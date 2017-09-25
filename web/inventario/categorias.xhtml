@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"      
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>        
+        <title>Categorías</title>
+        <link href="../recursos/css/estilos.css" rel="stylesheet"/>        
+        <link href="../recursos/css/metro-bootstrap.css" rel="stylesheet"/>
+        <link href="../recursos/css/iconFont.css" rel="stylesheet"/>
+        <link href="../recursos/css/bootstrap.min.css" rel="stylesheet"/>        
+        <script type="text/javascript" src="../recursos/js/calendario.js"/>
+
+    </h:head>
+    <h:body>
+        <h:form id="IdFormCategorias" >
+            #{categoriaMB.init()}
+            <p:growl id="growl" showDetail="true" sticky="false" autoUpdate="true" life="2000"  />
+            <br/>            
+
+            <br/> 
+            <div class="container">
+                <div class="row">
+                    <div style="padding: 5px;">
+                        <p:commandButton 
+                            title="Nueva Categoría" value="&nbsp;"                                        
+                            styleClass="icon-new fg-lightBlue bg-white no-border"                    
+                            actionListener="#{categoriaMB.nuevo}"
+                            process="@this"
+                            update="IdFormCategorias"
+                            style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/> 
+                        &nbsp;
+                        <p:commandButton 
+                            title="Buscar Categoría" value="&nbsp;"                                        
+                            styleClass="icon-search fg-lightBlue bg-white no-border" 
+                            oncomplete="PF('dialogoBuscarCategoria').show()"
+                            process="@this"
+                            update="IdFormCategorias"
+                            style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/> 
+                        &nbsp;
+                        <p:commandButton 
+                            title="Guardar/Actualizar Categoría" value="&nbsp;"
+                            styleClass="icon-floppy fg-lightBlue bg-white no-border" 
+                            actionListener="#{categoriaMB.guardar}"                   
+                            process="@this,txtNombre,txtObservacion,txtCodigo,sbcMI,sbcActivo"
+                            update="IdFormCategorias"
+                            style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/>                            
+                        &nbsp;
+                        <p:commandButton                     
+                            title="Eliminar Categoría" value="&nbsp;"                                        
+                            styleClass="icon-cancel fg-lightBlue bg-white no-border"                     
+                            process="@this,IdFormCategorias"
+                            update="IdFormCategorias"
+                            actionListener="#{categoriaMB.eliminar}"
+                            style="font-size: 20px; width: 20px; height: 20px; left: 20px; "> 
+                            <p:confirm header="Confirmación" message="¿Seguro desea eliminar la categoría?" icon="ui-icon-alert" />
+                        </p:commandButton>
+                        &nbsp;                
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                            <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                        </p:confirmDialog>
+                    </div>
+                </div>
+                <p:panel style="padding: 5px;">
+                    <div class="row">
+                        <div class="col-sm-3 col-xs-12">
+                            <p:outputLabel for="txtCodigo" value="Código Categoría" />
+                            <p:inputText value="#{categoriaMB.categoria.codigo}" styleClass="form-control" id="txtCodigo"  />
+                        </div>
+                        <div class="col-sm-3 col-xs-12">
+                            <p:outputLabel for="txtNombre" value="Nombre Categoría" styleClass="campoObligatorio2"/>
+                            <p:inputText value="#{categoriaMB.categoria.nombre}" styleClass="form-control" id="txtNombre"  />
+                        </div>
+                        <div class="col-sm-3 col-xs-12">
+                            <p:outputLabel value="Observación Categoría " />
+                            <p:inputText value="#{categoriaMB.categoria.observacion}" styleClass="form-control" id="txtObservacion"/>
+                        </div>
+                    </div><!--/row-->
+                    <div class="row">
+                        <div class="col-sm-3 col-xs-12">
+                            <p:outputLabel value="Medicamentos o Insumos" /><br />
+                            <p:selectBooleanCheckbox value="#{categoriaMB.categoria.medicamentosInsumos}" id="sbcMI"/>
+                        </div>
+                        <div class="col-sm-3 col-xs-12">
+                            <p:outputLabel value="Activo " /><br />
+                            <p:selectBooleanCheckbox value="#{categoriaMB.categoria.activo}" id="sbcActivo"/>
+                        </div>
+                    </div>
+                </p:panel>
+                <p:dialog id="IdDialogoBuscarCategoria" header="BUSCAR CLASIFICACION" widgetVar="dialogoBuscarCategoria" resizable="false" modal="true">  
+                    <p:ajax event="close" oncomplete="PF('wvTablaClasificaciones').clearFilters(); PF('wvTablaClasificaciones').getPaginator().setPage(0);" update="IdTablaClasificaciones" />
+                    <table>
+                        <tr>
+                            <td>
+                                <p:dataTable 
+                                    id="IdTablaClasificaciones" 
+                                    var="clasificacion" 
+                                    widgetVar="wvTablaClasificaciones"
+                                    value="#{categoriaMB.listaCategorias}"
+                                    rowKey="#{clasificacion.idCategoria}"  
+                                    selection="#{categoriaMB.categoria}" 
+                                    paginator="true"
+                                    style="width: 600px; height: 300px;"
+                                    rows="10"                                    
+                                    paginatorPosition="bottom"                                
+                                    emptyMessage="No hay categoria"
+                                    scrollable="true" 
+                                    currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                    paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"                                    
+                                    pageLinks="5"                                   
+                                    selectionMode="single"
+
+                                    resizableColumns="true">                                   
+                                    <p:column headerText="Código" filterBy="#{clasificacion.codigo}" filterMatchMode="contains">  
+                                        #{clasificacion.codigo}  
+                                    </p:column>                            
+                                    <p:column headerText="Nombre" filterBy="#{clasificacion.nombre}" filterMatchMode="contains">  
+                                        #{clasificacion.nombre}  
+                                    </p:column>                            
+                                    <p:column headerText="Observación" filterBy="#{clasificacion.observacion}" filterMatchMode="contains">  
+                                        #{clasificacion.observacion}  
+                                    </p:column>                            
+
+                                </p:dataTable>  
+                            </td>    
+                        </tr>
+                        <tr>
+                            <td>
+                                <br/>
+                                <p:commandButton 
+                                    value="Cargar seleccionado"                                
+                                    process="@this,IdTablaClasificaciones,IdFormCategorias"
+                                    update="IdFormCategorias:txtNombre,IdFormCategorias:txtCodigo,IdFormCategorias:txtNombre,IdFormCategorias:txtObservacion,IdFormCategorias:sbcMI,IdFormCategorias:sbcActivo"
+                                    actionListener="#{categoriaMB.buscar}"/>
+                            </td>    
+                        </tr>
+                    </table>
+                </p:dialog>
+            </div>
+        </h:form>
+    </h:body>
+</html>
+

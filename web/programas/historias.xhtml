@@ -1,0 +1,1596 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">  
+    <h:head>
+        <title>Historias</title>
+        <link href="../recursos/css/estilos.css" rel="stylesheet"/>        
+        <link href="../recursos/css/metro-bootstrap.css" rel="stylesheet"/>
+        <link href="../recursos/css/iconFont.css" rel="stylesheet"/>  
+        <script type="text/javascript" src="../recursos/js/calendario.js"></script> 
+    </h:head>
+    <h:body style="font-size: 11px;">  
+        #{Historia4505.inicializar()}
+        <h:form id="IdFormHistorias">  
+
+            <p:growl id="IdMensajeHistorias"  showDetail="true" sticky="false" autoUpdate="true" life="3000"  />             
+            <p:panel id="IdpanelDatosPaciente" style="position: relative; width: 100%; height: 100px; left: -5px;">
+                <table style="margin-left: auto; margin-right: auto;">
+                    <tr>
+                        <td>
+                            <table>
+                                <tr>
+                                    <td style="vertical-align: top; ">
+                                        <p:outputLabel styleClass="labelFormularioBold" style="width: 12px;" value="#{Historia4505.tipoIdentificacion}" rendered="#{Historia4505.hayPacienteSeleccionado}"/>                            
+                                        <p:inputText id="IdTxtIdentificacion"  styleClass="campoFormulario" size="30" value="#{Historia4505.identificacionPaciente}">                        
+                                            <p:ajax event="blur" listener="#{Historia4505.validarIdentificacion}" update="IdTablaPacientes IdpanelDatosPaciente"/>
+                                        </p:inputText>  
+                                        <p:watermark for="IdTxtIdentificacion" value="Digite identificación paciente"/>
+                                        <p:commandButton  styleClass="campoFormulario"  style="width: 22px; height: 22px;" title="Buscar paciente"    icon="ui-icon-search" onclick="PF('dlgSeleccionarPaciente').show();"/>
+                                        <p:commandButton  styleClass="campoFormulario" style="height: 22px;" title="Editar Paciente"    icon="ui-icon-pencil" actionListener="#{Historia4505.editarPaciente}"  rendered="#{Historia4505.hayPacienteSeleccionado}"/>
+                                        <p:outputLabel   styleClass="labelFormularioBold" value="Nombre" rendered="#{Historia4505.hayPacienteSeleccionado}"/>
+                                        <p:outputLabel   styleClass="labelFormulario"     value="#{Historia4505.nombrePaciente}"  rendered="#{Historia4505.hayPacienteSeleccionado}"/>                            
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p:outputLabel   styleClass="labelFormularioBold" style="font-weight: bold;" value="Género: " rendered="#{Historia4505.hayPacienteSeleccionado}"/>
+                                        <p:outputLabel   styleClass="labelFormulario"     style="font-weight: bold;" value="#{Historia4505.generoPaciente}"  rendered="#{Historia4505.hayPacienteSeleccionado}"/>
+                                        <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Edad: " rendered="#{Historia4505.hayPacienteSeleccionado}"/>
+                                        <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{Historia4505.edadPaciente}"  rendered="#{Historia4505.hayPacienteSeleccionado}"/>                            
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Administradora: " style="width: 80px;" rendered="#{Historia4505.hayPacienteSeleccionado}"/>
+                                        <p:outputLabel styleClass="labelFormulario"     value="#{Historia4505.administradoraPaciente}" style="margin-left: 10px;" rendered="#{Historia4505.hayPacienteSeleccionado}"/>
+                                    </td>
+                                </tr> 
+                            </table>
+                        </td>
+                        <td>
+                            <p:graphicImage id="IdFoto" url="#{Historia4505.urlFoto}" cache="false" width="80" height="70" rendered="#{Historia4505.hayPacienteSeleccionado}"/>                              
+                        </td>
+                    </tr>
+                </table>
+            </p:panel>
+            <p:dialog header="Seleccionar paciente" widgetVar="dlgSeleccionarPaciente" modal="true" resizable="false" closable="true">                
+
+                <p:dataTable
+                    id="IdTablaPacientes"
+                    widgetVar="wvTablaPacientes"
+                    var="paciente"
+                    value="#{Historia4505.listaPacientes}" 
+                    selection="#{Historia4505.pacienteSeleccionadoTabla}"
+                    selectionMode="single"
+                    rowKey="#{paciente.idPaciente}"
+                    paginator="true"
+                    scrollWidth="600"
+                    scrollHeight="250"
+                    rows="10"
+                    lazy="true"
+                    resizableColumns="true"
+                    paginatorPosition="bottom"
+                    scrollable="true"
+                    emptyMessage="No se encontraron registros"       
+                    currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                    pageLinks="5">                    
+                    <p:column headerText="ID" width="0"> 
+                        #{paciente.idPaciente}  
+                    </p:column>  
+                    <p:column headerText="IDENTIFICACION" width="10" filterBy="#{paciente.identificacion}">
+                        #{paciente.identificacion}  
+                    </p:column>  
+                    <p:column headerText="NOMBRES" width="90" filterBy="#{paciente.primerNombre}">
+                        #{paciente.primerNombre} #{paciente.segundoNombre} #{paciente.primerApellido} #{paciente.segundoApellido}
+                    </p:column>
+                </p:dataTable>
+                <br/>
+                <p:commandButton value="Cargar" actionListener="#{Historia4505.cargarPaciente}" update="IdpanelDatosPaciente"/>                
+                <br/>                
+            </p:dialog> 
+        
+            <br/><br/>
+            <p:fieldset legend="Identificación del Riesgo" rendered="#{Historia4505.verHistoria}">
+                <table>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Gestación: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.gestacion}"  filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - No" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - Si" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - No Aplica" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - Riesgo no Evaluado" itemValue="3"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Sifilis Gestacional o Congénita: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.sifilis_gestacional_congenita}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - No" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - Si es Mujer con Sifilis Gestacional" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - Si es Recien Nacido con Sifilis Congénita" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - No Aplica" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - Riesgo no Evaluado" itemValue="4"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Hipertensión Inducida por la Gestación: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.hipertension_gestacional_congenita}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - No" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - Si" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - No Aplica" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - Riesgo no Evaluado" itemValue="3"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Hipotiroidismo Congénito: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.hipotiroidismo_congenito}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - No" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - Si" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - No Aplica" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - Riesgo no Evaluado" itemValue="3"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Sintomático Respiratorio: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.sintomatico_respiratorio}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - No" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - Si" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - Riesgo no Evaluado" itemValue="2"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Tuberculosis Multidrogoresistente: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.tuberculosis_multidrogoresistente}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - No" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - Si" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - No Aplica" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - Riesgo no Evaluado" itemValue="3"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Lepra: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.lepra}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - No" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - Pausibacilar" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - Multibacilar" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - Riesgo no Evaluado" itemValue="3"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Obesidad o Desnutrición Proteico Calórica: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.obesidad_desutricion_proteico_calorica}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - No" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - Si es Obesidad" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - Si es Desnutrición Proteico Calórica" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - Riesgo no Evaluado" itemValue="3"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Victima de Maltrato: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.mujer_victima_maltrato}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - No" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - Si es Mujer Victima del Maltrato" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - Si es Menor Victima del Maltrato" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - No Aplica" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - Riesgo no Evaluado" itemValue="4"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Victima de Violencia Sexual: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.victima_violencia_sexual}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - No" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - Si" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - No Aplica" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - Riesgo no Evaluado" itemValue="3"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Infecciones de Transmisión Sexual: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.infecciones_transmision_sexual}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - No" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - Si" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - No Aplica" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - Riesgo no Evaluado" itemValue="3"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Enfermedad Mental: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.enfermedad_salud_mental}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - No" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - Si el Diagnóstico es Ansiedad" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - Si el Diagnóstico es Depresión" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - Si el Diagnóstico es Esquizofrenia" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - Si el Diagnóstico es Déficit de Atención por Hiperactividad" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - Si el Diagnóstico es Consumo de Sustancias Psicoactivas" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - Si el Diagnóstico es Trastorno del Ánimo Bipolar" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - Riesgo no Evaluado" itemValue="7"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Cáncer de Cérvix: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.cancer_cervix}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - No" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - Si" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - No Aplica" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - Riesgo no Evaluado" itemValue="3"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Cáncer de Seno: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.cancer_seno}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - No" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - Si" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - No Aplica" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - Riesgo no Evaluado" itemValue="3"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Fluorosis Dental: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.fluorosis_dental}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - No" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - Si" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - No Aplica" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - Riesgo no Evaluado" itemValue="3"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                </table>
+            </p:fieldset>
+            <p:fieldset legend="Actividades de Intervención Según el Riesgo" rendered="#{Historia4505.verHistoria}">
+                <table>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Fecha del Peso: " />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.fecha_peso}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Peso en KG: " />
+                        </td>
+                        <td>
+                            <p:inputText  styleClass="campoFormulario" value="#{Historia4505.u.peso_kilogramos}"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Fecha de la Talla: " />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es"  
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.fecha_talla}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Talla en CM: " />
+                        </td>
+                        <td>
+                            <p:inputText  styleClass="campoFormulario" value="#{Historia4505.u.talla_metros}"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Fecha Probable de Parto: " />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.fecha_probable_parto}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Edad Gestacional al Nacer: " />
+                        </td>
+                        <td>
+                            <p:inputText  styleClass="campoFormulario" value="#{Historia4505.u.edad_gestacional_nacer}"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="BCG: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.bcg}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - RN" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - OTRA DOSIS" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - SIN DATO" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO SE ADMINISTRA POR TRADICIÓN" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - NO SE ADMINISTRA POR NEGACIÓN DEL USUARIO" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO SE ADMINISTRA POR TENER DATOS DE CONTACTO DEL USUARIO NO ACTUALIZADOS" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - NO SE ADMINISTRA POR OTRAS RAZONES" itemValue="7"/>
+                                <f:selectItem itemLabel="8 - NO APLICA" itemValue="8"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Hepatitis B Menores de 1 Año: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.hepatitis_b_menores_1_año}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - RN" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - PRIMERA DOSIS" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - SEGUNDA DOSIS" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - TERCERA DOSIS" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - SIN DATO" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - NO SE ADMINISTRA POR UNA TRADICIÓN" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - NO SE ADMINISTRA POR NEGACIÓN DEL USUARIO" itemValue="7"/>
+                                <f:selectItem itemLabel="8 - NO SE ADMINISTRA POR TENER DATOS DE CONTACTO DEL USUARIO NO ACTUALIZADOS" itemValue="8"/>
+                                <f:selectItem itemLabel="9 - NO SE ADMINISTRA POR OTRAS RAZONES" itemValue="9"/>
+                                <f:selectItem itemLabel="10 - NO APLICA" itemValue="10"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Pentavelente: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.pentavalente}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - PRIMERA DOSIS" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - SEGUNDA DOSIS" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - TERCERA DOSIS" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - SIN DATO" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - NO SE ADMINISTRA POR UNA TRADICIÓN" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO SE ADMINISTRA POR NEGACIÓN DEL USUARIO" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - NO SE ADMINISTRA POR TENER DATOS DE CONTACTO DEL USUARIO NO ACTUALIZADOS" itemValue="7"/>
+                                <f:selectItem itemLabel="8 - NO SE ADMINISTRA POR OTRAS RAZONES" itemValue="8"/>
+                                <f:selectItem itemLabel="9 - NO APLICA" itemValue="9"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Polio: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.polio}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - PRIMERA DOSIS" 
+                                              itemValue="0"/>
+                                <f:selectItem itemLabel="1 - SEGUNDA DOSIS" 
+                                              itemValue="1"/>
+                                <f:selectItem itemLabel="2 - TERCERA DOSIS" 
+                                              itemValue="2"/>
+                                <f:selectItem itemLabel="3 - PRIMER REFUERZO" 
+                                              itemValue="3"/>
+                                <f:selectItem itemLabel="4 - SEGUNDO REFUERZO" 
+                                              itemValue="4"/>
+                                <f:selectItem itemLabel="5 - SIN DATO" 
+                                              itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO SE ADMINISTRA POR UNA TRADICIÓN" 
+                                              itemValue="6"/>
+                                <f:selectItem itemLabel="7 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" 
+                                              itemValue="7"/>
+                                <f:selectItem itemLabel="8 - NO SE ADMINISTRA POR NEGACIÓN DEL USUARIO" 
+                                              itemValue="8"/>
+                                <f:selectItem itemLabel="9 - NO SE ADMINISTRA POR TENER DATOS DE CONTACTO DEL USUARIO NO ACTUALIZADOS" 
+                                              itemValue="9"/>
+                                <f:selectItem itemLabel="10 - NO SE ADMINISTRA POR OTRAS RAZONES" 
+                                              itemValue="10"/>
+                                <f:selectItem itemLabel="11 - NO APLICA" 
+                                              itemValue="11"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="DPT Menores de 5 Años: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.dpt_menores_5_años}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - PRIMERA DOSIS" 
+                                              itemValue="0"/>
+                                <f:selectItem itemLabel="1 - SEGUNDA DOSIS" 
+                                              itemValue="1"/>
+                                <f:selectItem itemLabel="2 - TERCERA DOSIS" 
+                                              itemValue="2"/>
+                                <f:selectItem itemLabel="3 - PRIMER REFUERZO" 
+                                              itemValue="3"/>
+                                <f:selectItem itemLabel="4 - SEGUNDO REFUERZO" 
+                                              itemValue="4"/>
+                                <f:selectItem itemLabel="5 - SIN DATO" 
+                                              itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO SE ADMINISTRA POR UNA TRADICIÓN" 
+                                              itemValue="6"/>
+                                <f:selectItem itemLabel="7 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" 
+                                              itemValue="7"/>
+                                <f:selectItem itemLabel="8 - NO SE ADMINISTRA POR NEGACIÓN DEL USUARIO" 
+                                              itemValue="8"/>
+                                <f:selectItem itemLabel="9 - NO SE ADMINISTRA POR TENER DATOS DE CONTACTO DEL USUARIO NO ACTUALIZADOS" 
+                                              itemValue="9"/>
+                                <f:selectItem itemLabel="10 - NO SE ADMINISTRA POR OTRAS RAZONES" 
+                                              itemValue="10"/>
+                                <f:selectItem itemLabel="11 - NO APLICA" 
+                                              itemValue="11"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Rotavirus: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.rotavirus}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - RN" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - OTRA DOSIS" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - SIN DATO" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO SE ADMINISTRA POR TRADICIÓN" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - NO SE ADMINISTRA POR NEGACIÓN DEL USUARIO" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO SE ADMINISTRA POR TENER DATOS DE CONTACTO DEL USUARIO NO ACTUALIZADOS" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - NO SE ADMINISTRA POR OTRAS RAZONES" itemValue="7"/>
+                                <f:selectItem itemLabel="8 - NO APLICA" itemValue="8"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Neumococo: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.neumococo}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - PRIMERA DOSIS" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - SEGUNDA DOSIS" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - PRIMER REFUERZO" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - SIN DATO" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - NO SE ADMINISTRA POR UNA TRADICIÓN" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO SE ADMINISTRA POR NEGACIÓN DEL USUARIO" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - NO SE ADMINISTRA POR TENER DATOS DE CONTACTO DEL USUARIO NO ACTUALIZADOS" itemValue="7"/>
+                                <f:selectItem itemLabel="8 - NO SE ADMINISTRA POR OTRAS RAZONES" itemValue="8"/>
+                                <f:selectItem itemLabel="9 - NO APLICA" itemValue="9"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Influenza Niños: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.influenza_niños}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - PRIMERA DOSIS" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - SEGUNDA DOSIS" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - REFUERZO ANUAL" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - SIN DATO" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - NO SE ADMINISTRA POR UNA TRADICIÓN" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO SE ADMINISTRA POR NEGACIÓN DEL USUARIO" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - NO SE ADMINISTRA POR TENER DATOS DE CONTACTO DEL USUARIO NO ACTUALIZADOS" itemValue="7"/>
+                                <f:selectItem itemLabel="8 - NO SE ADMINISTRA POR OTRAS RAZONES" itemValue="8"/>
+                                <f:selectItem itemLabel="9 - NO APLICA" itemValue="9"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Fiebre Amarilla Niños de 1 Año: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.fiebre_amarilla_niños_1_año}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - DOSIS UNICA" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - SIN DATO" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - NO SE ADMINISTRA POR UNA TRADICIÓN" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - NO SE ADMINISTRA POR NEGACIÓN DEL USUARIO" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - NO SE ADMINISTRA POR TENER DATOS DE CONTACTO DEL USUARIO NO ACTUALIZADOS" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO SE ADMINISTRA POR OTRAS RAZONES" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - NO APLICA" itemValue="7"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Hepatitis A: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.hepatitis_a}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - DOSIS UNICA" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - SIN DATO" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - NO SE ADMINISTRA POR UNA TRADICIÓN" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - NO SE ADMINISTRA POR NEGACIÓN DEL USUARIO" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - NO SE ADMINISTRA POR TENER DATOS DE CONTACTO DEL USUARIO NO ACTUALIZADOS" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO SE ADMINISTRA POR OTRAS RAZONES" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - NO APLICA" itemValue="7"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Triple Viral Niños: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.triple_viral_niños}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - PRIMERA DOSIS" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - PRIMER REFUERZO" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - SIN DATO" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO SE ADMINISTRA POR TRADICIÓN" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - NO SE ADMINISTRA POR NEGACIÓN DEL USUARIO" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO SE ADMINISTRA POR TENER DATOS DE CONTACTO DEL USUARIO NO ACTUALIZADOS" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - NO SE ADMINISTRA POR OTRAS RAZONES" itemValue="7"/>
+                                <f:selectItem itemLabel="8 - NO APLICA" itemValue="8"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Virus del Papiloma Humano (VPH): " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.virus_papiloma_humano}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - PRIMERA DOSIS" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - SEGUNDA DOSIS" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - TERCERA DOSIS" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - SIN DATO" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - NO SE ADMINISTRA POR UNA TRADICIÓN" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO SE ADMINISTRA POR NEGACIÓN DEL USUARIO" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - NO SE ADMINISTRA POR TENER DATOS DE CONTACTO DEL USUARIO NO ACTUALIZADOS" itemValue="7"/>
+                                <f:selectItem itemLabel="8 - NO SE ADMINISTRA POR OTRAS RAZONES" itemValue="8"/>
+                                <f:selectItem itemLabel="9 - NO APLICA" itemValue="9"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="TD o TT Mujeres en Edad Fértil 15 a 49 Años: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.td_tt_mujeres_edad_fertil_15_49_años}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - PRIMERA DOSIS" 
+                                              itemValue="0"/>
+                                <f:selectItem itemLabel="1 - SEGUNDA DOSIS" 
+                                              itemValue="1"/>
+                                <f:selectItem itemLabel="2 - TERCERA DOSIS" 
+                                              itemValue="2"/>
+                                <f:selectItem itemLabel="3 - CUARTA DOSIS" 
+                                              itemValue="3"/>
+                                <f:selectItem itemLabel="4 - QUINTA DOSIS" 
+                                              itemValue="4"/>
+                                <f:selectItem itemLabel="5 - SIN DATO" 
+                                              itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO SE ADMINISTRA POR UNA TRADICIÓN" 
+                                              itemValue="6"/>
+                                <f:selectItem itemLabel="7 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" 
+                                              itemValue="7"/>
+                                <f:selectItem itemLabel="8 - NO SE ADMINISTRA POR NEGACIÓN DEL USUARIO" 
+                                              itemValue="8"/>
+                                <f:selectItem itemLabel="9 - NO SE ADMINISTRA POR TENER DATOS DE CONTACTO DEL USUARIO NO ACTUALIZADOS" 
+                                              itemValue="9"/>
+                                <f:selectItem itemLabel="10 - NO SE ADMINISTRA POR OTRAS RAZONES" 
+                                              itemValue="10"/>
+                                <f:selectItem itemLabel="11 - NO APLICA" 
+                                              itemValue="11"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Control de Placa Bacteriana: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.control_placa_bacteriana}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - NO SE ADMINISTRA POR TRADICIÓN" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - NO SE ADMINISTRA POR NEGACIÓN DEL USUARIO" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO SE ADMINISTRA POR TENER DATOS DE CONTACTO DEL USUARIO NO ACTUALIZADOS" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - NO SE ADMINISTRA POR OTRAS RAZONES" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - SI 1ra VEZ EN EL AÑO" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - SI 2da VEZ EN EL AÑO" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - SIN DATO" itemValue="7"/>
+                                <f:selectItem itemLabel="8 - NO APLICA" itemValue="8"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Fecha de Atención del Parto o Cesárea: " />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.fecha_atencion_parto_cesarea}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Fecha de Salida de la Atención del Parto o Cesárea: " />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.fecha_salida_atencion_parto_cesarea}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Fecha de Consejeria en Lactancia Materna: " />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.fecha_consejeria_lactancia_materna}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Control Recién Nacido: " />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.control_recien_nacido}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Planificación Familiar Primera Vez: " />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.planificacion_familiar_primera_vez}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Suministro de Método Anticonceptivo: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.suministro_metodo_anticonceptivo}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - DISPOSITIVO INTRAUTERINO" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - DISPOSITIVO INTRAUTERINO Y BARRERA" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - IMPLANTE SUBDERMICO" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - IMPLANTE SUBDERMICO Y BARRERA" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - ORAL" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - ORAL Y BARRERA" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - INYECTABLE MENSUAL" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - INYECTABLE MENSUAL Y BARRERA" itemValue="7"/>
+                                <f:selectItem itemLabel="8 - INYECTABLE TRIMESTRAL" itemValue="8"/>
+                                <f:selectItem itemLabel="9 - INYECTABLE TRIMESTRAL Y BARRERA" itemValue="9"/>
+                                <f:selectItem itemLabel="10 - EMERGENCIA" itemValue="10"/>
+                                <f:selectItem itemLabel="11 - EMERGENCIA Y BARRERA" itemValue="11"/>
+                                <f:selectItem itemLabel="12 - ESTERILIZACIÓN" itemValue="12"/>
+                                <f:selectItem itemLabel="13 - ESTERILIZACIÓN Y BARRERA" itemValue="13"/>
+                                <f:selectItem itemLabel="14 - BARRERA" itemValue="14"/>
+                                <f:selectItem itemLabel="15 - REGISTRO NO EVALUADO" itemValue="15"/>                         
+                                <f:selectItem itemLabel="16 - NO SE ADMINISTRA POR TRADICIÓN" itemValue="16"/>
+                                <f:selectItem itemLabel="17 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" itemValue="17"/>
+                                <f:selectItem itemLabel="18 - NO SE ADMINISTRA POR NEGACIÓN DE LA USUARIA" itemValue="18"/>
+                                <f:selectItem itemLabel="19 - NO SE ADMINISTRA POR OTRAS RAZONES" itemValue="19"/>
+                                <f:selectItem itemLabel="20 - NO APLICA" itemValue="20"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Control Prenatal de Primera Vez: " />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.control_prenatal_primera_vez}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Control Prenatal: " />
+                        </td>
+                        <td>
+                            <p:inputText  styleClass="campoFormulario" value="#{Historia4505.u.control_prenatal}"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Último Control Prenatal: " />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.ultimo_control_prenatal}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Suministro de Ácido Fólico en el Último Control Prenatal: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.suministro_acido_folico_ultimo_control_prenatal}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - NO SE ADMINISTRA POR TRADICIÓN" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - NO SE ADMINISTRA POR NEGACIÓN DE LA USUARIA" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO SE ADMINISTRA POR OTRAS RAZONES" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - SI SE SUMINISTRA" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - REGISTRO NO EVALUADO" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO APLICA" itemValue="6"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Suministro de Sulfato Ferroso en el Último Control Prenatal: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.suministro_sulfato_ferroso_ultimo_control_prenatal}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - NO SE ADMINISTRA POR TRADICIÓN" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - NO SE ADMINISTRA POR NEGACIÓN DE LA USUARIO" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO SE ADMINISTRA POR OTRAS RAZONES" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - SI SE SUMINISTRA" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - REGISTRO NO EVALUADO" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO APLICA" itemValue="6"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Suministro de Carbonato de Calcio en el Último Control Prenatal: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.suministro_carbonato_calcio_ultimo_control_prenatal}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - NO SE ADMINISTRA POR TRADICIÓN" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - NO SE ADMINISTRA POR NEGACIÓN DE LA USUARIO" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO SE ADMINISTRA POR OTRAS RAZONES" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - SI SE SUMINISTRA" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - REGISTRO NO EVALUADO" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO APLICA" itemValue="6"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Valoración de la Agudeza Visual: " />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.valoracion_agudeza_visual}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Consulta por Oftalmología: " />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.consulta_oftalmologia}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Fecha Diagnóstico Desnutrición Proteico Calórica: " />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.fecha_diagnostico_desnutricion_proteico_calorica}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Consulta Mujer o Menor Victima del Maltrato: " />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.consulta_mujero_menor_maltratado}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Consulta Victimas de Violencia Sexual: " />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.consulta_victimas_violencia_sexual}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Consulta Nutrición: " />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.consulta_nutricion}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Consulta de Psicología " />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.consulta_psicologica}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Consulta de Crecimiento y Desarrollo Primera Vez " />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.consulta_crecimiento_desarrollo_primera_vez}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Suministro de Sulfato Ferroso en la Última Consulta del Menor de 10 Años: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.suministro_sulfato_ferroso_ultima_consulta_menor_10_años}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - NO SE ADMINISTRA POR TRADICIÓN" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - NO SE ADMINISTRA POR NEGACIÓN DE LA USUARIO" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO SE ADMINISTRA POR OTRAS RAZONES" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - SI SE SUMINISTRA" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - REGISTRO NO EVALUADO" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO APLICA" itemValue="6"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Suministro de Vitamina A en la Última Consulta del Menor de 10 Años: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.suministro_vitamina_a_ultima_consulta_menor_10_años}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - NO SE ADMINISTRA POR TRADICIÓN" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - NO SE ADMINISTRA POR NEGACIÓN DE LA USUARIO" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO SE ADMINISTRA POR OTRAS RAZONES" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - SI SE SUMINISTRA" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - REGISTRO NO EVALUADO" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO APLICA" itemValue="6"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Consulta de Joven Primera Vez " />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.consulta_joven_primera_vez}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Consulta de Adulto Primera Vez " />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.consulta_adulto_primera_vez}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Preservativos Entregados a Pacientes con ITS: " />
+                        </td>
+                        <td>
+                            <p:inputText  styleClass="campoFormulario" value="#{Historia4505.u.preservativos_entregados_pacientes_con_its}"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Asesoria Pre Test Elisa para VIH " />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.asesoria_pre_test_elisa_vih}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Asesoria Pos Test Elisa para VIH " />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.asesoria_pos_test_elisa_vih}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Paciente con Diagnóstico de: Ansiedad, Depresión, Esquizofrenia, déficit de atención, consumo SPA y Bipolaridad " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.paciente_diagnostico_salud_mental_recibio_atencion_ultimos_6_meses_equipo_interdisciplinario_completo}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - DOSIS UNICA" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - SIN DATO" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - NO SE ADMINISTRA POR UNA TRADICIÓN" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - NO SE ADMINISTRA POR NEGACIÓN DEL USUARIO" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - NO SE ADMINISTRA POR TENER DATOS DE CONTACTO DEL USUARIO NO ACTUALIZADOS" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO SE ADMINISTRA POR OTRAS RAZONES" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - NO APLICA" itemValue="7"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Fecha Antigeno de Superficie Hepatitis B en Gestantes " />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.fecha_antigeno_superficie_hepatitis_b_gestantes}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Resultado de Antigeno de Superficie Hepatitis B en Gestantes " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.resultado_antigeno_superficie_hepatitis_b_gestantes}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - NEGATIVO" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - POSITIVO" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - SIN DATO" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO APLICA" itemValue="3"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Fecha Serologia para Sifilis" />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.fecha_serologia_sifilis}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Resultado de Serologia para Sifilis " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.resultado_serologia_sifilis}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - NO REACTIVA" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - REACTIVA" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - SIN DATO" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO APLICA" itemValue="3"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Fecha de Toma de Elisa para VIH" />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.fecha_toma_elisa_vih}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Resultado de Elisa para VIH " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.resultado_elisa_vih}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - NEGATIVO" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - POSITIVO" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - INDETERMINADO" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - SIN DATO" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - NO APLICA" itemValue="4"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Fecha de TSH Neonatal " />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.fecha_tsh_neonatal}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Resultado de TSH Neonatal " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.resultado_tsh_neonatal}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - NORMAL" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - ANORMAL" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - SIN DATO" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO APLICA" itemValue="3"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Tamizaje Cáncer de Cuello Uterino" />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.tamizaje_cancer_cuello_uterino}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - Citología Cervico Uterina" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - ADN - VPH" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - TÉCNICA DE INSPECCIÓN VISUAL" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO SE REALIZA POR UNA TRADICIÓN" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - NO SE REALIZA POR UNA CONDICIÓN DE SALUD" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - NO SE REALIZA POR NEGACIÓN DE LA USUARIA" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO SE REALIZA POR TENER DATOS DE CONTACTO DE LA USUARIO NO ACTUALIZADOS" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - NO SE REALIZA POR OTRAS RAZONES" itemValue="7"/>
+                                <f:selectItem itemLabel="8 - SIN DATO" itemValue="8"/>
+                                <f:selectItem itemLabel="9 - NO APLICA" itemValue="9"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Citología Cervico Uterina" />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.citologia_cervico_uterina}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Citología Cervico Uterina Resultados Según Bethesda" />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.citologia_cervico_uterina_resultados_bethesda}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="1 - ASC-US" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - ASC-H" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - LESIÓN INTRAEPITELIAL ESCAMOSA DE BAJO GRADO" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - LESIÓN INTRAEPITELIAL ESCAMOSA DE ALTO GRADO" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - CARCINOMA DE CELULAS ESCAMOSAS" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - CELULAS GLANDULARES ATIPICAS" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - ADENOCARCINOMA ENDOCERVICAL IN SITU" itemValue="7"/>
+                                <f:selectItem itemLabel="8 - ADENOCARCINOMA" itemValue="8"/>
+                                <f:selectItem itemLabel="9 - NEGATIVA PARA LESIÓN INTRAEPITELIAL O MALIGNIDAD" itemValue="9"/>
+                                <f:selectItem itemLabel="10 - CÉLULAS ENDOMETRIALES" itemValue="10"/>
+                                <f:selectItem itemLabel="11 - INADECUADA PARA LECTURA" itemValue="11"/>
+                                <f:selectItem itemLabel="99 - SIN DATO" itemValue="99"/>
+                                <f:selectItem itemLabel="98 - NO APLICA" itemValue="98"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Calidad en la Muestra de Citologia Cerviuterina " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.calidad_muestra_citologia_cervicouterina}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - SATISFACTORIA ZONA DE TRANSFORMACIÓN PRESENTE" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - SATISFACTORIA ZONA DE TRANSFORMACIÓN AUSENTE" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - INSATISFACTORIA" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - RECHAZADA" itemValue="3"/>
+                                <f:selectItem itemLabel="99 - SIN DATO" itemValue="99"/>
+                                <f:selectItem itemLabel="98 - NO APLICA" itemValue="98"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="CÓDIGO DE HABILITACIÓN IPS DONDE SE TOMA CITOLOGÍA CERVICOUTERINA " />
+                        </td>
+                        <td>
+                            <p:inputText  styleClass="campoFormulario" value="#{Historia4505.u.codigo_habilitacion_ips_donde_toma_citologia_cervicouterina}"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="FECHA COLPOSCOPIA" />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.fecha_colposcopia}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="CÓDIGO DE HABILITACIÓN IPS DONDE SE TOMA COLPOSCOPIA " />
+                        </td>
+                        <td>
+                            <p:inputText  styleClass="campoFormulario" value="#{Historia4505.u.codigo_habilitacion_ips_donde_toma_colposcopia}"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="FECHA DE BIOPSIA CERVICAL" />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.fecha_biopsia_cervical}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Resultado de Biosia Cervical " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.resultado_biopsia_cervical}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - NEGATIVO PARA NEOPLASIA" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - INFECCIÓN POR VPH" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - NIC DE BAJO GRADO - NIC I" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NIC DE ALTO GRADO: NIC II - NIC III" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - NEOPLASIA MICROINFILTRANTE: ESCAMOCELULAR O ADENOCARCIONOMA" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - NEOPLASIA INFILTRANTE: ESCAMOCELULAR O ADENOCARCINOMA" itemValue="5"/>
+                                <f:selectItem itemLabel="99 - SIN DATO" itemValue="99"/>
+                                <f:selectItem itemLabel="98 - NO APLICA" itemValue="98"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="CÓDIGO DE HABILITACIÓN IPS DONDE SE TOMA BIOPSIA CERVICAL " />
+                        </td>
+                        <td>
+                            <p:inputText  styleClass="campoFormulario" value="#{Historia4505.u.codigo_habilitacion_ips_donde_toma_biopsia_cervical}"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="FECHA DE MAMOGRAFÍA" />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.fecha_mamografia}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Resultado de Mamografía " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.resultado_mamografia}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - NECESIDAD DE NUEVO ESTUDIO IMAGENÓLOGICO O MAMOGRAFIA PREVIO EVALUACIÓN" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - NEGATIVO" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - HALLAZGOS BENIGNOS" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - PROBABLEMENTE BENIGNO" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - ANORMALIDAD SOSPECHOSA" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - ALTAMENTE SOSPECHOSO DE MALIGNIDAD" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - MALIGNIDAD POR BIOPSIA CONOCIDA" itemValue="6"/>
+                                <f:selectItem itemLabel="99 - SIN DATO" itemValue="99"/>
+                                <f:selectItem itemLabel="98 - NO APLICA" itemValue="98"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="CÓDIGO DE HABILITACIÓN IPS DONDE SE TOMA MAMOGRAFIA " />
+                        </td>
+                        <td>
+                            <p:inputText  styleClass="campoFormulario" value="#{Historia4505.u.codigo_habilitacion_ips_donde_toma_mamografia}"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="FECHA DE TOMA BIOPSIA SENO POR BACAF" />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.fecha_toma_biopsia_seno_bacaf}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="FECHA DE RESULTADO DE BIOPSIA SENO POR BACAF" />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.fecha_resultado_biopsia_seno_bacaf}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="BIOPSIA SENO POR BACAF " />
+                        </td>
+                        <td>
+                            <p:inputText  styleClass="campoFormulario" value="#{Historia4505.u.biopsia_seno_bacaf}"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="CÓDIGO DE HABILITACIÓN IPS DONDE SE TOMA BIPSIA SENO POR BACAF " />
+                        </td>
+                        <td>
+                            <p:inputText  styleClass="campoFormulario" value="#{Historia4505.u.codigo_habilitacion_ips_donde_toma_biopsia_seno_bacaf}"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="FECHA DE TOMA HEMOGLOBINA" />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.fecha_toma_hemoglobina}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="HEMOGLOBINA " />
+                        </td>
+                        <td>
+                            <p:inputText  styleClass="campoFormulario" value="#{Historia4505.u.hemoglobina}"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="FECHA DE TOMA DE GLICEMIA BASAL" />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.fecha_toma_glicemia_basal}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="FECHA DE CREATININA" />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.fecha_creatinina}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="CREATININA " />
+                        </td>
+                        <td>
+                            <p:inputText  styleClass="campoFormulario" value="#{Historia4505.u.creatinina}"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="FECHA DE HEMOGLOBINA GLICOSILADA" />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.fecha_hemoglobina_glicosilada}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="HEMOGLOBINA GLICOSILADA " />
+                        </td>
+                        <td>
+                            <p:inputText  styleClass="campoFormulario" value="#{Historia4505.u.hemoglobina_glicosilada}"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="FECHA DE TOMA DE MICROALBUMINURIA" />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.fecha_toma_microalbuminuria}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="FECHA DE TOMA DE HDL" />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.fecha_toma_hdl}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="FECHA DE TOMA DE BACILOSCOPIA DE DIAGNÓSTICO" />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.fecha_toma_baciloscopia_diagnostico}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Baciloscopia de Diagnóstico " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.baciloscopia_diagnostico}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - NO" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - NEGATIVA" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - POSITIVA" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - SIN DATO" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - NO APLICA" itemValue="4"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Tratamiento para Hipotiroidismo Congénito " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.tratamiento_hipotiroidismo_congenito}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - NO RECIBIÓ TRATAMIENTO POR TENER UNA TRADICIÓN QUE SE LO IMPIDE" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - NO RECIBIÓ TRATAMIENTO POR UNA CONDICIÓN DE SALUD QUE SE LO IMPIDE" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - NO RECIBIÓ TRATAMIENTO POR NEGACIÓN DEL USUARIO" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO RECIBIÓ TRATAMIENTO POR QUE LOS DATOS DE CONTACTO DEL USUARIO NO SE ENCUENTRAN ACTUALIZADOS" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - NO RECIBIÓ TRATAMIENTO POR OTRAS RAZONES" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - SI RECIBIÓ TRATAMIENTO" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - SIN DATO" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - NO APLICA" itemValue="7"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Tratamiento para Sifilis Gestacional " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.tratamiento_sifilis_gestacional}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - NO RECIBIÓ TRATAMIENTO POR TENER UNA TRADICIÓN QUE SE LO IMPIDE" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - NO RECIBIÓ TRATAMIENTO POR UNA CONDICIÓN DE SALUD QUE SE LO IMPIDE" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - NO RECIBIÓ TRATAMIENTO POR NEGACIÓN DEL USUARIO" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO RECIBIÓ TRATAMIENTO POR QUE LOS DATOS DE CONTACTO DEL USUARIO NO SE ENCUENTRAN ACTUALIZADOS" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - NO RECIBIÓ TRATAMIENTO POR OTRAS RAZONES" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - SI RECIBIÓ TRATAMIENTO" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - SIN DATO" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - NO APLICA" itemValue="7"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Tratamiento para Sifilis Congénita " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.tratamiento_sifilis_congenita}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - NO RECIBIÓ TRATAMIENTO POR TENER UNA TRADICIÓN QUE SE LO IMPIDE" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - NO RECIBIÓ TRATAMIENTO POR UNA CONDICIÓN DE SALUD QUE SE LO IMPIDE" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - NO RECIBIÓ TRATAMIENTO POR NEGACIÓN DEL USUARIO" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO RECIBIÓ TRATAMIENTO POR QUE LOS DATOS DE CONTACTO DEL USUARIO NO SE ENCUENTRAN ACTUALIZADOS" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - NO RECIBIÓ TRATAMIENTO POR OTRAS RAZONES" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - SI RECIBIÓ TRATAMIENTO" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - SIN DATO" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - NO APLICA" itemValue="7"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Tratamiento para Lepra " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" value="#{Historia4505.u.tratamiento_terminado_lepra}"   filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="0 - NO RECIBIÓ TRATAMIENTO POR TENER UNA TRADICIÓN QUE SE LO IMPIDE" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - NO RECIBIÓ TRATAMIENTO POR UNA CONDICIÓN DE SALUD QUE SE LO IMPIDE" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - NO RECIBIÓ TRATAMIENTO POR NEGACIÓN DEL USUARIO" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO RECIBIÓ TRATAMIENTO POR QUE LOS DATOS DE CONTACTO DEL USUARIO NO SE ENCUENTRAN ACTUALIZADOS" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - NO RECIBIÓ TRATAMIENTO POR OTRAS RAZONES" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - SI RECIBIÓ TRATAMIENTO" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - SIN DATO" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - NO APLICA" itemValue="7"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Fecha de Terminación Tratamiento para Leishmaniasis" />
+                        </td>
+                        <td>
+                            <p:calendar 
+                                navigator="true" 
+                                locale="es" 
+                                
+                                pattern="yyyy-MM-dd"  
+                                mask="9999/99/99" value="#{Historia4505.u.fecha_terminacion_tratamiento_leishmaniasis}"/>
+                        </td>
+                    </tr> 
+                </table>
+            </p:fieldset>
+        </h:form>
+            <p:fieldset >
+                <table>
+                    <tr>
+                        <td colspan="2">
+                            <p:commandButton value="Generar Informe" actionListener="#{Historia4505.generarInforme}" />
+                        </td>
+                    </tr>
+                </table>
+            </p:fieldset>
+    </h:body>
+</html>

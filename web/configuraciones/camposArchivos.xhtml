@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Campos Archivos</title>
+        <link href="../recursos/css/estilos.css" rel="stylesheet"/>        
+        <link href="../recursos/css/metro-bootstrap.css" rel="stylesheet"/>
+        <link href="../recursos/css/iconFont.css" rel="stylesheet"/>
+        <script type="text/javascript" src="../recursos/js/calendario.js"></script>  
+    </h:head>
+    <h:body>
+        #{camposArchivosMB.init()}
+        <h:form id="idFormCamposArchivos">
+            <p:growl id="IdMensajeManuales"  showDetail="true" sticky="false" autoUpdate="true" life="2000"  />            
+            <div>
+                <p:panelGrid  id="idPanelBuscar" columns="2" styleClass="panelGridSinBordes"   style="margin-right: auto" >
+                    <h:panelGroup >
+                        <p:outputLabel styleClass="campoObligatorio"  value="Administradora"/>
+                        <p:selectOneMenu id="menuAdministradora" 
+                                         styleClass="campoFormulario" 
+                                         style="width: 150px" value="#{camposArchivosMB.administradora.idAdministradora}">
+                            <f:selectItems value="#{aplicacionGeneralMB.listaAdministradoras}" var="administradora"  itemLabel="#{administradora.razonSocial}"  itemValue="#{administradora.idAdministradora}"/>
+                        </p:selectOneMenu>
+                    </h:panelGroup>
+                    <h:panelGroup >
+                        <p:commandButton    actionListener="#{camposArchivosMB.buscar}"
+                                            title       =   "Buscar" value=" "                                        
+                                            styleClass  =   "icon-search fg-lightBlue" 
+                                            style       =   "height: 20px;"
+                                            process="@this,idPanelBuscar"
+                                            update="idFormCamposArchivos"
+                                            >
+                        </p:commandButton>
+                    </h:panelGroup>
+                </p:panelGrid>
+            </div>
+            <div>
+                <br/>
+                &nbsp;
+                <p:commandButton onclick="PF('modalagregarCampo').show();" 
+                                 style       =   "height: 20px; margin-left: 3px"
+                                 styleClass="fg-lightBlue bg-white no-border"
+                                 value="Agregar Campo" />
+            </div>                 
+            <div >
+                <br/> <br/> <br/>
+                <h:panelGroup >
+                    <p:dataTable  value="#{camposArchivosMB.lstCampoArchivos}"
+                                    var="campos" 
+                                    id="tablaCampos"
+                                    rows="15" 
+                                    paginator="true"
+                                    paginatorPosition="bottom"
+                                    emptyMessage="No hay registros"
+                                    style="width: 600px">
+                        <p:column headerText="Nombre Campo">
+                            <h:outputText value="#{campos.nombreCampo}" />
+                        </p:column>
+                        <p:column headerText=" Orden ">
+                            <h:outputText value="#{campos.orden}" />
+                        </p:column>
+                        <p:column headerText="">
+                            <p:commandButton actionListener="#{camposArchivosMB.editar(campos)}" styleClass="icon-pencil fg-lightBlue"  title="Editar" value=""  process="@this" />
+                            <p:commandButton actionListener="#{camposArchivosMB.eliminar(campos)}" styleClass="icon-cancel fg-lightBlue"  title="Eliminar" value=""  process="@this" >
+                                <p:confirm header="Confirmación" message="¿Seguro desea eliminar  ?" icon="ui-icon-alert" />
+                            </p:commandButton> &nbsp;
+                        </p:column>
+                    </p:dataTable>
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:confirmDialog>
+                </h:panelGroup>
+            </div>
+            <p:dialog id="dialogForm" header="Agregar Campo Archivos" widgetVar="modalagregarCampo" modal="true"  height="100">
+                <p:panelGrid id="panelModal" columns="1" styleClass="panelGridConBordes" >
+                    <h:panelGroup > 
+                        <p:commandButton 
+                            title="Guardar/Actualizar campo" value="&nbsp;"
+                            styleClass="icon-floppy fg-lightBlue bg-white no-border" 
+                            style="font-size: 20px; width: 20px; height: 20px; left: 20px; "
+                            action="#{camposArchivosMB.guardar()}"
+                            process="@this,panelModal"
+                            update="idFormCamposArchivos"
+                            />                            
+                        &nbsp;
+                    </h:panelGroup>
+                    <h:panelGroup >
+                        <h:outputText value="Orden campo" styleClass="campoObligatorio" style="width: 100px;"/>
+                        <h:inputText value="#{camposArchivosMB.campo.orden}" styleClass="campoFormulario"/>
+                    </h:panelGroup>
+                    <h:panelGroup>
+                        <h:outputText value="Nombre campo" styleClass="campoObligatorio" style="width: 100px;"/>
+                        <p:selectOneMenu value="#{camposArchivosMB.campo.nombreCampo}" filter="true" filterMatchMode="startsWith">
+                            <f:selectItems value="#{camposArchivosMB.listaCampo}" />
+                        </p:selectOneMenu>
+
+                    </h:panelGroup>
+                </p:panelGrid>
+            </p:dialog>       
+        </h:form>
+    </h:body>
+</html>

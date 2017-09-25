@@ -1,0 +1,1197 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Programas</title>
+        <link href="../recursos/css/estilos.css" rel="stylesheet"/>
+        <link href="../recursos/css/metro-bootstrap.css" rel="stylesheet"/>
+        <link href="../recursos/css/iconFont.css" rel="stylesheet"/>
+        <script type="text/javascript" src="../recursos/js/calendario.js"/>
+    </h:head>
+    <h:body >
+        <!--<p:ajaxStatus style="display:block;margin-bottom:2em;height:24px;">
+            <f:facet name="default">
+            </f:facet>
+            <f:facet name="start">
+                Cargando...
+            </f:facet>
+            <f:facet name="complete">
+            </f:facet>
+        </p:ajaxStatus>
+        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+            Cargando...
+        </p:dialog>-->
+        <h:form id="clean">
+            #{PyP_Programas.limpiar()}
+            #{PyP_Programas.llenarlistas()}
+        </h:form>
+        <h:form id="IdFormManuales">
+            <p:growl id="IdMensajeManuales"  showDetail="true" sticky="false" autoUpdate="true" life="2000"  />
+            <br/>
+            <div>
+                <p:commandButton
+                    title="Nuevo Programa" value="&nbsp;"
+                    styleClass="icon-new fg-lightBlue bg-white no-border"
+                    actionListener="#{PyP_Programas.clickBtnNuevoPrograma}"
+                    oncomplete="PF('wvTabView').select(0);"
+                    update=":IdFormManuales"
+                    style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/>
+                &nbsp;
+                <p:commandButton
+                    title="Buscar Programa" value="&nbsp;"
+                    styleClass="icon-search fg-lightBlue bg-white no-border" async="true"
+                    actionListener="#{PyP_Programas.buscarPrograma}"
+                    style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/>
+                &nbsp;
+                <p:commandButton
+                    title="Eliminar Programa" value="&nbsp;"
+                    styleClass="icon-cancel fg-lightBlue bg-white no-border"
+                    actionListener="#{PyP_Programas.eliminarPrograma}"
+                    style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/>
+                &nbsp;
+                <p:commandButton
+                    title="Guardar Programa" value="&nbsp;"
+                    styleClass="icon-floppy fg-lightBlue bg-white no-border"
+                    actionListener="#{PyP_Programas.guardarPrograma}"
+                    style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/>
+                &nbsp;
+                <p:remoteCommand name="remoteCommand"  update=":IdFormManuales" />
+            </div>
+            <br/>
+            <p:tabView id="IdTabView" styleClass="centrar-maximo" widgetVar="wvTabView" dynamic="true" rendered="#{PyP_Programas.mostrarTabView}" activeIndex="0">
+                <p:tab title="#{PyP_Programas.tituloTabManual}" id="IdRegPro">
+                    <br/>
+                    <table style="margin-left: auto; margin-right: auto;" >
+                        <tr>
+                            <td>
+                                <p:outputLabel styleClass="campoObligatorio" value="Código"/>
+                                <p:inputText styleClass="campoFormulario" size="71" value="#{PyP_Programas.codigoPrograma}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:outputLabel styleClass="campoObligatorio" value="Nombre"/>
+                                <p:inputText styleClass="campoFormulario" size="70" maxlength="150" value="#{PyP_Programas.nombreManual}"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
+                </p:tab>
+                <p:tab title="#{PyP_Programas.tituloTabServicios}"  rendered="#{PyP_Programas.mostrarSIM}" >
+                    <br/>
+                    <p:commandButton
+                        title="Agregar Servicio" value="&nbsp;"
+                        styleClass="icon-plus-2 fg-lightBlue bg-white no-border" async="true"
+                        actionListener="#{PyP_Programas.cargarDialogoAgregarServicio}"
+                        style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/>
+                    &nbsp;
+                    <p:commandButton
+                        title="Quitar" value="&nbsp;"
+                        styleClass="icon-minus-2 fg-lightBlue bg-white no-border"
+                        actionListener="#{PyP_Programas.quitarServicio}"
+                        style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/>
+                    &nbsp;
+                    <p:commandButton
+                        title="Editar" value="&nbsp;"
+                        styleClass="icon-pencil fg-lightBlue bg-white no-border"
+                        actionListener="#{PyP_Programas.cargarDialogoEditarServicio}"
+                        style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/>
+                    <br/><br/>
+
+                    <p:dataTable
+                        id="IdTablaServiciosManual"
+                        var="servicioManual"
+                        widgetVar="wvTablaServiciosManual"
+                        value="#{PyP_Programas.listaServiciosPrograma}"
+                        rowKey="#{servicioManual.idProgramaItems}"
+                        selection="#{PyP_Programas.servicioSeleccionadoTabla}"
+                        paginator="true"
+                        style="width: 90%; height: 300px;"
+                        rows="10"
+                        paginatorPosition="bottom"
+                        emptyMessage="No hay Información"
+                        scrollable="true"
+                        currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                        paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                        pageLinks="5"
+                        selectionMode="single"
+                        resizableColumns="true">
+                        <f:facet name="header">
+                            SERVICIOS
+                        </f:facet>
+
+                        <p:column headerText="ID" style="display: none" filterBy="#{servicioManual.idProgramaItems}" filterMatchMode="contains">
+                            #{servicioManual.idProgramaItems}
+                        </p:column>
+                        <p:column headerText="Nombre" style="display: none" filterBy="#{servicioManual.idServicio}" filterMatchMode="contains">
+                            #{servicioManual.idServicio}
+                        </p:column>
+                        <p:column headerText="Nombre" width="300" filterBy="#{servicioManual.nombreActividad}" filterMatchMode="contains">
+                            #{servicioManual.nombreActividad}
+                        </p:column>
+                        <p:column headerText="Finalidad" width="85" filterBy="#{servicioManual.finalidad}" filterMatchMode="contains">
+                            #{servicioManual.finalidad}
+                        </p:column>
+                        <p:column headerText="Genero" width="85" filterBy="#{PyP_Programas.genero_to_string(servicioManual.genero)}" filterMatchMode="contains">
+                            #{PyP_Programas.genero_to_string(servicioManual.genero)}
+                        </p:column>
+                        <p:column headerText="Edad Inicial" width="85" filterBy="#{servicioManual.edad_ini}" filterMatchMode="contains">
+                            #{servicioManual.edad_ini} - #{PyP_Programas.edad_to_string(servicioManual.edad_ini_list)}
+                        </p:column>
+                        <p:column headerText="Edad Final" width="85" filterBy="#{servicioManual.edad_fin}" filterMatchMode="contains">
+                            #{servicioManual.edad_fin} - #{PyP_Programas.edad_to_string(servicioManual.edad_fin_list)}
+                        </p:column>
+                        <p:column headerText="Dosis" width="85" filterBy="#{servicioManual.dosis}" filterMatchMode="contains">
+                            #{servicioManual.dosis}
+                        </p:column>
+                        <p:column headerText="Frecuencia" width="85" filterBy="#{servicioManual.frecuencia}" filterMatchMode="contains">
+                            #{servicioManual.frecuencia}
+                        </p:column>
+                        <p:column headerText="Meta" width="85" filterBy="#{servicioManual.meta}" filterMatchMode="contains">
+                            #{servicioManual.meta}
+                        </p:column>
+                        <p:column headerText="Programa" style="display: none" filterBy="#{servicioManual.idPrograma}" filterMatchMode="contains">
+                            #{servicioManual.idPrograma}
+                        </p:column>
+                    </p:dataTable>
+                </p:tab>
+                <p:tab title="#{PyP_Programas.tituloTabMedicamentos}" rendered="#{PyP_Programas.mostrarSIM}">
+                    <br/>
+                    <p:commandButton
+                        title="Agregar Medicamento" value="&nbsp;"
+                        styleClass="icon-plus-2 fg-lightBlue bg-white no-border"
+                        actionListener="#{PyP_Programas.cargarDialogoAgregarMedicamento}"
+                        style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/>
+                    &nbsp;
+                    <p:commandButton
+                        title="Quitar" value="&nbsp;"
+                        styleClass="icon-minus-2 fg-lightBlue bg-white no-border"
+                        actionListener="#{PyP_Programas.quitarMedicamento}"
+                        style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/>
+                    &nbsp;
+                    <p:commandButton
+                        title="Editar" value="&nbsp;"
+                        styleClass="icon-pencil fg-lightBlue bg-white no-border"
+                        actionListener="#{PyP_Programas.cargarDialogoEditarMedicamento}"
+                        style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/>
+                    <br/><br/>
+
+                    <p:dataTable
+                        id="IdTablaMedicamentos"
+                        var="servicioManual"
+                        widgetVar="wvTablaMedicamentos"
+                        value="#{PyP_Programas.listaMedicamentosPrograma}"
+                        rowKey="#{servicioManual.idProgramaItems}"
+                        selection="#{PyP_Programas.medicamentoSeleccionadoTabla}"
+                        paginator="true"
+                        style="width: 90%; height: 300px;"
+                        rows="10"
+                        paginatorPosition="bottom"
+                        emptyMessage="No hay Información"
+                        scrollable="true"
+                        currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                        paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                        pageLinks="5"
+                        selectionMode="single"
+                        resizableColumns="true">
+                        <f:facet name="header">
+                            MEDICAMENTOS
+                        </f:facet>
+
+                        <p:column headerText="ID" style="display: none" filterBy="#{servicioManual.idProgramaItems}" filterMatchMode="contains">
+                            #{servicioManual.idProgramaItems}
+                        </p:column>
+                        <p:column headerText="Nombre" style="display: none" filterBy="#{servicioManual.idMedicamento}" filterMatchMode="contains">
+                            #{servicioManual.idMedicamento}
+                        </p:column>
+                        <p:column headerText="Nombre" width="300" filterBy="#{servicioManual.nombreActividad}" filterMatchMode="contains">
+                            #{servicioManual.nombreActividad}
+                        </p:column>
+                        <p:column headerText="Finalidad" width="85" filterBy="#{servicioManual.finalidad}" filterMatchMode="contains">
+                            #{servicioManual.finalidad}
+                        </p:column>
+                        <p:column headerText="Genero" width="85" filterBy="#{PyP_Programas.genero_to_string(servicioManual.genero)}" filterMatchMode="contains">
+                            #{PyP_Programas.genero_to_string(servicioManual.genero)}
+                        </p:column>
+                        <p:column headerText="Edad Inicial" width="85" filterBy="#{servicioManual.edad_ini}" filterMatchMode="contains">
+                            #{servicioManual.edad_ini} - #{PyP_Programas.edad_to_string(servicioManual.edad_ini_list)}
+                        </p:column>
+                        <p:column headerText="Edad Final" width="85" filterBy="#{servicioManual.edad_fin}" filterMatchMode="contains">
+                            #{servicioManual.edad_fin} - #{PyP_Programas.edad_to_string(servicioManual.edad_fin_list)}
+                        </p:column>
+                        <p:column headerText="Dosis" width="85" filterBy="#{servicioManual.dosis}" filterMatchMode="contains">
+                            #{servicioManual.dosis}
+                        </p:column>
+                        <p:column headerText="Frecuencia" width="85" filterBy="#{servicioManual.frecuencia}" filterMatchMode="contains">
+                            #{servicioManual.frecuencia}
+                        </p:column>
+                        <p:column headerText="Meta" width="85" filterBy="#{servicioManual.meta}" filterMatchMode="contains">
+                            #{servicioManual.meta}
+                        </p:column>
+                        <p:column headerText="Programa" style="display: none" filterBy="#{servicioManual.idPrograma}" filterMatchMode="contains">
+                            #{servicioManual.idPrograma}
+                        </p:column>
+                    </p:dataTable>
+                </p:tab>
+                <p:tab title="#{PyP_Programas.tituloTabInsumos}"  rendered="#{PyP_Programas.mostrarSIM}">
+                    <br/>
+                    <p:commandButton
+                        title="Agregar Insumos" value="&nbsp;"
+                        styleClass="icon-plus-2 fg-lightBlue bg-white no-border"
+                        actionListener="#{PyP_Programas.cargarDialogoAgregarInsumo}"
+                        style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/>
+                    &nbsp;
+                    <p:commandButton
+                        title="Quitar" value="&nbsp;"
+                        styleClass="icon-minus-2 fg-lightBlue bg-white no-border"
+                        actionListener="#{PyP_Programas.quitarInsumo}"
+                        style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/>
+                    &nbsp;
+                    <p:commandButton
+                        title="Editar" value="&nbsp;"
+                        styleClass="icon-pencil fg-lightBlue bg-white no-border"
+                        actionListener="#{PyP_Programas.cargarDialogoEditarInsumo}"
+                        style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/>
+                    <br/><br/>
+
+                    <p:dataTable
+                        id="IdTablaInsumos"
+                        var="servicioManual"
+                        widgetVar="wvTablaInsumos"
+                        value="#{PyP_Programas.listaInsumosPrograma}"
+                        rowKey="#{servicioManual.idProgramaItems}"
+                        selection="#{PyP_Programas.insumoSeleccionadoTabla}"
+                        paginator="true"
+                        style="width: 90%; height: 300px;"
+                        rows="10"
+                        paginatorPosition="bottom"
+                        emptyMessage="No hay Información"
+                        scrollable="true"
+                        currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                        paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                        pageLinks="5"
+                        selectionMode="single"
+                        resizableColumns="true">
+                        <f:facet name="header">
+                            INSUMOS
+                        </f:facet>
+
+                        <p:column headerText="ID" style="display: none" filterBy="#{servicioManual.idProgramaItems}" filterMatchMode="contains">
+                            #{servicioManual.idProgramaItems}
+                        </p:column>
+                        <p:column headerText="Nombre" style="display: none" filterBy="#{servicioManual.idInsumo}" filterMatchMode="contains">
+                            #{servicioManual.idInsumo}
+                        </p:column>
+                        <p:column headerText="Nombre" width="300" filterBy="#{servicioManual.nombreActividad}" filterMatchMode="contains">
+                            #{servicioManual.nombreActividad}
+                        </p:column>
+                        <p:column headerText="Finalidad" width="85" filterBy="#{servicioManual.finalidad}" filterMatchMode="contains">
+                            #{servicioManual.finalidad}
+                        </p:column>
+                        <p:column headerText="Genero" width="85" filterBy="#{PyP_Programas.genero_to_string(servicioManual.genero)}" filterMatchMode="contains">
+                            #{PyP_Programas.genero_to_string(servicioManual.genero)}
+                        </p:column>
+                        <p:column headerText="Edad Inicial" width="85" filterBy="#{servicioManual.edad_ini}" filterMatchMode="contains">
+                            #{servicioManual.edad_ini} - #{PyP_Programas.edad_to_string(servicioManual.edad_ini_list)}
+                        </p:column>
+                        <p:column headerText="Edad Final" width="85" filterBy="#{servicioManual.edad_fin}" filterMatchMode="contains">
+                            #{servicioManual.edad_fin} - #{PyP_Programas.edad_to_string(servicioManual.edad_fin_list)}
+                        </p:column>
+                        <p:column headerText="Dosis" width="85" filterBy="#{servicioManual.dosis}" filterMatchMode="contains">
+                            #{servicioManual.dosis}
+                        </p:column>
+                        <p:column headerText="Frecuencia" width="85" filterBy="#{servicioManual.frecuencia}" filterMatchMode="contains">
+                            #{servicioManual.frecuencia}
+                        </p:column>
+                        <p:column headerText="Meta" width="85" filterBy="#{servicioManual.meta}" filterMatchMode="contains">
+                            #{servicioManual.meta}
+                        </p:column>
+                        <p:column headerText="Programa" style="display: none" filterBy="#{servicioManual.idPrograma}" filterMatchMode="contains">
+                            #{servicioManual.idPrograma}
+                        </p:column>
+                    </p:dataTable>
+                </p:tab>
+            </p:tabView>
+        </h:form>
+        <h:form id="IdFormDialogs">
+            <p:dialog id="IdDialogoBuscarManualTarifario" header="BUSCAR PROGRAMA" widgetVar="dialogoBuscarManualesTarifarios" resizable="false" modal="true">
+                <table>
+                    <tr>
+                        <td>
+                            <p:dataTable
+                                id="IdTablaManualesTarifarios"
+                                var="manual"
+                                widgetVar="wvTablaManualesTarifarios"
+                                value="#{PyP_Programas.listaProgramas}"
+                                rowKey="#{manual.codigoPrograma}"
+                                selection="#{PyP_Programas.programaSeleccionadoTabla}"
+                                paginator="true"
+                                style="width: 90%; height: 300px;"
+                                rows="10"
+                                paginatorPosition="bottom"
+                                emptyMessage="No hay Programas"
+                                scrollable="true"
+                                currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                pageLinks="5"
+                                selectionMode="single"
+                                resizableColumns="true">
+                                <p:column headerText="CODIGO" width="1" filterBy="#{manual.codigoPrograma}" filterMatchMode="contains">
+                                    #{manual.codigoPrograma}
+                                </p:column>
+                                <p:column headerText="NOMBRE" width="90" filterBy="#{manual.nombrePrograma}" filterMatchMode="contains">
+                                    #{manual.nombrePrograma}
+                                </p:column>
+                            </p:dataTable>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <br/>
+                            <p:commandButton
+                                value="Cargar Programa"
+                                actionListener="#{PyP_Programas.cargarPrograma}"/>
+
+                        </td>
+                    </tr>
+                </table>
+            </p:dialog>
+            <p:dialog id="IdDialogoEliminarManualTarifario" header="Eliminar Programa" widgetVar="dialogoEliminarManualTarifario" resizable="false" modal="true">
+                <p:panelGrid id="panelEliminarManualTarifario" styleClass="panelGridSinBordes" columns="1">
+                    <h:outputText value="¿ Confirma La eliminacion de este Programa ?"/>
+                    <p:commandButton
+                        value="Eliminar"
+                        oncomplete="PF('dialogoEliminarManualTarifario').hide();"
+                        actionListener="#{PyP_Programas.confirmarEliminarPrograma}"/>
+                </p:panelGrid>
+            </p:dialog>
+        </h:form>
+        <h:form id="IdFormDialogs1">
+            <p:dialog id="IdDialogoEditandoServicio" header="EDITAR SERVICIO" widgetVar="dialogoEditandoServicio" resizable="false" modal="true">
+                <p:panelGrid id="IdPanelEditandoServicio" styleClass="panelGridSinBordes" style="width: 520px;">
+                    <p:row>
+                        <p:column>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Servicio:" />
+                                    </td>
+                                    <td colspan="2">
+                                        <p:inputTextarea rows="3" cols="33" value="#{PyP_Programas.item_servicios_editar.nombreActividad}"/>
+                                    </td>
+                                    <td>
+                                        <p:commandButton
+                                            title="Buscar servicio" value="&nbsp;"
+                                            styleClass="icon-search fg-lightBlue bg-white no-border"
+                                            actionListener="#{PyP_Programas.buscarServicioEditar}"
+                                            style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Finalidad:" />
+                                    </td>
+                                    <td>
+                                        <p:inputText  styleClass="campoFormulario" id="finalidad_" size="20" value="#{PyP_Programas.item_servicios_editar.finalidad}" >
+                                        </p:inputText>
+                                        <p:watermark for="finalidad_" value="Finalidad"/>
+                                    </td>
+                                    <td>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Genero:" />
+                                    </td>
+                                    <td>
+                                        <p:selectOneMenu styleClass="campoFormulario"
+                                                         id="selectgenero_"
+                                                         value="#{PyP_Programas.item_servicios_editar.genero}"
+                                                         >
+                                            <f:selectItem itemLabel="01 - AMBOS" itemValue="#{0}"/>
+                                            <f:selectItem itemLabel="02 - MASCULINO" itemValue="#{1}"/>
+                                            <f:selectItem itemLabel="03 - FEMENINO" itemValue="#{2}"/>
+                                        </p:selectOneMenu>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Edad:" />
+                                    </td>
+                                    <td>
+                                        <p:inputText  styleClass="campoFormulario" id="edad_" size="20" value="#{PyP_Programas.item_servicios_editar.edad_ini}" >
+                                        </p:inputText>
+                                        <p:watermark for="edad_" value="Edad Inicial"/>
+                                        <p:selectOneMenu styleClass="campoFormulario"
+                                                         id="lista_genero"
+                                                         value="#{PyP_Programas.item_servicios_editar.edad_ini_list}"
+                                                         >
+                                            <f:selectItem itemLabel="01 - AÑO" itemValue="#{0}"/>
+                                            <f:selectItem itemLabel="02 - MES" itemValue="#{1}"/>
+                                            <f:selectItem itemLabel="03 - DIA" itemValue="#{2}"/>
+                                        </p:selectOneMenu>
+                                    </td>
+                                    <td>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Edad Final:" />
+                                    </td>
+                                    <td>
+                                        <p:inputText  styleClass="campoFormulario" id="edad_fin_" size="20" value="#{PyP_Programas.item_servicios_editar.edad_fin}" >
+                                        </p:inputText>
+                                        <p:watermark for="edad_fin_" value="Edad Final"/>
+                                        <p:selectOneMenu styleClass="campoFormulario"
+                                                         id="lista_genero_fin"
+                                                         value="#{PyP_Programas.item_servicios_editar.edad_fin_list}"
+                                                         >
+                                            <f:selectItem itemLabel="01 - AÑO" itemValue="#{0}"/>
+                                            <f:selectItem itemLabel="02 - MES" itemValue="#{1}"/>
+                                            <f:selectItem itemLabel="03 - DIA" itemValue="#{2}"/>
+                                        </p:selectOneMenu>
+                                    </td>
+                                </tr>
+                                <tr style="display: none">
+                                    <td>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Dosis:" />
+                                    </td>
+                                    <td>
+                                        <p:inputText  styleClass="campoFormulario" id="dosis_" size="20" value="#{PyP_Programas.item_servicios_editar.dosis}" >
+                                        </p:inputText>
+                                        <p:watermark for="dosis_" value="Dosis"/>
+                                    </td>
+                                    <td>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Frecuencia:" />
+                                    </td>
+                                    <td>
+                                        <p:inputText  styleClass="campoFormulario" id="frecuencia_" size="20" value="#{PyP_Programas.item_servicios_editar.frecuencia}" >
+                                        </p:inputText>
+                                        <p:watermark for="frecuencia_" value="Frecuencia"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Meta:" />
+                                    </td>
+                                    <td>
+                                        <p:inputText  styleClass="campoFormulario" id="meta_" size="20" value="#{PyP_Programas.item_servicios_editar.meta}" >
+                                        </p:inputText>
+                                        <p:watermark for="meta_" value="Meta"/>
+                                    </td>
+                                    <td >
+                                        <p:commandButton
+                                            value="Actualizar"
+                                            actionListener="#{PyP_Programas.actualizarServicio}"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+            </p:dialog>
+            <p:dialog id="IdDialogoEditandoMedicamento" header="EDITAR MEDICAMENTO" widgetVar="dialogoEditandoMedicamento" resizable="false" modal="true">
+                <p:panelGrid id="IdPanelEditandoMedicamento" styleClass="panelGridSinBordes" style="width: 520px;">
+                    <p:row>
+                        <p:column>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <h:outputText styleClass="campoObligatorio" value="Descripción" title=""/>
+                                    </td>
+                                    <td>
+                                        <p:selectOneMenu styleClass="campoFormulario" style="width: 410px;" value="#{PyP_Programas.item_medicamentos_editar.idMedicamento}"  filter="true" filterMatchMode="contains">
+                                            <p:ajax event="change"
+                                                    listener="#{PyP_Programas.cambiaMedicamento}"
+                                                    update="actividad_m_e"/>
+                                            <f:selectItems value="#{PyP_Programas.listaMedicamentos}" var="servicio" itemLabel="#{servicio.idMedicamento}-#{servicio.codigoMedicamento} - #{servicio.nombreMedicamento}" itemValue="#{servicio.idMedicamento}"/>
+                                        </p:selectOneMenu>
+                                    </td>
+                                    <td>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Nombre:" />
+                                    </td>
+                                    <td>
+                                        <p:inputText  styleClass="campoFormulario" id="actividad_m_e" size="20" value="#{PyP_Programas.item_medicamentos_editar.nombreActividad}" >
+                                        </p:inputText>
+                                        <p:watermark for="actividad_m_e" value="Actividad"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Finalidad:" />
+                                    </td>
+                                    <td>
+                                        <p:inputText  styleClass="campoFormulario" id="finalidad_m_e" size="20" value="#{PyP_Programas.item_medicamentos_editar.finalidad}" >
+                                        </p:inputText>
+                                        <p:watermark for="finalidad_m_e" value="Finalidad"/>
+                                    </td>
+                                    <td>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Genero:" />
+                                    </td>
+                                    <td>
+                                        <p:selectOneMenu styleClass="campoFormulario"
+                                                         id="selectgenero_m_e"
+                                                         value="#{PyP_Programas.item_medicamentos_editar.genero}"
+                                                         >
+                                            <f:selectItem itemLabel="01 - AMBOS" itemValue="#{0}"/>
+                                            <f:selectItem itemLabel="02 - MASCULINO" itemValue="#{1}"/>
+                                            <f:selectItem itemLabel="03 - FEMENINO" itemValue="#{2}"/>
+                                        </p:selectOneMenu>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Edad:" />
+                                    </td>
+                                    <td>
+                                        <p:inputText  styleClass="campoFormulario" id="edad_m_e" size="20" value="#{PyP_Programas.item_medicamentos_editar.edad_ini}" >
+                                        </p:inputText>
+                                        <p:watermark for="edad_" value="Edad Inicial"/>
+                                        <p:selectOneMenu styleClass="campoFormulario"
+                                                         id="lista_genero_m_e"
+                                                         value="#{PyP_Programas.item_medicamentos_editar.edad_ini_list}"
+                                                         >
+                                            <f:selectItem itemLabel="01 - AÑO" itemValue="#{0}"/>
+                                            <f:selectItem itemLabel="02 - MES" itemValue="#{1}"/>
+                                            <f:selectItem itemLabel="03 - DIA" itemValue="#{2}"/>
+                                        </p:selectOneMenu>
+                                    </td>
+                                    <td>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Edad Final:" />
+                                    </td>
+                                    <td>
+                                        <p:inputText  styleClass="campoFormulario" id="edad_fin_m_e" size="20" value="#{PyP_Programas.item_medicamentos_editar.edad_fin}" >
+                                        </p:inputText>
+                                        <p:watermark for="edad_fin_" value="Edad Final"/>
+                                        <p:selectOneMenu styleClass="campoFormulario"
+                                                         id="lista_genero_finm_e"
+                                                         value="#{PyP_Programas.item_medicamentos_editar.edad_fin_list}"
+                                                         >
+                                            <f:selectItem itemLabel="01 - AÑO" itemValue="#{0}"/>
+                                            <f:selectItem itemLabel="02 - MES" itemValue="#{1}"/>
+                                            <f:selectItem itemLabel="03 - DIA" itemValue="#{2}"/>
+                                        </p:selectOneMenu>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Dosis:" />
+                                    </td>
+                                    <td>
+                                        <p:inputText  styleClass="campoFormulario" id="dosis_m_e" size="20" value="#{PyP_Programas.item_medicamentos_editar.dosis}" >
+                                        </p:inputText>
+                                        <p:watermark for="dosis_m_e" value="Dosis"/>
+                                    </td>
+                                    <td>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Frecuencia:" />
+                                    </td>
+                                    <td>
+                                        <p:inputText  styleClass="campoFormulario" id="frecuencia_m_e" size="20" value="#{PyP_Programas.item_medicamentos_editar.frecuencia}" >
+                                        </p:inputText>
+                                        <p:watermark for="frecuencia_m_e" value="Frecuencia"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Meta:" />
+                                    </td>
+                                    <td>
+                                        <p:inputText  styleClass="campoFormulario" id="meta_m_e" size="20" value="#{PyP_Programas.item_medicamentos_editar.meta}" >
+                                        </p:inputText>
+                                        <p:watermark for="meta_m_e" value="Meta"/>
+                                    </td>
+                                    <td >
+                                        <p:commandButton
+                                            value="Actualizar"
+                                            actionListener="#{PyP_Programas.actualizarMedicamento}"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+            </p:dialog>
+            <p:dialog id="IdDialogoEditandoInsumo" header="EDITAR INSUMO" widgetVar="dialogoEditandoInsumo" resizable="false" modal="true">
+                <p:panelGrid id="IdPanelEditandoInsumo" styleClass="panelGridSinBordes" style="width: 520px;">
+                    <p:row>
+                        <p:column>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <h:outputText styleClass="campoObligatorio" value="Descripción" title=""/>
+                                    </td>
+                                    <td>
+                                        <p:selectOneMenu styleClass="campoFormulario" style="width: 410px;" value="#{PyP_Programas.item_insumos_editar.idInsumo}"  filter="true" filterMatchMode="contains">
+                                            <p:ajax event="change"
+                                                    listener="#{PyP_Programas.cambiaInsumo}"
+                                                    update="actividad_i_e"/>
+                                            <f:selectItems value="#{PyP_Programas.listaInsumos}" var="servicio" itemLabel="#{servicio.idInsumo}-#{servicio.codigoInsumo} - #{servicio.nombreInsumo}" itemValue="#{servicio.idInsumo}"/>
+                                        </p:selectOneMenu>
+                                    </td>
+                                    <td>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Nombre:" />
+                                    </td>
+                                    <td>
+                                        <p:inputText  styleClass="campoFormulario" id="actividad_i_e" size="20" value="#{PyP_Programas.item_insumos_editar.nombreActividad}" >
+                                        </p:inputText>
+                                        <p:watermark for="actividad_i_e" value="Actividad"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Finalidad:" />
+                                    </td>
+                                    <td>
+                                        <p:inputText  styleClass="campoFormulario" id="finalidad_i_e" size="20" value="#{PyP_Programas.item_insumos_editar.finalidad}" >
+                                        </p:inputText>
+                                        <p:watermark for="finalidad_i_e" value="Finalidad"/>
+                                    </td>
+                                    <td>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Genero:" />
+                                    </td>
+                                    <td>
+                                        <p:selectOneMenu styleClass="campoFormulario"
+                                                         id="selectgenero_i_e"
+                                                         value="#{PyP_Programas.item_insumos_editar.genero}"
+                                                         >
+                                            <f:selectItem itemLabel="01 - AMBOS" itemValue="#{0}"/>
+                                            <f:selectItem itemLabel="02 - MASCULINO" itemValue="#{1}"/>
+                                            <f:selectItem itemLabel="03 - FEMENINO" itemValue="#{2}"/>
+                                        </p:selectOneMenu>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Edad:" />
+                                    </td>
+                                    <td>
+                                        <p:inputText  styleClass="campoFormulario" id="edad_i_e" size="20" value="#{PyP_Programas.item_insumos_editar.edad_ini}" >
+                                        </p:inputText>
+                                        <p:watermark for="edad_" value="Edad Inicial"/>
+                                        <p:selectOneMenu styleClass="campoFormulario"
+                                                         id="lista_genero_i_e"
+                                                         value="#{PyP_Programas.item_insumos_editar.edad_ini_list}"
+                                                         >
+                                            <f:selectItem itemLabel="01 - AÑO" itemValue="#{0}"/>
+                                            <f:selectItem itemLabel="02 - MES" itemValue="#{1}"/>
+                                            <f:selectItem itemLabel="03 - DIA" itemValue="#{2}"/>
+                                        </p:selectOneMenu>
+                                    </td>
+                                    <td>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Edad Final:" />
+                                    </td>
+                                    <td>
+                                        <p:inputText  styleClass="campoFormulario" id="edad_fin_i_e" size="20" value="#{PyP_Programas.item_insumos_editar.edad_fin}" >
+                                        </p:inputText>
+                                        <p:watermark for="edad_fin_" value="Edad Final"/>
+                                        <p:selectOneMenu styleClass="campoFormulario"
+                                                         id="lista_genero_fin_m_e"
+                                                         value="#{PyP_Programas.item_insumos_editar.edad_fin_list}"
+                                                         >
+                                            <f:selectItem itemLabel="01 - AÑO" itemValue="#{0}"/>
+                                            <f:selectItem itemLabel="02 - MES" itemValue="#{1}"/>
+                                            <f:selectItem itemLabel="03 - DIA" itemValue="#{2}"/>
+                                        </p:selectOneMenu>
+                                    </td>
+                                </tr>
+                                <tr style="display: none">
+                                    <td>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Dosis:" />
+                                    </td>
+                                    <td>
+                                        <p:inputText  styleClass="campoFormulario" id="dosis_i_e" size="20" value="#{PyP_Programas.item_insumos_editar.dosis}" >
+                                        </p:inputText>
+                                        <p:watermark for="dosis_i_e" value="Dosis"/>
+                                    </td>
+                                    <td>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Frecuencia:" />
+                                    </td>
+                                    <td>
+                                        <p:inputText  styleClass="campoFormulario" id="frecuencia_i_e" size="20" value="#{PyP_Programas.item_insumos_editar.frecuencia}" >
+                                        </p:inputText>
+                                        <p:watermark for="frecuencia_i_e" value="Frecuencia"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Meta:" />
+                                    </td>
+                                    <td>
+                                        <p:inputText  styleClass="campoFormulario" id="meta_i_e" size="20" value="#{PyP_Programas.item_insumos_editar.meta}" >
+                                        </p:inputText>
+                                        <p:watermark for="meta_i_e" value="Meta"/>
+                                    </td>
+                                    <td >
+                                        <p:commandButton
+                                            value="Actualizar"
+                                            actionListener="#{PyP_Programas.actualizarInsumo}"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+            </p:dialog>
+        </h:form>
+
+        <h:form id="IdFormDialogs5">
+            <p:dialog id="IdDialogoAgregarServicio" header="AGREGAR SERVICIO" widgetVar="dialogoAgregarServicio" resizable="false" modal="true">
+                <p:panelGrid id="IdPanelAgregarServicio" styleClass="panelGridSinBordes" style="width: 520px;">
+                    <p:row>
+                        <p:column>
+                            <p:column>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <p:outputLabel styleClass="labelFormularioBold" value="Servicio:" />
+                                        </td>
+                                        <td colspan="2">
+                                            <p:inputTextarea rows="3" cols="33" value="#{PyP_Programas.item_servicios.nombreActividad}"/>
+                                        </td>
+                                        <td>
+                                            <p:commandButton
+                                                title="Buscar servicio" value="&nbsp;"
+                                                styleClass="icon-search fg-lightBlue bg-white no-border"
+                                                actionListener="#{PyP_Programas.buscarServicio}"
+                                                style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p:outputLabel styleClass="labelFormularioBold" value="Finalidad:" />
+                                        </td>
+                                        <td>
+                                            <p:inputText  styleClass="campoFormulario" id="finalidad22" size="20" value="#{PyP_Programas.item_servicios.finalidad}" >
+                                            </p:inputText>
+                                            <p:watermark for="finalidad22" value="Finalidad"/>
+                                        </td>
+                                        <td>
+                                            <p:outputLabel styleClass="labelFormularioBold" value="Genero:" />
+                                        </td>
+                                        <td>
+                                            <p:selectOneMenu styleClass="campoFormulario"
+                                                             id="selectgenero22"
+                                                             value="#{PyP_Programas.item_servicios.genero}"
+                                                             >
+                                                <f:selectItem itemLabel="01 - AMBOS" itemValue="#{0}"/>
+                                                <f:selectItem itemLabel="02 - MASCULINO" itemValue="#{1}"/>
+                                                <f:selectItem itemLabel="03 - FEMENINO" itemValue="#{2}"/>
+                                            </p:selectOneMenu>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p:outputLabel styleClass="labelFormularioBold" value="Edad:" />
+                                        </td>
+                                        <td>
+                                            <p:inputText  styleClass="campoFormulario" id="edad22" size="20" value="#{PyP_Programas.item_servicios.edad_ini}" >
+                                            </p:inputText>
+                                            <p:watermark for="edad22" value="Edad Inicial"/>
+                                            <p:selectOneMenu styleClass="campoFormulario"
+                                                             id="lista_genero_fin1233223"
+                                                             value="#{PyP_Programas.item_servicios.edad_ini_list}"
+                                                             >
+                                                <f:selectItem itemLabel="01 - AÑO" itemValue="#{0}"/>
+                                                <f:selectItem itemLabel="02 - MES" itemValue="#{1}"/>
+                                                <f:selectItem itemLabel="03 - DIA" itemValue="#{2}"/>
+                                            </p:selectOneMenu>
+                                        </td>
+                                        <td>
+                                            <p:outputLabel styleClass="labelFormularioBold" value="Edad Final:" />
+                                        </td>
+                                        <td>
+                                            <p:inputText  styleClass="campoFormulario" id="edad_fin22" size="20" value="#{PyP_Programas.item_servicios.edad_fin}" >
+                                            </p:inputText>
+                                            <p:watermark for="edad_fin22" value="Edad Final"/>
+                                            <p:selectOneMenu styleClass="campoFormulario"
+                                                             id="lista_genero_fin12223"
+                                                             value="#{PyP_Programas.item_servicios.edad_fin_list}"
+                                                             >
+                                                <f:selectItem itemLabel="01 - AÑO" itemValue="#{0}"/>
+                                                <f:selectItem itemLabel="02 - MES" itemValue="#{1}"/>
+                                                <f:selectItem itemLabel="03 - DIA" itemValue="#{2}"/>
+                                            </p:selectOneMenu>
+                                        </td>
+                                    </tr>
+                                    <tr style="display: none">
+                                        <td>
+                                            <p:outputLabel styleClass="labelFormularioBold" value="Dosis:" />
+                                        </td>
+                                        <td>
+                                            <p:inputText  styleClass="campoFormulario" id="dosis22" size="20" value="#{PyP_Programas.item_servicios.dosis}" >
+                                            </p:inputText>
+                                            <p:watermark for="dosis22" value="Dosis"/>
+                                        </td>
+                                        <td>
+                                            <p:outputLabel styleClass="labelFormularioBold" value="Frecuencia:" />
+                                        </td>
+                                        <td>
+                                            <p:inputText  styleClass="campoFormulario" id="frecuencia22" size="20" value="#{PyP_Programas.item_servicios.frecuencia}" >
+                                            </p:inputText>
+                                            <p:watermark for="frecuencia22" value="Frecuencia"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p:outputLabel styleClass="labelFormularioBold" value="Meta:" />
+                                        </td>
+                                        <td>
+                                            <p:inputText  styleClass="campoFormulario" id="meta22" size="20" value="#{PyP_Programas.item_servicios.meta}" >
+                                            </p:inputText>
+                                            <p:watermark for="meta22" value="Meta"/>
+                                        </td>
+                                        <td>
+                                            <p:commandButton
+                                                value="Agregar"
+                                                actionListener="#{PyP_Programas.agregarServicio}"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </p:column>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+            </p:dialog>
+            <p:dialog id="IdDialogoAgregarMedicamento" header="AGREGAR MEDICAMENTO" widgetVar="dialogoAgregarMedicamento" resizable="false" modal="true">
+                <p:panelGrid id="IdPanelAgregarMedicamento" styleClass="panelGridSinBordes" style="width: 520px;">
+                    <p:row>
+                        <p:column>
+                            <p:column>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <h:outputText styleClass="campoObligatorio" value="Descripción" title=""/>
+                                        </td>
+                                        <td>
+                                            <p:selectOneMenu styleClass="campoFormulario" style="width: 410px;" value="#{PyP_Programas.item_medicamentos.idMedicamento}"  filter="true" filterMatchMode="contains">
+                                                <p:ajax event="change"
+                                                        listener="#{PyP_Programas.cambiaMedicamento}"
+                                                        update="actividad_m"/>
+                                                <f:selectItems value="#{PyP_Programas.listaMedicamentos}" var="medicamento" itemLabel="#{medicamento.idMedicamento}-#{medicamento.codigoMedicamento} - #{medicamento.nombreMedicamento}" itemValue="#{medicamento.idMedicamento}"/>
+                                            </p:selectOneMenu>
+                                        </td>
+                                        <td>
+                                            <p:outputLabel styleClass="labelFormularioBold" value="Nombre:" />
+                                        </td>
+                                        <td>
+                                            <p:inputText  styleClass="campoFormulario" id="actividad_m" size="20" value="#{PyP_Programas.item_medicamentos.nombreActividad}" >
+                                            </p:inputText>
+                                            <p:watermark for="actividad_m" value="Actividad"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p:outputLabel styleClass="labelFormularioBold" value="Finalidad:" />
+                                        </td>
+                                        <td>
+                                            <p:inputText  styleClass="campoFormulario" id="finalidad_m" size="20" value="#{PyP_Programas.item_medicamentos.finalidad}" >
+                                            </p:inputText>
+                                            <p:watermark for="finalidad_m" value="Finalidad"/>
+                                        </td>
+                                        <td>
+                                            <p:outputLabel styleClass="labelFormularioBold" value="Genero:" />
+                                        </td>
+                                        <td>
+                                            <p:selectOneMenu styleClass="campoFormulario"
+                                                             id="selectgenero_m"
+                                                             value="#{PyP_Programas.item_medicamentos.genero}"
+                                                             >
+                                                <f:selectItem itemLabel="01 - AMBOS" itemValue="#{0}"/>
+                                                <f:selectItem itemLabel="02 - MASCULINO" itemValue="#{1}"/>
+                                                <f:selectItem itemLabel="03 - FEMENINO" itemValue="#{2}"/>
+                                            </p:selectOneMenu>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p:outputLabel styleClass="labelFormularioBold" value="Edad:" />
+                                        </td>
+                                        <td>
+                                            <p:inputText  styleClass="campoFormulario" id="edad_m" size="20" value="#{PyP_Programas.item_medicamentos.edad_ini}" >
+                                            </p:inputText>
+                                            <p:watermark for="edad_m" value="Edad Inicial"/>
+                                            <p:selectOneMenu styleClass="campoFormulario"
+                                                             value="#{PyP_Programas.item_medicamentos.edad_ini_list}"
+                                                             >
+                                                <f:selectItem itemLabel="01 - AÑO" itemValue="#{0}"/>
+                                                <f:selectItem itemLabel="02 - MES" itemValue="#{1}"/>
+                                                <f:selectItem itemLabel="03 - DIA" itemValue="#{2}"/>
+                                            </p:selectOneMenu>
+                                        </td>
+                                        <td>
+                                            <p:outputLabel styleClass="labelFormularioBold" value="Edad Final:" />
+                                        </td>
+                                        <td>
+                                            <p:inputText  styleClass="campoFormulario" id="edad_fin_m" size="20" value="#{PyP_Programas.item_medicamentos.edad_fin}" >
+                                            </p:inputText>
+                                            <p:watermark for="edad_fin_m" value="Edad Final"/>
+                                            <p:selectOneMenu styleClass="campoFormulario"
+                                                             value="#{PyP_Programas.item_medicamentos.edad_fin_list}"
+                                                             >
+                                                <f:selectItem itemLabel="01 - AÑO" itemValue="#{0}"/>
+                                                <f:selectItem itemLabel="02 - MES" itemValue="#{1}"/>
+                                                <f:selectItem itemLabel="03 - DIA" itemValue="#{2}"/>
+                                            </p:selectOneMenu>
+                                        </td>
+                                    </tr>
+                                    <tr >
+                                        <td>
+                                            <p:outputLabel styleClass="labelFormularioBold" value="Dosis:" />
+                                        </td>
+                                        <td>
+                                            <p:inputText  styleClass="campoFormulario" id="dosis_m" size="20" value="#{PyP_Programas.item_medicamentos.dosis}" >
+                                            </p:inputText>
+                                            <p:watermark for="dosis_m" value="Dosis"/>
+                                        </td>
+                                        <td>
+                                            <p:outputLabel styleClass="labelFormularioBold" value="Frecuencia:" />
+                                        </td>
+                                        <td>
+                                            <p:inputText  styleClass="campoFormulario" id="frecuencia_m" size="20" value="#{PyP_Programas.item_medicamentos.frecuencia}" >
+                                            </p:inputText>
+                                            <p:watermark for="frecuencia_m" value="Frecuencia"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p:outputLabel styleClass="labelFormularioBold" value="Meta:" />
+                                        </td>
+                                        <td>
+                                            <p:inputText  styleClass="campoFormulario" id="meta_m" size="20" value="#{PyP_Programas.item_medicamentos.meta}" >
+                                            </p:inputText>
+                                            <p:watermark for="meta_m" value="Meta"/>
+                                        </td>
+                                        <td>
+                                            <p:commandButton
+                                                value="Agregar"
+                                                actionListener="#{PyP_Programas.agregarMedicamento}"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </p:column>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+            </p:dialog>
+            <p:dialog id="IdDialogoAgregarIsumo" header="AGREGAR INSUMO" widgetVar="dialogoAgregarInsumo" resizable="false" modal="true">
+                <p:panelGrid id="IdPanelAgregarInsumo" styleClass="panelGridSinBordes" style="width: 520px;">
+                    <p:row>
+                        <p:column>
+                            <p:column>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <h:outputText styleClass="campoObligatorio" value="Descripción" title=""/>
+                                        </td>
+                                        <td>
+                                            <p:selectOneMenu styleClass="campoFormulario" style="width: 410px;" value="#{PyP_Programas.item_insumos.idInsumo}"  filter="true" filterMatchMode="contains">
+                                                <p:ajax event="change"
+                                                        listener="#{PyP_Programas.cambiaInsumo}"
+                                                        update="actividad_i"/>
+                                                <f:selectItems value="#{PyP_Programas.listaInsumos}" var="medicamento" itemLabel="#{medicamento.idInsumo}-#{medicamento.codigoInsumo} - #{medicamento.nombreInsumo}" itemValue="#{medicamento.idInsumo}"/>
+                                            </p:selectOneMenu>
+                                        </td>
+                                        <td>
+                                            <p:outputLabel styleClass="labelFormularioBold" value="Nombre:" />
+                                        </td>
+                                        <td>
+                                            <p:inputText  styleClass="campoFormulario" id="actividad_i" size="20" value="#{PyP_Programas.item_insumos.nombreActividad}" >
+                                            </p:inputText>
+                                            <p:watermark for="actividad_i" value="Actividad"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p:outputLabel styleClass="labelFormularioBold" value="Finalidad:" />
+                                        </td>
+                                        <td>
+                                            <p:inputText  styleClass="campoFormulario" id="finalidad_i" size="20" value="#{PyP_Programas.item_insumos.finalidad}" >
+                                            </p:inputText>
+                                            <p:watermark for="finalidad_i" value="Finalidad"/>
+                                        </td>
+                                        <td>
+                                            <p:outputLabel styleClass="labelFormularioBold" value="Genero:" />
+                                        </td>
+                                        <td>
+                                            <p:selectOneMenu styleClass="campoFormulario"
+                                                             id="selectgenero_i"
+                                                             value="#{PyP_Programas.item_insumos.genero}"
+                                                             >
+                                                <f:selectItem itemLabel="01 - AMBOS" itemValue="#{0}"/>
+                                                <f:selectItem itemLabel="02 - MASCULINO" itemValue="#{1}"/>
+                                                <f:selectItem itemLabel="03 - FEMENINO" itemValue="#{2}"/>
+                                            </p:selectOneMenu>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p:outputLabel styleClass="labelFormularioBold" value="Edad:" />
+                                        </td>
+                                        <td>
+                                            <p:inputText  styleClass="campoFormulario" id="edad_i" size="20" value="#{PyP_Programas.item_insumos.edad_ini}" >
+                                            </p:inputText>
+                                            <p:watermark for="edad_i" value="Edad Inicial"/>
+                                            <p:selectOneMenu styleClass="campoFormulario"
+                                                             value="#{PyP_Programas.item_insumos.edad_ini_list}"
+                                                             >
+                                                <f:selectItem itemLabel="01 - AÑO" itemValue="#{0}"/>
+                                                <f:selectItem itemLabel="02 - MES" itemValue="#{1}"/>
+                                                <f:selectItem itemLabel="03 - DIA" itemValue="#{2}"/>
+                                            </p:selectOneMenu>
+                                        </td>
+                                        <td>
+                                            <p:outputLabel styleClass="labelFormularioBold" value="Edad Final:" />
+                                        </td>
+                                        <td>
+                                            <p:inputText  styleClass="campoFormulario" id="edad_fin_i" size="20" value="#{PyP_Programas.item_insumos.edad_fin}" >
+                                            </p:inputText>
+                                            <p:watermark for="edad_fin_i" value="Edad Final"/>
+                                            <p:selectOneMenu styleClass="campoFormulario"
+                                                             value="#{PyP_Programas.item_insumos.edad_fin_list}"
+                                                             >
+                                                <f:selectItem itemLabel="01 - AÑO" itemValue="#{0}"/>
+                                                <f:selectItem itemLabel="02 - MES" itemValue="#{1}"/>
+                                                <f:selectItem itemLabel="03 - DIA" itemValue="#{2}"/>
+                                            </p:selectOneMenu>
+                                        </td>
+                                    </tr>
+                                    <tr style="display: none">
+                                        <td>
+                                            <p:outputLabel styleClass="labelFormularioBold" value="Dosis:" />
+                                        </td>
+                                        <td>
+                                            <p:inputText  styleClass="campoFormulario" id="dosis_i" size="20" value="#{PyP_Programas.item_insumos.dosis}" >
+                                            </p:inputText>
+                                            <p:watermark for="dosis_i" value="Dosis"/>
+                                        </td>
+                                        <td>
+                                            <p:outputLabel styleClass="labelFormularioBold" value="Frecuencia:" />
+                                        </td>
+                                        <td>
+                                            <p:inputText  styleClass="campoFormulario" id="frecuencia_i" size="20" value="#{PyP_Programas.item_insumos.frecuencia}" >
+                                            </p:inputText>
+                                            <p:watermark for="frecuencia_i" value="Frecuencia"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p:outputLabel styleClass="labelFormularioBold" value="Meta:" />
+                                        </td>
+                                        <td>
+                                            <p:inputText  styleClass="campoFormulario" id="meta_i" size="20" value="#{PyP_Programas.item_insumos.meta}" >
+                                            </p:inputText>
+                                            <p:watermark for="meta_i" value="Meta"/>
+                                        </td>
+                                        <td>
+                                            <p:commandButton
+                                                value="Agregar"
+                                                actionListener="#{PyP_Programas.agregarInsumo}"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </p:column>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+            </p:dialog>
+        </h:form>
+        <h:form id="IdFormDialogs8">
+            <p:dialog id="IdDialogoBuscarServicios" header="BUSCAR SERVICIO" widgetVar="dialogoBuscarServicios" resizable="false" modal="true">
+                <br/>
+                <p:dataTable
+                    id="IdTablaServicios"
+                    var="servicio"
+                    widgetVar="wvTablaServicios"
+                    value="#{PyP_Programas.listaServicios}"
+                    rowKey="#{servicio.idServicio}"
+                    selection="#{PyP_Programas.servicioSeleccionadoTablaBusqueda}"
+                    paginator="true"
+                    style="width: 600px; height: 300px;"
+                    rows="10"
+                    paginatorPosition="bottom"
+                    emptyMessage="No hay servicios"
+                    scrollable="true"
+                    currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                    paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                    pageLinks="5"
+                    selectionMode="single"
+                    resizableColumns="true">
+                    <p:column headerText="ID" width="0" >
+                        #{servicio.idServicio}
+                    </p:column>
+                    <p:column headerText="CODIGO" width="10" filterBy="#{servicio.codigoServicio}" filterMatchMode="contains">
+                        #{servicio.codigoServicio}
+                    </p:column>
+                    <p:column headerText="NOMBRE" width="90" filterBy="#{servicio.nombreServicio}" filterMatchMode="contains">
+                        #{servicio.nombreServicio}
+                    </p:column>
+                </p:dataTable>
+                <br/>
+                <p:commandButton value="Cargar seleccionado" actionListener="#{PyP_Programas.cargarServicio}"/>
+                <br/>
+            </p:dialog>
+        </h:form>
+        <h:form id="IdFormDialogs9">
+            <p:dialog id="IdDialogoBuscarServiciosEditar" header="BUSCAR SERVICIO" widgetVar="dialogoBuscarServiciosEditar" resizable="false" modal="true">
+                <br/>
+                <p:dataTable
+                    id="IdTablaServiciosEditar"
+                    var="servicio"
+                    widgetVar="wvTablaServiciosEditar"
+                    value="#{PyP_Programas.listaServicios}"
+                    rowKey="#{servicio.idServicio}"
+                    selection="#{PyP_Programas.servicioSeleccionadoTablaBusqueda}"
+                    paginator="true"
+                    style="width: 600px; height: 300px;"
+                    rows="10"
+                    paginatorPosition="bottom"
+                    emptyMessage="No hay servicios"
+                    scrollable="true"
+                    currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                    paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                    pageLinks="5"
+                    selectionMode="single"
+                    resizableColumns="true">
+                    <p:column headerText="ID" width="0" >
+                        #{servicio.idServicio}
+                    </p:column>
+                    <p:column headerText="CODIGO" width="10" filterBy="#{servicio.codigoServicio}" filterMatchMode="contains">
+                        #{servicio.codigoServicio}
+                    </p:column>
+                    <p:column headerText="NOMBRE" width="90" filterBy="#{servicio.nombreServicio}" filterMatchMode="contains">
+                        #{servicio.nombreServicio}
+                    </p:column>
+                </p:dataTable>
+                <br/>
+                <p:commandButton value="Cargar seleccionado" actionListener="#{PyP_Programas.cargarServicioEditar}"/>
+                <br/>
+            </p:dialog>
+        </h:form>
+
+        <h:form id="IdFormDialogs7">
+            <p:dialog id="IdDialogoQuitarServicio" header="QUITAR SERVICIO" widgetVar="dialogoQuitarServicio" resizable="false" modal="true">
+                <p:panelGrid id="panelQuitarServicio" styleClass="panelGridSinBordes" columns="1">
+                    <h:outputText value="¿ Confirmación ?"/>
+                    <p:commandButton
+                        value="Quitar"
+                        update=":IdFormManuales:IdTabView"
+                        actionListener="#{PyP_Programas.confirmarQuitarServicio}"/>
+                </p:panelGrid>
+            </p:dialog>
+            <p:dialog id="IdDialogoQuitarMedicamento" header="QUITAR MEDICAMENTO" widgetVar="dialogoQuitarMedicamento" resizable="false" modal="true">
+                <p:panelGrid id="panelQuitarMedicamento" styleClass="panelGridSinBordes" columns="1">
+                    <h:outputText value="¿ Confirmación ?"/>
+                    <p:commandButton
+                        value="Quitar"
+                        update=":IdFormManuales:IdTabView"
+                        actionListener="#{PyP_Programas.confirmarQuitarMedicamento}"/>
+                </p:panelGrid>
+            </p:dialog>
+            <p:dialog id="IdDialogoQuitarInsumo" header="QUITAR INSUMO" widgetVar="dialogoQuitarInsumo" resizable="false" modal="true">
+                <p:panelGrid id="panelQuitarInsumo" styleClass="panelGridSinBordes" columns="1">
+                    <h:outputText value="¿ Confirmación ?"/>
+                    <p:commandButton
+                        value="Quitar"
+                        update=":IdFormManuales:IdTabView"
+                        actionListener="#{PyP_Programas.confirmarQuitarInsumo}"/>
+                </p:panelGrid>
+            </p:dialog>
+        </h:form>
+    </h:body>
+</html>

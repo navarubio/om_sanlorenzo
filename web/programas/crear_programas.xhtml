@@ -1,0 +1,223 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <script src="../recursos/js/calendario.js"/>
+        <link href="../recursos/css/estilos.css" rel="stylesheet"/>
+        <link href="../recursos/css/metro-bootstrap.css" rel="stylesheet"/>
+        <link href="../recursos/css/iconFont.css" rel="stylesheet"/>         
+    </h:head>
+    <h:body> 
+        #{pyp_programas.crearlistaServicios()}
+        <p:growl autoUpdate="true" showDetail="true"/> 
+        <br/>        
+        <h:form id="formPrograma">
+            <p:fieldset legend="Datos del Programa">
+                <table>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" value="Codígo:" />
+                        </td>
+                        <td>
+                            <p:inputText  styleClass="campoFormulario"  id="idprograma" size="20" value="#{pyp_programas.codigo_programa}" >
+                            </p:inputText> 
+                            <p:watermark for="idprograma" value="Codígo del Programa"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" value="Descripción:" />
+                        </td>
+                        <td>
+                            <p:inputText  styleClass="campoFormulario" id="programa" size="40" value="#{pyp_programas.descripcion}" >
+                            </p:inputText> 
+                            <p:watermark for="programa" value="Descripción del Programa"/>
+                        </td>
+                    </tr>
+                </table>   
+            </p:fieldset>
+            <p:fieldset legend="Servicios, Medicamentos y/o Insumos"  id="tab_programas">
+                <p:fieldset legend="Datos Complementarios">
+                    <table>
+                        <tr>
+                            <td>
+                                <p:outputLabel styleClass="labelFormularioBold" value="Nombre de Actividad:" />
+                            </td>
+                            <td>
+                                <p:inputText  styleClass="campoFormulario"  id="actividad" size="20" value="#{pyp_programas.actividad}" >
+                                </p:inputText> 
+                                <p:watermark for="actividad" value="Actividad"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:outputLabel styleClass="labelFormularioBold" value="Finalidad:" />
+                            </td>
+                            <td>
+                                <p:inputText  styleClass="campoFormulario" id="finalidad" size="20" value="#{pyp_programas.finalidad}" >
+                                </p:inputText> 
+                                <p:watermark for="finalidad" value="Finalidad"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:outputLabel styleClass="labelFormularioBold" value="Genero:" />
+                            </td>
+                            <td>
+                                <p:selectOneMenu styleClass="campoFormulario" 
+                                                id="selectgenero" 
+                                                value="#{pyp_programas.genero}" 
+                                                >
+                                   <f:selectItem itemLabel="F" itemValue="#{0}"/>
+                                   <f:selectItem itemLabel="M" itemValue="#{1}"/>
+                                   <f:selectItem itemLabel="M/F" itemValue="#{2}"/>
+                               </p:selectOneMenu>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:outputLabel styleClass="labelFormularioBold" value="Edad:" />
+                            </td>
+                            <td>
+                                <p:inputText  styleClass="campoFormulario" id="edad" size="20" value="#{pyp_programas.edad_ini}" >
+                                </p:inputText> 
+                                <p:watermark for="edad" value="Edad Inicial"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:outputLabel styleClass="labelFormularioBold" value="Edad Final:" />
+                            </td>
+                            <td>
+                                <p:inputText  styleClass="campoFormulario" id="edad_fin" size="20" value="#{pyp_programas.edad_fin}" >
+                                </p:inputText> 
+                                <p:watermark for="edad_fin" value="Edad Final"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:outputLabel styleClass="labelFormularioBold" value="Dosis:" />
+                            </td>
+                            <td>
+                                <p:inputText  styleClass="campoFormulario" id="dosis" size="20" value="#{pyp_programas.dosis}" >
+                                </p:inputText> 
+                                <p:watermark for="dosis" value="Dosis"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:outputLabel styleClass="labelFormularioBold" value="Frecuencia:" />
+                            </td>
+                            <td>
+                                <p:inputText  styleClass="campoFormulario" id="frecuencia" size="20" value="#{pyp_programas.frecuencia}" >
+                                </p:inputText> 
+                                <p:watermark for="frecuencia" value="Frecuencia"/>
+                            </td>
+                        </tr>
+                    </table>
+                </p:fieldset>
+                <table>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" value="Servicio:"/>
+                        </td>
+                        <td>
+                            <p:selectOneMenu styleClass="campoFormulario" 
+                                             id="selectservicio" 
+                                             value="#{pyp_programas.idServicio}" 
+                                             style="width: 250px;" >
+                                <f:selectItem itemLabel="..." itemValue="#{null}" noSelectionOption="true" />
+                                <f:selectItems value="#{pyp_programas.listaServicios}"  /> 
+                            </p:selectOneMenu>
+                        </td>
+                        <td>
+                            <p:commandButton 
+                                title="Agregar" 
+                                value="&nbsp;" 
+                                styleClass="icon-plus-2 fg-lightBlue bg-white no-border" 
+                                style="font-size: 20px; width: 20px; height: 20px; left: 20px; " 
+                                action="#{pyp_programas.agregar_fila}" 
+                                update="programas_id"/> 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" value="Medicamento:"/>
+                        </td>
+                        <td>
+                            <p:selectOneMenu styleClass="campoFormulario" 
+                                             id="selectmedicamento" 
+                                             value="#{pyp_programas.idMedicamento}" 
+                                             style="width: 250px;" >
+                                <f:selectItem itemLabel="..." itemValue="#{null}" noSelectionOption="true" />
+                                <f:selectItems value="#{pyp_programas.listaMedicamentos}"  /> 
+                            </p:selectOneMenu> 
+                        </td>
+                        <td>
+                            <p:commandButton 
+                                title="Agregar" 
+                                value="&nbsp;" 
+                                styleClass="icon-plus-2 fg-lightBlue bg-white no-border" 
+                                style="font-size: 20px; width: 20px; height: 20px; left: 20px; " 
+                                action="#{pyp_programas.agregar_fila_medicamento}" 
+                                update="programas_id"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" value="Insumo:"/>
+                        </td>
+                        <td>
+                            <p:selectOneMenu styleClass="campoFormulario" 
+                                             id="selectinsumo" 
+                                             value="#{pyp_programas.idInsumo}" 
+                                             style="width: 250px;" >
+                                <f:selectItem itemLabel="..." itemValue="#{null}" noSelectionOption="true" />
+                                <f:selectItems value="#{pyp_programas.listaInsumo}"  /> 
+                            </p:selectOneMenu>   
+                        </td>
+                        <td>
+                            <p:commandButton 
+                                title="Agregar" 
+                                value="&nbsp;" 
+                                styleClass="icon-plus-2 fg-lightBlue bg-white no-border" 
+                                style="font-size: 20px; width: 20px; height: 20px; left: 20px; " 
+                                action="#{pyp_programas.agregar_fila_insumo}" 
+                                update="programas_id"/>
+                        </td>
+                    </tr>
+                </table>   
+                <p:fieldset>
+                    <br/>
+                    <p:commandButton 
+                        title="Quitar" value="&nbsp;"                                        
+                        styleClass="icon-minus-2 fg-lightBlue bg-white no-border" 
+                        style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/> 
+                    <br/><br/>
+                    <p:dataTable value="#{pyp_programas.programas}" var="item" id="programas_id">
+                        <p:column><f:facet name="header">ID</f:facet>#{item.id}</p:column>
+                        <p:column><f:facet name="header">Tipo</f:facet>#{item.tipo}</p:column>
+                        <p:column><f:facet name="header">CUPS</f:facet>#{item.cups}</p:column>
+                        <p:column><f:facet name="header">Actividad</f:facet>#{item.actividad}</p:column>
+                        <p:column><f:facet name="header">Finalidad</f:facet>#{item.finalidad}</p:column>
+                        <p:column><f:facet name="header">RIPS</f:facet>#{item.rips}</p:column>
+                        <p:column><f:facet name="header">Genero</f:facet>#{item.genero}</p:column>
+                        <p:column><f:facet name="header">Edad Inicial</f:facet>#{item.edad_ini}</p:column>
+                        <p:column><f:facet name="header">Edad Final</f:facet>#{item.edad_fin}</p:column>
+                        <p:column><f:facet name="header">Dosis</f:facet>#{item.dosis}</p:column>
+                        <p:column><f:facet name="header">Frecuencia</f:facet>#{item.frecuencia}</p:column>
+                    </p:dataTable>
+                    <p:outputLabel styleClass="labelFormularioBold" value="Servicios: 0" />
+                    <p:outputLabel styleClass="labelFormularioBold" value="Medicamentos: 0" />
+                    <p:outputLabel styleClass="labelFormularioBold" value="Insumos: 0" />
+                    <br/><br/>
+                    <p:commandButton id="crearPrograma" value="Crear Programa" action="#{pyp_programas.crear_programa}" update="formPrograma"/>
+                </p:fieldset>
+            </p:fieldset> 
+        </h:form>
+    </h:body>
+</html>

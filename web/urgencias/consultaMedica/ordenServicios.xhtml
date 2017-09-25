@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <body>
+        <p:accordionPanel id="idAcordionOrdenServicios">
+
+            <p:tab title="Servicios">
+                <br></br>
+                <p:commandButton 
+                    value="NUEVO" rendered="#{consultaMB.urgTriage.idAdmision.estado ne 'ADMISION_PACIENTE_ENVIADO_DADO_ALTA'}" actionListener="#{consultaMB.cargarDialogoServicios()}" 
+                    title="Haga clic aquí para agregar un servicio" update=":formConsulta"
+                    />
+                <p:commandButton 
+                    value="Guardar" rendered="#{consultaMB.urgTriage.idAdmision.estado ne 'ADMISION_PACIENTE_ENVIADO_DADO_ALTA'}" actionListener="#{consultaMB.guardarServicios()}" 
+                    title="Haga  clic aquí para guarddar  la nueva prescripción" update=":formConsulta"
+                    />
+                <br></br>
+                <p:dataTable 
+                    id="IdTablaServicios" 
+                    var="servicio" 
+                    widgetVar="IdTablaServicios"
+                    value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.urgOrdenCobro.facConsumoServiciolist}" 
+                    paginator="true"                                    
+                    paginatorPosition="bottom"                                
+                    emptyMessage="No hay servicios registrados"
+                    scrollable="true" 
+                    scrollWidth="110%"
+                    scrollHeight="135"
+                    rows="5"
+                    currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                    paginatorTemplate="{CurrentPageReport} {FirstPageLink} 
+                    {PreviousPageLink} {PageLinks} {NextPageLink} 
+                    {LastPageLink} {RowsPerPageDropdown}"
+                    pageLinks="5"
+                    resizableColumns="true">                                                                                               
+                    <f:facet name="header">
+                        SERVICIOS
+                    </f:facet>
+                    <p:column headerText="PROFESIONAL" resizable="true" filterBy="#{servicio.idPrestador.primerNombre}" filterMatchMode="contains">
+                        #{servicio.idPrestador.primerNombre}  #{servicio.idPrestador.primerApellido}
+                    </p:column>
+                    <p:column headerText="FECHA" resizable="true" filterBy="#{servicio.fecha}" filterMatchMode="contains">
+                        <p:calendar size="10" value="#{servicio.fecha}"
+                                    pattern="dd/MM/yyyy HH:mm:ss"/> 
+                    </p:column>
+                    <p:column headerText="CODIGO" resizable="true" filterBy="#{servicio.idServicio.codigoServicio}" filterMatchMode="contains">
+                        #{servicio.idServicio.codigoServicio}
+                    </p:column>
+                    <p:column headerText="NOMBRE" resizable="true"  filterBy="#{servicio.idServicio.nombreServicio}" filterMatchMode="contains">
+                        #{servicio.idServicio.nombreServicio}
+                    </p:column>
+                    <p:column headerText="DESCRIPCION"  resizable="true" filterBy="#{servicio.idServicio.finalidad.descripcion}" 
+                              filterMatchMode="contains">
+                        <p:inputTextarea value="#{servicio.idServicio.finalidad.descripcion}" readonly="true" style="width: 100%" autoResize="true"/>
+                    </p:column>
+                    <p:column headerText="CANTIDAD"  resizable="true" filterBy="#{servicio.cantidad}" filterMatchMode="contains">
+                        #{servicio.cantidad}
+                    </p:column>
+                    <p:column headerText="DIAGNOSTICO PRINCIPAL"  resizable="true" filterBy="#{servicio.diagnosticoPrincipal}" filterMatchMode="contains">
+                        <p:inputTextarea  value="#{servicio.diagnosticoPrincipal}" readonly="true" style="width: 100%" autoResize="true"/>
+                    </p:column>
+                    <p:column headerText="OPERACION" resizable="true" filterMatchMode="contains">
+                        <p:commandButton rendered="#{servicio.idConsumoServicio eq null}" value="Borrar" actionListener="#{consultaMB.borrarServicio(servicio)}" 
+                                         update=":formConsulta:IdTabView:idAcordionOrdenServicios:IdTablaServicios  :formConsulta:msgbTriage"></p:commandButton>
+                    </p:column>
+                </p:dataTable>
+            </p:tab>
+            <p:tab title="Insumos">
+                <br></br>
+                <p:commandButton 
+                    value="NUEVO" rendered="#{consultaMB.urgTriage.idAdmision.estado ne 'ADMISION_PACIENTE_ENVIADO_DADO_ALTA'}" actionListener="#{consultaMB.cargarDialogoInsumos()}" 
+                    title="Haga clic aquí para agregar un insumo" update=":formConsulta"
+                    />
+                <p:commandButton 
+                    value="Guardar" rendered="#{consultaMB.urgTriage.idAdmision.estado ne 'ADMISION_PACIENTE_ENVIADO_DADO_ALTA'}" actionListener="#{consultaMB.guardarInsumos()}" 
+                    title="Haga  clic aquí para guarddar  el nuevo insumo" update=":formConsulta"
+                    />
+                <br></br>
+                <p:dataTable 
+                    id="IdTablaInsumos" 
+                    var="insumo" 
+                    widgetVar="IdTablaInsumos"
+                    value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.urgOrdenCobro.facConsumoInsumolist}" 
+                    paginator="true"                                    
+                    paginatorPosition="bottom"                                
+                    emptyMessage="No hay insumos registrados"
+                    scrollable="true" 
+                    scrollWidth="100%"
+                    scrollHeight="135"
+                    rows="5"
+                    currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                    paginatorTemplate="{CurrentPageReport} {FirstPageLink} 
+                    {PreviousPageLink} {PageLinks} {NextPageLink} 
+                    {LastPageLink} {RowsPerPageDropdown}"
+                    pageLinks="5"
+                    resizableColumns="true">                                                                                               
+                    <f:facet name="header">
+                        INSUMOS
+                    </f:facet>
+                    <p:column headerText="PROFESIONAL" resizable="true" filterBy="#{insumo.idPrestador.primerNombre}" filterMatchMode="contains">
+                        #{insumo.idPrestador.primerNombre} #{insumo.idPrestador.primerApellido}
+                    </p:column>
+                    <p:column headerText="FECHA" resizable="true" filterBy="#{insumo.fecha}" filterMatchMode="contains">
+                        <p:calendar size="10" value="#{insumo.fecha}"
+                                    pattern="dd/MM/yyyy HH:mm:ss" /> 
+                    </p:column>
+                    <p:column headerText="NOMBRE" resizable="true" filterBy="#{insumo.idInsumo.nombreInsumo}" filterMatchMode="contains">
+                        #{insumo.idInsumo.codigoInsumo} #{insumo.idInsumo.nombreInsumo}
+                    </p:column>
+                    <p:column headerText="CANTIDAD" resizable="true" filterBy="#{insumo.cantidad}" filterMatchMode="contains">
+                        #{insumo.cantidad}
+                    </p:column>
+                    <p:column headerText="OBSERVACION" resizable="true" filterBy="#{insumo.idInsumo.observacion}" filterMatchMode="contains">
+                        <p:inputTextarea  value=" #{insumo.idInsumo.observacion}" readonly="true" style="width: 100%"  autoResize="true"/>
+                    </p:column>
+                    <p:column headerText="OPERACION" filterMatchMode="contains">
+                        <p:commandButton rendered="#{insumo.idConsumoInsumo eq null}" value="Borrar" actionListener="#{consultaMB.borrarInsumo(insumo)}" 
+                                         update=":formConsulta:IdTabView:idAcordionOrdenServicios:IdTablaInsumos  :formConsulta:msgbTriage">
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+            </p:tab>
+            <p:tab title="Paquetes">
+                <br></br>
+                <p:commandButton 
+                    value="NUEVO" rendered="#{consultaMB.urgTriage.idAdmision.estado ne 'ADMISION_PACIENTE_ENVIADO_DADO_ALTA'}" actionListener="#{consultaMB.cargarDialogoPaquetes()}" 
+                    title="Haga clic aquí para agregar paquetes" update=":formConsulta"
+                    />
+                <p:commandButton 
+                    value="Guardar" rendered="#{consultaMB.urgTriage.idAdmision.estado ne 'ADMISION_PACIENTE_ENVIADO_DADO_ALTA'}" actionListener="#{consultaMB.guardarPaquetes()}" 
+                    title="Haga  clic aquí para guarddar el nuevo paquete" update=":formConsulta"
+                    />
+                <br></br>
+                <p:dataTable 
+                    id="IdTablaPaquetes" 
+                    var="paquete" 
+                    widgetVar="IdTablaPaquetes"
+                    value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.urgOrdenCobro.facConsumoPaquetelist}" 
+                    paginator="true"                                    
+                    paginatorPosition="bottom"                                
+                    emptyMessage="No hay paquetes registrados"
+                    scrollable="true" 
+                    scrollWidth="100%"
+                    scrollHeight="135"
+                    rows="5"
+                    currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                    paginatorTemplate="{CurrentPageReport} {FirstPageLink} 
+                    {PreviousPageLink} {PageLinks} {NextPageLink} 
+                    {LastPageLink} {RowsPerPageDropdown}"
+                    pageLinks="5"
+                    resizableColumns="true">                                                                                               
+                    <f:facet name="header">
+                        PAQUETES
+                    </f:facet>
+                    <p:column headerText="PROFESIONAL" resizable="true" filterBy="#{paquete.idPrestador.primerNombre}" filterMatchMode="contains">
+                        #{paquete.idPrestador.primerNombre} #{paquete.idPrestador.primerApellido}
+                    </p:column>
+                    <p:column headerText="FECHA" resizable="true" filterBy="#{paquete.fecha}" filterMatchMode="contains">
+                        <p:calendar size="10" value="#{paquete.fecha}"
+                                    pattern="dd/MM/yyyy HH:mm:ss" /> 
+                    </p:column>
+                    <p:column headerText="NOMBRE" resizable="true" filterBy="#{paquete.idPaquete.nombrePaquete}" filterMatchMode="contains">
+                        #{paquete.idPaquete.codigoPaquete}  #{paquete.idPaquete.nombrePaquete}
+                    </p:column>
+                    <p:column headerText="CANTIDAD" resizable="true" filterBy="#{paquete.cantidad}" filterMatchMode="contains">
+                        #{paquete.cantidad}
+                    </p:column>
+                    <p:column headerText="OPERACION" filterMatchMode="contains">
+                        <p:commandButton rendered="#{paquete.idConsumoPaquete eq null}" value="Borrar" actionListener="#{consultaMB.borrarPaquete(paquete)}" 
+                                         update=":formConsulta:IdTabView:idAcordionOrdenServicios:IdTablaPaquetes :formConsulta:msgbTriage"></p:commandButton>
+                    </p:column>
+                </p:dataTable>
+            </p:tab>
+        </p:accordionPanel>
+    </body>
+    <p:dialog id="IdDialogoAgregarServicios" header="AGREGAR SERVICIO" widgetVar="IdDialogoAgregarServicios" resizable="false" modal="true">  
+        <p:panelGrid id="IdPanelAgregarServicios" styleClass="panelGridSinBordes" columns="2">
+            <p:outputLabel styleClass="campoObligatorio" value="PROFESIONAL:" />
+            <p:outputLabel styleClass="campoFormulario" value="#{loginMB.usuarioActual.primerNombre} #{loginMB.usuarioActual.primerApellido}" />
+            <p:outputLabel styleClass="campoObligatorio" value="SERVICIOS:" />
+            <p:selectOneMenu id="IdListaServicio" style="width: 380px;" 
+                             value="#{consultaMB.facConsumoServicio.idServicio}" converter="objectConverter"
+                             filter="true" filterMatchMode="contains">
+                <f:selectItems value="#{consultaMB.listaServiciosOrden}"
+                               var="servicio" 
+                               itemLabel="#{servicio.nombreServicio}" 
+                               itemValue="#{servicio}"/>
+            </p:selectOneMenu>
+            <p:outputLabel value="CANTIDAD:" styleClass="campoObligatorio"/>
+            <pe:inputNumber decimalSeparator="," decimalPlaces="0" minValue="0"  value="#{consultaMB.facConsumoServicio.cantidad}">
+            </pe:inputNumber>  
+            <p:outputLabel value="DIAGNOSTICO PRINCIPAL:" styleClass="campoObligatorio"/>
+            <p:inputTextarea maxlength="1000" styleClass="labelFormulario" placeholder="Ingrese una observación" rows="3"
+                             value="#{consultaMB.facConsumoServicio.diagnosticoPrincipal}" style="width: 300px"/>
+            <p:commandButton 
+                value="Agregar"                         
+                actionListener="#{consultaMB.agregarServicio()}" update=":formConsulta:IdTabView:idAcordionOrdenServicios:IdTablaServicios :formConsulta:msgbTriage"/>
+        </p:panelGrid>
+    </p:dialog>
+    <p:dialog id="IdDialogoAgregarInsumos" header="AGREGAR INSUMOS" widgetVar="IdDialogoAgregarInsumos" resizable="false" modal="true">  
+        <p:panelGrid id="IdPanelAgregarInsumos" styleClass="panelGridSinBordes" columns="2">
+            <p:outputLabel styleClass="campoObligatorio" value="PROFESIONAL:" />
+            <p:outputLabel styleClass="campoFormulario" value="#{loginMB.usuarioActual.primerNombre} #{loginMB.usuarioActual.primerApellido}" />
+            <p:outputLabel styleClass="campoObligatorio" value="INSUMOS:" />
+            <p:selectOneMenu id="IdListaInsumos" style="width: 380px;" 
+                             value="#{consultaMB.facConsumoInsumo.idInsumo}" converter="objectConverter"
+                             filter="true" filterMatchMode="contains">
+                <f:selectItems value="#{consultaMB.listaInsumosOrden}"
+                               var="insumos" 
+                               itemLabel="#{insumos.nombreInsumo}" 
+                               itemValue="#{insumos}"/>
+            </p:selectOneMenu>
+            <p:outputLabel value="CANTIDAD:" styleClass="campoObligatorio"/>
+            <pe:inputNumber decimalSeparator="," decimalPlaces="0" minValue="0"  value="#{consultaMB.facConsumoInsumo.cantidad}">
+            </pe:inputNumber>  
+            <p:commandButton 
+                value="Agregar"                         
+                actionListener="#{consultaMB.agregarInsumo()}" update=":formConsulta:IdTabView:idAcordionOrdenServicios:IdTablaInsumos :formConsulta:msgbTriage"/>
+        </p:panelGrid>
+    </p:dialog>
+    <p:dialog id="IdDialogoAgregarPaquetes" header="AGREGAR PAQUETES" widgetVar="IdDialogoAgregarPaquetes" resizable="false" modal="true">  
+        <p:panelGrid id="IdPanelAgregarPaquetes" styleClass="panelGridSinBordes" columns="2">
+            <p:outputLabel styleClass="campoObligatorio" value="PROFESIONAL:" />
+            <p:outputLabel styleClass="campoFormulario" value="#{loginMB.usuarioActual.primerNombre} #{loginMB.usuarioActual.primerApellido}" />
+            <p:outputLabel styleClass="campoObligatorio" value="PAQUETES:" />
+            <p:selectOneMenu id="IdListaPaquetes" style="width: 380px;" 
+                             value="#{consultaMB.facConsumoPaquete.idPaquete}" converter="objectConverter"
+                             filter="true" filterMatchMode="contains">
+                <f:selectItems value="#{consultaMB.listaFacPaqueteOrden}"
+                               var="paquete" 
+                               itemLabel="#{paquete.nombrePaquete}" 
+                               itemValue="#{paquete}"/>
+            </p:selectOneMenu>
+            <p:outputLabel value="CANTIDAD:" styleClass="campoObligatorio"/>
+            <pe:inputNumber decimalSeparator="," decimalPlaces="0" minValue="0"  value="#{consultaMB.facConsumoInsumo.cantidad}">
+            </pe:inputNumber>  
+            <p:commandButton 
+                value="Agregar"                         
+                actionListener="#{consultaMB.agregarPaquete()}" update=":formConsulta:IdTabView:idAcordionOrdenServicios:IdTablaPaquetes :formConsulta:msgbTriage"/>
+        </p:panelGrid>
+    </p:dialog>
+</html>
+

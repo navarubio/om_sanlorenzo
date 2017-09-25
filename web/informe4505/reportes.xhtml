@@ -1,0 +1,2049 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <script src="../recursos/js/calendario.js"/>
+        <link href="../recursos/css/estilos.css" rel="stylesheet"/>
+        <link href="../recursos/css/metro-bootstrap.css" rel="stylesheet"/>
+        <link href="../recursos/css/iconFont.css" rel="stylesheet"/>
+        <style type="text/css">
+            .ui-panelgrid td, .ui-panelgrid tr
+            {
+                border-style: none !important;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <br/>
+        <p:growl autoUpdate="true" showDetail="true"/>
+        <p:fieldset legend="Informe 4505">
+            <h:form id="formReporte">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <p:outputLabel styleClass="labelFormularioBold"  value="Fecha Inicial:" />
+                                <p:calendar
+                                    navigator="true"
+                                    id="fechIni"
+                                    widgetVar="calwidgetini"
+                                    value="#{reporteInforme.fechaInicial}"
+                                    locale="es"
+                                    rendered="#{reporteInforme.renFechas}"
+                                    timeZone="America/Bogota"
+                                    pattern="dd/MM/yyyy"
+                                    mask="99/99/9999"
+                                    size="10"/>
+                            </td>
+                            <td>
+                                <p:outputLabel styleClass="labelFormularioBold"  value="Fecha Final:"  />
+                                <p:calendar
+                                    navigator="true"
+                                    id="fechFin"
+                                    widgetVar="calwidgetfin"
+                                    value="#{reporteInforme.fechaFinal}"
+                                    locale="es"
+                                    rendered="#{reporteInforme.renFechas}"
+                                    timeZone="America/Bogota"
+                                    pattern="dd/MM/yyyy"
+                                    mask="99/99/9999"
+                                    size="10" />
+                            </td>
+                            <td>
+                                <p:outputLabel styleClass="labelFormularioBold" value="Administradora:"/>
+                                <p:selectOneMenu styleClass="campoFormulario"
+                                                 value="#{reporteInforme.idAdministradora}" style="width: 200px;" filter="true" filterMatchMode="contains">
+                                    <f:ajax event="change" listener="#{reporteInforme.cambiaAdministradora_programa}" />
+                                    <f:selectItems value="#{reporteInforme.listaAdministradoras}" var="administradora"/>
+                                </p:selectOneMenu>
+                            </td>
+                            <td>
+                                <p:commandButton id="idButtonReporte" actionListener="#{reporteInforme.generarReporte}" value="Cargar Datos" ajax="false" >
+                                    <f:attribute name="logo_empresa" value="#{loginMB.rutaCarpetaImagenes}#{loginMB.empresaActual.logo.urlImagen}" />
+                                </p:commandButton>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </h:form>
+        </p:fieldset>
+        <p:fieldset legend="Informe 4505" rendered="#{reporteInforme.renBuscar}" >
+            <h:form id="form4505" rendered="#{reporteInforme.renBuscar}">
+                <p:dataTable
+                    id="tabla4505"
+                    var="resolucion"
+                    value="#{reporteInforme.post_filtrar}"
+                    rowKey="#{resolucion.consecutivo_registro}"
+                    selection="#{reporteInforme.pacienteSeleccionado4505}"
+                    paginator="true"
+                    rows="30"
+                    paginatorPosition="bottom"
+                    emptyMessage="No se encontraron pacientes"
+                    scrollable="true"
+                    style="width: 15210px"
+                    scrollWidth="15210px" scrollHeight="350"
+                    pageLinks="5"
+                    widgetVar="resolucionTable"
+                    selectionMode="single"
+                    >
+                    <p:ajax event="cellEdit" listener="#{reporteInforme.onCellEdit}"/>
+                    <p:column width="130px" headerText="Consecutivo"  >
+                        <h:outputText value="#{resolucion.consecutivo_registro}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="IPS"  >
+                        <h:outputText value="#{resolucion.codigo_habilitacion_ips_primaria}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="Tipo de Identificación"  >
+                        <h:outputText value="#{resolucion.tipo_identificacion_usuario}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="No. Identificación"  >
+                        <h:outputText value="#{resolucion.numero_identificacion_usuario}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="Primer Apellido"  >
+                        <h:outputText value="#{resolucion.primer_apellido_usuario}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="Segundo Apellido"  >
+                        <h:outputText value="#{resolucion.segundo_apellido_usuario}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="Primer Nombre"  >
+                        <h:outputText value="#{resolucion.primer_nombre_usuario}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="Segundo Nombre"  >
+                        <h:outputText value="#{resolucion.segundo_nombre_usuario}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="Fecha Nacimiento"  >
+                        <h:outputText value="#{resolucion.fecha_nacimiento}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="Sexo"  >
+                        <h:outputText value="#{resolucion.sexo}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="Etnica"  >
+                        <h:outputText value="#{reporteInforme.getDescripcion(1,resolucion.codigo_pertenencia_etnica)}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="Ocupación"  >
+                        <h:outputText value="#{reporteInforme.getDescripcion(2,resolucion.codigo_ocupacion)}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="Nivel"  >
+                        <h:outputText value="#{reporteInforme.getDescripcion(3,resolucion.codigo_nivel_educativo)}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="Gestación"  >
+                        <h:outputText value="#{resolucion.gestacion} #{reporteInforme.getDescripcion(4,resolucion.gestacion)}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="Sifilis Gestacional"  >
+                        <h:outputText value="#{resolucion.sifilis_gestacional_congenita}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="Hipertensión"  >
+                        <h:outputText value="#{resolucion.hipertension_gestacional_congenita}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="Hipotiroidismo"  >
+                        <h:outputText value="#{resolucion.hipotiroidismo_congenito}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="Respiratorio"  >
+                        <h:outputText value="#{resolucion.sintomatico_respiratorio}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="Tuberculosis"  >
+                        <h:outputText value="#{resolucion.tuberculosis_multidrogoresistente}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="Lepra"  >
+                        <h:outputText value="#{resolucion.lepra}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="Obesidad o Desnutrición"  >
+                        <h:outputText value="#{resolucion.obesidad_desutricion_proteico_calorica}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="Victima de Maltrato"  >
+                        <h:outputText value="#{resolucion.mujer_victima_maltrato}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="Victima de Violencia Sexual"  >
+                        <h:outputText value="#{resolucion.victima_violencia_sexual}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="Infec. Trans. Sexual"  >
+                        <h:outputText value="#{resolucion.infecciones_transmision_sexual}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="Enfer. Mental"  >
+                        <h:outputText value="#{resolucion.enfermedad_salud_mental}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="C. Carvix"  >
+                        <h:outputText value="#{resolucion.cancer_cervix}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="C. Seno"  >
+                        <h:outputText value="#{resolucion.cancer_seno}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="Fluorosis"  >
+                        <h:outputText value="#{resolucion.fluorosis_dental}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="F. Peso"  >
+                        <h:outputText value="#{resolucion.fecha_peso}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="P. KG"  >
+                        <h:outputText value="#{resolucion.peso_kilogramos}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="F. Talla"  >
+                        <h:outputText value="#{resolucion.fecha_talla}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="Talla"  >
+                        <h:outputText value="#{resolucion.talla_metros}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="F. Prob. Parto"  >
+                        <h:outputText value="#{resolucion.fecha_probable_parto}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="Edad Gest."  >
+                        <h:outputText value="#{resolucion.edad_gestacional_nacer}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="BCG"  >
+                        <h:outputText value="#{resolucion.bcg}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="Hepatitis B"  >
+                        <h:outputText value="#{resolucion.hepatitis_b_menores_1_año}"/>
+
+                    </p:column>
+                    <p:column width="130px" headerText="Pentavalente"  >
+                        <h:outputText value="#{resolucion.pentavalente}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="Polio"  >
+                        <h:outputText value="#{resolucion.polio}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="DTP"  >
+                        <h:outputText value="#{resolucion.dpt_menores_5_años}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="Rotavirus"  >
+                        <h:outputText value="#{resolucion.rotavirus}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="Neumococo"  >
+                        <h:outputText value="#{resolucion.neumococo}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="Influenza"  >
+                        <h:outputText value="#{resolucion.influenza_niños}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="Fiebre Ama."  >
+                        <h:outputText value="#{resolucion.fiebre_amarilla_niños_1_año}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="Hepatitis A"  >
+                        <h:outputText value="#{resolucion.hepatitis_a}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="Triple Viral"  >
+                        <h:outputText value="#{resolucion.triple_viral_niños}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="VPH"  >
+                        <h:outputText value="#{resolucion.virus_papiloma_humano}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="TD o TT"  >
+                        <h:outputText value="#{resolucion.td_tt_mujeres_edad_fertil_15_49_años}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="Control Placa"  >
+                        <h:outputText value="#{resolucion.control_placa_bacteriana}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="F. Atencion Parto"  >
+                        <h:outputText value="#{resolucion.fecha_atencion_parto_cesarea}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="F. Salida Atencion Parto"  >
+                        <h:outputText value="#{resolucion.fecha_salida_atencion_parto_cesarea}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+
+                    </p:column>
+                    <p:column width="130px" headerText="F. Consejeria"  >
+                        <h:outputText value="#{resolucion.fecha_consejeria_lactancia_materna}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="Control R. Nacido"  >
+                        <h:outputText value="#{resolucion.control_recien_nacido}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="P. Familiar"  >
+                        <h:outputText value="#{resolucion.planificacion_familiar_primera_vez}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="S. M. Anticonceptivo"  >
+                        <h:outputText value="#{resolucion.suministro_metodo_anticonceptivo}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="F. S. M. A."  >
+                        <h:outputText value="#{resolucion.fecha_suministro_medico_anticonceptivo}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="C. P. Primera Vez"  >
+                        <h:outputText value="#{resolucion.control_prenatal_primera_vez}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="Control Prenatal"  >
+                        <h:outputText value="#{resolucion.control_prenatal}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="U. C. Prenatal"  >
+                        <h:outputText value="#{resolucion.ultimo_control_prenatal}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="Sum. A. Folico"  >
+                        <h:outputText value="#{resolucion.suministro_acido_folico_ultimo_control_prenatal}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="Sum. S. Ferroso C. Pre."  >
+                        <h:outputText value="#{resolucion.suministro_sulfato_ferroso_ultimo_control_prenatal}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="Sum. C. Calcio"  >
+                        <h:outputText value="#{resolucion.suministro_carbonato_calcio_ultimo_control_prenatal}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="Valoración A. Visual"  >
+                        <h:outputText value="#{resolucion.valoracion_agudeza_visual}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="Consulta Oftal."  >
+                        <h:outputText value="#{resolucion.consulta_oftalmologia}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="F. Diagnostico"  >
+                        <h:outputText value="#{resolucion.fecha_diagnostico_desnutricion_proteico_calorica}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="C. Victima Maltrato"  >
+                        <h:outputText value="#{resolucion.consulta_mujero_menor_maltratado}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="C. Violencia"  >
+                        <h:outputText value="#{resolucion.consulta_victimas_violencia_sexual}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="C. Nutrición"  >
+                        <h:outputText value="#{resolucion.consulta_nutricion}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="C. Psicologia"  >
+                        <h:outputText value="#{resolucion.consulta_psicologica}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="C. Crecimiento"  >
+                        <h:outputText value="#{resolucion.consulta_crecimiento_desarrollo_primera_vez}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="S. Sulfato Ferroso"  >
+                        <h:outputText value="#{resolucion.suministro_sulfato_ferroso_ultima_consulta_menor_10_años}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="S. Vitamina A"  >
+                        <h:outputText value="#{resolucion.suministro_vitamina_a_ultima_consulta_menor_10_años}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="C. Joven"  >
+                        <h:outputText value="#{resolucion.consulta_joven_primera_vez}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="C. Adulto"  >
+                        <h:outputText value="#{resolucion.consulta_adulto_primera_vez}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="P. Entregados"  >
+                        <h:outputText value="#{resolucion.preservativos_entregados_pacientes_con_its}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="Elisa Pre"  >
+                        <h:outputText value="#{resolucion.asesoria_pre_test_elisa_vih}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="Elisa Pos"  >
+                        <h:outputText value="#{resolucion.asesoria_pos_test_elisa_vih}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="Diagnostico Ansiedad, Depresion, otros"  >
+                        <h:outputText value="#{resolucion.paciente_diagnostico_salud_mental_recibio_atencion_ultimos_6_meses_equipo_interdisciplinario_completo}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="F. Antigeno"  >
+                        <h:outputText value="#{resolucion.fecha_antigeno_superficie_hepatitis_b_gestantes}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="R. Antigeno"  >
+                        <h:outputText value="#{resolucion.resultado_antigeno_superficie_hepatitis_b_gestantes}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="F. Serologia"  >
+                        <h:outputText value="#{resolucion.fecha_serologia_sifilis}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="R. Serologia"  >
+                        <h:outputText value="#{resolucion.resultado_serologia_sifilis}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="F. Elisa"  >
+                        <h:outputText value="#{resolucion.fecha_toma_elisa_vih}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="R. Elisa"  >
+                        <h:outputText value="#{resolucion.resultado_elisa_vih}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="F. TSH"  >
+                        <h:outputText value="#{resolucion.fecha_tsh_neonatal}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="R. TSH"  >
+                        <h:outputText value="#{resolucion.resultado_tsh_neonatal}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="Tamizaje C. Cuello Uterino"  >
+                        <h:outputText value="#{resolucion.tamizaje_cancer_cuello_uterino}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="Citologia C. U"  >
+                        <h:outputText value="#{resolucion.citologia_cervico_uterina}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="R. Citologia C. U"  >
+                        <h:outputText value="#{resolucion.citologia_cervico_uterina_resultados_bethesda}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="Calidad M. Citologia"  >
+                        <h:outputText value="#{resolucion.calidad_muestra_citologia_cervicouterina}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="C. IPS C. Cervico."  >
+                        <h:outputText value="#{resolucion.codigo_habilitacion_ips_donde_toma_citologia_cervicouterina}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="F. Colposcopia"  >
+                        <h:outputText value="#{resolucion.fecha_colposcopia}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="Codigo IPS Colpos."  >
+                        <h:outputText value="#{resolucion.codigo_habilitacion_ips_donde_toma_colposcopia}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="F. Biopsia Cerv."  >
+                        <h:outputText value="#{resolucion.fecha_biopsia_cervical}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="R. Biopsia Cerv."  >
+                        <h:outputText value="#{resolucion.resultado_biopsia_cervical}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="C. IPS Biopsia Cerv."  >
+                        <h:outputText value="#{resolucion.codigo_habilitacion_ips_donde_toma_biopsia_cervical}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="F. Mamografia"  >
+                        <h:outputText value="#{resolucion.fecha_mamografia}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="R. Mamografia"  >
+                        <h:outputText value="#{resolucion.resultado_mamografia}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="C. IPS Mamografia"  >
+                        <h:outputText value="#{resolucion.codigo_habilitacion_ips_donde_toma_mamografia}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="F. BACAF"  >
+                        <h:outputText value="#{resolucion.fecha_toma_biopsia_seno_bacaf}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="F. R. BACAF"  >
+                        <h:outputText value="#{resolucion.fecha_resultado_biopsia_seno_bacaf}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="Biopsia BACAF"  >
+                        <h:outputText value="#{resolucion.biopsia_seno_bacaf}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="C. IPS BACAF"  >
+                        <h:outputText value="#{resolucion.codigo_habilitacion_ips_donde_toma_biopsia_seno_bacaf}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="F. Hemoglobina"  >
+                        <h:outputText value="#{resolucion.fecha_toma_hemoglobina}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="Hemoglobina"  >
+                        <h:outputText value="#{resolucion.hemoglobina}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="F. Glicemia"  >
+                        <h:outputText value="#{resolucion.fecha_toma_glicemia_basal}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="F. Creatinina"  >
+                        <h:outputText value="#{resolucion.fecha_creatinina}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="F. Hemoglobina Glicosilada"  >
+                        <h:outputText value="#{resolucion.fecha_hemoglobina_glicosilada}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="Hemoglobina G."  >
+                        <h:outputText value="#{resolucion.hemoglobina_glicosilada}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="F. Microalbuminuria"  >
+                        <h:outputText value="#{resolucion.fecha_toma_microalbuminuria}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="F. HDL"  >
+                        <h:outputText value="#{resolucion.fecha_toma_hdl}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="F. Baciloscopia"  >
+                        <h:outputText value="#{resolucion.fecha_toma_baciloscopia_diagnostico}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="Baciloscopia"  >
+                        <h:outputText value="#{resolucion.baciloscopia_diagnostico}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="T. Hipotiroidismo"  >
+                        <h:outputText value="#{resolucion.tratamiento_hipotiroidismo_congenito}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="T. Sifilis Ges."  >
+                        <h:outputText value="#{resolucion.tratamiento_sifilis_gestacional}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="T. Sifilis Con."  >
+                        <h:outputText value="#{resolucion.tratamiento_sifilis_congenita}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="T. Lepra"  >
+                        <h:outputText value="#{resolucion.tratamiento_terminado_lepra}"/>
+                    </p:column>
+                    <p:column width="130px" headerText="F. Leishmaniasis"  >
+                        <h:outputText value="#{resolucion.fecha_terminacion_tratamiento_leishmaniasis}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                </p:dataTable>
+                <p:commandButton id="idButtonReporte" rendered="#{reporteInforme.renBtnReporte}" actionListener="#{reporteInforme.modificar_datos}" value="Editar Registro" ajax="false" >
+                    <f:attribute name="logo_empresa" value="#{loginMB.rutaCarpetaImagenes}#{loginMB.empresaActual.logo.urlImagen}" />
+                </p:commandButton>
+                <p:commandButton
+                    id="cbtnPaciente2"
+                    value="Generar Informe 4505"
+                    actionListener="#{reporteInforme.generarInforme}" ajax="false"
+                    >
+                    <p:fileDownload value="#{reporteInforme.file}"
+                                    contentDisposition="attachment" />
+                </p:commandButton>
+                <h:commandLink>
+                    Exportar en Excel
+                    <p:dataExporter type="xls" target="tabla4505" fileName="resolucion" pageOnly="true" />
+                </h:commandLink>
+            </h:form>
+        </p:fieldset>
+
+        <h:form id="modificar_form" style="width: 466px" rendered="#{reporteInforme.renModificar}">
+            <br/><br/>
+            <p:fieldset legend="Identificación del Riesgo" >
+                <table>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Gestación: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px" value="#{reporteInforme.u.gestacion}"  filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - No" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - Si" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - No Aplica" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - Riesgo no Evaluado" itemValue="3"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Sifilis Gestacional o Congénita: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.sifilis_gestacional_congenita}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - No" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - Si es Mujer con Sifilis Gestacional" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - Si es Recien Nacido con Sifilis Congénita" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - No Aplica" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - Riesgo no Evaluado" itemValue="4"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Hipertensión Inducida por la Gestación: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.hipertension_gestacional_congenita}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - No" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - Si" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - No Aplica" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - Riesgo no Evaluado" itemValue="3"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Hipotiroidismo Congénito: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.hipotiroidismo_congenito}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - No" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - Si" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - No Aplica" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - Riesgo no Evaluado" itemValue="3"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Sintomático Respiratorio: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.sintomatico_respiratorio}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - No" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - Si" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - Riesgo no Evaluado" itemValue="2"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Tuberculosis Multidrogoresistente: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.tuberculosis_multidrogoresistente}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - No" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - Si" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - No Aplica" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - Riesgo no Evaluado" itemValue="3"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Lepra: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.lepra}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - No" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - Pausibacilar" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - Multibacilar" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - Riesgo no Evaluado" itemValue="3"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Obesidad o Desnutrición Proteico Calórica: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.obesidad_desutricion_proteico_calorica}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - No" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - Si es Obesidad" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - Si es Desnutrición Proteico Calórica" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - Riesgo no Evaluado" itemValue="3"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Victima de Maltrato: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.mujer_victima_maltrato}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - No" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - Si es Mujer Victima del Maltrato" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - Si es Menor Victima del Maltrato" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - No Aplica" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - Riesgo no Evaluado" itemValue="4"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Victima de Violencia Sexual: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.victima_violencia_sexual}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - No" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - Si" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - No Aplica" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - Riesgo no Evaluado" itemValue="3"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Infecciones de Transmisión Sexual: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.infecciones_transmision_sexual}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - No" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - Si" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - No Aplica" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - Riesgo no Evaluado" itemValue="3"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Enfermedad Mental: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.enfermedad_salud_mental}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - No" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - Si el Diagnóstico es Ansiedad" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - Si el Diagnóstico es Depresión" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - Si el Diagnóstico es Esquizofrenia" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - Si el Diagnóstico es Déficit de Atención por Hiperactividad" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - Si el Diagnóstico es Consumo de Sustancias Psicoactivas" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - Si el Diagnóstico es Trastorno del Ánimo Bipolar" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - Riesgo no Evaluado" itemValue="7"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Cáncer de Cérvix: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.cancer_cervix}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - No" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - Si" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - No Aplica" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - Riesgo no Evaluado" itemValue="3"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Cáncer de Seno: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.cancer_seno}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - No" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - Si" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - No Aplica" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - Riesgo no Evaluado" itemValue="3"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Fluorosis Dental: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.fluorosis_dental}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - No" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - Si" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - No Aplica" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - Riesgo no Evaluado" itemValue="3"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                </table>
+            </p:fieldset>
+            <p:fieldset legend="Actividades de Intervención Según el Riesgo"  >
+                <table>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Fecha del Peso: " />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.fecha_peso}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Peso en KG: " />
+                        </td>
+                        <td>
+                            <p:inputText  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.peso_kilogramos}"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Fecha de la Talla: " />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.fecha_talla}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Talla en CM: " />
+                        </td>
+                        <td>
+                            <p:inputText  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.talla_metros}"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Fecha Probable de Parto: " />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.fecha_probable_parto}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Edad Gestacional al Nacer: " />
+                        </td>
+                        <td>
+                            <p:inputText  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.edad_gestacional_nacer}"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="BCG: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.bcg}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - RN" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - OTRA DOSIS" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - SIN DATO" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO SE ADMINISTRA POR TRADICIÓN" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - NO SE ADMINISTRA POR NEGACIÓN DEL USUARIO" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO SE ADMINISTRA POR TENER DATOS DE CONTACTO DEL USUARIO NO ACTUALIZADOS" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - NO SE ADMINISTRA POR OTRAS RAZONES" itemValue="7"/>
+                                <f:selectItem itemLabel="8 - NO APLICA" itemValue="8"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Hepatitis B Menores de 1 Año: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.hepatitis_b_menores_1_año}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - RN" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - PRIMERA DOSIS" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - SEGUNDA DOSIS" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - TERCERA DOSIS" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - SIN DATO" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - NO SE ADMINISTRA POR UNA TRADICIÓN" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - NO SE ADMINISTRA POR NEGACIÓN DEL USUARIO" itemValue="7"/>
+                                <f:selectItem itemLabel="8 - NO SE ADMINISTRA POR TENER DATOS DE CONTACTO DEL USUARIO NO ACTUALIZADOS" itemValue="8"/>
+                                <f:selectItem itemLabel="9 - NO SE ADMINISTRA POR OTRAS RAZONES" itemValue="9"/>
+                                <f:selectItem itemLabel="10 - NO APLICA" itemValue="10"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Pentavelente: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.pentavalente}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - PRIMERA DOSIS" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - SEGUNDA DOSIS" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - TERCERA DOSIS" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - SIN DATO" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - NO SE ADMINISTRA POR UNA TRADICIÓN" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO SE ADMINISTRA POR NEGACIÓN DEL USUARIO" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - NO SE ADMINISTRA POR TENER DATOS DE CONTACTO DEL USUARIO NO ACTUALIZADOS" itemValue="7"/>
+                                <f:selectItem itemLabel="8 - NO SE ADMINISTRA POR OTRAS RAZONES" itemValue="8"/>
+                                <f:selectItem itemLabel="9 - NO APLICA" itemValue="9"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Polio: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.polio}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - PRIMERA DOSIS"
+                                              itemValue="0"/>
+                                <f:selectItem itemLabel="1 - SEGUNDA DOSIS"
+                                              itemValue="1"/>
+                                <f:selectItem itemLabel="2 - TERCERA DOSIS"
+                                              itemValue="2"/>
+                                <f:selectItem itemLabel="3 - PRIMER REFUERZO"
+                                              itemValue="3"/>
+                                <f:selectItem itemLabel="4 - SEGUNDO REFUERZO"
+                                              itemValue="4"/>
+                                <f:selectItem itemLabel="5 - SIN DATO"
+                                              itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO SE ADMINISTRA POR UNA TRADICIÓN"
+                                              itemValue="6"/>
+                                <f:selectItem itemLabel="7 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD"
+                                              itemValue="7"/>
+                                <f:selectItem itemLabel="8 - NO SE ADMINISTRA POR NEGACIÓN DEL USUARIO"
+                                              itemValue="8"/>
+                                <f:selectItem itemLabel="9 - NO SE ADMINISTRA POR TENER DATOS DE CONTACTO DEL USUARIO NO ACTUALIZADOS"
+                                              itemValue="9"/>
+                                <f:selectItem itemLabel="10 - NO SE ADMINISTRA POR OTRAS RAZONES"
+                                              itemValue="10"/>
+                                <f:selectItem itemLabel="11 - NO APLICA"
+                                              itemValue="11"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="DPT Menores de 5 Años: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.dpt_menores_5_años}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - PRIMERA DOSIS"
+                                              itemValue="0"/>
+                                <f:selectItem itemLabel="1 - SEGUNDA DOSIS"
+                                              itemValue="1"/>
+                                <f:selectItem itemLabel="2 - TERCERA DOSIS"
+                                              itemValue="2"/>
+                                <f:selectItem itemLabel="3 - PRIMER REFUERZO"
+                                              itemValue="3"/>
+                                <f:selectItem itemLabel="4 - SEGUNDO REFUERZO"
+                                              itemValue="4"/>
+                                <f:selectItem itemLabel="5 - SIN DATO"
+                                              itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO SE ADMINISTRA POR UNA TRADICIÓN"
+                                              itemValue="6"/>
+                                <f:selectItem itemLabel="7 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD"
+                                              itemValue="7"/>
+                                <f:selectItem itemLabel="8 - NO SE ADMINISTRA POR NEGACIÓN DEL USUARIO"
+                                              itemValue="8"/>
+                                <f:selectItem itemLabel="9 - NO SE ADMINISTRA POR TENER DATOS DE CONTACTO DEL USUARIO NO ACTUALIZADOS"
+                                              itemValue="9"/>
+                                <f:selectItem itemLabel="10 - NO SE ADMINISTRA POR OTRAS RAZONES"
+                                              itemValue="10"/>
+                                <f:selectItem itemLabel="11 - NO APLICA"
+                                              itemValue="11"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Rotavirus: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.rotavirus}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - RN" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - OTRA DOSIS" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - SIN DATO" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO SE ADMINISTRA POR TRADICIÓN" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - NO SE ADMINISTRA POR NEGACIÓN DEL USUARIO" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO SE ADMINISTRA POR TENER DATOS DE CONTACTO DEL USUARIO NO ACTUALIZADOS" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - NO SE ADMINISTRA POR OTRAS RAZONES" itemValue="7"/>
+                                <f:selectItem itemLabel="8 - NO APLICA" itemValue="8"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Neumococo: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.neumococo}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - PRIMERA DOSIS" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - SEGUNDA DOSIS" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - PRIMER REFUERZO" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - SIN DATO" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - NO SE ADMINISTRA POR UNA TRADICIÓN" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO SE ADMINISTRA POR NEGACIÓN DEL USUARIO" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - NO SE ADMINISTRA POR TENER DATOS DE CONTACTO DEL USUARIO NO ACTUALIZADOS" itemValue="7"/>
+                                <f:selectItem itemLabel="8 - NO SE ADMINISTRA POR OTRAS RAZONES" itemValue="8"/>
+                                <f:selectItem itemLabel="9 - NO APLICA" itemValue="9"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Influenza Niños: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.influenza_niños}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - PRIMERA DOSIS" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - SEGUNDA DOSIS" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - REFUERZO ANUAL" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - SIN DATO" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - NO SE ADMINISTRA POR UNA TRADICIÓN" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO SE ADMINISTRA POR NEGACIÓN DEL USUARIO" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - NO SE ADMINISTRA POR TENER DATOS DE CONTACTO DEL USUARIO NO ACTUALIZADOS" itemValue="7"/>
+                                <f:selectItem itemLabel="8 - NO SE ADMINISTRA POR OTRAS RAZONES" itemValue="8"/>
+                                <f:selectItem itemLabel="9 - NO APLICA" itemValue="9"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Fiebre Amarilla Niños de 1 Año: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.fiebre_amarilla_niños_1_año}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - DOSIS UNICA" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - SIN DATO" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - NO SE ADMINISTRA POR UNA TRADICIÓN" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - NO SE ADMINISTRA POR NEGACIÓN DEL USUARIO" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - NO SE ADMINISTRA POR TENER DATOS DE CONTACTO DEL USUARIO NO ACTUALIZADOS" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO SE ADMINISTRA POR OTRAS RAZONES" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - NO APLICA" itemValue="7"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Hepatitis A: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.hepatitis_a}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - DOSIS UNICA" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - SIN DATO" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - NO SE ADMINISTRA POR UNA TRADICIÓN" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - NO SE ADMINISTRA POR NEGACIÓN DEL USUARIO" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - NO SE ADMINISTRA POR TENER DATOS DE CONTACTO DEL USUARIO NO ACTUALIZADOS" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO SE ADMINISTRA POR OTRAS RAZONES" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - NO APLICA" itemValue="7"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Triple Viral Niños: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.triple_viral_niños}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - PRIMERA DOSIS" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - PRIMER REFUERZO" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - SIN DATO" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO SE ADMINISTRA POR TRADICIÓN" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - NO SE ADMINISTRA POR NEGACIÓN DEL USUARIO" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO SE ADMINISTRA POR TENER DATOS DE CONTACTO DEL USUARIO NO ACTUALIZADOS" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - NO SE ADMINISTRA POR OTRAS RAZONES" itemValue="7"/>
+                                <f:selectItem itemLabel="8 - NO APLICA" itemValue="8"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Virus del Papiloma Humano (VPH): " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.virus_papiloma_humano}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - PRIMERA DOSIS" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - SEGUNDA DOSIS" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - TERCERA DOSIS" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - SIN DATO" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - NO SE ADMINISTRA POR UNA TRADICIÓN" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO SE ADMINISTRA POR NEGACIÓN DEL USUARIO" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - NO SE ADMINISTRA POR TENER DATOS DE CONTACTO DEL USUARIO NO ACTUALIZADOS" itemValue="7"/>
+                                <f:selectItem itemLabel="8 - NO SE ADMINISTRA POR OTRAS RAZONES" itemValue="8"/>
+                                <f:selectItem itemLabel="9 - NO APLICA" itemValue="9"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="TD o TT Mujeres en Edad Fértil 15 a 49 Años: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.td_tt_mujeres_edad_fertil_15_49_años}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - PRIMERA DOSIS"
+                                              itemValue="0"/>
+                                <f:selectItem itemLabel="1 - SEGUNDA DOSIS"
+                                              itemValue="1"/>
+                                <f:selectItem itemLabel="2 - TERCERA DOSIS"
+                                              itemValue="2"/>
+                                <f:selectItem itemLabel="3 - CUARTA DOSIS"
+                                              itemValue="3"/>
+                                <f:selectItem itemLabel="4 - QUINTA DOSIS"
+                                              itemValue="4"/>
+                                <f:selectItem itemLabel="5 - SIN DATO"
+                                              itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO SE ADMINISTRA POR UNA TRADICIÓN"
+                                              itemValue="6"/>
+                                <f:selectItem itemLabel="7 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD"
+                                              itemValue="7"/>
+                                <f:selectItem itemLabel="8 - NO SE ADMINISTRA POR NEGACIÓN DEL USUARIO"
+                                              itemValue="8"/>
+                                <f:selectItem itemLabel="9 - NO SE ADMINISTRA POR TENER DATOS DE CONTACTO DEL USUARIO NO ACTUALIZADOS"
+                                              itemValue="9"/>
+                                <f:selectItem itemLabel="10 - NO SE ADMINISTRA POR OTRAS RAZONES"
+                                              itemValue="10"/>
+                                <f:selectItem itemLabel="11 - NO APLICA"
+                                              itemValue="11"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Control de Placa Bacteriana: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.control_placa_bacteriana}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - NO SE ADMINISTRA POR TRADICIÓN" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - NO SE ADMINISTRA POR NEGACIÓN DEL USUARIO" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO SE ADMINISTRA POR TENER DATOS DE CONTACTO DEL USUARIO NO ACTUALIZADOS" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - NO SE ADMINISTRA POR OTRAS RAZONES" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - SI 1ra VEZ EN EL AÑO" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - SI 2da VEZ EN EL AÑO" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - SIN DATO" itemValue="7"/>
+                                <f:selectItem itemLabel="8 - NO APLICA" itemValue="8"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Fecha de Atención del Parto o Cesárea: " />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.fecha_atencion_parto_cesarea}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Fecha de Salida de la Atención del Parto o Cesárea: " />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.fecha_salida_atencion_parto_cesarea}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Fecha de Consejeria en Lactancia Materna: " />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.fecha_consejeria_lactancia_materna}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Control Recién Nacido: " />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.control_recien_nacido}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Planificación Familiar Primera Vez: " />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.planificacion_familiar_primera_vez}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Suministro de Método Anticonceptivo: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.suministro_metodo_anticonceptivo}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - DISPOSITIVO INTRAUTERINO" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - DISPOSITIVO INTRAUTERINO Y BARRERA" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - IMPLANTE SUBDERMICO" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - IMPLANTE SUBDERMICO Y BARRERA" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - ORAL" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - ORAL Y BARRERA" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - INYECTABLE MENSUAL" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - INYECTABLE MENSUAL Y BARRERA" itemValue="7"/>
+                                <f:selectItem itemLabel="8 - INYECTABLE TRIMESTRAL" itemValue="8"/>
+                                <f:selectItem itemLabel="9 - INYECTABLE TRIMESTRAL Y BARRERA" itemValue="9"/>
+                                <f:selectItem itemLabel="10 - EMERGENCIA" itemValue="10"/>
+                                <f:selectItem itemLabel="11 - EMERGENCIA Y BARRERA" itemValue="11"/>
+                                <f:selectItem itemLabel="12 - ESTERILIZACIÓN" itemValue="12"/>
+                                <f:selectItem itemLabel="13 - ESTERILIZACIÓN Y BARRERA" itemValue="13"/>
+                                <f:selectItem itemLabel="14 - BARRERA" itemValue="14"/>
+                                <f:selectItem itemLabel="15 - REGISTRO NO EVALUADO" itemValue="15"/>
+                                <f:selectItem itemLabel="16 - NO SE ADMINISTRA POR TRADICIÓN" itemValue="16"/>
+                                <f:selectItem itemLabel="17 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" itemValue="17"/>
+                                <f:selectItem itemLabel="18 - NO SE ADMINISTRA POR NEGACIÓN DE LA USUARIA" itemValue="18"/>
+                                <f:selectItem itemLabel="19 - NO SE ADMINISTRA POR OTRAS RAZONES" itemValue="19"/>
+                                <f:selectItem itemLabel="20 - NO APLICA" itemValue="20"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Control Prenatal de Primera Vez: " />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.control_prenatal_primera_vez}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Control Prenatal: " />
+                        </td>
+                        <td>
+                            <p:inputText  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.control_prenatal}"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Último Control Prenatal: " />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.ultimo_control_prenatal}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Suministro de Ácido Fólico en el Último Control Prenatal: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.suministro_acido_folico_ultimo_control_prenatal}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - NO SE ADMINISTRA POR TRADICIÓN" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - NO SE ADMINISTRA POR NEGACIÓN DE LA USUARIA" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO SE ADMINISTRA POR OTRAS RAZONES" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - SI SE SUMINISTRA" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - REGISTRO NO EVALUADO" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO APLICA" itemValue="6"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Suministro de Sulfato Ferroso en el Último Control Prenatal: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.suministro_sulfato_ferroso_ultimo_control_prenatal}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - NO SE ADMINISTRA POR TRADICIÓN" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - NO SE ADMINISTRA POR NEGACIÓN DE LA USUARIO" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO SE ADMINISTRA POR OTRAS RAZONES" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - SI SE SUMINISTRA" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - REGISTRO NO EVALUADO" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO APLICA" itemValue="6"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Suministro de Carbonato de Calcio en el Último Control Prenatal: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.suministro_carbonato_calcio_ultimo_control_prenatal}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - NO SE ADMINISTRA POR TRADICIÓN" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - NO SE ADMINISTRA POR NEGACIÓN DE LA USUARIO" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO SE ADMINISTRA POR OTRAS RAZONES" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - SI SE SUMINISTRA" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - REGISTRO NO EVALUADO" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO APLICA" itemValue="6"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Valoración de la Agudeza Visual: " />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.valoracion_agudeza_visual}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Consulta por Oftalmología: " />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.consulta_oftalmologia}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Fecha Diagnóstico Desnutrición Proteico Calórica: " />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.fecha_diagnostico_desnutricion_proteico_calorica}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Consulta Mujer o Menor Victima del Maltrato: " />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.consulta_mujero_menor_maltratado}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Consulta Victimas de Violencia Sexual: " />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.consulta_victimas_violencia_sexual}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Consulta Nutrición: " />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.consulta_nutricion}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Consulta de Psicología " />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.consulta_psicologica}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Consulta de Crecimiento y Desarrollo Primera Vez " />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.consulta_crecimiento_desarrollo_primera_vez}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Suministro de Sulfato Ferroso en la Última Consulta del Menor de 10 Años: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.suministro_sulfato_ferroso_ultima_consulta_menor_10_años}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - NO SE ADMINISTRA POR TRADICIÓN" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - NO SE ADMINISTRA POR NEGACIÓN DE LA USUARIO" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO SE ADMINISTRA POR OTRAS RAZONES" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - SI SE SUMINISTRA" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - REGISTRO NO EVALUADO" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO APLICA" itemValue="6"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Suministro de Vitamina A en la Última Consulta del Menor de 10 Años: " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.suministro_vitamina_a_ultima_consulta_menor_10_años}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - NO SE ADMINISTRA POR TRADICIÓN" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - NO SE ADMINISTRA POR NEGACIÓN DE LA USUARIO" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO SE ADMINISTRA POR OTRAS RAZONES" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - SI SE SUMINISTRA" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - REGISTRO NO EVALUADO" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO APLICA" itemValue="6"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Consulta de Joven Primera Vez " />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.consulta_joven_primera_vez}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Consulta de Adulto Primera Vez " />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.consulta_adulto_primera_vez}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Preservativos Entregados a Pacientes con ITS: " />
+                        </td>
+                        <td>
+                            <p:inputText  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.preservativos_entregados_pacientes_con_its}"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Asesoria Pre Test Elisa para VIH " />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.asesoria_pre_test_elisa_vih}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Asesoria Pos Test Elisa para VIH " />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.asesoria_pos_test_elisa_vih}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Paciente con Diagnóstico de: Ansiedad, Depresión, Esquizofrenia, déficit de atención, consumo SPA y Bipolaridad " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.paciente_diagnostico_salud_mental_recibio_atencion_ultimos_6_meses_equipo_interdisciplinario_completo}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - DOSIS UNICA" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - SIN DATO" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - NO SE ADMINISTRA POR UNA TRADICIÓN" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO SE ADMINISTRA POR UNA CONDICIÓN DE SALUD" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - NO SE ADMINISTRA POR NEGACIÓN DEL USUARIO" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - NO SE ADMINISTRA POR TENER DATOS DE CONTACTO DEL USUARIO NO ACTUALIZADOS" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO SE ADMINISTRA POR OTRAS RAZONES" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - NO APLICA" itemValue="7"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Fecha Antigeno de Superficie Hepatitis B en Gestantes " />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.fecha_antigeno_superficie_hepatitis_b_gestantes}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Resultado de Antigeno de Superficie Hepatitis B en Gestantes " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.resultado_antigeno_superficie_hepatitis_b_gestantes}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - NEGATIVO" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - POSITIVO" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - SIN DATO" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO APLICA" itemValue="3"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Fecha Serologia para Sifilis" />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.fecha_serologia_sifilis}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Resultado de Serologia para Sifilis " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.resultado_serologia_sifilis}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - NO REACTIVA" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - REACTIVA" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - SIN DATO" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO APLICA" itemValue="3"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Fecha de Toma de Elisa para VIH" />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.fecha_toma_elisa_vih}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Resultado de Elisa para VIH " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.resultado_elisa_vih}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - NEGATIVO" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - POSITIVO" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - INDETERMINADO" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - SIN DATO" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - NO APLICA" itemValue="4"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Fecha de TSH Neonatal " />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.fecha_tsh_neonatal}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Resultado de TSH Neonatal " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.resultado_tsh_neonatal}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - NORMAL" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - ANORMAL" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - SIN DATO" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO APLICA" itemValue="3"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Tamizaje Cáncer de Cuello Uterino" />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.tamizaje_cancer_cuello_uterino}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - Citología Cervico Uterina" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - ADN - VPH" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - TÉCNICA DE INSPECCIÓN VISUAL" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO SE REALIZA POR UNA TRADICIÓN" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - NO SE REALIZA POR UNA CONDICIÓN DE SALUD" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - NO SE REALIZA POR NEGACIÓN DE LA USUARIA" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - NO SE REALIZA POR TENER DATOS DE CONTACTO DE LA USUARIO NO ACTUALIZADOS" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - NO SE REALIZA POR OTRAS RAZONES" itemValue="7"/>
+                                <f:selectItem itemLabel="8 - SIN DATO" itemValue="8"/>
+                                <f:selectItem itemLabel="9 - NO APLICA" itemValue="9"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Citología Cervico Uterina" />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.citologia_cervico_uterina}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Citología Cervico Uterina Resultados Según Bethesda" />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.citologia_cervico_uterina_resultados_bethesda}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="1 - ASC-US" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - ASC-H" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - LESIÓN INTRAEPITELIAL ESCAMOSA DE BAJO GRADO" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - LESIÓN INTRAEPITELIAL ESCAMOSA DE ALTO GRADO" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - CARCINOMA DE CELULAS ESCAMOSAS" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - CELULAS GLANDULARES ATIPICAS" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - ADENOCARCINOMA ENDOCERVICAL IN SITU" itemValue="7"/>
+                                <f:selectItem itemLabel="8 - ADENOCARCINOMA" itemValue="8"/>
+                                <f:selectItem itemLabel="9 - NEGATIVA PARA LESIÓN INTRAEPITELIAL O MALIGNIDAD" itemValue="9"/>
+                                <f:selectItem itemLabel="10 - CÉLULAS ENDOMETRIALES" itemValue="10"/>
+                                <f:selectItem itemLabel="11 - INADECUADA PARA LECTURA" itemValue="11"/>
+                                <f:selectItem itemLabel="99 - SIN DATO" itemValue="99"/>
+                                <f:selectItem itemLabel="98 - NO APLICA" itemValue="98"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Calidad en la Muestra de Citologia Cerviuterina " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.calidad_muestra_citologia_cervicouterina}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - SATISFACTORIA ZONA DE TRANSFORMACIÓN PRESENTE" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - SATISFACTORIA ZONA DE TRANSFORMACIÓN AUSENTE" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - INSATISFACTORIA" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - RECHAZADA" itemValue="3"/>
+                                <f:selectItem itemLabel="99 - SIN DATO" itemValue="99"/>
+                                <f:selectItem itemLabel="98 - NO APLICA" itemValue="98"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="CÓDIGO DE HABILITACIÓN IPS DONDE SE TOMA CITOLOGÍA CERVICOUTERINA " />
+                        </td>
+                        <td>
+                            <p:inputText  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.codigo_habilitacion_ips_donde_toma_citologia_cervicouterina}"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="FECHA COLPOSCOPIA" />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.fecha_colposcopia}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="CÓDIGO DE HABILITACIÓN IPS DONDE SE TOMA COLPOSCOPIA " />
+                        </td>
+                        <td>
+                            <p:inputText  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.codigo_habilitacion_ips_donde_toma_colposcopia}"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="FECHA DE BIOPSIA CERVICAL" />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.fecha_biopsia_cervical}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Resultado de Biosia Cervical " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.resultado_biopsia_cervical}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - NEGATIVO PARA NEOPLASIA" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - INFECCIÓN POR VPH" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - NIC DE BAJO GRADO - NIC I" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NIC DE ALTO GRADO: NIC II - NIC III" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - NEOPLASIA MICROINFILTRANTE: ESCAMOCELULAR O ADENOCARCIONOMA" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - NEOPLASIA INFILTRANTE: ESCAMOCELULAR O ADENOCARCINOMA" itemValue="5"/>
+                                <f:selectItem itemLabel="99 - SIN DATO" itemValue="99"/>
+                                <f:selectItem itemLabel="98 - NO APLICA" itemValue="98"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="CÓDIGO DE HABILITACIÓN IPS DONDE SE TOMA BIOPSIA CERVICAL " />
+                        </td>
+                        <td>
+                            <p:inputText  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.codigo_habilitacion_ips_donde_toma_biopsia_cervical}"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="FECHA DE MAMOGRAFÍA" />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.fecha_mamografia}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Resultado de Mamografía " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.resultado_mamografia}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - NECESIDAD DE NUEVO ESTUDIO IMAGENÓLOGICO O MAMOGRAFIA PREVIO EVALUACIÓN" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - NEGATIVO" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - HALLAZGOS BENIGNOS" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - PROBABLEMENTE BENIGNO" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - ANORMALIDAD SOSPECHOSA" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - ALTAMENTE SOSPECHOSO DE MALIGNIDAD" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - MALIGNIDAD POR BIOPSIA CONOCIDA" itemValue="6"/>
+                                <f:selectItem itemLabel="99 - SIN DATO" itemValue="99"/>
+                                <f:selectItem itemLabel="98 - NO APLICA" itemValue="98"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="CÓDIGO DE HABILITACIÓN IPS DONDE SE TOMA MAMOGRAFIA " />
+                        </td>
+                        <td>
+                            <p:inputText  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.codigo_habilitacion_ips_donde_toma_mamografia}"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="FECHA DE TOMA BIOPSIA SENO POR BACAF" />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.fecha_toma_biopsia_seno_bacaf}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="FECHA DE RESULTADO DE BIOPSIA SENO POR BACAF" />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.fecha_resultado_biopsia_seno_bacaf}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="BIOPSIA SENO POR BACAF " />
+                        </td>
+                        <td>
+                            <p:inputText  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.biopsia_seno_bacaf}"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="CÓDIGO DE HABILITACIÓN IPS DONDE SE TOMA BIPSIA SENO POR BACAF " />
+                        </td>
+                        <td>
+                            <p:inputText  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.codigo_habilitacion_ips_donde_toma_biopsia_seno_bacaf}"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="FECHA DE TOMA HEMOGLOBINA" />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.fecha_toma_hemoglobina}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="HEMOGLOBINA " />
+                        </td>
+                        <td>
+                            <p:inputText  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.hemoglobina}"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="FECHA DE TOMA DE GLICEMIA BASAL" />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.fecha_toma_glicemia_basal}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="FECHA DE CREATININA" />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.fecha_creatinina}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="CREATININA " />
+                        </td>
+                        <td>
+                            <p:inputText  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.creatinina}"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="FECHA DE HEMOGLOBINA GLICOSILADA" />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.fecha_hemoglobina_glicosilada}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="HEMOGLOBINA GLICOSILADA " />
+                        </td>
+                        <td>
+                            <p:inputText  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.hemoglobina_glicosilada}"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="FECHA DE TOMA DE MICROALBUMINURIA" />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.fecha_toma_microalbuminuria}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="FECHA DE TOMA DE HDL" />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.fecha_toma_hdl}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="FECHA DE TOMA DE BACILOSCOPIA DE DIAGNÓSTICO" />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.fecha_toma_baciloscopia_diagnostico}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Baciloscopia de Diagnóstico " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.baciloscopia_diagnostico}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - NO" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - NEGATIVA" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - POSITIVA" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - SIN DATO" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - NO APLICA" itemValue="4"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Tratamiento para Hipotiroidismo Congénito " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.tratamiento_hipotiroidismo_congenito}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - NO RECIBIÓ TRATAMIENTO POR TENER UNA TRADICIÓN QUE SE LO IMPIDE" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - NO RECIBIÓ TRATAMIENTO POR UNA CONDICIÓN DE SALUD QUE SE LO IMPIDE" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - NO RECIBIÓ TRATAMIENTO POR NEGACIÓN DEL USUARIO" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO RECIBIÓ TRATAMIENTO POR QUE LOS DATOS DE CONTACTO DEL USUARIO NO SE ENCUENTRAN ACTUALIZADOS" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - NO RECIBIÓ TRATAMIENTO POR OTRAS RAZONES" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - SI RECIBIÓ TRATAMIENTO" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - SIN DATO" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - NO APLICA" itemValue="7"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Tratamiento para Sifilis Gestacional " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.tratamiento_sifilis_gestacional}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - NO RECIBIÓ TRATAMIENTO POR TENER UNA TRADICIÓN QUE SE LO IMPIDE" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - NO RECIBIÓ TRATAMIENTO POR UNA CONDICIÓN DE SALUD QUE SE LO IMPIDE" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - NO RECIBIÓ TRATAMIENTO POR NEGACIÓN DEL USUARIO" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO RECIBIÓ TRATAMIENTO POR QUE LOS DATOS DE CONTACTO DEL USUARIO NO SE ENCUENTRAN ACTUALIZADOS" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - NO RECIBIÓ TRATAMIENTO POR OTRAS RAZONES" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - SI RECIBIÓ TRATAMIENTO" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - SIN DATO" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - NO APLICA" itemValue="7"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Tratamiento para Sifilis Congénita " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.tratamiento_sifilis_congenita}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - NO RECIBIÓ TRATAMIENTO POR TENER UNA TRADICIÓN QUE SE LO IMPIDE" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - NO RECIBIÓ TRATAMIENTO POR UNA CONDICIÓN DE SALUD QUE SE LO IMPIDE" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - NO RECIBIÓ TRATAMIENTO POR NEGACIÓN DEL USUARIO" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO RECIBIÓ TRATAMIENTO POR QUE LOS DATOS DE CONTACTO DEL USUARIO NO SE ENCUENTRAN ACTUALIZADOS" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - NO RECIBIÓ TRATAMIENTO POR OTRAS RAZONES" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - SI RECIBIÓ TRATAMIENTO" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - SIN DATO" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - NO APLICA" itemValue="7"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Tratamiento para Lepra " />
+                        </td>
+                        <td>
+                            <p:selectOneMenu  styleClass="campoFormulario" style="width: 150px"   value="#{reporteInforme.u.tratamiento_terminado_lepra}"   filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="0 - NO RECIBIÓ TRATAMIENTO POR TENER UNA TRADICIÓN QUE SE LO IMPIDE" itemValue="0"/>
+                                <f:selectItem itemLabel="1 - NO RECIBIÓ TRATAMIENTO POR UNA CONDICIÓN DE SALUD QUE SE LO IMPIDE" itemValue="1"/>
+                                <f:selectItem itemLabel="2 - NO RECIBIÓ TRATAMIENTO POR NEGACIÓN DEL USUARIO" itemValue="2"/>
+                                <f:selectItem itemLabel="3 - NO RECIBIÓ TRATAMIENTO POR QUE LOS DATOS DE CONTACTO DEL USUARIO NO SE ENCUENTRAN ACTUALIZADOS" itemValue="3"/>
+                                <f:selectItem itemLabel="4 - NO RECIBIÓ TRATAMIENTO POR OTRAS RAZONES" itemValue="4"/>
+                                <f:selectItem itemLabel="5 - SI RECIBIÓ TRATAMIENTO" itemValue="5"/>
+                                <f:selectItem itemLabel="6 - SIN DATO" itemValue="6"/>
+                                <f:selectItem itemLabel="7 - NO APLICA" itemValue="7"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Fecha de Terminación Tratamiento para Leishmaniasis" />
+                        </td>
+                        <td>
+                            <p:calendar
+                                navigator="true"
+                                locale="es"
+                                pattern="yyyy-MM-dd"
+                                mask="9999-99-99" value="#{reporteInforme.u.fecha_terminacion_tratamiento_leishmaniasis}"/>
+                        </td>
+                    </tr>
+                </table>
+            </p:fieldset>
+            <p:commandButton value="Guardar Datos" ajax="false" actionListener="#{reporteInforme.guardar_datos_dataset}">
+                <f:attribute name="logo_empresa" value="#{loginMB.rutaCarpetaImagenes}#{loginMB.empresaActual.logo.urlImagen}" />
+            </p:commandButton>
+        </h:form>
+    </h:body>
+</html>
+

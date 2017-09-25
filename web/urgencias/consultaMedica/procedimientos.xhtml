@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <body>
+        <p:outputPanel>
+            <p:dataTable 
+                id="IdTablaGestionarServicios" 
+                var="servicios" 
+                widgetVar="IdTablaGestionarServicios"
+                value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.urgOrdenCobro.facConsumoServiciolist}" 
+                paginator="true"                        
+                emptyMessage="No hay servicios registrados"
+                scrollable="true" 
+                rows="5" scrollWidth="150%" scrollHeight="150"
+                paginatorPosition="bottom" 
+                paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                pageLinks="5" 
+                resizableColumns="true">                                                                                               
+                <f:facet name="header">
+                    SERVICIOS Y PROCEDIMIENTOS ASOCIADOS AL PACIENTE
+                </f:facet>
+                <p:column style="width:32px;text-align: center">
+                    <p:commandButton rendered="#{servicios.estado eq false}" 
+                                     actionListener="#{consultaMB.cargarDialogoCancelarServicio(servicios)}" icon="ui-icon-cancel" title="Cancelar servicios"> 
+                    </p:commandButton>
+                </p:column>
+                <p:column headerText="PROFESIONAL"  width="11%" filterBy="#{servicios.idPrestador.primerNombre}" 
+                          filterMatchMode="contains">
+                    #{servicios.idPrestador.primerNombre}  #{servicios.idPrestador.primerApellido}
+                </p:column>
+                <p:column headerText="FECHA" filterBy="#{servicios.fecha}" filterMatchMode="contains">
+                    <p:outputLabel value="#{servicios.fecha}">
+                        <f:convertDateTime  pattern="dd/MM/yyyy HH:mm:ss" />
+                    </p:outputLabel>
+                </p:column>
+                <p:column headerText="CODIGO"  filterBy="#{servicios.idServicio.codigoServicio}" filterMatchMode="contains">
+                    #{servicios.idServicio.codigoServicio}
+                </p:column>
+                <p:column headerText="NOMBRE"  filterBy="#{servicios.idServicio.nombreServicio}" filterMatchMode="contains">
+                    #{servicios.idServicio.nombreServicio}
+                </p:column>
+                <p:column headerText="DESCRIPCION"  filterBy="#{servicios.idServicio.finalidad.descripcion}" filterMatchMode="contains">
+                    <p:inputTextarea  value="#{servicios.idServicio.finalidad.descripcion}" readonly="true" style="width: 100%"  autoResize="true"/>
+                </p:column>
+                <p:column headerText="CANTIDAD"  filterBy="#{servicios.cantidad}" filterMatchMode="contains">
+                    #{servicios.cantidad}
+                </p:column>
+                <p:column headerText="DIAGNOSTICO PRINCIPAL"  filterBy="#{servicios.diagnosticoPrincipal}" filterMatchMode="contains">
+                    <p:inputTextarea  value="#{servicios.diagnosticoPrincipal}" readonly="true" style="width: 100%"  autoResize="true"/>
+                </p:column>
+                <p:column headerText="CANCELADO"  filterBy="#{servicios.estado}"  filterMatchMode="contains">
+                    <p:selectBooleanButton disabled="true" value="#{servicios.estado}" onLabel="Si" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:70px">
+                    </p:selectBooleanButton>
+                </p:column>
+                <p:column headerText="CANCELADO POR" width="100" filterBy="#{servicios.profesionaApruebaServicio.primerNombre}"
+                          filterMatchMode="contains">
+                    #{servicios.profesionaApruebaServicio.primerNombre}  #{servicios.profesionaApruebaServicio.primerApellido}
+                </p:column>
+                <p:column headerText="FECHA" filterBy="#{servicios.fechaCancelacion}" filterMatchMode="contains">
+                    <p:calendar size="10" value="#{servicios.fechaCancelacion}"
+                                pattern="dd/MM/yyyy HH:mm:ss" /> 
+                </p:column>
+                <p:column headerText="OBSERVACION"  filterBy="#{servicios.observacion}"
+                          filterMatchMode="contains">
+                    <p:inputTextarea  value="#{servicios.observacion}" readonly="true" style="width: 100%"  autoResize="true"/>
+                </p:column>
+            </p:dataTable>
+        </p:outputPanel> 
+    </body>
+    <p:dialog id="IdDialogoGestionarServicios" header="CANCELAR PROCEDIMIENTO/SERVICIOS MEDICOS" widgetVar="IdDialogoGestionarServicios" 
+              resizable="false" modal="true">  
+        <p:panelGrid id="IdPanelCancelarServicio" styleClass="panelGridSinBordes" columns="2">
+            <p:outputLabel styleClass="campoObligatorio" value="PROFESIONAL:" />
+            <p:outputLabel styleClass="campoFormulario" value="#{loginMB.usuarioActual.primerNombre} #{loginMB.usuarioActual.primerApellido}" />
+            <p:outputLabel value="MOTIVO CANCELACION"  styleClass="campoObligatorio"/>
+            <p:inputTextarea  maxlength="1000" styleClass="labelFormulario" placeholder="Ingrese un motivo de cancelación " rows="3"
+                              value="#{consultaMB.facConsumoServicio.observacion}" style="width: 300px"/>
+            <p:commandButton 
+                value="Agregar"                         
+                actionListener="#{consultaMB.guardarServiciosCancelados()}" update=":formConsulta:msgbTriage"/>
+        </p:panelGrid>
+    </p:dialog>
+</html>

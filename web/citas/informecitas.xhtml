@@ -1,0 +1,156 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">  
+    <h:head>        
+        <title>Informe de citas</title>
+        <link href="../../recursos/css/estilos.css" rel="stylesheet"/>        
+        <link href="../../recursos/css/metro-bootstrap.css" rel="stylesheet"/>
+        <link href="../../recursos/css/iconFont.css" rel="stylesheet"/>
+        <script type="text/javascript" src="../../recursos/js/calendario.js"></script>  
+    </h:head>
+    <h:body>
+        #{informeCitasMB.init()}
+        <h:form id="IdFormInformeCitas">              
+
+            <p:growl id="IdMensajePeriodos"  showDetail="true" sticky="false" autoUpdate="true" life="2000"  />                        
+            <p:tabView id="IdTabView" style=" width: 95%;  margin-left: 15px;" >                 
+                <p:tab title="Informe Citas">                    
+                    <p:panelGrid id="IdPanelFiltro" styleClass="panelGridSinBordes" columns="2" style="margin-right: auto;">                    
+                        <h:panelGroup >
+                            <p:outputLabel styleClass="campoObligatorio" value="Medico" style="width: 120px;"/>                        
+                            <p:selectOneMenu styleClass="campoFormulario" style="width: 200px;"  value="#{informeCitasMB.medico}" >
+                                <f:selectItem itemLabel="--Seleccione Médico--" itemValue=""/>
+                                <f:selectItems value="#{informeCitasMB.listaMedicos}" var="ad" itemLabel="#{ad.primerNombre} #{ad.primerApellido}" itemValue="#{ad.idUsuario}"/>
+                                <f:ajax event="change" render="@this" />
+                                <p:ajax event="change" listener="#{informeCitasMB.limpiar}" update="opResultado,IdPanelFiltro"/>
+                            </p:selectOneMenu>                     
+                        </h:panelGroup>
+                        <h:panelGroup >
+                            <p:outputLabel styleClass="campoObligatorio" value="Administradora" style="width: 120px;"/>                        
+                            <p:selectOneMenu styleClass="campoFormulario" style="width: 200px;"  value="#{informeCitasMB.administradora}">
+                                <f:selectItem itemLabel="--Seleccione Administradora--" itemValue=""/>
+                                <f:selectItems value="#{aplicacionGeneralMB.listaAdministradoras}" var="ad" itemLabel="#{ad.razonSocial}" itemValue="#{ad.idAdministradora}"/>
+                                <f:ajax event="change" render="@this" />
+                                <p:ajax event="change" listener="#{informeCitasMB.limpiar}" update="opResultado,IdPanelFiltro"/>
+                            </p:selectOneMenu>                     
+                        </h:panelGroup>
+                        <h:panelGroup >
+                            <p:outputLabel styleClass="campoObligatorio" value="Fecha Desde"  style="width: 120px;"/>                        
+                            <p:calendar style="width: 200px;" value="#{informeCitasMB.fechaDesde}" pattern="dd/MM/yyyy" locale="es"  navigator="true"/>
+                        </h:panelGroup>
+                        <h:panelGroup >
+                            <p:outputLabel styleClass="campoObligatorio" value="Fecha Hasta"  style="width: 120px;"/>                        
+                            <p:calendar value="#{informeCitasMB.fechaHasta}" pattern="dd/MM/yyyy" locale="es"  navigator="true"/>
+                        </h:panelGroup>
+                        
+                        <h:panelGroup >
+                            <p:outputLabel styleClass="campoObligatorio" value="Motivo Consulta"  style="width: 120px;"/>                        
+                            <p:selectOneMenu styleClass="campoFormulario" style="width: 200px;"  value="#{informeCitasMB.motivoConsulta}" filter="true">
+                                <f:selectItem itemLabel="--Seleccione Motivo--" itemValue=""/>
+                                <f:selectItems value="#{informeCitasMB.listaMotivoConsulta}" var="ad" itemLabel="#{ad.descripcion}" itemValue="#{ad.id}"/>
+                                <f:ajax event="change" render="@this" />
+                                <p:ajax event="change" listener="#{informeCitasMB.limpiar}" update="opResultado,IdPanelFiltro"/>
+                            </p:selectOneMenu>                     
+                        </h:panelGroup>
+                        <h:panelGroup >
+                            <p:outputLabel styleClass="campoObligatorio" value="Oportunidad"  style="width: 120px;"/>                        
+                            <p:selectOneMenu styleClass="campoFormulario" style="width: 200px;"  value="#{informeCitasMB.oportunidad}" filter="true">
+                                <f:selectItem itemLabel="--Seleccione oportunidad--" itemValue=""/>
+                                <f:selectItem itemLabel="SOLICITADA" itemValue="disponible"/>
+                                <f:selectItem itemLabel="ASIGNADO" itemValue="en_espera"/>
+                                <p:ajax event="change" listener="#{informeCitasMB.limpiar}" update="opResultado,IdPanelFiltro"/>
+                            </p:selectOneMenu>                     
+                        </h:panelGroup>
+                        <h:panelGroup >
+                            <p:outputLabel styleClass="campoObligatorio" value="Estado de citas"  style="width: 120px;"/>                        
+                            <p:selectOneMenu styleClass="campoFormulario" style="width: 200px;"  value="#{informeCitasMB.estado}" filter="true">
+                                <f:selectItem itemLabel="--Seleccione Estado--" itemValue=""/>
+                                <f:selectItem itemLabel="ASIGNADA" itemValue="1"/>
+                                <f:selectItem itemLabel="ATENDIDA" itemValue="2"/>
+                                <f:selectItem itemLabel="CANCELADA" itemValue="3"/>
+                                <f:selectItem itemLabel="FACTURADA" itemValue="4"/>
+                                <f:ajax event="change" render="@this" />
+                                <p:ajax event="change" listener="#{informeCitasMB.limpiar}" update="opResultado,IdPanelFiltro"/>
+                            </p:selectOneMenu>                     
+                        </h:panelGroup>
+                        <h:panelGroup>
+                            <p:outputLabel styleClass="campoObligatorio" value="Pacientes"  style="width: 120px;"/>                        
+                            <p:selectOneMenu styleClass="campoFormulario" style="width: 200px;"  value="#{informeCitasMB.estadoPaciente}" filter="true">
+                                <f:selectItem itemLabel="--Seleccione Estado--" itemValue=""/>
+                                <f:selectItem itemLabel="ACTIVO" itemValue="1"/>
+                                <f:selectItem itemLabel="INACTIVO" itemValue="2"/>
+                                <f:ajax event="change" render="@this" />
+                                <p:ajax event="change" listener="#{informeCitasMB.limpiar}" update="opResultado,IdPanelFiltro"/>
+                            </p:selectOneMenu>                     
+                            <p:commandButton 
+                                title       =   "Buscar" value="&nbsp;"                                        
+                                styleClass  =   "icon-search fg-lightBlue" 
+                                style       =   "height: 20px;"
+                                actionListener="#{informeCitasMB.consultar}"
+                                process="@this,IdPanelFiltro"
+                                update="opResultado,IdPanelFiltro"
+                                />                     
+                            <p:commandButton 
+                                value="Limpiar Formulario"                                        
+                                style       =   "height: 20px;"
+                                actionListener="#{informeCitasMB.limpiar}"
+                                process="@this,IdPanelFiltro"
+                                update="opResultado,IdPanelFiltro"
+                                />  
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:outputPanel id="opResultado">
+                        <p:dataTable id="idDataResultado"
+                                     value="#{informeCitasMB.listaCitas}"
+                                     rows="10"                               
+                                     rendered="#{informeCitasMB.renderBuscar}"
+                                     var="cita"
+                                     paginator="true"
+                                     paginatorPosition="bottom"                                
+                                     emptyMessage="No hay resultado "
+
+                                     >
+                            <p:column headerText="FECHA SOLICITUD">  
+                                <h:outputLabel value="#{cita.fechaRegistro}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </h:outputLabel>
+                            </p:column>                            
+                            <p:column headerText="FECHA ATENCION">  
+                                <h:outputLabel value="#{cita.idTurno.fechaCreacion}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </h:outputLabel>
+                            </p:column>                            
+                            <p:column headerText="MEDICO">  
+                                #{cita.idPrestador.primerNombre} #{cita.idPrestador.primerApellido}
+
+                            </p:column>                            
+                            <p:column headerText="ESPECIALIDAD">  
+                                #{cita.idPrestador.especialidad.descripcion}
+                            </p:column>                           
+                            <p:column headerText="ADMINISTRADORA">  
+                                <h:outputLabel value="#{cita.idAdministradora.razonSocial}" style="font-size: 10px;" />
+                            </p:column>                            
+                            <p:column headerText="PACIENTE">  
+                                <h:outputLabel value="#{cita.idPaciente.primerNombre} #{cita.idPaciente.primerApellido}" style="font-size: 10px;" />
+                            </p:column>                            
+                        </p:dataTable>
+                        <br />
+                        <p:commandButton 
+                            title       =   "Exportar CSV" value="&nbsp; "                                        
+                            styleClass  =   "icon-file-excel fg-lightBlue" 
+                            style       =   "height: 30px;font-size: 24px;"
+                            rendered="#{informeCitasMB.renderBuscar}"
+                            actionListener="#{informeCitasMB.exportarCSV}"
+                            process="@this"
+                            ajax="false" 
+                            /> 
+                    </p:outputPanel>
+                </p:tab>
+            </p:tabView>
+        </h:form>
+    </h:body>
+</html>
+

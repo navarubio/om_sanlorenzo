@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <body>
+        <br></br>
+        <p:commandButton 
+            value="Guardar" rendered="#{consultaMB.urgTriage.idAdmision.estado ne 'ADMISION_PACIENTE_ENVIADO_DADO_ALTA'}" actionListener="#{consultaMB.guardarSuministroMedicamentoPaciente()}" 
+            title="Haga  clic aquí para guardar el nuevo suministro aplicado al paciente" update=":formConsulta"
+            />
+        <p:commandButton 
+            value="Imprimir" icon="ui-icon-print"
+            title="Nota administración medicamentos"
+            actionListener="#{consultaMB.generarNotaAdministracionMedicamentos}"
+            rendered="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.urgPrescripcionMedicamentolist ne null and consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.urgPrescripcionMedicamentolist.size() gt 0 }"
+            ajax="false" onclick="this.form.target = '_blank'">
+            <f:attribute name="logo_empresa"
+                         value="#{loginMB.rutaCarpetaImagenes}#{loginMB.empresaActual.logo.urlImagen}" />
+        </p:commandButton>                            
+
+        <br></br>
+        <p:dataTable
+            id="tableControlPrespcionMedicamentos"
+            var="medicamentos" 
+            value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.urgPrescripcionMedicamentolist}"
+            paginator="true"
+            style="width: 100%;"
+            rows="10"
+            lazy="true"
+            paginatorPosition="bottom"                                
+            emptyMessage="No se encontraron medicamentos asignados al paciente"
+            scrollable="true" 
+            pageLinks="5"
+            scrollWidth="110%" scrollHeight="150"
+            widgetVar="tableControlPrespcionMedicamentos"
+            resizableColumns="true"
+            >
+            <p:column exportable="false" style="width:16px">
+                <p:rowToggler />
+            </p:column>
+            <p:column headerText="PROFESIONAL QUE PRESCRIBE" width="13%" filterBy="#{medicamentos.idPrestador.primerNombre}"
+                      filterMatchMode="contains">
+                <h:outputText value="#{medicamentos.idPrestador.primerNombre} #{medicamentos.idPrestador.primerApellido }"/>                                  
+            </p:column>
+            <p:column headerText="CODIGO" filterBy="#{medicamentos.idMedicamento.codigoMedicamento}" filterMatchMode="contains">
+                <h:outputText value="#{medicamentos.idMedicamento.codigoMedicamento}" />
+            </p:column>
+            <p:column headerText="NOMBRE" width="13%" filterBy="#{medicamentos.idMedicamento.nombreMedicamento}" filterMatchMode="contains">
+                <h:outputText value="#{medicamentos.idMedicamento.nombreMedicamento}" />
+            </p:column>
+            <p:column headerText="PRESENTACION"  width="13%" filterBy="#{medicamentos.idMedicamento.formaMedicamento}" filterMatchMode="contains">
+                <h:outputText value="#{medicamentos.idMedicamento.formaMedicamento}" />
+            </p:column>
+            <p:column headerText="CONCENTRACION" width="13%" filterBy="#{medicamentos.idMedicamento.concentracion}"  filterMatchMode="contains">
+                <h:outputText value="#{medicamentos.idMedicamento.concentracion}" />
+            </p:column>
+            <p:column headerText="VIA" width="13%" filterBy="#{medicamentos.idMedicamento.modAdmin}"  filterMatchMode="contains">
+                <h:outputText value="#{medicamentos.idMedicamento.modAdmin}" />
+            </p:column>
+            <p:column headerText="CANT. SOLICITADA"  filterBy="#{medicamentos.cantidad}"  filterMatchMode="contains">
+                <h:outputText value="#{medicamentos.cantidad}" />
+            </p:column>
+            <p:column headerText="FECHA PRESCRIPCION" width="13%" filterBy="#{medicamentos.fecha}"  filterMatchMode="contains">
+                <p:calendar size="10" value="#{medicamentos.fecha}"
+                            pattern="dd/MM/yyyy" /> 
+                <p:calendar size="7" value="#{medicamentos.hora}"
+                            pattern="HH:mm:ss" />  
+            </p:column>
+            <p:column headerText="DOSIS" filterBy="#{medicamentos.dosis}" filterMatchMode="contains">
+                <h:outputText value="#{medicamentos.dosis}" >
+                </h:outputText>
+            </p:column>
+            <p:column headerText="CANT. SUMINISTRADA"  filterBy="#{medicamentos.cantidadSuministrada}"  filterMatchMode="contains">
+                <h:outputText value="#{medicamentos.cantidadSuministrada}" />
+            </p:column>
+            <p:column headerText="CADA " width="10%"  filterBy="#{medicamentos.indicacionesMedicamentos.description}"  filterMatchMode="contains">
+                <h:outputText value="#{medicamentos.indicacionesMedicamentos.description}" />
+            </p:column>
+            <p:column headerText="OBSERVACION" width="15%" filterBy="#{medicamentos.observacion}"  filterMatchMode="contains">
+                <p:inputTextarea  value=" #{medicamentos.observacion}" readonly="true" style="width: 100%"  autoResize="true"/>
+            </p:column>
+            <p:column  headerText="OPERACIONES" width="10%" >
+                <p:commandButton title="Agregar suministro"  process="@this"
+                                 rendered="#{consultaMB.urgTriage.idAdmision.estado ne 'ADMISION_PACIENTE_ENVIADO_DADO_ALTA'}"
+                                 actionListener="#{consultaMB.cargarDialogoSuministroMedicamento(medicamentos)}" 
+                                 icon="ui-icon-gear">
+                </p:commandButton>
+            </p:column>
+            <p:rowExpansion>
+                <p:dataTable id="tableControlMedicamento" 
+                             value="#{medicamentos.urgControlPrescripcionMedicamentoList}"
+                             rows="5" emptyMessage="no existen registros" var="profesional">
+                    <f:facet name="header">
+                        CONTROL Y SUMINISTRO DE MEDICAMENTOS 
+                    </f:facet>
+                    <p:column headerText="QUIEN SUMINISTRA EL MEDICAMENTO">
+                        <p:outputLabel value="#{profesional.idPrestador.primerNombre} #{profesional.idPrestador.primerApellido}"  >
+                        </p:outputLabel>
+                    </p:column>
+                    <p:column headerText="FECHA">
+                        <p:calendar size="10" value="#{profesional.fecha}"
+                                    pattern="dd/MM/yyyy" /> 
+                        <p:calendar size="7" value="#{profesional.hora}"
+                                    pattern="HH:mm:ss" />  
+                    </p:column>
+                    <p:column headerText="CANTIDAD SUMINISTRADA">
+                        <p:outputLabel value="#{profesional.cantidadSuministrada}"  >
+                        </p:outputLabel>
+                    </p:column>
+                    <p:column headerText="OBSERVACION">
+                        <p:outputLabel value="#{profesional.observacion}"  >
+                        </p:outputLabel>
+                    </p:column>
+                </p:dataTable>
+            </p:rowExpansion>
+        </p:dataTable>
+    </body>
+    <p:dialog id="IdDialogoSuministroMedicamento" header="AGREGAR SUMINISTRO MEDICAMENTO" widgetVar="IdDialogoSuministroMedicamento" 
+              resizable="false" modal="true">  
+        <p:panelGrid id="IdPanelAgregarSuministroMedicamento" styleClass="panelGridSinBordes" columns="2">
+            <p:outputLabel styleClass="campoObligatorio" value="PROFESIONAL:" />
+            <p:outputLabel styleClass="campoFormulario" value="#{loginMB.usuarioActual.primerNombre} #{loginMB.usuarioActual.primerApellido}" />
+            <p:outputLabel value="CANTIDAD:" styleClass="campoObligatorio"/>
+            <p:spinner id="cantidad" min="0" value="#{consultaMB.urgControlPrescripcionMedicamento.cantidadSuministrada}"  />
+            <p:outputLabel value="OBSERVACION:" styleClass="campoObligatorio"/>
+            <p:inputTextarea styleClass="labelFormulario" placeholder="Ingrese una observación" rows="3"
+                             maxlength="1000"    value="#{consultaMB.urgControlPrescripcionMedicamento.observacion}" style="width: 300px"/>
+            <p:commandButton 
+                value="Agregar"                         
+                actionListener="#{consultaMB.agregarSuministroMedicamentoPaciente()}" update=":formConsulta:IdTabView:tableControlPrespcionMedicamentos :formConsulta:msgbTriage"/>
+        </p:panelGrid>
+    </p:dialog>
+</html>

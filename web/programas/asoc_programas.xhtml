@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <script src="../recursos/js/calendario.js"/>
+        <link href="../recursos/css/estilos.css" rel="stylesheet"/>
+        <link href="../recursos/css/metro-bootstrap.css" rel="stylesheet"/>
+        <link href="../recursos/css/iconFont.css" rel="stylesheet"/>         
+    </h:head>
+    <h:body> 
+        #{pyp_programas.crearlistaProgramas()}
+        #{pyp_programas.crearlistaAdministradoras()}
+        <p:growl autoUpdate="true" showDetail="true"/> 
+        <br/>        
+        #{facturarAdministradoraMB.recargarDatosFacturacion()}
+        <h:form id="formPrograma_asoc">
+            <p:fieldset legend="Buscar Programa">
+                <table>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" value="Administradora:"/>
+                        </td>
+                        <td >                             
+                            <p:selectOneMenu styleClass="campoFormulario" value="#{pyp_programas.id_administradora}" style="width: 550px;" filter="true" filterMatchMode="contains">                            
+                                <f:ajax event="change" listener="#{pyp_programas.cambiaAdministradora_programa}"/>
+                                <f:selectItem itemLabel=""/>
+                                <f:selectItems value="#{pyp_programas.listaAdministradoras}" var="administradora"/>
+                            </p:selectOneMenu>                        
+                        </td>                        
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" value="Contrato:"/>
+                        </td>
+                        <td>
+                            <p:selectOneMenu id="IdListaContratos" styleClass="campoFormulario" value="#{pyp_programas.id_contrato}" style="width: 340px;" filter="true" filterMatchMode="contains">
+                                <f:selectItems value="#{pyp_programas.listaContratos}" var="contrato" itemValue="#{contrato.idContrato}" itemLabel="#{contrato.descripcion}"/>
+                            </p:selectOneMenu>                                                                    
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" value="Programa:"/>
+                        </td>
+                        <td>
+                            <p:selectOneMenu styleClass="campoFormulario" 
+                                             id="selectservicio" 
+                                             value="#{pyp_programas.id_programa}" 
+                                             style="width: 250px;"  filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="..." itemValue="#{pyp_programas.id_programa}" noSelectionOption="true" />
+                                <f:selectItems value="#{pyp_programas.listaprograma}"  /> 
+                            </p:selectOneMenu>
+                        </td> 
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" value="Meta:"/>
+                        </td>
+                        <td>
+                            <p:inputText  styleClass="campoFormulario"  id="meta" size="20" value="#{pyp_programas.meta}" >
+                            </p:inputText> 
+                            <p:watermark for="meta" value="%"/>                                                                   
+                        </td>
+                    </tr>
+                </table>
+                <br/><br/>
+                <p:commandButton id="asociarPrograma" value="Asociar Programa" action="#{pyp_programas.asociar_programa}" update="formPrograma_asoc"/>
+            </p:fieldset> 
+        </h:form>
+    </h:body>
+</html>

@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="s_consentimientoinformadoplanificacionfamiliar" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="62380da5-dbf4-4617-9ca2-93e940089aa4">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="dato600" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato600]]></fieldDescription>
+	</field>
+	<field name="dato601" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato601]]></fieldDescription>
+	</field>
+	<field name="dato602" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato602]]></fieldDescription>
+	</field>
+	<field name="dato626" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato626]]></fieldDescription>
+	</field>
+	<field name="dato628" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato628]]></fieldDescription>
+	</field>
+	<field name="dato630" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato630]]></fieldDescription>
+	</field>
+	<field name="dato632" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato632]]></fieldDescription>
+	</field>
+	<field name="dato635" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato635]]></fieldDescription>
+	</field>
+	<field name="dato680" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato680]]></fieldDescription>
+	</field>
+	<field name="dato686" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato686]]></fieldDescription>
+	</field>
+	<field name="dato689" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato689]]></fieldDescription>
+	</field>
+	<field name="dato699" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato699]]></fieldDescription>
+	</field>
+	<field name="dato700" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato700]]></fieldDescription>
+	</field>
+	<field name="dato701" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato701]]></fieldDescription>
+	</field>
+	<field name="dato702" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato702]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="77" splitType="Stretch">
+			<frame>
+				<reportElement uuid="8c3c6500-b0ac-4237-ab34-fe5e78823fd1" positionType="Float" x="0" y="0" width="572" height="77"/>
+				<rectangle radius="3">
+					<reportElement uuid="3dc8551e-a7ac-4d75-b1d2-d35c2605e1b1" positionType="Float" x="0" y="0" width="572" height="75"/>
+				</rectangle>
+				<image scaleImage="FillFrame" onErrorType="Blank">
+					<reportElement uuid="9c3bbc6e-8311-410d-a87e-f822b43f3dd0" positionType="Float" x="2" y="3" width="88" height="72"/>
+					<imageExpression><![CDATA[$F{dato680}]]></imageExpression>
+				</image>
+				<frame>
+					<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="434" y="22" width="138" height="12"/>
+					<textField isStretchWithOverflow="true">
+						<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="1" y="0" width="136" height="12"/>
+						<textElement markup="html">
+							<font fontName="SansSerif" size="9"/>
+							<paragraph leftIndent="5"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{dato600}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="91" y="11" width="344" height="13"/>
+					<textField isStretchWithOverflow="true">
+						<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="344" height="13"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+							<font fontName="SansSerif" size="10" isBold="true"/>
+							<paragraph leftIndent="5"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{dato699}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="91" y="24" width="344" height="10"/>
+					<textField isStretchWithOverflow="true">
+						<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="344" height="10"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+							<font fontName="SansSerif" size="7" isBold="false"/>
+							<paragraph leftIndent="5"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{dato700}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="91" y="34" width="344" height="13"/>
+					<textField isStretchWithOverflow="true">
+						<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="344" height="13"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+							<font fontName="SansSerif" size="10" isBold="true"/>
+							<paragraph leftIndent="5"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{dato701}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="91" y="47" width="344" height="10"/>
+					<textField isStretchWithOverflow="true">
+						<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="344" height="10"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+							<font fontName="SansSerif" size="7" isBold="false"/>
+							<paragraph leftIndent="5"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{dato702}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="13fde49d-7849-49c0-b75d-76e69d3cc57a" positionType="Float" stretchType="RelativeToTallestObject" x="435" y="34" width="136" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato602}]]></textFieldExpression>
+				</textField>
+				<frame>
+					<reportElement uuid="4ae4e292-3b14-4d61-88a9-38eeac9f510d" positionType="Float" x="434" y="45" width="136" height="12"/>
+					<textField>
+						<reportElement uuid="068129ed-d829-4725-8f9c-be76b588040d" x="29" y="0" width="13" height="12"/>
+						<textElement textAlignment="Center">
+							<font size="9"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement uuid="d9152ce0-d426-48f4-af7f-3f5ce9ff6f85" x="1" y="0" width="34" height="12"/>
+						<textElement>
+							<font size="9" isBold="false"/>
+							<paragraph leftIndent="5"/>
+						</textElement>
+						<text><![CDATA[PAG.]]></text>
+					</staticText>
+					<staticText>
+						<reportElement uuid="58148155-ad5d-4fdf-a185-83370a201d15" x="40" y="0" width="20" height="12"/>
+						<textElement>
+							<font size="9" isBold="false"/>
+							<paragraph leftIndent="5"/>
+						</textElement>
+						<text><![CDATA[DE]]></text>
+					</staticText>
+					<textField evaluationTime="Report" isBlankWhenNull="true">
+						<reportElement uuid="0dff0d20-739e-4f46-ac4d-8ddaedc1c513" x="59" y="0" width="13" height="12"/>
+						<textElement textAlignment="Center">
+							<font size="9"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="435" y="10" width="136" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato601}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="321" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="faf14165-e485-4341-90a0-429fd8508710" x="131" y="10" width="304" height="40"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[CONSENTIMIENTO INFORMADO PARA PLANIFICACIÓN FAMILIAR]]></text>
+			</staticText>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="56" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="26" height="12"/>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["YO,"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="26" y="0" width="323" height="12"/>
+					<box>
+						<bottomPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isUnderline="false"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato626}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="349" y="0" width="222" height="12"/>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["IDENTIFICADA CON LA CÉDULA DE CIUDADANÍA"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="68" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="26" height="12"/>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["NO."]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="26" y="0" width="219" height="12"/>
+					<box>
+						<bottomPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isUnderline="false"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato635}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="245" y="0" width="75" height="12"/>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["EXPEDIDA EN"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="321" y="0" width="251" height="12"/>
+					<box>
+						<bottomPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isUnderline="false"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="80" width="572" height="24" isPrintWhenDetailOverflows="true"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="572" height="24"/>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["CERTIFICO QUE HE LEÍDO (O SE ME HA LEÍDO) EL DOCUMENTO SOBRE EL CONSENTIMIENTO INFORMADO DE PLANIFICACIÓN FAMILIAR."]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="121" width="572" height="24" isPrintWhenDetailOverflows="true"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="572" height="24"/>
+					<textElement verticalAlignment="Top" markup="html">
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["TOMO LA DECISÓN LIBRE Y RESPONSABLE DE PLANIFICAR CON:"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="195" width="572" height="48" isPrintWhenDetailOverflows="true"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="572" height="48"/>
+					<textElement verticalAlignment="Top" markup="html">
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["ENTIENDO DE FORMA CLARA Y SEGURA TODOS LOS BENEFICIOS, INDICACIONES, CONTRAINDICACIONES, VENTAJAS Y LOS RIESGOS QUE TIENE ESTE MÉTODO DE PLANIFICACIÓN FAMILIAR. ADEMÁS ME COMPROMETO A ASISTIR PUNTUALMENTE A TODOS LOS CONTROLES QUE EL MÉDICO O LA ENFERMERA ME INFORMEN."]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="272" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<textField>
+					<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="363" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement markup="html">
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato626}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="363" y="0" width="97" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement markup="html">
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato628}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="460" y="0" width="112" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement markup="html">
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato630}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="284" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<textField>
+					<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement markup="html">
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato632}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<summary>
+		<band height="127" splitType="Stretch">
+			<frame>
+				<reportElement uuid="4c895a70-2257-4783-ae96-5ec6d69570cd" x="148" y="0" width="286" height="100"/>
+				<image scaleImage="FillFrame" onErrorType="Blank">
+					<reportElement uuid="9c3bbc6e-8311-410d-a87e-f822b43f3dd0" positionType="Float" x="41" y="4" width="204" height="82"/>
+					<imageExpression><![CDATA[$F{dato689}]]></imageExpression>
+				</image>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="86" width="280" height="12"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato686}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="115" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<textField>
+					<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="571" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="7" isBold="true" isItalic="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["CON AMOR Y PROFESIONALISMO PROTEGEMOS LA SALUD DE NUESTRA GENTE"]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</summary>
+</jasperReport>

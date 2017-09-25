@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <body>
+        <p:accordionPanel id="idAcordion">
+            <p:tab title="Anamnesis" id="idTabAnamnesis">
+                <h:panelGrid  cellpadding="10">
+                    <table>  
+                        <tr>
+                            <td>
+                                <p:outputLabel styleClass="labelFormularioBold" value="SERVICIOS:"/>
+                                <p:selectOneMenu disabled="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idConsulta !=null}" converter="objectConverter" filter="true" filterMatchMode="contains" styleClass="campoFormulario" 
+                                                 id="selectipocita" 
+                                                 value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idServicio}" style="width: 450px;">
+                                    <f:selectItems  var="servicio" itemLabel="#{servicio.nombreServicio}" itemValue="#{servicio}" value="#{consultaMB.listaServicios}" /> 
+                                </p:selectOneMenu>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:outputLabel styleClass="labelFormularioBold" value="MOTIVO CONSULTA:"/>
+                            </td>
+                            <tr>
+                                <td>
+                                    <p:inputTextarea  disabled="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idConsulta !=null}" maxlength="1000" style="width: 600px" rows="4" styleClass="campoObligatorio" 
+                                                      value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.motivo}"  placeholder="Ingrese el motivo Consulta:">
+                                    </p:inputTextarea>
+                                </td>
+                            </tr>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:outputLabel styleClass="labelFormularioBold" value="ENFERMEDAD ACTUAL:"/>
+                            </td>
+                            <tr>
+                                <td>
+                                    <p:inputTextarea disabled="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idConsulta !=null}" maxlength="1000" style="width: 600px" rows="4" styleClass="campoObligatorio" 
+                                                     value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.enfermedadActual}"
+                                                     placeholder="Ingrese la enfermedad actual:"/>
+                                </td>
+                            </tr>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:outputLabel rendered="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idConsulta !=null}"  styleClass="labelFormularioBold"
+                                               value="CONSULTA REGISTRADA POR:"></p:outputLabel>
+                            </td>
+                            <td>
+
+                                <p:outputLabel  rendered="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idConsulta !=null}" 
+                                                styleClass="labelFormulario" value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idPrestador.primerNombre}
+                                                #{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idPrestador.primerApellido}"/>           
+                            </td>
+                        </tr>
+                    </table>
+                </h:panelGrid>
+                <p:commandButton 
+                    value="Guardar" 
+                    id="idGuardar" rendered="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idConsulta ==null or consultaMB.urgTriage.idUrgConsultaPacienteUrgencia eq null}" 
+                    actionListener="#{consultaMB.guardarConsulta()}" update=":formConsulta:IdTabView:idAcordion" />
+                <p:commandButton value="Cancelar" actionListener="#{consultaMB.cancelarAnamnesis()}" rendered="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idConsulta ==null}" 
+                                 update=":formConsulta:IdTabView:idAcordion:idTabAnamnesis"/>
+            </p:tab>
+            <p:tab id="idExamen" title="REGISTRO DE EXAMEN FISICO" rendered="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idConsulta !=null}">
+                <table>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" value="REVISION:"  />
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:inputTextarea styleClass="labelFormulario" placeholder="Ingrese los detalle de la revisión" rows="3"
+                                             maxlength="1000" disabled="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.idDetalleConsulta !=null}"  value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.revision}" style="width: 900px" id="idMotivo"/>
+                        </td>
+                    </tr>
+                </table>
+                <p:fieldset id="idfieldsetSignosVitalesTriage" legend="SIGNOS VITALES"  >
+                    <table>
+                        <tr>
+                            <td>
+                                <p:outputLabel styleClass="labelFormularioBold" value="Peso:" ></p:outputLabel>
+                                <p:inputText maxlength="5" onblur="#{consultaMB.determinarimc()}" id="idpeso" styleClass="campoFormulario" style="width: 45px" value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.peso}" >
+                                    <pe:keyFilter regEx="/[\d\.]/"/>
+                                    <p:ajax  update=":formConsulta:IdTabView:idAcordion:idfieldsetSignosVitalesTriage"></p:ajax>
+                                </p:inputText>
+                                <p:outputLabel styleClass="labelFormularioBold" value="kg." />
+                                <p:outputLabel styleClass="labelFormularioBold" value="Talla:" />
+                                <p:inputText maxlength="3" onblur="#{consultaMB.determinarimc()}" styleClass="campoFormulario" id="idtalla" style="width: 45px"  value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.talla}" >
+                                    <pe:keyFilter regEx="/[\d\-]/"/>
+                                    <p:ajax  update=":formConsulta:IdTabView:idAcordion:idfieldsetSignosVitalesTriage"></p:ajax>
+                                </p:inputText>
+                                <p:outputLabel styleClass="labelFormularioBold" value="cm." />
+                                <p:outputLabel styleClass="labelFormularioBold" value="MC:"/>
+                                <p:inputText readonly="true" maxlength="4" styleClass="campoFormulario" id="idmc" style="width: 45px" value="#{consultaMB.imc}" />
+                                <p:outputLabel styleClass="labelFormularioBold" value="kg/m2" />
+                                <p:outputLabel styleClass="labelFormularioBold" value="FC:" ></p:outputLabel>
+                                <p:inputText maxlength="3" styleClass="campoFormulario" id="idfc" style="width: 45px" value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.frecuenciaCardiaca}" >
+                                    <pe:keyFilter regEx="/[\d\-]/"/>
+                                </p:inputText>
+                                <p:outputLabel styleClass="labelFormularioBold" value="Min. FR:"/>
+                                <p:inputText maxlength="3" styleClass="campoFormulario" id="idfr" style="width: 45px" value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.frecuencia_respiratoria}">
+                                    <pe:keyFilter regEx="/[\d\-]/"/>
+                                </p:inputText>
+                                <p:outputLabel styleClass="labelFormularioBold" value="PA:" />
+                                <p:inputText maxlength="3" styleClass="campoFormulario" id="idpammin" style="width: 45px"  value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.presionArteriaMinima}" 
+                                             >
+                                    <pe:keyFilter regEx="/[\d\-]/"/>
+                                </p:inputText>
+                                <p:outputLabel styleClass="labelFormularioBold" value="/" />
+                                <p:inputText maxlength="3" styleClass="campoFormulario" id="idpamax" style="width: 45px" value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.presionArteriaMaxima}">
+                                    <pe:keyFilter regEx="/[\d\-]/"/>
+                                </p:inputText>
+                                <p:outputLabel styleClass="labelFormularioBold" id="idtemperatura" value="Temp." />
+                                <p:inputText maxlength="2" styleClass="campoFormulario" value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.temperatura}" style="width: 45px" >
+                                    <pe:keyFilter regEx="/[\d\.]/"/>
+                                </p:inputText>
+                                <p:outputLabel styleClass="labelFormularioBold" value="°C" />
+                                <p:outputLabel styleClass="labelFormularioBold" id="idpsaturacion" value="Saturación:"/>
+                                <p:inputText maxlength="3" styleClass="campoFormulario" value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.saturacion}" style="width: 45px" >
+                                    <pe:keyFilter regEx="/[\d\-]/"/>
+                                </p:inputText>
+                                <p:outputLabel styleClass="labelFormularioBold"  value="%" />
+                            </td>
+                        </tr>
+                    </table>
+                </p:fieldset>
+                <table>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" value="HALLAZGOS ESTADO GENERAL:"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:inputTextarea styleClass="labelFormulario" placeholder="Ingrese los hallazgos" rows="3"
+                                             maxlength="1000"    value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.hallazgosClinico}" style="width: 900px"></p:inputTextarea>
+                        </td>
+                    </tr>
+                </table>
+                <p:panelGrid id="detalleHallazgos" columns="3" styleClass="pnlGridNoBorder" >
+                    <p:outputLabel styleClass="labelFormularioBold" value="CABEZA:"  />
+                    <p:selectOneMenu filter="true" filterMatchMode="contains" styleClass="campoFormulario" style="width: 80px;" 
+                                     value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.estadoCabeza}">                                    
+                        <f:selectItems value="#{consultaMB.estadoFisicoPaciente}" 
+                                       var="estado" itemLabel="#{estado.description}" itemValue="#{estado}" />
+                    </p:selectOneMenu> 
+
+                    <p:inputTextarea styleClass="labelFormulario" placeholder="Ingrese la encontrada observación" rows="3"
+                                     maxlength="1000"  value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.cabeza}" style="width: 700px"></p:inputTextarea>
+
+                    <p:outputLabel styleClass="labelFormularioBold" value="CUELLO:"  />
+                    <p:selectOneMenu filter="true" filterMatchMode="contains" styleClass="campoFormulario" style="width: 80px;" 
+                                     value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.estadoCuello}">                                    
+                        <f:selectItems value="#{consultaMB.estadoFisicoPaciente}" 
+                                       var="estado" itemLabel="#{estado.description}" itemValue="#{estado}" />
+                    </p:selectOneMenu> 
+                    <p:inputTextarea styleClass="labelFormulario" placeholder="Ingrese la encontrada observación" rows="3"
+                                     maxlength="1000"    value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.cuello}" style="width: 700px"></p:inputTextarea>
+
+                    <p:outputLabel styleClass="labelFormularioBold" value="TORAX:"  />
+                    <p:selectOneMenu filter="true" filterMatchMode="contains" styleClass="campoFormulario" style="width: 80px;" 
+                                     value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.estadoTorax}">                                    
+                        <f:selectItems value="#{consultaMB.estadoFisicoPaciente}" 
+                                       var="estado" itemLabel="#{estado.description}" itemValue="#{estado}" />
+                    </p:selectOneMenu> 
+                    <p:inputTextarea styleClass="labelFormulario" placeholder="Ingrese la encontrada observación" rows="3"
+                                     maxlength="1000"     value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.torax}" style="width: 700px"></p:inputTextarea>
+
+                    <p:outputLabel styleClass="labelFormularioBold" value="ABDOMEN:"  />
+                    <p:selectOneMenu filter="true" filterMatchMode="contains" styleClass="campoFormulario" style="width: 80px;" 
+                                     value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.estadoAbdomen}">                                    
+                        <f:selectItems value="#{consultaMB.estadoFisicoPaciente}" 
+                                       var="estado" itemLabel="#{estado.description}" itemValue="#{estado}" />
+                    </p:selectOneMenu> 
+                    <p:inputTextarea styleClass="labelFormulario" placeholder="Ingrese la encontrada observación" rows="3"
+                                     maxlength="1000"   value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.abdomen}" style="width: 700px"></p:inputTextarea>
+
+                    <p:outputLabel styleClass="labelFormularioBold" value="G/U:"  />
+                    <p:selectOneMenu filter="true" filterMatchMode="contains" styleClass="campoFormulario" style="width: 80px;" 
+                                     value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.estadoGu}">                                    
+                        <f:selectItems value="#{consultaMB.estadoFisicoPaciente}" 
+                                       var="estado" itemLabel="#{estado.description}" itemValue="#{estado}" />
+                    </p:selectOneMenu> 
+
+                    <p:inputTextarea styleClass="labelFormulario" placeholder="Ingrese la encontrada observación" rows="3"
+                                     maxlength="1000"   value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.gu}" style="width: 700px"></p:inputTextarea>
+
+                    <p:outputLabel styleClass="labelFormularioBold" value="EXTREMIDADES:"  />
+                    <p:selectOneMenu filter="true" filterMatchMode="contains" styleClass="campoFormulario" style="width: 80px;" 
+                                     value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.estadoExtremidades}">                                    
+                        <f:selectItems value="#{consultaMB.estadoFisicoPaciente}" 
+                                       var="estado" itemLabel="#{estado.description}" itemValue="#{estado}" />
+                    </p:selectOneMenu> 
+
+                    <p:inputTextarea styleClass="labelFormulario" placeholder="Ingrese la encontrada observación" rows="3"
+                                     maxlength="1000"   value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.extremidades}" style="width: 700px"></p:inputTextarea>
+
+                    <p:outputLabel styleClass="labelFormularioBold" value="NEUROLOGICO"  />
+                    <p:selectOneMenu filter="true" filterMatchMode="contains" styleClass="campoFormulario" style="width: 80px;" 
+                                     value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.estadoNeurologico}">                                    
+                        <f:selectItems value="#{consultaMB.estadoFisicoPaciente}" 
+                                       var="estado" itemLabel="#{estado.description}" itemValue="#{estado}" />
+                    </p:selectOneMenu> 
+
+                    <p:inputTextarea styleClass="labelFormulario" placeholder="Ingrese la encontrada observación" rows="3"
+                                     maxlength="1000"    value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.neurologico}" style="width: 700px"></p:inputTextarea>
+
+                    <p:outputLabel styleClass="labelFormularioBold" value="NARIZ:"  />
+                    <p:selectOneMenu filter="true" filterMatchMode="contains" styleClass="campoFormulario" style="width: 80px;" 
+                                     value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.estadoNariz}">                                    
+                        <f:selectItems value="#{consultaMB.estadoFisicoPaciente}" 
+                                       var="estado" itemLabel="#{estado.description}" itemValue="#{estado}" />
+                    </p:selectOneMenu> 
+
+                    <p:inputTextarea styleClass="labelFormulario" placeholder="Ingrese la encontrada observación" rows="3"
+                                     maxlength="1000"   value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.nariz}" style="width: 700px"></p:inputTextarea>
+
+                    <p:outputLabel styleClass="labelFormularioBold" value="OIDOS:"  />
+                    <p:selectOneMenu filter="true" filterMatchMode="contains" styleClass="campoFormulario" style="width: 80px;" 
+                                     value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.estadoOidos}">                                    
+                        <f:selectItems value="#{consultaMB.estadoFisicoPaciente}" 
+                                       var="estado" itemLabel="#{estado.description}" itemValue="#{estado}" />
+                    </p:selectOneMenu> 
+
+                    <p:inputTextarea styleClass="labelFormulario" placeholder="Ingrese la encontrada observación" rows="3"
+                                     maxlength="1000"   value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.oidos}" style="width: 700px"></p:inputTextarea>
+
+                    <p:outputLabel styleClass="labelFormularioBold" value="OJOS:"  />
+                    <p:selectOneMenu filter="true" filterMatchMode="contains" styleClass="campoFormulario" style="width: 80px;" 
+                                     value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.estadoOjos}">                                    
+                        <f:selectItems value="#{consultaMB.estadoFisicoPaciente}" 
+                                       var="estado" itemLabel="#{estado.description}" itemValue="#{estado}" />
+                    </p:selectOneMenu> 
+
+                    <p:inputTextarea styleClass="labelFormulario" placeholder="Ingrese la encontrada observación" rows="3"
+                                     maxlength="1000"   value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.ojos}" style="width: 700px"></p:inputTextarea>
+
+                    <p:outputLabel styleClass="labelFormularioBold" value="BOCA:"  />
+                    <p:selectOneMenu filter="true" filterMatchMode="contains" styleClass="campoFormulario" style="width: 80px;" 
+                                     value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.estadoBoca}">                                    
+                        <f:selectItems value="#{consultaMB.estadoFisicoPaciente}" 
+                                       var="estado" itemLabel="#{estado.description}" itemValue="#{estado}" />
+                    </p:selectOneMenu> 
+
+                    <p:inputTextarea styleClass="labelFormulario" placeholder="Ingrese la encontrada observación" rows="3"
+                                     maxlength="1000"   value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.boca}" style="width: 700px"></p:inputTextarea>
+
+                    <p:outputLabel styleClass="labelFormularioBold" value="PIEL:"  />
+                    <p:selectOneMenu filter="true" filterMatchMode="contains" styleClass="campoFormulario" style="width: 80px;" 
+                                     value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.estadoPiel}">                                    
+                        <f:selectItems value="#{consultaMB.estadoFisicoPaciente}" 
+                                       var="estado" itemLabel="#{estado.description}" itemValue="#{estado}" />
+                    </p:selectOneMenu> 
+
+                    <p:inputTextarea styleClass="labelFormulario" placeholder="Ingrese la encontrada observación" rows="3"
+                                     maxlength="1000"    value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.piel}" style="width: 700px"></p:inputTextarea>
+
+                    <p:outputLabel styleClass="labelFormularioBold" value="ANO:"  />
+                    <p:selectOneMenu filter="true" filterMatchMode="contains" styleClass="campoFormulario" style="width: 80px;" 
+                                     value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.estadoAno}">                                    
+                        <f:selectItems value="#{consultaMB.estadoFisicoPaciente}" 
+                                       var="estado" itemLabel="#{estado.description}" itemValue="#{estado}" />
+                    </p:selectOneMenu> 
+
+                    <p:inputTextarea styleClass="labelFormulario" placeholder="Ingrese la encontrada observación" rows="3"
+                                     maxlength="1000"    value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.ano}" style="width: 700px"></p:inputTextarea>
+
+                    <p:outputLabel styleClass="labelFormularioBold" value="OSTEOMUSCULAR:"  />
+                    <p:selectOneMenu filter="true" filterMatchMode="contains" styleClass="campoFormulario" style="width: 80px;" 
+                                     value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.estadoOsteomuscular}">                                    
+                        <f:selectItems value="#{consultaMB.estadoFisicoPaciente}" 
+                                       var="estado" itemLabel="#{estado.description}" itemValue="#{estado}" />
+                    </p:selectOneMenu> 
+                    <p:inputTextarea styleClass="labelFormulario" placeholder="Ingrese la encontrada observación" rows="3"
+                                     maxlength="1000"   value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.osteomuscular}" style="width: 700px"></p:inputTextarea>
+
+                </p:panelGrid>
+                <br></br>
+                <p:commandButton 
+                    value="Guardar" 
+                    id="idGuardarExamenFisico" rendered="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.idDetalleConsulta ==null or consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta eq null}" 
+                    actionListener="#{consultaMB.guardarExamenFisico()}" update=":formConsulta:IdTabView" />
+                <p:commandButton value="Cancelar" 
+                                 rendered="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta  ==null or consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.idDetalleConsulta ==null}"
+                                 actionListener="#{consultaMB.cancelarExamenFisico()}" update=":formConsulta:IdTabView:idAcordion:idExamen"/>
+
+            </p:tab>
+            <p:tab title="DIAGNOSTICO" id="idDiagnostico" rendered="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.idDetalleConsulta !=null}">
+                <table>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" value="DIAGNOSTICO:"  />
+                            <p:autoComplete   size="125" value="#{consultaMB.diagnostico}" 
+                                              completeMethod="#{consultaMB.autocompletarDiagnostico}"
+                                              forceSelection="true">
+                                <p:ajax event="itemSelect" listener="#{consultaMB.capturarDiagnostico}"/>
+                            </p:autoComplete> 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" value="OBSERVACIÓN:"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:inputTextarea styleClass="labelFormulario" placeholder="Ingrese la encontrada observación" rows="3"
+                                             maxlength="1000"   value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.observacion}" style="width: 900px"/>
+                        </td>
+                    </tr>
+                </table>
+                <p:commandButton 
+                    value="Guardar" 
+                    rendered="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.idCfgDiagnostico ==null or consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.idCfgDiagnostico eq null}" 
+                    actionListener="#{consultaMB.guardarDiagnostico()}" update=":formConsulta:IdTabView:idAcordion" />
+                <p:commandButton value="Cancelar" actionListener="#{consultaMB.cancelarDiagnostico()}" rendered="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.idCfgDiagnostico  ==null}" 
+                                 update=":formConsulta:IdTabView:idAcordion:idDiagnostico"/>
+            </p:tab>
+            <p:tab title="PLAN  DE MANEJO Y RECOMENDACIONES"  id="idPlanyManejo" rendered="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.idCfgDiagnostico !=null}">
+                <table>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" value="DESTINO PACIENTE:"  />
+                            <p:selectOneMenu styleClass="campoFormulario" style="width: 100px;"
+                                             value="#{consultaMB.destinoPaciente}">                                                    
+                                <f:selectItems value="#{aplicacionGeneralMB.listaAmbito}" />
+                              <!--  <p:ajax   listener="#{consultaMB.asignarCamaUrgencia()}" />-->
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" value="RECOMENDACIONES:"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:inputTextarea styleClass="labelFormulario" placeholder="Ingrese las recomendaciones" rows="3"
+                                             maxlength="1000"   value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.recomendacion}" style="width: 900px"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel rendered="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.atendida eq true}"  styleClass="labelFormularioBold"
+                                           value="REGISTRO REALIZADO POR:"></p:outputLabel>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+
+                            <p:outputLabel  rendered="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.atendida eq true}" 
+                                            styleClass="labelFormulario" value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.idRegistroAuditoriaProfesional.primerNombre}
+                                            #{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.idRegistroAuditoriaProfesional.primerApellido}"/>           
+                        </td>
+                    </tr>
+                </table>
+                <p:commandButton 
+                    value="Guardar" 
+                    rendered="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.atendida eq false}" 
+                    actionListener="#{consultaMB.guardarPlanYManejo()}" update=":formConsulta" />
+                <p:commandButton value="Cancelar" rendered="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.atendida eq false}" 
+                                 actionListener="#{consultaMB.cancelarPlanyManejo()}" update=":formConsulta:IdTabView:idAcordion:idPlanyManejo"/>
+            </p:tab>
+        </p:accordionPanel>        
+    </body>
+    <p:dialog header="CAMA ASIGNADA AL PACIENTE"  id="dialogoAsignarCama"  closable="true" 
+              style="text-align: center" widgetVar="dialogoAsignarCama"
+              modal="true" resizable="false" width="500px" height="180px"
+              showEffect="fade" hideEffect="fade" >
+        <p:panelGrid styleClass="panelGridSinBordes" columns="2">
+            <p:outputLabel styleClass="labelFormularioBold" value="HABITACION NUMERO"/>                    
+            <p:outputLabel style="color: red" styleClass="labelFormularioBold" value="#{consultaMB.camaDisponible.cfgHabitacion.numeroHabitacion}"/>
+            <p:outputLabel styleClass="labelFormularioBold" value="OBSERVACION"/>                    
+            <p:outputLabel style="color: red" styleClass="labelFormularioBold" value="#{consultaMB.camaDisponible.cfgHabitacion.observacion}"/>                    
+            <p:outputLabel styleClass="labelFormularioBold" value="NUMERO DE CAMA"/>                    
+            <p:outputLabel style="color: red" styleClass="labelFormularioBold" value="#{consultaMB.camaDisponible.numeroCama}"/> 
+        </p:panelGrid>
+    </p:dialog> 
+    <p:dialog header="CAMA NO DISPONIBLES"  id="dialogoNoDisponible"  closable="false" 
+              style="text-align: center" widgetVar="dialogoNoDisponible"
+              modal="true" resizable="false" width="400px" height="180px"
+              showEffect="fade" hideEffect="fade" >
+        <p:panelGrid styleClass="panelGridSinBordes" columns="2">
+            <p:row>
+                <p:column colspan="2"> 
+                    <p:outputLabel style="color: red" styleClass="labelFormularioBold" value="ADVERTENCIA NO HAY DISPONIBILIDAD DE CAMAS PARA DEJAR EL PACIENTE EN OBSERVACION DE URGENCIA, TOME SUS PROVISIONES"/> 
+                </p:column>
+            </p:row>
+            <p:row>
+                <p:column colspan="2"> 
+                    <p:outputLabel styleClass="labelFormularioBold" value="¿DESEA CONTINUAR?"/>  
+                </p:column> 
+            </p:row>
+            <p:row>
+                <p:commandButton value="Si" actionListener="#{consultaMB.guardarPlanManejoSinCamaDisponible()}" 
+                                 update=":formConsulta:IdTabView:idAcordion:idPlanyManejo"></p:commandButton>
+                <p:commandButton value="No" onclick="PF('dialogoNoDisponible').hide();"  ></p:commandButton>
+            </p:row>
+        </p:panelGrid>
+    </p:dialog> 
+</html>

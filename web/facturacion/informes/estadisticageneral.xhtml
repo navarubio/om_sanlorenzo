@@ -1,0 +1,184 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">  
+    <h:head>        
+        <title>Estadistica General</title>
+        <link href="../../recursos/css/estilos.css" rel="stylesheet"/>        
+        <link href="../../recursos/css/metro-bootstrap.css" rel="stylesheet"/>
+        <link href="../../recursos/css/iconFont.css" rel="stylesheet"/>
+        <script type="text/javascript" src="../../recursos/js/calendario.js"></script>  
+    </h:head>
+    <h:body>
+        #{estadisticaGeneralMB.init()}
+        <h:form id="IdFormEstadisticaGeneral">              
+
+            <p:growl id="IdMensajePeriodos"  showDetail="true" sticky="false" autoUpdate="true" life="2000"  />                        
+            <p:tabView id="IdTabView" style=" width: 95%;  margin-left: 15px;" >                 
+                <p:tab title="Estadisticas generales">                    
+                    <p:panelGrid id="IdPanelEditarPeriodo" styleClass="panelGridSinBordes" columns="8" style="margin-right: auto;">                    
+                        <h:panelGroup>
+                            <p:outputLabel styleClass="campoObligatorio" value="Filtro" style="width: 120px;"/>                        
+                            <p:selectOneMenu styleClass="campoFormulario" style="width: 200px;"  value="#{estadisticaGeneralMB.filtroReporte}">
+                                <f:selectItem itemLabel="--Seleccione Filtro--" itemValue="0"/>
+                                <f:selectItems value="#{estadisticaGeneralMB.listaFiltro}" />
+                                <f:ajax listener="#{estadisticaGeneralMB.validarFiltro}" render="IdPanelFiltro" />
+                                <p:ajax update="IdTabView"/>
+                            </p:selectOneMenu>                     
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:panelGrid id="IdPanelFiltro" styleClass="panelGridSinBordes" columns="2" style="margin-right: auto;">                    
+                        <h:panelGroup rendered="#{estadisticaGeneralMB.renderFiltro1}">
+                            <p:outputLabel styleClass="campoObligatorio" value="Administradora" style="width: 120px;"/>                        
+                            <p:selectOneMenu styleClass="campoFormulario" style="width: 200px;"  value="#{estadisticaGeneralMB.administradora.idAdministradora}">
+                                <f:selectItem itemLabel="Todas" itemValue="0"/>
+                                <f:selectItems value="#{estadisticaGeneralMB.listaAdministradora}" var="ad" itemLabel="#{ad.razonSocial}" itemValue="#{ad.idAdministradora}"/>
+                                <f:ajax event="change" render="@this" />
+                                <p:ajax event="change" listener="#{estadisticaGeneralMB.cambiaAdministradora_programa}" update="IdListaContratos"/>
+                                <p:ajax update="IdTabView"/>
+                            </p:selectOneMenu> 
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{estadisticaGeneralMB.renderFiltro1}">
+                            <p:outputLabel styleClass="campoObligatorio" value="Contrato:"/>
+                            <p:selectOneMenu id="IdListaContratos" styleClass="campoFormulario" value="#{estadisticaGeneralMB.id_contrato}" style="width: 340px;" filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="Todos" itemValue="0"/>
+                                <f:selectItems value="#{estadisticaGeneralMB.listaContratos}" var="contrato" itemValue="#{contrato.idContrato}" itemLabel="#{contrato.descripcion}"/>
+                                <p:ajax update="IdTabView"/>
+                            </p:selectOneMenu>         
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{estadisticaGeneralMB.renderFiltro2}">
+                            <p:outputLabel styleClass="campoObligatorio" value="Tipo Identificación"  style="width: 120px;"/>                        
+                            <p:selectOneMenu styleClass="campoFormulario" style="width: 200px;"  value="#{estadisticaGeneralMB.paciente.tipoIdentificacion.id}" >
+                                <f:selectItem itemLabel="--Seleccione Tipo Identificación--" itemValue="0"/>
+                                <f:selectItems value="#{estadisticaGeneralMB.listaTipoIdentificacion}" var="ti" itemLabel="#{ti.observacion}" itemValue="#{ti.id}"/>
+                                <f:ajax event="change" render="@this" />
+                            </p:selectOneMenu>                     
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{estadisticaGeneralMB.renderFiltro2}">
+                            <p:outputLabel styleClass="campoObligatorio" value="Identificación"  style="width: 120px;"/>                        
+                            <p:inputText value="#{estadisticaGeneralMB.paciente.identificacion}"/>
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{estadisticaGeneralMB.renderFiltro3}">
+                            <p:outputLabel styleClass="campoObligatorio" value="Fecha Desde"  style="width: 120px;"/>                        
+                            <p:calendar style="width: 200px;" value="#{estadisticaGeneralMB.fechaInicial}" pattern="dd/MM/yyyy" locale="es"  navigator="true"/>
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{estadisticaGeneralMB.renderFiltro3}">
+                            <p:outputLabel styleClass="campoObligatorio" value="Fecha Hasta"  style="width: 120px;"/>                        
+                            <p:calendar value="#{estadisticaGeneralMB.fechaFinal}" pattern="dd/MM/yyyy" locale="es"  navigator="true"/>
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{estadisticaGeneralMB.renderFiltro4}">
+                            <p:outputLabel styleClass="campoObligatorio" value="Estado Factura"  style="width: 120px;"/>                        
+                            <p:selectOneMenu styleClass="campoFormulario" style="width: 200px;"  value="#{estadisticaGeneralMB.estadoFactura}" >
+                                <f:selectItem itemLabel="Todos" itemValue="0"/>
+                                <f:selectItem itemValue="1" itemLabel="Facturada" />
+                                <f:selectItem itemValue="2" itemLabel="Pendiente Facturación" />
+                                <f:selectItem itemValue="3" itemLabel="Anulada" />
+                            </p:selectOneMenu>                     
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{estadisticaGeneralMB.renderFiltro5}">
+                            <p:outputLabel styleClass="campoObligatorio" value="Estrato"  style="width: 120px;"/>                        
+                            <p:selectOneMenu styleClass="campoFormulario" style="width: 200px;"  value="#{estadisticaGeneralMB.estrato.id}" >
+                                <f:selectItem itemLabel="--Seleccione Estrato--" itemValue="0"/>
+                                <f:selectItems value="#{estadisticaGeneralMB.listaEstrato}" var="e" itemLabel="#{e.descripcion}" itemValue="#{e.id}"/>
+                            </p:selectOneMenu>                     
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{estadisticaGeneralMB.renderFiltro6}">
+                            <p:outputLabel styleClass="campoObligatorio" value="Médico"  style="width: 120px;"/>                        
+                            <p:selectOneMenu styleClass="campoFormulario" style="width: 200px;"  value="#{estadisticaGeneralMB.usuario.idUsuario}" >
+                                <f:selectItem itemLabel="Todos" itemValue="0"/>
+                                <f:selectItems value="#{estadisticaGeneralMB.listaUsuarios}" var="u" itemLabel="#{u.primerNombre} #{u.primerApellido}" itemValue="#{u.idUsuario}"/>
+                            </p:selectOneMenu>                     
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{estadisticaGeneralMB.renderFiltro7}">
+                            <p:outputLabel styleClass="campoObligatorio" value="Sede"  style="width: 120px;"/>     
+                            <p:selectOneMenu  value="#{estadisticaGeneralMB.centroDeAtencion}" id="IdSedes" style="width: 150px;" >
+                                <f:selectItem itemLabel="Todas" itemValue="0"/>
+                                <f:selectItems value="#{estadisticaGeneralMB.listaCentrosDeAtencion}" var="a" itemLabel="#{a.description}" itemValue="#{a.value}"/>
+                            </p:selectOneMenu>
+                        </h:panelGroup>
+                        <h:panelGroup>
+                            <p:commandButton 
+                                title       =   "Buscar" value="&nbsp;"                                        
+                                styleClass  =   "icon-search fg-lightBlue" 
+                                style       =   "height: 20px;"
+                                actionListener="#{estadisticaGeneralMB.consultar}"
+                                rendered="#{estadisticaGeneralMB.renderBuscar}"
+                                process="@this,IdPanelEditarPeriodo,IdPanelFiltro"
+                                update="opResultado,IdPanelFiltro"
+                                />  
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:outputPanel id="opResultado">
+                        <p:dataTable id="idDataResultado"
+                                     value="#{estadisticaGeneralMB.listaConsulta}"
+                                     rows="10"                               
+                                     rendered="#{estadisticaGeneralMB.renderResultado}"
+                                     var="res"
+                                     paginator="true"
+                                     paginatorPosition="bottom"                                
+                                     emptyMessage="No hay resultado "
+
+                                     >
+                            <p:column headerText="FACTURA">  
+                                #{res.factura}
+                            </p:column>   
+                            <p:column headerText="ADMINISTRADORA">  
+                                #{res.empresa}
+                            </p:column>   
+                            <p:column headerText="CONTRATO">  
+                                #{res.contrato}
+                            </p:column>                    
+                            <p:column headerText="SEDE">  
+                                #{res.sede}
+                            </p:column>                                                   
+                            <p:column headerText="TIPO IDENTIFICACION">  
+                                #{res.tipoIdentificacion}                         
+                            </p:column>                            
+                            <p:column headerText="IDENTIFICACION">  
+                                #{res.identificacion}                         
+                            </p:column>  
+                            <p:column headerText="PRIMER NOMBRE">  
+                                #{res.nombre1}
+                            </p:column>                            
+                            <p:column headerText="SEGUNDO NOMBRE">  
+                                #{res.nombre2}                         
+                            </p:column>                            
+                            <p:column headerText="PRIMER APELLIDO">  
+                                #{res.apellido1}                         
+                            </p:column>                           
+                            <p:column headerText="SEGUNDO APELLIDO">  
+                                #{res.apellido2}                         
+                            </p:column>                               
+                        </p:dataTable>
+                        <br/>
+                        <p:commandButton 
+                            title       =   "Exportar CSV" value="&nbsp; "                                        
+                            styleClass  =   "icon-file-excel fg-lightBlue" 
+                            style       =   "height: 30px;font-size: 24px;"
+                            rendered="#{estadisticaGeneralMB.renderResultado}"
+                            actionListener="#{estadisticaGeneralMB.exportarCSV}"
+                            process="@this"
+                            ajax="false" 
+                            />  
+                        <p:commandButton
+                        title="PDF Facturas Detalladas" value="&nbsp;"
+                        styleClass="icon-file-pdf fg-lightBlue" 
+                        ajax="false" 
+                        actionListener="#{estadisticaGeneralMB.generarDetalladasPDF}"
+                        style       =   "height: 30px;font-size: 24px;"
+                        rendered="#{estadisticaGeneralMB.renderDetalladas}"/>
+                        <p:commandButton
+                        title="PDF Facturas Consolidadas" value="&nbsp;"
+                        styleClass="icon-file-pdf fg-lightBlue" 
+                        ajax="false" 
+                        actionListener="#{estadisticaGeneralMB.generarConsolidadasPDF}"
+                        style       =   "height: 30px;font-size: 24px;"
+                        rendered="#{estadisticaGeneralMB.renderConsolidadas}"/>
+                    </p:outputPanel>
+                </p:tab>
+            </p:tabView>
+        </h:form>
+    </h:body>
+</html>

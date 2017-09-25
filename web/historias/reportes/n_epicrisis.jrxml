@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="n_epicrisis" language="groovy" pageWidth="612" pageHeight="792" columnWidth="592" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10" uuid="f2bfbc1a-ab25-479b-8ff3-6a8b541fa728">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\Documentos\\Independientes\\CSRosario\\Formato ESE Rosario\\Formatos\\iReport\\"]]></defaultValueExpression>
+	</parameter>
+	<field name="dato7" class="java.lang.String"/>
+	<field name="dato8" class="java.lang.String"/>
+	<field name="dato9" class="java.lang.String"/>
+	<field name="dato10" class="java.lang.String"/>
+	<field name="dato11" class="java.lang.String"/>
+	<field name="dato12" class="java.lang.String"/>
+	<field name="dato13" class="java.lang.String"/>
+	<field name="dato14" class="java.lang.String"/>
+	<field name="dato15" class="java.lang.String"/>
+	<field name="dato16" class="java.lang.String"/>
+	<field name="dato17" class="java.lang.String"/>
+	<field name="dato18" class="java.lang.String"/>
+	<field name="dato19" class="java.lang.String"/>
+	<field name="dato20" class="java.lang.String"/>
+	<field name="dato21" class="java.lang.String"/>
+	<field name="dato22" class="java.lang.String"/>
+	<field name="dato23" class="java.lang.String"/>
+	<field name="dato24" class="java.lang.String"/>
+	<field name="dato25" class="java.lang.String"/>
+	<field name="dato26" class="java.lang.String"/>
+	<field name="dato27" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<detail>
+		<band height="396" splitType="Stretch">
+			<textField>
+				<reportElement uuid="22ea573a-fbda-49f1-a1c1-9a1763ee123a" x="0" y="13" width="592" height="12"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato7}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="22ea573a-fbda-49f1-a1c1-9a1763ee123a" x="0" y="25" width="424" height="12"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato8}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="22ea573a-fbda-49f1-a1c1-9a1763ee123a" x="424" y="25" width="168" height="12"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato9}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="22ea573a-fbda-49f1-a1c1-9a1763ee123a" x="424" y="37" width="168" height="12"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato12}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="22ea573a-fbda-49f1-a1c1-9a1763ee123a" x="0" y="37" width="212" height="12"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato10}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="22ea573a-fbda-49f1-a1c1-9a1763ee123a" x="212" y="37" width="212" height="12"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato11}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="22ea573a-fbda-49f1-a1c1-9a1763ee123a" x="0" y="49" width="592" height="36"/>
+				<textElement verticalAlignment="Top" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato13}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="22ea573a-fbda-49f1-a1c1-9a1763ee123a" x="0" y="85" width="592" height="36"/>
+				<textElement verticalAlignment="Top" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato14}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="22ea573a-fbda-49f1-a1c1-9a1763ee123a" x="0" y="121" width="592" height="24"/>
+				<textElement verticalAlignment="Top" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato15}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="22ea573a-fbda-49f1-a1c1-9a1763ee123a" x="0" y="145" width="592" height="12"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato16}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="22ea573a-fbda-49f1-a1c1-9a1763ee123a" x="0" y="157" width="592" height="36"/>
+				<textElement verticalAlignment="Top" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato17}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="22ea573a-fbda-49f1-a1c1-9a1763ee123a" x="0" y="193" width="592" height="24"/>
+				<textElement verticalAlignment="Top" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato18}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="22ea573a-fbda-49f1-a1c1-9a1763ee123a" x="0" y="217" width="592" height="24"/>
+				<textElement verticalAlignment="Top" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato19}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="22ea573a-fbda-49f1-a1c1-9a1763ee123a" x="0" y="241" width="592" height="12"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato20}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="22ea573a-fbda-49f1-a1c1-9a1763ee123a" x="0" y="253" width="592" height="36"/>
+				<textElement verticalAlignment="Top" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato21}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="22ea573a-fbda-49f1-a1c1-9a1763ee123a" x="0" y="289" width="592" height="24"/>
+				<textElement verticalAlignment="Top" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato22}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="22ea573a-fbda-49f1-a1c1-9a1763ee123a" x="0" y="313" width="592" height="24"/>
+				<textElement verticalAlignment="Top" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato23}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="22ea573a-fbda-49f1-a1c1-9a1763ee123a" x="0" y="337" width="592" height="24"/>
+				<textElement verticalAlignment="Top" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato24}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="22ea573a-fbda-49f1-a1c1-9a1763ee123a" x="0" y="360" width="592" height="36"/>
+				<textElement verticalAlignment="Top" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato25}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="43" splitType="Stretch">
+			<textField>
+				<reportElement uuid="22ea573a-fbda-49f1-a1c1-9a1763ee123a" x="0" y="31" width="267" height="12"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato26}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="22ea573a-fbda-49f1-a1c1-9a1763ee123a" x="325" y="31" width="267" height="12"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato27}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

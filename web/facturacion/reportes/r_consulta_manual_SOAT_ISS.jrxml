@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="r_consulta_manual_SOAT_ISS" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7752ef0f-0cc6-4d64-9a6d-84d6a20f1a17">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="P_ID_MANUAL" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[select fs.codigo_cup,fs.nombre_servicio,fs.factor_iss,fu.smlvd,fu.uvr,
+	case when fc.tipo_manual=1 then ft.valor_final else round((fu.smlvd*(case when fc.tipo_manual=2 then fs.factor_iss else fs.factor_soat end ))+(case when fc.signo_porcentaje ='+' then  1  else -1 end * fc.porcentaje))  end
+ as servicio, fa.razon_social,fc.tipo_manual,fc.annio_manual,fc.descripcion as nombre_contrato,grupo.descripcion as grupo,fm.nombre_manual_tarifario
+
+from  fac_contrato fc
+inner join fac_manual_tarifario fm on fc.id_manual_tarifario = fm.id_manual_tarifario
+inner join fac_manual_tarifario_servicio ft on ft.id_manual_tarifario = fm.id_manual_tarifario
+inner join fac_servicio fs on fs.id_servicio = ft.id_Servicio
+left join fac_unidad_valor fu on fu.anio = fc.annio_manual
+inner join fac_administradora fa on fa.id_administradora = fc.id_administradora
+left join cfg_clasificaciones grupo on grupo.maestro='GrupoServicio' and grupo.id = fs.grupo_servicio
+where fc.id_manual_tarifario=$P{P_ID_MANUAL}]]>
+	</queryString>
+	<field name="codigo_cup" class="java.lang.String"/>
+	<field name="nombre_servicio" class="java.lang.String"/>
+	<field name="factor_iss" class="java.lang.Double"/>
+	<field name="smlvd" class="java.lang.Double"/>
+	<field name="uvr" class="java.lang.Double"/>
+	<field name="servicio" class="java.lang.Double"/>
+	<field name="razon_social" class="java.lang.String"/>
+	<field name="tipo_manual" class="java.lang.Integer"/>
+	<field name="annio_manual" class="java.lang.Integer"/>
+	<field name="nombre_contrato" class="java.lang.String"/>
+	<field name="grupo" class="java.lang.String"/>
+	<field name="nombre_manual_tarifario" class="java.lang.String"/>
+	<field name="factor_soat" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="63" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="572" height="63" uuid="1a0d6d94-33b1-4320-9560-d57ae0ca3baa"/>
+				<textElement textAlignment="Center" markup="html">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["INFORME DE MANUAL TARIFARIO "+$F{razon_social}+"<br /> MANUAL TARIFARIO "+$F{nombre_manual_tarifario}.toUpperCase()+" ("+($F{tipo_manual}==1?"ESPECIFICO":($F{tipo_manual}==2?"ISS":"SOAT"))+") "+$F{annio_manual}+" <br />"+$F{nombre_contrato}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="67" height="20" uuid="61234b2e-47e3-4379-92b1-b9cfebf856fc"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CODIGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="67" y="0" width="308" height="20" uuid="c4a97a7f-da46-4540-a1e2-bdd711a0771a"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SERVICIO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="375" y="0" width="45" height="20" uuid="4543d870-7bff-4bab-8ecd-425459899d14"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["SOAT"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="420" y="0" width="66" height="20" uuid="61234b2e-47e3-4379-92b1-b9cfebf856fc"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SMLDV]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="487" y="0" width="85" height="20" uuid="61234b2e-47e3-4379-92b1-b9cfebf856fc"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[VLR. SERVICIO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="67" height="20" uuid="88394c3b-9546-4fb4-afdd-a438293dbf74"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigo_cup}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="67" y="0" width="308" height="20" uuid="8a64cbfc-c5fb-401f-ae5a-9d45a30d4e74"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_servicio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="375" y="0" width="45" height="20" uuid="12cbfb50-bc44-4e75-9bcf-f24c6f605770">
+					<printWhenExpression><![CDATA[$F{tipo_manual}==2]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{factor_soat}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="420" y="0" width="66" height="20" uuid="7d8897f1-dae5-42fc-a435-53321e6ce1c3"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{smlvd}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="486" y="0" width="86" height="20" uuid="478db6ca-c67f-43c2-b41e-9ec38d12ead0"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{servicio}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="452" y="0" width="80" height="22" uuid="4b559ad7-1338-4621-8aad-3f5bbb69a15f"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="532" y="0" width="40" height="22" uuid="c5bb9023-94b3-41df-a6f7-eba8eb75966e"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="0" y="0" width="100" height="22" uuid="34b3e04b-e023-48e1-aae4-e2a04cd81b9e"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

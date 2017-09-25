@@ -1,0 +1,298 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>               
+
+        <title>Historial urgencias</title>
+        <script src="../recursos/js/calendario.js"/>
+        <link href="../recursos/css/estilos.css" rel="stylesheet"/>
+        <link href="../recursos/css/metro-bootstrap.css" rel="stylesheet"/>
+        <link href="../recursos/css/iconFont.css" rel="stylesheet"/>        
+    </h:head>
+    <h:body>
+        <br/>   
+        <div>
+            <div class="text-left">
+                <p:outputLabel style="font-size: 150%" value="Fecha:"/>
+                <p:calendar size="11" value="#{consultaMB.fecha}"
+                            pattern="dd/MM/yyyy" /> 
+                <p:calendar size="7" value="#{consultaMB.hora}"
+                            pattern="HH:mm:ss" />
+            </div>
+            <div class="text-right">
+                <p:outputLabel style="font-size: 150%" value="#{loginMB.usuarioActual.cargoActual}"/> :
+                <p:outputLabel style="font-style: italic;font-size: 150%" value="#{loginMB.usuarioActual.nombreCompleto()}"/>
+            </div>
+        </div>
+
+
+        <h:form id="formConsulta" style="width: auto">
+            <p:growl id="msgbTriage" autoUpdate="true" showDetail="true"/> 
+
+            <!-- SELECCION DEL PACIENTE -->                    
+            <p:fieldset legend="Listado de pacientes en urgencias" rendered="#{consultaMB.pacienteSeleccionado.idPaciente == null}">
+                <table>  
+                    <tr>
+                        <td>
+                            <p:dataTable
+                                id="tableElegirPaciente"
+                                var="admision" 
+                                value="#{consultaMB.listaUrgTriagePacienteDadoAlta}"
+                                paginator="true"
+                                rows="10"
+                                lazy="true"
+                                paginatorPosition="bottom"                                
+                                emptyMessage="No se encontraron pacientes"
+                                scrollable="true" 
+                                scrollWidth="108%" scrollHeight="150"
+                                pageLinks="5"
+                                widgetVar="tableElegirPaciente"
+                                resizableColumns="true"
+                                >
+                                <p:column headerText="NRO. ADMISION" width="20%" filterBy="#{admision.idAdmision.nroAdmision}" filterMatchMode="contains" filterStyle="width: 145px;">
+                                    <h:outputText value="#{admision.idAdmision.nroAdmision}"/>                                  
+                                </p:column>
+                                <p:column headerText="IDENTIFICACION" width="20%" filterBy="#{admision.idAdmision.idPaciente.identificacion}" filterMatchMode="contains" filterStyle="width: 145px;">
+                                    <h:outputText value="#{admision.idAdmision.idPaciente.identificacion}"/>                                  
+                                </p:column>
+                                <p:column headerText="PACIENTE" width="40%" filterBy="#{admision.idAdmision.idPaciente.primerNombre} #{admision.idAdmision.idPaciente.segundoNombre} #{admision.idAdmision.idPaciente.primerApellido} #{admision.idAdmision.idPaciente.segundoApellido}" filterStyle="width: 250px;" filterMatchMode="contains">
+                                    <h:outputText value="#{admision.idAdmision.idPaciente.primerNombre} #{admision.idAdmision.idPaciente.segundoNombre} #{admision.idAdmision.idPaciente.primerApellido} #{admision.idAdmision.idPaciente.segundoApellido}" />
+                                </p:column>
+                                <p:column headerText="GENERO" filterBy="#{admision.idAdmision.idPaciente.genero.descripcion}" width="15%" filterMatchMode="contains" >
+                                    <h:outputText value="#{admision.idAdmision.idPaciente.genero.descripcion}"/>                                  
+                                </p:column>
+                                <p:column headerText="EDAD" width="10%" filterBy="#{admision.idAdmision.idPaciente.edad}" filterMatchMode="contains" filterStyle="width: 145px;">
+                                    <h:outputText value="#{consultaMB.calcularEdadInt(admision.idAdmision.idPaciente.fechaNacimiento)}"/>                                  
+                                </p:column>
+                                <p:column headerText="FECHA ADMISION" width="30%" filterBy="#{admision.idAdmision.fechaAdmision}" filterMatchMode="contains" filterStyle="width: 145px;">
+                                    <p:calendar size="10" value="#{admision.idAdmision.fechaAdmision}"
+                                                pattern="dd/MM/yyyy" /> 
+                                    <p:calendar size="7" value="#{admision.idAdmision.horaAdmision}"
+                                                pattern="HH:mm:ss" />                          
+                                </p:column>
+                                <p:column  headerText="NIVEL TRIAGE" width="15%"  >
+                                    <h:outputText value="#{admision.nivelTriage.description}">
+                                    </h:outputText>                                
+                                </p:column>
+                                <p:column  headerText="ESTADO PACIENTE" width="35%"  >
+                                    <h:outputText value="#{admision.idAdmision.estadoAdmisionPaciente.description}">
+                                    </h:outputText>                                
+                                </p:column>
+                                <p:column  headerText="HABITACION" width="15%"  >
+                                    <h:outputText value="#{admision.idUrgConsultaPacienteUrgencia.cfgCama.cfgHabitacion.numeroHabitacion}">
+                                    </h:outputText>                                
+                                </p:column>
+                                <p:column  headerText="CAMA" width="15%"  >
+                                    <h:outputText value="#{admision.idUrgConsultaPacienteUrgencia.cfgCama.numeroCama}">
+                                    </h:outputText>                                
+                                </p:column>
+                                <p:column headerText="FECHA SALIDA" width="30%" filterBy="#{admision.idAdmision.fechaSalidaUrgencia}" filterMatchMode="contains" filterStyle="width: 145px;">
+                                    <p:calendar size="10" value="#{admision.idAdmision.fechaSalidaUrgencia}"
+                                                pattern="dd/MM/yyyy" /> 
+                                    <p:calendar size="7" value="#{admision.idAdmision.horaSalidaUrgencia}"
+                                                pattern="HH:mm:ss" />                          
+                                </p:column>
+                                <p:column  headerText="ACCION" width="15%"  >
+                                    <p:commandButton title="Consultar"  process="@this" actionListener="#{consultaMB.iniciarConsulta(admision)}" 
+                                                     update=":formConsulta:tableElegirPaciente :formConsulta" icon="ui-icon-gear">
+                                    </p:commandButton>
+                                </p:column>
+                            </p:dataTable>                                    
+                        </td>
+                    </tr>
+                </table>
+            </p:fieldset>
+            <p:fieldset id="idfieldsetdatosPaciente" legend="Datos del Paciente" rendered="#{consultaMB.pacienteSeleccionado.idPaciente eq null ? false : true}"  > 
+                <table style="margin-left: auto; margin-right: auto;">
+                    <tr>
+                        <td>
+                            <p:graphicImage id="IdFoto" url="#{consultaMB.urlFoto}" cache="false" width="80" height="70" rendered="#{consultaMB.pacienteSeleccionado.idPaciente!=null}"/>                              
+                        </td>
+                        <td>
+                            <table>
+                                <tr>
+                                    <td>
+
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Paciente:" rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}" />
+                                        <p:outputLabel styleClass="labelFormulario" id="idpaciente" value="#{consultaMB.pacienteSeleccionado.primerNombre} #{consultaMB.pacienteSeleccionado.segundoNombre}
+                                                       #{consultaMB.pacienteSeleccionado.primerApellido} #{consultaMB.pacienteSeleccionado.segundoApellido}" rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Género:" rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel styleClass="labelFormulario" id="idsexo" value="#{consultaMB.pacienteSeleccionado.genero.observacion}" rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Fecha Nacimiento:" rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel styleClass="labelFormulario"  id="idfecnac" value="#{consultaMB.pacienteSeleccionado.fechaNacimiento}" rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}">
+                                            <f:convertDateTime locale="es_CO" pattern="MM/dd/yyyy"/>   
+                                        </p:outputLabel>                                       
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Edad:" rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel styleClass="labelFormulario" id="idedad" value="#{consultaMB.pacienteSeleccionado.edad}" rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="G.S. RH:" rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel  styleClass="labelFormulario" id="idrh" value="#{consultaMB.pacienteSeleccionado.grupoSanguineo.descripcion}" rendered="#{consultaMB.pacienteSeleccionado.idPaciente!=null}"/>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Estado Civil:" rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel  styleClass="labelFormulario" id="idecivil" value="#{consultaMB.pacienteSeleccionado.estadoCivil.descripcion}" rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Lugar Nacimiento:" rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel styleClass="labelFormulario" id="idlugnac"  value="#{consultaMB.pacienteSeleccionado.municipio.descripcion} #{consultaMB.pacienteSeleccionado.departamento.descripcion}" 
+                                                       rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Teléfono:" rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel styleClass="labelFormulario" id="idtel" value="#{consultaMB.pacienteSeleccionado.telefonoResidencia}" rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Dirección:" rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel  styleClass="labelFormulario" id="iddir" value="#{consultaMB.pacienteSeleccionado.direccion}" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left">
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Fecha:" rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:calendar  styleClass="labelFormulario" size="10" value="#{consultaMB.urgTriage.fechaTriage}"
+                                                     pattern="dd/MM/yyyy" /> 
+                                        <p:calendar styleClass="labelFormulario" size="7" value="#{consultaMB.urgTriage.horaTriage}"
+                                                    pattern="HH:mm:ss" /> 
+                                        <p:outputLabel styleClass="labelFormularioBold" value="del triage" rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Atendido por:" rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel  styleClass="labelFormulario" value="#{consultaMB.urgTriage.idPrestador.primerNombre}
+                                                        #{consultaMB.urgTriage.idPrestador.primerApellido}"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                <div style="text-align: right">
+                    <p:commandButton 
+                        value="Imprimir" icon="ui-icon-print"
+                        title="Imprimir risp urgencia" rendered="#{consultaMB.urgTriage.idAdmision.estado eq 'ADMISION_PACIENTE_ENVIADO_DADO_ALTA'}"
+                        actionListener="#{consultaMB.generarRisp}"
+                        ajax="false" onclick="this.form.target = '_blank'">
+                        <f:attribute name="logo_empresa"
+                                     value="#{loginMB.rutaCarpetaImagenes}#{loginMB.empresaActual.logo.urlImagen}" /></p:commandButton>
+                </div>
+                <br></br>
+            </p:fieldset>
+            <p:tabView style=" width: 99%;"  rendered="#{consultaMB.pacienteSeleccionado.idPaciente eq null ? false : true}" 
+                       activeIndex="#{consultaMB.activeTabIndex}" id="IdTabView" >
+
+                <p:tab  title="Triage">
+                    <table style="margin-left: auto; margin-right: auto;">
+                        <p:commandButton  style="text-align: center"
+                                          value="Imprimir" icon="ui-icon-print"
+                                          title="Imprimir Triage" 
+                                          actionListener="#{consultaMB.generarTriage}"
+                                          ajax="false" onclick="this.form.target = '_blank'">
+
+                            <f:attribute name="logo_empresa"
+                                         value="#{loginMB.rutaCarpetaImagenes}#{loginMB.empresaActual.logo.urlImagen}" />
+                        </p:commandButton> 
+                        <table>
+                            <tr>
+                                <td>
+                                    <p:outputLabel styleClass="labelFormularioBold" value="Motivo:" rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}" />
+                                    <p:inputTextarea styleClass="labelFormulario" disabled="true" placeholder="Ingrese el motivo de la urgencia" rows="3" value="#{consultaMB.urgTriage.motivo}" style="width: 1100px" id="idMotivo"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <p:fieldset id="idfieldsetSignosVitalesTriage" legend="Signos vitales" rendered="#{consultaMB.pacienteSeleccionado.idPaciente eq null ? false : true}"  > 
+                            <table>
+                                <tr>
+                                    <td>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Peso:" rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}" />
+                                        <p:inputText id="idpeso" disabled="true" styleClass="campoFormulario" style="width: 45px" value="#{consultaMB.urgTriage.peso}" />
+                                        <p:outputLabel styleClass="labelFormularioBold" value="kg." rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Talla:" rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:inputText styleClass="campoFormulario" disabled="true" id="idtalla" style="width: 45px"  value="#{consultaMB.urgTriage.talla}" rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="cm." rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="MC:" rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:inputText styleClass="campoFormulario" disabled="true" id="idmc" style="width: 45px" value="#{consultaMB.urgTriage.mc}" rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="kg/m2" rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="FC:" rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:inputText styleClass="campoFormulario" disabled="true" id="idfc" style="width: 45px" value="#{consultaMB.urgTriage.frecuenciaCardiaca}" rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Min. FR:" rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:inputText styleClass="campoFormulario" disabled="true" id="idfr" style="width: 45px" value="#{consultaMB.urgTriage.frecuencia_respiratoria}" rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="PA:" rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:inputText styleClass="campoFormulario" id="idpammin" disabled="true" style="width: 45px"  value="#{consultaMB.urgTriage.presionArteriaMinima}" rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="/" rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:inputText styleClass="campoFormulario"  disabled="true" id="idpamax" style="width: 45px" value="#{consultaMB.urgTriage.presionArteriaMaxima}" rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel styleClass="labelFormularioBold" id="idtemperatura" value="Temp." rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:inputText styleClass="campoFormulario" disabled="true" value="#{consultaMB.urgTriage.temperatura}" style="width: 45px"  rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="°C" rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel styleClass="labelFormularioBold" id="idpsaturacion" value="Saturación:" rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:inputText styleClass="campoFormulario" disabled="true" value="#{consultaMB.urgTriage.saturacion}" style="width: 45px"  rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel styleClass="labelFormularioBold"  value="%" rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </p:fieldset>
+                        <table>
+                            <tr>
+                                <td>
+                                    <p:outputLabel styleClass="labelFormularioBold" value="Hallazgos clinicos:" 
+                                                   rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}" />
+                                    <p:inputTextarea styleClass="labelFormulario" disabled="true" maxlength="1000"
+                                                     placeholder="Ingrese los hallazcos clinicos"
+                                                     value="#{consultaMB.urgTriage.hallazgosClinico}" rows="5" 
+                                                     style="width: 400px" id="idhallazgos"/>
+
+                                    <p:outputLabel styleClass="labelFormularioBold" value="Conducta observada:" 
+                                                   rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}" />
+                                    <p:inputTextarea styleClass="labelFormulario" disabled="true" placeholder="Ingrese detalles de la conducta observada en el paciente" 
+                                                     value="#{consultaMB.urgTriage.conducta}" rows="5" maxlength="1000"
+                                                     style="width: 400px" id="idconducta"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <br></br>
+                                    <p:outputLabel   styleClass="labelFormularioBold" value="Impresión Diagnostica"/>
+                                    <p:outputLabel  styleClass="labelFormulario" value="#{consultaMB.immpresionDiagnostica}"/>
+                                    <p:outputLabel   styleClass="labelFormularioBold" value="Clasificación triage:"/>
+                                    <p:outputLabel   styleClass="labelFormulario"
+                                                     value="#{consultaMB.urgTriage.nivelTriage.description}"/>                                    
+
+                                </td>
+                            </tr>           
+                        </table>
+                    </table>
+                </p:tab>
+                <p:tab id="idTabConsulta" rendered="#{(loginMB.usuarioActual.idPerfil.idPerfil eq 3 or loginMB.usuarioActual.idPerfil.idPerfil eq 1) or (consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.atendida eq true and (loginMB.usuarioActual.idPerfil.idPerfil eq 6))}" title="Consulta">
+                    <ui:include src="consultaMedica/consulta.xhtml"  />                  
+                </p:tab>
+                <p:tab id="idTabPrescripcionesMedicamentoAmbulatorio" rendered="#{(consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.atendida eq true) and (loginMB.usuarioActual.idPerfil.idPerfil eq 3 or loginMB.usuarioActual.idPerfil.idPerfil eq 1) and consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.ambitoDestinoPaciente.id eq 1831}" title="Prescripción de medicamento para retirar por farmacia">
+                    <ui:include src="consultaMedica/prescripcionMedicamentoAmbulatorio.xhtml"  />                  
+                </p:tab>
+                <p:tab id="idTabPrescripciones" rendered="#{(consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.atendida eq true) and (loginMB.usuarioActual.idPerfil.idPerfil eq 3 or loginMB.usuarioActual.idPerfil.idPerfil eq 1) and consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.ambitoDestinoPaciente.id ne 1831}" title="Prescripción de medicamentos">
+                    <ui:include src="consultaMedica/prescripcionMedicamentos.xhtml"  />                  
+                </p:tab>
+                <p:tab id="idTabOrden" title="Orden de servicios" rendered="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.atendida eq true and (loginMB.usuarioActual.idPerfil.idPerfil eq 3 or loginMB.usuarioActual.idPerfil.idPerfil eq 1) and consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.ambitoDestinoPaciente.id ne 1831}">
+                    <ui:include src="consultaMedica/ordenServicios.xhtml"  />                  
+                </p:tab>
+                <p:tab id="idTabControlMedicamentos" title="Control y suministro de medicamentos" rendered="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.atendida eq true and consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.ambitoDestinoPaciente.id ne 1831}">
+                    <ui:include src="consultaMedica/controlySeguimientoPrescripcionMedicamentos.xhtml"  />                  
+                </p:tab>
+                <p:tab id="idTabProcedimientos" title="Procedimientos y servicios" rendered="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.atendida eq true and consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.ambitoDestinoPaciente.id ne 1831}">
+                    <ui:include src="consultaMedica/procedimientos.xhtml"  />                  
+                </p:tab>
+                <p:tab id="idTabNotasEnfermera" title="Notas de enfermeria" rendered="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.atendida eq true and consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.ambitoDestinoPaciente.id ne 1831}">
+                    <ui:include src="consultaMedica/notasEnfermeria.xhtml"  />                  
+                </p:tab>
+                <p:tab id="idTabNotasMedicas" title="Nota médicas" rendered="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.atendida eq true and (loginMB.usuarioActual.idPerfil.idPerfil eq 3 or loginMB.usuarioActual.idPerfil.idPerfil eq 1)}">
+                    <ui:include src="consultaMedica/notasMedicas.xhtml"  />                  
+                </p:tab>
+                <p:tab id="idTabPlanManejo" title="Plan de manejo" rendered="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.atendida eq true and (loginMB.usuarioActual.idPerfil.idPerfil eq 3 or loginMB.usuarioActual.idPerfil.idPerfil eq 1) and consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.idUrgDetalleConsulta.ambitoDestinoPaciente.id ne 1831}">
+                    <ui:include src="consultaMedica/planyManejoPaciente.xhtml"  />                  
+                </p:tab>
+            </p:tabView> 
+            <br></br>
+            <div class="centrar" >
+                <p:commandButton  icon="ui-icon ui-icon-triangle-1-w" value="Regresar al inicio" rendered="#{consultaMB.pacienteSeleccionado.idPaciente !=null}" actionListener="#{consultaMB.volver}" update=":formConsulta"></p:commandButton>
+            </div>
+        </h:form>
+    </h:body>
+</html>

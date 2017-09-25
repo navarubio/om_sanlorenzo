@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <body>
+        <br></br>
+        <p:commandButton 
+            value="Nueva"  
+            actionListener="#{consultaMB.cargarDialogoMedicamentos()}" 
+            rendered="#{consultaMB.urgTriage.idAdmision.estado ne 'ADMISION_PACIENTE_ENVIADO_DADO_ALTA'}"
+            title="Haga clic aquí para crear una nueva prescripción" update=":formConsulta"
+            />
+        <p:commandButton 
+            value="Guardar" 
+            actionListener="#{consultaMB.guardarPrescripciones()}" 
+            rendered="#{consultaMB.urgTriage.idAdmision.estado ne 'ADMISION_PACIENTE_ENVIADO_DADO_ALTA'}"
+            title="Haga  clic aquí para guardar  la nueva prescripción" update=":formConsulta"
+            />
+        <p:commandButton 
+            value="Imprimir" icon="ui-icon-print"
+            title="Formula médica" 
+            actionListener="#{consultaMB.generarFormulaMedica}"
+            rendered="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.urgPrescripcionMedicamentolist ne null and consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.urgPrescripcionMedicamentolist.size() gt 0}"
+            ajax="false" onclick="this.form.target = '_blank'">
+
+            <f:attribute name="logo_empresa"
+                         value="#{loginMB.rutaCarpetaImagenes}#{loginMB.empresaActual.logo.urlImagen}" />
+        </p:commandButton> 
+        <br></br>
+        <p:dataTable
+            id="tableMedicamentos"
+            var="medicamentos" 
+            value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.urgPrescripcionMedicamentolist}"
+            paginator="true"
+            style="width: 100%;"
+            rows="10"
+            scrollable="true" 
+            scrollWidth="110%"
+            scrollHeight="135"
+            lazy="true"
+            paginatorPosition="bottom"                                
+            emptyMessage="No se encontraron medicamentos asignados al paciente"
+            pageLinks="5"
+            widgetVar="tableMedicamentos"
+            resizableColumns="true"
+            >
+            <p:column headerText="PROFESIONAL" width="10%" resizable="true" filterBy="#{medicamentos.idPrestador.primerNombre}"
+                      filterMatchMode="contains">
+                <h:outputText value="#{medicamentos.idPrestador.primerNombre} #{medicamentos.idPrestador.primerApellido }"/>                                  
+            </p:column>
+            <p:column headerText="CODIGO" resizable="true" filterBy="#{medicamentos.idMedicamento.codigoMedicamento}" filterMatchMode="contains">
+                <h:outputText value="#{medicamentos.idMedicamento.codigoMedicamento}" />
+            </p:column>
+            <p:column headerText="NOMBRE" width="13%" resizable="true" filterBy="#{medicamentos.idMedicamento.nombreMedicamento}"  filterMatchMode="contains">
+                <h:outputText value="#{medicamentos.idMedicamento.nombreMedicamento}" />
+            </p:column>
+            <p:column headerText="PRESENTACION"  width="13%" resizable="true" filterBy="#{medicamentos.idMedicamento.formaMedicamento}"  filterMatchMode="contains">
+                <h:outputText value="#{medicamentos.idMedicamento.formaMedicamento}" />
+            </p:column>
+            <p:column headerText="CONCENTRACION" resizable="true" filterBy="#{medicamentos.idMedicamento.concentracion}"  filterMatchMode="contains">
+                <h:outputText value="#{medicamentos.idMedicamento.concentracion}" />
+            </p:column>
+            <p:column headerText="VIA"  filterBy="#{medicamentos.idMedicamento.modAdmin}" resizable="true" filterMatchMode="contains">
+                <h:outputText value="#{medicamentos.idMedicamento.modAdmin}" />
+            </p:column>
+            <p:column headerText="CANT. SOLICITADA"  filterBy="#{medicamentos.cantidad}" resizable="true" filterMatchMode="contains">
+                <h:outputText value="#{medicamentos.cantidad}" />
+            </p:column>
+            <p:column headerText="FECHA PRESCRIPCION" width="15%"  filterBy="#{medicamentos.fecha}" resizable="true" filterMatchMode="contains">
+                <p:calendar size="10" value="#{medicamentos.fecha}"
+                            pattern="dd/MM/yyyy" /> 
+                <p:calendar size="7" value="#{medicamentos.hora}"
+                            pattern="HH:mm:ss" />  
+            </p:column>
+            <p:column headerText="DOSIS" resizable="true" filterBy="#{medicamentos.dosis}" filterMatchMode="contains">
+                <h:outputText value="#{medicamentos.dosis}" >
+                </h:outputText>
+            </p:column>
+            <p:column  headerText="CANT. SUMINISTRADA" filterBy="#{medicamentos.cantidadSuministrada}" resizable="true" filterMatchMode="contains">
+                <h:outputText value="#{medicamentos.cantidadSuministrada}" />
+            </p:column>
+            <p:column headerText="CADA " filterBy="#{medicamentos.indicacionesMedicamentos.description}" resizable="true" filterMatchMode="contains">
+                <h:outputText value="#{medicamentos.indicacionesMedicamentos.description}" />
+            </p:column>
+            <p:column headerText="OBSERVACION" filterBy="#{medicamentos.observacion}" width="12%" resizable="true" filterMatchMode="contains">
+                <p:inputTextarea  value=" #{medicamentos.observacion}" readonly="true" style="width: 100%"  autoResize="true"/>
+            </p:column>
+            <p:column headerText="OPERACION" resizable="true"  filterMatchMode="contains">
+                <p:commandButton rendered="#{medicamentos.idPrescripcion eq null}" value="Borrar" actionListener="#{consultaMB.borrarPrescripcion(medicamentos)}" 
+                                 update=":formConsulta:IdTabView:tableMedicamentos :formConsulta:msgbTriage"></p:commandButton>
+            </p:column>
+        </p:dataTable>
+    </body>
+    <p:dialog id="IdDialogoAgregarMedicamento" header="AGREGAR MEDICAMENTO" widgetVar="IdDialogoAgregarMedicamento" resizable="false" modal="true">  
+        <p:panelGrid id="IdPanelAgregarMedicamento" styleClass="panelGridSinBordes" columns="2">
+            <p:outputLabel styleClass="campoObligatorio" value="PROFESIONAL:" />
+            <p:outputLabel styleClass="campoFormulario" value="#{loginMB.usuarioActual.primerNombre} #{loginMB.usuarioActual.primerApellido}" />
+            <p:outputLabel styleClass="campoObligatorio" value="MEDICAMENTOS:" />
+            <p:selectOneMenu id="IdListaMedicamento" style="width: 380px;" 
+                             value="#{consultaMB.urgPrescripcionMedicamento.idMedicamento}" converter="objectConverter"
+                             filter="true" filterMatchMode="contains">
+                <f:selectItems value="#{consultaMB.listaCfgMedicamento}"
+                               var="medicamento" 
+                               itemLabel="#{medicamento.nombreMedicamento}" 
+                               itemValue="#{medicamento}"/>
+            </p:selectOneMenu>
+            <p:outputLabel value="CANTIDAD SOLICITADA:" styleClass="campoObligatorio"/>
+            <pe:inputNumber decimalSeparator="," decimalPlaces="0" minValue="0"  value="#{consultaMB.urgPrescripcionMedicamento.cantidad}">
+            </pe:inputNumber>
+            <p:outputLabel value="DOSIS RECOMENDADA:" styleClass="campoObligatorio"/>
+            <pe:inputNumber decimalSeparator="," decimalPlaces="0" minValue="0"  value="#{consultaMB.urgPrescripcionMedicamento.dosis}">
+            </pe:inputNumber>   
+            <p:outputLabel   styleClass="campoObligatorio" value="CADA:"/>
+            <p:selectOneMenu filter="true" filterMatchMode="contains" styleClass="campoFormulario" style="width: 80px;" 
+                             value="#{consultaMB.urgPrescripcionMedicamento.indicacionesMedicamentos}">                                    
+                <f:selectItems value="#{consultaMB.indicacionesMedicamentos}" 
+                               var="indicaciones" itemLabel="#{indicaciones.description}" itemValue="#{indicaciones}" />
+            </p:selectOneMenu> 
+            <p:outputLabel value="OBSERVACION:" styleClass="campoObligatorio"/>
+            <p:inputTextarea maxlength="1000" styleClass="labelFormulario" placeholder="Ingrese una observación" rows="3"
+                             value="#{consultaMB.urgPrescripcionMedicamento.observacion}" style="width: 300px"/>
+
+            <p:commandButton 
+                value="Agregar"                         
+                actionListener="#{consultaMB.agregarMedicamento}" update=":formConsulta:IdTabView:tableMedicamentos :formConsulta:msgbTriage"/>
+        </p:panelGrid>
+    </p:dialog>
+</html>

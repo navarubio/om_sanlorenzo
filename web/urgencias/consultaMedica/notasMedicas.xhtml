@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <body>
+        <br></br>
+        <p:commandButton 
+            value="Guardar"   rendered="#{loginMB.usuarioActual.idPerfil.idPerfil eq 3 and consultaMB.urgTriage.idAdmision.estado ne 'ADMISION_PACIENTE_ENVIADO_DADO_ALTA'}"  actionListener="#{consultaMB.guardarNotaMedicas()}" 
+            title="Haga  clic aquí para guardar la nueva nota" update=":formConsulta"
+            />
+        <p:commandButton 
+            value="Nueva"  rendered="#{loginMB.usuarioActual.idPerfil.idPerfil eq 3 and consultaMB.urgTriage.idAdmision.estado ne 'ADMISION_PACIENTE_ENVIADO_DADO_ALTA'}" actionListener="#{consultaMB.cargarDialogoAgregarNotaMedicas()}" 
+            title="Haga  clic aquí cargar el dialogo y agregar una nueva nota" update=":formConsulta"
+            />
+        <p:commandButton 
+            value="Imprimir" icon="ui-icon-print"
+            title="Notas medicas de evolución del paciente ó recomendaciones" 
+            actionListener="#{consultaMB.generarEvolucion}"
+            rendered="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.urgNotasMedicasList ne null and consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.urgNotasMedicasList.size() gt 0 }"
+            ajax="false" onclick="this.form.target = '_blank'">
+
+            <f:attribute name="logo_empresa"
+                         value="#{loginMB.rutaCarpetaImagenes}#{loginMB.empresaActual.logo.urlImagen}" />
+        </p:commandButton>                            
+        <br></br>
+        <p:dataTable
+            id="tableNotasMedicas"
+            var="nota" 
+            value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.urgNotasMedicasList}"
+            paginator="true"
+            style="width: 100%;"
+            rows="10"
+            lazy="true"
+            paginatorPosition="bottom"                                
+            emptyMessage="No se encontraron registros de notas de enfermeria"
+            scrollable="true" 
+            pageLinks="5"
+            widgetVar="tableNotasMedicas"
+            resizableColumns="true"
+            >
+            <p:column headerText="PROFESIONAL" filterBy="#{medicamentos.idPrestador.primerNombre}"
+                      filterMatchMode="contains">
+                <h:outputText value="#{nota.idPrestador.primerNombre} #{nota.idPrestador.primerApellido }"/>                                  
+            </p:column>
+            <p:column headerText="NOTA"  filterBy="#{nota.nota}"  filterMatchMode="contains">
+                <p:inputTextarea disabled="true" autoResize="true"  style="width: 100%"  rows="4" value="#{nota.nota}" />
+            </p:column>
+            <p:column headerText="FECHA REGISTRO" filterBy="#{nota.fecha}"  filterMatchMode="contains">
+                <p:calendar size="10" value="#{nota.fecha}"
+                            pattern="dd/MM/yyyy" /> 
+                <p:calendar size="7" value="#{nota.hora}"
+                            pattern="HH:mm:ss" />  
+            </p:column>
+            <p:column headerText="OPERACION" resizable="true"  filterMatchMode="contains">
+                <p:commandButton rendered="#{nota.idNota eq null}" value="Borrar" actionListener="#{consultaMB.borrarNotaMedica(nota)}" 
+                                 update=":formConsulta:IdTabView:tableNotasMedicas :formConsulta:msgbTriage"></p:commandButton>
+            </p:column>
+        </p:dataTable>
+    </body>
+    <p:dialog id="IdDialogoNotasMedicas" header="AGREGAR NOTAS MEDICAS" widgetVar="IdDialogoNotasMedicas" 
+              resizable="false" modal="true">  
+        <p:panelGrid id="IdPanelAgregarNotasMedicas" styleClass="panelGridSinBordes" columns="2">
+            <p:outputLabel styleClass="campoObligatorio" value="PROFESIONAL:" />
+            <p:outputLabel styleClass="campoFormulario" value="#{loginMB.usuarioActual.primerNombre} #{loginMB.usuarioActual.primerApellido}" />
+            <p:outputLabel value="NOTA:" styleClass="campoObligatorio"/>
+            <p:inputTextarea styleClass="labelFormulario" placeholder="Ingrese una nota" rows="3"
+                             maxlength="1000"   value="#{consultaMB.urgNotasMedicas.nota}" style="width: 300px"/>
+            <p:commandButton 
+                value="Agregar"                         
+                actionListener="#{consultaMB.agregarNotaMedicas()}" update=":formConsulta:IdTabView:tableNotasMedicas :formConsulta:msgbTriage"></p:commandButton>
+        </p:panelGrid>
+    </p:dialog>
+</html>

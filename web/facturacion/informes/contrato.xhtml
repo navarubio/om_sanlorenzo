@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">  
+    <h:head>        
+        <title>Contrato</title>
+        <link href="../../recursos/css/estilos.css" rel="stylesheet"/>        
+        <link href="../../recursos/css/metro-bootstrap.css" rel="stylesheet"/>
+        <link href="../../recursos/css/iconFont.css" rel="stylesheet"/>
+        <script type="text/javascript" src="../../recursos/js/calendario.js"></script>  
+    </h:head>
+    <h:body>
+        #{estadisticaGeneralMB.init()}
+        <h:form id="IdFormInformeContrato">              
+            
+            <p:growl id="IdMensajePeriodos"  showDetail="true" sticky="false" autoUpdate="true" life="2000"  />                        
+            <p:tabView id="IdTabView" style=" width: 95%;  margin-left: 15px;" >                 
+                <p:tab title="Informe Contratos">                    
+                    <p:panelGrid id="IdPanelEditarPeriodo" styleClass="panelGridSinBordes" columns="8" style="margin-right: auto;">                    
+                        <h:panelGroup>
+                            <p:outputLabel styleClass="campoObligatorio" value="Filtro" style="width: 120px;"/>                        
+                            <p:selectOneMenu styleClass="campoFormulario" style="width: 200px;"  value="#{informeContratosMB.filtroReporte}">
+                                <f:selectItem itemLabel="--Seleccione Filtro--" itemValue="0"/>
+                                <f:selectItems value="#{informeContratosMB.listaFiltro}" />
+                                <f:ajax event="change" listener="#{informeContratosMB.validarFiltro}" render="IdPanelFiltro" />
+                            </p:selectOneMenu>                     
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:panelGrid id="IdPanelFiltro" styleClass="panelGridSinBordes" columns="8" style="margin-right: auto;">                    
+                        <h:panelGroup rendered="#{informeContratosMB.renderFiltro1}">
+                            <p:outputLabel styleClass="campoObligatorio" value="Administradora" style="width: 120px;"/>                        
+                            <p:selectOneMenu styleClass="campoFormulario" style="width: 200px;"  value="#{informeContratosMB.administradora.idAdministradora}">
+                                <f:selectItem itemLabel="--Seleccione Administradora--" itemValue="0"/>
+                                <f:selectItems value="#{informeContratosMB.listaAdministradora}" var="ad" itemLabel="#{ad.razonSocial}" itemValue="#{ad.idAdministradora}"/>
+                                <f:ajax event="change" render="@this" />
+                        </p:selectOneMenu>                     
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{informeContratosMB.renderFiltro2}">
+                            <p:outputLabel styleClass="campoObligatorio" value="Vigencia"  style="width: 120px;"/>                        
+                            <p:selectOneMenu styleClass="campoFormulario" style="width: 200px;"  value="#{informeContratosMB.estadoContrato}" >
+                                <f:selectItem itemLabel="VIGENTE" itemValue="1"/>
+                                <f:selectItem itemLabel="VENCIDO" itemValue="2"/>
+                                <f:ajax event="change" render="@this" />
+                        </p:selectOneMenu>                     
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{informeContratosMB.renderFiltro3}">
+                            <p:outputLabel styleClass="campoObligatorio" value="Modalidad"  style="width: 120px;"/>                        
+                            <p:selectOneMenu styleClass="campoFormulario" style="width: 200px;"  value="#{informeContratosMB.modalidad}">
+                                <f:selectItem itemLabel="--Seleccione Modalidad--" itemValue="0"/>
+                                <f:selectItems value="#{informeContratosMB.listaTipoPago}" var="ad" itemLabel="#{ad.descripcion}" itemValue="#{ad.id}"/>
+                                <f:ajax event="change" render="@this" />
+                        </p:selectOneMenu>                     
+                        </h:panelGroup>
+                        <h:panelGroup>
+                            <p:commandButton 
+                                title       =   "Buscar" value="&nbsp;"                                        
+                                styleClass  =   "icon-search fg-lightBlue" 
+                                style       =   "height: 20px;"
+                                actionListener="#{informeContratosMB.consultar}"
+                                rendered="#{informeContratosMB.renderBuscar}"
+                                process="@this,IdPanelEditarPeriodo,IdPanelFiltro"
+                                update="opResultado,IdPanelFiltro"
+                                />  
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:outputPanel id="opResultado">
+                        <p:dataTable id="idDataResultado"
+                                     value="#{informeContratosMB.listaConsulta}"
+                                     rows="10"                               
+                                     rendered="#{informeContratosMB.renderResultado}"
+                                     var="res"
+                                     paginator="true"
+                                     paginatorPosition="bottom"                                
+                                     emptyMessage="No hay resultado "
+                                     
+                                     >
+                            <p:column headerText="CODIGO">  
+                                #{res.codigoContrato}
+                            </p:column>                            
+                            <p:column headerText="NOMBRE CONTRATO">  
+                                #{res.descripcion}
+                            </p:column>                            
+                            <p:column headerText="EMPRESA">  
+                                #{res.idAdministradora.razonSocial}                         
+                           </p:column>                            
+                            <p:column headerText="TARIFA">  
+                                #{res.manualTarifa}                         
+                           </p:column>                           
+                            <p:column headerText="MODALIDAD">  
+                                #{res.tipoPago.descripcion}                         
+                           </p:column>                            
+                        </p:dataTable>
+                        <br />
+                        <p:commandButton 
+                                title       =   "Exportar CSV" value="&nbsp; "                                        
+                                styleClass  =   "icon-file-excel fg-lightBlue" 
+                                style       =   "height: 30px;font-size: 24px;"
+                                rendered="#{informeContratosMB.renderResultado}"
+                                actionListener="#{informeContratosMB.exportarCSV}"
+                                process="@this"
+                                ajax="false" 
+                                /> 
+                    </p:outputPanel>
+                </p:tab>
+            </p:tabView>
+        </h:form>
+    </h:body>
+</html>

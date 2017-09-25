@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d08b5da0-64d5-4e7d-936b-6e7dd4146470">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="56"/>
+	<parameter name="logoEmpresa" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<field name="pacientePA" class="java.lang.String"/>
+	<field name="pacienteSA" class="java.lang.String"/>
+	<field name="nota" class="java.lang.String"/>
+	<field name="fecha" class="java.lang.String"/>
+	<field name="sede" class="java.lang.String"/>
+	<field name="pacienteSN" class="java.lang.String"/>
+	<field name="prestadorPA" class="java.lang.String"/>
+	<field name="sedeTel" class="java.lang.String"/>
+	<field name="hora" class="java.lang.String"/>
+	<field name="prestadorPN" class="java.lang.String"/>
+	<field name="pacientePN" class="java.lang.String"/>
+	<field name="sedeDir" class="java.lang.String"/>
+	<field name="empresa" class="java.lang.String"/>
+	<field name="documentoIdentidad" class="java.lang.String"/>
+	<field name="pacienteTipoDocumento" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="150" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="224" y="30" width="317" height="110" uuid="94969cd6-5b75-42c4-b616-ff7589ee73ed"/>
+			</rectangle>
+			<textField>
+				<reportElement x="41" y="53" width="141" height="20" uuid="ed323639-71df-42fa-a476-2804495f9c46"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sede}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="40" y="92" width="141" height="20" uuid="66e18612-4d6e-4e8d-85d9-39f43354257e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sedeTel}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="40" y="73" width="141" height="20" uuid="b1e68ba9-6e42-4183-bbaa-926fd60456ca"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sedeDir}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="77" y="6" width="224" height="45" uuid="29f349ad-1015-4adf-a641-a18f2189c67c"/>
+				<imageExpression><![CDATA[$P{logoEmpresa}]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="242" y="51" width="100" height="1" uuid="8ae6605b-c4e7-47c9-94cd-3f937c2a4cb4"/>
+			</line>
+			<staticText>
+				<reportElement x="242" y="53" width="100" height="20" uuid="162cd8ce-e430-4a86-9ebc-d568f38273d3"/>
+				<text><![CDATA[Primer Apellido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="343" y="53" width="100" height="20" uuid="9ebadef8-a031-4ada-bf56-b743a08b22f5"/>
+				<text><![CDATA[Segundo Apellido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="443" y="53" width="100" height="20" uuid="6041c0bc-35b6-409f-b33e-d5595e0f44a2"/>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<line>
+				<reportElement x="342" y="50" width="100" height="1" uuid="3d496785-7c83-4cc0-99de-00f7bf4446dd"/>
+			</line>
+			<line>
+				<reportElement x="443" y="50" width="100" height="1" uuid="a334382c-fabd-4278-b039-80a41b5ae174"/>
+			</line>
+			<textField>
+				<reportElement x="243" y="33" width="100" height="20" uuid="9ff20f33-2e39-4236-af62-bee20d6ff128"/>
+				<textFieldExpression><![CDATA[$F{pacientePA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="343" y="33" width="100" height="20" uuid="2921260f-264f-4a84-be3b-83ddff1e4f4f"/>
+				<textFieldExpression><![CDATA[$F{pacienteSA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="443" y="32" width="100" height="20" uuid="435e54c6-3e8d-4e9e-b233-2a66bb70c2e1"/>
+				<textFieldExpression><![CDATA[$F{pacientePN}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="243" y="107" width="300" height="1" uuid="45be79ef-5fc1-4a83-83f9-cd183d5d9e12"/>
+			</line>
+			<staticText>
+				<reportElement x="285" y="112" width="200" height="20" uuid="563522ab-7587-4597-a0fc-cb979e32e38c"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo y número de identificación]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="243" y="79" width="199" height="20" uuid="791991d3-ece3-452c-b806-de1d4f6dcad9"/>
+				<textFieldExpression><![CDATA[$F{pacienteTipoDocumento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="443" y="79" width="100" height="20" uuid="411a8022-84f4-4008-a10c-59915d1f5396"/>
+				<textFieldExpression><![CDATA[$F{documentoIdentidad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="243" y="13" width="115" height="20" uuid="8ca5da76-035d-4398-893e-e9efcbd307f6"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[HISTORIA CLINICA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="25" y="120" width="184" height="20" uuid="085d5f25-b01d-4bf7-a0af-ecb7d7c4d13b"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EVOLUCION Y TRATAMIENTO]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="37" width="551" height="20" uuid="fe05c28d-e212-4746-89d5-88b978f88685"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="301" y="38" width="238" height="20" uuid="543ba34c-fe43-48c0-806b-4f64f7d4bc0d"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOTA]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="23" y="10" width="184" height="20" uuid="48aa1f91-8d36-4645-a22b-4757a79be2ff"/>
+				<textFieldExpression><![CDATA[$F{prestadorPA} +" "+$F{prestadorPN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="208" y="10" width="51" height="20" uuid="f6c43489-6e2f-4918-ac6d-56db708478de"/>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="209" y="-24" width="92" height="20" uuid="7eaa6b38-258b-4572-960f-5eecbd97139b"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="312" y="10" width="239" height="56" uuid="93c702b1-2cb7-436a-ba58-080d5018ed16"/>
+				<textFieldExpression><![CDATA[$F{nota}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="259" y="10" width="42" height="20" uuid="5e2f6b1b-bcdb-42b5-8716-1f33a58a1c3f"/>
+				<textFieldExpression><![CDATA[$F{hora}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="7" y="-24" width="200" height="20" uuid="21becde9-01e1-4d29-b763-0c5d0b06b7bb"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[MEDICO]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

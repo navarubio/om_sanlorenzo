@@ -1,0 +1,211 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"      
+
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Entrada Orden de Compra</title>
+        <link href="../recursos/css/estilos.css" rel="stylesheet"/>        
+        <link href="../recursos/css/metro-bootstrap.css" rel="stylesheet"/>
+        <link href="../recursos/css/iconFont.css" rel="stylesheet"/>
+        <link href="../recursos/css/bootstrap.min.css" rel="stylesheet"/>        
+        <script type="text/javascript" src="../recursos/js/calendario.js"/>
+    </h:head>
+    <h:body>
+        <h:form id="IdFormEntradaOrdenCompra" >
+            #{entradaOrdenCompraMB.init()}
+            <p:remoteCommand name="update" actionListener="#{ordenCompraMB.updateTabla}"/>
+            <p:growl id="growl" showDetail="true" sticky="false" autoUpdate="true" life="2000"  />
+            <br/>            
+
+            <br/> 
+            <div class="container">
+                <div class="row">
+                    <div style="padding: 5px;">
+                        <p:outputPanel id="opBotones">
+                            <p:commandButton 
+                                title="Nueva Entrada" value="&nbsp;"                                        
+                                styleClass="icon-new fg-lightBlue bg-white no-border"                    
+                                actionListener="#{entradaOrdenCompraMB.nuevo}"
+                                process="@this"
+                                update="IdFormEntradaOrdenCompra:opFormulario,IdFormEntradaOrdenCompra:opProductos"
+                                style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/> 
+                            &nbsp;
+                            
+                            <p:commandButton 
+                                title="Buscar Orden" value="&nbsp;"                                        
+                                styleClass="icon-search fg-lightBlue bg-white no-border" 
+                                oncomplete="PF('dialogOrdenes').show()"
+                                process="@this"
+                                style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/> 
+                            &nbsp;
+                            <p:commandButton 
+                                title="Guardar Entrada de Orden de compra" value="&nbsp;"
+                                styleClass="icon-floppy fg-lightBlue bg-white no-border" 
+                                actionListener="#{entradaOrdenCompraMB.guardar}"                   
+                                process="@this,IdFormEntradaOrdenCompra:opFormulario"
+                                update="IdFormEntradaOrdenCompra:opFormulario,IdFormEntradaOrdenCompra:opProductos"
+                                style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/>                            
+                        </p:outputPanel>
+                    </div>
+                </div>
+                <p:panel style="padding: 5px;">
+                    <p:outputPanel id="opFormulario">
+                        <div class="row">
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Número Movimiento" styleClass="campoObligatorio2"/>
+                                <p:inputText  value="#{entradaOrdenCompraMB.movimiento.numeroDocumento}" styleClass="form-control" maxlength="10"/>
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Tipo de movimiento" styleClass="campoObligatorio2"/>
+                                <p:inputText value="Entrada por Compra" styleClass="form-control" maxlength="10" readonly="true"/>
+                            </div>
+                            <div class="col-sm-2 col-xs-12">
+                                <p:outputLabel value="Fecha Ingreso" styleClass="campoObligatorio2"/>
+                                <p:inputText value="#{entradaOrdenCompraMB.movimiento.fechaMovimiento}" styleClass="form-control" maxlength="10" readonly="true" >
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </p:inputText>
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Cód Bodega Principal" styleClass="campoObligatorio2"/>
+                                <p:inputText value="#{entradaOrdenCompraMB.bodega.codigoBodega}" styleClass="form-control" maxlength="10" readonly="true" >
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </p:inputText>
+                            </div>
+                            
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-sm-2 col-xs-12">
+                                <p:outputLabel value="Número Orden" styleClass="campoObligatorio2"/>
+                                <p:inputText id="txtNroDocumento" value="#{entradaOrdenCompraMB.nroDocumento}"  styleClass="form-control" maxlength="10"  >
+                                </p:inputText>
+                            </div>
+                            <div class="col-sm-1 col-xs-12">
+                                <br/>
+                                <p:commandButton 
+                                    title       =   "Buscar Número Orden" value="&nbsp;"                                        
+                                    style       =   "height: 20px;top: 6px;"
+                                    styleClass  =   "icon-search fg-lightBlue" 
+                                    process="@this,IdFormEntradaOrdenCompra:txtNroDocumento"
+                                    update="IdFormEntradaOrdenCompra:opFormulario,IdFormEntradaOrdenCompra:opProductos"
+                                    actionListener="#{entradaOrdenCompraMB.buscarCodigo}"
+                                    /> 
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Número Orden Proveedor" styleClass="campoObligatorio2"/>
+                                <p:inputText value="#{entradaOrdenCompraMB.movimiento.numeroDocumentoProveedor}" styleClass="form-control" maxlength="20" >
+                                </p:inputText>
+                            </div>
+                            <div class="col-sm-5 col-xs-12">
+                                <p:outputLabel value="Proveedor" styleClass="campoObligatorio2"/>
+                                <p:inputText value="#{entradaOrdenCompraMB.ordenCompra.idProveedor.tipoDocumento.descripcion} #{entradaOrdenCompraMB.ordenCompra.idProveedor.numeroDocumento} #{entradaOrdenCompraMB.ordenCompra.idProveedor.razonSocial}" styleClass="form-control" maxlength="10" readonly="true"/>
+                            </div>
+                            
+                        </div><!--/row-->
+                    </p:outputPanel>
+                    <!--productos-->
+                    <p:outputPanel id="opProductos">
+                        <h3>Productos</h3>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-12 col-xs-12">
+                                <p:dataTable id="idDTProductos"
+                                             value="#{entradaOrdenCompraMB.listaOrdenCompraProductos}"
+                                             rows="8"                                    
+                                             var="producto"
+                                             paginator="true"
+                                             paginatorPosition="bottom"                                
+                                             emptyMessage="No hay productos "
+                                             editable="true" editMode="cell"
+                                             >
+                                    <p:ajax event="cellEdit" listener="#{ordenCompraMB.onCellEdit}" oncomplete="update()" update="@none" /> 
+                                    <p:column headerText="Código Producto" filterMatchMode="contains" filterBy="#{producto.idProducto.codigo}">  
+                                        #{producto.idProducto.codigo}
+                                    </p:column>                            
+                                    <p:column headerText="Nombre Producto"  filterMatchMode="contains" filterBy="#{producto.idProducto.nombre}">  
+                                        #{producto.idProducto.nombre}
+                                    </p:column>                            
+                                    <p:column headerText="Cantidad Solicitada"  filterMatchMode="contains">  
+                                        <h:outputText value="#{producto.cantidad}" />
+                                    </p:column>                            
+                                    <p:column headerText="Cantidad Entegada"  filterMatchMode="contains">  
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{producto.cantidadEntregada}" /></f:facet>
+                                            <f:facet name="input"><p:spinner value="#{producto.cantidadEntregada}" min="1"  size="5"/></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>                            
+                                </p:dataTable>
+                            </div>
+                        </div><!--/row-->
+
+                        <br />
+                        <div class="row">
+                        <div class="col-sm-5 col-xs-12">
+                            <p:outputLabel value="Observaciones" />
+                            <p:inputTextarea styleClass="form-control" rows="6" cols="16" placeholder="Observaciones de la entrada" value="#{entradaOrdenCompraMB.observaciones}"/>
+
+                        </div>
+                        </div>
+                    </p:outputPanel>
+                    <!--/productos-->
+                </p:panel>
+                <!--Orden de compra-->
+                <p:dialog id="IdDialogoOrdenCompra" header="BUSCAR ORDENES" widgetVar="dialogOrdenes" resizable="false" modal="true">  
+                    <p:ajax event="close" oncomplete="PF('wvTablaOrdenes').clearFilters(); PF('wvTablaOrdenes').getPaginator().setPage(0);"/>
+                    <table>
+                        <tr>
+                            <td>
+                                <p:dataTable 
+                                    id="IdTablaOrdenes" 
+                                    var="orden" 
+                                    widgetVar="wvTablaOrdenes"
+                                    value="#{entradaOrdenCompraMB.listaOrdenCompra}"
+                                    rowKey="#{orden.idOrdenCompra}"  
+                                    selection="#{entradaOrdenCompraMB.ordenCompra}" 
+                                    paginator="true"
+                                    style="width: 600px; height: 300px;"
+                                    rows="10"                                    
+                                    paginatorPosition="bottom"                                
+                                    emptyMessage="No hay ordenes"
+                                    scrollable="true" 
+                                    currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                    paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"                                    
+                                    pageLinks="5"                                   
+                                    selectionMode="single"
+
+                                    resizableColumns="true">                                   
+                                    <p:column headerText="Número Documento" filterBy="#{orden.nroDocumento}" filterMatchMode="contains">  
+                                        #{orden.nroDocumento}  
+                                    </p:column>                            
+                                    <p:column headerText="Proveedor" filterBy="#{orden.idProveedor.razonSocial}" filterMatchMode="contains">  
+                                        #{orden.idProveedor.razonSocial}  
+                                    </p:column>                            
+                                    <p:column headerText="Estado" filterBy="#{orden.estado}" filterMatchMode="contains">  
+                                        #{orden.estado}
+                                    </p:column>                            
+                                    <p:column headerText="Total" filterMatchMode="contains">  
+                                        #{orden.total}
+                                    </p:column>                            
+                                </p:dataTable>  
+                            </td>    
+                        </tr>
+                        <tr>
+                            <td>
+                                <br/>
+                                <p:commandButton 
+                                    value="Cargar seleccionado"                                
+                                    process="@this,IdTablaOrdenes"
+                                    update="IdFormEntradaOrdenCompra:opFormulario,IdFormEntradaOrdenCompra:opProductos"
+                                    oncomplete="PF('dialogOrdenes').hide()"
+                                    actionListener="#{entradaOrdenCompraMB.buscar}"/>
+                            </td>    
+                        </tr>
+                    </table>
+                </p:dialog>
+            </div>
+        </h:form>   
+    </h:body>
+</html>
+

@@ -1,0 +1,245 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">  
+    <h:head>
+        <title>Usuarios</title>
+        <link href="../recursos/css/estilos.css" rel="stylesheet"/>        
+        <link href="../recursos/css/metro-bootstrap.css" rel="stylesheet"/>
+        <link href="../recursos/css/iconFont.css" rel="stylesheet"/>
+        <script type="text/javascript" src="../recursos/js/calendario.js"></script> 
+        <script type="text/javascript">
+            $(document).keypress(
+                    function (event) {
+                        if (event.which == '13') {
+                            event.preventDefault();
+                        }
+
+
+                    });
+        </script>
+    </h:head>
+    <h:body>
+        #{historiasMB.inicializar()}
+        <h:form id="IdFormRegistroClinico">  
+            <p:growl id="IdMensajeUsuarios"  showDetail="true" sticky="false" autoUpdate="true" life="2000"/>
+            <table style="margin-left: auto; margin-right: auto;" >
+                <tr><td colspan="2"><h2>ORDENES MEDICAS</h2></td></tr> 
+
+                <!--...-->
+                <tr>
+                    <td colspan="2"><h2>DIAGNOSTICOS</h2></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p:outputLabel styleClass="labelFormulario" style="width: 182px;" value="DIAGNOSTICO PPAL"/>
+                        <p:focus for="IdFocus" />
+                        <p:autoComplete size="86" id="IdFocus" value="#{historiasMB.datosFormulario.dato0}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p:outputLabel styleClass="labelFormulario" style="width: 182px;" value="DIAGNOSTICO RELACIONADO 1"/>
+                        <p:autoComplete size="86" value="#{historiasMB.datosFormulario.dato1}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p:outputLabel styleClass="labelFormulario" style="width: 182px;" value="DIAGNOSTICO RELACIONADO 2"/>
+                        <p:autoComplete size="86" value="#{historiasMB.datosFormulario.dato2}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/>
+                    </td>
+                </tr>   
+
+                <!---->
+                <tr>
+                    <td colspan="2">
+                        <div style="width: 80%; margin-left: auto; margin-right: auto;">
+
+                            <p:commandButton 
+                                title="Agregar" value="&nbsp;"
+                                styleClass="icon-plus-2 fg-lightBlue bg-white no-border"
+                                actionListener="#{historiasMB.cargarDialogoAgregarItemMedicamento}"
+                                style="font-size: 20px; width: 20px; height: 20px; left: 20px; "  /> 
+                            &nbsp;
+                            <p:commandButton 
+                                title="Quitar medicamento" value="&nbsp;"                                        
+                                styleClass="icon-minus-2 fg-lightBlue bg-white no-border"                     
+                                actionListener="#{historiasMB.quitarItemMedicamento}"
+                                style="font-size: 20px; width: 20px; height: 20px; left: 20px; " update="tablaAgregarItemMedicamento"/> 
+                            <br/><br/>
+
+                            <p:dataTable 
+                                id="tablaAgregarItemMedicamento" 
+                                var="item" 
+                                widgetVar="wvtablaMedicamentos"
+                                value="#{historiasMB.listaMedicamentos}" 
+                                filteredValue="#{historiasMB.listaMedicamentosFiltro}"
+                                selection="#{historiasMB.medicamentoSeleccionado}"                                     
+                                rowKey="#{item.codigo}"
+                                selectionMode="single"
+                                paginator="true"
+                                rows="5"                                    
+                                paginatorPosition="bottom"                                
+                                emptyMessage="No hay registros"
+                                scrollable="true" 
+                                scrollHeight="250"
+                                currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                pageLinks="5"
+                                resizableColumns="false">                                                                                               
+                                <p:column headerText="CÓDIGO"  filterBy="#{item.codigo}" filterMatchMode="contains">
+                                    #{item.codigo}
+                                </p:column>
+                                <p:column headerText="DESCRIPCIÓN" filterBy="#{item.descripcion}" filterMatchMode="contains">
+                                    #{item.descripcion}
+                                </p:column>
+                                <p:column headerText="CANT."  filterBy="#{item.cantidad}" filterMatchMode="contains">
+                                    #{item.cantidad}
+                                </p:column>
+                                <p:column headerText="DOSIS" filterBy="#{item.dosis}" filterMatchMode="contains">
+                                    #{item.dosis}
+                                </p:column>
+                                <p:column headerText="PRESENTACIÓN" filterBy="#{item.presentacion}" filterMatchMode="contains">
+                                    #{item.presentacion}
+                                </p:column>
+                                <p:column headerText="CONCENTRACIÓN" filterBy="#{item.concentracion}" filterMatchMode="contains">
+                                    #{item.concentracion}
+                                </p:column>
+                                <p:column headerText="VÍA ADMIN." filterBy="#{item.viaAdmin}" filterMatchMode="contains">
+                                    #{item.viaAdmin}
+                                </p:column>
+                                <p:column headerText="POSOLOGÍA" filterBy="#{item.posologia}" filterMatchMode="contains">
+                                    #{item.posologia}
+                                </p:column>
+                                <p:column headerText="OBSERVACIONES" filterBy="#{item.observacion}" filterMatchMode="contains">
+                                    #{item.observacion}
+                                </p:column>
+                            </p:dataTable>  
+                        </div>
+                    </td>
+
+                </tr>
+                <!--/-->
+                <tr>
+                    <td colspan="2"><h2>OBSERVACIONES</h2></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p:inputTextarea style='width:100%' rows ='5' value="#{historiasMB.datosFormulario.dato3}" />
+                    </td>
+                </tr>
+
+
+
+                <tr><td>&nbsp;</td></tr>
+                <tr>
+                    <td colspan="2">
+                        <p:outputLabel value="FECHA-HORA REGISTRO"/><p:calendar navigator="true" locale="es" value="#{historiasMB.fechaReg}" pattern="dd/MM/yyyy HH:mm:ss" size="23" mask="true"  />
+                    </td>
+                </tr>
+                <tr><td>&nbsp;</td></tr>
+                <tr>
+                    <td><p:outputLabel value="MEDICO"/></td>
+                    <td><p:outputLabel value="ESPECIALIDAD"/></td>
+                </tr>
+                <tr>
+                    <td>
+                        <p:selectOneMenu style="width: 315px;" value="#{historiasMB.idPrestador}" filter="true" filterMatchMode="contains">                            
+                            <p:ajax event="change" listener="#{historiasMB.cambiaMedico}" update="IdEspecialidad"/>
+                            <f:selectItem itemLabel="" itemValue=""/>
+                            <f:selectItems value="#{historiasMB.listaPrestadores}" var="p" itemLabel="#{p.primerNombre} #{p.segundoNombre} #{p.primerApellido} #{p.segundoApellido}" itemValue="#{p.idUsuario}"/>
+                        </p:selectOneMenu>
+                    </td>
+                    <td><p:inputText id="IdEspecialidad" readonly="true" styleClass="width1" value="#{historiasMB.especialidadPrestador}"/></td>
+                </tr>                
+                <tr><td>&nbsp;</td></tr>
+                <tr>
+                    <td colspan="2">
+                        <p:commandButton icon="ui-icon-disk" value="Guardar Nuevo Registro" actionListener="#{historiasMB.guardarRegistro}" disabled="#{historiasMB.modificandoRegCli}"/>
+                        <p:commandButton icon="ui-icon-arrowthickstop-1-s" value="Actualizar Registro" actionListener="#{historiasMB.actualizarRegistro}" disabled="#{!historiasMB.modificandoRegCli}" rendered="#{loginMB.superUsuario}"/>
+                        <p:commandButton icon="ui-icon-document" value="Limpiar Formulario" actionListener="#{historiasMB.btnLimpiarFormulario}" update="IdFormRegistroClinico"/>
+                    </td>
+                </tr>
+            </table>
+
+            <p:dialog id="IdDialogoAgregarMedicamento" header="AGREGAR MEDICAMENTO" widgetVar="dialogoAgregarItemMedicamento" resizable="false" modal="true">  
+                <p:panelGrid id="IdPanelAgregarItemMedicamento" styleClass="panelGridSinBordes" columns="4">
+
+                    <p:outputLabel styleClass="campoObligatorio" value="Medicamento" />
+                    <p:selectOneMenu  style="width: 300px;" value="#{historiasMB.idMedicamento}"  filter="true" filterMatchMode="contains">
+                        <f:selectItem itemLabel="" itemValue=""/>
+                        <f:selectItems value="#{aplicacionGeneralMB.listaMedicamentos}" var="p" itemLabel="#{p.nombreMedicamento}" itemValue="#{p.idMedicamento}" />
+                        <f:ajax event="change" listener="#{historiasMB.cambiarMedicamento}" render="IdPanelAgregarItemMedicamento"/> 
+                    </p:selectOneMenu>  
+                    <p:outputLabel styleClass="campoObligatorio" value="Código" />
+                    <p:inputText  value="#{historiasMB.codigo}"/>
+                    <p:outputLabel styleClass="campoObligatorio" value="Cantidad" />
+                    <p:inputText  value="#{historiasMB.cantidad}"/>
+                    <p:outputLabel styleClass="campoObligatorio" value="Dosis" />
+                    <p:inputText  value="#{historiasMB.dosis}"/>
+                    <p:outputLabel styleClass="campoObligatorio" value="Presentación" />
+                    <p:inputText  value="#{historiasMB.presentacion}"/>
+                    <p:outputLabel styleClass="campoObligatorio" value="Concentración" />
+                    <p:inputText  value="#{historiasMB.concentracion}"/>    
+                    <p:outputLabel styleClass="campoObligatorio" value="Vía de administración" />
+                    <p:inputText  value="#{historiasMB.viaAdmin}"/>
+                    <p:outputLabel styleClass="campoObligatorio" value="Posología" />
+                    <p:inputText  value="#{historiasMB.posologia}"/>
+                    <p:outputLabel  value="Observaciones" />
+                    <p:inputTextarea value="#{historiasMB.observacion}">
+                    </p:inputTextarea>
+                    <p:commandButton 
+                        value="Agregar"                         
+                        actionListener="#{historiasMB.agregarMedicamento}" update="tablaAgregarItemMedicamento IdPanelAgregarItemMedicamento"/>
+                    <p:commandButton 
+                        value="Cerrar"                         
+                        actionListener="#{historiasMB.cerrarFormMedicamentos}" update="tablaAgregarItemMedicamento"/>
+                </p:panelGrid>
+            </p:dialog>
+
+            <p:dialog id="IdTextosDlgPredefinidos" header="TEXTOS PREDEFINIDOS" width="645" widgetVar="dlgTextosPredefinidos" resizable="false" closable="true" modal="true">                                
+                <p:panelGrid styleClass="panelGridSinBordes" id="IdPanelTextosPredefinidos">
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel   styleClass="labelFormulario" style="width: 60px;" value="Categoría: "/>
+                            <p:selectOneMenu styleClass="campoFormulario" style="width: 220px;" value="#{historiasMB.idMaestroTextoPredef}" >
+                                <f:ajax event="change" listener="#{historiasMB.cambiaMaestro}" render="IdComboTextosPredefinidos IdEditorTextoPredefinido IdNombrePredefinido"/> 
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItems value="#{historiasMB.listaMaestrosTxtPredefinidos}" var="maestro" itemValue="#{maestro.idMaestro}" itemLabel="#{maestro.nombre}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel   styleClass="labelFormulario" style="width: 60px;" value="Predefinidos: "/>
+                            <p:selectOneMenu styleClass="campoFormulario" style="width: 220px;" id="IdComboTextosPredefinidos"  value="#{historiasMB.idTextoPredef}" >
+                                <f:ajax 
+                                    event="change"
+                                    listener="#{historiasMB.cambiaTextoPredefinido}"                                                
+                                    render="IdEditorTextoPredefinido IdNombrePredefinido"/>                                 
+                                <f:selectItems value="#{historiasMB.listaTxtPredefinidos}" var="texto" itemValue="#{texto.idTxtPredefinido}" itemLabel="#{texto.nombre}"/>
+                            </p:selectOneMenu>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel styleClass="labelFormulario" value="Nombre: " style="width: 60px;"/>
+                            <p:inputText   styleClass="campoFormulario" id="IdNombrePredefinido" size="39" value="#{historiasMB.nombreTextoPredefinido}"/>                                                    
+                            <p:commandButton icon="ui-icon-circle-arrow-s" title="Usar seleccionado"    actionListener="#{historiasMB.usarTextoPredefinido}"/>
+                            <p:commandButton icon="ui-icon-disk"           title="Guardar/Actualizar"   actionListener="#{historiasMB.guardarTextoPredefinido}" />            
+                            <p:commandButton icon="ui-icon-trash"          title="Eliminar predefinido" id="IdBtnEliminarPredefinido"/>                                        
+                            <p:overlayPanel for="IdBtnEliminarPredefinido" widgetVar="opEliminarPredefinido">
+                                <p:outputLabel   styleClass="labelFormulario" value="¿Confirma la eliminación?  "/>
+                                <p:commandButton value="Si" title="Crear nueva categoría" actionListener="#{historiasMB.eliminarPredefinido}" oncomplete="PF('opEliminarPredefinido').hide();"/>                        
+                            </p:overlayPanel> 
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:editor id="IdEditorTextoPredefinido" value="#{historiasMB.detalleTextoPredef}" width="600" controls="bold italic underline font size bullets numbering alignleft center alignright justify undo redo"/>
+                        </p:column>
+                    </p:row>
+
+                </p:panelGrid>             
+            </p:dialog>
+        </h:form>        
+    </h:body>
+</html>

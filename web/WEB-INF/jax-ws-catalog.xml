@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="https://eros.asmetsalud.org.co:8443/WSAsmetSalud/ComprobacionDerechosBean?wsdl" uri="wsdl/eros.asmetsalud.org.co_8443/WSAsmetSalud/ComprobacionDerechosBean.wsdl"/>
+    <system systemId="https://eros.asmetsalud.org.co:8443/WSAsmetSalud/ComprobacionDerechosBean?wsdl=ComprobacionDerechosRemote.wsdl" uri="wsdl/eros.asmetsalud.org.co_8443/WSAsmetSalud/ComprobacionDerechosBean.wsdl_ComprobacionDerechosRemote.wsdl"/>
+</catalog>

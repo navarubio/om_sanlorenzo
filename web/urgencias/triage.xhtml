@@ -1,0 +1,262 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Triage</title>
+        <script src="../recursos/js/calendario.js"/>
+        <link href="../recursos/css/estilos.css" rel="stylesheet"/>
+        <link href="../recursos/css/metro-bootstrap.css" rel="stylesheet"/>
+        <link href="../recursos/css/iconFont.css" rel="stylesheet"/>        
+    </h:head>
+    <h:body>
+        <p:growl id="msgbTriage" autoUpdate="true" showDetail="true"/> 
+        <br/>   
+        <div>
+            #{triageMB.inicializar()}
+            <div class="text-left">
+                <p:outputLabel style="font-size: 150%" value="Fecha:"/>
+                <p:calendar size="11" id="datetime" value="#{triageMB.fecha}"
+                            pattern="dd/MM/yyyy" /> 
+                <p:calendar size="7" value="#{triageMB.hora}"
+                            pattern="HH:mm:ss" /> 
+            </div>
+            <div class="text-right">
+                <p:outputLabel style="font-size: 150%" value="#{loginMB.usuarioActual.cargoActual}"/> :
+                <p:outputLabel style="font-style: italic;font-size: 150%" value="#{loginMB.usuarioActual.nombreCompleto()}"/>
+            </div>
+        </div>
+
+
+        <h:form id="formTriage" style="width: auto">
+
+            <!-- SELECCION DEL PACIENTE -->                    
+            <p:fieldset legend="Listado de Pacientes en espera de Triage" rendered="#{triageMB.pacienteSeleccionado.idPaciente == null}">
+                <table>  
+                    <tr>
+                        <td>
+                            <p:dataTable
+                                id="tableElegirPaciente"
+                                var="admision" 
+                                value="#{triageMB.listaAdmisionesPaciente}"
+                                paginator="true"
+                                rows="3"
+                                lazy="true"
+                                paginatorPosition="bottom"                                
+                                emptyMessage="No se encontraron pacientes admitidos para realizarle triage"
+                                scrollable="true" 
+                                pageLinks="5"
+                                widgetVar="tableElegirPaciente"
+                                resizableColumns="true"
+                                >
+                                <p:column headerText="NRO.ADMISION" width="25%" filterBy="#{admision.nroAdmision}" filterMatchMode="contains" filterStyle="width: 145px;">
+                                    <h:outputText value="#{admision.nroAdmision}"/>                                  
+                                </p:column>
+                                <p:column headerText="IDENTIFICACION" width="25%" filterBy="#{admision.idPaciente.identificacion}" filterMatchMode="contains" filterStyle="width: 145px;">
+                                    <h:outputText value="#{admision.idPaciente.identificacion}"/>                                  
+                                </p:column>
+                                <p:column headerText="PACIENTE" width="44%" filterBy="#{admision.idPaciente.primerNombre} #{admision.idPaciente.segundoNombre} #{admision.idPaciente.primerApellido} #{admision.idPaciente.segundoApellido}" filterStyle="width: 250px;" filterMatchMode="contains">
+                                    <h:outputText value="#{admision.idPaciente.primerNombre} #{admision.idPaciente.segundoNombre} #{admision.idPaciente.primerApellido} #{admision.idPaciente.segundoApellido}" />
+                                </p:column>
+                                <p:column headerText="GENERO" filterBy="#{admision.idPaciente.genero.descripcion}" width="20%" filterMatchMode="contains" >
+                                    <h:outputText value="#{admision.idPaciente.genero.descripcion}"/>                                  
+                                </p:column>
+                                <p:column headerText="EDAD" width="25%" filterBy="#{admision.idPaciente.edad}" filterMatchMode="contains" filterStyle="width: 145px;">
+                                    <h:outputText value="#{triageMB.calcularEdadInt(admision.idPaciente.fechaNacimiento)}"/>                                  
+                                </p:column>
+                                <p:column headerText="FECHA ADMISION" width="25%" filterBy="#{admision.fechaAdmision}" filterMatchMode="contains" filterStyle="width: 145px;">
+                                    <p:calendar size="10"  value="#{admision.fechaAdmision}"
+                                                pattern="dd/MM/yyyy" /> 
+                                    <p:calendar size="7" value="#{admision.horaAdmision}"
+                                                pattern="HH:mm:ss" />                              
+                                </p:column>
+                                <p:column  headerText="OPERACIONES" width="20%"  >
+                                    <p:commandButton title="Comenzar triage"  process="@this" actionListener="#{triageMB.iniciarTriage(admision)}" 
+                                                     update=":formTriage:tableElegirPaciente :formTriage" icon="fa fa-fw fa-gear">
+                                    </p:commandButton>
+                                </p:column>
+                            </p:dataTable>                                    
+                        </td>
+                    </tr>
+                </table>
+            </p:fieldset>
+            <p:fieldset id="idfieldsetdatosPaciente" legend="Datos del Paciente" rendered="#{triageMB.pacienteSeleccionado.idPaciente eq null ? false : true}"  > 
+                <table style="margin-left: auto; margin-right: auto;">
+                    <tr>
+                        <td>
+                            <p:graphicImage id="IdFoto" url="#{triageMB.urlFoto}" cache="false" width="80" height="70" rendered="#{triageMB.pacienteSeleccionado.idPaciente!=null}"/>                              
+                        </td>
+                        <td>
+                            <table>
+                                <tr>
+                                    <td>
+
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Paciente:" rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}" />
+                                        <p:outputLabel styleClass="labelFormulario" id="idpaciente" value="#{triageMB.pacienteSeleccionado.primerNombre} #{triageMB.pacienteSeleccionado.segundoNombre}
+                                                       #{triageMB.pacienteSeleccionado.primerApellido} #{triageMB.pacienteSeleccionado.segundoApellido}" rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Género:" rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel styleClass="labelFormulario" id="idsexo" value="#{triageMB.pacienteSeleccionado.genero.observacion}" rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Fecha Nacimiento:" rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel styleClass="labelFormulario"  id="idfecnac" value="#{triageMB.pacienteSeleccionado.fechaNacimiento}" rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}">
+                                            <f:convertDateTime locale="es_CO" pattern="MM/dd/yyyy"/>   
+                                        </p:outputLabel>                                       
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Edad:" rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel styleClass="labelFormulario" id="idedad" value="#{triageMB.pacienteSeleccionado.edad}" rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="G.S. RH:" rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel  styleClass="labelFormulario" id="idrh" value="#{triageMB.pacienteSeleccionado.grupoSanguineo.descripcion}" rendered="#{triageMB.pacienteSeleccionado.idPaciente!=null}"/>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Estado Civil:" rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel  styleClass="labelFormulario" id="idecivil" value="#{triageMB.pacienteSeleccionado.estadoCivil.descripcion}" rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Lugar Nacimiento:" rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel styleClass="labelFormulario" id="idlugnac"  value="#{triageMB.pacienteSeleccionado.municipio.descripcion} #{triageMB.pacienteSeleccionado.departamento.descripcion}" 
+                                                       rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Teléfono:" rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel styleClass="labelFormulario" id="idtel" value="#{triageMB.pacienteSeleccionado.telefonoResidencia}" rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Dirección:" rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel  styleClass="labelFormulario" id="iddir" value="#{triageMB.pacienteSeleccionado.direccion}" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left">
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Fecha:" rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:calendar  styleClass="labelFormulario" size="10" value="#{triageMB.urgAdmision.fechaAdmision}"
+                                                     pattern="dd/MM/yyyy" /> 
+                                        <p:calendar styleClass="labelFormulario" size="7" value="#{triageMB.urgAdmision.horaAdmision}"
+                                                    pattern="HH:mm:ss" /> 
+                                        <p:outputLabel styleClass="labelFormularioBold" value="de admisión" rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Atendido por:" rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                        <p:outputLabel  styleClass="labelFormulario" value="#{triageMB.urgAdmision.idPrestador.primerNombre}
+                                                        #{triageMB.urgAdmision.idPrestador.primerApellido}"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                <br></br>
+            </p:fieldset>
+            <p:fieldset id="idfieldsetdetalleTriage" legend="Detalle triage" rendered="#{triageMB.pacienteSeleccionado.idPaciente eq null ? false : true}"  > 
+                <table style="margin-left: auto; margin-right: auto;">
+                    <table>
+                        <tr>
+                            <td>
+                                <p:outputLabel styleClass="labelFormularioBold" value="Motivo:" rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}" />
+                                <p:inputTextarea styleClass="labelFormulario" placeholder="Ingrese el motivo de la urgencia" rows="3" value="#{triageMB.urgTriage.motivo}" style="width: 1100px" id="idMotivo"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <p:fieldset id="idfieldsetSignosVitalesTriage" legend="Signos vitales" rendered="#{triageMB.pacienteSeleccionado.idPaciente eq null ? false : true}"  > 
+                        <table>
+                            <tr>
+                                <td>
+                                    <p:outputLabel styleClass="labelFormularioBold" value="Peso:" rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}" />
+                                    <p:inputText maxlength="5" onblur="#{triageMB.determinarimc()}" id="idpeso" styleClass="campoFormulario" style="width: 45px" value="#{triageMB.urgTriage.peso}" >
+                                        <pe:keyFilter regEx="/[\d\.]/"/>
+                                        <p:ajax  update=":formTriage:idfieldsetSignosVitalesTriage"></p:ajax>
+                                    </p:inputText>
+                                    <p:outputLabel styleClass="labelFormularioBold" value="kg." rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                    <p:outputLabel styleClass="labelFormularioBold" value="Talla:" rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                    <p:inputText onblur="#{triageMB.determinarimc()}" maxlength="3" styleClass="campoFormulario" id="idtalla" style="width: 45px"  value="#{triageMB.urgTriage.talla}" 
+                                                 rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}">
+                                        <pe:keyFilter regEx="/[\d\-]/"/>
+                                        <p:ajax  update=":formTriage:idfieldsetSignosVitalesTriage"></p:ajax>
+                                    </p:inputText>
+                                    <p:outputLabel styleClass="labelFormularioBold" value="cm." rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                    <p:outputLabel styleClass="labelFormularioBold" value="MC:" rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                    <p:inputText readonly="true" maxlength="3" styleClass="campoFormulario" id="idmc" style="width: 45px" value="#{triageMB.urgTriage.mc}" 
+                                                 rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}">
+                                        <pe:keyFilter regEx="/[\d\-]/"/>
+                                    </p:inputText>
+                                    <p:outputLabel styleClass="labelFormularioBold" value="kg/m2" rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                    <p:outputLabel styleClass="labelFormularioBold" value="FC:" rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                    <p:inputText maxlength="3" styleClass="campoFormulario" id="idfc" style="width: 45px" value="#{triageMB.urgTriage.frecuenciaCardiaca}"
+                                                 rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}">
+                                        <pe:keyFilter regEx="/[\d\-]/"/>
+                                    </p:inputText>
+                                    <p:outputLabel styleClass="labelFormularioBold" value="Min. FR:" rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                    <p:inputText maxlength="3" styleClass="campoFormulario" id="idfr" style="width: 45px" value="#{triageMB.urgTriage.frecuencia_respiratoria}"
+                                                 rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}">
+                                        <pe:keyFilter regEx="/[\d\-]/"/>
+                                    </p:inputText>
+                                    <p:outputLabel styleClass="labelFormularioBold" value="PA:" rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                    <p:inputText maxlength="3" styleClass="campoFormulario" id="idpammin" style="width: 45px"  value="#{triageMB.urgTriage.presionArteriaMinima}" 
+                                                 rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}">
+                                        <pe:keyFilter regEx="/[\d\-]/"/>
+                                    </p:inputText>
+                                    <p:outputLabel styleClass="labelFormularioBold" value="/" rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                    <p:inputText maxlength="3" styleClass="campoFormulario" id="idpamax" style="width: 45px" value="#{triageMB.urgTriage.presionArteriaMaxima}"
+                                                 rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}">
+                                        <pe:keyFilter regEx="/[\d\-]/"/>
+                                    </p:inputText>
+                                    <p:outputLabel styleClass="labelFormularioBold" id="idtemperatura" value="Temp." rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                    <p:inputText maxlength="3" styleClass="campoFormulario" value="#{triageMB.urgTriage.temperatura}" style="width: 45px" 
+                                                 rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}">
+                                        <pe:keyFilter regEx="/[\d\-]/"/>
+                                    </p:inputText>
+                                    <p:outputLabel styleClass="labelFormularioBold" value="°C" rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                    <p:outputLabel styleClass="labelFormularioBold" id="idpsaturacion" value="Saturación:" rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                    <p:inputText maxlength="3" styleClass="campoFormulario" value="#{triageMB.urgTriage.saturacion}" style="width: 45px"  
+                                                 rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}">
+                                        <pe:keyFilter regEx="/[\d\-]/"/>
+                                    </p:inputText>
+                                    <p:outputLabel styleClass="labelFormularioBold"  value="%" rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </p:fieldset>
+                    <table>
+                        <tr>
+                            <td>
+                                <p:outputLabel styleClass="labelFormularioBold" value="Hallazgos clinicos:" 
+                                               rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}" />
+                                <p:inputTextarea  styleClass="labelFormulario" maxlength="1000"
+                                                  placeholder="Ingrese los hallazcos clinicos"
+                                                  value="#{triageMB.urgTriage.hallazgosClinico}" rows="5" 
+                                                  style="width: 400px" id="idhallazgos"/>
+
+                                <p:outputLabel styleClass="labelFormularioBold" value="Conducta observada:" 
+                                               rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}" />
+                                <p:inputTextarea  styleClass="labelFormulario" placeholder="Ingrese detalles de la conducta observada en el paciente" 
+                                                  value="#{triageMB.urgTriage.conducta}" rows="5" maxlength="1000"
+                                                  style="width: 400px" id="idconducta"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <br></br>
+                                <p:outputLabel   styleClass="campoObligatorio" value="Impresión Diagnostica"/>
+                                <p:selectOneMenu  filter="true" filterMatchMode="contains" styleClass="campoFormulario" style="width: 500px;" value="#{triageMB.immpresionDiagnostica}">                                    
+                                    <f:selectItems  value="#{aplicacionGeneralMB.listaDiagnosticosUrgencias}" />
+                                </p:selectOneMenu> 
+                                <p:outputLabel   styleClass="campoObligatorio" value="Clasificación triage:"/>
+                                <p:selectOneMenu filter="true" filterMatchMode="contains" styleClass="campoFormulario" style="width: 80px;" 
+                                                 value="#{triageMB.urgTriage.nivelTriage}">                                    
+                                    <f:selectItems value="#{triageMB.nivelTriage}" 
+                                                   var="nivel" itemLabel="#{nivel.description}" itemValue="#{nivel}" />
+                                </p:selectOneMenu> 
+                            </td>
+                        </tr>           
+                    </table>
+                </table>
+                <br></br>
+            </p:fieldset>
+            <p:commandButton style="width: auto"
+                             value="Guardar triage" actionListener="#{triageMB.guardarTriage()}" 
+                             update=":formTriage formTriage:tableElegirPaciente" 
+                             rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}"  />
+            <p:commandButton style="width: auto"
+                             value="Cancelar" actionListener="#{triageMB.cancelarTriage()}" update=":formTriage" 
+                             rendered="#{triageMB.pacienteSeleccionado.idPaciente !=null}" />
+        </h:form>
+    </h:body>
+</html>

@@ -1,0 +1,205 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"      
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>        
+        <title>Categorías</title>
+        <link href="../recursos/css/estilos.css" rel="stylesheet"/>        
+        <link href="../recursos/css/metro-bootstrap.css" rel="stylesheet"/>
+        <link href="../recursos/css/iconFont.css" rel="stylesheet"/>
+        <link href="../recursos/css/bootstrap.min.css" rel="stylesheet"/>        
+        <script type="text/javascript" src="../recursos/js/calendario.js"/>
+
+    </h:head>
+    <h:body>
+        <h:form id="idFormProducto" >
+            #{productoMB.init()}
+            <p:growl id="growl" showDetail="true" sticky="false" autoUpdate="true" life="2000"  />
+            <br/>            
+
+            <br/> 
+            <div class="container">
+                <div class="row">
+                    <div style="padding: 5px;">
+                        <p:outputPanel id="opBotones">
+                            <p:commandButton 
+                                title="Nueva Producto" value="&nbsp;"                                        
+                                styleClass="icon-new fg-lightBlue bg-white no-border"                    
+                                actionListener="#{productoMB.nuevo}"
+                                process="@this"
+                                update="idFormProducto:opProductos,idFormProducto:opBotones,idFormProducto:opFormulario"
+                                rendered="#{productoMB.renderFormBotones}"
+                                style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/> 
+                            &nbsp;
+                            <p:commandButton 
+                                title="Buscar Producto" value="&nbsp;"                                        
+                                styleClass="icon-search fg-lightBlue bg-white no-border" 
+                                oncomplete="PF('dialogoBuscarProducto').show()"
+                                process="@this"
+                                rendered="false"
+                                style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/> 
+                            &nbsp;
+                            <p:commandButton 
+                                title="Guardar/Actualizar Producto" value="&nbsp;"
+                                styleClass="icon-floppy fg-lightBlue bg-white no-border" 
+                                actionListener="#{productoMB.guardar}"     
+                                rendered="#{productoMB.renderFormBotones}"
+                                process="@this,idFormProducto:opFormulario"
+                                update="idFormProducto:opFormulario"
+                                style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/>                            
+                            &nbsp;
+                            <p:commandButton                     
+                                title="Eliminar Producto" value="&nbsp;"                                        
+                                styleClass="icon-cancel fg-lightBlue bg-white no-border"                     
+                                rendered="false"
+                                process="@this,idFormProducto"
+                                update="idFormProducto"
+                                actionListener="#{productoMB.eliminar}"
+                                style="font-size: 20px; width: 20px; height: 20px; left: 20px; "> 
+                                <p:confirm header="Confirmación" message="¿Seguro desea eliminar el producto ?" icon="ui-icon-alert" />
+                            </p:commandButton>
+                            &nbsp;
+                            <p:commandButton                     
+                                title="Cancelar" value="&nbsp;"                                        
+                                styleClass="icon-undo fg-lightBlue bg-white no-border"                     
+                                rendered="#{productoMB.renderFormBotones}"
+                                process="@this"
+                                update="idFormProducto"
+                                actionListener="#{productoMB.cancelar}"
+                                style="font-size: 20px; width: 20px; height: 20px; left: 20px; "> 
+                            </p:commandButton>
+                            &nbsp;                
+                            
+                        </p:outputPanel>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p:outputLabel value="Categoría" styleClass="campoObligatorio2"/><br />
+                        <p:selectOneMenu filter="true" value="#{productoMB.categoria.idCategoria}" >
+                            <f:selectItem itemLabel="-- Seleccione Categoría --" itemValue="0" />
+                            <f:selectItems value="#{productoMB.listaCategorias}" var="categoria" itemLabel="#{categoria.nombre}" itemValue="#{categoria.idCategoria}" />
+                            <f:ajax event="change" listener="#{productoMB.validarCategoria}" render="idFormProducto:opProductos idFormProducto:opBotones"/>
+                        </p:selectOneMenu>
+                    </div>
+                </div>
+                <p:outputPanel id="opProductos">
+                    <p:dataTable id             =   "dtProductos" 
+                                 rendered       =   "#{productoMB.renderFormTabla}" 
+                                 emptyMessage   =   "No existen productos" 
+                                 value          =   "#{productoMB.listaProductos}" 
+                                 var            =   "producto"
+                                 paginator      =   "true"
+                                 rows           =   "10"                                    
+                                 paginatorPosition  ="bottom"                                
+                                 >
+                        <p:column headerText="Código Producto" filterMatchMode="contains" filterBy="#{producto.codigo}">  
+                            <h:outputText value="#{producto.codigo}" style="font-size: 10px"/>
+                        </p:column>                            
+                        <p:column headerText="Nombre Producto" filterMatchMode="contains" filterBy="#{producto.nombre}">  
+                            <h:outputText value="#{producto.nombre}" style="font-size: 10px"/>
+                        </p:column>                            
+                        <p:column headerText="Nombre Genérico" filterMatchMode="contains" filterBy="#{producto.nombreGenerico}">  
+                            <h:outputText value="#{producto.nombreGenerico}" style="font-size: 10px"/>
+                        </p:column>                            
+                        <p:column headerText="Unidad" filterMatchMode="contains" filterBy="#{producto.idUnidadMedida.codigo}">  
+                            <h:outputText value="#{producto.idUnidadMedida.codigo}" style="font-size: 10px"/>
+                        </p:column>                            
+                        <p:column headerText="Presentación" filterMatchMode="contains" filterBy="#{producto.idPresentacion.descripcion}">  
+                            <h:outputText value="#{producto.idPresentacion.descripcion}" style="font-size: 10px"/>
+                        </p:column>                            
+                        <p:column headerText="" >
+                            <p:commandButton styleClass="icon-pencil fg-lightBlue"  title="Editar" value="" actionListener="#{productoMB.editar(producto)}" process="@this" />&nbsp;
+                                <p:commandButton styleClass="icon-cancel fg-lightBlue"  title="Eliminar" value="" actionListener="#{productoMB.eliminar(producto)}" process="@this" >
+                                    <p:confirm header="Confirmación" message="¿Seguro desea eliminar el producto #{producto.nombre} (el produto se desactivará) ?" icon="ui-icon-alert" />
+                                </p:commandButton> &nbsp;
+                        </p:column>
+                    </p:dataTable>
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+                </p:outputPanel>
+                <p:outputPanel id="opFormulario">
+                    <p:panel id="pProductos" style="padding-left: 5px;" rendered="#{productoMB.renderFormProducto}">
+                        <div class="row">
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Código articulo" styleClass="campoObligatorio2"/>
+                                <p:inputText value="#{productoMB.producto.codigo}" styleClass="form-control" id="txtCodigo2"  />
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Código CUMS" rendered="#{productoMB.renderCodigoCUMS}"/>
+                                <p:inputText value="#{productoMB.producto.codigoCums}" styleClass="form-control" id="txtCodigoCums"  rendered="#{productoMB.renderCodigoCUMS}"/>
+                            </div>
+                        </div><!-- /row-->
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12">
+                                <p:outputLabel value="Nombre" styleClass="campoObligatorio2"/>
+                                <p:inputText value="#{productoMB.producto.nombre}" styleClass="form-control" id="txtNombreArticulo"  />
+                            </div>
+                            <div class="col-sm-6 col-xs-12">
+                                <p:outputLabel value="Nombre Genérico" />
+                                <p:inputText value="#{productoMB.producto.nombreGenerico}" styleClass="form-control" id="txtNombreArticuloGenerico"  />
+                            </div>
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Registro Sanitario " />
+                                <p:inputText value="#{productoMB.producto.registroSanitario}" styleClass="form-control" id="txtRegistroSanitario"  />
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Costo" />
+                                <p:inputText value="#{productoMB.producto.costo}" styleClass="form-control" id="txtCosto"  onkeypress="return permite(event, 'num')"/>
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Stock Mínimo" />
+                                <p:inputText value="#{productoMB.producto.stockMinimo}" styleClass="form-control" id="txtStockimo"  onkeypress="return permite(event, 'num')"/>
+                            </div>
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Unidad de Medida" />
+                                <p:selectOneMenu styleClass="campoFormulario" filter="true" value="#{productoMB.unidaMedida.id}">
+                                    <f:selectItem itemLabel="-- Seleccione una unidad --" itemValue="0"/>
+                                    <f:selectItems value="#{productoMB.listaUnidades}" var="unidad" itemLabel="#{unidad.codigo}" itemValue="#{unidad.id}" />
+                                </p:selectOneMenu>
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Vía de Administración"/>
+                                <p:selectOneMenu  value="#{productoMB.viaAdministracion.id}">
+                                    <f:selectItem itemLabel="-- Seleccione una vía --" itemValue="0"/>
+                                    <f:selectItems value="#{productoMB.listaViaAdministracion}" var="via" itemLabel="#{via.descripcion}" itemValue="#{via.id}" />
+                                </p:selectOneMenu>
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Forma de presentación"/>
+                                <p:selectOneMenu  value="#{productoMB.presentacion.id}">
+                                    <f:selectItem itemLabel="-- Seleccione una presentación --" itemValue="0"/>
+                                    <f:selectItems value="#{productoMB.listaPresentacion}" var="via" itemLabel="#{via.descripcion}" itemValue="#{via.id}" />
+                                </p:selectOneMenu>
+                            </div>
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-sm-1 col-xs-12">
+                                <p:outputLabel value="POS " /><br />
+                                <p:selectBooleanCheckbox value="#{productoMB.producto.productoPos}" />
+                            </div>                        
+                            <div class="col-sm-1 col-xs-12">
+                                <p:outputLabel value="Por Lote " /><br />
+                                <p:selectBooleanCheckbox value="#{productoMB.producto.lote}" />
+                            </div>                        
+                            <div class="col-sm-1 col-xs-12">
+                                <p:outputLabel value="Activo" /><br />
+                                <p:selectBooleanCheckbox value="#{productoMB.producto.activo}" />
+                            </div>
+                        </div><!--/row-->
+                    </p:panel>
+                </p:outputPanel>
+            </div>
+        </h:form>
+    </h:body>
+</html>
+

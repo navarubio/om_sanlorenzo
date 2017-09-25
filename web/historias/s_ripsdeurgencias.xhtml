@@ -1,0 +1,450 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">  
+    <h:head>
+        <title>Usuarios</title>
+        <link href="../recursos/css/estilos.css" rel="stylesheet"/>        
+        <link href="../recursos/css/metro-bootstrap.css" rel="stylesheet"/>
+        <link href="../recursos/css/iconFont.css" rel="stylesheet"/>
+        <script type="text/javascript" src="../recursos/js/calendario.js"></script> 
+        <script type="text/javascript">
+            $(document).keypress(
+                    function (event) {
+                        if (event.which == '13') {
+                            event.preventDefault();
+                        }
+
+
+                    });
+        </script>
+    </h:head>
+    <h:body>
+        <h:form id="IdFormRegistroClinico">  
+            <p:growl id="IdMensajeUsuarios"  showDetail="true" sticky="false" autoUpdate="true" life="4000"/>
+            <table style="margin-left: auto; margin-right: auto;">
+
+                <tr><td colspan="2"><h2>RIPS DE URGENCIAS</h2></td></tr>
+
+                <!--DATOS DE LA FACTURA-->
+                <tr><td colspan="2"><h2>DATOS DE LA FACTURA</h2></td></tr>         
+                <div>
+                    <tr>
+                        <td><p:outputLabel value="FACTURA NRO:"/></td>
+                        <td><p:outputLabel value="ADMINSIÓN NRO:"/></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato0}" maxlength="15" placeholder="15 caracteres máximo"/>
+                        </td>                 
+                        <td>
+                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato1}" maxlength="15" placeholder="15 caracteres máximo"/>
+                        </td>                 
+                    </tr>              
+                </div>
+
+
+                <!--DATOS DEL PACIENTE-->
+                <tr><td colspan="2"><h2>DATOS DEL PACIENTE</h2></td></tr>         
+                <div>
+                    <tr>
+                        <td><p:outputLabel value="ESTADO DE EMBARAZO:"/></td>
+                        <td><p:outputLabel value="TIPO DE LA CONSULTA:"/></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:selectOneMenu styleClass="campoFormulario"   value="#{historiasMB.datosFormulario.dato2}">
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItem itemLabel="T1" itemValue="T1" />
+                                <f:selectItem itemLabel="T2" itemValue="T2" />
+                                <f:selectItem itemLabel="T3" itemValue="T3" />
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="N/A" itemValue="N/A" />
+                            </p:selectOneMenu>
+                        </td>
+                        <td>
+                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato3}" maxlength="70" placeholder="70 caracteres máximo"/>
+                        </td>
+                    </tr>
+                </div>
+
+
+                <!--CONSULTA EXTERNA-->
+                <tr><td colspan="2"><h2>CONSULTA EXTERNA</h2></td></tr>         
+                <div>
+                    <tr>
+                        <td><p:outputLabel value="ACCIDENTE OFÍDICO:"/></td>
+                        <td><p:outputLabel value="ACCIDENTE RÁBICO:"/></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:selectOneMenu styleClass="campoFormulario"   value="#{historiasMB.datosFormulario.dato4}">
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                        </td>
+                        <td>
+                            <p:selectOneMenu styleClass="campoFormulario"   value="#{historiasMB.datosFormulario.dato5}">
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><p:outputLabel value="ACCIDENTE DE TRABAJO:"/></td>
+                        <td><p:outputLabel value="ACCIDENTE DE TRÁNSITO:"/></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:selectOneMenu styleClass="campoFormulario"   value="#{historiasMB.datosFormulario.dato6}">
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                        </td>
+                        <td>
+                            <p:selectOneMenu styleClass="campoFormulario"   value="#{historiasMB.datosFormulario.dato7}">
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><p:outputLabel value="ENFERMEDAD GENERAL:"/></td>
+                        <td><p:outputLabel value="ENFERMEDAD PROFESIONAL:"/></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:selectOneMenu styleClass="campoFormulario"   value="#{historiasMB.datosFormulario.dato8}">
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                        </td>
+                        <td>
+                            <p:selectOneMenu styleClass="campoFormulario"   value="#{historiasMB.datosFormulario.dato9}">
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><p:outputLabel value="EVENTO CATASTRÓFICO:"/></td>
+                        <td><p:outputLabel value="LESIÓN AUTOINFLINGIDA:"/></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:selectOneMenu styleClass="campoFormulario"   value="#{historiasMB.datosFormulario.dato10}">
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                        </td>
+                        <td>
+                            <p:selectOneMenu styleClass="campoFormulario"   value="#{historiasMB.datosFormulario.dato11}">
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><p:outputLabel value="LESIÓN POR GRAVEDAD:"/></td>
+                        <td><p:outputLabel value="OTRO TIPO DE ACCIDENTE:"/></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:selectOneMenu styleClass="campoFormulario"   value="#{historiasMB.datosFormulario.dato12}">
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                        </td>
+                        <td>
+                            <p:selectOneMenu styleClass="campoFormulario"   value="#{historiasMB.datosFormulario.dato13}">
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><p:outputLabel value="SOSPECHA DE ABUSO SEXUAL:"/></td>
+                        <td><p:outputLabel value="SOSPECHA MALTRATO EMOCIONAL:"/></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:selectOneMenu styleClass="campoFormulario"   value="#{historiasMB.datosFormulario.dato14}">
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                        </td>
+                        <td>
+                            <p:selectOneMenu styleClass="campoFormulario"   value="#{historiasMB.datosFormulario.dato15}">
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><p:outputLabel value="SOSPECHA DE MALTRATO FÍSICO:"/></td>
+                        <td><p:outputLabel value="SOSPECHA DE MALTRATO SEXUAL:"/></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:selectOneMenu styleClass="campoFormulario"   value="#{historiasMB.datosFormulario.dato16}">
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                        </td>
+                        <td>
+                            <p:selectOneMenu styleClass="campoFormulario"   value="#{historiasMB.datosFormulario.dato17}">
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><p:outputLabel value="OTRA:"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p:selectOneMenu styleClass="campoFormulario"   value="#{historiasMB.datosFormulario.dato18}">
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                </div>
+
+
+                <!--DIAGNÓSTICO DE INGRESO-->
+                <tr><td colspan="2"><h2>DIAGNÓSTICO DE INGRESO</h2></td></tr>         
+                <div>
+                    <tr>
+                        <td colspan="2">
+                            <p:outputLabel styleClass="labelFormulario" style="width2" value="DIAGNÓSTICO DE INGRESO 1:"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p:autoComplete size="100" value="#{historiasMB.datosFormulario.dato19}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p:outputLabel styleClass="labelFormulario" style="width2" value="DIAGNÓSTICO DE INGRESO 2"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p:autoComplete size="100" value="#{historiasMB.datosFormulario.dato20}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/>
+                        </td>
+                    </tr>
+                </div>
+
+
+                <!--DESTINO REMISIÓN-->
+                <tr><td colspan="2"><h2>DESTINO REMISIÓN</h2></td></tr>         
+                <div>
+                    <tr>
+                        <td><p:outputLabel value="ALTA DE URGENCIAS:"/></td>
+                        <td><p:outputLabel value="OTRO NIVEL DE COMPLEJIDAD:"/></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:selectOneMenu styleClass="campoFormulario"   value="#{historiasMB.datosFormulario.dato21}">
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                        </td>
+                        <td>
+                            <p:selectOneMenu styleClass="campoFormulario"   value="#{historiasMB.datosFormulario.dato22}">
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><p:outputLabel value="HOSPITALIZACIÓN:"/></td>
+                        <td><p:outputLabel value="FECHA DE EGRESO:"/></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:selectOneMenu styleClass="campoFormulario"   value="#{historiasMB.datosFormulario.dato23}">
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                        </td>
+                        <td>
+                            <p:calendar navigator="true" locale="es" value="#{historiasMB.datosFormulario.dato24}" pattern="dd/MM/yyyy" mask="true">
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </p:calendar>
+                        </td>  
+                    </tr>
+                    <tr>
+                        <td><p:outputLabel value="AUTORIZACIÓN NÚMERO:"/></td>
+                        <td><p:outputLabel value="CONDICIÓN DE SALIDA:"/></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato25}" maxlength="10" placeholder="10 caracteres máximo"/>
+                        </td>  
+                        <td>
+                            <p:selectOneMenu styleClass="campoFormulario"   value="#{historiasMB.datosFormulario.dato26}">
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItem itemLabel="VIVO" itemValue="VIVO" />
+                                <f:selectItem itemLabel="MUERTO" itemValue="MUERTO" />
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><p:outputLabel value="NOTIFICACIÓN:"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p:selectOneMenu styleClass="campoFormulario"   value="#{historiasMB.datosFormulario.dato27}">
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItem itemLabel="A FAMILIARES" itemValue="A FAMILIARES" />
+                                <f:selectItem itemLabel="A POLICIA" itemValue="A POLICIA" />
+                                <f:selectItem itemLabel="A FAMILIARES Y POLICIA" itemValue="A FAMILIARES Y POLICIA" />
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                </div>
+
+
+                <!--DIAGNÓSTICO DE LA MUERTE-->
+                <tr><td colspan="2"><h2>DIAGNÓSTICO DE LA MUERTE</h2></td></tr>         
+                <div>
+                    <tr>
+                        <td colspan="2">
+                            <p:outputLabel styleClass="labelFormulario" style="width2" value="DIAGNÓSTICO DE MUERTE:"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p:autoComplete size="100" value="#{historiasMB.datosFormulario.dato28}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/>
+                        </td>
+                    </tr>
+                </div>
+                
+                
+                <!--DIAGNÓSTICO RELACIONADO A LA SALIDA-->
+                <tr><td colspan="2"><h2>DIAGNÓSTICO RELACIONADO A LA SALIDA</h2></td></tr>         
+                <div>
+                    <tr>
+                        <td colspan="2">
+                            <p:outputLabel styleClass="labelFormulario" style="width2" value="DIAGNÓSTICO DE SALIDA 1:"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p:autoComplete size="100" value="#{historiasMB.datosFormulario.dato29}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p:outputLabel styleClass="labelFormulario" style="width2" value="DIAGNÓSTICO DE SALIDA 2:"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p:autoComplete size="100" value="#{historiasMB.datosFormulario.dato30}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p:outputLabel styleClass="labelFormulario" style="width2" value="DIAGNÓSTICO DE SALIDA 3:"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p:autoComplete size="100" value="#{historiasMB.datosFormulario.dato31}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/>
+                        </td>
+                    </tr>
+                </div>
+                
+                 <tr>
+                        <td colspan="2"><p:outputLabel value="OBSERVACIONES:"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p:inputTextarea styleClass="width2" value="#{historiasMB.datosFormulario.dato32}" counter="display" maxlength="500" counterTemplate="{0} caracteres restantes." autoResize="false"/>
+                            <br/>
+                            <h:outputText id="display" />
+                        </td>                   
+                    </tr>
+                
+
+
+                <tr><td colspan="2">&nbsp;</td></tr>
+                <tr>
+                    <td colspan="2">
+                        <p:outputLabel value="FECHA-HORA REGISTRO"/><p:calendar navigator="true" locale="es" value="#{historiasMB.fechaReg}" pattern="dd/MM/yyyy HH:mm:ss" size="23" mask="true"  />
+                    </td>
+                </tr>
+                <tr><td colspan="2">&nbsp;</td></tr>
+                <tr>
+                    <td><p:outputLabel value="MEDICO"/></td>
+                    <td><p:outputLabel value="ESPECIALIDAD"/></td>
+                </tr>
+                <tr>
+                    <td>
+                        <p:selectOneMenu   value="#{historiasMB.idPrestador}" filter="true" filterMatchMode="contains">                            
+                            <p:ajax event="change" listener="#{historiasMB.cambiaMedico}" update="IdEspecialidad"/>
+                            <f:selectItem itemLabel="" itemValue=""/>
+                            <f:selectItems value="#{historiasMB.listaPrestadores}" var="p" itemLabel="#{p.primerNombre} #{p.segundoNombre} #{p.primerApellido} #{p.segundoApellido}" itemValue="#{p.idUsuario}"/>
+                        </p:selectOneMenu>
+                    </td>
+                    <td><p:inputText id="IdEspecialidad" readonly="true" styleClass="width1" value="#{historiasMB.especialidadPrestador}"/></td>
+                </tr>                
+                <tr><td colspan="2">&nbsp;</td></tr>
+                <tr>
+                    <td colspan="2">
+                        <p:commandButton icon="ui-icon-disk" value="Guardar Nuevo Registro" actionListener="#{historiasMB.guardarRegistro}" disabled="#{historiasMB.modificandoRegCli}" update="IdFormRegistroClinico"/>
+                        <p:commandButton icon="ui-icon-arrowthickstop-1-s" value="Actualizar Registro" actionListener="#{historiasMB.actualizarRegistro}" disabled="#{!historiasMB.modificandoRegCli}" rendered="#{loginMB.superUsuario}"/>
+                        <p:commandButton icon="ui-icon-document" value="Limpiar Formulario" actionListener="#{historiasMB.btnLimpiarFormulario}" update="IdFormRegistroClinico"/>
+                    </td>
+                </tr>
+            </table>
+            <p:dialog id="IdTextosDlgPredefinidos" header="TEXTOS PREDEFINIDOS" width="645" widgetVar="dlgTextosPredefinidos" resizable="false" closable="true" modal="true">                                
+                <p:panelGrid styleClass="panelGridSinBordes" id="IdPanelTextosPredefinidos">
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel   styleClass="labelFormulario" style="width: 60px;" value="Categoría: "/>
+                            <p:selectOneMenu styleClass="campoFormulario" style="width: 220px;" value="#{historiasMB.idMaestroTextoPredef}" >
+                                <f:ajax event="change" listener="#{historiasMB.cambiaMaestro}" render="IdComboTextosPredefinidos IdEditorTextoPredefinido IdNombrePredefinido"/> 
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItems value="#{historiasMB.listaMaestrosTxtPredefinidos}" var="maestro" itemValue="#{maestro.idMaestro}" itemLabel="#{maestro.nombre}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel   styleClass="labelFormulario" style="width: 60px;" value="Predefinidos: "/>
+                            <p:selectOneMenu styleClass="campoFormulario" style="width: 220px;" id="IdComboTextosPredefinidos"  value="#{historiasMB.idTextoPredef}" >
+                                <f:ajax 
+                                    event="change"
+                                    listener="#{historiasMB.cambiaTextoPredefinido}"                                                
+                                    render="IdEditorTextoPredefinido IdNombrePredefinido"/>                                 
+                                <f:selectItems value="#{historiasMB.listaTxtPredefinidos}" var="texto" itemValue="#{texto.idTxtPredefinido}" itemLabel="#{texto.nombre}"/>
+                            </p:selectOneMenu>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel styleClass="labelFormulario" value="Nombre: " style="width: 60px;"/>
+                            <p:inputText   styleClass="campoFormulario" id="IdNombrePredefinido" size="39" value="#{historiasMB.nombreTextoPredefinido}"/>                                                    
+                            <p:commandButton icon="ui-icon-circle-arrow-s" title="Usar seleccionado"    actionListener="#{historiasMB.usarTextoPredefinido}"/>
+                            <p:commandButton icon="ui-icon-disk"           title="Guardar/Actualizar"   actionListener="#{historiasMB.guardarTextoPredefinido}" />            
+                            <p:commandButton icon="ui-icon-trash"          title="Eliminar predefinido" id="IdBtnEliminarPredefinido"/>                                        
+                            <p:overlayPanel for="IdBtnEliminarPredefinido" widgetVar="opEliminarPredefinido">
+                                <p:outputLabel   styleClass="labelFormulario" value="¿Confirma la eliminación?  "/>
+                                <p:commandButton value="Si" title="Crear nueva categoría" actionListener="#{historiasMB.eliminarPredefinido}" oncomplete="PF('opEliminarPredefinido').hide();"/>                        
+                            </p:overlayPanel> 
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:editor id="IdEditorTextoPredefinido" value="#{historiasMB.detalleTextoPredef}" width="600" controls="bold italic underline font size bullets numbering alignleft center alignright justify undo redo"/>
+                        </p:column>
+                    </p:row>
+
+                </p:panelGrid>             
+            </p:dialog>
+        </h:form>        
+    </h:body>
+</html>

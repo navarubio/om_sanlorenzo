@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <body> 
+        <table>
+            <tr>
+                <td>
+                    <p:outputLabel styleClass="labelFormularioBold" value="DESTINO PACIENTE:"  />
+                    <p:selectOneMenu styleClass="campoFormulario" style="width: 100px;"
+                                     value="#{consultaMB.destinoPaciente}">                                                    
+                        <f:selectItems var="ambito" value="#{aplicacionGeneralMB.listaAmbito}" />
+                        <p:ajax listener="#{consultaMB.crearNuevaRecomendacion()}" ></p:ajax>
+                    </p:selectOneMenu>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p:outputLabel styleClass="labelFormularioBold" value="RECOMENDACIONES:"  />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p:inputTextarea styleClass="labelFormulario" placeholder="Ingrese las recomendaciones" rows="3"
+                                     maxlength="1000"   value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.urgDestinoPaciente.observacion}" style="width: 900px"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p:outputLabel rendered="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.urgDestinoPaciente.idDestino !=null}"  styleClass="labelFormularioBold"
+                                   value="REGISTRO REALIZADO POR:"></p:outputLabel>
+                </td>
+            </tr>
+            <tr>
+                <td>
+
+                    <p:outputLabel  rendered="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.urgDestinoPaciente.idDestino !=null}" 
+                                    styleClass="labelFormulario" value="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.urgDestinoPaciente.idPrestador.primerNombre}
+                                    #{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.urgDestinoPaciente.idPrestador.primerApellido}"/>           
+                </td>
+            </tr>
+
+        </table>
+        <p:commandButton 
+            value="Guardar" 
+            rendered="#{consultaMB.urgTriage.idUrgConsultaPacienteUrgencia.urgDestinoPaciente.idDestino ==null }" 
+            actionListener="#{consultaMB.guardarSalidaUrgenciaPaciente()}" update=":formConsulta" />
+    </body>
+</html>

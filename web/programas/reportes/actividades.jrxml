@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="citasProgramasEjecutados" language="groovy" pageWidth="200" pageHeight="612" orientation="Landscape" columnWidth="200" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isFloatColumnFooter="true" isIgnorePagination="true" uuid="ab36ede1-4c6e-4bd8-86bb-b8ed99dd3e2b">
+	<property name="ireport.zoom" value="0.9313819845887326"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="net.sf.jasperreports.export.xls.column.width.ratio" value="2"/>
+	<parameter name="logoEmpresa" class="java.lang.String"/>
+	<parameter name="title" class="java.lang.String"/>
+	<parameter name="periodo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="actividad" class="java.lang.String"/>
+	<field name="value" class="java.lang.String"/>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement uuid="38b943ea-80fc-457c-8dda-e18bead1b43f" x="0" y="0" width="200" height="35"/>
+			</rectangle>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="6ebd7d7e-7f41-4121-9c43-fd0d8226dfcc" x="0" y="10" width="200" height="12"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<image scaleImage="RetainShape" isUsingCache="false">
+				<reportElement uuid="ea969720-6ecd-41c4-afb1-83ce2e141501" x="0" y="0" width="100" height="35"/>
+				<imageExpression><![CDATA[$P{logoEmpresa}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement uuid="3999cc46-2591-481f-a1e9-df2ba6302a4b" x="0" y="8" width="200" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{title}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="39" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="9b93801d-79c7-4337-97b2-0186bcac5bf3" x="0" y="15" width="100" height="24" forecolor="#000000" backcolor="#666666"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" isUnderline="false" isStrikeThrough="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Actividad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c54927aa-a5c3-4f22-ac90-fefbfe2a66fa" x="0" y="0" width="65" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PERIODO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="5281a06f-2cf1-4cbc-8a24-c194d278a8cd" x="65" y="0" width="135" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{periodo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="9b93801d-79c7-4337-97b2-0186bcac5bf3" x="100" y="15" width="100" height="24" forecolor="#000000" backcolor="#666666"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" isUnderline="false" isStrikeThrough="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="27" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="a5dc4feb-7070-45de-8730-163aa593a974" mode="Transparent" x="0" y="0" width="100" height="27" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{actividad}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="a5dc4feb-7070-45de-8730-163aa593a974" mode="Transparent" x="100" y="0" width="100" height="27" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{value}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

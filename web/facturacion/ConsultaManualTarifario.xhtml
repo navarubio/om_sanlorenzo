@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">  
+    <h:head>        
+        <title>Informe Manual Tarifario</title>
+        <link href="../recursos/css/estilos.css" rel="stylesheet"/>        
+        <link href="../recursos/css/metro-bootstrap.css" rel="stylesheet"/>
+        <link href="../recursos/css/iconFont.css" rel="stylesheet"/>
+        <script type="text/javascript" src="../recursos/js/calendario.js"></script>  
+    </h:head>
+    <h:body>
+        #{consultaManualTarifarioMB.init()}
+        <h:form id="IdFormConsultaManualTarifario">              
+            
+            <p:growl id="IdMensajePeriodos"  showDetail="true" sticky="false" autoUpdate="true" life="2000"  />                        
+            <p:tabView id="IdTabView" style=" width: 95%;  margin-left: 15px;" >                 
+                <p:tab title="Informe de Servicios en Manuales Tarifarios">                    
+                    <p:panelGrid id="IdPanelEditarPeriodo" styleClass="panelGridSinBordes" columns="4" style="margin-right: auto;">                    
+                        <h:panelGroup>
+                            <p:outputLabel styleClass="campoObligatorio" value="Administradora"/>                        
+                            <p:selectOneMenu styleClass="campoFormulario" style="width: 200px;"  value="#{consultaManualTarifarioMB.administradoraId}">
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItems value="#{aplicacionGeneralMB.listaAdministradoras}" var="administradora" itemLabel="#{administradora.razonSocial}" itemValue="#{administradora.idAdministradora}"/>
+                                <f:ajax listener="#{consultaManualTarifarioMB.validarAdministrador}" event="change" render="somContratos"/>
+                        </p:selectOneMenu>                     
+                        </h:panelGroup>
+                        <h:panelGroup>
+                            <p:outputLabel  styleClass="campoObligatorio" value="Contrato"/>                        
+                            <p:selectOneMenu id="somContratos" value="#{consultaManualTarifarioMB.idContrato}">
+                                <f:selectItem  itemLabel="-- Seleccione Contrato --" itemValue="0" />
+                                <f:selectItems value="#{consultaManualTarifarioMB.listaContratoAdministradora}" var="con" itemLabel="#{con.descripcion}" itemValue="#{con.idContrato}" />
+                                <f:ajax event="change" render="@this" />
+                            </p:selectOneMenu>
+                            
+                        </h:panelGroup>
+                        <h:panelGroup>
+                            <p:commandButton 
+                                title       =   "Buscar" value="&nbsp;"                                        
+                                styleClass  =   "icon-search fg-lightBlue" 
+                                style       =   "height: 20px;"
+                                actionListener  =   "#{consultaManualTarifarioMB.buscar}"
+                                process     =   "IdPanelEditarPeriodo"
+                                update="opResultado,idPanelbotones"
+                                /> 
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <hr />
+                    <p:outputPanel id="opResultado">
+                        <h:panelGroup rendered="#{consultaManualTarifarioMB.renderLista}">
+                            <h2 style="margin-left: 2%;">#{consultaManualTarifarioMB.tipoTarifa}</h2>
+                        </h:panelGroup>
+                        <p:dataTable id="idDataResultado"
+                                     value="#{consultaManualTarifarioMB.contrato.idManualTarifario.facManualTarifarioServicioList}"
+                                     filteredValue="#{consultaManualTarifarioMB.contratoFilter.idManualTarifario.facManualTarifarioServicioList}"
+                                     rows="10"                               
+                                     rowKey="#{res.facServicio.idServicio}"
+                                     rendered="#{consultaManualTarifarioMB.renderLista}"
+                                     var="res"
+                                     paginator="true"
+                                     paginatorPosition="bottom"                                
+                                     emptyMessage="No hay resultado "
+                                     
+                                     >
+                            <p:column headerText="CUP" filterBy="#{res.facServicio.codigoCup}" filterMatchMode="contains">  
+                                #{res.facServicio.codigoCup}
+                            </p:column>                            
+                            <p:column headerText="Servicio">  
+                                #{res.facServicio.nombreServicio}
+                            </p:column>                            
+                            <p:column headerText="FACTOR">  
+                                #{consultaManualTarifarioMB.factor(res.facServicio)}                         
+                           </p:column>                         
+                            <p:column headerText="SMLVD">  
+                                #{consultaManualTarifarioMB.SMLVD}                         
+                           </p:column>                         
+                            <p:column headerText="(%)">  
+                                #{consultaManualTarifarioMB.contrato.signoPorcentaje}#{consultaManualTarifarioMB.contrato.porcentaje}                         
+                           </p:column>                         
+                            <p:column headerText="VALOR FACTOR">  
+                                #{consultaManualTarifarioMB.valor(res.facServicio)}                         
+                           </p:column>                         
+                            <p:column headerText="VALOR PROCENTAJE">  
+                                #{consultaManualTarifarioMB.valor_porcentaje(res.facServicio)}                                  
+                           </p:column>                         
+                            <p:column headerText="VALOR FINAL">  
+                                #{consultaManualTarifarioMB.valor_final(res.facServicio)}                         
+                           </p:column>              
+                        </p:dataTable>
+                    </p:outputPanel>
+                    <p:panelGrid id="idPanelbotones" styleClass="panelGridSinBordes" columns="4" style="margin-right: auto;">                    
+                        <h:panelGroup>
+                            <p:commandButton 
+                                title       =   "Imprimir PDF" value="&nbsp; "                                        
+                                styleClass  =   "icon-file-pdf fg-lightBlue" 
+                                style       =   "height: 30px;font-size: 24px;"
+                                rendered="#{consultaManualTarifarioMB.renderLista}"
+                                actionListener="#{consultaManualTarifarioMB.imprimir}"
+                                process="@this"
+                                ajax="false" 
+                                onclick="this.form.target = '_blank'"
+                                /> 
+                        </h:panelGroup>
+                    </p:panelGrid>
+                </p:tab>
+            </p:tabView>
+        </h:form>
+    </h:body>
+</html>

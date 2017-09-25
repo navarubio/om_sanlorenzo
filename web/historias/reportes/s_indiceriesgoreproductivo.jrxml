@@ -1,0 +1,2189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="s_indiceriesgoreproductivo" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="da761f5a-69a8-4046-83f8-183bb2e882ad">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="dato0" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato0]]></fieldDescription>
+	</field>
+	<field name="dato1" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato1]]></fieldDescription>
+	</field>
+	<field name="dato2" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato2]]></fieldDescription>
+	</field>
+	<field name="dato3" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato3]]></fieldDescription>
+	</field>
+	<field name="dato4" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato4]]></fieldDescription>
+	</field>
+	<field name="dato5" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato5]]></fieldDescription>
+	</field>
+	<field name="dato6" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato6]]></fieldDescription>
+	</field>
+	<field name="dato7" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato7]]></fieldDescription>
+	</field>
+	<field name="dato8" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato8]]></fieldDescription>
+	</field>
+	<field name="dato9" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato9]]></fieldDescription>
+	</field>
+	<field name="dato10" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato10]]></fieldDescription>
+	</field>
+	<field name="dato11" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato11]]></fieldDescription>
+	</field>
+	<field name="dato12" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato12]]></fieldDescription>
+	</field>
+	<field name="dato13" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato13]]></fieldDescription>
+	</field>
+	<field name="dato14" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato14]]></fieldDescription>
+	</field>
+	<field name="dato15" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato15]]></fieldDescription>
+	</field>
+	<field name="dato16" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato16]]></fieldDescription>
+	</field>
+	<field name="dato17" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato17]]></fieldDescription>
+	</field>
+	<field name="dato18" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato18]]></fieldDescription>
+	</field>
+	<field name="dato19" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato19]]></fieldDescription>
+	</field>
+	<field name="dato600" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato600]]></fieldDescription>
+	</field>
+	<field name="dato601" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato601]]></fieldDescription>
+	</field>
+	<field name="dato602" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato602]]></fieldDescription>
+	</field>
+	<field name="dato626" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato626]]></fieldDescription>
+	</field>
+	<field name="dato628" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato628]]></fieldDescription>
+	</field>
+	<field name="dato629" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato629]]></fieldDescription>
+	</field>
+	<field name="dato630" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato630]]></fieldDescription>
+	</field>
+	<field name="dato632" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato632]]></fieldDescription>
+	</field>
+	<field name="dato633" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato633]]></fieldDescription>
+	</field>
+	<field name="dato646" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato646]]></fieldDescription>
+	</field>
+	<field name="dato680" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato680]]></fieldDescription>
+	</field>
+	<field name="dato686" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato686]]></fieldDescription>
+	</field>
+	<field name="dato689" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato689]]></fieldDescription>
+	</field>
+	<field name="dato699" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato699]]></fieldDescription>
+	</field>
+	<field name="dato700" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato700]]></fieldDescription>
+	</field>
+	<field name="dato701" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato701]]></fieldDescription>
+	</field>
+	<field name="dato702" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato702]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="87" splitType="Stretch">
+			<frame>
+				<reportElement uuid="8c3c6500-b0ac-4237-ab34-fe5e78823fd1" positionType="Float" x="0" y="0" width="572" height="87"/>
+				<rectangle radius="3">
+					<reportElement uuid="3dc8551e-a7ac-4d75-b1d2-d35c2605e1b1" positionType="Float" x="0" y="0" width="572" height="87"/>
+				</rectangle>
+				<image scaleImage="FillFrame" onErrorType="Blank">
+					<reportElement uuid="9c3bbc6e-8311-410d-a87e-f822b43f3dd0" positionType="Float" x="2" y="3" width="88" height="72"/>
+					<imageExpression><![CDATA[$F{dato680}]]></imageExpression>
+				</image>
+				<frame>
+					<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="434" y="1" width="138" height="12"/>
+					<textField isStretchWithOverflow="true">
+						<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="1" y="0" width="136" height="12"/>
+						<textElement markup="html">
+							<font fontName="SansSerif" size="9"/>
+							<paragraph leftIndent="5"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{dato601}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="433" y="11" width="138" height="12"/>
+					<textField isStretchWithOverflow="true">
+						<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="1" y="0" width="136" height="12"/>
+						<textElement markup="html">
+							<font fontName="SansSerif" size="9"/>
+							<paragraph leftIndent="5"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{dato600}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="90" y="0" width="344" height="13"/>
+					<textField isStretchWithOverflow="true">
+						<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="344" height="13"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+							<font fontName="SansSerif" size="10" isBold="true"/>
+							<paragraph leftIndent="5"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{dato699}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="90" y="13" width="344" height="10"/>
+					<textField isStretchWithOverflow="true">
+						<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="344" height="10"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+							<font fontName="SansSerif" size="7" isBold="false"/>
+							<paragraph leftIndent="5"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{dato700}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="90" y="23" width="344" height="13"/>
+					<textField isStretchWithOverflow="true">
+						<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="344" height="13"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+							<font fontName="SansSerif" size="10" isBold="true"/>
+							<paragraph leftIndent="5"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{dato701}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="90" y="36" width="344" height="10"/>
+					<textField isStretchWithOverflow="true">
+						<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="344" height="10"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+							<font fontName="SansSerif" size="7" isBold="false"/>
+							<paragraph leftIndent="5"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{dato702}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<staticText>
+					<reportElement uuid="faf14165-e485-4341-90a0-429fd8508710" x="136" y="46" width="259" height="41"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="12" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[PLANIFICACIÓN FAMILIAR ÍNDICE DE RIESGO REPRODUCTIVO]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="13fde49d-7849-49c0-b75d-76e69d3cc57a" positionType="Float" stretchType="RelativeToTallestObject" x="434" y="23" width="136" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato602}]]></textFieldExpression>
+				</textField>
+				<frame>
+					<reportElement uuid="4ae4e292-3b14-4d61-88a9-38eeac9f510d" positionType="Float" x="433" y="34" width="136" height="12"/>
+					<textField>
+						<reportElement uuid="068129ed-d829-4725-8f9c-be76b588040d" x="29" y="0" width="13" height="12"/>
+						<textElement textAlignment="Center">
+							<font size="9"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement uuid="d9152ce0-d426-48f4-af7f-3f5ce9ff6f85" x="1" y="0" width="34" height="12"/>
+						<textElement>
+							<font size="9" isBold="false"/>
+							<paragraph leftIndent="5"/>
+						</textElement>
+						<text><![CDATA[PAG.]]></text>
+					</staticText>
+					<staticText>
+						<reportElement uuid="58148155-ad5d-4fdf-a185-83370a201d15" x="40" y="0" width="20" height="12"/>
+						<textElement>
+							<font size="9" isBold="false"/>
+							<paragraph leftIndent="5"/>
+						</textElement>
+						<text><![CDATA[DE]]></text>
+					</staticText>
+					<textField evaluationTime="Report" isBlankWhenNull="true">
+						<reportElement uuid="0dff0d20-739e-4f46-ac4d-8ddaedc1c513" x="59" y="0" width="13" height="12"/>
+						<textElement textAlignment="Center">
+							<font size="9"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+					</textField>
+				</frame>
+			</frame>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="599" splitType="Stretch">
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="0" width="572" height="13" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<staticText>
+					<reportElement uuid="c4a9d40c-6222-4a68-bda2-352d503adaad" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="572" height="13" backcolor="#CCCCCC"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[DATOS DEL PACIENTE]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="13" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textField>
+					<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="363" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement markup="html">
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato626}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="363" y="0" width="97" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement markup="html">
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato628}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="460" y="0" width="112" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement markup="html">
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato630}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="25" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textField>
+					<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="380" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement markup="html">
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato646}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="380" y="0" width="192" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement markup="html">
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato629}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="37" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textField>
+					<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="415" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement markup="html">
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato632}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="415" y="0" width="157" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement markup="html">
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato633}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="49" width="572" height="13" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<staticText>
+					<reportElement uuid="c4a9d40c-6222-4a68-bda2-352d503adaad" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="572" height="13" backcolor="#CCCCCC"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[DATOS DE LA CONSULTA]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="62" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textField>
+					<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="286" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato0}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="286" y="0" width="286" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato1}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="80" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<textField>
+					<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="318" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["ESTE COLOR REPRESENTA LO SELECCIONADO EN CADA ÁREA:"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="318" y="0" width="15" height="12" isPrintWhenDetailOverflows="true" backcolor="#CCCCCC"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="107" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="200" height="12" backcolor="#CCCCCC"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["EDAD DE LA MUJER"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="200" y="0" width="40" height="12"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="332" y="0" width="200" height="12" backcolor="#CCCCCC"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["PARIDAD"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="532" y="0" width="40" height="12"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato19}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="119" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="0" width="200" height="12" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["DE 17 AÑOS O MENOS"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="200" y="0" width="40" height="12">
+						<printWhenExpression><![CDATA[!$F{dato2}.equals("<b>&nbsp; </b>DE 17 AÑOS O MENOS")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["2"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="200" y="0" width="40" height="12" backcolor="#CCCCCC">
+						<printWhenExpression><![CDATA[$F{dato2}.equals("<b>&nbsp; </b>DE 17 AÑOS O MENOS")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["2"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="332" y="0" width="200" height="12" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["NULÍPARA"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="532" y="0" width="40" height="12">
+						<printWhenExpression><![CDATA[!$F{dato3}.equals("<b>&nbsp; </b>NULÍPARA")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["0"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="532" y="0" width="40" height="12" backcolor="#CCCCCC">
+						<printWhenExpression><![CDATA[$F{dato3}.equals("<b>&nbsp; </b>NULÍPARA")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["0"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="131" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="0" width="200" height="12" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["DE 18 A 34 AÑOS"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="200" y="0" width="40" height="12">
+						<printWhenExpression><![CDATA[!$F{dato2}.equals("<b>&nbsp; </b>DE 18 A 34 AÑOS")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["0"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="200" y="0" width="40" height="12" backcolor="#CCCCCC">
+						<printWhenExpression><![CDATA[$F{dato2}.equals("<b>&nbsp; </b>DE 18 A 34 AÑOS")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["0"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="332" y="0" width="200" height="12" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["DE 1 A 3 PARTOS"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="532" y="0" width="40" height="12">
+						<printWhenExpression><![CDATA[!$F{dato3}.equals("<b>&nbsp; </b>DE 1 A 3 PARTOS")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["1"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="532" y="0" width="40" height="12" backcolor="#CCCCCC">
+						<printWhenExpression><![CDATA[$F{dato3}.equals("<b>&nbsp; </b>DE 1 A 3 PARTOS")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["1"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="143" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="0" width="200" height="12" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["DE 35 AÑOS O MÁS"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="200" y="0" width="40" height="12">
+						<printWhenExpression><![CDATA[!$F{dato2}.equals("<b>&nbsp; </b>DE 35 AÑOS O MÁS")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["2"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="200" y="0" width="40" height="12" backcolor="#CCCCCC">
+						<printWhenExpression><![CDATA[$F{dato2}.equals("<b>&nbsp; </b>DE 35 AÑOS O MÁS")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["2"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="332" y="0" width="200" height="12" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["DE 4 PARTOS O MÁS"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="532" y="0" width="40" height="12">
+						<printWhenExpression><![CDATA[!$F{dato3}.equals("<b>&nbsp; </b>DE 4 PARTOS O MÁS")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["4"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="532" y="0" width="40" height="12" backcolor="#CCCCCC">
+						<printWhenExpression><![CDATA[$F{dato3}.equals("<b>&nbsp; </b>DE 4 PARTOS O MÁS")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["4"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="166" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="200" height="12" backcolor="#CCCCCC"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["SOCIOECONÓMICO"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="200" y="0" width="40" height="12"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="332" y="0" width="200" height="12" backcolor="#CCCCCC"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["INTERVALO ENTRE EMBARAZOS"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="532" y="0" width="40" height="12"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="178" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="0" width="200" height="12" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["TUGURIO"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="200" y="0" width="40" height="12">
+						<printWhenExpression><![CDATA[!$F{dato4}.equals("<b>&nbsp; </b>TUGURIO")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["2"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="200" y="0" width="40" height="12" backcolor="#CCCCCC">
+						<printWhenExpression><![CDATA[$F{dato4}.equals("<b>&nbsp; </b>TUGURIO")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["2"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="332" y="0" width="200" height="12" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["MENOS DE 12 MESES"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="532" y="0" width="40" height="12">
+						<printWhenExpression><![CDATA[!$F{dato5}.equals("<b>&nbsp; </b>MENOS DE 12 MESES")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["4"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="532" y="0" width="40" height="12" backcolor="#CCCCCC">
+						<printWhenExpression><![CDATA[$F{dato5}.equals("<b>&nbsp; </b>MENOS DE 12 MESES")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["4"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="190" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="0" width="200" height="12" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["NIÑO <2 AÑOS DESNUTRIDO"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="200" y="0" width="40" height="12">
+						<printWhenExpression><![CDATA[!$F{dato4}.equals("<b>&nbsp; </b>NIÑO <2 AÑOS DESNUTRIDO")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["2"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="200" y="0" width="40" height="12" backcolor="#CCCCCC">
+						<printWhenExpression><![CDATA[$F{dato4}.equals("<b>&nbsp; </b>NIÑO <2 AÑOS DESNUTRIDO")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["2"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="332" y="0" width="200" height="12" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["DE 1 A 2 AÑOS"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="532" y="0" width="40" height="12">
+						<printWhenExpression><![CDATA[!$F{dato5}.equals("<b>&nbsp; </b>DE 1 A 2 AÑOS")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["1"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="532" y="0" width="40" height="12" backcolor="#CCCCCC">
+						<printWhenExpression><![CDATA[$F{dato5}.equals("<b>&nbsp; </b>DE 1 A 2 AÑOS")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["1"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="202" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="0" width="200" height="12" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["MUERTE DE NIÑO <2 AÑOS"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="200" y="0" width="40" height="12">
+						<printWhenExpression><![CDATA[!$F{dato4}.equals("<b>&nbsp; </b>MUERTE DE NIÑO <2 AÑOS")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["2"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="200" y="0" width="40" height="12" backcolor="#CCCCCC">
+						<printWhenExpression><![CDATA[$F{dato4}.equals("<b>&nbsp; </b>MUERTE DE NIÑO <2 AÑOS")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["2"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="332" y="0" width="200" height="12" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["MÁS DE 2 AÑOS"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="532" y="0" width="40" height="12">
+						<printWhenExpression><![CDATA[!$F{dato5}.equals("<b>&nbsp; </b>MÁS DE 2 AÑOS")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["0"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="532" y="0" width="40" height="12" backcolor="#CCCCCC">
+						<printWhenExpression><![CDATA[$F{dato5}.equals("<b>&nbsp; </b>MÁS DE 2 AÑOS")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["0"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="226" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="572" height="12" backcolor="#CCCCCC"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["ANTECEDENTES"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="238" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="200" height="12" backcolor="#CCCCCC"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["ABORTO"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="200" y="0" width="40" height="12"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="332" y="0" width="200" height="12" backcolor="#CCCCCC"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["CESÁREA"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="532" y="0" width="40" height="12"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="250" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="0" width="200" height="12" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["1 O 2"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="200" y="0" width="40" height="12">
+						<printWhenExpression><![CDATA[!$F{dato6}.equals("<b>&nbsp; </b>1 O 2")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["2"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="200" y="0" width="40" height="12" backcolor="#CCCCCC">
+						<printWhenExpression><![CDATA[$F{dato6}.equals("<b>&nbsp; </b>1 O 2")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["2"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="332" y="0" width="200" height="12" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["1 O 2"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="532" y="0" width="40" height="12">
+						<printWhenExpression><![CDATA[!$F{dato7}.equals("<b>&nbsp; </b>1 O 2")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["2"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="532" y="0" width="40" height="12" backcolor="#CCCCCC">
+						<printWhenExpression><![CDATA[$F{dato7}.equals("<b>&nbsp; </b>1 O 2")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["2"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="262" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="0" width="200" height="12" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["3 O MÁS"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="200" y="0" width="40" height="12">
+						<printWhenExpression><![CDATA[!$F{dato6}.equals("<b>&nbsp; </b>3 O MÁS")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["4"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="200" y="0" width="40" height="12" backcolor="#CCCCCC">
+						<printWhenExpression><![CDATA[$F{dato6}.equals("<b>&nbsp; </b>3 O MÁS")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["4"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="332" y="0" width="200" height="12" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["3 O MÁS"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="532" y="0" width="40" height="12">
+						<printWhenExpression><![CDATA[!$F{dato7}.equals("<b>&nbsp; </b>3 O MÁS")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["4"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="532" y="0" width="40" height="12" backcolor="#CCCCCC">
+						<printWhenExpression><![CDATA[$F{dato7}.equals("<b>&nbsp; </b>3 O MÁS")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["4"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="280" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="200" height="12" backcolor="#CCCCCC"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["MORTINATO"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="200" y="0" width="40" height="12"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="332" y="0" width="200" height="12" backcolor="#CCCCCC"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["PREMATURO"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="532" y="0" width="40" height="12"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="292" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="0" width="200" height="12" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["1 O 2"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="200" y="0" width="40" height="12">
+						<printWhenExpression><![CDATA[!$F{dato8}.equals("<b>&nbsp; </b>1 O 2")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["2"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="200" y="0" width="40" height="12" backcolor="#CCCCCC">
+						<printWhenExpression><![CDATA[$F{dato8}.equals("<b>&nbsp; </b>1 O 2")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["2"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="332" y="0" width="200" height="12" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["1 O 2"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="532" y="0" width="40" height="12">
+						<printWhenExpression><![CDATA[!$F{dato9}.equals("<b>&nbsp; </b>1 O 2")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["2"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="532" y="0" width="40" height="12" backcolor="#CCCCCC">
+						<printWhenExpression><![CDATA[$F{dato9}.equals("<b>&nbsp; </b>1 O 2")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["2"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="304" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="0" width="200" height="12" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["3 O MÁS"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="200" y="0" width="40" height="12">
+						<printWhenExpression><![CDATA[!$F{dato8}.equals("<b>&nbsp; </b>3 O MÁS")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["4"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="200" y="0" width="40" height="12" backcolor="#CCCCCC">
+						<printWhenExpression><![CDATA[$F{dato8}.equals("<b>&nbsp; </b>3 O MÁS")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["4"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="332" y="0" width="200" height="12" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["3 O MÁS"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="532" y="0" width="40" height="12">
+						<printWhenExpression><![CDATA[!$F{dato9}.equals("<b>&nbsp; </b>3 O MÁS")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["4"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="532" y="0" width="40" height="12" backcolor="#CCCCCC">
+						<printWhenExpression><![CDATA[$F{dato9}.equals("<b>&nbsp; </b>3 O MÁS")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["4"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="324" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="0" width="200" height="12" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["HIPERTENSIÓN"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="200" y="0" width="40" height="12">
+						<printWhenExpression><![CDATA[!$F{dato10}.equals("<b>&nbsp; </b>SI")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["2"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="200" y="0" width="40" height="12" backcolor="#CCCCCC">
+						<printWhenExpression><![CDATA[$F{dato10}.equals("<b>&nbsp; </b>SI")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["2"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="332" y="0" width="200" height="12" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["TOXEMIA"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="532" y="0" width="40" height="12">
+						<printWhenExpression><![CDATA[!$F{dato11}.equals("<b>&nbsp; </b>SI")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["2"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="532" y="0" width="40" height="12" backcolor="#CCCCCC">
+						<printWhenExpression><![CDATA[$F{dato11}.equals("<b>&nbsp; </b>SI")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["2"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="336" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="0" width="200" height="12" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["CARDIOPATÍA"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="200" y="0" width="40" height="12">
+						<printWhenExpression><![CDATA[!$F{dato12}.equals("<b>&nbsp; </b>SI")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["2"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="200" y="0" width="40" height="12" backcolor="#CCCCCC">
+						<printWhenExpression><![CDATA[$F{dato12}.equals("<b>&nbsp; </b>SI")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["2"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="332" y="0" width="200" height="12" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["OTRA PATOLOGÍA"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="532" y="0" width="40" height="12">
+						<printWhenExpression><![CDATA[!$F{dato13}.equals("<b>&nbsp; </b>SI")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["2"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="532" y="0" width="40" height="12" backcolor="#CCCCCC">
+						<printWhenExpression><![CDATA[$F{dato13}.equals("<b>&nbsp; </b>SI")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["2"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="359" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="572" height="12" backcolor="#CCCCCC"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["PATOLOGÍA ACTUAL"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="371" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="0" width="200" height="12" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["ANEMIA SEVERA (MENOR DE 7GM DE HB)"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="200" y="0" width="40" height="12">
+						<printWhenExpression><![CDATA[!$F{dato14}.equals("<b>&nbsp; </b>SI")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["4"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="200" y="0" width="40" height="12" backcolor="#CCCCCC">
+						<printWhenExpression><![CDATA[$F{dato14}.equals("<b>&nbsp; </b>SI")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["4"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="332" y="0" width="200" height="12" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["ENFERMEDAD RENAL"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="532" y="0" width="40" height="12">
+						<printWhenExpression><![CDATA[!$F{dato15}.equals("<b>&nbsp; </b>SI")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["4"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="532" y="0" width="40" height="12" backcolor="#CCCCCC">
+						<printWhenExpression><![CDATA[$F{dato15}.equals("<b>&nbsp; </b>SI")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["4"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="383" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="0" width="200" height="12" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["HIPERTENSIÓN"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="200" y="0" width="40" height="12">
+						<printWhenExpression><![CDATA[!$F{dato16}.equals("<b>&nbsp; </b>SI")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["4"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="200" y="0" width="40" height="12" backcolor="#CCCCCC">
+						<printWhenExpression><![CDATA[$F{dato16}.equals("<b>&nbsp; </b>SI")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["4"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="332" y="0" width="200" height="12" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["CARDIOPATÍAS"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="532" y="0" width="40" height="12">
+						<printWhenExpression><![CDATA[!$F{dato17}.equals("<b>&nbsp; </b>SI")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["4"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="532" y="0" width="40" height="12" backcolor="#CCCCCC">
+						<printWhenExpression><![CDATA[$F{dato17}.equals("<b>&nbsp; </b>SI")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["4"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="395" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="0" width="200" height="12" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["OTRA PATOLOGÍA"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="200" y="0" width="40" height="12">
+						<printWhenExpression><![CDATA[!$F{dato18}.equals("<b>&nbsp; </b>SI")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["4"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="200" y="0" width="40" height="12" backcolor="#CCCCCC">
+						<printWhenExpression><![CDATA[$F{dato18}.equals("<b>&nbsp; </b>SI")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["4"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="417" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="180" y="0" width="215" height="12" backcolor="#CCCCCC"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["RIESGO TOTAL"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="429" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="180" y="0" width="106" height="12" backcolor="#FFFFFF"/>
+					<box>
+						<leftPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["RIESGO ALTO:"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="286" y="0" width="109" height="12" backcolor="#FFFFFF"/>
+					<box>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="false"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["10 Y MÁS PUNTOS"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="441" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="180" y="0" width="106" height="12" backcolor="#FFFFFF"/>
+					<box>
+						<leftPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["RIESGO MEDIO:"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="286" y="0" width="109" height="12" backcolor="#FFFFFF"/>
+					<box>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="false"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["5 A 9 PUNTOS"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="453" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="180" y="0" width="106" height="12" backcolor="#FFFFFF"/>
+					<box>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["RIESGO BAJO:"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="286" y="0" width="109" height="12" backcolor="#FFFFFF"/>
+					<box>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="9" isBold="false"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["0 A 4 PUNTOS"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="477" width="572" height="36" isPrintWhenDetailOverflows="true"/>
+				<textField>
+					<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="572" height="36" isPrintWhenDetailOverflows="true"/>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="8" isBold="false" isItalic="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["*OTRA PATOLOGÍA: INDAGUE Y ANOTE OTRA PATOLOGÍA ENCONTRADA QUE PUEDA CONSTITUIR RIESGO PARA PRÓXIMO EMBARAZO, (TUBERCULOSIS, INSUFICIENCIA RENAL, DIABETES, EPILEPSIA, ANOMALIAS CONGÉNITAS, ENFERMEDAD MENTAL Y OTRAS DE ALTA PREVALENCIA REGIONAL"]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<summary>
+		<band height="26" splitType="Stretch">
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="14" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<textField>
+					<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="7" isBold="true" isItalic="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["CON AMOR Y PROFESIONALISMO PROTEGEMOS LA SALUD DE NUESTRA GENTE"]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</summary>
+</jasperReport>

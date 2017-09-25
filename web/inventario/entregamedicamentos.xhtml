@@ -1,0 +1,192 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"      
+
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Entrega Medicamentos</title>
+        <link href="../recursos/css/estilos.css" rel="stylesheet"/>        
+        <link href="../recursos/css/metro-bootstrap.css" rel="stylesheet"/>
+        <link href="../recursos/css/iconFont.css" rel="stylesheet"/>
+        <link href="../recursos/css/bootstrap.min.css" rel="stylesheet"/>        
+        <script type="text/javascript" src="../recursos/js/calendario.js"/>
+        <script>
+            function FocusOnInput(){
+                document.getElementById("IdFormEntregaMedicamentos:txtIdentificacion").focus();
+            }
+        </script>
+            
+    </h:head>
+    <h:body onload="FocusOnInput()">
+        <h:form id="IdFormEntregaMedicamentos" >
+            #{entregaMedicamentosMB.init()}
+            <p:growl id="growl" showDetail="true" sticky="false" autoUpdate="true" life="2000"  />
+            <br/>            
+
+            <br/> 
+            <div class="container">
+                <div class="row">
+                    <div style="padding: 5px;">
+                        <p:outputPanel id="opBotones">
+                            <p:commandButton 
+                                title="Nuevo" value="&nbsp;"                                        
+                                styleClass="icon-new fg-lightBlue bg-white no-border"                    
+                                actionListener="#{entregaMedicamentosMB.nuevo}"
+                                process="@this"
+                                style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/> 
+                            &nbsp;
+
+                            <p:commandButton 
+                                title="Buscar" value="&nbsp;"                                        
+                                styleClass="icon-search fg-lightBlue bg-white no-border" 
+                                oncomplete="PF('dialogOrdenes').show()" 
+                                process="@this"
+                                style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/> 
+                            &nbsp;
+                            <p:commandButton 
+                                title="Guardar Entrega Medicamentos" value="&nbsp;"
+                                styleClass="icon-floppy fg-lightBlue bg-white no-border" 
+                                actionListener="#{entregaMedicamentosMB.guardar}"                   
+                                update="IdFormEntregaMedicamentos:opBotones"
+                                rendered="#{!entregaMedicamentosMB.renderBoton}"
+                                process="@this,IdFormEntregaMedicamentos:opBotones,IdFormEntregaMedicamentos:opFormulario,IdFormEntregaMedicamentos:opPaciente"
+                                style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/>                            
+                            &nbsp;
+                            <p:commandButton 
+                                title="Imprimir Entrega Medicamentos" value="&nbsp;"
+                                styleClass="icon-printer fg-lightBlue bg-white no-border" 
+                                rendered="#{entregaMedicamentosMB.renderBoton}"
+                                style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/>                            
+                            
+                            <p:commandButton 
+                                title="Facturar Medicamentos" value="&nbsp;"
+                                styleClass="icon-clipboard-2 fg-lightBlue bg-white no-border" 
+                                rendered="#{entregaMedicamentosMB.renderBoton}"
+                                actionListener="#{entregaMedicamentosMB.facturar}"                   
+                                process="@this"
+                                style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/>                            
+                            &nbsp;
+                        </p:outputPanel>
+                    </div>
+                </div>
+                <p:panel style="padding: 5px;">
+                    <p:outputPanel id="opFormulario">
+                        <div class="row">
+                            <div class="col-sm-2 col-xs-12">
+                                <p:outputLabel value="Fecha" styleClass="campoObligatorio2"/>
+                                <p:inputText value="#{entregaMedicamentosMB.fecha}" styleClass="form-control" maxlength="10" readonly="true" >
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </p:inputText>
+                            </div>
+                            <div class="col-sm-2 col-xs-12">
+                                <p:outputLabel value="No. Documento" styleClass="campoObligatorio2" />
+                                <p:inputText value="#{entregaMedicamentosMB.numeroDocumento}" styleClass="form-control" maxlength="10" readonly="true"/>
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Tipo Identificación Paciente" styleClass="campoObligatorio2"/>
+                                <p:selectOneMenu value="#{entregaMedicamentosMB.tipoIdentificacion}">
+                                    <f:selectItems value="#{entregaMedicamentosMB.listaTipoIdentificacion}" var="ti" itemLabel="#{ti.observacion}" itemValue="#{ti.id}" />
+                                </p:selectOneMenu>
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Identificación Paciente" styleClass="campoObligatorio2"/>
+                                <p:inputText value="#{entregaMedicamentosMB.identificación}" styleClass="form-control" maxlength="10" placeholder="Identificación Paciente" id="txtIdentificacion" />
+                            </div>
+                            <div class="col-sm-1 col-xs-12">
+                                <br/>
+                                <p:commandButton 
+                                    title       =   "Buscar Paciente" value="&nbsp;"                                        
+                                    style       =   "height: 20px;top: 6px;"
+                                    styleClass  =   "icon-search fg-lightBlue" 
+                                    action      =   "#{entregaMedicamentosMB.buscarPaciente}"
+                                    process     =   "@this,IdFormEntregaMedicamentos:opFormulario"
+                                    update      =   "IdFormEntregaMedicamentos:opPaciente"
+                                    /> 
+                            </div>
+                        </div><!--/row-->
+                    </p:outputPanel>
+                    
+                    <p:outputPanel id="opPaciente">
+                        <h:panelGroup rendered="#{entregaMedicamentosMB.renderForm}">
+                            <hr />
+                            <h4>Datos Paciente</h4>
+                        </h:panelGroup>
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12">
+                                    <p:outputLabel value="Nombre Paciente" rendered="#{entregaMedicamentosMB.renderForm}"/>
+                                    <p:inputText value="#{entregaMedicamentosMB.paciente.tipoIdentificacion.descripcion} - #{entregaMedicamentosMB.paciente.identificacion} #{entregaMedicamentosMB.paciente.primerNombre} #{entregaMedicamentosMB.paciente.segundoNombre} #{entregaMedicamentosMB.paciente.primerApellido} #{entregaMedicamentosMB.paciente.segundoApellido} " styleClass="form-control" readonly="true" rendered="#{entregaMedicamentosMB.renderForm}"/>
+                                </div>
+                                <div class="col-sm-6 col-xs-12">
+                                    <p:outputLabel value="Administradora" rendered="#{entregaMedicamentosMB.renderForm}"/>
+                                    <p:inputText value="#{entregaMedicamentosMB.paciente.idAdministradora.razonSocial}" styleClass="form-control" readonly="true" rendered="#{entregaMedicamentosMB.renderForm}"/>
+                                </div>
+                            </div><!-- /row -->
+                            <div class="row">
+                                <div class="col-sm-3 col-xs-12">
+                                    <p:outputLabel value="Dirección" rendered="#{entregaMedicamentosMB.renderForm}"/>
+                                    <p:inputText value="#{entregaMedicamentosMB.paciente.direccion}" styleClass="form-control" readonly="true" rendered="#{entregaMedicamentosMB.renderForm}"/>
+                                </div>
+                                <div class="col-sm-3 col-xs-12">
+                                    <p:outputLabel value="Teléfono" rendered="#{entregaMedicamentosMB.renderForm}"/>
+                                    <p:inputText value="#{entregaMedicamentosMB.paciente.telefonoResidencia}" styleClass="form-control" readonly="true" rendered="#{entregaMedicamentosMB.renderForm}"/>
+                                </div>
+                                <div class="col-sm-3 col-xs-12">
+                                    <p:outputLabel value="Punto de Atención" rendered="#{entregaMedicamentosMB.renderForm}"/>
+                                    <p:inputText value="#{entregaMedicamentosMB.centroAtencion}" styleClass="form-control" readonly="true" rendered="#{entregaMedicamentosMB.renderForm}"/>
+                                </div>
+                            </div><!-- /row -->
+                            <br />
+                                <div class="row">
+                            <div class="col-sm-12 col-xs-12">
+                                <p:dataTable id="idDTProductos"
+                                             value="#{entregaMedicamentosMB.listaProductos}"
+                                             rows="10"                                    
+                                             var="producto"
+                                             paginatorPosition="bottom"                                
+                                             emptyMessage="No hay productos"
+                                             editable="true" editMode="cell"
+                                             rendered="#{entregaMedicamentosMB.renderForm}"
+                                    >
+                                    <p:column headerText="Código Producto" filterMatchMode="contains">  
+                                        #{producto.idProducto.codigo}
+                                    </p:column>                            
+                                    <p:column headerText="Nombre Producto"  filterMatchMode="contains">  
+                                        #{producto.idProducto.nombre}
+                                    </p:column>                            
+                                    <p:column headerText="Presentación"  filterMatchMode="contains">  
+                                        #{producto.idProducto.idPresentacion.descripcion}
+                                    </p:column>                            
+                                    <p:column headerText="Observaciones"  filterMatchMode="contains">  
+                                        #{producto.observaciones}
+                                    </p:column>                            
+                                    <p:column headerText="Cantidad recetada"  filterMatchMode="contains">  
+                                        #{producto.cantidadRecetada}
+                                    </p:column>    
+                                    
+                                    <p:column headerText="Cantidad Entregada"  filterMatchMode="contains">  
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{producto.cantidadRecibida}" /></f:facet>
+                                            <f:facet name="input"><p:spinner value="#{producto.cantidadRecibida}" min="1"  size="5"/></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>                            
+                                </p:dataTable>
+                                    
+                            </div>
+                        </div><!--/row-->
+                        <br />
+                    <div class="row">
+                        <div class="col-sm-5 col-xs-12">
+                            <p:outputLabel value="Observaciones"  rendered="#{entregaMedicamentosMB.renderForm}"/>
+                            <p:inputTextarea value="#{entregaMedicamentosMB.observaciones}" styleClass="form-control" rows="6" cols="16" placeholder="Observaciones de la entrada" rendered="#{entregaMedicamentosMB.renderForm}" maxlength="1000"/>
+
+                        </div>
+                    </div>
+                    </p:outputPanel>
+                </p:panel>
+            </div>
+        </h:form>   
+    </h:body>
+</html>
+

@@ -1,0 +1,231 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"      
+
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Lotes</title>
+        <link href="../recursos/css/estilos.css" rel="stylesheet"/>        
+        <link href="../recursos/css/metro-bootstrap.css" rel="stylesheet"/>
+        <link href="../recursos/css/iconFont.css" rel="stylesheet"/>
+        <link href="../recursos/css/bootstrap.min.css" rel="stylesheet"/>        
+        <script type="text/javascript" src="../recursos/js/calendario.js"/>
+    </h:head>
+    <h:body>
+        <h:form id="IdFormLotes" >
+            #{loteMB.init()}
+            <p:growl id="growl" showDetail="true" sticky="false" autoUpdate="true" life="2000"  />
+            <br/>            
+
+            <br/> 
+            <div class="container">
+                <div class="row">
+                    <div style="padding: 5px;">
+                        <p:outputPanel id="opBotones">
+                        <p:commandButton 
+                            title="Nuevo Lote" value="&nbsp;"                                        
+                            styleClass="icon-new fg-lightBlue bg-white no-border"                    
+                            actionListener="#{loteMB.nuevo}"
+                            process="@this,IdFormLotes:opFormulario"
+                            update="IdFormLotes"
+                            style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/> 
+                        &nbsp;
+                        <p:commandButton 
+                            title="Buscar Lote" value="&nbsp;"                                        
+                            styleClass="icon-search fg-lightBlue bg-white no-border" 
+                            oncomplete="PF('dialogoBuscarCategoria').show()"
+                            process="@this,IdFormLotes:opFormulario"
+                            update="IdFormLotes"
+                            actionListener="#{loteMB.buscar}"
+                            style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/> 
+                        &nbsp;
+                        <p:commandButton 
+                            title="Guardar/Actualizar Lote" value="&nbsp;"
+                            styleClass="icon-floppy fg-lightBlue bg-white no-border" 
+                            actionListener="#{loteMB.guardar}"                   
+                            update="IdFormLotes:opFormulario"
+                            process="@this,IdFormLotes:opFormulario"
+                            style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/>                            
+                        &nbsp;
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                            <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                        </p:confirmDialog>
+                        </p:outputPanel>
+                    </div>
+                </div>
+                <p:outputPanel id="opFormulario">
+                    <p:panel style="padding: 5px;">
+                        <div class="row">
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Código Lote" styleClass="campoObligatorio2"/>
+                                <p:inputText value="#{loteMB.lote.codigo}" styleClass="form-control" maxlength="10" placeholder="Código Lote"/>
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Fecha Vigencia" styleClass="campoObligatorio2"/>
+                                <p:calendar value="#{loteMB.lote.fechaVencimiento}" pattern="dd/MM/yyyy" lang="es" locale="es"/>
+                            </div>
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12">
+                                <p:outputLabel value="Observación"/>
+                                <p:inputTextarea value="#{loteMB.lote.observacion}" styleClass="form-control" maxlength="2000" placeholder="Observación"/>
+                            </div>
+                        </div><!--/row-->
+                        <hr />
+                        <h3>Productos</h3>
+                        <div class="row">
+                                <p:commandButton 
+                                    title="Agregar producto" value="&nbsp;"                                        
+                                    styleClass="icon-plus fg-lightBlue bg-white no-border"                    
+                                    oncomplete="PF('IdDialogoBuscarProducto').show()"
+                                    process="@this"
+                                    style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/> 
+                            <br />
+                        </div><!--/row-->
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-12 col-xs-12">
+                                <p:dataTable id="idDTProductos"
+                                             value="#{loteMB.listaLoteProductos}"
+                                             rows="10"                                    
+                                             var="loteProducto"
+                                            paginatorPosition="bottom"                                
+                                            emptyMessage="No hay productos asociados"
+                                    >
+                                    
+                                    <p:column headerText="Código Producto" filterMatchMode="contains">  
+                                        #{loteProducto.idProducto.codigo}
+                                    </p:column>                            
+                                    <p:column headerText="Nombre Producto"  filterMatchMode="contains">  
+                                        #{loteProducto.idProducto.nombre}
+                                    </p:column>                            
+                                    <p:column headerText="Stock Mínimo"  filterMatchMode="contains">  
+                                        #{loteProducto.idProducto.stockMinimo}
+                                    </p:column>                            
+                                    <p:column headerText="Costo"  filterMatchMode="contains">  
+                                        #{loteProducto.idProducto.costo}
+                                    </p:column>                            
+                                    <p:column headerText="" >
+                                        <p:commandButton styleClass="icon-cancel fg-lightBlue"  title="Eliminar" value="" actionListener="#{loteMB.eliminar(loteProducto.idProducto)}" process="@this">
+                                            <p:confirm header="Confirmación" message="¿Seguro desea eliminar el producto #{loteProducto.idProducto.nombre} (se borrará permanentemente al actualizar ?" icon="ui-icon-alert" />
+                                        </p:commandButton> &nbsp;
+
+                                    </p:column>                            
+                                </p:dataTable>
+                                    
+                            </div>
+                        </div><!--/row-->
+                    </p:panel>
+                </p:outputPanel>
+                <p:dialog id="IdDialogoBuscarCategoria" header="BUSCAR LOTE" widgetVar="dialogoBuscarCategoria" resizable="false" modal="true">  
+                    <p:ajax event="close" oncomplete="PF('wvTablaClasificaciones').clearFilters(); PF('wvTablaClasificaciones').getPaginator().setPage(0);" update="IdTablaProveedor" />
+                    <table>
+                        <tr>
+                            <td>
+                                <p:dataTable 
+                                    id="IdTablaProveedor" 
+                                    var="lot" 
+                                    widgetVar="wvTablaClasificaciones"
+                                    value="#{loteMB.listaLotes}"
+                                    rowKey="#{lot.idLote}"  
+                                    selection="#{loteMB.lote}" 
+                                    paginator="true"
+                                    style="width: 600px; height: 300px;"
+                                    rows="10"                                    
+                                    paginatorPosition="bottom"                                
+                                    emptyMessage="No hay Lotes"
+                                    scrollable="true" 
+                                    currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                    paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"                                    
+                                    pageLinks="5"                                   
+                                    selectionMode="single"
+
+                                    resizableColumns="true">                                   
+                                    <p:column headerText="Código" filterBy="#{lot.codigo}" filterMatchMode="contains">  
+                                        #{lot.codigo}  
+                                    </p:column>                            
+                                    <p:column headerText="Fecha Vigencia" filterBy="#{lot.fechaVencimiento}" filterMatchMode="contains">  
+                                        <p:outputLabel value="#{lot.fechaVencimiento}">
+                                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                                        </p:outputLabel>
+                                        
+                                    </p:column>                            
+                                </p:dataTable>  
+                            </td>    
+                        </tr>
+                        <tr>
+                            <td>
+                                <br/>
+                                <p:commandButton 
+                                    value="Cargar seleccionado"                                
+                                    process="@this,IdTablaProveedor"
+                                    update="IdFormLotes:opFormulario,IdFormLotes:opBotones"
+                                    oncomplete="PF('dialogoBuscarCategoria').hide()"
+                                    actionListener="#{loteMB.buscar}"/>
+                            </td>    
+                        </tr>
+                    </table>
+                </p:dialog>
+                <!--productos agregar-->
+                <p:dialog id="IdDialogoBuscarProducto" header="BUSCAR PRODUCTOS" widgetVar="IdDialogoBuscarProducto" resizable="false" modal="true">  
+                    <p:ajax event="close" oncomplete="PF('wvTablaProductos').clearFilters(); PF('wvTablaProductos').getPaginator().setPage(0);" update="IdTablaProductos" />
+                    <table>
+                        <tr>
+                            <td>
+                                <p:dataTable 
+                                    id="IdTablaProductos" 
+                                    var="prod" 
+                                    widgetVar="wvTablaProductos"
+                                    value="#{loteMB.listaProductos}"
+                                    rowKey="#{prod.idProducto}"  
+                                    selection="#{loteMB.producto}" 
+                                    paginator="true"
+                                    style="width: 600px; height: 300px;"
+                                    rows="10"                                    
+                                    paginatorPosition="bottom"                                
+                                    emptyMessage="No hay productos"
+                                    scrollable="true" 
+                                    currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                    paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"                                    
+                                    pageLinks="5"                                   
+                                    selectionMode="single"
+
+                                    resizableColumns="true">                                   
+                                    <p:column headerText="Código Producto" filterBy="#{prod.codigo}" filterMatchMode="contains">  
+                                        #{prod.codigo}
+                                    </p:column>                            
+                                    <p:column headerText="Nombre Producto" filterBy="#{prod.nombre}" filterMatchMode="contains">  
+                                        #{prod.nombre}
+                                    </p:column>                            
+                                    <p:column headerText="Nombre Genérico" filterBy="#{prod.nombreGenerico}" filterMatchMode="contains">  
+                                        #{prod.nombreGenerico}
+                                    </p:column>                            
+                                    <p:column headerText="Stock Mínimo" filterBy="#{prod.stockMinimo}" filterMatchMode="contains">  
+                                        #{prod.stockMinimo}
+                                    </p:column>                            
+                                    <p:column headerText="Costo" filterBy="#{prod.costo}" filterMatchMode="contains">  
+                                        #{prod.costo}
+                                    </p:column>                            
+                                </p:dataTable>  
+                            </td>    
+                        </tr>
+                        <tr>
+                            <td>
+                                <br/>
+                                <p:commandButton 
+                                    value="Cargar seleccionado"                                
+                                    process="@this,IdTablaProductos"
+                                    update="IdFormLotes:idDTProductos,IdFormLotes:opBotones"
+                                    oncomplete="PF('IdDialogoBuscarProducto').hide()"
+                                    actionListener="#{loteMB.seleccionarProducto}"/>
+                            </td>    
+                        </tr>
+                    </table>
+                </p:dialog>
+            </div>
+        </h:form>   
+    </h:body>
+</html>

@@ -1,0 +1,164 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"      
+
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Bodegas</title>
+        <link href="../recursos/css/estilos.css" rel="stylesheet"/>        
+        <link href="../recursos/css/metro-bootstrap.css" rel="stylesheet"/>
+        <link href="../recursos/css/iconFont.css" rel="stylesheet"/>
+        <link href="../recursos/css/bootstrap.min.css" rel="stylesheet"/>        
+        <script type="text/javascript" src="../recursos/js/calendario.js"/>
+    </h:head>
+    <h:body>
+        <h:form id="IdFormBodegas" >
+            #{bodegaMB.init()}
+            <p:growl id="growl" showDetail="true" sticky="false" autoUpdate="true" life="2000"  />
+            <br/>            
+
+            <br/> 
+            <div class="container">
+                <div class="row">
+                    <div style="padding: 5px;">
+                        <p:outputPanel id="opBotones">
+                        <p:commandButton 
+                            title="Nueva Bodega" value="&nbsp;"                                        
+                            styleClass="icon-new fg-lightBlue bg-white no-border"                    
+                            actionListener="#{bodegaMB.nuevo}"
+                            process="@this"
+                            update="IdFormBodegas"
+                            style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/> 
+                        &nbsp;
+                        <p:commandButton 
+                            title="Buscar Bodega" value="&nbsp;"                                        
+                            styleClass="icon-search fg-lightBlue bg-white no-border" 
+                            oncomplete="PF('dialogoBuscarCategoria').show()"
+                            process="@this"
+                            update="IdFormBodegas"
+                            actionListener="#{bodegaMB.nuevo}"
+                            style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/> 
+                        &nbsp;
+                        <p:commandButton 
+                            title="Guardar/Actualizar Bodega" value="&nbsp;"
+                            styleClass="icon-floppy fg-lightBlue bg-white no-border" 
+                            actionListener="#{bodegaMB.guardar}"                   
+                            update="IdFormBodegas:opFormulario"
+                            process="@this,IdFormBodegas:opFormulario"
+                            style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/>                            
+                        &nbsp;
+                        <p:commandButton                     
+                            title="Eliminar Bodega" value="&nbsp;"                                        
+                            styleClass="icon-cancel fg-lightBlue bg-white no-border"                     
+                            actionListener="#{bodegaMB.eliminar}"
+                            update="IdFormBodegas:opFormulario"
+                            style="font-size: 20px; width: 20px; height: 20px; left: 20px; "> 
+                            <p:confirm header="Confirmación" message="¿Seguro desea eliminar la bodega?" icon="ui-icon-alert" />
+                        </p:commandButton>
+                        &nbsp;                
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                            <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                        </p:confirmDialog>
+                        </p:outputPanel>
+                    </div>
+                </div>
+                <p:outputPanel id="opFormulario">
+                    <p:panel style="padding: 5px;">
+                        <div class="row">
+                            <div class="col-sm-2 col-xs-12">
+                                <p:outputLabel  value="Tipo" styleClass="campoObligatorio2"/><br/>
+                                <p:selectOneMenu value="#{bodegaMB.bodega.tipo}">
+                                    <f:selectItem itemLabel="Bodega" itemValue="1" />
+                                    <f:selectItem itemLabel="Farmacia" itemValue="2" />
+                                    <f:ajax event="change" listener="#{bodegaMB.validarTipo}" render="IdFormBodegas:opFormulario" />
+                                </p:selectOneMenu>
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel  value="Sede" styleClass="campoObligatorio2"/><br />
+                                <p:selectOneMenu value="#{bodegaMB.sede.idSede}">
+                                    <f:selectItem itemLabel="-- Seleccione Sede --" itemValue="0" />
+                                    <f:selectItems value="#{bodegaMB.listaSedes}" var="sede" itemLabel="#{sede.nombreSede}" itemValue="#{sede.idSede}" />
+                                </p:selectOneMenu>
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Código Bodega" styleClass="campoObligatorio2"/>
+                                <p:inputText value="#{bodegaMB.bodega.codigoBodega}" styleClass="form-control" id="txtObservacion"/>
+                            </div>
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-sm-5 col-xs-12">
+                                <p:outputLabel value="Bodega" styleClass="campoObligatorio2"/>
+                                <p:inputText value="#{bodegaMB.bodega.nombre}" styleClass="form-control" id="txtBodega"/>
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Responsable" styleClass="campoObligatorio2"/><br/>
+                                <p:selectOneMenu value="#{bodegaMB.usuario.idUsuario}" filter="true">
+                                    <f:selectItem itemLabel="-- Seleccione Responsable --" itemValue="0" />
+                                    <f:selectItems value="#{bodegaMB.listaUsuarios}" var="usu" itemLabel="#{usu.primerNombre} #{usu.primerApellido} " itemValue="#{usu.idUsuario}" />
+                                </p:selectOneMenu>
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Bodega Principal" rendered="#{bodegaMB.renderPrincipal}"/><br/>
+                                <p:selectBooleanCheckbox value="#{bodegaMB.bodega.principal}" rendered="#{bodegaMB.renderPrincipal}"/>
+                            </div>
+                        </div>
+                    </p:panel>
+                </p:outputPanel>
+                <p:dialog id="IdDialogoBuscarCategoria" header="BUSCAR BODEGAS" widgetVar="dialogoBuscarCategoria" resizable="false" modal="true">  
+                    <p:ajax event="close" oncomplete="PF('wvTablaClasificaciones').clearFilters(); PF('wvTablaClasificaciones').getPaginator().setPage(0);" update="IdTablaBodegas" />
+                    <table>
+                        <tr>
+                            <td>
+                                <p:dataTable 
+                                    id="IdTablaBodegas" 
+                                    var="bodeg" 
+                                    widgetVar="wvTablaClasificaciones"
+                                    value="#{bodegaMB.listaBodegas}"
+                                    rowKey="#{bodeg.idBodega}"  
+                                    selection="#{bodegaMB.bodegaSeleccionada}" 
+                                    paginator="true"
+                                    style="width: 600px; height: 300px;"
+                                    rows="10"                                    
+                                    paginatorPosition="bottom"                                
+                                    emptyMessage="No hay bodegas"
+                                    scrollable="true" 
+                                    currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                    paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"                                    
+                                    pageLinks="5"                                   
+                                    selectionMode="single"
+
+                                    resizableColumns="true">                                   
+                                    <p:column headerText="Código" filterBy="#{bodeg.codigoBodega}" filterMatchMode="contains">  
+                                        #{bodeg.codigoBodega}  
+                                    </p:column>                            
+                                    <p:column headerText="Nombre" filterBy="#{bodeg.nombre}" filterMatchMode="contains">  
+                                        #{bodeg.nombre}  
+                                    </p:column>                            
+                                    <p:column headerText="Responsable" filterBy="#{bodeg.responsable.primerNombre} #{bodeg.responsable.primerApellido}" filterMatchMode="contains">  
+                                        #{bodeg.responsable.primerNombre} #{bodeg.responsable.primerApellido} 
+                                    </p:column>                            
+
+                                </p:dataTable>  
+                            </td>    
+                        </tr>
+                        <tr>
+                            <td>
+                                <br/>
+                                <p:commandButton 
+                                    value="Cargar seleccionado"                                
+                                    process="@this,IdTablaBodegas"
+                                    update="IdFormBodegas:opFormulario,IdFormBodegas:opBotones"
+                                    oncomplete="PF('dialogoBuscarCategoria').hide()"
+                                    actionListener="#{bodegaMB.buscar}"/>
+                            </td>    
+                        </tr>
+                    </table>
+                </p:dialog>
+            </div>
+        </h:form>   
+    </h:body>
+</html>
+
