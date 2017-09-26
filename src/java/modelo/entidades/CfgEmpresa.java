@@ -6,6 +6,7 @@
 package modelo.entidades;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,8 +15,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -87,7 +90,8 @@ public class CfgEmpresa implements Serializable {
     @JoinColumn(name = "cod_departamento", referencedColumnName = "id")
     @ManyToOne
     private CfgClasificaciones codDepartamento;
-
+    @OneToMany(mappedBy = "idEmpresa")
+    private List<InvLotes> invLotesList;
     public CfgEmpresa() {
     }
 
@@ -244,6 +248,14 @@ public class CfgEmpresa implements Serializable {
 
     public void setCodDepartamento(CfgClasificaciones codDepartamento) {
         this.codDepartamento = codDepartamento;
+    }
+    @XmlTransient
+    public List<InvLotes> getInvLotesList() {
+        return invLotesList;
+    }
+
+    public void setInvLotesList(List<InvLotes> invLotesList) {
+        this.invLotesList = invLotesList;
     }
 
     @Override

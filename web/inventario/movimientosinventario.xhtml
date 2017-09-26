@@ -100,7 +100,7 @@
                                 </p:selectOneMenu>
                             </div>
                             <div class="col-sm-3 col-xs-12">
-                                <p:outputLabel value="Tipo Proceso" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderProcesos}"/>
+                                <p:outputLabel value="Tipo Proceso" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderProcesos}"/><br />
                                 <p:selectOneMenu id="somTipoProceso" value="#{movimientosInventariosMB.tipoProceso}" rendered="#{movimientosInventariosMB.renderProcesos}">
                                     <f:selectItem itemLabel="-- Seleccione proceso --" itemValue="0" />
                                     <f:selectItems value="#{movimientosInventariosMB.listaProcesos}" rendered="#{movimientosInventariosMB.renderProcesos}"/>
@@ -151,6 +151,15 @@
                                     <f:convertDateTime pattern="dd/MM/yyyy" />
                                 </p:inputText>
                             </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Lote" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderEntradaTrasladoB}"/><br />
+                                <p:selectOneMenu value="#{movimientosInventariosMB.idLote}" style="width:190px;"  rendered="#{movimientosInventariosMB.renderEntradaTrasladoB}">
+                                        <f:selectItem itemValue="0" itemLabel="-- Seleccione Lote --" />
+                                        <f:selectItems value="#{movimientosInventariosMB.listaLote}" var="lot" itemLabel="#{lot.codigo}" itemValue="#{lot.idLote}"/>
+                                        <p:ajax event="change" listener="#{movimientosInventariosMB.validarProductosBodegaLote}" update="IdFormMovimientosInventario:opFormulario IdFormMovimientosInventario:opBotones IdFormMovimientosInventario:opProductos IdFormMovimientosInventario:listaProductos" ></p:ajax>
+                                  </p:selectOneMenu>
+                                
+                            </div>
                         </div>
 
                         <!-- /.row entrada Traslados-->
@@ -160,6 +169,15 @@
                                 <p:outputLabel value="Bodega" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderEntradaSaldoInicial}"/>
                                 <p:inputText value="#{movimientosInventariosMB.bodegaOrigen.codigoBodega} #{movimientosInventariosMB.bodegaOrigen.nombre}" styleClass="form-control" readonly="true" rendered="#{movimientosInventariosMB.renderEntradaSaldoInicial}"/>
                             </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Lote" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderEntradaSaldoInicial}"/><br />
+                                <p:selectOneMenu value="#{movimientosInventariosMB.idLote}" style="width:190px;"  rendered="#{movimientosInventariosMB.renderEntradaSaldoInicial}">
+                                        <f:selectItem itemValue="0" itemLabel="-- Seleccione Lote --" />
+                                        <f:selectItems value="#{movimientosInventariosMB.listaLote}" var="lot" itemLabel="#{lot.codigo}" itemValue="#{lot.idLote}"/>
+                                        <p:ajax event="change" listener="#{movimientosInventariosMB.validarSaldoInicial}" update="IdFormMovimientosInventario:opFormulario IdFormMovimientosInventario:opBotones IdFormMovimientosInventario:opProductos" ></p:ajax>
+                                  </p:selectOneMenu>
+                                
+                            </div>
                         </div>
                         <!-- /.row entrada saldo inicial-->
                         <!-- row entrada ajuste positivo -->
@@ -167,6 +185,16 @@
                             <div class="col-sm-3 col-xs-12">
                                 <p:outputLabel value="Bodega" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderEntradaAjustePositivo}"/>
                                 <p:inputText value="#{movimientosInventariosMB.bodegaOrigen.codigoBodega} #{movimientosInventariosMB.bodegaOrigen.nombre}" styleClass="form-control" readonly="true" rendered="#{movimientosInventariosMB.renderEntradaAjustePositivo}"/>
+                                
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Lote" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderEntradaAjustePositivo}"/><br />
+                                <p:selectOneMenu value="#{movimientosInventariosMB.idLote}" style="width:190px;"  rendered="#{movimientosInventariosMB.renderEntradaAjustePositivo}">
+                                        <f:selectItem itemValue="0" itemLabel="-- Seleccione Lote --" />
+                                        <f:selectItems value="#{movimientosInventariosMB.listaLote}" var="lot" itemLabel="#{lot.codigo}" itemValue="#{lot.idLote}"/>
+                                        <p:ajax event="change" listener="#{movimientosInventariosMB.validarAjustePositivo}" update="IdFormMovimientosInventario:opFormulario IdFormMovimientosInventario:opBotones IdFormMovimientosInventario:opProductos" ></p:ajax>
+                                  </p:selectOneMenu>
+                                
                             </div>
                         </div>
                         <!-- /.row entrada ajuste positivo-->
@@ -213,6 +241,16 @@
                                 </p:selectOneMenu>
                             </div>
                             <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Lote" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderSalidaTraslados}"/><br />
+                                <p:selectOneMenu value="#{movimientosInventariosMB.idLote}" style="width:190px;"  rendered="#{movimientosInventariosMB.renderSalidaTraslados}">
+                                        <f:selectItem itemValue="0" itemLabel="-- Seleccione Lote --" />
+                                        <f:selectItems value="#{movimientosInventariosMB.listaLote}" var="lot" itemLabel="#{lot.codigo}" itemValue="#{lot.idLote}"/>
+                                        <p:ajax event="change" listener="#{movimientosInventariosMB.validarProductosBodegaLote}" update="IdFormMovimientosInventario:opFormulario IdFormMovimientosInventario:opBotones IdFormMovimientosInventario:opProductos IdFormMovimientosInventario:listaProductos" ></p:ajax>
+                                  </p:selectOneMenu>
+                                
+                            </div>
+                            
+                            <div class="col-sm-3 col-xs-12">
                                 <p:outputLabel value="Bodega Destino" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderSalidaTraslados}"/>
                                 <p:selectOneMenu id="somBodegasDestino" value="#{movimientosInventariosMB.bodegaDestino.idBodega}" rendered="#{movimientosInventariosMB.renderSalidaTraslados}" style="width:195px;">
                                     <f:selectItem itemValue="0" itemLabel="-- Seleccione Bodega --" />
@@ -228,15 +266,26 @@
                                 <p:outputLabel value="Bodega" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderSalidaTrasladosAjusteNegativo}"/>
                                 <p:inputText value="#{movimientosInventariosMB.bodegaOrigen.codigoBodega} #{movimientosInventariosMB.bodegaOrigen.nombre}" styleClass="form-control" readonly="true" rendered="#{movimientosInventariosMB.renderSalidaTrasladosAjusteNegativo}"/>
                             </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Lote" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderSalidaTrasladosAjusteNegativo}"/><br />
+                                <p:selectOneMenu value="#{movimientosInventariosMB.idLote}" style="width:190px;"  rendered="#{movimientosInventariosMB.renderSalidaTrasladosAjusteNegativo}">
+                                        <f:selectItem itemValue="0" itemLabel="-- Seleccione Lote --" />
+                                        <f:selectItems value="#{movimientosInventariosMB.listaLote}" var="lot" itemLabel="#{lot.codigo}" itemValue="#{lot.idLote}"/>
+                                        <p:ajax event="change" listener="#{movimientosInventariosMB.validarLoteAjusteNegativo}" update="IdFormMovimientosInventario:opFormulario IdFormMovimientosInventario:opBotones IdFormMovimientosInventario:opProductos IdFormMovimientosInventario:listaProductos" ></p:ajax>
+                                  </p:selectOneMenu>
+                                
+                            </div>
                         </div>
                         <!-- /.row salida ajuste negativo-->
                         <!-- row salida devolución compra -->
                         <div class="row">
+                            
                             <div class="col-sm-3 col-xs-12">
                                 <p:outputLabel value="Número De Salida" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderSalidaTrasladosDevolucionCompra}"/>
                                 <p:inputText id="txtNroSalidaDevolucion" value="#{movimientosInventariosMB.nroSalida}"  styleClass="form-control" maxlength="10"  rendered="#{movimientosInventariosMB.renderSalidaTrasladosDevolucionCompra}">
                                 </p:inputText>
                             </div>
+                            
                             <div class="col-sm-2 col-xs-12">
                                 <p:outputLabel value="Orden de Compra" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderSalidaTrasladosDevolucionCompra}"/>
                                 <p:inputText id="txtNroOrdenDevolucion" value="#{movimientosInventariosMB.nroOrden}"  styleClass="form-control" maxlength="10"  rendered="#{movimientosInventariosMB.renderSalidaTrasladosDevolucionCompra}">
@@ -267,6 +316,15 @@
                                 <p:inputText value="#{movimientosInventariosMB.movimiento.fechaMovimiento}" styleClass="form-control" readonly="true" rendered="#{movimientosInventariosMB.renderSalidaTrasladosDevolucionCompraB}">
                                     <f:convertDateTime pattern="dd/MM/yyyy" />
                                 </p:inputText>
+                            </div>
+                             <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Lote" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderSalidaTrasladosDevolucionCompraB}"/><br />
+                                <p:selectOneMenu disabled="true" value="#{movimientosInventariosMB.idLote}" style="width:190px;"  rendered="#{movimientosInventariosMB.renderSalidaTrasladosDevolucionCompraB}">
+                                        <f:selectItem itemValue="0" itemLabel="-- Seleccione Lote --" />
+                                        <f:selectItems value="#{movimientosInventariosMB.listaLote}" var="lot" itemLabel="#{lot.codigo}" itemValue="#{lot.idLote}"/>
+                                        <p:ajax event="change" listener="#{movimientosInventariosMB.validarLoteAjusteNegativo}" update="IdFormMovimientosInventario:opFormulario IdFormMovimientosInventario:opBotones IdFormMovimientosInventario:opProductos IdFormMovimientosInventario:listaProductos" ></p:ajax>
+                                  </p:selectOneMenu>
+                                
                             </div>
                         </div>
 

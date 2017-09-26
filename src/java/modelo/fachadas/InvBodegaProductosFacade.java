@@ -23,6 +23,16 @@ public class InvBodegaProductosFacade extends AbstractFacade<InvBodegaProductos>
         super(InvBodegaProductos.class);
     }
     
+    public InvBodegaProductos getBodegaProductoLote(int idBodega, int idProducto,int idLote){
+        try {
+            String hql = "SELECT i FROM InvBodegaProductos i where i.idBodega.idBodega=:idBodega and i.idProducto.idProducto=:idProducto and i.idLote.idLote=:idLote";
+            Query query = getEntityManager().createQuery(hql).setParameter("idBodega", idBodega).setParameter("idProducto", idProducto).setParameter("idLote",idLote);
+            return (InvBodegaProductos)query.getSingleResult();
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
     public InvBodegaProductos getBodegaProducto(int idBodega, int idProducto){
         try {
             String hql = "SELECT i FROM InvBodegaProductos i where i.idBodega.idBodega=:idBodega and i.idProducto.idProducto=:idProducto";
@@ -42,6 +52,16 @@ public class InvBodegaProductosFacade extends AbstractFacade<InvBodegaProductos>
         }
         return new ArrayList<>();
     }
+    
+    public List<InvBodegaProductos> getProductosBodegasExistenciaXlote(int idBodega,int idLote){
+        try {
+            String hql ="SELECT i FROM InvBodegaProductos i where i.idBodega.idBodega=:idBodega and i.existencia>0 and i.idLote.idLote=:idLote";
+            Query query = getEntityManager().createQuery(hql).setParameter("idBodega", idBodega).setParameter("idLote",idLote);
+            return query.getResultList();
+        } catch (Exception e) {
+        }
+        return new ArrayList<>();
+    }
     public List<InvBodegaProductos> getProductosBodegas(int idBodega){
         try {
             String hql ="SELECT i FROM InvBodegaProductos i where i.idBodega.idBodega=:idBodega";
@@ -53,6 +73,19 @@ public class InvBodegaProductosFacade extends AbstractFacade<InvBodegaProductos>
         return new ArrayList<>();
    
     }
+    public List<InvBodegaProductos> getProductosBodegasXLote(int idBodega, int idLote){
+        try {
+            String hql ="SELECT i FROM InvBodegaProductos i where i.idBodega.idBodega=:idBodega and i.idLote.idLote=:idLote";
+            Query query = getEntityManager().createQuery(hql).setParameter("idBodega", idBodega).setParameter("idLote", idLote);
+            return query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<>();
+   
+    }
+    
+    
     
         /**
      * Método para consultar medicamentos según el texto enviado por parámetro.
@@ -63,7 +96,7 @@ public class InvBodegaProductosFacade extends AbstractFacade<InvBodegaProductos>
     public List<String> autocompletarMedicamentos(String txt) {
         try {
 
-             String hql = "SELECT CONCAT('(',t.idProducto.idProducto,')',t.idProducto.codigo,' - ', t.idProducto.nombre ,' - ', t.existencia) FROM InvBodegaProductos t "
+             String hql = "SELECT CONCAT('(',t.idProducto.idProducto,')',t.idProducto.codigo,' - ', t.idProducto.nombre ,' - ', t.existencia,' - Lote:',t.idLote.codigo) FROM InvBodegaProductos t "
                     + "WHERE t.idProducto.idCategoria.idCategoria=1 and t.idProducto.productoPos=true and t.idProducto.activo=true and "
                     + "UPPER(CONCAT(t.idProducto.codigo,' - ', t.idProducto.nombre ,' - ', t.existencia)) LIKE '%" + txt + "%'";
             

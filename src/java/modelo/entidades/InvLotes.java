@@ -61,11 +61,20 @@ public class InvLotes implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaCreacion;
     @OneToMany(mappedBy = "idLote")
+    @JoinColumn(name = "id_empresa", referencedColumnName = "cod_empresa")
+    @ManyToOne
+    private CfgEmpresa idEmpresa;
+    private List<InvBodegaProductos> invBodegaProductosList;
+    @OneToMany(mappedBy = "idLote")
     private List<InvLoteProductos> invLoteProductosList;
     @JoinColumn(name = "usuario_crea", referencedColumnName = "id_usuario")
     @ManyToOne
     private CfgUsuarios usuarioCrea;
-
+    @OneToMany(mappedBy = "idLote")
+    private List<InvOrdenCompra> invOrdenCompraList;
+    @OneToMany(mappedBy = "idLote")
+    private List<InvEntregaMedicamentosDetalle> invEntregaMedicamentosDetalleList;
+    
     public InvLotes() {
     }
 
@@ -129,6 +138,39 @@ public class InvLotes implements Serializable {
     public void setUsuarioCrea(CfgUsuarios usuarioCrea) {
         this.usuarioCrea = usuarioCrea;
     }
+    public CfgEmpresa getIdEmpresa() {
+        return idEmpresa;
+    }
+
+    public void setIdEmpresa(CfgEmpresa idEmpresa) {
+        this.idEmpresa = idEmpresa;
+    }
+    
+    @XmlTransient
+    public List<InvBodegaProductos> getInvBodegaProductosList() {
+        return invBodegaProductosList;
+    }
+
+    public void setInvBodegaProductosList(List<InvBodegaProductos> invBodegaProductosList) {
+        this.invBodegaProductosList = invBodegaProductosList;
+    }
+     @XmlTransient
+    public List<InvOrdenCompra> getInvOrdenCompraList() {
+        return invOrdenCompraList;
+    }
+
+    public void setInvOrdenCompraList(List<InvOrdenCompra> invOrdenCompraList) {
+        this.invOrdenCompraList = invOrdenCompraList;
+    }
+     @XmlTransient
+    public List<InvEntregaMedicamentosDetalle> getInvEntregaMedicamentosDetalleList() {
+        return invEntregaMedicamentosDetalleList;
+    }
+
+    public void setInvEntregaMedicamentosDetalleList(List<InvEntregaMedicamentosDetalle> invEntregaMedicamentosDetalleList) {
+        this.invEntregaMedicamentosDetalleList = invEntregaMedicamentosDetalleList;
+    }
+    
 
     @Override
     public int hashCode() {

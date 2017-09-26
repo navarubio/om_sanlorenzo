@@ -104,6 +104,28 @@
                             </div>
                             
                         </div><!--/row-->
+                        	
+                        <div class="row">
+                            <h:panelGroup rendered="#{entradaOrdenCompraMB.renderLote}">
+                                <div class="col-sm-3 col-xs-12">
+                                    <p:outputLabel value="Lote" styleClass="campoObligatorio2"/><br />
+                                    <p:selectOneMenu value="#{entradaOrdenCompraMB.idLote}" style="width:190px;">
+                                        <f:selectItem itemValue="0" itemLabel="-- Seleccione Lote --" />
+                                        <f:selectItems value="#{entradaOrdenCompraMB.listaLote}" var="lot" itemLabel="#{lot.codigo}" itemValue="#{lot.idLote}"/>
+                                        <p:ajax event="change" listener="#{entradaOrdenCompraMB.validarLote}" update="opFV"></p:ajax>
+                                    </p:selectOneMenu>
+                                </div>
+                                <div class="col-sm-3 col-xs-12">
+                                    <p:outputPanel id="opFV">
+                                        <p:outputLabel value="Fecha Vencimiento Lote" rendered="#{entradaOrdenCompraMB.renderLoteFV}" styleClass="campoObligatorio2"/><br />
+                                    <p:inputText value="#{entradaOrdenCompraMB.lote.fechaVencimiento}" rendered="#{entradaOrdenCompraMB.renderLoteFV}" styleClass="form-control" maxlength="10" readonly="true">
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                    </p:inputText>
+                                    </p:outputPanel>
+                                </div>
+                            </h:panelGroup>
+                        </div><!--/row-->
+						
                     </p:outputPanel>
                     <!--productos-->
                     <p:outputPanel id="opProductos">

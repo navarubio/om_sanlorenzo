@@ -65,6 +65,7 @@
                             </div>
                             <div class="col-sm-3 col-xs-12">
                                 <p:outputLabel value="Fecha Vigencia" styleClass="campoObligatorio2"/>
+                                <br />
                                 <p:calendar value="#{loteMB.lote.fechaVencimiento}" pattern="dd/MM/yyyy" lang="es" locale="es"/>
                             </div>
                         </div><!--/row-->
@@ -75,6 +76,7 @@
                             </div>
                         </div><!--/row-->
                         <hr />
+                        <h:panelGroup rendered="false">
                         <h3>Productos</h3>
                         <div class="row">
                                 <p:commandButton 
@@ -118,6 +120,7 @@
                                     
                             </div>
                         </div><!--/row-->
+                        </h:panelGroup>
                     </p:panel>
                 </p:outputPanel>
                 <p:dialog id="IdDialogoBuscarCategoria" header="BUSCAR LOTE" widgetVar="dialogoBuscarCategoria" resizable="false" modal="true">  

@@ -18,9 +18,11 @@ import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import managedBeans.seguridad.AplicacionGeneralMB;
 import managedBeans.seguridad.LoginMB;
+import modelo.entidades.CfgEmpresa;
 import modelo.entidades.InvLoteProductos;
 import modelo.entidades.InvLotes;
 import modelo.entidades.InvProductos;
+import modelo.fachadas.CfgEmpresaFacade;
 import modelo.fachadas.InvLoteProductosFacade;
 import modelo.fachadas.InvLotesFacade;
 import modelo.fachadas.InvProductosFacade;
@@ -40,11 +42,15 @@ public class LoteMB extends MetodosGenerales implements java.io.Serializable{
     private InvLoteProductosFacade loteProductoFachada;
     @EJB 
     private InvProductosFacade productoFachada;
+    @EJB
+    private CfgEmpresaFacade empresaFacade;
+    
     
     private InvLotes lote;
     private InvProductos producto;
     
     private LoginMB loginMB;
+    private CfgEmpresa empresaActual;
     
     private List<InvLotes> listaLotes;
     private List<InvProductos> listaProductos;
@@ -62,6 +68,7 @@ public class LoteMB extends MetodosGenerales implements java.io.Serializable{
         listaLoteProductos = new ArrayList<>();
         listaLoteProductosEliminar = new ArrayList<>();
         listaLotes = loteFachada.findAll();
+        this.empresaActual =  empresaFacade.find(1);
     }
     public void buscar(){
         if(lote!=null){
@@ -71,6 +78,7 @@ public class LoteMB extends MetodosGenerales implements java.io.Serializable{
     public void nuevo(){
         lote = new InvLotes();
         lote.setFechaVencimiento(new Date());
+        lote.setIdEmpresa(empresaActual);
         listaLoteProductos = new ArrayList<>();
         listaLoteProductosEliminar = new ArrayList<>();
     }
@@ -80,6 +88,7 @@ public class LoteMB extends MetodosGenerales implements java.io.Serializable{
                 if(lote.getIdLote()==null){
                     lote.setFechaCreacion(new Date());
                     lote.setUsuarioCrea(loginMB.getUsuarioActual());
+                    lote.setIdEmpresa(empresaActual);
                     loteFachada.create(lote);
                     //guardamos el detalle
                     for(InvLoteProductos il:listaLoteProductos){

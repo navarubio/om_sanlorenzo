@@ -32,6 +32,7 @@ import modelo.entidades.InvBodegas;
 import modelo.entidades.InvConsecutivos;
 import modelo.entidades.InvEntregaMedicamentos;
 import modelo.entidades.InvEntregaMedicamentosDetalle;
+import modelo.entidades.InvLotes;
 import modelo.entidades.InvMovimientoProductos;
 import modelo.entidades.InvMovimientos;
 import modelo.entidades.InvProductos;
@@ -44,6 +45,7 @@ import modelo.fachadas.InvBodegasFacade;
 import modelo.fachadas.InvConsecutivosFacade;
 import modelo.fachadas.InvEntregaMedicamentosDetalleFacade;
 import modelo.fachadas.InvEntregaMedicamentosFacade;
+import modelo.fachadas.InvLotesFacade;
 import modelo.fachadas.InvMovimientosFacade;
 import modelo.fachadas.InvProductosFacade;
 import org.primefaces.context.RequestContext;
@@ -78,6 +80,8 @@ public class EntregaMedicamentosMB extends MetodosGenerales implements java.io.S
     private InvEntregaMedicamentosDetalleFacade entregaMedicamentoDetalleFacade;
     @EJB
     private InvBodegaProductosFacade bodegaProductosFacade;
+    @EJB
+    private InvLotesFacade loteFachada;
     
     private InvEntregaMedicamentos entregaMedicamentos;
     private InvMovimientos movimiento;
@@ -181,7 +185,7 @@ public class EntregaMedicamentosMB extends MetodosGenerales implements java.io.S
                         movimientoProducto.setCantidadSolicitada(detalle.getCantidadRecetada());
                         movimientoProducto.setCantidadRecibida(detalle.getCantidadRecibida());
                         //Validar existencia
-                        InvBodegaProductos bodegaProductos = bodegaProductosFacade.getBodegaProducto(bodega.getIdBodega(), detalle.getIdProducto().getIdProducto());
+                        InvBodegaProductos bodegaProductos = bodegaProductosFacade.getBodegaProductoLote(bodega.getIdBodega(), detalle.getIdProducto().getIdProducto(),(detalle.getIdLote()!=null?detalle.getIdLote().getIdLote():0));
                         if(bodegaProductos!=null){
                             movimientoProducto.setExistencia(bodegaProductos.getExistencia());
                             //descontamos existencia
@@ -241,7 +245,7 @@ public class EntregaMedicamentosMB extends MetodosGenerales implements java.io.S
                                     movimientoProducto.setCantidadSolicitada(detalle.getCantidadRecetada());
                                     movimientoProducto.setCantidadRecibida(detalle.getCantidadRecibida());
                                     //Validar existencia
-                                    InvBodegaProductos bodegaProductos = bodegaProductosFacade.getBodegaProducto(bodega.getIdBodega(), detalle.getIdProducto().getIdProducto());
+                                    InvBodegaProductos bodegaProductos = bodegaProductosFacade.getBodegaProductoLote(bodega.getIdBodega(), detalle.getIdProducto().getIdProducto(),(detalle.getIdLote()!=null?detalle.getIdLote().getIdLote():0));
                                     if(bodegaProductos!=null){
                                         movimientoProducto.setExistencia(bodegaProductos.getExistencia());
                                         //descontamos existencia
@@ -363,8 +367,13 @@ public class EntregaMedicamentosMB extends MetodosGenerales implements java.io.S
                 //seteamos los valores en su posicion
                     //Medicamento 1
                     if(!datosFormulario.getDato2().equals("")){
+                        
                         int indexo = datosFormulario.getDato2().toString().indexOf("(");
                         int indexp = datosFormulario.getDato2().toString().lastIndexOf(")");
+                        int indexLot = datosFormulario.getDato2().toString().indexOf(":");
+                        String codigoLote = datosFormulario.getDato2().toString().substring(indexLot+1,datosFormulario.getDato2().toString().length());
+                        InvLotes lote = loteFachada.getLoteXCodigo(codigoLote);
+                        
                         Integer idProducto =Integer.parseInt(datosFormulario.getDato2().toString().substring(indexo+1, indexp));
                         InvProductos p = productoFacade.find(idProducto);
                         detalleMedicamento = new InvEntregaMedicamentosDetalle();
@@ -373,6 +382,7 @@ public class EntregaMedicamentosMB extends MetodosGenerales implements java.io.S
                         detalleMedicamento.setCantidadRecibida(detalleMedicamento.getCantidadRecetada());
                         detalleMedicamento.setObservaciones(datosFormulario.getDato4().toString());
                         detalleMedicamento.setIdEntrega(entregaMedicamentos);
+                        detalleMedicamento.setIdLote(lote);
                         listaProductos.add(detalleMedicamento);
                     }
                     //Medicamento 2
@@ -380,6 +390,9 @@ public class EntregaMedicamentosMB extends MetodosGenerales implements java.io.S
                         detalleMedicamento = new InvEntregaMedicamentosDetalle();
                         int indexo = datosFormulario.getDato2().toString().indexOf("(");
                         int indexp = datosFormulario.getDato2().toString().lastIndexOf(")");
+                        int indexLot = datosFormulario.getDato2().toString().indexOf(":");
+                        String codigoLote = datosFormulario.getDato2().toString().substring(indexLot+1,datosFormulario.getDato2().toString().length());
+                        InvLotes lote = loteFachada.getLoteXCodigo(codigoLote);
                         Integer idProducto =Integer.parseInt(datosFormulario.getDato2().toString().substring(indexo+1, indexp));
                         InvProductos p = productoFacade.find(idProducto);
                         detalleMedicamento = new InvEntregaMedicamentosDetalle();
@@ -388,6 +401,8 @@ public class EntregaMedicamentosMB extends MetodosGenerales implements java.io.S
                         detalleMedicamento.setCantidadRecibida(detalleMedicamento.getCantidadRecetada());
                         detalleMedicamento.setObservaciones(datosFormulario.getDato7().toString());
                         detalleMedicamento.setIdEntrega(entregaMedicamentos);
+                        detalleMedicamento.setIdLote(lote);
+                                
                         listaProductos.add(detalleMedicamento);
                     }
                     //Medicamento 3
@@ -395,6 +410,9 @@ public class EntregaMedicamentosMB extends MetodosGenerales implements java.io.S
                         detalleMedicamento = new InvEntregaMedicamentosDetalle();
                         int indexo = datosFormulario.getDato2().toString().indexOf("(");
                         int indexp = datosFormulario.getDato2().toString().lastIndexOf(")");
+                        int indexLot = datosFormulario.getDato2().toString().indexOf(":");
+                        String codigoLote = datosFormulario.getDato2().toString().substring(indexLot+1,datosFormulario.getDato2().toString().length());
+                        InvLotes lote = loteFachada.getLoteXCodigo(codigoLote);
                         Integer idProducto =Integer.parseInt(datosFormulario.getDato2().toString().substring(indexo+1, indexp));
                         InvProductos p = productoFacade.find(idProducto);
                         detalleMedicamento.setIdProducto(p!=null?p:new InvProductos());
@@ -404,6 +422,8 @@ public class EntregaMedicamentosMB extends MetodosGenerales implements java.io.S
                         detalleMedicamento.setCantidadRecibida(detalleMedicamento.getCantidadRecetada());
                         detalleMedicamento.setObservaciones(datosFormulario.getDato10().toString());
                         detalleMedicamento.setIdEntrega(entregaMedicamentos);
+                        detalleMedicamento.setIdLote(lote);
+                                
                         listaProductos.add(detalleMedicamento);
                     }
                     //Medicamento 4
@@ -411,12 +431,16 @@ public class EntregaMedicamentosMB extends MetodosGenerales implements java.io.S
                         detalleMedicamento = new InvEntregaMedicamentosDetalle();
                         int indexo = datosFormulario.getDato2().toString().indexOf("(");
                         int indexp = datosFormulario.getDato2().toString().lastIndexOf(")");
+                        int indexLot = datosFormulario.getDato2().toString().indexOf(":");
+                        String codigoLote = datosFormulario.getDato2().toString().substring(indexLot+1,datosFormulario.getDato2().toString().length());
+                        InvLotes lote = loteFachada.getLoteXCodigo(codigoLote);
                         Integer idProducto =Integer.parseInt(datosFormulario.getDato2().toString().substring(indexo+1, indexp));
                         InvProductos p = productoFacade.find(idProducto);
                         detalleMedicamento.setIdProducto(p!=null?p:new InvProductos());
                         detalleMedicamento.setCantidadRecetada(Double.parseDouble(datosFormulario.getDato12().toString()));
                         detalleMedicamento.setObservaciones(datosFormulario.getDato13().toString());
                         detalleMedicamento.setIdEntrega(entregaMedicamentos);
+                        detalleMedicamento.setIdLote(lote);
                         listaProductos.add(detalleMedicamento);
                     }
                     //Medicamento 5
@@ -424,6 +448,9 @@ public class EntregaMedicamentosMB extends MetodosGenerales implements java.io.S
                         detalleMedicamento = new InvEntregaMedicamentosDetalle();
                         int indexo = datosFormulario.getDato2().toString().indexOf("(");
                         int indexp = datosFormulario.getDato2().toString().lastIndexOf(")");
+                        int indexLot = datosFormulario.getDato2().toString().indexOf(":");
+                        String codigoLote = datosFormulario.getDato2().toString().substring(indexLot+1,datosFormulario.getDato2().toString().length());
+                        InvLotes lote = loteFachada.getLoteXCodigo(codigoLote);
                         Integer idProducto =Integer.parseInt(datosFormulario.getDato2().toString().substring(indexo+1, indexp));
                         InvProductos p = productoFacade.find(idProducto);
                         detalleMedicamento.setIdProducto(p!=null?p:new InvProductos());
@@ -431,6 +458,7 @@ public class EntregaMedicamentosMB extends MetodosGenerales implements java.io.S
                         detalleMedicamento.setCantidadRecibida(detalleMedicamento.getCantidadRecetada());
                         detalleMedicamento.setObservaciones(datosFormulario.getDato16().toString());
                         detalleMedicamento.setIdEntrega(entregaMedicamentos);
+                        detalleMedicamento.setIdLote(lote);
                         listaProductos.add(detalleMedicamento);
                     }
                     

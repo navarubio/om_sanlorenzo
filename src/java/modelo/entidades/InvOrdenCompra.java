@@ -100,6 +100,9 @@ public class InvOrdenCompra implements Serializable {
     @JoinColumn(name = "id_proveedor", referencedColumnName = "id_proveedor")
     @ManyToOne
     private InvProveedores idProveedor;
+    @JoinColumn(name = "id_lote", referencedColumnName = "id_lote")
+    @ManyToOne
+    private InvLotes idLote;
 
     public InvOrdenCompra() {
     }
@@ -227,6 +230,13 @@ public class InvOrdenCompra implements Serializable {
 
     public void setIdProveedor(InvProveedores idProveedor) {
         this.idProveedor = idProveedor;
+    }
+     public InvLotes getIdLote() {
+        return idLote;
+    }
+
+    public void setIdLote(InvLotes idLote) {
+        this.idLote = idLote;
     }
 
     @Override

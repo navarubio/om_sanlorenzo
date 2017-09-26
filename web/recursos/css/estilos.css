@@ -108,6 +108,11 @@ body{
     color: red;    
     content: "  *";    
 }
+
+.campoObligatorio2:after{
+    color: red;    
+    content: "  *";    
+}
 .campoNoObligatorio{
     float: left; padding: 5px; background-color: #eff5fa; margin: 0px;  margin-right: 3px; 
 }

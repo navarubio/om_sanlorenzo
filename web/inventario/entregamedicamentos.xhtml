@@ -149,6 +149,9 @@
                                              editable="true" editMode="cell"
                                              rendered="#{entregaMedicamentosMB.renderForm}"
                                     >
+                                    <p:column headerText="Lote" filterMatchMode="contains">  
+                                        #{producto.idLote.codigo}
+                                    </p:column>                            
                                     <p:column headerText="Código Producto" filterMatchMode="contains">  
                                         #{producto.idProducto.codigo}
                                     </p:column>                            

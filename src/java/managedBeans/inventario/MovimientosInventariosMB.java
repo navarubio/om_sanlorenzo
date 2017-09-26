@@ -45,6 +45,7 @@ import modelo.entidades.CfgCorreo;
 import modelo.entidades.InvBodegaProductos;
 import modelo.entidades.InvBodegas;
 import modelo.entidades.InvConsecutivos;
+import modelo.entidades.InvLotes;
 import modelo.entidades.InvMovimientoProductos;
 import modelo.entidades.InvMovimientos;
 import modelo.entidades.InvOrdenCompra;
@@ -53,6 +54,7 @@ import modelo.fachadas.DBConnector;
 import modelo.fachadas.InvBodegaProductosFacade;
 import modelo.fachadas.InvBodegasFacade;
 import modelo.fachadas.InvConsecutivosFacade;
+import modelo.fachadas.InvLotesFacade;
 import modelo.fachadas.InvMovimientoProductosFacade;
 import modelo.fachadas.InvMovimientosFacade;
 import modelo.fachadas.InvOrdenCompraFacade;
@@ -86,6 +88,8 @@ public class MovimientosInventariosMB extends MetodosGenerales implements java.i
     private CfgCorreoFacade correoFacade;
     @EJB
     private InvOrdenCompraFacade ordenCompraFacade;
+    @EJB
+    private InvLotesFacade loteFachada;
     
     private InvBodegas bodegaOrigen;
     private InvBodegas bodegaDestino;
@@ -102,6 +106,7 @@ public class MovimientosInventariosMB extends MetodosGenerales implements java.i
     private List<InvBodegaProductos> listaProductosBodegas;
     private List<InvMovimientoProductos> listaMovimientosProductos;
     private List<InvMovimientos> listaMovimientos;
+    private List<InvLotes> listaLote;
     private List<SelectItem> listaProcesos;
     
     
@@ -134,6 +139,8 @@ public class MovimientosInventariosMB extends MetodosGenerales implements java.i
     private String numeroDocumento;
     private Date fechaMovimiento;
     private int tipoProceso;
+    private int idLote;
+    
     public MovimientosInventariosMB() {
         loginMB = FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{loginMB}", LoginMB.class);
         
@@ -158,7 +165,10 @@ public class MovimientosInventariosMB extends MetodosGenerales implements java.i
         fechaMovimiento = new Date();
         //Cargamos la bodega asignada al usuario logueado
         bodegaOrigen = bodegaFachada.bodegaUsuarioReponsable(loginMB.getUsuarioActual().getIdUsuario());
+        //cargamos los lotes creados por la empresa
+        listaLote = loteFachada.getLotesSinVencer(loginMB.getEmpresaActual().getCodEmpresa());
         initRender();
+        idLote= 0;
     }
     
     public void nuevo(){
@@ -167,6 +177,7 @@ public class MovimientosInventariosMB extends MetodosGenerales implements java.i
         tipoMovimiento = "0";
         movimiento = new InvMovimientos();
         bodegaDestino = new InvBodegas();
+        bodegaOrigen = new InvBodegas();
         listaBodegas = new ArrayList<>();
         listaBodegasDestinos = new ArrayList<>();
         listaProductosBodegas = new ArrayList<>();
@@ -251,6 +262,7 @@ public class MovimientosInventariosMB extends MetodosGenerales implements java.i
         this.renderTitulo = false;
         this.renderSalidaTrasladosDevolucionCompra = false;
         this.renderSalidaTrasladosDevolucionCompraB = false;
+        this.idLote = 0;
     }
     private void guardarEntradaAjustePostivo(){
         try {
@@ -285,7 +297,7 @@ public class MovimientosInventariosMB extends MetodosGenerales implements java.i
             consecutivoFacade.edit(consecutivo);
             //aumentamos valores de traslados de la bodega principal
             for(InvMovimientoProductos pr:movimiento.getInvMovimientoProductosList()){
-                bodegaProducto = bodegaProductosFacade.getBodegaProducto(movimiento.getIdBodegaOrigen().getIdBodega(), pr.getIdProducto().getIdProducto());
+                bodegaProducto = bodegaProductosFacade.getBodegaProductoLote(movimiento.getIdBodegaOrigen().getIdBodega(), pr.getIdProducto().getIdProducto(),idLote);
                 bodegaProducto.setExistencia(pr.getExistencia()+pr.getCantidadRecibida());
                 bodegaProductosFacade.edit(bodegaProducto);
             }
@@ -332,7 +344,7 @@ public class MovimientosInventariosMB extends MetodosGenerales implements java.i
             consecutivoFacade.edit(consecutivo);
             //aumentamos valores de traslados de la bodega principal
             for(InvMovimientoProductos pr:movimiento.getInvMovimientoProductosList()){
-                bodegaProducto = bodegaProductosFacade.getBodegaProducto(movimiento.getIdBodegaOrigen().getIdBodega(), pr.getIdProducto().getIdProducto());
+                bodegaProducto = bodegaProductosFacade.getBodegaProductoLote(movimiento.getIdBodegaOrigen().getIdBodega(), pr.getIdProducto().getIdProducto(),idLote);
                 bodegaProducto.setExistencia(pr.getCantidadSolicitada());
                 bodegaProductosFacade.edit(bodegaProducto);
             }
@@ -347,58 +359,63 @@ public class MovimientosInventariosMB extends MetodosGenerales implements java.i
     }
     private void guardarTrasladoEntrada(){
         try {
-            //actualizamos la orden de salida
-            movimiento.setTipoProceso(1);
-            movimiento.setEstado(TipoInventarioEnum.C.toString());
-            movimiento.setUsuarioAprueba(loginMB.getUsuarioActual());
-            movimiento.setFechaAprobacion(new Date());
-            movimiento.setIdMovimientoOrigen(movimientoSeleccionado!=null?movimientoSeleccionado.getIdMovimiento():0);
-            movimientoFacade.edit(movimiento);
-            //actualizamos y cargamos
-            movimientoEntrada.setEstado(TipoInventarioEnum.C.toString());
-            this.consecutivo = consecutivoFacade.getConsecutivoTipo(tipoMovimiento);
-            int cod = consecutivo.getConsecutivo()+1;
-            movimientoEntrada.setNumeroDocumento(String.format("%04d",cod));
-            movimientoEntrada.setObservaciones(observaciones);
-            consecutivo.setConsecutivo(consecutivo.getConsecutivo()+1);
-            consecutivoFacade.edit(consecutivo);
-            movimientoEntrada.setInvMovimientoProductosList(new ArrayList<InvMovimientoProductos>());
-            for(InvMovimientoProductos pr : listaMovimientosProductos){
-                movimientoProductoFacade.edit(pr);
-                InvMovimientoProductos mov= new InvMovimientoProductos();
-                mov.setIdProducto(pr.getIdProducto());
-                mov.setIdMovimiento(movimientoEntrada);
-                mov.setCantidadSolicitada(pr.getCantidadSolicitada());
-                mov.setCantidadRecibida(pr.getCantidadRecibida());
-                movimientoEntrada.getInvMovimientoProductosList().add(mov);
-            }
-            movimientoEntrada.setIdBodegaOrigen(movimiento.getIdBodegaOrigen());
-            movimientoEntrada.setIdBodegaDestino(movimiento.getIdBodegaDestino());
-            movimientoEntrada.setUsuarioAprueba(loginMB.getUsuarioActual());
-            movimientoEntrada.setFechaAprobacion(new Date());
-            movimientoEntrada.setIdUsuarioCrea(loginMB.getUsuarioActual());
-            movimientoEntrada.setIdEmpresa(loginMB.getEmpresaActual());
-            movimientoFacade.create(movimientoEntrada);
-            
-            //aumentamos valores de traslados de la bodega principal
-            for(InvMovimientoProductos pr:movimientoEntrada.getInvMovimientoProductosList()){
-                InvBodegaProductos bodegaProductos = bodegaProductosFacade.getBodegaProducto(movimiento.getIdBodegaDestino().getIdBodega(), pr.getIdProducto().getIdProducto());
-                if(bodegaProductos==null){//Creamos el producto
-                    bodegaProductos = new InvBodegaProductos();
-                    bodegaProductos.setIdBodega(movimiento.getIdBodegaDestino());
-                    bodegaProductos.setIdProducto(pr.getIdProducto());
-                    bodegaProductos.setExistencia(pr.getCantidadRecibida());
-                    bodegaProductosFacade.create(bodegaProductos);
-                }else{
-                    bodegaProductos.setExistencia(bodegaProductos.getExistencia()+pr.getCantidadRecibida());
-                    bodegaProductosFacade.edit(bodegaProductos);
+            if(idLote!=0){
+                //actualizamos la orden de salida
+                movimiento.setTipoProceso(1);
+                movimiento.setEstado(TipoInventarioEnum.C.toString());
+                movimiento.setUsuarioAprueba(loginMB.getUsuarioActual());
+                movimiento.setFechaAprobacion(new Date());
+                movimiento.setIdMovimientoOrigen(movimientoSeleccionado!=null?movimientoSeleccionado.getIdMovimiento():0);
+                movimientoFacade.edit(movimiento);
+                //actualizamos y cargamos
+                movimientoEntrada.setEstado(TipoInventarioEnum.C.toString());
+                this.consecutivo = consecutivoFacade.getConsecutivoTipo(tipoMovimiento);
+                int cod = consecutivo.getConsecutivo()+1;
+                movimientoEntrada.setNumeroDocumento(String.format("%04d",cod));
+                movimientoEntrada.setObservaciones(observaciones);
+                consecutivo.setConsecutivo(consecutivo.getConsecutivo()+1);
+                consecutivoFacade.edit(consecutivo);
+                movimientoEntrada.setInvMovimientoProductosList(new ArrayList<InvMovimientoProductos>());
+                for(InvMovimientoProductos pr : listaMovimientosProductos){
+                    movimientoProductoFacade.edit(pr);
+                    InvMovimientoProductos mov= new InvMovimientoProductos();
+                    mov.setIdProducto(pr.getIdProducto());
+                    mov.setIdMovimiento(movimientoEntrada);
+                    mov.setCantidadSolicitada(pr.getCantidadSolicitada());
+                    mov.setCantidadRecibida(pr.getCantidadRecibida());
+                    movimientoEntrada.getInvMovimientoProductosList().add(mov);
                 }
+                movimientoEntrada.setIdBodegaOrigen(movimiento.getIdBodegaOrigen());
+                movimientoEntrada.setIdBodegaDestino(movimiento.getIdBodegaDestino());
+                movimientoEntrada.setUsuarioAprueba(loginMB.getUsuarioActual());
+                movimientoEntrada.setFechaAprobacion(new Date());
+                movimientoEntrada.setIdUsuarioCrea(loginMB.getUsuarioActual());
+                movimientoEntrada.setIdEmpresa(loginMB.getEmpresaActual());
+                movimientoFacade.create(movimientoEntrada);
+
+                //aumentamos valores de traslados de la bodega principal
+                for(InvMovimientoProductos pr:movimientoEntrada.getInvMovimientoProductosList()){
+                    InvBodegaProductos bodegaProductos = bodegaProductosFacade.getBodegaProductoLote(movimiento.getIdBodegaDestino().getIdBodega(), pr.getIdProducto().getIdProducto(),idLote);
+                    if(bodegaProductos==null){//Creamos el producto
+                        bodegaProductos = new InvBodegaProductos();
+                        bodegaProductos.setIdBodega(movimiento.getIdBodegaDestino());
+                        bodegaProductos.setIdProducto(pr.getIdProducto());
+                        bodegaProductos.setExistencia(pr.getCantidadRecibida());
+                        bodegaProductos.setIdLote(new InvLotes(idLote));
+                        bodegaProductosFacade.create(bodegaProductos);
+                    }else{
+                        bodegaProductos.setExistencia(bodegaProductos.getExistencia()+pr.getCantidadRecibida());
+                        bodegaProductosFacade.edit(bodegaProductos);
+                    }
+                }
+                imprimirMensaje("Guardado", "Guardado Correctamente", FacesMessage.SEVERITY_INFO);
+                renderBotonGuardar=false;
+                RequestContext.getCurrentInstance().update("IdFormMovimientosInventario:opFormulario");
+                RequestContext.getCurrentInstance().update("IdFormMovimientosInventario:opProductos");
+                movimientoSeleccionado = movimiento;
+            }else{
+                imprimirMensaje("Error al guardar", "Seleccione Lote", FacesMessage.SEVERITY_ERROR);
             }
-            imprimirMensaje("Guardado", "Guardado Correctamente", FacesMessage.SEVERITY_INFO);
-            renderBotonGuardar=false;
-            RequestContext.getCurrentInstance().update("IdFormMovimientosInventario:opFormulario");
-            RequestContext.getCurrentInstance().update("IdFormMovimientosInventario:opProductos");
-            movimientoSeleccionado = movimiento;
         } catch (Exception e) {
         }
     }
@@ -422,7 +439,7 @@ public class MovimientosInventariosMB extends MetodosGenerales implements java.i
             
             //disminuir valores de traslados de la bodega principal
             for(InvMovimientoProductos productos:listaMovimientosProductos){
-                InvBodegaProductos productoBodega = bodegaProductosFacade.getBodegaProducto(bodegaOrigen.getIdBodega(), productos.getIdProducto().getIdProducto());
+                InvBodegaProductos productoBodega = bodegaProductosFacade.getBodegaProductoLote(bodegaOrigen.getIdBodega(), productos.getIdProducto().getIdProducto(),idLote);
                 productoBodega.setExistencia(productoBodega.getExistencia()-productos.getCantidadSolicitada());
                 bodegaProductosFacade.edit(productoBodega);
             }
@@ -467,7 +484,7 @@ public class MovimientosInventariosMB extends MetodosGenerales implements java.i
             consecutivoFacade.edit(consecutivo);
             //aumentamos valores de traslados de la bodega principal
             for(InvMovimientoProductos pr:movimiento.getInvMovimientoProductosList()){
-                bodegaProducto = bodegaProductosFacade.getBodegaProducto(movimiento.getIdBodegaOrigen().getIdBodega(), pr.getIdProducto().getIdProducto());
+                bodegaProducto = bodegaProductosFacade.getBodegaProductoLote(movimiento.getIdBodegaOrigen().getIdBodega(), pr.getIdProducto().getIdProducto(),idLote);
                 bodegaProducto.setExistencia(pr.getExistencia()-pr.getCantidadRecibida());
                 bodegaProductosFacade.edit(bodegaProducto);
             }
@@ -502,7 +519,7 @@ public class MovimientosInventariosMB extends MetodosGenerales implements java.i
             movimiento.setInvMovimientoProductosList(new ArrayList<InvMovimientoProductos>());
             for(InvMovimientoProductos m:listaMovimientosProductos){
                 if (movimientoSeleccionado.getIdOrdenCompra() == null) {
-                    InvBodegaProductos pro = bodegaProductosFacade.getBodegaProducto(bodegaOrigen.getIdBodega(), m.getIdProducto().getIdProducto());
+                    InvBodegaProductos pro = bodegaProductosFacade.getBodegaProductoLote(bodegaOrigen.getIdBodega(), m.getIdProducto().getIdProducto(),idLote);
                     if (pro != null) {
 
                         //sumamos la existencia a la bodega de donde provino la salida
@@ -518,14 +535,14 @@ public class MovimientosInventariosMB extends MetodosGenerales implements java.i
                     }
 
                     //resta la existencia a la bodega de donde provino la salida
-                    InvBodegaProductos proSalida = bodegaProductosFacade.getBodegaProducto(bodegaDestino.getIdBodega(), m.getIdProducto().getIdProducto());
+                    InvBodegaProductos proSalida = bodegaProductosFacade.getBodegaProductoLote(bodegaDestino.getIdBodega(), m.getIdProducto().getIdProducto(),idLote);
                     if (proSalida != null) {
                         proSalida.setExistencia(proSalida.getExistencia() - m.getCantidadDevolver());
                         bodegaProductosFacade.edit(proSalida);
                     }
                 }else{
                     //resta la existencia a la bodega de donde provino la salida
-                    InvBodegaProductos proSalida = bodegaProductosFacade.getBodegaProducto(bodegaDestino.getIdBodega(), m.getIdProducto().getIdProducto());
+                    InvBodegaProductos proSalida = bodegaProductosFacade.getBodegaProductoLote(bodegaDestino.getIdBodega(), m.getIdProducto().getIdProducto(),idLote);
                     if (proSalida != null) {
                         proSalida.setExistencia(proSalida.getExistencia() - m.getCantidadDevolver());
                         bodegaProductosFacade.edit(proSalida);
@@ -672,7 +689,7 @@ public class MovimientosInventariosMB extends MetodosGenerales implements java.i
             listaProcesos.add(new SelectItem(1,"Traslados Bodegas"));
             listaProcesos.add(new SelectItem(2,"Saldo Inicial"));
             listaProcesos.add(new SelectItem(3,"Ajuste Positivo"));
-            listaProcesos.add(new SelectItem(4,"Devolución por cliente"));
+            //listaProcesos.add(new SelectItem(4,"Devolución por cliente"));
         }else{
             listaProcesos.clear();
             listaProcesos.add(new SelectItem(1,"Traslados Bodegas"));
@@ -725,74 +742,147 @@ public class MovimientosInventariosMB extends MetodosGenerales implements java.i
     private void ajustePositivo(){
         try {
             renderEntradaAjustePositivo = true;
-            listaProductosBodegas = bodegaProductosFacade.getProductosBodegas(bodegaOrigen.getIdBodega());
-            listaMovimientosProductos.clear();
-            for(InvBodegaProductos bp:listaProductosBodegas){
-                InvMovimientoProductos mp = new InvMovimientoProductos();
-                mp.setIdMovimiento(movimiento);
-                mp.setExistencia(bp.getExistencia());
-                mp.setCantidadSolicitada(0d);
-                mp.setCantidadRecibida(0d);
-                mp.setTotal(bp.getExistencia());
-                mp.setIdProducto(bp.getIdProducto());
-                listaMovimientosProductos.add(mp);
-            }
-            renderTitulo = true;
-            renderForm = true;
-            renderBotones =true;
-            renderBotonGuardar = true;
-            renderEntradaAjustePositivo =true;
-            
-        } catch (Exception e) {
-        }
-    }
-    private void saldoInicial(){
-        try {
-            //Cargamos los productos de la bodega de usuario
-            listaMovimientosProductos.clear();
-            listaProductosBodegas = bodegaProductosFacade.getProductosBodegas(bodegaOrigen.getIdBodega());
-            for(InvBodegaProductos bp:listaProductosBodegas){
-                InvMovimientoProductos mp = new InvMovimientoProductos();
-                mp.setIdMovimiento(movimiento);
-                mp.setExistencia(bp.getExistencia());
-                mp.setCantidadSolicitada(bp.getExistencia());
-                mp.setCantidadRecibida(bp.getExistencia());
-                mp.setIdProducto(bp.getIdProducto());
-                listaMovimientosProductos.add(mp);
-            }
-        
-            renderEntradaSaldoInicial = true;
-            renderTitulo = true;
-            renderForm = true;
-            renderBotones =true;
-            renderBotonGuardar = true;
+            this.idLote= 0;
+            imprimirMensaje("Resultado", "Seleccionar Lote", FacesMessage.SEVERITY_INFO);
         } catch (Exception e) {
         }
     }
     
+    public void validarAjustePositivo(){
+        try {
+            listaMovimientosProductos.clear();
+            if(idLote!=0){
+
+                listaProductosBodegas = bodegaProductosFacade.getProductosBodegasXLote(bodegaOrigen.getIdBodega(),idLote);
+                if(!listaProductosBodegas.isEmpty()){
+                    for(InvBodegaProductos bp:listaProductosBodegas){
+                        InvMovimientoProductos mp = new InvMovimientoProductos();
+                        mp.setIdMovimiento(movimiento);
+                        mp.setExistencia(bp.getExistencia());
+                        mp.setCantidadSolicitada(0d);
+                        mp.setCantidadRecibida(0d);
+                        mp.setTotal(bp.getExistencia());
+                        mp.setIdProducto(bp.getIdProducto());
+                        listaMovimientosProductos.add(mp);
+                    }
+                    renderTitulo = true;
+                    renderForm = true;
+                    renderBotones =true;
+                    renderBotonGuardar = true;
+                    renderEntradaAjustePositivo =true;
+                }else{
+                    imprimirMensaje("No hay registros", "No se encontrarón productos en este lote", FacesMessage.SEVERITY_INFO);
+                    renderTitulo = false;
+                    renderForm = false;
+                    renderBotones =false;
+                    renderBotonGuardar = false;
+                    renderEntradaAjustePositivo =true;
+                }
+            }else{
+                imprimirMensaje("No hay registros", "Seleccione lote", FacesMessage.SEVERITY_INFO);
+                renderTitulo = false;
+                renderForm = false;
+                renderBotones =false;
+                renderBotonGuardar = false;
+                renderEntradaAjustePositivo =true;
+            }
+        } catch (Exception e) {
+        }
+    }
+    private void saldoInicial(){
+        renderEntradaSaldoInicial = true;
+        this.idLote= 0;
+        imprimirMensaje("Resultado", "Seleccionar Lote", FacesMessage.SEVERITY_INFO);
+    }
+    
+    public void validarSaldoInicial(){
+        try {
+            listaMovimientosProductos.clear();
+            if(idLote!=0){
+                //Cargamos los productos de la bodega de usuario
+                listaProductosBodegas = bodegaProductosFacade.getProductosBodegasXLote(bodegaOrigen.getIdBodega(),idLote);
+                for(InvBodegaProductos bp:listaProductosBodegas){
+                    InvMovimientoProductos mp = new InvMovimientoProductos();
+                    mp.setIdMovimiento(movimiento);
+                    mp.setExistencia(bp.getExistencia());
+                    mp.setCantidadSolicitada(bp.getExistencia());
+                    mp.setCantidadRecibida(bp.getExistencia());
+                    mp.setIdProducto(bp.getIdProducto());
+                    listaMovimientosProductos.add(mp);
+                }
+
+                if(!listaMovimientosProductos.isEmpty()){
+                    renderEntradaSaldoInicial = true;
+                    renderTitulo = true;
+                    renderForm = true;
+                    renderBotones =true;
+                    renderBotonGuardar = true;
+                }else{
+                    imprimirMensaje("No hay registros", "No se encontrarón productos en este lote", FacesMessage.SEVERITY_INFO);
+                    renderEntradaSaldoInicial = true;
+                    renderTitulo = false;
+                    renderForm = false;
+                    renderBotones =false;
+                    renderBotonGuardar = false;
+                }
+            }else{
+                imprimirMensaje("No hay registros", "Seleccione Lote", FacesMessage.SEVERITY_INFO);
+                renderEntradaSaldoInicial = true;
+                renderTitulo = false;
+                renderForm = false;
+                renderBotones =false;
+                renderBotonGuardar = false;
+            }
+            
+        } catch (Exception e) {
+        }
+    }
     private void ajusteNegativo(){
         try {
             renderSalidaTrasladosAjusteNegativo = true;
-            listaProductosBodegas = bodegaProductosFacade.getProductosBodegas(bodegaOrigen.getIdBodega());
-            listaMovimientosProductos.clear();
-            for(InvBodegaProductos bp:listaProductosBodegas){
-                InvMovimientoProductos mp = new InvMovimientoProductos();
-                mp.setIdMovimiento(movimiento);
-                mp.setExistencia(bp.getExistencia());
-                mp.setCantidadSolicitada(0d);
-                mp.setCantidadRecibida(0d);
-                mp.setTotal(bp.getExistencia());
-                mp.setIdProducto(bp.getIdProducto());
-                listaMovimientosProductos.add(mp);
+            imprimirMensaje("Seleccione", "Seleccione un lote", FacesMessage.SEVERITY_INFO);
+        } catch (Exception e) {
+        }
+    }
+    
+    public void validarLoteAjusteNegativo(){
+        try {
+            if(idLote!=0){
+                listaProductosBodegas = bodegaProductosFacade.getProductosBodegasXLote(bodegaOrigen.getIdBodega(),idLote);
+                if(!listaProductosBodegas.isEmpty()){
+                    listaMovimientosProductos.clear();
+                    for(InvBodegaProductos bp:listaProductosBodegas){
+                        InvMovimientoProductos mp = new InvMovimientoProductos();
+                        mp.setIdMovimiento(movimiento);
+                        mp.setExistencia(bp.getExistencia());
+                        mp.setCantidadSolicitada(0d);
+                        mp.setCantidadRecibida(0d);
+                        mp.setTotal(bp.getExistencia());
+                        mp.setIdProducto(bp.getIdProducto());
+                        listaMovimientosProductos.add(mp);
+                    }
+                    renderTitulo = true;
+                    renderForm = true;
+                    renderBotones =true;
+                    renderBotonGuardar = true;
+                    renderEntradaSaldoInicial = false;
+                    renderEntradaTraslado = false;
+                    renderEntradaAjustePositivo =false;
+                    renderEntradaDevolucionCompra=false;
+                }else{
+                    imprimirMensaje("No hay resultados", "No hay productos en este Lote", FacesMessage.SEVERITY_INFO);
+                }
+            }else{
+                imprimirMensaje("No hay resultados", "Seleccione Lote", FacesMessage.SEVERITY_INFO);
+                renderTitulo = false;
+                renderForm = false;
+                renderBotones =false;
+                renderBotonGuardar = false;
+                renderEntradaSaldoInicial = false;
+                renderEntradaTraslado = false;
+                renderEntradaAjustePositivo =false;
+                renderEntradaDevolucionCompra=false;
             }
-            renderTitulo = true;
-            renderForm = true;
-            renderBotones =true;
-            renderBotonGuardar = true;
-            renderEntradaSaldoInicial = false;
-            renderEntradaTraslado = false;
-            renderEntradaAjustePositivo =false;
-            renderEntradaDevolucionCompra=false;
         } catch (Exception e) {
         }
     }
@@ -825,14 +915,11 @@ public class MovimientosInventariosMB extends MetodosGenerales implements java.i
                 //validamos el tipo de proceso
                 switch(tipoProceso){
                     case 1://1. Traslados
-                        renderForm = true;
-                        renderSalidaTraslados=true;
-                        renderTitulo = true;
-                        renderBotonGuardar = true;
-                        renderBotones = true;
+                        renderSalidaTraslados= true;
                         listaBodegasDestinos = bodegaFachada.bodegaActivasEmpresasDiferenteOrigen(loginMB.getEmpresaActual().getCodEmpresa(), bodegaOrigen.getIdBodega());
                         //Cargamos productos Bodegas con existencia mayor a 0
-                        listaProductosBodegas = bodegaProductosFacade.getProductosBodegasExistencia(bodegaOrigen.getIdBodega());
+                        //listaProductosBodegas = bodegaProductosFacade.getProductosBodegasExistencia(bodegaOrigen.getIdBodega());
+                        imprimirMensaje("Seleccione", "Seleccione lote", FacesMessage.SEVERITY_INFO);
                         RequestContext.getCurrentInstance().update("IdFormMovimientosInventario:listaProductos");
                     break;
                     case 6://6. Ajuste Negativo
@@ -852,12 +939,34 @@ public class MovimientosInventariosMB extends MetodosGenerales implements java.i
         }
     }
     
+    public void validarProductosBodegaLote(){
+        if(idLote!=0){
+            RequestContext.getCurrentInstance().update("IdFormMovimientosInventario:listaProductos");
+                renderForm = true;
+                renderTitulo = true;
+                renderBotonGuardar = true;
+                renderBotones = true;
+            /*listaProductosBodegas = bodegaProductosFacade.getProductosBodegasExistenciaXlote(bodegaOrigen.getIdBodega(),idLote);
+            if(!listaProductosBodegas.isEmpty()){
+                
+            }else{
+                renderForm = false;
+                renderTitulo = false;
+                renderBotonGuardar = false;
+                renderBotones = false;
+                imprimirMensaje("No hay Registros", "No se encontrarón productos en este lote", FacesMessage.SEVERITY_INFO);
+            }*/
+            }else{
+                renderForm = false;
+                renderTitulo = false;
+                renderBotonGuardar = false;
+                renderBotones = false;
+                imprimirMensaje("No hay Registros", "Seleccione lote", FacesMessage.SEVERITY_INFO);
+        }
+    }
     public void validarBodegaOrigen(){
         //cargamos bodega destinos
         listaBodegasDestinos = bodegaFachada.bodegaActivasEmpresasDiferenteOrigen(loginMB.getEmpresaActual().getCodEmpresa(), bodegaOrigen.getIdBodega());
-        //Cargamos productos Bodegas con existencia mayor a 0
-        listaProductosBodegas = bodegaProductosFacade.getProductosBodegasExistencia(bodegaOrigen.getIdBodega());
-        RequestContext.getCurrentInstance().update("IdFormMovimientosInventario:listaProductos");
     }
     public void onCellEdit(CellEditEvent event) {
         try{
@@ -1026,6 +1135,7 @@ public class MovimientosInventariosMB extends MetodosGenerales implements java.i
                             } else if (mov.getEstado().equals(TipoInventarioEnum.P.toString())) {
                                 imprimirMensaje("Salida", "El número de salida se encuentra pendiente", FacesMessage.SEVERITY_INFO);
                             } else {
+                                idLote = ordenCompra.getIdLote()!=null?ordenCompra.getIdLote().getIdLote():0;
                                 bodegaDestino = mov.getIdBodegaDestino();
                                 movimientoSeleccionado = mov;
                                 renderForm = true;
@@ -1382,5 +1492,21 @@ public class MovimientosInventariosMB extends MetodosGenerales implements java.i
 
     public void setRenderSalidaTrasladosDevolucionCompraB(boolean renderSalidaTrasladosDevolucionCompraB) {
         this.renderSalidaTrasladosDevolucionCompraB = renderSalidaTrasladosDevolucionCompraB;
+    }
+
+    public List<InvLotes> getListaLote() {
+        return listaLote;
+    }
+
+    public void setListaLote(List<InvLotes> listaLote) {
+        this.listaLote = listaLote;
+    }
+
+    public int getIdLote() {
+        return idLote;
+    }
+
+    public void setIdLote(int idLote) {
+        this.idLote = idLote;
     }
 }

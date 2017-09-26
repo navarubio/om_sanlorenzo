@@ -20,6 +20,7 @@ import managedBeans.seguridad.LoginMB;
 import modelo.entidades.InvBodegaProductos;
 import modelo.entidades.InvBodegas;
 import modelo.entidades.InvConsecutivos;
+import modelo.entidades.InvLotes;
 import modelo.entidades.InvMovimientoProductos;
 import modelo.entidades.InvMovimientos;
 import modelo.entidades.InvOrdenCompra;
@@ -27,6 +28,7 @@ import modelo.entidades.InvOrdenCompraProductos;
 import modelo.fachadas.InvBodegaProductosFacade;
 import modelo.fachadas.InvBodegasFacade;
 import modelo.fachadas.InvConsecutivosFacade;
+import modelo.fachadas.InvLotesFacade;
 import modelo.fachadas.InvMovimientosFacade;
 import modelo.fachadas.InvOrdenCompraFacade;
 import modelo.fachadas.InvOrdenCompraProductosFacade;
@@ -50,7 +52,8 @@ public class EntradaOrdenCompraMB extends MetodosGenerales implements java.io.Se
     private InvMovimientosFacade movimientoFacade;
     @EJB
     private InvOrdenCompraProductosFacade ordenCompraProductoFacade;
-    
+    @EJB
+    private InvLotesFacade loteFachada;
     private InvOrdenCompra ordenCompra;
     private InvMovimientos movimiento;
     private InvConsecutivos consecutivo;
@@ -59,8 +62,13 @@ public class EntradaOrdenCompraMB extends MetodosGenerales implements java.io.Se
     private String observaciones;
     private LoginMB loginMB;
     private String nroDocumento;
+    private boolean renderLote;
+    private boolean renderLoteFV;
+    private int idLote;
+    private InvLotes lote;
     private List<InvOrdenCompra> listaOrdenCompra;
     private List<InvOrdenCompraProductos> listaOrdenCompraProductos;
+    private List<InvLotes> listaLote;
     public EntradaOrdenCompraMB() {
         loginMB = FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{loginMB}", LoginMB.class);
     }
@@ -77,9 +85,14 @@ public class EntradaOrdenCompraMB extends MetodosGenerales implements java.io.Se
         movimiento.setNumeroDocumento(String.format("%04d",cod));
         listaOrdenCompra = ordenCompraFacade.getComprasXEstado(TipoInventarioEnum.P.toString());
         bodega = bodegaFacade.bodegaPrincipal(loginMB.getEmpresaActual().getCodEmpresa(), 1);
+        renderLote = false;
+        renderLoteFV= false;
+        idLote=0;
+        lote= null;
     }
     public void buscar(){
         try {
+            renderLote = false;
             if(ordenCompra==null){
                 imprimirMensaje("Resultado", "No se encontró resultado", FacesMessage.SEVERITY_INFO);
             }else{
@@ -88,10 +101,16 @@ public class EntradaOrdenCompraMB extends MetodosGenerales implements java.io.Se
                 }else if(ordenCompra.getEstado().equals(TipoInventarioEnum.C.toString())){
                     imprimirMensaje("Resultado", "La orden se encuentra en estado cerrada", FacesMessage.SEVERITY_INFO);
                 }else{
-                    listaOrdenCompraProductos = ordenCompra.getInvOrdenCompraProductosList();
-                    movimiento.setNumeroDocumentoProveedor(ordenCompra.getNroDocumento());
-                    for(int i=0;i<listaOrdenCompraProductos.size();i++){
-                        listaOrdenCompraProductos.get(i).setCantidadEntregada(listaOrdenCompraProductos.get(i).getCantidad());
+                    listaLote = loteFachada.getLotesSinVencer(loginMB.getEmpresaActual().getCodEmpresa());
+                    if(!listaLote.isEmpty()){
+                        listaOrdenCompraProductos = ordenCompra.getInvOrdenCompraProductosList();
+                        movimiento.setNumeroDocumentoProveedor(ordenCompra.getNroDocumento());
+                        for(int i=0;i<listaOrdenCompraProductos.size();i++){
+                            listaOrdenCompraProductos.get(i).setCantidadEntregada(listaOrdenCompraProductos.get(i).getCantidad());
+                        }
+                        renderLote = true;
+                    }else{
+                        imprimirMensaje("Resultado", "No hay lotes configurados", FacesMessage.SEVERITY_INFO);
                     }
                 }
             }
@@ -101,59 +120,63 @@ public class EntradaOrdenCompraMB extends MetodosGenerales implements java.io.Se
     public void guardar(){
         //guardamos movimiento y guardamos en la bodega
         try {
-            this.consecutivo = consecutivoFacade.getConsecutivoTipo(TipoInventarioEnum.E.toString());
-            int cod = consecutivo.getConsecutivo() + 1;
-            movimiento.setNumeroDocumento(String.format("%04d",cod));
-            movimiento.setObservaciones(observaciones);
-            movimiento.setIdOrdenCompra(ordenCompra);
-            movimiento.setUsuarioAprueba(loginMB.getUsuarioActual());
-            movimiento.setFechaAprobacion(new Date());
-            movimiento.setIdBodegaDestino(bodega);
-            movimiento.setEstado(TipoInventarioEnum.C.toString());
-            movimiento.setUsuarioAprueba(loginMB.getUsuarioActual());
-            movimiento.setFechaAprobacion(new Date());
-            movimiento.setTipoProceso(5);
-            consecutivo.setConsecutivo(consecutivo.getConsecutivo()+1);
-            consecutivoFacade.edit(consecutivo);
-            
-            movimiento.setInvMovimientoProductosList(new ArrayList<InvMovimientoProductos>());
-            
-            //recorremos los productos a actualizar en la bodega
-            for(InvOrdenCompraProductos producto:listaOrdenCompraProductos){
-                bodegaProductos = bodegaProductoFacade.getBodegaProducto(bodega.getIdBodega(), producto.getIdProducto().getIdProducto());
-                if(bodegaProductos==null){//Creamos el producto
-                    bodegaProductos = new InvBodegaProductos();
-                    bodegaProductos.setIdBodega(bodega);
-                    bodegaProductos.setIdProducto(producto.getIdProducto());
-                    bodegaProductos.setExistencia(producto.getCantidadEntregada());
-                    bodegaProductoFacade.create(bodegaProductos);
-                }else{
-                    bodegaProductos.setExistencia(bodegaProductos.getExistencia()+producto.getCantidadEntregada());
-                    bodegaProductoFacade.edit(bodegaProductos);
+            if(validar()){
+                this.consecutivo = consecutivoFacade.getConsecutivoTipo(TipoInventarioEnum.E.toString());
+                int cod = consecutivo.getConsecutivo() + 1;
+                movimiento.setNumeroDocumento(String.format("%04d",cod));
+                movimiento.setObservaciones(observaciones);
+                movimiento.setIdOrdenCompra(ordenCompra);
+                movimiento.setUsuarioAprueba(loginMB.getUsuarioActual());
+                movimiento.setFechaAprobacion(new Date());
+                movimiento.setIdBodegaDestino(bodega);
+                movimiento.setEstado(TipoInventarioEnum.C.toString());
+                movimiento.setUsuarioAprueba(loginMB.getUsuarioActual());
+                movimiento.setFechaAprobacion(new Date());
+                movimiento.setTipoProceso(5);
+                consecutivo.setConsecutivo(consecutivo.getConsecutivo()+1);
+                consecutivoFacade.edit(consecutivo);
+
+                movimiento.setInvMovimientoProductosList(new ArrayList<InvMovimientoProductos>());
+
+                //recorremos los productos a actualizar en la bodega
+                for(InvOrdenCompraProductos producto:listaOrdenCompraProductos){
+                    bodegaProductos = bodegaProductoFacade.getBodegaProductoLote(bodega.getIdBodega(), producto.getIdProducto().getIdProducto(),idLote);
+                    if(bodegaProductos==null){//Creamos el producto
+                        bodegaProductos = new InvBodegaProductos();
+                        bodegaProductos.setIdBodega(bodega);
+                        bodegaProductos.setIdProducto(producto.getIdProducto());
+                        bodegaProductos.setExistencia(producto.getCantidadEntregada());
+                        bodegaProductos.setIdLote(lote);
+                        bodegaProductoFacade.create(bodegaProductos);
+                    }else{
+                        bodegaProductos.setExistencia(bodegaProductos.getExistencia()+producto.getCantidadEntregada());
+                        bodegaProductoFacade.edit(bodegaProductos);
+                    }
+
+                    //asociamos los productos al movimiento
+                    InvMovimientoProductos movimientoProducto = new InvMovimientoProductos();
+                    movimientoProducto.setIdProducto(producto.getIdProducto());
+                    movimientoProducto.setCantidadSolicitada(producto.getCantidad());
+                    movimientoProducto.setCantidadRecibida(producto.getCantidadEntregada());
+                    movimientoProducto.setIdMovimiento(movimiento);
+                    movimiento.getInvMovimientoProductosList().add(movimientoProducto);
+
+                    //actualizamos las entregas recibidas
+                    ordenCompraProductoFacade.edit(producto);
                 }
-                
-                //asociamos los productos al movimiento
-                InvMovimientoProductos movimientoProducto = new InvMovimientoProductos();
-                movimientoProducto.setIdProducto(producto.getIdProducto());
-                movimientoProducto.setCantidadSolicitada(producto.getCantidad());
-                movimientoProducto.setCantidadRecibida(producto.getCantidadEntregada());
-                movimientoProducto.setIdMovimiento(movimiento);
-                movimiento.getInvMovimientoProductosList().add(movimientoProducto);
-                
-                //actualizamos las entregas recibidas
-                ordenCompraProductoFacade.edit(producto);
+                //guardamos movimiento
+                movimientoFacade.create(movimiento);
+
+                //actualizamos orden
+                ordenCompra.setEstado(TipoInventarioEnum.C.toString());
+                ordenCompra.setFechaActualizacion(new Date());
+                ordenCompra.setUsuarioActualiza(loginMB.getUsuarioActual());
+                ordenCompra.setIdLote(lote);
+                ordenCompra.setInvOrdenCompraProductosList(listaOrdenCompraProductos);
+                ordenCompraFacade.edit(ordenCompra);
+                imprimirMensaje("Guardado", "Guardado Correctamente", FacesMessage.SEVERITY_INFO);
+                nuevo();
             }
-            //guardamos movimiento
-            movimientoFacade.create(movimiento);
-            
-            //actualizamos orden
-            ordenCompra.setEstado(TipoInventarioEnum.C.toString());
-            ordenCompra.setFechaActualizacion(new Date());
-            ordenCompra.setUsuarioActualiza(loginMB.getUsuarioActual());
-            ordenCompra.setInvOrdenCompraProductosList(listaOrdenCompraProductos);
-            ordenCompraFacade.edit(ordenCompra);
-            imprimirMensaje("Guardado", "Guardado Correctamente", FacesMessage.SEVERITY_INFO);
-            nuevo();
         } catch (Exception e) {
         }
     }
@@ -168,9 +191,19 @@ public class EntradaOrdenCompraMB extends MetodosGenerales implements java.io.Se
         listaOrdenCompra = ordenCompraFacade.getComprasXEstado(TipoInventarioEnum.P.toString());
         listaOrdenCompraProductos = new ArrayList<>();
         nroDocumento = "";
+        renderLote = false;
+        this.idLote = 0;
+    }
+    private boolean validar(){
+        if(idLote==0){
+            imprimirMensaje("Error al guardar", "Seleccione un lote", FacesMessage.SEVERITY_ERROR);
+            return false;
+        }
+        return true;
     }
     public void buscarCodigo(){
         try {
+            renderLote = false;
             ordenCompra = new InvOrdenCompra();
             ordenCompra.setNroDocumento(nroDocumento);
             ordenCompra = ordenCompraFacade.getCompraXDocumento(ordenCompra.getNroDocumento());
@@ -182,15 +215,30 @@ public class EntradaOrdenCompraMB extends MetodosGenerales implements java.io.Se
                 }else if(ordenCompra.getEstado().equals(TipoInventarioEnum.C.toString())){
                     imprimirMensaje("Resultado", "La orden se encuentra en estado cerrada", FacesMessage.SEVERITY_INFO);
                 }else{
-                    listaOrdenCompraProductos = ordenCompra.getInvOrdenCompraProductosList();
-                    movimiento.setNumeroDocumentoProveedor(ordenCompra.getNroDocumento());
-                    for(int i=0;i<listaOrdenCompraProductos.size();i++){
-                        listaOrdenCompraProductos.get(i).setCantidadEntregada(listaOrdenCompraProductos.get(i).getCantidad());
+                    listaLote = loteFachada.getLotesSinVencer(loginMB.getEmpresaActual().getCodEmpresa());
+                    if(!listaLote.isEmpty()){
+                        listaOrdenCompraProductos = ordenCompra.getInvOrdenCompraProductosList();
+                        movimiento.setNumeroDocumentoProveedor(ordenCompra.getNroDocumento());
+                        for(int i=0;i<listaOrdenCompraProductos.size();i++){
+                            listaOrdenCompraProductos.get(i).setCantidadEntregada(listaOrdenCompraProductos.get(i).getCantidad());
+                        }
+                        renderLote = true;
+                    }else{
+                        imprimirMensaje("Resultado", "No hay lotes configurados", FacesMessage.SEVERITY_INFO);
                     }
                 }
             }
         } catch (Exception e) {
         }
+    }
+    public void validarLote(){
+        if(idLote!=0){
+            lote= loteFachada.find(idLote);
+            renderLoteFV= true;
+        }else{
+            renderLoteFV= false;
+        }
+        
     }
     public InvOrdenCompra getOrdenCompra() {
         return ordenCompra;
@@ -264,5 +312,46 @@ public class EntradaOrdenCompraMB extends MetodosGenerales implements java.io.Se
 
     public void setNroDocumento(String nroDocumento) {
         this.nroDocumento = nroDocumento;
+    }
+
+    public List<InvLotes> getListaLote() {
+        return listaLote;
+    }
+
+    public void setListaLote(List<InvLotes> listaLote) {
+        this.listaLote = listaLote;
+    }
+
+  
+    public boolean isRenderLote() {
+        return renderLote;
+    }
+
+    public void setRenderLote(boolean renderLote) {
+        this.renderLote = renderLote;
+    }
+
+    public int getIdLote() {
+        return idLote;
+    }
+
+    public void setIdLote(int idLote) {
+        this.idLote = idLote;
+    }
+
+    public InvLotes getLote() {
+        return lote;
+    }
+
+    public void setLote(InvLotes lote) {
+        this.lote = lote;
+    }
+
+    public boolean isRenderLoteFV() {
+        return renderLoteFV;
+    }
+
+    public void setRenderLoteFV(boolean renderLoteFV) {
+        this.renderLoteFV = renderLoteFV;
     }
 }

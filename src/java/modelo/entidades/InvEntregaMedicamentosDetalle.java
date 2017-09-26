@@ -55,6 +55,9 @@ public class InvEntregaMedicamentosDetalle implements Serializable {
     @JoinColumn(name = "id_producto", referencedColumnName = "id_producto")
     @ManyToOne
     private InvProductos idProducto;
+    @JoinColumn(name = "id_lote", referencedColumnName = "id_lote")
+    @ManyToOne
+    private InvLotes idLote;
 
     public InvEntregaMedicamentosDetalle() {
     }
@@ -109,6 +112,13 @@ public class InvEntregaMedicamentosDetalle implements Serializable {
 
     public void setIdProducto(InvProductos idProducto) {
         this.idProducto = idProducto;
+    }
+     public InvLotes getIdLote() {
+        return idLote;
+    }
+
+    public void setIdLote(InvLotes idLote) {
+        this.idLote = idLote;
     }
 
     @Override
