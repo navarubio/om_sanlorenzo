@@ -156,6 +156,7 @@
                                 <p:selectOneMenu value="#{movimientosInventariosMB.idLote}" style="width:190px;"  rendered="#{movimientosInventariosMB.renderEntradaTrasladoB}">
                                         <f:selectItem itemValue="0" itemLabel="-- Seleccione Lote --" />
                                         <f:selectItems value="#{movimientosInventariosMB.listaLote}" var="lot" itemLabel="#{lot.codigo}" itemValue="#{lot.idLote}"/>
+                                        <p:ajax event="change" listener="#{movimientosInventariosMB.validarProductosBodegaLoteEntrada}" update="IdFormMovimientosInventario:opFormulario IdFormMovimientosInventario:opBotones IdFormMovimientosInventario:opProductos IdFormMovimientosInventario:listaProductos" ></p:ajax>
                                   </p:selectOneMenu>
                                 
                             </div>

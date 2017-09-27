@@ -939,16 +939,35 @@ public class MovimientosInventariosMB extends MetodosGenerales implements java.i
         }
     }
     
+    public void validarProductosBodegaLoteEntrada(){
+        if(idLote!=0){
+            renderForm = true;
+            renderTitulo = true;
+            renderBotonGuardar = true;
+            renderBotones = true;
+        }else{
+            renderForm = false;
+                renderTitulo = false;
+                renderBotonGuardar = false;
+                renderBotones = false;
+                imprimirMensaje("No hay Registros", "Seleccione lote", FacesMessage.SEVERITY_INFO);
+        }
+    }
+    
     public void validarProductosBodegaLote(){
-        /*if(idLote!=0){
+        
+        if(idLote!=0){
             RequestContext.getCurrentInstance().update("IdFormMovimientosInventario:listaProductos");
                 renderForm = true;
                 renderTitulo = true;
                 renderBotonGuardar = true;
                 renderBotones = true;
-            /*listaProductosBodegas = bodegaProductosFacade.getProductosBodegasExistenciaXlote(bodegaOrigen.getIdBodega(),idLote);
+            listaProductosBodegas = bodegaProductosFacade.getProductosBodegasExistenciaXlote(bodegaOrigen.getIdBodega(),idLote);
             if(!listaProductosBodegas.isEmpty()){
-                
+                renderForm = true;
+                renderTitulo = true;
+                renderBotonGuardar = true;
+                renderBotones = true;
             }else{
                 renderForm = false;
                 renderTitulo = false;
@@ -962,11 +981,12 @@ public class MovimientosInventariosMB extends MetodosGenerales implements java.i
                 renderBotonGuardar = false;
                 renderBotones = false;
                 imprimirMensaje("No hay Registros", "Seleccione lote", FacesMessage.SEVERITY_INFO);
-        }*/
+        }
     }
     public void validarBodegaOrigen(){
         //cargamos bodega destinos
         listaBodegasDestinos = bodegaFachada.bodegaActivasEmpresasDiferenteOrigen(loginMB.getEmpresaActual().getCodEmpresa(), bodegaOrigen.getIdBodega());
+       
     }
     public void onCellEdit(CellEditEvent event) {
         try{
