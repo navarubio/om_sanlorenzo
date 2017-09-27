@@ -41,13 +41,13 @@ public class CategoriaMB extends MetodosGenerales implements Serializable{
     public void init(){
         categoria = new InvCategorias();
         categoria.setActivo(true);
-        listaCategorias = clasificacionesFachada.findAll();
+        listaCategorias = clasificacionesFachada.getActivos();
     }
     
     public void nuevo(){
         categoria = new InvCategorias();
         categoria.setActivo(true);
-        listaCategorias = clasificacionesFachada.findAll();
+        listaCategorias = clasificacionesFachada.getActivos();
     }
     public void buscar(){
         RequestContext.getCurrentInstance().execute("PF('dialogoBuscarCategoria').hide(); PF('wvTablaClasificaciones').clearFilters(); PF('wvTablaClasificaciones').getPaginator().setPage(0);");

@@ -18,7 +18,7 @@ public class DBConnector {
 
     private DBConnector() throws Exception {
         javax.naming.InitialContext ctx = new javax.naming.InitialContext();
-        javax.sql.DataSource ds = (javax.sql.DataSource) ctx.lookup("jdbc/om_optica");
+        javax.sql.DataSource ds = (javax.sql.DataSource) ctx.lookup("online");
 
         connection = ds.getConnection();
         connection.setAutoCommit(false);

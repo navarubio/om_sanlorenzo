@@ -940,7 +940,7 @@ public class MovimientosInventariosMB extends MetodosGenerales implements java.i
     }
     
     public void validarProductosBodegaLote(){
-        if(idLote!=0){
+        /*if(idLote!=0){
             RequestContext.getCurrentInstance().update("IdFormMovimientosInventario:listaProductos");
                 renderForm = true;
                 renderTitulo = true;
@@ -955,14 +955,14 @@ public class MovimientosInventariosMB extends MetodosGenerales implements java.i
                 renderBotonGuardar = false;
                 renderBotones = false;
                 imprimirMensaje("No hay Registros", "No se encontrarón productos en este lote", FacesMessage.SEVERITY_INFO);
-            }*/
+            }
             }else{
                 renderForm = false;
                 renderTitulo = false;
                 renderBotonGuardar = false;
                 renderBotones = false;
                 imprimirMensaje("No hay Registros", "Seleccione lote", FacesMessage.SEVERITY_INFO);
-        }
+        }*/
     }
     public void validarBodegaOrigen(){
         //cargamos bodega destinos
