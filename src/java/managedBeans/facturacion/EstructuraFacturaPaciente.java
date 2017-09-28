@@ -55,6 +55,7 @@ public class EstructuraFacturaPaciente { //clase que contiene los datos para una
     private String son = "";//total en palabras
     private String firmaAutoriza = "";
     private String logoEmpresa = "";
+    private String nombreMedico;
     private List<EstructuraItemsPaciente> listaItemsFactura;
 
     public String getTituloFactura() {
@@ -399,6 +400,14 @@ public class EstructuraFacturaPaciente { //clase que contiene los datos para una
 
     public void setTotalCuotaMod(String totalCuotaMod) {
         this.totalCuotaMod = totalCuotaMod;
+    }
+
+    public String getNombreMedico() {
+        return nombreMedico;
+    }
+
+    public void setNombreMedico(String nombreMedico) {
+        this.nombreMedico = nombreMedico;
     }
     
 }

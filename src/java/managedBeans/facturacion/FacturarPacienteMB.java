@@ -1329,6 +1329,9 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
         nuevaFactura.setFirmaAutoriza(loginMB.getRutaCarpetaImagenes() + loginMB.getEmpresaActual().getLogo().getUrlImagen());
         nuevaFactura.setLogoEmpresa(loginMB.getRutaCarpetaImagenes() + loginMB.getEmpresaActual().getLogo().getUrlImagen().substring(0, loginMB.getEmpresaActual().getLogo().getUrlImagen().length()-8)+"-fac.png");
         for (FacFacturaServicio servicioFactura : facturaSeleccionada.getFacFacturaServicioList()) {
+            if(servicioFactura.getIdMedico()!=null){
+                nuevaFactura.setMedico("<b>MEDICO: </b>" +servicioFactura.getIdMedico().getPrimerNombre()+" "+servicioFactura.getIdMedico().getSegundoNombre()+" "+servicioFactura.getIdMedico().getPrimerApellido()+" "+servicioFactura.getIdMedico().getSegundoApellido());
+            }
             EstructuraItemsPaciente nuevoItem = new EstructuraItemsPaciente();
             nuevoItem.setCantidad(servicioFactura.getCantidadServicio().toString());
             nuevoItem.setCodigo(servicioFactura.getIdServicio().getCodigoCup());
@@ -1338,6 +1341,9 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
             listaItemsFactura.add(nuevoItem);
         }
         for (FacFacturaMedicamento medicamentoFactura : facturaSeleccionada.getFacFacturaMedicamentoList()) {
+            if(medicamentoFactura.getIdMedico()!=null){
+                nuevaFactura.setMedico("<b>MEDICO: </b>" +medicamentoFactura.getIdMedico().getPrimerNombre()+" "+medicamentoFactura.getIdMedico().getSegundoNombre()+" "+medicamentoFactura.getIdMedico().getPrimerApellido()+" "+medicamentoFactura.getIdMedico().getSegundoApellido());
+            }
             EstructuraItemsPaciente nuevoItem = new EstructuraItemsPaciente();
             nuevoItem.setCantidad(medicamentoFactura.getCantidadMedicamento().toString());
             nuevoItem.setCodigo(medicamentoFactura.getIdMedicamento().getCodigoCums());
@@ -1347,6 +1353,9 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
             listaItemsFactura.add(nuevoItem);
         }
         for (FacFacturaInsumo insumoFactura : facturaSeleccionada.getFacFacturaInsumoList()) {
+            if(insumoFactura.getIdMedico()!=null){
+                nuevaFactura.setMedico("<b>MEDICO: </b>" +insumoFactura.getIdMedico().getPrimerNombre()+" "+insumoFactura.getIdMedico().getSegundoNombre()+" "+insumoFactura.getIdMedico().getPrimerApellido()+" "+insumoFactura.getIdMedico().getSegundoApellido());
+            }
             EstructuraItemsPaciente nuevoItem = new EstructuraItemsPaciente();
             nuevoItem.setCantidad(insumoFactura.getCantidadInsumo().toString());
             nuevoItem.setCodigo(insumoFactura.getIdInsumo().getCodigoInsumo());
@@ -1356,6 +1365,9 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
             listaItemsFactura.add(nuevoItem);
         }
         for (FacFacturaPaquete paqueteFactura : facturaSeleccionada.getFacFacturaPaqueteList()) {
+            if(paqueteFactura.getIdMedico()!=null){
+                nuevaFactura.setMedico("<b>MEDICO: </b>" +paqueteFactura.getIdMedico().getPrimerNombre()+" "+paqueteFactura.getIdMedico().getSegundoNombre()+" "+paqueteFactura.getIdMedico().getPrimerApellido()+" "+paqueteFactura.getIdMedico().getSegundoApellido());
+            }
             EstructuraItemsPaciente nuevoItem = new EstructuraItemsPaciente();
             nuevoItem.setCantidad(paqueteFactura.getCantidadPaquete().toString());
             nuevoItem.setCodigo(paqueteFactura.getIdPaquete().getCodigoPaquete());

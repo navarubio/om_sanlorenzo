@@ -757,6 +757,10 @@ public class FacturarAdministradoraMB extends MetodosGenerales implements Serial
         boolean itemEncontrado;
         //Como el valor unitario puede cambiar de una factura a otra no se usa valor unitario        
         for (FacFacturaPaciente facturaPaciente : facturaAdmiSeleccionada.getFacFacturaPacienteList()) {
+            if(facturaPaciente.getIdCaja()!=null){
+                if(facturaPaciente.getIdCaja().getIdSede()!=null)
+                    nuevaFactura.setTituloFactura(facturaPaciente.getIdCaja().getIdSede().getNombreSede());
+            }
             for (FacFacturaServicio servicioFactura : facturaPaciente.getFacFacturaServicioList()) {
                 itemEncontrado = false;
                 for (EstructuraItemsAdministradora itemFactura : listaItemsFactura) {//agrupar si el servicio ya estaba en la factura
@@ -915,6 +919,11 @@ public class FacturarAdministradoraMB extends MetodosGenerales implements Serial
         nuevaFactura.setLogoEmpresa(loginMB.getRutaCarpetaImagenes() + loginMB.getEmpresaActual().getLogo().getUrlImagen());
 
         for (FacFacturaPaciente facturaPaciente : facturaAdmiSeleccionada.getFacFacturaPacienteList()) {
+            if(facturaPaciente.getIdCaja()!=null){
+                if(facturaPaciente.getIdCaja().getIdSede()!=null)
+                    nuevaFactura.setTituloFactura(facturaPaciente.getIdCaja().getIdSede().getNombreSede());
+            }
+            
             for (FacFacturaServicio servicioFactura : facturaPaciente.getFacFacturaServicioList()) {
                 EstructuraItemsAdministradora nuevoItem = new EstructuraItemsAdministradora();
                 nuevoItem.setCantidad(servicioFactura.getCantidadServicio().toString());
