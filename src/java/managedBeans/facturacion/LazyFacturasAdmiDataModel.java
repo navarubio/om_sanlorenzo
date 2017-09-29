@@ -133,13 +133,30 @@ public class LazyFacturasAdmiDataModel extends LazyDataModel<FilaDataTable> {
         listaDatosFacturas = facturaAdmiFacade.consultaNativaArreglo(sqlResult);
         for (Object listaDatosFactura : listaDatosFacturas) {
             Object[] datosUnaFactura = (Object[]) listaDatosFactura;
+            
+            String sede="";
+            try{
+                //obtenemos la sede
+                String query  ="select  cs.nombre_sede from fac_factura_admi_detalle f \n" +
+                        "inner join fac_factura_paciente fp on fp.id_factura_paciente = f.id_factura_paciente\n" +
+                        "inner join fac_caja fc on fp.id_caja= fc.id_caja\n" +
+                        "inner join cfg_sede cs on cs.id_sede = fc.id_sede\n" +
+                        " where id_factura_admi="+datosUnaFactura[0].toString()+" limit 1";
+                List<Object> listaDatosFacturas2 = facturaAdmiFacade.consultaNativaArreglo(query);
+                sede = listaDatosFacturas2.toString();
+                sede = sede!=null?sede.replace("[", ""):"";
+                sede = sede!=null?sede.replace("]", ""):"";
+            }catch(Exception e){
+                
+            }
             nuevaFila = new FilaDataTable(
                     datosUnaFactura[0].toString(),
                     datosUnaFactura[1].toString(),
                     datosUnaFactura[2].toString(),
                     datosUnaFactura[3].toString(),
                     datosUnaFactura[4].toString(),
-                    datosUnaFactura[5].toString());
+                    datosUnaFactura[5].toString(),
+                    sede);
             dataSource.add(nuevaFila);
         }
         this.setRowCount(facturaAdmiFacade.consultaNativaConteo(sqlCount));
