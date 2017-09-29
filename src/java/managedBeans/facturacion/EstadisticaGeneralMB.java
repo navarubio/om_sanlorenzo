@@ -644,8 +644,8 @@ public class EstadisticaGeneralMB extends MetodosGenerales implements java.io.Se
                     break;
             }
             FacesContext.getCurrentInstance().responseComplete();
-            String baseURL = "sumedica.jpasolutions.co";//PRODUCCION
-//            String baseURL = context.getExternalContext().getRequestContextPath();
+            //String baseURL = "sumedica.jpasolutions.co";//PRODUCCION
+            String baseURL = context.getExternalContext().getRequestContextPath();
             String url = baseURL + "/EstadisticasGeneralesServlet?filtro=" + filtroReporte + "&param1=" + parametro1 + "&param2=" + parametro2;
             String encodeURL = context.getExternalContext().encodeResourceURL(url);
             context.getExternalContext().redirect(encodeURL);
