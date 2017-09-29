@@ -1054,10 +1054,10 @@ public class RipsMB extends MetodosGenerales implements Serializable {
                                 + us.getSegNom() + ","
                                 + us.getEdad() + ","
                                 + us.getTipoEdad() + ","
-                                + us.getZonaRes()
+                                + us.getSexo()
                                 + us.getCodDepRes() + ","
                                 + us.getCodMunRes().substring(2) + ","
-                                + us.getSexo() + ",");
+                                + us.getZonaRes() + ",");
                         if(i < ripSeleccionado.getRipsUsList().size()-1){
                             pw.print(ln);
                         }
