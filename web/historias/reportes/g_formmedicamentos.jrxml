@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="612" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="532" leftMargin="40" rightMargin="40" topMargin="40" bottomMargin="40" uuid="9f7fc654-ee1d-4b56-916d-b168aa7d7a43">
 	<property name="ireport.zoom" value="1.0533250172243216"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="81"/>
 	<style name="table 4_TD" mode="Opaque" backcolor="#FFFFFF">
 		<box>
 			<pen lineWidth="0.5" lineColor="#000000"/>
@@ -1313,13 +1313,16 @@
 		</band>
 	</detail>
 	<pageFooter>
+		<band height="9"/>
+	</pageFooter>
+	<summary>
 		<band height="68">
 			<image scaleImage="FillFrame" onErrorType="Blank">
-				<reportElement uuid="9c3bbc6e-8311-410d-a87e-f822b43f3dd0" positionType="Float" x="52" y="0" width="167" height="51"/>
+				<reportElement uuid="9c3bbc6e-8311-410d-a87e-f822b43f3dd0" positionType="Float" x="55" y="0" width="167" height="51"/>
 				<imageExpression><![CDATA[$F{dato236}]]></imageExpression>
 			</image>
 			<frame>
-				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="26" y="54" width="217" height="12"/>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="29" y="54" width="217" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToBandHeight" x="1" y="0" width="213" height="12"/>
 					<textElement markup="html">
@@ -1333,23 +1336,23 @@
 				</line>
 			</frame>
 			<frame>
-				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="291" y="54" width="217" height="14"/>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="294" y="54" width="217" height="14"/>
 				<line>
 					<reportElement uuid="eab9670c-6faa-4f32-b945-3933c1079775" x="0" y="1" width="215" height="1"/>
 				</line>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="2" width="213" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato227}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<image scaleImage="FillFrame" onErrorType="Blank">
-				<reportElement uuid="9c3bbc6e-8311-410d-a87e-f822b43f3dd0" positionType="Float" x="322" y="0" width="167" height="51"/>
+				<reportElement uuid="9c3bbc6e-8311-410d-a87e-f822b43f3dd0" positionType="Float" x="325" y="0" width="167" height="51"/>
 				<imageExpression><![CDATA[$F{dato226}]]></imageExpression>
 			</image>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToBandHeight" x="291" y="56" width="213" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato227}]]></textFieldExpression>
-			</textField>
 		</band>
-	</pageFooter>
+	</summary>
 </jasperReport>
