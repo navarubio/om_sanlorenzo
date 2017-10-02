@@ -659,11 +659,13 @@ public class RipsMB extends MetodosGenerales implements Serializable {
                     for (FacFacturaPaciente facturaPaciente : facturaActual.getFacFacturaPacienteList()) {
                         for (FacFacturaServicio servicioActual : facturaPaciente.getFacFacturaServicioList()) {                            
                             continuar = true;
+                            System.out.println(servicioActual.getIdServicio().getCodigoCup());
                             if (servicioActual.getIdServicio().getCodigoCup() == null) {
                                 continuar = false;
                                 System.err.println("El servicio: "+servicioActual.getIdServicio().getCodigoServicio()+" - "+servicioActual.getIdServicio().getNombreServicio()+"no tiene codigo CUPS");
                             }
                             if (continuar && servicioActual.getIdServicio().getCodigoCup().equals("881234")) {
+                                continuar = true;
                             }else if (continuar && servicioActual.getIdServicio().getCodigoCup().equals("890114")) {
                             }else{
                                 if (continuar && !servicioActual.getIdServicio().getCodigoCup().startsWith("9")) {
