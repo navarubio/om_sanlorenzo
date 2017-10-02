@@ -664,6 +664,9 @@ public class RipsMB extends MetodosGenerales implements Serializable {
                                 continuar = false;
                                 System.err.println("El servicio: "+servicioActual.getIdServicio().getCodigoServicio()+" - "+servicioActual.getIdServicio().getNombreServicio()+"no tiene codigo CUPS");
                             }
+                            if(servicioActual.getIdServicio().getCodigoCup().equals("890201")){
+                                continuar=false;
+                            }
                             if (continuar && servicioActual.getIdServicio().getCodigoCup().equals("881234")) {
                             }else if (continuar && servicioActual.getIdServicio().getCodigoCup().equals("890114")) {
                             }else{
@@ -1220,7 +1223,7 @@ public class RipsMB extends MetodosGenerales implements Serializable {
                                     + formateadorDecimal.format(ac.getVlrCons()).replace(",", ".") + ","
                                     + formateadorDecimal.format(ac.getVlrCuoMod()).replace(",", ".") + ","
                                     + formateadorDecimal.format(ac.getVlrNeto()).replace(",", "."));
-                                if(i < ripSeleccionado.getRipsAcList().size()-1){
+                                    if(i < ripSeleccionado.getRipsAcList().size()-1){
                                     pw.print(ln);
                                 }
                            }
