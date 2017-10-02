@@ -28,6 +28,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
+import modelo.entidades.CfgClasificaciones;
 import modelo.entidades.CfgDiagnostico;
 import modelo.entidades.CfgEmpresa;
 import modelo.entidades.FacAdministradora;
@@ -714,11 +715,11 @@ public class RipsMB extends MetodosGenerales implements Serializable {
 
                                 ArrayList<String> diagnosticosDeterminados = determinarDiagnosticos(servicioActual);
                                 if (diagnosticosDeterminados != null) {//si es diferente de null tiene 4 elementos asi sean cadenas vacias
-                                    System.out.println("no esta vacio los diagnosticos");
+                                    //System.out.println("no esta vacio los diagnosticos");
                                     nuevoregistroRipAP.setDxPpal(diagnosticosDeterminados.get(0));
                                     nuevoregistroRipAP.setDxRel(diagnosticosDeterminados.get(1));
                                 } else {
-                                    System.out.println("si estan vacios los diagnosticos");
+                                    //System.out.println("si estan vacios los diagnosticos");
                                     nuevoregistroRipAP.setDxPpal("");
                                     nuevoregistroRipAP.setDxRel("");
                                 }
@@ -759,62 +760,121 @@ public class RipsMB extends MetodosGenerales implements Serializable {
                                 continuar = false;
                             }
                             if (continuar) {
-                                contadorAC++;
-                                RipsAcPK llave = new RipsAcPK(ripAlmacenado.getIdRipAlmacenado(), contadorAC);
-                                RipsAc nuevoregistroRipAC = new RipsAc(llave);
-                                nuevoregistroRipAC.setNumFac(facturaPaciente.getNumeroDocumento().toString());
-                                nuevoregistroRipAC.setCodPre(empresaActual.getCodigoEmpresa());
-                                if (facturaPaciente.getIdPaciente().getTipoIdentificacion() != null) {
-                                    nuevoregistroRipAC.setTipIde(facturaPaciente.getIdPaciente().getTipoIdentificacion().getDescripcion());
-                                } else {
-                                    nuevoregistroRipAC.setTipIde("");
-                                }
-                                nuevoregistroRipAC.setNumIde(facturaPaciente.getIdPaciente().getIdentificacion());
-                                nuevoregistroRipAC.setFecCons(formatoFechaSql.format(servicioActual.getFechaServicio()));
-                                if (facturaPaciente.getNumeroAutorizacion() != null) {
-                                    nuevoregistroRipAC.setNumAut(facturaPaciente.getNumeroAutorizacion());
-                                } else {
-                                    nuevoregistroRipAC.setNumAut("");
-                                }
-
-                                if (servicioActual.getIdServicio().getCodigoCup() != null) {
-                                    nuevoregistroRipAC.setCodCon(servicioActual.getIdServicio().getCodigoCup());
-                                } else {
-                                    nuevoregistroRipAC.setCodCon("");
-                                }
-
                                 ArrayList<String> diagnosticosDeterminados = determinarDiagnosticos(servicioActual);
-                                if (diagnosticosDeterminados != null) {//si es diferente de null tiene 4 elementos asi sean cadenas vacias
-                                    System.out.println("llenos");
-                                    nuevoregistroRipAC.setDxPpal(diagnosticosDeterminados.get(0));
-                                    nuevoregistroRipAC.setDxRel1(diagnosticosDeterminados.get(1));
-                                    nuevoregistroRipAC.setDxRel2(diagnosticosDeterminados.get(2));
-                                    nuevoregistroRipAC.setDxRel3(diagnosticosDeterminados.get(3));
-                                    nuevoregistroRipAC.setDxRel4(diagnosticosDeterminados.get(4));
-                                    nuevoregistroRipAC.setTipoDxPpal(Integer.parseInt(diagnosticosDeterminados.get(5))+"");
-                                    nuevoregistroRipAC.setCauExt(diagnosticosDeterminados.get(6));
-                                    nuevoregistroRipAC.setFinCon(diagnosticosDeterminados.get(7));
-                                } else {
-                                    System.out.println("vacios");
-                                    nuevoregistroRipAC.setDxPpal("");
-                                    nuevoregistroRipAC.setDxRel1("");
-                                    nuevoregistroRipAC.setDxRel2("");
-                                    nuevoregistroRipAC.setDxRel3("");
-                                    nuevoregistroRipAC.setDxRel4("");
-                                    nuevoregistroRipAC.setTipoDxPpal("");
-                                    nuevoregistroRipAC.setCauExt("");
-                                    nuevoregistroRipAC.setFinCon("");
-                                }
-                                
-                                nuevoregistroRipAC.setVlrCons(servicioActual.getValorServicio());
-                                if (!cuotaModeradoraCobrada && facturaPaciente.getCuotaModeradora() != 0) {
-                                    nuevoregistroRipAC.setVlrCuoMod(facturaPaciente.getCuotaModeradora());
-                                    cuotaModeradoraCobrada = true;
-                                } else {
-                                    nuevoregistroRipAC.setVlrCuoMod(Double.parseDouble("0"));
-                                }
-                                nuevoregistroRipAC.setVlrNeto(servicioActual.getValorEmpresa());
-                                ripsAcFacade.create(nuevoregistroRipAC);
+                                    contadorAC++;
+                                    RipsAcPK llave = new RipsAcPK(ripAlmacenado.getIdRipAlmacenado(), contadorAC);
+                                    RipsAc nuevoregistroRipAC = new RipsAc(llave);
+                                    nuevoregistroRipAC.setNumFac(facturaPaciente.getNumeroDocumento().toString());
+                                    nuevoregistroRipAC.setCodPre(empresaActual.getCodigoEmpresa());
+                                    if (facturaPaciente.getIdPaciente().getTipoIdentificacion() != null) {
+                                        nuevoregistroRipAC.setTipIde(facturaPaciente.getIdPaciente().getTipoIdentificacion().getDescripcion());
+                                    } else {
+                                        nuevoregistroRipAC.setTipIde("");
+                                    }
+                                    nuevoregistroRipAC.setNumIde(facturaPaciente.getIdPaciente().getIdentificacion());
+                                    nuevoregistroRipAC.setFecCons(formatoFechaSql.format(servicioActual.getFechaServicio()));
+                                    if (facturaPaciente.getNumeroAutorizacion() != null) {
+                                        nuevoregistroRipAC.setNumAut(facturaPaciente.getNumeroAutorizacion());
+                                    } else {
+                                        nuevoregistroRipAC.setNumAut("");
+                                    }
+
+                                    if (servicioActual.getIdServicio().getCodigoCup() != null) {
+                                        nuevoregistroRipAC.setCodCon(servicioActual.getIdServicio().getCodigoCup());
+                                    } else {
+                                        nuevoregistroRipAC.setCodCon("");
+                                    }
+
+                                    if (diagnosticosDeterminados != null) {//si es diferente de null tiene 4 elementos asi sean cadenas vacias
+                                        if(diagnosticosDeterminados.get(0)!=null){
+                                            if(diagnosticosDeterminados.get(0).equals("")){
+                                                //cargamos estaticamente el registro rcv
+                                                HcRegistro registro = registroFacade.buscarUltimo(facturaPaciente.getIdPaciente().getIdPaciente(), 54);
+                                                if(registro!=null){
+                                                    for(HcDetalle detalle:registro.getHcDetalleList()){
+                                                        try {
+                                                            switch (detalle.getHcCamposReg().getPosicion()) {
+                                                                case 337://dx principal
+                                                                    CfgClasificaciones clasificaciones = clasificacionesFacade.buscarPorId(detalle.getValor()==null?"0":detalle.getValor());
+                                                                    nuevoregistroRipAC.setFinCon(clasificaciones!=null?clasificaciones.getCodigo():"");
+                                                                    break;
+                                                                case 336://dx rel_1
+                                                                    clasificaciones = clasificacionesFacade.buscarPorId(detalle.getValor()==null?"0":detalle.getValor());
+                                                                    nuevoregistroRipAC.setCauExt(clasificaciones!=null?clasificaciones.getCodigo():"");
+                                                                    break;
+                                                                case 166://dx rel_2
+                                                                    String valor = detalle.getValor()==null?"":detalle.getValor().split(" - ")[0];
+                                                                    nuevoregistroRipAC.setDxPpal(valor);
+                                                                    break;
+                                                                case 167://dx rel_3
+                                                                    valor = detalle.getValor()==null?"":detalle.getValor().split(" - ")[0];
+                                                                    nuevoregistroRipAC.setDxRel1(valor);
+                                                                    break;
+                                                                case 168://dx rel_3
+                                                                    valor = detalle.getValor()==null?"":detalle.getValor().split(" - ")[0];
+                                                                    nuevoregistroRipAC.setDxRel2(valor);
+                                                                    break;
+                                                                case 169://dx rel_3
+                                                                    valor = detalle.getValor()==null?"":detalle.getValor().split(" - ")[0];
+                                                                    nuevoregistroRipAC.setDxRel3(valor);
+                                                                    break;
+                                                                case 268://dx rel_3
+                                                                    valor = detalle.getValor()==null?"":detalle.getValor().split(" - ")[0];
+                                                                    nuevoregistroRipAC.setDxRel4(valor);
+                                                                    break;
+                                                                case 335://dx rel_3
+                                                                    clasificaciones = clasificacionesFacade.buscarPorId(detalle.getValor()==null?"0":detalle.getValor());
+                                                                    nuevoregistroRipAC.setTipoDxPpal(clasificaciones!=null?clasificaciones.getCodigo():"");
+                                                                    break;
+                                                               }
+                                                        } catch (Exception e) {
+                                                        }
+                                                    }
+                                                }else{
+                                                   //  System.out.println("vacios");
+                                                        nuevoregistroRipAC.setDxPpal("");
+                                                        nuevoregistroRipAC.setDxRel1("");
+                                                        nuevoregistroRipAC.setDxRel2("");
+                                                        nuevoregistroRipAC.setDxRel3("");
+                                                        nuevoregistroRipAC.setDxRel4("");
+                                                        nuevoregistroRipAC.setTipoDxPpal("");
+                                                        nuevoregistroRipAC.setCauExt("");
+                                                        nuevoregistroRipAC.setFinCon("");
+                                                }
+                                            }else{
+                                              //  System.out.println("llenos");
+                                                nuevoregistroRipAC.setDxPpal(diagnosticosDeterminados.get(0));
+                                                nuevoregistroRipAC.setDxRel1(diagnosticosDeterminados.get(1));
+                                                nuevoregistroRipAC.setDxRel2(diagnosticosDeterminados.get(2));
+                                                nuevoregistroRipAC.setDxRel3(diagnosticosDeterminados.get(3));
+                                                nuevoregistroRipAC.setDxRel4(diagnosticosDeterminados.get(4));
+                                                nuevoregistroRipAC.setTipoDxPpal(Integer.parseInt(diagnosticosDeterminados.get(5))+"");
+                                                nuevoregistroRipAC.setCauExt(diagnosticosDeterminados.get(6));
+                                                nuevoregistroRipAC.setFinCon(diagnosticosDeterminados.get(7));
+                                            }
+                                        }
+                                        
+                                    } else {
+                                        System.out.println("vacios");
+                                        nuevoregistroRipAC.setDxPpal("");
+                                        nuevoregistroRipAC.setDxRel1("");
+                                        nuevoregistroRipAC.setDxRel2("");
+                                        nuevoregistroRipAC.setDxRel3("");
+                                        nuevoregistroRipAC.setDxRel4("");
+                                        nuevoregistroRipAC.setTipoDxPpal("");
+                                        nuevoregistroRipAC.setCauExt("");
+                                        nuevoregistroRipAC.setFinCon("");
+                                    }
+
+                                    nuevoregistroRipAC.setVlrCons(servicioActual.getValorServicio());
+                                    if (!cuotaModeradoraCobrada && facturaPaciente.getCuotaModeradora() != 0) {
+                                        nuevoregistroRipAC.setVlrCuoMod(facturaPaciente.getCuotaModeradora());
+                                        cuotaModeradoraCobrada = true;
+                                    } else {
+                                        nuevoregistroRipAC.setVlrCuoMod(Double.parseDouble("0"));
+                                    }
+                                    nuevoregistroRipAC.setVlrNeto(servicioActual.getValorEmpresa());
+                                    ripsAcFacade.create(nuevoregistroRipAC);
                             }
                         }
                     }
@@ -1140,28 +1200,33 @@ public class RipsMB extends MetodosGenerales implements Serializable {
 //                        pw.println("num_fac,cod_pre,tip_ide,num_ide,fec_cons,num_aut,cod_proced,finali_con,cau_ext,cdiag_pri,cdiag_r1,cdiag_r2,cdiag_r3,tip_diag_pri,val_cons,val_cuo_mod,val_net");
                     }
                     for (RipsAc ac : ripSeleccionado.getRipsAcList()) {
-                        pw.print(
-                                ac.getNumFac() + ","
-                                + ac.getCodPre() + ","
-                                + ac.getTipIde() + ","
-                                + ac.getNumIde() + ","
-                                + ac.getFecCons() + ","
-                                + ac.getNumAut() + ","
-                                + ac.getCodCon() + ","
-                                + ac.getFinCon() + ","
-                                + ac.getCauExt() + ","
-                                + ac.getDxPpal() + ","
-                                + ac.getDxRel1() + ","
-                                + ac.getDxRel2() + ","
-                                + ac.getDxRel3() + ","
-                                + ac.getTipoDxPpal()+ ","
-                                + formateadorDecimal.format(ac.getVlrCons()).replace(",", ".") + ","
-                                + formateadorDecimal.format(ac.getVlrCuoMod()).replace(",", ".") + ","
-                                + formateadorDecimal.format(ac.getVlrNeto()).replace(",", "."));
-                        if(i < ripSeleccionado.getRipsAcList().size()-1){
-                            pw.print(ln);
+                       if(ac.getFinCon()!=null){
+                           if(!ac.getFinCon().equals("")){
+                            pw.print(
+                                    ac.getNumFac() + ","
+                                    + ac.getCodPre() + ","
+                                    + ac.getTipIde() + ","
+                                    + ac.getNumIde() + ","
+                                    + ac.getFecCons() + ","
+                                    + ac.getNumAut() + ","
+                                    + ac.getCodCon() + ","
+                                    + (ac.getFinCon()==null?"":ac.getFinCon()) + ","
+                                    + (ac.getCauExt()==null?"":ac.getCauExt()) + ","
+                                    + (ac.getDxPpal()==null?"":ac.getDxPpal()) + ","
+                                    + (ac.getDxRel1()==null?"":ac.getDxRel1()) + ","
+                                    + (ac.getDxRel2()==null?"":ac.getDxRel2()) + ","
+                                    + (ac.getDxRel3()==null?"":ac.getDxRel3()) + ","
+                                    + (ac.getTipoDxPpal()==null?"":ac.getTipoDxPpal())+ ","
+                                    + formateadorDecimal.format(ac.getVlrCons()).replace(",", ".") + ","
+                                    + formateadorDecimal.format(ac.getVlrCuoMod()).replace(",", ".") + ","
+                                    + formateadorDecimal.format(ac.getVlrNeto()).replace(",", "."));
+                                if(i < ripSeleccionado.getRipsAcList().size()-1){
+                                    pw.print(ln);
+                                }
+                           }
                         }
                         i++;
+                       
                     }
                 } catch (IOException e) {
                     System.out.println(e.getMessage());
