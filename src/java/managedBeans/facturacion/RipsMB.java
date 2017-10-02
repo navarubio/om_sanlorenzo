@@ -666,7 +666,7 @@ public class RipsMB extends MetodosGenerales implements Serializable {
                             if (continuar && servicioActual.getIdServicio().getCodigoCup().equals("881234")) {
                             }else if (continuar && servicioActual.getIdServicio().getCodigoCup().equals("890114")) {
                             }else{
-                                if (continuar && !servicioActual.getIdServicio().getCodigoCup().startsWith("9")) {
+                                if (continuar && (!servicioActual.getIdServicio().getCodigoCup().startsWith("9") || !servicioActual.getIdServicio().getCodigoCup().startsWith("8") || !servicioActual.getIdServicio().getCodigoCup().startsWith("A"))) {
                                     continuar = false;
                                     if (continuar && !servicioActual.getIdServicio().getCodigoCup().startsWith("8")) {
                                         System.err.println("El codigo CUP("+servicioActual.getIdServicio().getCodigoCup()+") del servicio: "+servicioActual.getIdServicio().getCodigoServicio()+" - "+servicioActual.getIdServicio().getNombreServicio()+" no inicia ni con 9 ni con 8");
