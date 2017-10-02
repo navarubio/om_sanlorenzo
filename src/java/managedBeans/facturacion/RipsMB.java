@@ -711,7 +711,8 @@ public class RipsMB extends MetodosGenerales implements Serializable {
                                     nuevoregistroRipAP.setFinPro("");
                                 }
                                 if (servicioActual.getIdMedico().getTipoUsuario() != null) {
-                                    nuevoregistroRipAP.setPersAti(servicioActual.getIdMedico().getTipoUsuario().getCodigo());
+                                    nuevoregistroRipAP.setPersAti("");
+                                    //nuevoregistroRipAP.setPersAti(servicioActual.getIdMedico().getTipoUsuario().getCodigo());
                                 } else {
                                     nuevoregistroRipAP.setPersAti("");
                                 }
