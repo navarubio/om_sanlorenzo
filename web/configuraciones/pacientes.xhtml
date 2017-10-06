@@ -12,6 +12,19 @@
         <link href="../recursos/css/iconFont.css" rel="stylesheet"/>
         <script type="text/javascript" src="../recursos/js/calendario.js"></script>          
         <script type="text/javascript">
+           function valida(e){
+                tecla = (document.all) ? e.keyCode : e.which;
+
+                //Tecla de retroceso para borrar, siempre la permite
+                if (tecla==8){
+                    return true;
+                }
+
+                // Patron de entrada, en este caso solo acepta numeros
+                patron =/[0-9]/;
+                tecla_final = String.fromCharCode(tecla);
+                return patron.test(tecla_final);
+            }
             $(document).keypress(
                     function (event) {
                         if (event.which == '13') {
@@ -104,8 +117,8 @@
                                                 <f:selectItems value="#{aplicacionGeneralMB.listaTipoIdentificacion}" />
                                             </p:selectOneMenu>                                         
                                             <p:outputLabel   styleClass="campoObligatorio" value="Identificación"/>
-
-                                            <p:inputText id="identificacion" styleClass="campoFormulario" value="#{pacientesMB.identificacion}" >  
+                                            
+                                            <p:inputText id="identificacion" styleClass="campoFormulario" value="#{pacientesMB.identificacion}" onkeypress="return valida(event)">  
                                                 <p:ajax event="blur" process="tipoIdentificacion,identificacion" update=":IdFormPrincipal" listener="#{pacientesMB.validarIdentificacion}"/>
                                             </p:inputText> 
 

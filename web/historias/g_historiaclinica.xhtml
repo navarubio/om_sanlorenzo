@@ -38,8 +38,8 @@
                         <td><p:outputLabel value="Dirección" /></td>
                     </tr>
                     <tr>
-                        <td><p:inputText  disabled="true" styleClass="width1" value="#{historiasMB.pacienteSeleccionado.acompanante}"  /></td> <!--Este campo pen realidad es el acudiente-->
-                        <td><p:inputText  disabled="true" styleClass="width1" value="#{historiasMB.pacienteSeleccionado.direccion}"  /></td>                    
+                        <td><p:inputText  readonly="true" styleClass="width1" value="#{historiasMB.pacienteSeleccionado.acompanante}"  /></td> <!--Este campo pen realidad es el acudiente-->
+                        <td><p:inputText  readonly="true" styleClass="width1" value="#{historiasMB.pacienteSeleccionado.direccion}"  /></td>                    
                     </tr>
                     <tr>
                         <td><p:outputLabel value="Acompañante" /></td>
@@ -73,24 +73,24 @@
                         <td><p:outputLabel value="Discapacidad" /></td>
                     </tr>
                     <tr>
-                        <td><p:inputText disabled="true" styleClass="width1" value="#{historiasMB.pacienteSeleccionado.escolaridad.descripcion}"  /></td>
-                        <td><p:inputText disabled="true" styleClass="width1" value="#{historiasMB.pacienteSeleccionado.discapacidad.descripcion}"  /></td>                    
+                        <td><p:inputText readonly="true" styleClass="width1" value="#{historiasMB.pacienteSeleccionado.escolaridad.descripcion}"  /></td>
+                        <td><p:inputText readonly="true" styleClass="width1" value="#{historiasMB.pacienteSeleccionado.discapacidad.descripcion}"  /></td>                    
                     </tr>
                     <tr>
                         <td><p:outputLabel value="Gestación" /></td>
                         <td><p:outputLabel value="Ocupación" /></td>
                     </tr>
                     <tr>
-                        <td><p:inputText disabled="true" styleClass="width1" value="#{historiasMB.pacienteSeleccionado.gestacion.descripcion}"  /></td>                    
-                        <td><p:inputText disabled="true" styleClass="width1" value="#{historiasMB.pacienteSeleccionado.ocupacion.descripcion}"  /></td>                    
+                        <td><p:inputText readonly="true" styleClass="width1" value="#{historiasMB.pacienteSeleccionado.gestacion.descripcion}"  /></td>                    
+                        <td><p:inputText readonly="true" styleClass="width1" value="#{historiasMB.pacienteSeleccionado.ocupacion.descripcion}"  /></td>                    
                     </tr>
                     <tr>
                         <td><p:outputLabel value="Religión" /></td>
                         <td><p:outputLabel value="Etnia" /></td>
                     </tr>
                     <tr>
-                        <td><p:inputText disabled="true" styleClass="width1" value="#{historiasMB.pacienteSeleccionado.religion.descripcion}"  /></td>                    
-                        <td><p:inputText disabled="true" styleClass="width1" value="#{historiasMB.pacienteSeleccionado.etnia.descripcion}"  /></td>                    
+                        <td><p:inputText readonly="true" styleClass="width1" value="#{historiasMB.pacienteSeleccionado.religion.descripcion}"  /></td>                    
+                        <td><p:inputText readonly="true" styleClass="width1" value="#{historiasMB.pacienteSeleccionado.etnia.descripcion}"  /></td>                    
                     </tr>
                     <tr>
                         <td>
@@ -100,7 +100,7 @@
                                         <p:outputLabel value="Víctima de conflicto armado" />
                                     </td>
                                     <td>
-                                        <p:selectBooleanCheckbox disabled="true" value="#{historiasMB.pacienteSeleccionado.victimaConflicto}"  />
+                                        <p:selectBooleanCheckbox readonly="true" value="#{historiasMB.pacienteSeleccionado.victimaConflicto}"  />
                                     </td>
                                 </tr>
                             </table>
@@ -112,7 +112,7 @@
                                         <p:outputLabel value="Población LBGT" />
                                     </td>
                                     <td>
-                                        <p:selectBooleanCheckbox disabled="true" value="#{historiasMB.pacienteSeleccionado.poblacionLBGT}"  />
+                                        <p:selectBooleanCheckbox readonly="true" value="#{historiasMB.pacienteSeleccionado.poblacionLBGT}"  />
                                     </td>
                                 </tr>
                             </table>
@@ -127,7 +127,7 @@
                                         <p:outputLabel value="Desplazado" />
                                     </td>
                                     <td>
-                                        <p:selectBooleanCheckbox disabled="true" value="#{historiasMB.pacienteSeleccionado.desplazado}"  />
+                                        <p:selectBooleanCheckbox readonly="true" value="#{historiasMB.pacienteSeleccionado.desplazado}"  />
                                     </td>
                                 </tr>
                             </table>
@@ -139,7 +139,7 @@
                                         <p:outputLabel value="Víctima de maltrato" />
                                     </td>
                                     <td>
-                                        <p:selectBooleanCheckbox disabled="true" value="#{historiasMB.pacienteSeleccionado.victimaMaltrato}"/>
+                                        <p:selectBooleanCheckbox readonly="true" value="#{historiasMB.pacienteSeleccionado.victimaMaltrato}"/>
                                     </td>
                                 </tr>
                             </table>

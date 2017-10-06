@@ -733,11 +733,16 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
             if(pacienteSeleccionadoTabla!=null){
                 cargarPaciente();
                 imprimirMensaje("Informacion", "El paciente ya se encuentra registrado, se carga información", FacesMessage.SEVERITY_INFO);
+            }else{
+              imprimirMensaje("Informacion", "El paciente no existe, ingrese los datos para crearlo o verifique el número de documento", FacesMessage.SEVERITY_INFO);
+              
             }
             /*imprimirMensaje("Informacion", "El paciente ya se encuentra registrado", FacesMessage.SEVERITY_ERROR);
             nuevoRegistro = true;
             listaPacientes = new LazyPacienteDataModel(pacientesFachada);
             limpiarFormulario();*/
+        }else{
+            imprimirMensaje("Informacion", "El paciente no existe, ingrese los datos para crearlo o verifique el número de documento", FacesMessage.SEVERITY_INFO);
         }
     }
 
