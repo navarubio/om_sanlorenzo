@@ -152,7 +152,7 @@ public class CfgPacientes implements Serializable {
     private String telefonoResidencia;
     @Column(name = "telefono_oficina", length = 20)
     private String telefonoOficina;
-    @Column(name = "celular", length = 20)
+    @Column(name = "celular")
     private String celular;
     @Column(name = "fecha_afiliacion")
     @Temporal(TemporalType.TIMESTAMP)

@@ -100,13 +100,13 @@
                                     <tr>                           
                                         <td>
                                             <p:outputLabel   styleClass="campoObligatorio" value="Tipo Identificación"/>
-                                            <p:selectOneMenu styleClass="campoFormulario" style="width: 80px;" value="#{pacientesMB.tipoIdentificacion}">                                    
+                                            <p:selectOneMenu id="tipoIdentificacion" styleClass="campoFormulario" style="width: 80px;" value="#{pacientesMB.tipoIdentificacion}">                                    
                                                 <f:selectItems value="#{aplicacionGeneralMB.listaTipoIdentificacion}" />
                                             </p:selectOneMenu>                                         
                                             <p:outputLabel   styleClass="campoObligatorio" value="Identificación"/>
 
-                                            <p:inputText styleClass="campoFormulario" value="#{pacientesMB.identificacion}" >  
-                                                <p:ajax event="blur" update=":IdFormPrincipal" listener="#{pacientesMB.validarIdentificacion}"/>
+                                            <p:inputText id="identificacion" styleClass="campoFormulario" value="#{pacientesMB.identificacion}" >  
+                                                <p:ajax event="blur" process="tipoIdentificacion,identificacion" update=":IdFormPrincipal" listener="#{pacientesMB.validarIdentificacion}"/>
                                             </p:inputText> 
 
                                             <p:outputLabel   styleClass="campoNoObligatorio" value="Lugar expedición"/>
@@ -118,7 +118,7 @@
                                     <tr>
                                         <td>
                                             <p:outputLabel   styleClass="campoObligatorio" value="Fec. Nacimiento"/>
-                                            <p:calendar styleClass="campoFormulario" navigator="true" mask="true" locale="es" pattern="dd/MM/yyyy" maxdate="#{pacientesMB.maxDate}" value="#{pacientesMB.fechaNacimiento}" size="14">
+                                            <p:calendar styleClass="campoFormulario" yearRange="c-100:c+100" navigator="true" mask="true" locale="es" pattern="dd/MM/yyyy" maxdate="#{pacientesMB.maxDate}" value="#{pacientesMB.fechaNacimiento}" size="14">
                                                 <p:ajax 
                                                     event="dateSelect"
                                                     listener="#{pacientesMB.cambiaFechaNacimiento(event)}"
