@@ -156,6 +156,7 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
         nuevoRegistro = true;
         listaPacientes = new LazyPacienteDataModel(pacientesFachada);
         listaContrato = new ArrayList();
+        limpiarFormulario();
         //listaCompletaOcupaciones = clasificacionesFachada.buscarPorMaestro("ocupaciones");
     }
 
@@ -222,9 +223,9 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
     }
     
     public void validar_edad(){
-        System.out.println(años);
-        System.out.println(estadoCivil);
-        System.out.println(ocupacion);
+        //System.out.println(años);
+        //System.out.println(estadoCivil);
+        //System.out.println(ocupacion);
         if(años <= 13){
             estadoCivil = "1881";
             ocupacion = "1654";
@@ -293,6 +294,68 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
         victimaMaltrato = false;
         desplazado = false;
         poblacionLBGT = false;
+        contrato ="";
+        listaContrato = new ArrayList<>();
+        cambiaFechaNacimiento(null);
+        cargarMunicipios();
+    }
+    
+    public void nuevoPaciente() {
+        tituloTabPacientes = "Datos nuevo paciente";
+        pacienteSeleccionado = null;
+        archivoFirma = null;
+        archivoFoto = null;
+        fotoTomadaWebCam = false;
+        urlFirma = firmaPorDefecto;
+        urlFoto = fotoPorDefecto;
+        lugarExpedicion = "";
+        fechaNacimiento = null;
+        fechNacimiConvetEdad = "-";
+        genero = "";
+        grupoSanguineo = "";
+        primerNombre = "";
+        segundoNombre = "";
+        primerApellido = "";
+        segundoApellido = "";
+        estadoCivil = "";
+        ocupacion = "";
+        telefonoResidencia = "";
+        telefonoOficina = "";
+        celular = "";
+        departamento = "";
+        municipio = "";
+        zona = "";
+        barrio = "";
+        direccion = "";
+        email = "";
+        activo = true;
+        administradora = "";
+        tipoAfiliado = "";
+        regimen = "";
+        categoriaPaciente = "";
+        estrato = "";
+        etnia = "";
+        escolaridad = "";
+        numeroAutorizacion = "";
+        responsable = "";
+        telefonoResponsable = "";
+        parentesco = "";
+        acompanante = "";
+        telefonoAcompanante = "";
+        fechaAfiliacion = null;
+        fechaSisben = null;
+        carnet = "";
+        fechaVenceCarnet = null;
+        observaciones = "";
+        religion = "";
+        gestacion = "";
+        discapacidad = "";
+        victimaConflicto = false;
+        victimaMaltrato = false;
+        desplazado = false;
+        poblacionLBGT = false;
+        contrato="";
+        listaContrato = new ArrayList<>();
         cambiaFechaNacimiento(null);
         cargarMunicipios();
     }
@@ -735,7 +798,7 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
                 imprimirMensaje("Informacion", "El paciente ya se encuentra registrado, se carga información", FacesMessage.SEVERITY_INFO);
             }else{
               imprimirMensaje("Informacion", "El paciente no existe, ingrese los datos para crearlo o verifique el número de documento", FacesMessage.SEVERITY_INFO);
-              
+              nuevoPaciente();
             }
             /*imprimirMensaje("Informacion", "El paciente ya se encuentra registrado", FacesMessage.SEVERITY_ERROR);
             nuevoRegistro = true;
@@ -743,6 +806,7 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
             limpiarFormulario();*/
         }else{
             imprimirMensaje("Informacion", "El paciente no existe, ingrese los datos para crearlo o verifique el número de documento", FacesMessage.SEVERITY_INFO);
+            nuevoPaciente();
         }
     }
 

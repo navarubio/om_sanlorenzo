@@ -35,6 +35,7 @@
 
     </h:head>
     <h:body>             
+        #{pacientesMB.inicializar()}
         <h:form id="IdFormPrincipal">              
             <p:growl id="IdMensajePacientes"  showDetail="true" sticky="false" autoUpdate="true" life="2000"  />            
             <!--===================================================================================-->
@@ -70,7 +71,7 @@
                 &nbsp;
             </div>
             <br/>            
-
+            
             <p:tabView style=" width: 99%;" activeIndex="#{pacientesMB.tabActivaPacientes}" id="IdTabView" > 
                 <p:tab title="#{pacientesMB.tituloTabPacientes}">  
                     <table style="margin: 20px; margin-left: auto; margin-right: auto;">
