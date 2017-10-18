@@ -41,6 +41,7 @@ import modelo.entidades.CfgPacientes;
 import modelo.entidades.CfgTxtPredefinidos;
 import modelo.entidades.CfgUsuarios;
 import modelo.entidades.CitCitas;
+import modelo.entidades.FacConsumoMedicamento;
 import modelo.entidades.FacServicio;
 import modelo.entidades.HcArchivos;
 import modelo.entidades.HcCamposReg;
@@ -61,6 +62,7 @@ import modelo.fachadas.CfgTxtPredefinidosFacade;
 import modelo.fachadas.CfgUsuariosFacade;
 import modelo.fachadas.CitCitasFacade;
 import modelo.fachadas.CitTurnosFacade;
+import modelo.fachadas.FacConsumoMedicamentoFacade;
 import modelo.fachadas.FacServicioFacade;
 import modelo.fachadas.HcArchivosFacade;
 import modelo.fachadas.HcCamposRegFacade;
@@ -139,6 +141,8 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     HcDetalleFacade detalleFacade;
     @EJB
     InvBodegaProductosFacade invBodegaProductosFacade;
+    @EJB
+    FacConsumoMedicamentoFacade facConsumoMedicamentoFacade;
     //---------------------------------------------------
     //-----------------ENTIDADES ------------------------
     //---------------------------------------------------
@@ -554,6 +558,14 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 datosFormulario.setDato4("Prioritaria");//prioridad de la atencion                
                 datosFormulario.setDato0(pacienteSeleccionado.getIdAdministradora().getRazonSocial());//pagador 
                 datosFormulario.setDato1(pacienteSeleccionado.getIdAdministradora().getCodigoAdministradora());//codigo
+            }else  if (tipoRegistroClinicoActual.getIdTipoReg() == 19) {//FOrmulación Médica
+                //Cargamos los diágnostico principales y 
+                String diagPrincipal = detalleFacade.diagnosticoPrincipal(pacienteSeleccionado.getIdPaciente());
+                datosFormulario.setDato0(diagPrincipal);
+                String diagRel1 = detalleFacade.diagnosticoRel1(pacienteSeleccionado.getIdPaciente());
+                String diagRel2 = detalleFacade.diagnosticoRel2(pacienteSeleccionado.getIdPaciente());
+                datosFormulario.setDato1(diagRel1);
+                datosFormulario.setDato2(diagRel2);
             }
         }
         calculo_imc();
@@ -2572,6 +2584,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             }
         }
 
+        datosFormulario = new DatosFormularioHistoria();
         listaEstructuraFamiliar.clear();
         listaEstructuraFamiliarFiltro.clear();
         listaMedicamentos.clear();
@@ -3978,7 +3991,8 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         }
         registroFacade.create(nuevoRegistro);
 
-        /**
+        
+       /**
          * new arcarrero, se encontró un registro con 248 campos, hubo que hacer
          * algunas modificaciones al código, por ende se comenta la línea donde
          * se coloca el valor 200 de valor arbitraria, y se tomará en cuenta el
@@ -4042,6 +4056,42 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             }
         }
 
+         //medicamentos asociados 
+        if (listaMedicamentos != null) {
+            for (FilaDataTable item : listaMedicamentos) {
+                HcItems nuevoMedicamento = new HcItems();
+                nuevoMedicamento.setIdRegistro(nuevoRegistro);
+                nuevoMedicamento.setIdTabla(item.getColumna1());
+                nuevoMedicamento.setTabla("cfg_medicamento");
+//                nuevoMedicamento.setDescripcion(item.getDescripcion());
+//                nuevoMedicamento.setConcentracion(item.getConcentracion());
+                nuevoMedicamento.setObservacion(item.getColumna10());
+                nuevoMedicamento.setCantidad(Integer.parseInt(item.getColumna4()));
+                nuevoMedicamento.setDosis(item.getColumna5());
+                nuevoMedicamento.setPosologia(item.getColumna9());
+//                nuevoMedicamento.setViaAdmin(item.getViaAdmin());
+                itemsFacade.create(nuevoMedicamento);
+                System.out.println("GUARDADO ITEM");
+                System.out.println(item.getColumna2());
+                ///creamos la lista de insumos para formulacion de medicaentos
+                 FacConsumoMedicamento facMedicamento = new FacConsumoMedicamento();
+                        CfgMedicamento medicamento = cfgMedicamento.medicamentoXCodigo(item.getColumna2());
+                        if(medicamento!=null){
+                            facMedicamento.setCantidad(Integer.parseInt(item.getColumna4()));
+                            facMedicamento.setIdPaciente(pacienteSeleccionado);
+                            facMedicamento.setIdMedicamento(medicamento);
+                            if (idPrestador != null && idPrestador.length() != 0) {//validacion de campos obligatorios
+                                facMedicamento.setIdPrestador(usuariosFacade.find(Integer.parseInt(idPrestador)));
+                            }
+                            
+                            facMedicamento.setFecha(new Date());
+                            facMedicamento.setValorUnitario(medicamento.getValor());
+                            facMedicamento.setValorFinal(medicamento.getValor()*facMedicamento.getCantidad());
+                            facConsumoMedicamentoFacade.create(facMedicamento);
+                        }
+            }
+        }
+
         if (listaEstructuraFamiliar != null) {
             //guardar estructura familiar si es que existe
             for (FilaDataTable familiar : listaEstructuraFamiliar) {
@@ -4077,24 +4127,6 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         nuevoRegistro.setFolio(registroFacade.buscarMaximoFolio(nuevoRegistro.getIdPaciente().getIdPaciente()) + 1);
         registroFacade.edit(nuevoRegistro);
 
-        //medicamentos asociados 
-        if (listaMedicamentos != null) {
-            for (FilaDataTable item : listaMedicamentos) {
-                HcItems nuevoMedicamento = new HcItems();
-                nuevoMedicamento.setIdRegistro(nuevoRegistro);
-                nuevoMedicamento.setIdTabla(item.getColumna1());
-                nuevoMedicamento.setTabla("cfg_medicamento");
-//                nuevoMedicamento.setDescripcion(item.getDescripcion());
-//                nuevoMedicamento.setConcentracion(item.getConcentracion());
-                nuevoMedicamento.setObservacion(item.getColumna10());
-                nuevoMedicamento.setCantidad(Integer.parseInt(item.getColumna4()));
-                nuevoMedicamento.setDosis(item.getColumna5());
-                nuevoMedicamento.setPosologia(item.getColumna9());
-//                nuevoMedicamento.setViaAdmin(item.getViaAdmin());
-                itemsFacade.create(nuevoMedicamento);
-
-            }
-        }
 
         //servicios o examenes medicos asociados
         if (listaServicios != null) {

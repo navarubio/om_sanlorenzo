@@ -54,6 +54,15 @@ public class FacContratoFacade extends AbstractFacade<FacContrato> {
         }
     }
     
+    public FacContrato buscarPoridContrato(int idContrato) {
+        try {
+            String hql = "SELECT c FROM FacContrato c WHERE c.idContrato =:idContrato";
+            return (FacContrato) getEntityManager().createQuery(hql).setParameter("idContrato", idContrato).getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
     public List<FacContrato> buscarPorAdministrador(int idAdminitradora) {
         try {
             String hql = "SELECT c FROM FacContrato c WHERE c.idAdministradora.idAdministradora =:idAdministradora";

@@ -30,4 +30,16 @@ public class FacManualTarifarioMedicamentoFacade extends AbstractFacade<FacManua
             return null;
         }
     }
+    
+    public FacManualTarifarioMedicamento buscarManualContratoMedicamento(int idManual,int idMedicamento){
+        Query query;
+        try {
+            query = getEntityManager().createQuery("SELECT m FROM FacManualTarifarioMedicamento m WHERE m.facManualTarifario.idManualTarifario = :idManual and m.cfgMedicamento.idMedicamento=:idMedicamento ").setParameter("idManual", idManual).setParameter("idMedicamento", idMedicamento);
+            List<FacManualTarifarioMedicamento> listaMedicamento = query.getResultList();
+            return listaMedicamento.size() > 0 ? listaMedicamento.get(0) : null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

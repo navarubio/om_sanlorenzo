@@ -29,5 +29,14 @@ public class HcTipoRegFacade extends AbstractFacade<HcTipoReg> {
         }
     }
     
+    public HcTipoReg getTipoRegUrlPagin(String urlPagina){
+        try {
+            String hql ="SELECT h FROM HcTipoReg h WHERE h.urlPagina=:urlPagina ";
+            List<HcTipoReg> lista = getEntityManager().createQuery(hql).setParameter("urlPagina", urlPagina).getResultList();
+            return lista.size() > 0 ? lista.get(0) : null;
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
 }

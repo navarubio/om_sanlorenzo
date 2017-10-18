@@ -71,4 +71,16 @@ public class CfgMedicamentoFacade extends AbstractFacade<CfgMedicamento> {
         }
         return null;
     }
+    
+     public CfgMedicamento medicamentoXCodigo(String codigoMedicamento){
+        try {
+            String hql  ="SELECT c FROM CfgMedicamento c WHERE c.codigoMedicamento=:codigoMedicamento";
+            Query query = getEntityManager().createQuery(hql).setParameter("codigoMedicamento", codigoMedicamento);
+            List<CfgMedicamento> lista = query.getResultList();
+            return lista.size() > 0 ? lista.get(0) : null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

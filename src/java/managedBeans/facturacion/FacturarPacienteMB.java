@@ -96,6 +96,7 @@ import modelo.fachadas.FacFacturaPaqueteFacade;
 import modelo.fachadas.FacFacturaServicioFacade;
 import modelo.fachadas.FacImpuestosFacade;
 import modelo.fachadas.FacManualTarifarioFacade;
+import modelo.fachadas.FacManualTarifarioMedicamentoFacade;
 import modelo.fachadas.FacPaqueteFacade;
 import modelo.fachadas.FacPeriodoFacade;
 import modelo.fachadas.FacServicioFacade;
@@ -180,7 +181,8 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
     FacConsumoInsumoFacade consumoInsumoFacade;
     @EJB
     FacConsumoPaqueteFacade consumoPaqueteFacade;
-
+    @EJB
+    FacManualTarifarioMedicamentoFacade facManualTarifarioMedicamentoFacade;
     private AplicacionGeneralMB aplicacionGeneralMB;
     
     ///ENTREGA MEDICAMENTOS
@@ -1346,7 +1348,7 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
             }
             EstructuraItemsPaciente nuevoItem = new EstructuraItemsPaciente();
             nuevoItem.setCantidad(medicamentoFactura.getCantidadMedicamento().toString());
-            nuevoItem.setCodigo(medicamentoFactura.getIdMedicamento().getCodigoCums());
+            nuevoItem.setCodigo(medicamentoFactura.getIdMedicamento().getCodigoCums()!=null?medicamentoFactura.getIdMedicamento().getCodigoCums():medicamentoFactura.getIdMedicamento().getCodigoMedicamento());
             nuevoItem.setDescripcion(medicamentoFactura.getIdMedicamento().getNombreMedicamento());
             nuevoItem.setValorUnitario(formateadorDecimal.format(medicamentoFactura.getValorMedicamento()));
             nuevoItem.setValorTotal(formateadorDecimal.format(medicamentoFactura.getValorParcial()));
@@ -1814,7 +1816,7 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
                     nuevaFila.setColumna5(medicamentoConsumo.getValorUnitario().toString());
                     nuevaFila.setColumna6(medicamentoConsumo.getCantidad().toString());
                     nuevaFila.setColumna7(medicamentoConsumo.getValorFinal().toString());
-                    nuevaFila.setColumna8(medicamentoConsumo.getIdPrestador().nombreCompleto());
+                    nuevaFila.setColumna8(medicamentoConsumo.getIdPrestador()!=null?medicamentoConsumo.getIdPrestador().nombreCompleto():"");
                     listaMedicamentosConsumo.add(nuevaFila);
                 }
             }
@@ -2246,6 +2248,8 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
             imprimirMensaje("Error", "Ne se ha seleccionado ningÃºn medicamento", FacesMessage.SEVERITY_ERROR);
         } else {
             FilaDataTable nuevaFila;
+            //validamos contrato
+            FacContrato contrato = contratoFacade.buscarPoridContrato(Integer.parseInt(idContratoActual));
             for (FilaDataTable medicamento : medicamentosConsumoSeleccionados) {
                 nuevaFila = new FilaDataTable();
                 FacConsumoMedicamento consumoMedicamentoBuscado = consumoMedicamentoFacade.find(Integer.parseInt(medicamento.getColumna1()));
@@ -2254,9 +2258,23 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
                 nuevaFila.setColumna2(formateadorFecha.format(consumoMedicamentoBuscado.getFecha()));
                 nuevaFila.setColumna3(consumoMedicamentoBuscado.getIdMedicamento().getNombreMedicamento());
                 nuevaFila.setColumna4(consumoMedicamentoBuscado.getIdMedicamento().getFormaMedicamento());
-                nuevaFila.setColumna5(String.valueOf(consumoMedicamentoBuscado.getValorUnitario()));
-                nuevaFila.setColumna6(String.valueOf(consumoMedicamentoBuscado.getCantidad()));
-                nuevaFila.setColumna7(String.valueOf(consumoMedicamentoBuscado.getValorFinal()));
+                if(contrato!=null){
+                    //Obtenemos precio del medicamento por medio del contrato manual tarifario
+                    FacManualTarifarioMedicamento medicamentoManual = facManualTarifarioMedicamentoFacade.buscarManualContratoMedicamento(contrato.getIdManualTarifario().getIdManualTarifario(), consumoMedicamentoBuscado.getIdMedicamento().getIdMedicamento());
+                    if(medicamentoManual!=null){
+                        nuevaFila.setColumna5(String.valueOf(medicamentoManual.getValorFinal()));
+                        nuevaFila.setColumna6(String.valueOf(consumoMedicamentoBuscado.getCantidad()));
+                        nuevaFila.setColumna7(String.valueOf(medicamentoManual.getValorFinal()*consumoMedicamentoBuscado.getCantidad()));
+                    }else{
+                        nuevaFila.setColumna5(String.valueOf(consumoMedicamentoBuscado.getValorUnitario()));
+                        nuevaFila.setColumna6(String.valueOf(consumoMedicamentoBuscado.getCantidad()));
+                        nuevaFila.setColumna7(String.valueOf(consumoMedicamentoBuscado.getValorFinal()));
+                    }
+                }else{
+                    nuevaFila.setColumna5(String.valueOf(consumoMedicamentoBuscado.getValorUnitario()));
+                    nuevaFila.setColumna6(String.valueOf(consumoMedicamentoBuscado.getCantidad()));
+                    nuevaFila.setColumna7(String.valueOf(consumoMedicamentoBuscado.getValorFinal()));
+                }
                 nuevaFila.setColumna8(consumoMedicamentoBuscado.getIdPrestador().nombreCompleto());
 
                 nuevaFila.setColumna20(pacienteSeleccionado.getIdPaciente().toString());
