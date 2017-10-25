@@ -16,14 +16,14 @@
 	<pageHeader>
 		<band height="42" splitType="Stretch">
 			<rectangle radius="10">
-				<reportElement x="0" y="0" width="498" height="42" uuid="d19ceedd-bd12-4984-939e-a264cd1bcb9a"/>
+				<reportElement uuid="d19ceedd-bd12-4984-939e-a264cd1bcb9a" x="0" y="0" width="498" height="42"/>
 			</rectangle>
-			<image hAlign="Left" vAlign="Middle">
-				<reportElement x="5" y="1" width="119" height="39" uuid="09a3ca3c-267e-48a6-837c-e5cb01450a81"/>
+			<image hAlign="Left" vAlign="Middle" onErrorType="Blank">
+				<reportElement uuid="09a3ca3c-267e-48a6-837c-e5cb01450a81" x="5" y="1" width="119" height="39"/>
 				<imageExpression><![CDATA[$P{logoEmpresa}]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement x="0" y="0" width="500" height="42" uuid="ecefa7ed-8ff9-4ff7-b472-c6984d6f0c79"/>
+				<reportElement uuid="ecefa7ed-8ff9-4ff7-b472-c6984d6f0c79" x="0" y="0" width="500" height="42"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="18" isBold="true"/>
 				</textElement>
@@ -34,42 +34,42 @@
 	<columnHeader>
 		<band height="34" splitType="Stretch">
 			<staticText>
-				<reportElement x="200" y="18" width="100" height="15" uuid="4849412a-8272-4a6c-8260-f386f8cf1778"/>
+				<reportElement uuid="4849412a-8272-4a6c-8260-f386f8cf1778" x="200" y="18" width="100" height="15"/>
 				<textElement textAlignment="Center" verticalAlignment="Bottom">
 					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[TOTAL CITAS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="300" y="18" width="100" height="15" uuid="de2f5a04-d325-4019-a7c0-f95a0c010607"/>
+				<reportElement uuid="de2f5a04-d325-4019-a7c0-f95a0c010607" x="300" y="18" width="100" height="15"/>
 				<textElement textAlignment="Center" verticalAlignment="Bottom">
 					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[TOTAL DIAS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="400" y="18" width="100" height="15" uuid="a812099b-f818-4c1a-a1df-f960fa88c9e2"/>
+				<reportElement uuid="a812099b-f818-4c1a-a1df-f960fa88c9e2" x="400" y="18" width="100" height="15"/>
 				<textElement textAlignment="Center" verticalAlignment="Bottom">
 					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[PROMEDIO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="18" width="200" height="15" uuid="b080bb61-d5cb-4377-a8d7-36edd846b446"/>
+				<reportElement uuid="b080bb61-d5cb-4377-a8d7-36edd846b446" x="0" y="18" width="200" height="15"/>
 				<textElement textAlignment="Center" verticalAlignment="Bottom">
 					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[SERVICIO]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="55" y="3" width="443" height="15" uuid="687aa24b-07c4-4563-8a15-b0b15264931e"/>
+				<reportElement uuid="687aa24b-07c4-4563-8a15-b0b15264931e" x="55" y="3" width="443" height="15"/>
 				<textElement>
 					<font size="8" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{periodo}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="3" width="55" height="15" uuid="756d12f7-d4e2-406f-a6e0-7260b50e2309"/>
+				<reportElement uuid="756d12f7-d4e2-406f-a6e0-7260b50e2309" x="0" y="3" width="55" height="15"/>
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
@@ -80,28 +80,28 @@
 	<detail>
 		<band height="17" splitType="Stretch">
 			<textField>
-				<reportElement x="200" y="0" width="100" height="16" uuid="3bdd889f-b7db-4070-8c97-a65e4671868f"/>
+				<reportElement uuid="3bdd889f-b7db-4070-8c97-a65e4671868f" x="200" y="0" width="100" height="16"/>
 				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{total_citas}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="300" y="0" width="100" height="16" uuid="1539a3f7-0f2d-4397-bd36-4a381ffa2636"/>
+				<reportElement uuid="1539a3f7-0f2d-4397-bd36-4a381ffa2636" x="300" y="0" width="100" height="16"/>
 				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{total_dias}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="400" y="0" width="98" height="16" uuid="0364c0aa-9f92-44fb-b244-bf2faf338043"/>
+				<reportElement uuid="0364c0aa-9f92-44fb-b244-bf2faf338043" x="400" y="0" width="98" height="16"/>
 				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{promedio}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="0" y="0" width="200" height="16" uuid="76da6d5b-42b0-4db0-a0ae-694256847dc1"/>
+				<reportElement uuid="76da6d5b-42b0-4db0-a0ae-694256847dc1" x="0" y="0" width="200" height="16"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
