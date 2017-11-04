@@ -156,9 +156,13 @@ public class pypbean extends MetodosGenerales implements Serializable {
     }
 
     public void llenarlistas() {
+        /*
+        CASC 20171103
+        Esto es lo que hace que se retrase la carga de modulo
         listaServicios = servicioFacade.buscarTodosOrdenado();
         listaInsumos = insumoFacade.buscarOrdenado();
         listaMedicamentos = medicamentoFacade.buscarOrdenado();
+        */
     }
 
     public void clickBtnNuevoPrograma() {
@@ -329,14 +333,23 @@ public class pypbean extends MetodosGenerales implements Serializable {
     }
 
     public void cargarDialogoAgregarServicio() {
+        /*
+        CASC 20171103
+        Comentado no puede buscar todos los servicios porque son muchos
         if (listaServicios != null && !listaServicios.isEmpty()) {
             item_servicios.setIdServicio(listaServicios.get(0).getIdServicio());
             item_servicios.setNombreActividad(listaServicios.get(0).getCodigoCup() + " - " + listaServicios.get(0).getNombreServicio());
         } else {
             listaServicios = servicioFacade.buscarTodosOrdenado();
-        }
+        } */
         RequestContext.getCurrentInstance().update("IdFormDialogs5:IdPanelAgregarServicio");
         RequestContext.getCurrentInstance().execute("PF('dialogoAgregarServicio').show();");
+        //Mostrar y luego cargar la ventana
+        System.out.println("Va a Cargar los servicios");
+        if(listaServicios==null || listaServicios.isEmpty()){
+            listaServicios = servicioFacade.buscarTodosOrdenado();
+        }
+        System.out.println("Termino");
     }
 
     public void cargarDialogoEditarServicio() {
@@ -459,15 +472,21 @@ public class pypbean extends MetodosGenerales implements Serializable {
     }
 
     public void cargarDialogoAgregarInsumo() {
-        listaInsumos = insumoFacade.buscarOrdenado();
+        /*listaInsumos = insumoFacade.buscarOrdenado();
         if (listaInsumos != null && !listaInsumos.isEmpty()) {
             item_insumos.setIdInsumo(listaInsumos.get(0).getIdInsumo());
             item_insumos.setNombreActividad(listaInsumos.get(0).getCodigoInsumo() + " - " + listaInsumos.get(0).getNombreInsumo());
         }
+        */
         cambiaInsumo();
         RequestContext.getCurrentInstance().update("IdFormDialogs5:IdPanelAgregarInsumo");
         RequestContext.getCurrentInstance().execute("PF('dialogoAgregarInsumo').show();");
-
+        //Mostrar y luego cargar la ventana
+        System.out.println("Va a Cargar los Insumos");
+        if(listaInsumos==null || listaInsumos.isEmpty()){
+            listaInsumos = insumoFacade.buscarOrdenado();
+        }
+        System.out.println("Termino");
     }
 
     public void cargarDialogoEditarInsumo() {
@@ -558,7 +577,7 @@ public class pypbean extends MetodosGenerales implements Serializable {
 
     }
 
-    public void cambiaMedicamento() {
+     public void cambiaMedicamento() {
         if (item_medicamentos.getIdMedicamento() != null) {
             for (CfgMedicamento s : listaMedicamentos) {
                 if (s.getIdMedicamento().equals(item_medicamentos.getIdMedicamento())) {
@@ -576,14 +595,21 @@ public class pypbean extends MetodosGenerales implements Serializable {
     }
 
     public void cargarDialogoAgregarMedicamento() {
+        /*
         listaMedicamentos = medicamentoFacade.buscarOrdenado();
         if (listaMedicamentos != null && !listaMedicamentos.isEmpty()) {
             item_medicamentos.setIdMedicamento(listaMedicamentos.get(0).getIdMedicamento());
             item_medicamentos.setNombreActividad(listaMedicamentos.get(0).getCodigoMedicamento() + " - " + listaMedicamentos.get(0).getNombreMedicamento());
-        }
+        }*/
         cambiaMedicamento();
+        
         RequestContext.getCurrentInstance().update("IdFormDialogs5:IdPanelAgregarMedicamento");
         RequestContext.getCurrentInstance().execute("PF('dialogoAgregarMedicamento').show();");
+        System.out.println("A cargar medicamentos");
+        if(listaMedicamentos==null || listaMedicamentos.isEmpty()){
+        listaMedicamentos = medicamentoFacade.buscarOrdenado();
+        }
+        System.out.println("termino");
     }
 
     public void cargarDialogoEditarMedicamento() {

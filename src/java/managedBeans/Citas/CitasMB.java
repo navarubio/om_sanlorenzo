@@ -37,12 +37,14 @@ import java.util.Date;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import managedBeans.seguridad.LoginMB;
+import modelo.entidades.CfgDiasNoLaborales;
 import modelo.entidades.CitAutorizacionesServicios;
 import modelo.entidades.CitAutorizacionesServiciosPK;
 import modelo.entidades.FacManualTarifarioServicio;
 import modelo.entidades.FacServicio;
 import modelo.entidades.PyPProgramaItem;
 import modelo.entidades.PyPprograma;
+import modelo.fachadas.CfgDiasNoLaboralesFacade;
 import modelo.fachadas.CfgPacientesFacade;
 import modelo.fachadas.PyPprogramaItems;
 import modelo.fachadas.CfgUsuariosFacade;
@@ -169,6 +171,9 @@ public class CitasMB extends MetodosGenerales implements Serializable {
     CfgUsuariosFacade usuariosFachada;
     @EJB
     FacManualTarifarioFacade manualFacade;
+    
+    @EJB
+    CfgDiasNoLaboralesFacade noLaborablesFacade;
 
     public CitasMB() {        
     }
@@ -417,6 +422,15 @@ public class CitasMB extends MetodosGenerales implements Serializable {
             imprimirMensaje("Error", "El turno seleccionado esta programado para una fecha previa", FacesMessage.SEVERITY_ERROR);
             return;
         }
+        
+        CfgDiasNoLaborales noLabora=noLaborablesFacade.FindDiaNoLaboraleBySede(sede, turnoSeleccionado.getFecha());
+        if(noLabora!=null){
+            imprimirMensaje("Error", "El dia del turno seleccionado es no laborable", FacesMessage.SEVERITY_ERROR);
+            return;
+        }
+        
+        
+        
 
         //variable que controla si el servicio o tipo de cita seleccionado requiere autorizacion
 //        boolean ban = false;

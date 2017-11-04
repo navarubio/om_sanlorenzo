@@ -113,17 +113,21 @@ public class PyP_Programas extends MetodosGenerales implements Serializable {
 
     @PostConstruct
     private void inicializar() {
-        
         programas = new ArrayList<programas>();
         listaAdministradoras = new ArrayList<>();
         listaServicios = new ArrayList();
         listaMedicamentos = new ArrayList();
         listaInsumo = new ArrayList();
         listaprograma = new ArrayList();
+        /*CASC 20171104
+        Se cargan cada lista en su debido modulo y momento,
+        porque esta poniendo lento la carga inicial del modulo sin necesidad 
+        de utilizar estas listas
         crearlistaProgramas();
         crearlistaServicios();
         crearlistaMedicamentos();
         crearlistaInsumo();
+        */
         LoginMB loginMB = FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{loginMB}", LoginMB.class);
         sede = loginMB.getCentroDeAtencionactual().getIdSede();
     }
@@ -143,16 +147,20 @@ public class PyP_Programas extends MetodosGenerales implements Serializable {
 
     public void crearlistaAdministradoras() {
         List<FacAdministradora> progra = administradoraFacade.buscarOrdenado();
+        System.out.println("Cantidad de administradoras");
         for (FacAdministradora programa : progra) {
             getListaAdministradoras().add(new SelectItem(programa.getIdAdministradora(), programa.getCodigoAdministradora() + " - " + programa.getRazonSocial()));
         }
+        System.out.println("Termino de carar administradoras");
     }
 
     public void crearlistaProgramas() { 
         List<PyPprograma> progra = PyPprogramasFacade.buscar_programas();
+        System.out.println("Cantidad de Programas");
         for (PyPprograma programa : progra) {
             getListaprograma().add(new SelectItem(programa.getIdPrograma(), programa.getCodigoPrograma() + " - " + programa.getNombrePrograma()));
         }
+        System.out.println("Cargo Lista de Programas");
     }
 
     public void crearlistaServicios() { 

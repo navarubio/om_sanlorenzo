@@ -56,7 +56,7 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
     FacAdministradoraFacade administradoraFacade;
     @EJB
     FacContratoFacade contratoFacade;
-    
+
     private AplicacionGeneralMB aplicacionGeneralMB;
     //---------------------------------------------------
     //-----------------ENTIDADES -------------------------
@@ -110,7 +110,7 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
     private String email = "";
     private Boolean activo = true;
     private String administradora = "";
-    private String contrato="0";
+    private String contrato = "0";
     private String tipoAfiliado = "";
     private String regimen = "";
     private String categoriaPaciente;
@@ -142,11 +142,12 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
     private Boolean ver_ocupacion = false;
     private Boolean ver_estado_civil = false;
     private int años = 1;
-    //    
     
+    //CASC20171103
+    private boolean tieneGestacion;    
+
     private final static String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     private final static Pattern EMAIL_COMPILED_PATTERN = Pattern.compile(EMAIL_PATTERN);
-     
 
     //---------------------------------------------------
     //----------------- FUNCIONES -------------------------
@@ -159,9 +160,19 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
         limpiarFormulario();
         //listaCompletaOcupaciones = clasificacionesFachada.buscarPorMaestro("ocupaciones");
     }
+    
+     public void seleccionGenero(){
+         tieneGestacion=false;
+         if(genero!=null && genero.equals("277")){
+            tieneGestacion=true;
+         }else{
+             gestacion="";
+         }
+         System.out.println("Generooo " + genero);
+    }
 
     public void cambiaFechaNacimiento(SelectEvent event) {
-        
+
 //        ocupacion = "";
 //        otra_ocupacion = "";
 //        estadoCivil = "";
@@ -182,15 +193,15 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
         }
         RequestContext.getCurrentInstance().update("IdFormPrincipal");
     }
-    
-    public Date getMaxDate(){
+
+    public Date getMaxDate() {
         return new Date();
     }
-    
-    public void camZona(){
-        if(zona.equals("1775")){
+
+    public void camZona() {
+        if (zona.equals("1775")) {
             desBarrio = "COMUNA Y BARRIO";
-        }else{
+        } else {
             desBarrio = "VEREDA Y CORREGIMIENTO";
         }
     }
@@ -209,29 +220,29 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
             }
         }
     }
-    
-    public void validar_ocupacion(){
-        if(ocupacion.equals("1603")){ 
+
+    public void validar_ocupacion() {
+        if (ocupacion.equals("1603")) {
             ver_otra_ocupacion = true;
-        }else{
-            if(años <= 13){
+        } else {
+            if (años <= 13) {
                 ocupacion = "1654";
             }
             ver_otra_ocupacion = false;
         }
         RequestContext.getCurrentInstance().update("IdFormPrincipal");
     }
-    
-    public void validar_edad(){
+
+    public void validar_edad() {
         //System.out.println(años);
         //System.out.println(estadoCivil);
         //System.out.println(ocupacion);
-        if(años <= 13){
+        if (años <= 13) {
             estadoCivil = "1881";
             ocupacion = "1654";
             RequestContext.getCurrentInstance().update("IdFormPrincipal");
-        }else{
-            if(estadoCivil.equals("1881")){
+        } else {
+            if (estadoCivil.equals("1881")) {
                 estadoCivil = "246";
                 RequestContext.getCurrentInstance().update("IdFormPrincipal");
             }
@@ -246,12 +257,13 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
         fotoTomadaWebCam = false;
         urlFirma = firmaPorDefecto;
         urlFoto = fotoPorDefecto;
-        tipoIdentificacion = ""; 
+        tipoIdentificacion = "";
         identificacion = null;
         lugarExpedicion = "";
         fechaNacimiento = null;
         fechNacimiConvetEdad = "-";
         genero = "";
+        tieneGestacion=false;
         grupoSanguineo = "";
         primerNombre = "";
         segundoNombre = "";
@@ -294,12 +306,12 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
         victimaMaltrato = false;
         desplazado = false;
         poblacionLBGT = false;
-        contrato ="";
+        contrato = "";
         listaContrato = new ArrayList<>();
         cambiaFechaNacimiento(null);
         cargarMunicipios();
     }
-    
+
     public void nuevoPaciente() {
         tituloTabPacientes = "Datos nuevo paciente";
         pacienteSeleccionado = null;
@@ -312,6 +324,7 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
         fechaNacimiento = null;
         fechNacimiConvetEdad = "-";
         genero = "";
+        tieneGestacion=false;
         grupoSanguineo = "";
         primerNombre = "";
         segundoNombre = "";
@@ -354,7 +367,7 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
         victimaMaltrato = false;
         desplazado = false;
         poblacionLBGT = false;
-        contrato="";
+        contrato = "";
         listaContrato = new ArrayList<>();
         cambiaFechaNacimiento(null);
         cargarMunicipios();
@@ -365,13 +378,16 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
         setIdentificacion(id);
         cargarPaciente();
     }
-    /***
+
+    /**
+     * *
      * Método que carga los contratos a partir de la administración
      */
-    public void validarContrato(){
+    public void validarContrato() {
         try {
-            if(!administradora.equals(""))
-            listaContrato = contratoFacade.buscarPorAdministrador(Integer.parseInt(administradora));
+            if (!administradora.equals("")) {
+                listaContrato = contratoFacade.buscarPorAdministrador(Integer.parseInt(administradora));
+            }
         } catch (Exception e) {
         }
     }
@@ -454,7 +470,7 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
             zona = "";
         }
         barrio = pacienteSeleccionado.getBarrio();
-        if(pacienteSeleccionado.getDireccion() != null){
+        if (pacienteSeleccionado.getDireccion() != null) {
             direccion = pacienteSeleccionado.getDireccion();
         }
         email = pacienteSeleccionado.getEmail();
@@ -532,9 +548,9 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
             victimaConflicto = false;
         }
 
-        if(pacienteSeleccionado.getIdContrato()!=null){
+        if (pacienteSeleccionado.getIdContrato() != null) {
             contrato = pacienteSeleccionado.getIdContrato().getIdContrato().toString();
-        }else{
+        } else {
             contrato = "";
         }
         numeroAutorizacion = pacienteSeleccionado.getNumeroAutorizacion();
@@ -574,7 +590,7 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
     public void guardarPaciente() {
         CfgPacientes pacienteTmp;
         //VALIDACION DE DATOS OBLIGATORIOS
-        if (validacionCampoVacio(identificacion+"", "Identificación")) {
+        if (validacionCampoVacio(identificacion + "", "Identificación")) {
             return;
         }
         if (validacionCampoVacio(tipoIdentificacion, "Tipo de identificación")) {
@@ -584,7 +600,7 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
             imprimirMensaje("Error", "La fecha de nacimiento es obligatoria", FacesMessage.SEVERITY_ERROR);
             return;
         }
-        if(fechaNacimiento.after(new Date())){
+        if (fechaNacimiento.after(new Date())) {
             imprimirMensaje("Error", "La fecha de nacimiento no puede ser mayor a la actual", FacesMessage.SEVERITY_ERROR);
             return;
         }
@@ -597,7 +613,7 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
         /*if (validacionCampoVacio(celular, "Celular")) {
             return;
         }*/
-       /* if (validacionCampoVacio(departamento, "Departamento")) {
+ /* if (validacionCampoVacio(departamento, "Departamento")) {
             return;
         }
         if (validacionCampoVacio(barrio, desBarrio)) {
@@ -618,13 +634,13 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
         }
         //VALIDACION DE VALORES UNICOS
         if (pacienteSeleccionado == null) {//guardando nuevo paciente                 
-            if (pacientesFachada.buscarPorIdentificacion(identificacion+"") != null) {
+            if (pacientesFachada.buscarPorIdentificacion(identificacion + "") != null) {
                 imprimirMensaje("Error", "Ya existe un paciente con esta identificación", FacesMessage.SEVERITY_ERROR);
                 return;
             }
             guardarNuevoPaciente();
         } else {//modificando paciente existente            
-            pacienteTmp = pacientesFachada.buscarPorIdentificacion(identificacion+"");
+            pacienteTmp = pacientesFachada.buscarPorIdentificacion(identificacion + "");
             if (pacienteTmp != null && !pacienteSeleccionado.getIdentificacion().equals(pacienteTmp.getIdentificacion())) {
                 imprimirMensaje("Error", "Existe un paciente diferente con esta identificación", FacesMessage.SEVERITY_ERROR);
                 return;
@@ -632,6 +648,7 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
             actualizarPacienteExistente();
         }
         tabActivaPacientes = "0";
+
     }
 
     private void guardarNuevoPaciente() {
@@ -671,7 +688,7 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
             imagenesFacade.edit(nuevaImagen);
             nuevoPaciente.setFoto(nuevaImagen);
         }
-        nuevoPaciente.setIdentificacion(identificacion+"");
+        nuevoPaciente.setIdentificacion(identificacion + "");
         if (validarNoVacio(tipoIdentificacion)) {
             nuevoPaciente.setTipoIdentificacion(clasificacionesFachada.find(Integer.parseInt(tipoIdentificacion)));
         }
@@ -722,9 +739,6 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
         nuevoPaciente.setDireccion(direccion);
         nuevoPaciente.setEmail(email);
         nuevoPaciente.setActivo(activo);
-        if (validarNoVacio(administradora)) {
-            nuevoPaciente.setIdAdministradora(administradoraFacade.find(Integer.parseInt(administradora)));
-        }
         if (validarNoVacio(tipoAfiliado)) {
             nuevoPaciente.setTipoAfiliado(clasificacionesFachada.find(Integer.parseInt(tipoAfiliado)));
         }
@@ -771,11 +785,12 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
         nuevoPaciente.setVictimaMaltrato(victimaMaltrato);
         nuevoPaciente.setPoblacionLBGT(poblacionLBGT);
         nuevoPaciente.setDesplazado(desplazado);
-        
-        if(!contrato.equals("0")){
+
+        if (!contrato.equals("0") && validarNoVacio(administradora)) {
+            nuevoPaciente.setIdAdministradora(administradoraFacade.find(Integer.parseInt(administradora)));
             nuevoPaciente.setIdContrato(contratoFacade.find(Integer.parseInt(contrato)));
-            if(regimen!=null){
-                if(regimen.equals("1741")){
+            if (regimen != null) {
+                if (regimen.equals("1741")) {
                     tipoAfiliado = "";
                 }
             }
@@ -783,28 +798,30 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
             imprimirMensaje("Correcto", "Nuevo paciente creado correctamente", FacesMessage.SEVERITY_INFO);
             listaPacientes = new LazyPacienteDataModel(pacientesFachada);
             limpiarFormulario();//limpiar formulario
-        }else{
-            imprimirMensaje("Error", "Debe seleccionar un contrato", FacesMessage.SEVERITY_ERROR);
+        } else {
+            imprimirMensaje("Error", "Debe seleccionar Administradora y  Contrato", FacesMessage.SEVERITY_ERROR);
+            return;
         }
-    } 
-    
+        this.inicializar();
+    }
+
     public void validarIdentificacion() {
         //System.out.println(tipoIdentificacion+""+identificacion);
-        int cedula = pacientesFachada.numeroCedulas(identificacion+"");
+        int cedula = pacientesFachada.numeroCedulas(identificacion + "");
         if (cedula > 0) {
             pacienteSeleccionadoTabla = pacientesFachada.findPacienteByTipIden(Integer.parseInt(tipoIdentificacion), identificacion);
-            if(pacienteSeleccionadoTabla!=null){
+            if (pacienteSeleccionadoTabla != null) {
                 cargarPaciente();
                 imprimirMensaje("Informacion", "El paciente ya se encuentra registrado, se carga información", FacesMessage.SEVERITY_INFO);
-            }else{
-              imprimirMensaje("Informacion", "El paciente no existe, ingrese los datos para crearlo o verifique el número de documento", FacesMessage.SEVERITY_INFO);
-              nuevoPaciente();
+            } else {
+                imprimirMensaje("Informacion", "El paciente no existe, ingrese los datos para crearlo o verifique el número de documento", FacesMessage.SEVERITY_INFO);
+                nuevoPaciente();
             }
             /*imprimirMensaje("Informacion", "El paciente ya se encuentra registrado", FacesMessage.SEVERITY_ERROR);
             nuevoRegistro = true;
             listaPacientes = new LazyPacienteDataModel(pacientesFachada);
             limpiarFormulario();*/
-        }else{
+        } else {
             imprimirMensaje("Informacion", "El paciente no existe, ingrese los datos para crearlo o verifique el número de documento", FacesMessage.SEVERITY_INFO);
             nuevoPaciente();
         }
@@ -860,7 +877,7 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
             }
         }
 
-        pacienteSeleccionado.setIdentificacion(identificacion+"");
+        pacienteSeleccionado.setIdentificacion(identificacion + "");
         if (validarNoVacio(tipoIdentificacion)) {
             pacienteSeleccionado.setTipoIdentificacion(clasificacionesFachada.find(Integer.parseInt(tipoIdentificacion)));
         }
@@ -896,13 +913,10 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
         pacienteSeleccionado.setDireccion(direccion);
         pacienteSeleccionado.setEmail(email);
         pacienteSeleccionado.setActivo(activo);
-        if (validarNoVacio(administradora)) {
-            pacienteSeleccionado.setIdAdministradora(administradoraFacade.find(Integer.parseInt(administradora)));
-        }
         if (validarNoVacio(regimen)) {
             pacienteSeleccionado.setRegimen(clasificacionesFachada.find(Integer.parseInt(regimen)));
-            if(regimen!=null){
-                if(regimen.equals("1741")){
+            if (regimen != null) {
+                if (regimen.equals("1741")) {
                     tipoAfiliado = "";
                 }
             }
@@ -962,16 +976,20 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
         pacienteSeleccionado.setVictimaMaltrato(victimaMaltrato);
         pacienteSeleccionado.setPoblacionLBGT(poblacionLBGT);
         pacienteSeleccionado.setDesplazado(desplazado);
-        
-        if(!contrato.equals("0")){
+
+        if (!contrato.equals("0")
+                && validarNoVacio(administradora)) {
+            pacienteSeleccionado.setIdAdministradora(administradoraFacade.find(Integer.parseInt(administradora)));
             pacienteSeleccionado.setIdContrato(contratoFacade.find(Integer.parseInt(contrato)));
             pacientesFachada.edit(pacienteSeleccionado);
             imprimirMensaje("Correcto", "Paciente actualizado correctamente", FacesMessage.SEVERITY_INFO);
             listaPacientes = new LazyPacienteDataModel(pacientesFachada);
             limpiarFormulario();//limpiar formulario
-        }else{
-            imprimirMensaje("Error", "Debe seleccionar un contrato", FacesMessage.SEVERITY_ERROR);
+        } else {
+            imprimirMensaje("Error", "Debe seleccionar Administradora y  Contrato", FacesMessage.SEVERITY_ERROR);
+            return;
         }
+        this.inicializar();
     }
 
     private UploadedFile file;
@@ -1708,4 +1726,13 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
     public void setAños(int años) {
         this.años = años;
     }
+
+    public boolean isTieneGestacion() {
+        return tieneGestacion;
+    }
+
+    public void setTieneGestacion(boolean tieneGestacion) {
+        this.tieneGestacion = tieneGestacion;
+    }
+
 }
