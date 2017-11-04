@@ -142,6 +142,10 @@
                                             <p:outputLabel   styleClass="campoObligatorio" value="Género"/>
                                             <p:selectOneMenu styleClass="campoFormulario" style="width: 150px;" value="#{pacientesMB.genero}">                                    
                                                 <f:selectItems value="#{aplicacionGeneralMB.listaGenero}" />
+                                                <p:ajax  
+                                                    event="change"
+                                                    listener="#{pacientesMB.seleccionGenero}"
+                                                     update="IdGestacion"/> 
                                             </p:selectOneMenu>
                                             <p:outputLabel   styleClass="campoNoObligatorio" value="RH"/> 
                                             <p:selectOneMenu styleClass="campoFormulario" style="width: 100px;" value="#{pacientesMB.grupoSanguineo}">                                                    
@@ -261,7 +265,7 @@
                     <table style="margin: 20px; margin-left: auto; margin-right: auto;">
                         <tr>
                             <td>   
-                                <p:outputLabel   styleClass="campoNoObligatorio" value="EPS"/> 
+                                <p:outputLabel   styleClass="campoObligatorio" value="Administradora"/> 
                                 <p:selectOneMenu styleClass="campoFormulario" style="width: 53.6%;" value="#{pacientesMB.administradora}">
                                     <f:selectItem itemLabel="" itemValue=""/>
                                     <f:selectItems value="#{aplicacionGeneralMB.listaAdministradoras}" var="administradora" itemLabel="#{administradora.razonSocial}" itemValue="#{administradora.idAdministradora}" />
@@ -271,7 +275,7 @@
                         </tr>
                         <tr>
                             <td>    
-                                <p:outputLabel   styleClass="campoNoObligatorio" value="Contrato"/> 
+                                <p:outputLabel   styleClass="campoObligatorio" value="Contrato"/> 
                                 <p:selectOneMenu id="contratos" styleClass="campoFormulario" style="width: 50%;" value="#{pacientesMB.contrato}">
                                     <f:selectItem itemLabel="" itemValue="0"/>
                                     <f:selectItems value="#{pacientesMB.listaContrato}" var="contrato" itemLabel="#{contrato.descripcion}" itemValue="#{contrato.idContrato}" />
@@ -369,7 +373,9 @@
                                     <f:selectItems value="#{aplicacionGeneralMB.listaDiscapacidad}" />
                                 </p:selectOneMenu>   
                                 <p:outputLabel   styleClass="campoNoObligatorio" value="Gestación"/>
-                                <p:selectOneMenu styleClass="campoFormulario" style="width: 175px;" value="#{pacientesMB.gestacion}" filter="true" filterMatchMode="contains">
+                                <p:selectOneMenu styleClass="campoFormulario" style="width: 175px;"
+                                                 disabled="#{!pacientesMB.tieneGestacion}" id="IdGestacion"
+                                                 value="#{pacientesMB.gestacion}" filter="true" filterMatchMode="contains">
                                     <f:selectItem itemLabel="" itemValue=""/>
                                     <f:selectItems value="#{aplicacionGeneralMB.listaGestacion}" />
                                 </p:selectOneMenu>   

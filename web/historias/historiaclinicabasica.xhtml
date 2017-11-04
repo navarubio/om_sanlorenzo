@@ -102,7 +102,7 @@
                                         <p:outputLabel value="Víctima de conflicto armado" />
                                     </td>
                                     <td>
-                                        <p:selectBooleanCheckbox readonly="true" value="#{historiasMB.pacienteSeleccionado.victimaConflicto}"  />
+                                        <p:selectBooleanCheckbox value="#{historiasMB.pacienteSeleccionado.victimaConflicto}"  />
                                     </td>
                                 </tr>
                             </table>
@@ -114,7 +114,7 @@
                                         <p:outputLabel value="Población LBGT" />
                                     </td>
                                     <td>
-                                        <p:selectBooleanCheckbox readonly="true" value="#{historiasMB.pacienteSeleccionado.poblacionLBGT}"  />
+                                        <p:selectBooleanCheckbox value="#{historiasMB.pacienteSeleccionado.poblacionLBGT}"  />
                                     </td>
                                 </tr>
                             </table>
@@ -129,7 +129,7 @@
                                         <p:outputLabel value="Desplazado" />
                                     </td>
                                     <td>
-                                        <p:selectBooleanCheckbox readonly="true" value="#{historiasMB.pacienteSeleccionado.desplazado}"  />
+                                        <p:selectBooleanCheckbox value="#{historiasMB.pacienteSeleccionado.desplazado}"  />
                                     </td>
                                 </tr>
                             </table>
@@ -141,7 +141,7 @@
                                         <p:outputLabel value="Víctima de maltrato" />
                                     </td>
                                     <td>
-                                        <p:selectBooleanCheckbox readonly="true" value="#{historiasMB.pacienteSeleccionado.victimaMaltrato}"/>
+                                        <p:selectBooleanCheckbox  value="#{historiasMB.pacienteSeleccionado.victimaMaltrato}"/>
                                     </td>
                                 </tr>
                             </table>
@@ -188,9 +188,12 @@
                 <tr><td>&nbsp;</td></tr>
                 <tr>
                     <td colspan="2">
-                        <p:commandButton icon="ui-icon-disk" value="Guardar Nuevo Registro" actionListener="#{historiasMB.guardarRegistro}" disabled="#{historiasMB.modificandoRegCli}" update="IdFormRegistroClinico"/>
-                        <p:commandButton icon="ui-icon-arrowthickstop-1-s" value="Actualizar Registro" actionListener="#{historiasMB.actualizarRegistro}" disabled="#{!historiasMB.modificandoRegCli}" rendered="#{loginMB.superUsuario}"/>
-                        <p:commandButton icon="ui-icon-document" value="Limpiar Formulario" actionListener="#{historiasMB.btnLimpiarFormulario}" update="IdFormRegistroClinico"/>
+                        <p:commandButton icon="ui-icon-disk" value="Guardar Nuevo Registro"
+                                         actionListener="#{historiasMB.guardarRegistro}" disabled="#{historiasMB.modificandoRegCli}" 
+                                         update="@form"/>
+                        <p:commandButton icon="ui-icon-arrowthickstop-1-s" value="Actualizar Registro" actionListener="#{historiasMB.actualizarRegistro}" disabled="#{!historiasMB.modificandoRegCli}" rendered="#{loginMB.superUsuario}"
+                                         update="@form"/>
+                        <p:commandButton icon="ui-icon-document" value="Limpiar Formulario" actionListener="#{historiasMB.btnLimpiarFormulario}" update="@form"/>
                     </td>
                 </tr>
             </table>

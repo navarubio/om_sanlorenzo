@@ -1516,9 +1516,14 @@
                 <tr><td colspan="2">&nbsp;</td></tr>
                 <tr>
                     <td colspan="2">
-                        <p:commandButton icon="ui-icon-disk" value="Guardar Nuevo Registro" actionListener="#{historiasMB.guardarRegistro}" disabled="#{historiasMB.modificandoRegCli}" update="IdFormRegistroClinico"/>
-                        <p:commandButton icon="ui-icon-arrowthickstop-1-s" value="Actualizar Registro" actionListener="#{historiasMB.actualizarRegistro}" disabled="#{!historiasMB.modificandoRegCli}" rendered="#{loginMB.superUsuario}"/>
-                        <p:commandButton icon="ui-icon-document" value="Limpiar Formulario" actionListener="#{historiasMB.btnLimpiarFormulario}" update="IdFormRegistroClinico"/>
+                        <p:commandButton icon="ui-icon-disk" value="Guardar Nuevo Registro" 
+                                         actionListener="#{historiasMB.guardarRegistro}" disabled="#{historiasMB.modificandoRegCli}" 
+                                         update="@form"/>
+                        <p:commandButton icon="ui-icon-arrowthickstop-1-s" value="Actualizar Registro" 
+                                         actionListener="#{historiasMB.actualizarRegistro}" disabled="#{!historiasMB.modificandoRegCli}" 
+                                         rendered="#{loginMB.superUsuario}" update="@form"/>
+                        <p:commandButton icon="ui-icon-document" value="Limpiar Formulario" 
+                                         actionListener="#{historiasMB.btnLimpiarFormulario}" update="@form"/>
                     </td>
                 </tr>
             </table>

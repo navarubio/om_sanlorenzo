@@ -2318,9 +2318,14 @@
 
                 <p:inputText id="IdEspecialidad" style="" readonly="true" styleClass="width1" value="#{historiasMB.especialidadPrestador}"/>
                 <br/><br/>
-                <p:commandButton icon="ui-icon-disk" value="Guardar Nuevo Registro" actionListener="#{historiasMB.guardarRegistro}" disabled="#{historiasMB.modificandoRegCli}" update="IdFormRegistroClinico"/>
-                <p:commandButton icon="ui-icon-arrowthickstop-1-s" value="Actualizar Registro" actionListener="#{historiasMB.actualizarRegistro}" disabled="#{!historiasMB.modificandoRegCli}"/>
-                <p:commandButton icon="ui-icon-document" value="Limpiar Formulario" actionListener="#{historiasMB.btnLimpiarFormulario}" update="IdFormRegistroClinico"/>
+                <p:commandButton icon="ui-icon-disk" value="Guardar Nuevo Registro" 
+                                 actionListener="#{historiasMB.guardarRegistro}" disabled="#{historiasMB.modificandoRegCli}"
+                                 update="@form"/>
+                <p:commandButton icon="ui-icon-arrowthickstop-1-s" value="Actualizar Registro" 
+                                 actionListener="#{historiasMB.actualizarRegistro}" disabled="#{!historiasMB.modificandoRegCli}"
+                                 update="@form"/>
+                <p:commandButton icon="ui-icon-document" value="Limpiar Formulario"
+                                 actionListener="#{historiasMB.btnLimpiarFormulario}" update="@form"/>
             </p:panel>
 
             <p:dialog id="IdTextosDlgPredefinidos" header="TEXTOS PREDEFINIDOS" width="645" widgetVar="dlgTextosPredefinidos" resizable="false" closable="true" modal="true">
