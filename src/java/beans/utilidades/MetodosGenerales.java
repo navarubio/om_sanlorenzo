@@ -389,5 +389,14 @@ public class MetodosGenerales {
         }
         return listaRetorno;
     }
+    
+    
+     public boolean validacionCampoMayorCero(double valor, String nombre) {
+        if (valor <=0 ) {
+            imprimirMensaje("Error", "El campo " + nombre + " debe ser mayor que cero", FacesMessage.SEVERITY_ERROR);
+            return true;
+        }
+        return false;
+    }
 
 }

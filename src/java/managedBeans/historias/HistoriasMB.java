@@ -721,26 +721,28 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
 
     public void agregarMedicamento() {
         System.out.println("From agregarMedicamento()");
-
-        if (validacionCampoVacio(descripcion, "Medicamento")) {
+        if (validacionCampoVacio(codigo, "Codigo")) {
+            return;
+        }
+        if (validacionCampoVacio(descripcion, "Descripcion")) {
+            return;
+        }
+        if (validacionCampoVacio(dosis, "Dosis")) {
+            return;
+        }
+        if(validacionCampoMayorCero(cantidad, "Cantidad")) {
             return;
         }
         if (validacionCampoVacio(presentacion, "Presentación")) {
             return;
         }
-        if (validacionCampoVacio(cantidad.toString(), "Cantidad")) {
+        if (validacionCampoVacio(concentracion, "Contentración")) {
             return;
         }
-        if (validacionCampoVacio(presentacion, "Presentación")) {
+        if (validacionCampoVacio(viaAdmin, "Vía de administración")) {
             return;
         }
-        if (validacionCampoVacio(presentacion, "Contentración")) {
-            return;
-        }
-        if (validacionCampoVacio(presentacion, "Vía de administración")) {
-            return;
-        }
-        if (validacionCampoVacio(presentacion, "Posología")) {
+        if (validacionCampoVacio(posologia, "Posología")) {
             return;
         }
 
