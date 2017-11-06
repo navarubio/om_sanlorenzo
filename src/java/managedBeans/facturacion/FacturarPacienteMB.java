@@ -172,7 +172,7 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
     FacFacturaPaqueteFacade facturaPaqueteFacade;
     @EJB
     FacUnidadValorFacade unidadValorFacade;
-    
+
     @EJB
     FacConsumoServicioFacade consumoServicioFacade;
     @EJB
@@ -184,7 +184,7 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
     @EJB
     FacManualTarifarioMedicamentoFacade facManualTarifarioMedicamentoFacade;
     private AplicacionGeneralMB aplicacionGeneralMB;
-    
+
     ///ENTREGA MEDICAMENTOS
     @EJB
     InvEntregaMedicamentosFacade entregaMedicamentoFacade;
@@ -205,8 +205,8 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
     private FacConsecutivo consecutivoSeleccionado;
     private FacCaja cajaSeleccionada;
     private FacPeriodo periodoSeleccionado;
-    private HcRegistro  registro;
-    
+    private HcRegistro registro;
+
     private List<FacManualTarifarioServicio> listaServiciosManual;
     private List<FacManualTarifarioInsumo> listaInsumosManual;
     private List<FacManualTarifarioMedicamento> listaMedicamentosManual;
@@ -229,6 +229,7 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
     private boolean facturarComoParticularDisabled = false;//si administradora no es particular se puede facturar como administradora
     private String msjBtnFacturarParticular = "Facturar como particular: NO";
     private boolean cargandoDesdeTab = false;
+    private boolean guardando=false; //Indica que documento esta siendo guarddo y asi evitamos que al dar varios clicks en boton intente enviar varias veces a guardar
 
     //------- CONSUMOS --------------
     private String tituloTabServiciosConsumo = "Servicios (0)";
@@ -423,7 +424,9 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
                 facturarComoParticular = true;
                 msjBtnFacturarParticular = "Facturar como particular: SI";
             }
-            if(citaActual!=null)medico = citaActual.getIdPrestador().getPrimerNombre()+" "+citaActual.getIdPrestador().getPrimerApellido()+" "+citaActual.getIdPrestador().getSegundoApellido();
+            if (citaActual != null) {
+                medico = citaActual.getIdPrestador().getPrimerNombre() + " " + citaActual.getIdPrestador().getPrimerApellido() + " " + citaActual.getIdPrestador().getSegundoApellido();
+            }
             //BUSCAR SERVICIO EN EL MANUAL
             if (manualTarifarioPaciente == null || pacienteSeleccionado == null) {
                 return;
@@ -488,7 +491,7 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
                         + "RazÃ³n: No existen cajas ";
                 return false;
             } else {
-                
+
                 if (listaCajas.get(0).getCerrada()) {
                     msjHtmlCaja = "La caja <br/>estÃ¡ cerrada";
                     estiloCaja = "border-color: orange; border-width: 2px; border-style: solid; border-radius: 7px 7px 7px 7px;";
@@ -506,7 +509,7 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
                         + "RazÃ³n: El usuario actual no tiene una caja asignada";
                 return false;
             } else {
-                listaCajas= loginMB.getUsuarioActual().getFacCajaList();
+                listaCajas = loginMB.getUsuarioActual().getFacCajaList();
                 caja = listaCajas.get(0).getIdCaja().toString();
                 if (listaCajas.get(0).getCerrada()) {
                     msjHtmlCaja = "La caja <br/>esta cerrada";
@@ -530,10 +533,10 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
         listaInsumosFacturaFiltro.clear();
         listaPaquetesFactura.clear();
         listaPaquetesFacturaFiltro.clear();
-        if(idContratoActual != null){
-            System.out.println("id: "+idContratoActual);
+        if (idContratoActual != null) {
+            System.out.println("id: " + idContratoActual);
             contratoActual = contratoFacade.find(Integer.parseInt(idContratoActual));
-            System.out.println("id-2: "+contratoActual.getIdContrato());
+            System.out.println("id-2: " + contratoActual.getIdContrato());
             manualTarifarioPaciente = contratoActual.getIdManualTarifario();
             listaServiciosManual = manualTarifarioPaciente.getFacManualTarifarioServicioList();
             listaMedicamentosManual = manualTarifarioPaciente.getFacManualTarifarioMedicamentoList();
@@ -1063,6 +1066,16 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
         } else {
             administradoraPaciente = "";
         }
+        //Consultar ultimo medico
+        CitCitas cita = citasFacade.ultimaCitaPaciente(pacienteSeleccionado.getIdPaciente());
+        if(cita!=null && cita.getIdPrestador()!=null){
+            medico = 
+                    cita.getIdPrestador().getPrimerNombre() 
+                    +" "+ cita.getIdPrestador().getSegundoNombre() 
+                    +" "+ cita.getIdPrestador().getPrimerApellido() 
+                    +" "+cita.getIdPrestador().getSegundoApellido();
+        }
+        
         recargarFilasTablasConsumo();
 //        recalcularValorFactura();
         if (!cargandoDesdeTab) {//cuando se esta cargando desde tab no se ejecuta esta funcion por que probocaria error
@@ -1181,6 +1194,7 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
         valorParcial = 0;
         valorTotal = 0;
         valorCuotaModeradora = 0;
+        guardando=false;
 //        if(pacienteSeleccionado==null){
 //            //System.out.println("1. Aqui va null");
 //        }else{
@@ -1290,19 +1304,19 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
         nuevaFactura.setCodigoDocumento("" + facturaSeleccionada.getCodigoDocumento());
         nuevaFactura.setSubtituloFactura(loginMB.getEmpresaActual().getDireccion() + " - Tel1: " + loginMB.getEmpresaActual().getTelefono1() + " - Tel2: " + loginMB.getEmpresaActual().getTelefono2() + " - " + loginMB.getEmpresaActual().getWebsite());
         nuevaFactura.setClienteNombre("<b>NOMBRE: </b>" + facturaSeleccionada.getIdPaciente().nombreCompleto());
-        if(facturaSeleccionada.getIdPaciente().getDireccion() != null){
+        if (facturaSeleccionada.getIdPaciente().getDireccion() != null) {
             nuevaFactura.setClienteDireccion("<b>DIRECCIÒN: </b>" + facturaSeleccionada.getIdPaciente().getDireccion());
-        }else{
+        } else {
             nuevaFactura.setClienteDireccion("<b>DIRECCIÒN: </b>");
         }
         nuevaFactura.setClienteIdentificacion("<b>IDENTIFICACIÓN: </b>" + facturaSeleccionada.getIdPaciente().getIdentificacion());
         nuevaFactura.setHistoria("<b>HISTORIA: </b>#" + facturaSeleccionada.getIdPaciente().getIdentificacion());
         nuevaFactura.setClienteTelefono("<b>TELEFONO: </b>" + facturaSeleccionada.getIdPaciente().getTelefonoResidencia() + " <b>CELULAR: </b>" + facturaSeleccionada.getIdPaciente().getCelular());
         nuevaFactura.setClienteCiudad("<b>CIUDAD: </b>" + "-");
-        nuevaFactura.setEmail("<b>EMAIL: </b>"+facturaSeleccionada.getIdPaciente().getEmail());
-        nuevaFactura.setSexo("<b>SEXO: </b>"+facturaSeleccionada.getIdPaciente().getGenero().getDescripcion());
-        nuevaFactura.setEps("<b>EPS: </b>"+facturaSeleccionada.getIdPaciente().getIdAdministradora().getRazonSocial());
-        nuevaFactura.setSede("<b>SEDE: </b>"+facturaSeleccionada.getIdCaja().getIdSede().getNombreSede());
+        nuevaFactura.setEmail("<b>EMAIL: </b>" + facturaSeleccionada.getIdPaciente().getEmail());
+        nuevaFactura.setSexo("<b>SEXO: </b>" + facturaSeleccionada.getIdPaciente().getGenero().getDescripcion());
+        nuevaFactura.setEps("<b>EPS: </b>" + facturaSeleccionada.getIdPaciente().getIdAdministradora().getRazonSocial());
+        nuevaFactura.setSede("<b>SEDE: </b>" + facturaSeleccionada.getIdCaja().getIdSede().getNombreSede());
         nuevaFactura.setFechaFactura("<b>FECHA FACTURA: </b>" + formateadorFecha.format(facturaSeleccionada.getFechaElaboracion()));
         nuevaFactura.setContrato("<b>CONTRATO: </b>" + facturaSeleccionada.getIdContrato().getDescripcion());
         nuevaFactura.setEdad("<b>EDAD: </b>" + calcularEdad(facturaSeleccionada.getIdPaciente().getFechaNacimiento()));
@@ -1310,7 +1324,7 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
         nuevaFactura.setGravadas("GRAVADA");
         nuevaFactura.setNoGravadas("NO GRAVADA");
         nuevaFactura.setObservaciones(facturaSeleccionada.getObservacion());
-        nuevaFactura.setUsuario(facturaSeleccionada.getIdCaja().getIdUsuario().getPrimerNombre()+" "+facturaSeleccionada.getIdCaja().getIdUsuario().getSegundoNombre()+" "+facturaSeleccionada.getIdCaja().getIdUsuario().getPrimerApellido()+" "+facturaSeleccionada.getIdCaja().getIdUsuario().getSegundoApellido());
+        nuevaFactura.setUsuario(facturaSeleccionada.getIdCaja().getIdUsuario().getPrimerNombre() + " " + facturaSeleccionada.getIdCaja().getIdUsuario().getSegundoNombre() + " " + facturaSeleccionada.getIdCaja().getIdUsuario().getPrimerApellido() + " " + facturaSeleccionada.getIdCaja().getIdUsuario().getSegundoApellido());
         nuevaFactura.setSubtotal(format.format(facturaSeleccionada.getValorParcial()));
         nuevaFactura.setTotalEmpresa(format.format(facturaSeleccionada.getValorEmpresa()));
         nuevaFactura.setTotalUsuario(format.format(facturaSeleccionada.getValorUsuario()));
@@ -1329,10 +1343,10 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
         nuevaFactura.setTotal(format.format(facturaSeleccionada.getValorTotal()));
         nuevaFactura.setSon("<b>TOTAL: </b>" + ConversorDeNumerosALetras.convertNumberToLetter(t));
         nuevaFactura.setFirmaAutoriza(loginMB.getRutaCarpetaImagenes() + loginMB.getEmpresaActual().getLogo().getUrlImagen());
-        nuevaFactura.setLogoEmpresa(loginMB.getRutaCarpetaImagenes() + loginMB.getEmpresaActual().getLogo().getUrlImagen().substring(0, loginMB.getEmpresaActual().getLogo().getUrlImagen().length()-8)+"-fac.png");
+        nuevaFactura.setLogoEmpresa(loginMB.getRutaCarpetaImagenes() + loginMB.getEmpresaActual().getLogo().getUrlImagen().substring(0, loginMB.getEmpresaActual().getLogo().getUrlImagen().length() - 8) + "-fac.png");
         for (FacFacturaServicio servicioFactura : facturaSeleccionada.getFacFacturaServicioList()) {
-            if(servicioFactura.getIdMedico()!=null){
-                nuevaFactura.setMedico("<b>MEDICO: </b>" +servicioFactura.getIdMedico().getPrimerNombre()+" "+servicioFactura.getIdMedico().getSegundoNombre()+" "+servicioFactura.getIdMedico().getPrimerApellido()+" "+servicioFactura.getIdMedico().getSegundoApellido());
+            if (servicioFactura.getIdMedico() != null) {
+                nuevaFactura.setMedico("<b>MEDICO: </b>" + servicioFactura.getIdMedico().getPrimerNombre() + " " + servicioFactura.getIdMedico().getSegundoNombre() + " " + servicioFactura.getIdMedico().getPrimerApellido() + " " + servicioFactura.getIdMedico().getSegundoApellido());
             }
             EstructuraItemsPaciente nuevoItem = new EstructuraItemsPaciente();
             nuevoItem.setCantidad(servicioFactura.getCantidadServicio().toString());
@@ -1343,20 +1357,20 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
             listaItemsFactura.add(nuevoItem);
         }
         for (FacFacturaMedicamento medicamentoFactura : facturaSeleccionada.getFacFacturaMedicamentoList()) {
-            if(medicamentoFactura.getIdMedico()!=null){
-                nuevaFactura.setMedico("<b>MEDICO: </b>" +medicamentoFactura.getIdMedico().getPrimerNombre()+" "+medicamentoFactura.getIdMedico().getSegundoNombre()+" "+medicamentoFactura.getIdMedico().getPrimerApellido()+" "+medicamentoFactura.getIdMedico().getSegundoApellido());
+            if (medicamentoFactura.getIdMedico() != null) {
+                nuevaFactura.setMedico("<b>MEDICO: </b>" + medicamentoFactura.getIdMedico().getPrimerNombre() + " " + medicamentoFactura.getIdMedico().getSegundoNombre() + " " + medicamentoFactura.getIdMedico().getPrimerApellido() + " " + medicamentoFactura.getIdMedico().getSegundoApellido());
             }
             EstructuraItemsPaciente nuevoItem = new EstructuraItemsPaciente();
             nuevoItem.setCantidad(medicamentoFactura.getCantidadMedicamento().toString());
-            nuevoItem.setCodigo(medicamentoFactura.getIdMedicamento().getCodigoCums()!=null?medicamentoFactura.getIdMedicamento().getCodigoCums():medicamentoFactura.getIdMedicamento().getCodigoMedicamento());
+            nuevoItem.setCodigo(medicamentoFactura.getIdMedicamento().getCodigoCums() != null ? medicamentoFactura.getIdMedicamento().getCodigoCums() : medicamentoFactura.getIdMedicamento().getCodigoMedicamento());
             nuevoItem.setDescripcion(medicamentoFactura.getIdMedicamento().getNombreMedicamento());
             nuevoItem.setValorUnitario(formateadorDecimal.format(medicamentoFactura.getValorMedicamento()));
             nuevoItem.setValorTotal(formateadorDecimal.format(medicamentoFactura.getValorParcial()));
             listaItemsFactura.add(nuevoItem);
         }
         for (FacFacturaInsumo insumoFactura : facturaSeleccionada.getFacFacturaInsumoList()) {
-            if(insumoFactura.getIdMedico()!=null){
-                nuevaFactura.setMedico("<b>MEDICO: </b>" +insumoFactura.getIdMedico().getPrimerNombre()+" "+insumoFactura.getIdMedico().getSegundoNombre()+" "+insumoFactura.getIdMedico().getPrimerApellido()+" "+insumoFactura.getIdMedico().getSegundoApellido());
+            if (insumoFactura.getIdMedico() != null) {
+                nuevaFactura.setMedico("<b>MEDICO: </b>" + insumoFactura.getIdMedico().getPrimerNombre() + " " + insumoFactura.getIdMedico().getSegundoNombre() + " " + insumoFactura.getIdMedico().getPrimerApellido() + " " + insumoFactura.getIdMedico().getSegundoApellido());
             }
             EstructuraItemsPaciente nuevoItem = new EstructuraItemsPaciente();
             nuevoItem.setCantidad(insumoFactura.getCantidadInsumo().toString());
@@ -1367,8 +1381,8 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
             listaItemsFactura.add(nuevoItem);
         }
         for (FacFacturaPaquete paqueteFactura : facturaSeleccionada.getFacFacturaPaqueteList()) {
-            if(paqueteFactura.getIdMedico()!=null){
-                nuevaFactura.setMedico("<b>MEDICO: </b>" +paqueteFactura.getIdMedico().getPrimerNombre()+" "+paqueteFactura.getIdMedico().getSegundoNombre()+" "+paqueteFactura.getIdMedico().getPrimerApellido()+" "+paqueteFactura.getIdMedico().getSegundoApellido());
+            if (paqueteFactura.getIdMedico() != null) {
+                nuevaFactura.setMedico("<b>MEDICO: </b>" + paqueteFactura.getIdMedico().getPrimerNombre() + " " + paqueteFactura.getIdMedico().getSegundoNombre() + " " + paqueteFactura.getIdMedico().getPrimerApellido() + " " + paqueteFactura.getIdMedico().getSegundoApellido());
             }
             EstructuraItemsPaciente nuevoItem = new EstructuraItemsPaciente();
             nuevoItem.setCantidad(paqueteFactura.getCantidadPaquete().toString());
@@ -1377,28 +1391,28 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
             nuevoItem.setValorUnitario(format.format(paqueteFactura.getValorPaquete()));
             nuevoItem.setValorTotal(format.format(paqueteFactura.getValorParcial()));
             listaItemsFactura.add(nuevoItem);
-            for(FacPaqueteServicio servicio: paqueteFactura.getIdPaquete().getFacPaqueteServicioList()){
+            for (FacPaqueteServicio servicio : paqueteFactura.getIdPaquete().getFacPaqueteServicioList()) {
                 nuevoItem = new EstructuraItemsPaciente();
                 nuevoItem.setCantidad(servicio.getCantidad().toString());
-                nuevoItem.setCodigo("("+paqueteFactura.getIdPaquete().getCodigoPaquete()+")-"+servicio.getFacServicio().getCodigoCup());
+                nuevoItem.setCodigo("(" + paqueteFactura.getIdPaquete().getCodigoPaquete() + ")-" + servicio.getFacServicio().getCodigoCup());
                 nuevoItem.setDescripcion(servicio.getFacServicio().getNombreServicio());
                 nuevoItem.setValorUnitario(format.format(servicio.getValorUnitario()));
                 nuevoItem.setValorTotal(format.format(servicio.getValorFinal()));
                 listaItemsFactura.add(nuevoItem);
             }
-            for(FacPaqueteMedicamento medicamento: paqueteFactura.getIdPaquete().getFacPaqueteMedicamentoList()){
+            for (FacPaqueteMedicamento medicamento : paqueteFactura.getIdPaquete().getFacPaqueteMedicamentoList()) {
                 nuevoItem = new EstructuraItemsPaciente();
                 nuevoItem.setCantidad(medicamento.getCantidad().toString());
-                nuevoItem.setCodigo("("+paqueteFactura.getIdPaquete().getCodigoPaquete()+")-"+medicamento.getCfgMedicamento().getCodigoCums());
+                nuevoItem.setCodigo("(" + paqueteFactura.getIdPaquete().getCodigoPaquete() + ")-" + medicamento.getCfgMedicamento().getCodigoCums());
                 nuevoItem.setDescripcion(medicamento.getCfgMedicamento().getNombreMedicamento());
                 nuevoItem.setValorUnitario(format.format(medicamento.getValorUnitario()));
                 nuevoItem.setValorTotal(format.format(medicamento.getValorFinal()));
                 listaItemsFactura.add(nuevoItem);
             }
-            for(FacPaqueteInsumo insumo: paqueteFactura.getIdPaquete().getFacPaqueteInsumoList()){
+            for (FacPaqueteInsumo insumo : paqueteFactura.getIdPaquete().getFacPaqueteInsumoList()) {
                 nuevoItem = new EstructuraItemsPaciente();
                 nuevoItem.setCantidad(insumo.getCantidad().toString());
-                nuevoItem.setCodigo("("+paqueteFactura.getIdPaquete().getCodigoPaquete()+")-"+insumo.getCfgInsumo().getCodigoInsumo());
+                nuevoItem.setCodigo("(" + paqueteFactura.getIdPaquete().getCodigoPaquete() + ")-" + insumo.getCfgInsumo().getCodigoInsumo());
                 nuevoItem.setDescripcion(insumo.getCfgInsumo().getNombreInsumo());
                 nuevoItem.setValorUnitario(format.format(insumo.getValorUnitario()));
                 nuevoItem.setValorTotal(format.format(insumo.getValorFinal()));
@@ -1409,16 +1423,16 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
         listaRegistrosFactura.add(nuevaFactura);
         return true;
     }
-    
-    public void editarPaciente() { 
-        if(identificacionPaciente.length() > 0){
-            if(pacienteSeleccionado != null){
-                if(pacientesFacade.buscarPorIdentificacion(identificacionPaciente) != null){
+
+    public void editarPaciente() {
+        if (identificacionPaciente.length() > 0) {
+            if (pacienteSeleccionado != null) {
+                if (pacientesFacade.buscarPorIdentificacion(identificacionPaciente) != null) {
                     RequestContext.getCurrentInstance().execute("window.parent.cargarPaciente('Pacientes','configuraciones/pacientes.xhtml','" + pacienteSeleccionado.getIdPaciente() + "')");
-                }else{
+                } else {
                     RequestContext.getCurrentInstance().execute("window.parent.cargarPaciente('Pacientes','configuraciones/pacientes.xhtml','" + getIdentificacionPaciente() + "')");
                 }
-            }else{ 
+            } else {
                 RequestContext.getCurrentInstance().execute("window.parent.cargarPaciente('Pacientes','configuraciones/pacientes.xhtml','" + getIdentificacionPaciente() + "')");
             }
         }
@@ -1497,11 +1511,21 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
             imprimirMensaje("Error", "La factura se encuentra vacia", FacesMessage.SEVERITY_ERROR);
             return;
         }
+        if (!fechaDentroDeRangoMas1Dia(contratoActual.getFechaInicio(), contratoActual.getFechaFinal(), fecha)) {
+            imprimirMensaje("Error", "Contrato no vigente", FacesMessage.SEVERITY_ERROR);
+            return;
+        }
         RequestContext.getCurrentInstance().execute("PF('dialogoConfirmarGuardarFactura').show();");
     }
 
+    
     public void confirmarGuardarFactura(ActionEvent actionEvent) {
+        if(guardando){
+            return;
+        }
+        guardando=true;
         try {
+
             String numDocStr;
             int numDocInt;
             consecutivoSeleccionado = consecutivoFacade.find(consecutivoSeleccionado.getIdConsecutivo());
@@ -1536,7 +1560,7 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
                     nuevaFactura.setFechaAutorizacion(citaActual.getIdAutorizacion().getFechaAutorizacion());
                 }
             }
-            
+
             nuevaFactura.setObservacion(observaciones);
             nuevaFactura.setResolucionDian(consecutivoSeleccionado.getResolucionDian());
             nuevaFactura.setIdAdministradora(administradoraActual);
@@ -1553,7 +1577,7 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
             nuevaFactura.setFacturarComoParticular(facturarComoParticular);
             nuevaFactura.setFechaSistema(new Date());
             nuevaFactura.setIdCita(citaActual);
-            
+
             facturaPacienteFacade.create(nuevaFactura);
             if (citaActual != null) {//ya se facturo la cita
                 citaActual = citasFacade.find(citaActual.getIdCita());
@@ -1584,15 +1608,15 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
                     nuevoServicioFactura.setValorServicio(Double.parseDouble(servicioFactura.getColumna5().replaceAll(",", ".")));//nuevaFila.setColumna5(String.valueOf(valorUnitarioServicio));
                     nuevoServicioFactura.setCantidadServicio(Short.parseShort(servicioFactura.getColumna6()));//nuevaFila.setColumna6(String.valueOf(cantidadServicio));
                     nuevoServicioFactura.setValorParcial(Double.parseDouble(servicioFactura.getColumna7().replaceAll(",", ".")));//nuevaFila.setColumna7(String.valueOf(valorFinalServicio));
-                    
+
                     //nuevaFila.setColumna8(usuariosFacade.find(Integer.parseInt(idPrestadorServicio)).nombreCompleto());
                     nuevoServicioFactura.setDiagnosticoPrincipal(servicioFactura.getColumna9());
                     nuevoServicioFactura.setDiagnosticoRelacionado(servicioFactura.getColumna10());
-                    
+
                     //nuevaFila.setColumna20(pacienteSeleccionado.getIdPaciente().toString());
                     nuevoServicioFactura.setIdMedico(usuariosFacade.find(Integer.parseInt(servicioFactura.getColumna21())));//nuevaFila.setColumna21(idPrestadorServicio);
                     nuevoServicioFactura.setIdServicio(servicioFacade.find(Integer.parseInt(servicioFactura.getColumna22())));//nuevaFila.setColumna22(idServicioManual);
-                    
+
                     nuevoServicioFactura.setValorIva(nuevoServicioFactura.getValorParcial() * (valorIva / 100));
                     nuevoServicioFactura.setValorCree(nuevoServicioFactura.getValorParcial() * (valorCree / 100));
                     if (facturarComoParticular) {
@@ -1602,7 +1626,7 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
                         nuevoServicioFactura.setValorEmpresa(nuevoServicioFactura.getValorParcial() + nuevoServicioFactura.getValorIva() + nuevoServicioFactura.getValorCree());
                         nuevoServicioFactura.setValorUsuario(Double.parseDouble("0"));
                     }
-                    
+
                     if (servicioFactura.getColumna30().compareTo("-1") != 0) {//ELIMINAR SI FORMABA PARTE DE CONSUMOS
                         consumoServicioFacade.remove(consumoServicioFacade.find(Integer.parseInt(servicioFactura.getColumna30())));//            nuevaFila.setColumna30("-1");//COLUMNA 30 CONTIENE EL IDENTIFICADOR EN TABLA fac_consumo_servicio //como fue agreado desde la misma fatura no refiere a la tabla fac_consumo_servicio
                     }
@@ -1619,7 +1643,7 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
                     nuevoMedicamentoFactura.setFechaMedicamento(formateadorFecha.parse(medicamentoFactura.getColumna2()));//nuevaFila.setColumna2(dateFormat.format(fechaMedicamento));
                     //nuevaFila.setColumna3(medicamentoFacade.find(Integer.parseInt(idMedicamentoManual)).getNombreMedicamento());
                     //nuevaFila.setColumna4(medicamentoFacade.find(Integer.parseInt(idMedicamentoManual)).getFormaMedicamento());
-                    
+
                     nuevoMedicamentoFactura.setValorMedicamento(Double.parseDouble(medicamentoFactura.getColumna5()));//nuevaFila.setColumna5(String.valueOf(valorUnitarioMedicamento));
                     nuevoMedicamentoFactura.setCantidadMedicamento(Short.parseShort(medicamentoFactura.getColumna6()));//nuevaFila.setColumna6(String.valueOf(cantidadMedicamento));
                     nuevoMedicamentoFactura.setValorParcial(Double.parseDouble(medicamentoFactura.getColumna7()));//nuevaFila.setColumna7(String.valueOf(valorFinalMedicamento));
@@ -1627,7 +1651,7 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
                     //nuevaFila.setColumna20(pacienteSeleccionado.getIdPaciente().toString());
                     nuevoMedicamentoFactura.setIdMedico(usuariosFacade.find(Integer.parseInt(medicamentoFactura.getColumna21())));//nuevaFila.setColumna21(idPrestadorMedicamento);
                     nuevoMedicamentoFactura.setIdMedicamento(medicamentoFacade.find(Integer.parseInt(medicamentoFactura.getColumna22())));//nuevaFila.setColumna22(idMedicamentoManual);
-                    
+
                     nuevoMedicamentoFactura.setValorIva(valorIva * nuevoMedicamentoFactura.getValorParcial());
                     nuevoMedicamentoFactura.setValorCree(valorCree * nuevoMedicamentoFactura.getValorParcial());
                     if (facturarComoParticular) {
@@ -1637,7 +1661,7 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
                         nuevoMedicamentoFactura.setValorEmpresa(nuevoMedicamentoFactura.getValorParcial() + nuevoMedicamentoFactura.getValorIva() + nuevoMedicamentoFactura.getValorCree());
                         nuevoMedicamentoFactura.setValorUsuario(Double.parseDouble("0"));
                     }
-                    
+
                     if (medicamentoFactura.getColumna30().compareTo("-1") != 0) {//ELIMINAR SI FORMABA PARTE DE CONSUMOS
                         consumoMedicamentoFacade.remove(consumoMedicamentoFacade.find(Integer.parseInt(medicamentoFactura.getColumna30())));//            nuevaFila.setColumna30("-1");//COLUMNA 30 CONTIENE EL IDENTIFICADOR EN TABLA fac_consumo_servicio //como fue agreado desde la misma fatura no refiere a la tabla fac_consumo_servicio
                     }
@@ -1661,7 +1685,7 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
                     //nuevaFila.setColumna20(pacienteSeleccionado.getIdPaciente().toString());
                     nuevoPaqueteFactura.setIdMedico(usuariosFacade.find(Integer.parseInt(paqueteFactura.getColumna21())));//nuevaFila.setColumna21(idPrestadorPaquete);
                     nuevoPaqueteFactura.setIdPaquete(paqueteFacade.find(Integer.parseInt(paqueteFactura.getColumna22())));//nuevaFila.setColumna22(idPaqueteManual);
-                    
+
                     nuevoPaqueteFactura.setValorIva(valorIva * nuevoPaqueteFactura.getValorParcial());
                     nuevoPaqueteFactura.setValorCree(valorCree * nuevoPaqueteFactura.getValorParcial());
                     if (facturarComoParticular) {
@@ -1671,7 +1695,7 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
                         nuevoPaqueteFactura.setValorEmpresa(nuevoPaqueteFactura.getValorParcial() + nuevoPaqueteFactura.getValorIva() + nuevoPaqueteFactura.getValorCree());
                         nuevoPaqueteFactura.setValorUsuario(Double.parseDouble("0"));
                     }
-                    
+
                     if (paqueteFactura.getColumna30().compareTo("-1") != 0) {//ELIMINAR SI FORMABA PARTE DE CONSUMOS
                         consumoPaqueteFacade.remove(consumoPaqueteFacade.find(Integer.parseInt(paqueteFactura.getColumna30())));//            nuevaFila.setColumna30("-1");//COLUMNA 30 CONTIENE EL IDENTIFICADOR EN TABLA fac_consumo_servicio //como fue agreado desde la misma fatura no refiere a la tabla fac_consumo_servicio
                     }
@@ -1694,7 +1718,7 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
                     //nuevaFila.setColumna20(pacienteSeleccionado.getIdPaciente().toString());
                     nuevoInsumoFactura.setIdMedico(usuariosFacade.find(Integer.parseInt(insumoFactura.getColumna21())));//nuevaFila.setColumna21(idPrestadorInsumo);
                     nuevoInsumoFactura.setIdInsumo(insumoFacade.find(Integer.parseInt(insumoFactura.getColumna22())));//nuevaFila.setColumna22(idInsumoManual);
-                    
+
                     nuevoInsumoFactura.setValorIva(valorIva * nuevoInsumoFactura.getValorParcial());
                     nuevoInsumoFactura.setValorCree(valorCree * nuevoInsumoFactura.getValorParcial());
                     if (facturarComoParticular) {
@@ -1704,7 +1728,7 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
                         nuevoInsumoFactura.setValorEmpresa(nuevoInsumoFactura.getValorParcial() + nuevoInsumoFactura.getValorIva() + nuevoInsumoFactura.getValorCree());
                         nuevoInsumoFactura.setValorUsuario(Double.parseDouble("0"));
                     }
-                    
+
                     if (insumoFactura.getColumna30().length() != 0 && insumoFactura.getColumna30().compareTo("-1") != 0) {//ELIMINAR SI FORMABA PARTE DE CONSUMOS
                         consumoInsumoFacade.remove(consumoInsumoFacade.find(Integer.parseInt(insumoFactura.getColumna30())));//            nuevaFila.setColumna30("-1");//COLUMNA 30 CONTIENE EL IDENTIFICADOR EN TABLA fac_consumo_servicio //como fue agreado desde la misma fatura no refiere a la tabla fac_consumo_servicio
                     }
@@ -1714,12 +1738,14 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
                 }
             }
             pacienteSeleccionadoTabla = null;
-            limpiarFormularioFacturacion(); 
+            limpiarFormularioFacturacion();
             imprimirMensaje("Correcto", nuevaFactura.getTipoDocumento().getDescripcion() + " " + numDocStr + " se ha creado.", FacesMessage.SEVERITY_INFO);
             generarPdf_Factura(nuevaFactura);
-            numDocStr="";
+            numDocStr = "";
         } catch (JRException | IOException ex) {
             Logger.getLogger(FacturarPacienteMB.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            guardando=false;
         }
     }
 
@@ -1816,7 +1842,7 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
                     nuevaFila.setColumna5(medicamentoConsumo.getValorUnitario().toString());
                     nuevaFila.setColumna6(medicamentoConsumo.getCantidad().toString());
                     nuevaFila.setColumna7(medicamentoConsumo.getValorFinal().toString());
-                    nuevaFila.setColumna8(medicamentoConsumo.getIdPrestador()!=null?medicamentoConsumo.getIdPrestador().nombreCompleto():"");
+                    nuevaFila.setColumna8(medicamentoConsumo.getIdPrestador() != null ? medicamentoConsumo.getIdPrestador().nombreCompleto() : "");
                     listaMedicamentosConsumo.add(nuevaFila);
                 }
             }
@@ -1953,35 +1979,35 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
         }
         return null;
     }
-    
+
     public void calcularValoresServicio() {//calculo del valor final de un servicio
         if (validarNoVacio(idServicioManual)) {
             //CALCULOS MEJORADOS POR JEANFRANCO CORES 
             FacManualTarifarioServicio s = buscarEnListaServiciosManual(Integer.parseInt(idServicioManual));
             tipoTarifaServicio = s.getTipoTarifa();
             double SMLVD = s.getAnioUnidadValor().getSmlvd();
-            double valor = s.getFacServicio().getFactorSoat()*SMLVD;
+            double valor = s.getFacServicio().getFactorSoat() * SMLVD;
             BigDecimal x = new BigDecimal(valor);
             valor = x.setScale(-2, RoundingMode.HALF_DOWN).intValue();
             double porcentaje = 0.0;
-            if(contratoActual.getSignoPorcentaje().equals("-")){
-                if(contratoActual.getPorcentaje().intValue() < 99){
-                    porcentaje = Double.parseDouble("0."+contratoActual.getPorcentaje().intValue());
-                }else{
-                    porcentaje = Double.parseDouble(contratoActual.getPorcentaje().toString().substring(0,1)+"."+(contratoActual.getPorcentaje().intValue()+"").substring(1));
+            if (contratoActual.getSignoPorcentaje().equals("-")) {
+                if (contratoActual.getPorcentaje().intValue() < 99) {
+                    porcentaje = Double.parseDouble("0." + contratoActual.getPorcentaje().intValue());
+                } else {
+                    porcentaje = Double.parseDouble(contratoActual.getPorcentaje().toString().substring(0, 1) + "." + (contratoActual.getPorcentaje().intValue() + "").substring(1));
                 }
-                valor = valor-valor*porcentaje;
+                valor = valor - valor * porcentaje;
             }
-            if(contratoActual.getSignoPorcentaje().equals("+")){
-                if(contratoActual.getPorcentaje().intValue() < 99){
-                    porcentaje = Double.parseDouble("0."+contratoActual.getPorcentaje().intValue());
-                }else{
-                    porcentaje = Double.parseDouble(contratoActual.getPorcentaje().toString().substring(0,1)+"."+(contratoActual.getPorcentaje().intValue()+"").substring(1));
+            if (contratoActual.getSignoPorcentaje().equals("+")) {
+                if (contratoActual.getPorcentaje().intValue() < 99) {
+                    porcentaje = Double.parseDouble("0." + contratoActual.getPorcentaje().intValue());
+                } else {
+                    porcentaje = Double.parseDouble(contratoActual.getPorcentaje().toString().substring(0, 1) + "." + (contratoActual.getPorcentaje().intValue() + "").substring(1));
                 }
-                valor = valor+valor*porcentaje;
+                valor = valor + valor * porcentaje;
             }
             valorUnitarioServicio = valor;
-            valorFinalServicio = valor*cantidadServicio;
+            valorFinalServicio = valor * cantidadServicio;
             if (!facturarComoParticular) {
                 valorUsuarioServicio = valorCopago + valorCuotaModeradora;
                 valorUsuario += valorUsuarioServicio;
@@ -1993,10 +2019,10 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
     public void cargarDialogoAgregarServicio() {//se abre dialogo de registro de un nuevo servicio en la factura
         if (manualTarifarioPaciente == null) {
         }
-        if(idContratoActual != null){
-            System.out.println("id: "+idContratoActual);
+        if (idContratoActual != null) {
+            System.out.println("id: " + idContratoActual);
             contratoActual = contratoFacade.find(Integer.parseInt(idContratoActual));
-            System.out.println("id-2: "+contratoActual.getIdContrato());
+            System.out.println("id-2: " + contratoActual.getIdContrato());
             manualTarifarioPaciente = contratoActual.getIdManualTarifario();
             listaServiciosManual = manualTarifarioPaciente.getFacManualTarifarioServicioList();
             listaMedicamentosManual = manualTarifarioPaciente.getFacManualTarifarioMedicamentoList();
@@ -2032,7 +2058,7 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
         nuevaFila.setColumna2(formateadorFecha.format(fechaServicio));
         nuevaFila.setColumna3(servicioFacade.find(Integer.parseInt(idServicioManual)).getNombreServicio());
         nuevaFila.setColumna4(tipoTarifaServicio);
-        nuevaFila.setColumna6(String.valueOf(cantidadServicio)); 
+        nuevaFila.setColumna6(String.valueOf(cantidadServicio));
         nuevaFila.setColumna7(formateadorDecimal.format(valorFinalServicio));
         nuevaFila.setColumna8(usuariosFacade.find(Integer.parseInt(idPrestadorServicio)).nombreCompleto());
         nuevaFila.setColumna9(diagnosticoPrincipal);
@@ -2040,19 +2066,19 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
         nuevaFila.setColumna11(formateadorDecimal.format(valorUsuarioServicio));
         nuevaFila.setColumna12(formateadorDecimal.format(valorEmpresaServicio));
         nuevaFila.setColumna5(formateadorDecimal.format(valorUnitarioServicio));
-        nuevaFila.setColumna13(formateadorDecimal.format(valorUsuarioServicio*cantidadServicio));
-        nuevaFila.setColumna14(formateadorDecimal.format(valorEmpresaServicio*cantidadServicio));
+        nuevaFila.setColumna13(formateadorDecimal.format(valorUsuarioServicio * cantidadServicio));
+        nuevaFila.setColumna14(formateadorDecimal.format(valorEmpresaServicio * cantidadServicio));
         nuevaFila.setColumna20(pacienteSeleccionado.getIdPaciente().toString());
         nuevaFila.setColumna21(idPrestadorServicio);
         nuevaFila.setColumna22(idServicioManual);
         nuevaFila.setColumna30("-1");//COLUMNA 30 CONTIENE EL IDENTIFICADOR EN TABLA fac_consumo_servicio //como fue agreado desde la misma fatura no refiere a la tabla fac_consumo_servicio
-        valorCopagoTotal += valorCopago*cantidadServicio;
-        valorCuotaModeradoraTotal += valorCuotaModeradora*cantidadServicio;
+        valorCopagoTotal += valorCopago * cantidadServicio;
+        valorCuotaModeradoraTotal += valorCuotaModeradora * cantidadServicio;
         listaServiciosFactura.add(nuevaFila);
         renumerarIdLista(listaServiciosFactura);
         listaServiciosFacturaFiltro = new ArrayList<>();
         listaServiciosFacturaFiltro.addAll(listaServiciosFactura);
-        
+
         recalcularValorFactura();
         tituloTabServiciosFactura = "Servicios (" + listaServiciosFactura.size() + ")";
         if (!cargandoDesdeTab) {
@@ -2062,36 +2088,36 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
         }
     }
 
-    private Double validarTarifa(Integer tarifa,FacServicio servicio){
-        Double valorTarifa =0d;
-        FacUnidadValor unidadValor =null;
-        if(tarifa!=null){
-            switch(tarifa){
+    private Double validarTarifa(Integer tarifa, FacServicio servicio) {
+        Double valorTarifa = 0d;
+        FacUnidadValor unidadValor = null;
+        if (tarifa != null) {
+            switch (tarifa) {
                 case 2://ISS    
                     //obtenemos el factor unidad por aÃ±o
-                    unidadValor =unidadValorFacade.buscarPorAnio(contratoActual.getAnnioManual());
-                    valorTarifa = unidadValor.getSmlvd()*servicio.getFactorIss();
-                    if(contratoActual.getPorcentaje()>0){
-                        Double valorPorcentaje = valorTarifa * (contratoActual.getPorcentaje()/100);
-                        if(contratoActual.getSignoPorcentaje().equals("+")){
-                                valorTarifa=valorTarifa+valorPorcentaje;
-                        }else{
-                            valorTarifa=valorTarifa-valorPorcentaje;
+                    unidadValor = unidadValorFacade.buscarPorAnio(contratoActual.getAnnioManual());
+                    valorTarifa = unidadValor.getSmlvd() * servicio.getFactorIss();
+                    if (contratoActual.getPorcentaje() > 0) {
+                        Double valorPorcentaje = valorTarifa * (contratoActual.getPorcentaje() / 100);
+                        if (contratoActual.getSignoPorcentaje().equals("+")) {
+                            valorTarifa = valorTarifa + valorPorcentaje;
+                        } else {
+                            valorTarifa = valorTarifa - valorPorcentaje;
                         }
                     }
-                break;
+                    break;
                 case 3://SOAT
                     //obtenemos el factor unidad por aÃ±o
-                    unidadValor =unidadValorFacade.buscarPorAnio(contratoActual.getAnnioManual());
-                    valorTarifa = unidadValor.getSmlvd()*servicio.getFactorSoat();
-                break;
+                    unidadValor = unidadValorFacade.buscarPorAnio(contratoActual.getAnnioManual());
+                    valorTarifa = unidadValor.getSmlvd() * servicio.getFactorSoat();
+                    break;
                 default://Valor especifico
-                break;
+                    break;
             }
         }
         return valorTarifa;
     }
-    
+
     public void agregarServiciosDesdeConsumos() {//agregar desde el dialogo de consumos
         if (serviciosConsumoSeleccionados == null || serviciosConsumoSeleccionados.isEmpty()) {
             imprimirMensaje("Error", "Ne se ha seleccionado ningÃºn servicio", FacesMessage.SEVERITY_ERROR);
@@ -2258,19 +2284,19 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
                 nuevaFila.setColumna2(formateadorFecha.format(consumoMedicamentoBuscado.getFecha()));
                 nuevaFila.setColumna3(consumoMedicamentoBuscado.getIdMedicamento().getNombreMedicamento());
                 nuevaFila.setColumna4(consumoMedicamentoBuscado.getIdMedicamento().getFormaMedicamento());
-                if(contrato!=null){
+                if (contrato != null) {
                     //Obtenemos precio del medicamento por medio del contrato manual tarifario
                     FacManualTarifarioMedicamento medicamentoManual = facManualTarifarioMedicamentoFacade.buscarManualContratoMedicamento(contrato.getIdManualTarifario().getIdManualTarifario(), consumoMedicamentoBuscado.getIdMedicamento().getIdMedicamento());
-                    if(medicamentoManual!=null){
+                    if (medicamentoManual != null) {
                         nuevaFila.setColumna5(String.valueOf(medicamentoManual.getValorFinal()));
                         nuevaFila.setColumna6(String.valueOf(consumoMedicamentoBuscado.getCantidad()));
-                        nuevaFila.setColumna7(String.valueOf(medicamentoManual.getValorFinal()*consumoMedicamentoBuscado.getCantidad()));
-                    }else{
+                        nuevaFila.setColumna7(String.valueOf(medicamentoManual.getValorFinal() * consumoMedicamentoBuscado.getCantidad()));
+                    } else {
                         nuevaFila.setColumna5(String.valueOf(consumoMedicamentoBuscado.getValorUnitario()));
                         nuevaFila.setColumna6(String.valueOf(consumoMedicamentoBuscado.getCantidad()));
                         nuevaFila.setColumna7(String.valueOf(consumoMedicamentoBuscado.getValorFinal()));
                     }
-                }else{
+                } else {
                     nuevaFila.setColumna5(String.valueOf(consumoMedicamentoBuscado.getValorUnitario()));
                     nuevaFila.setColumna6(String.valueOf(consumoMedicamentoBuscado.getCantidad()));
                     nuevaFila.setColumna7(String.valueOf(consumoMedicamentoBuscado.getValorFinal()));
@@ -3995,4 +4021,4 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
         this.valorCuotaModeradoraTotal = valorCuotaModeradoraTotal;
     }
 
-} 
+}

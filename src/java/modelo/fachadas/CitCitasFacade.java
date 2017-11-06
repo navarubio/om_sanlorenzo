@@ -44,7 +44,7 @@ public class CitCitasFacade extends AbstractFacade<CitCitas> {
         //listado de citas que no tienen registro asociado (solo para un prestador)
         try {
             //String hql = "SELECT a FROM CitCitas a WHERE a.tieneRegAsociado = false AND a.cancelada=false AND a.atendida=true";
-            String hql = "SELECT a FROM CitCitas a WHERE a.tieneRegAsociado = false AND a.cancelada=false AND a.idPrestador.idUsuario = " + idprestador +" AND a.idTurno.estado like 'en_espera'";
+            String hql = "SELECT a FROM CitCitas a WHERE a.tieneRegAsociado = false AND a.cancelada=false AND a.idPrestador.idUsuario = " + idprestador + " AND a.idTurno.estado like 'en_espera'";
             return getEntityManager().createQuery(hql).getResultList();
         } catch (Exception e) {
             System.err.println("" + e.toString());
@@ -447,19 +447,37 @@ public class CitCitasFacade extends AbstractFacade<CitCitas> {
             return null;
         }
     }
-    
-    public List<CitCitas> getInformeFiltro(String filtro,Date fechaDesde, Date fechaHasta){
+
+    public List<CitCitas> getInformeFiltro(String filtro, Date fechaDesde, Date fechaHasta) {
         try {
-            String hql ="SELECT c FROM CitCitas c WHERE c.idCita>0 "+ filtro;
-            if(fechaDesde!=null && fechaHasta!=null){
+            String hql = "SELECT c FROM CitCitas c WHERE c.idCita>0 " + filtro;
+            if (fechaDesde != null && fechaHasta != null) {
                 return getEntityManager().createQuery(hql).setParameter("param1", fechaDesde, TemporalType.TIMESTAMP).setParameter("param2", fechaHasta, TemporalType.TIMESTAMP).getResultList();
-            }else{
+            } else {
                 return getEntityManager().createQuery(hql).getResultList();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return new ArrayList<>();
+    }
+
+    public CitCitas ultimaCitaPaciente(int idpaciente) {
+        try {
+            Query query = getEntityManager().createQuery("SELECT c FROM CitCitas c WHERE c.idPaciente.idPaciente = ?1 "
+                    + " AND c.atendida = true AND c.cancelada = false ORDER BY c.fechaRegistro DESC");
+            query.setParameter(1, idpaciente);
+            List<CitCitas> arr = query.getResultList();
+            if (arr != null && !arr.isEmpty()) {
+                return arr.get(0);
+            }else{
+                return null;
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error consultadndo cita "+e.getMessage());
+            return null;
+        }
     }
 
 }
