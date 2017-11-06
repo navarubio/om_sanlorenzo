@@ -22296,14 +22296,12 @@ public class DatosFormularioHistoria {
         this.dato1727 = dato1727;
     }
 
-    public List<RepExamenes> getListaRepExamenes() {
+     public List<RepExamenes> getListaRepExamenes() {
         return listaRepExamenes;
     }
 
     public void setListaRepExamenes(List<RepExamenes> listaRepExamenes) {
         this.listaRepExamenes = listaRepExamenes;
     }
-
-
     
 }

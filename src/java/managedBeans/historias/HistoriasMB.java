@@ -7,11 +7,17 @@ import javax.faces.bean.SessionScoped;
 import beans.utilidades.MetodosGenerales;
 import beans.utilidades.NodoArbolHistorial;
 import beans.utilidades.TipoNodoEnum;
+import co.com.kno.svg.SVGHelper;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,6 +27,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -28,7 +37,9 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.transform.TransformerException;
 import managedBeans.seguridad.AplicacionGeneralMB;
 import managedBeans.seguridad.LoginMB;
 import modelo.entidades.CfgClasificaciones;
@@ -82,6 +93,7 @@ import net.sf.jasperreports.engine.export.JRPdfExporterParameter;
 import net.sf.jmimemagic.MagicException;
 import net.sf.jmimemagic.MagicMatchNotFoundException;
 import net.sf.jmimemagic.MagicParseException;
+import org.apache.batik.transcoder.TranscoderException;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DefaultStreamedContent;
@@ -156,6 +168,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     private List<CfgMaestrosTxtPredefinidos> listaMaestrosTxtPredefinidos;
     private List<CfgTxtPredefinidos> listaTxtPredefinidos;
     private List<CfgUsuarios> listaPrestadores;
+    private List<CfgUsuarios> listaOdontologos;
     private CfgTxtPredefinidos txtPredefinidoActual = null;
     private CfgClasificaciones clasificacionBuscada;
     private CfgDiagnostico diagnosticoBuscado;
@@ -169,7 +182,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     private Date filtroFechaFinal = null;//new Date();
 
     public UploadedFile archivos;
-    private String urlFile = ""; 
+    private String urlFile = "";
 
     private String detalleTextoPredef = "";
     private String descriparchivo = "";
@@ -273,6 +286,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
 
     private String numeroDiente = "";
     private int variableInicial;
+    private String urlZonasActivasOleary = "";
     private String detDiente1 = "";
     private String detDiente2 = "";
     private String detDiente3 = "";
@@ -289,6 +303,12 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     private List<HcArchivos> listaArchivo;
     private HcArchivos archivoSeleccionado;
     private StreamedContent fileDownload;
+    private Boolean falla_atencion = false;
+    private String jsonOdontograma;
+    private String jsonEvolucion;
+    private String jsonOleary1;
+    private String jsonOleary2;
+    private int edadAnios;
     FilaDataTable reporte_seleccionado;
     HcRepExamenes agregar_fila_reporte = new HcRepExamenes();
     String examen = "";
@@ -335,7 +355,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     public HistoriasMB() {
         aplicacionGeneralMB = FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{aplicacionGeneralMB}", AplicacionGeneralMB.class);
     }
-     
+
     public void cargarMunicipios() {
         listaMunicipios = new ArrayList<>();
         try {
@@ -533,6 +553,12 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         //listaPacientesFiltro.addAll(listaPacientes);
         listaTipoRegistroClinico = tipoRegCliFacade.buscarTiposRegstroActivos();
         listaPrestadores = usuariosFacade.buscarUsuariosParaHistorias();
+         listaOdontologos = new ArrayList<>();
+        for (CfgUsuarios usuario : listaPrestadores) {
+            if (Pattern.matches("460|461|462|463", usuario.getEspecialidad().getCodigo())) {
+                listaOdontologos.add(usuario);
+            }
+        }
         seleccionaTodosRegCliHis();
         empresa = empresaFacade.findAll().get(0);
 
@@ -549,7 +575,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         viaAdmin = "";
         posologia = "";
         observacion = "";
-        
+
     }
 
     private void valoresPorDefecto() {
@@ -558,7 +584,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 datosFormulario.setDato4("Prioritaria");//prioridad de la atencion                
                 datosFormulario.setDato0(pacienteSeleccionado.getIdAdministradora().getRazonSocial());//pagador 
                 datosFormulario.setDato1(pacienteSeleccionado.getIdAdministradora().getCodigoAdministradora());//codigo
-            }else  if (tipoRegistroClinicoActual.getIdTipoReg() == 19) {//FOrmulación Médica
+            } else if (tipoRegistroClinicoActual.getIdTipoReg() == 19) {//FOrmulación Médica
                 //Cargamos los diágnostico principales y 
                 String diagPrincipal = detalleFacade.diagnosticoPrincipal(pacienteSeleccionado.getIdPaciente());
                 datosFormulario.setDato0(diagPrincipal);
@@ -730,7 +756,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         if (validacionCampoVacio(dosis, "Dosis")) {
             return;
         }
-        if(validacionCampoMayorCero(cantidad, "Cantidad")) {
+        if (validacionCampoMayorCero(cantidad, "Cantidad")) {
             return;
         }
         if (validacionCampoVacio(presentacion, "Presentación")) {
@@ -1465,7 +1491,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         //48
         datosReporte.setValor(204, "<b>CELULAR: </b>" + obtenerCadenaNoNula(pacienteSeleccionado.getSegundoApellido()));//
         //49
-        if(pacienteSeleccionado.getEmail() != null){
+        if (pacienteSeleccionado.getEmail() != null) {
             datosReporte.setValor(205, "<b>CORREO: </b>" + obtenerCadenaNoNula(pacienteSeleccionado.getEmail()));//
         }
         //50
@@ -1508,7 +1534,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             datosReporte.setValor(215, "<b>OCUPACION: </b> ");
         }
         //59
-        if(pacienteSeleccionado.getDireccion() != null){
+        if (pacienteSeleccionado.getDireccion() != null) {
             datosReporte.setValor(265, "<b>DIRECCION: </b> " + obtenerCadenaNoNula(pacienteSeleccionado.getDireccion()));
         }
         //60
@@ -1531,7 +1557,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             datosReporte.setValor(220, "<b>COBERTURA EN SALUD: </b>");
         }
         //63
-        if(pacienteSeleccionado.getResponsable() != null){
+        if (pacienteSeleccionado.getResponsable() != null) {
             datosReporte.setValor(221, "<b>RESPONSABLE: </b> " + obtenerCadenaNoNula(pacienteSeleccionado.getResponsable()));
             //64
             datosReporte.setValor(222, "<b>TELEFONO: </b> " + obtenerCadenaNoNula(pacienteSeleccionado.getTelefonoResponsable()));
@@ -1651,10 +1677,10 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
 //        datosReporte.setValor(112, "<b>VIC. DE MALTRATO :</b>" + victimaMaltratoStr);
 //        
         //datos acudiente
-        if(pacienteSeleccionado.getAcompanante() != null){
+        if (pacienteSeleccionado.getAcompanante() != null) {
             datosReporte.setValor(250, "<b>NOMBRE :</b>" + pacienteSeleccionado.getAcompanante()); // NOMBRE DEL ACUDIENTE, si es correcto; del acudiente
         }
-        if(pacienteSeleccionado.getDireccion() != null){
+        if (pacienteSeleccionado.getDireccion() != null) {
             datosReporte.setValor(251, "<b>DIRECCION :</b>" + pacienteSeleccionado.getDireccion()); //DIRECCION DEL PACIENTE
         }
         //y enfoque diferencial        
@@ -1678,13 +1704,13 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         datosReporte.setValor(262, "<b>EDAD EN MESES :</b>" + calcularEdad(pacienteSeleccionado.getFechaNacimiento()));
 
         //Paciente
-        if(pacienteSeleccionado.getCarnet() != null){
+        if (pacienteSeleccionado.getCarnet() != null) {
             datosReporte.setValor(263, "<b>CARNET: </b>" + pacienteSeleccionado.getCarnet());
         }
         //imagenes de los reportes
-        if(regEncontrado.getIdTipoReg().getIdTipoReg() == 19){
-            datosReporte.setValor(264, regEncontrado.getIdMedico().getPrimerNombre()+" "+regEncontrado.getIdMedico().getSegundoNombre()+" "+regEncontrado.getIdMedico().getPrimerApellido()+" "+regEncontrado.getIdMedico().getSegundoApellido()); //Flujograma
-        }else{
+        if (regEncontrado.getIdTipoReg().getIdTipoReg() == 19) {
+            datosReporte.setValor(264, regEncontrado.getIdMedico().getPrimerNombre() + " " + regEncontrado.getIdMedico().getSegundoNombre() + " " + regEncontrado.getIdMedico().getPrimerApellido() + " " + regEncontrado.getIdMedico().getSegundoApellido()); //Flujograma
+        } else {
             datosReporte.setValor(264, loginMB.getRutaCarpetaImagenes() + "Reportes/1.png"); //Flujograma
         }
         datosReporte.setValor(266, loginMB.getRutaCarpetaImagenes() + "Reportes/2.png"); //Altura uterina
@@ -2013,7 +2039,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         datosReporte.setValor(622, "<b>PRIMER APELLIDO: </b>" + obtenerCadenaNoNula(pacienteSeleccionado.getPrimerApellido()));//PRIMER APELLIDO
         datosReporte.setValor(623, "<b>SEGUNDO APELLIDO: </b>" + obtenerCadenaNoNula(pacienteSeleccionado.getSegundoApellido()));//SEGUNDO APELLIDO
         datosReporte.setValor(624, "<b>CELULAR: </b>" + obtenerCadenaNoNula(pacienteSeleccionado.getCelular()));//CELULAR
-        if(pacienteSeleccionado.getEmail() != null){
+        if (pacienteSeleccionado.getEmail() != null) {
             datosReporte.setValor(625, "<b>CORREO: </b>" + obtenerCadenaNoNula(pacienteSeleccionado.getEmail()));//CORREO
         }
         datosReporte.setValor(626, "<b>NOMBRE: </b>" + pacienteSeleccionado.nombreCompleto());//NOMBRE COMPLETO 
@@ -2067,12 +2093,12 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             if (pacienteSeleccionado.getParentesco_a() != null) {
                 parentezco_a = ", PARENTEZCO: " + pacienteSeleccionado.getParentesco_a().getDescripcion();
             }
-            if(pacienteSeleccionado.getResponsable() != null){
+            if (pacienteSeleccionado.getResponsable() != null) {
                 datosReporte.setValor(638, "<b>ACUDIENTE: </b> " + obtenerCadenaNoNula(pacienteSeleccionado.getResponsable()) + parentezco_a);//RESPONSABLE
                 datosReporte.setValor(639, "<b>TELEFONO: </b> " + obtenerCadenaNoNula(pacienteSeleccionado.getTelefonoResponsable()));//TELEFONO DEL RESPONSABLE
             }
         } else {
-            if(pacienteSeleccionado.getResponsable() != null){
+            if (pacienteSeleccionado.getResponsable() != null) {
                 datosReporte.setValor(638, "<b>RESPONSABLE: </b> " + obtenerCadenaNoNula(pacienteSeleccionado.getResponsable()));//RESPONSABLE
                 datosReporte.setValor(639, "<b>TELEFONO: </b> " + obtenerCadenaNoNula(pacienteSeleccionado.getTelefonoResponsable()));//TELEFONO DEL RESPONSABLE
             }
@@ -2125,7 +2151,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         datosReporte.setValor(644, pacienteSeleccionado.nombreCompleto() + "<br/>" + datosReporte.getValor(634));//NOMBRE EN FIRMA PACIENTE   
 
         //DATOS DEL ACUDIENTE (ACOMPAÑANTE).
-        if(pacienteSeleccionado.getAcompanante() != null){
+        if (pacienteSeleccionado.getAcompanante() != null) {
             datosReporte.setValor(645, "<b>NOMBRE :</b>" + pacienteSeleccionado.getAcompanante()); // NOMBRE DEL ACUDIENTE (ACOMPAÑANTE).
         }
         //ENFOQUE DIFERENCIAL  
@@ -2142,7 +2168,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         datosReporte.setValor(656, "<b>EDAD EN MESES :</b>" + calcularEdad(pacienteSeleccionado.getFechaNacimiento()));
 
         //Paciente
-        if(pacienteSeleccionado.getCarnet() != null){
+        if (pacienteSeleccionado.getCarnet() != null) {
             datosReporte.setValor(657, "<b>CARNET: </b>" + pacienteSeleccionado.getCarnet());
         }
         /**
@@ -2251,7 +2277,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     talla = Double.parseDouble(datosReporte2.getDato22().toString());
                 }
             }
-            calculo_imc_peso(); 
+            calculo_imc_peso();
 
             datosReporte.setValor(710, formateadorDecimal.format(peso_to) + "");
             datosReporte.setValor(711, clasificacion_peso);
@@ -2270,7 +2296,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     perimetro = Double.parseDouble(datosReporte2.getDato23().toString());
                 }
             }
-            calculo_imc_perimetro(); 
+            calculo_imc_perimetro();
             datosReporte.setValor(712, clasificacion_perimetro);
             if (regEncontrado.getIdTipoReg().getIdTipoReg() == 77) {
                 datosFormulario.setDato15(horas);
@@ -2514,7 +2540,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 list.add(jasperPrint);
 
             }
-            
+
             JRPdfExporter exporter = new JRPdfExporter();
             exporter.setParameter(JRPdfExporterParameter.JASPER_PRINT_LIST, list);
             exporter.setParameter(JRPdfExporterParameter.OUTPUT_STREAM, servletOutputStream);
@@ -2540,6 +2566,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     //--------- FUNCIONES REGISTROS CLINICOS ------------
     //---------------------------------------------------
     public void limpiarFormulario() {//reinicia todos los controles de un registro clinico
+        falla_atencion = false;
         fc = 0;
         fr = 0;
         t = 0.0;
@@ -2660,6 +2687,70 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         }
     }
 
+    public void guardarOdontograma() {
+        Type listType = new TypeToken<List<String>>() {
+        }.getType();
+        List<String> valores = new Gson().fromJson(this.jsonOdontograma, listType);
+        for (String valor : valores) {
+            try {
+                String[] pares = valor.split("=");
+                String nombreMetodo = String.format("setDato%1$s", pares[0]);
+                Method metodo = datosFormulario.getClass().getMethod(nombreMetodo, Object.class);
+                metodo.invoke(datosFormulario, pares[1]);
+            } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+                Logger.getLogger(HistoriasMB.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    public void guardarEvolucion() {
+        Type listType = new TypeToken<List<String>>() {
+        }.getType();
+        List<String> valores = new Gson().fromJson(this.jsonEvolucion, listType);
+        for (String valor : valores) {
+            try {
+                String[] pares = valor.split("=");
+                String nombreMetodo = String.format("setDato%1$s", pares[0]);
+                Method metodo = datosFormulario.getClass().getMethod(nombreMetodo, Object.class);
+                metodo.invoke(datosFormulario, pares[1]);
+            } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+                Logger.getLogger(HistoriasMB.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    public void guardarOleary1() {
+        Type listType = new TypeToken<List<String>>() {
+        }.getType();
+        List<String> valores = new Gson().fromJson(this.jsonOleary1, listType);
+        for (String valor : valores) {
+            try {
+                String[] pares = valor.split("=");
+                String nombreMetodo = String.format("setDato%1$s", pares[0]);
+                Method metodo = datosFormulario.getClass().getMethod(nombreMetodo, Object.class);
+                metodo.invoke(datosFormulario, pares[1]);
+            } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+                Logger.getLogger(HistoriasMB.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    public void guardarOleary2() {
+        Type listType = new TypeToken<List<String>>() {
+        }.getType();
+        List<String> valores = new Gson().fromJson(this.jsonOleary2, listType);
+        for (String valor : valores) {
+            try {
+                String[] pares = valor.split("=");
+                String nombreMetodo = String.format("setDato%1$s", pares[0]);
+                Method metodo = datosFormulario.getClass().getMethod(nombreMetodo, Object.class);
+                metodo.invoke(datosFormulario, pares[1]);
+            } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+                Logger.getLogger(HistoriasMB.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
     private void cargarUltimoRegistro() {
         mostrarFormularioRegistroClinico();
         if (tipoRegistroClinicoActual != null) {
@@ -2687,16 +2778,16 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             if (registroEncontrado != null) {
                 Date d = new Date();
                 long secs = (d.getTime() - registroEncontrado.getFechaSis().getTime()) / 1000;
-                int hours = (int) (secs / 3600);    
+                int hours = (int) (secs / 3600);
                 secs = secs % 3600;
                 int mins = (int) (secs / 60);
                 secs = secs % 60;
-                System.out.println(hours+" "+mins+" "+registroEncontrado.getFechaSis());
-                if(registroEncontrado.getIdTipoReg().getIdTipoReg() == 54){
-                    if(hours <= 23 && mins <= 59){
+                System.out.println(hours + " " + mins + " " + registroEncontrado.getFechaSis());
+                if (registroEncontrado.getIdTipoReg().getIdTipoReg() == 54) {
+                    if (hours <= 23 && mins <= 59) {
                         modificandoRegCli = true;
-                        imprimirMensaje("Informacion", "Le restan "+(23-hours)+" Hora(s) y "+(59-mins)+" Minuto(s) para agregar alguna observación o hallazgo.", FacesMessage.SEVERITY_INFO);
-                    }else{
+                        imprimirMensaje("Informacion", "Le restan " + (23 - hours) + " Hora(s) y " + (59 - mins) + " Minuto(s) para agregar alguna observación o hallazgo.", FacesMessage.SEVERITY_INFO);
+                    } else {
                         modificandoRegCli = false;
                     }
                 }
@@ -2774,11 +2865,11 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     }
                 }
                 System.out.println("Tipo registro " + registroEncontrado.getIdTipoReg().getIdTipoReg());
-                if(registroEncontrado.getIdTipoReg().getIdTipoReg() == 54){
-                    if(hours > 23){
+                if (registroEncontrado.getIdTipoReg().getIdTipoReg() == 54) {
+                    if (hours > 23) {
                         imprimirMensaje("Informacion", "Para su facilidad se cargo los datos de la última historia de este tipo de registro", FacesMessage.SEVERITY_INFO);
                     }
-                }else{
+                } else {
                     imprimirMensaje("Informacion", "Para su facilidad se cargo los datos de la última historia de este tipo de registro", FacesMessage.SEVERITY_INFO);
                 }
             } else {
@@ -2815,7 +2906,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     }
                     registroEncontrado = registroFacade.buscarUltimo(pacienteSeleccionado.getIdPaciente(), 77);
                     datosFormulario.limpiar();
-                    if(registroEncontrado != null){
+                    if (registroEncontrado != null) {
                         listaDetalles = registroEncontrado.getHcDetalleList();
                         for (HcDetalle detalle : listaDetalles) {
                             HcCamposReg campo = camposRegFacade.find(detalle.getHcDetallePK().getIdCampo());
@@ -2842,7 +2933,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                             }
                             cargarMunicipios();//intento cargar municipios sea o no necesario
                         }
-                    } 
+                    }
                     //MEDIDAS ANTROPOMETRICAS
                     if (datosFormulario.getDato21().equals("")) {//PESO
                         if (!datosFormulario_nutricion.getDato131().equals("")) {//PESO 
@@ -3649,7 +3740,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             calculo_imc();
             if (tipoRegistroClinicoActual.getIdTipoReg() == 19) {
                 registroEncontrado = registroFacade.buscarUltimo(pacienteSeleccionado.getIdPaciente(), 54);
-                if(registroEncontrado != null){
+                if (registroEncontrado != null) {
                     List<HcDetalle> listaDetalles = registroEncontrado.getHcDetalleList();
                     for (HcDetalle detalle : listaDetalles) {
                         HcCamposReg campo = camposRegFacade.find(detalle.getHcDetallePK().getIdCampo());
@@ -3684,7 +3775,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     }
                     if (!datosFormulario_formmedicamentos.getDato168().equals("")) {//3
                         datosFormulario.setDato2(datosFormulario_formmedicamentos.getDato168());
-                    } 
+                    }
                 }
             }
         }
@@ -3712,11 +3803,26 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         }
     }
 
+    public void cambiaFalla() {
+        falla_atencion = false;
+        if (datosFormulario.getDato248().equals("SI")) {
+            falla_atencion = true;
+        } else {
+            datosFormulario.setDato249(null);
+            datosFormulario.setDato250(null);
+        }
+//        RequestContext.getCurrentInstance().update("IdFormRegistroClinico");
+    }
+
     public void actualizarRegistro() {//actualizacion de un registro clinico existente
         List<HcDetalle> listaDetalle = new ArrayList<>();
         HcDetalle nuevoDetalle;
         HcCamposReg campoResgistro;
 
+        guardarOdontograma();
+        guardarEvolucion();
+        guardarOleary1();
+        guardarOleary2();
         if (!modificandoRegCli) {
             imprimirMensaje("Error", "No se ha cargado un registro para poder modificarlo", FacesMessage.SEVERITY_ERROR);
             return;
@@ -3754,49 +3860,49 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
 //        for (int i = 0; i < 200; i++) { //maximo 200 campos,  por ahora el maximo tiene 177 ...
 //        for (int i = 0; i < tipoRegistroClinicoActual.getCantCampos(); i++) {
         int i = 338;
-            if (datosFormulario.getValor(i) != null && datosFormulario.getValor(i).toString().length() != 0) {
-                campoResgistro = camposRegFacade.buscarPorTipoRegistroYPosicion(tipoRegistroClinicoActual.getIdTipoReg(), i);
-                if (campoResgistro != null) {
+        if (datosFormulario.getValor(i) != null && datosFormulario.getValor(i).toString().length() != 0) {
+            campoResgistro = camposRegFacade.buscarPorTipoRegistroYPosicion(tipoRegistroClinicoActual.getIdTipoReg(), i);
+            if (campoResgistro != null) {
 //                    if ((datosFormulario.getValor(i).toString().length() != 0 && campoResgistro.getTabla().contains("date")) || !campoResgistro.getTabla().contains("date")) {
-                    nuevoDetalle = new HcDetalle(registroEncontrado.getIdRegistro(), campoResgistro.getIdCampo());
-                    if (campoResgistro.getTabla() == null || campoResgistro.getTabla().length() == 0) {
-                        nuevoDetalle.setValor(datosFormulario.getValor(i).toString());
-                    } else {
-                        switch (campoResgistro.getTabla()) {
-                            case "html":
-                                nuevoDetalle.setValor(corregirHtml(datosFormulario.getValor(i).toString()));
-                                break;
-                            case "date":
-                                try {
-                                    Date f = sdfFechaString.parse(datosFormulario.getValor(i).toString());
-                                    nuevoDetalle.setValor(sdfDateHour.format(f));
-                                } catch (ParseException ex) {
-                                    nuevoDetalle.setValor("Error: " + datosFormulario.getValor(i).toString());
-                                }
-                                break;
-                            //new arcarrero, para permitir guardar fechas de solo días (sin horas).
-                            case "date2":
-                                try {
-                                    Date f = sdfFechaString.parse(datosFormulario.getValor(i).toString());
-                                    nuevoDetalle.setValor(sdfDate.format(f));
-                                } catch (ParseException ex) {
-                                    nuevoDetalle.setValor("Error: " + datosFormulario.getValor(i).toString());
-                                }
-                                break;
-                            default://casos: cfg_clasificaciones,boolean, double, u otros
-                                nuevoDetalle.setValor(datosFormulario.getValor(i).toString());
-                                break;
-                        }
+                nuevoDetalle = new HcDetalle(registroEncontrado.getIdRegistro(), campoResgistro.getIdCampo());
+                if (campoResgistro.getTabla() == null || campoResgistro.getTabla().length() == 0) {
+                    nuevoDetalle.setValor(datosFormulario.getValor(i).toString());
+                } else {
+                    switch (campoResgistro.getTabla()) {
+                        case "html":
+                            nuevoDetalle.setValor(corregirHtml(datosFormulario.getValor(i).toString()));
+                            break;
+                        case "date":
+                            try {
+                                Date f = sdfFechaString.parse(datosFormulario.getValor(i).toString());
+                                nuevoDetalle.setValor(sdfDateHour.format(f));
+                            } catch (ParseException ex) {
+                                nuevoDetalle.setValor("Error: " + datosFormulario.getValor(i).toString());
+                            }
+                            break;
+                        //new arcarrero, para permitir guardar fechas de solo días (sin horas).
+                        case "date2":
+                            try {
+                                Date f = sdfFechaString.parse(datosFormulario.getValor(i).toString());
+                                nuevoDetalle.setValor(sdfDate.format(f));
+                            } catch (ParseException ex) {
+                                nuevoDetalle.setValor("Error: " + datosFormulario.getValor(i).toString());
+                            }
+                            break;
+                        default://casos: cfg_clasificaciones,boolean, double, u otros
+                            nuevoDetalle.setValor(datosFormulario.getValor(i).toString());
+                            break;
                     }
-                    listaDetalle.add(nuevoDetalle);
-                    detalleFacade.edit(nuevoDetalle);
+                }
+                listaDetalle.add(nuevoDetalle);
+                detalleFacade.edit(nuevoDetalle);
 //                }
             } else {
                 System.out.println("No encontro en tabla hc_campos_registro el valor: id_tipo_reg = " + tipoRegistroClinicoActual.getIdTipoReg());
             }
 //            }
         }
-        
+
 //        registroEncontrado.setHcDetalleList(listaDetalle);
 //        registroFacade.edit(registroEncontrado);
         imprimirMensaje("Correcto", "Registro actualizado.", FacesMessage.SEVERITY_INFO);
@@ -3954,23 +4060,23 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         if (fechaReg == null) {
             fechaReg = fechaSis;
         }
-        if(tipoRegistroClinicoActual.getIdTipoReg() == 54){
-            if(fc == 0 || fr == 0 || t == 0){
+        if (tipoRegistroClinicoActual.getIdTipoReg() == 54) {
+            if (fc == 0 || fr == 0 || t == 0) {
                 imprimirMensaje("Error", "Faltan diligenciar signos vitales", FacesMessage.SEVERITY_ERROR);
                 return;
-            } 
-            if(pas_de == 0 || pad_de == 0){
+            }
+            if (pas_de == 0 || pad_de == 0) {
                 imprimirMensaje("Error", "Faltan diligenciar la hipertensión", FacesMessage.SEVERITY_ERROR);
                 return;
-            } 
-            if(peso == 0 || talla == 0){
+            }
+            if (peso == 0 || talla == 0) {
                 imprimirMensaje("Error", "Faltan diligenciar el peso y la talla", FacesMessage.SEVERITY_ERROR);
                 return;
-            } 
-            if(perimetro == 0){
+            }
+            if (perimetro == 0) {
                 imprimirMensaje("Error", "Faltan diligenciar el perímetro abdominal", FacesMessage.SEVERITY_ERROR);
                 return;
-            } 
+            }
         }
         nuevoRegistro.setFechaReg(fechaReg);
         nuevoRegistro.setFechaSis(fechaSis);
@@ -3993,8 +4099,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         }
         registroFacade.create(nuevoRegistro);
 
-        
-       /**
+        /**
          * new arcarrero, se encontró un registro con 248 campos, hubo que hacer
          * algunas modificaciones al código, por ende se comenta la línea donde
          * se coloca el valor 200 de valor arbitraria, y se tomará en cuenta el
@@ -4058,7 +4163,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             }
         }
 
-         //medicamentos asociados 
+        //medicamentos asociados 
         if (listaMedicamentos != null) {
             for (FilaDataTable item : listaMedicamentos) {
                 HcItems nuevoMedicamento = new HcItems();
@@ -4076,21 +4181,21 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 System.out.println("GUARDADO ITEM");
                 System.out.println(item.getColumna2());
                 ///creamos la lista de insumos para formulacion de medicaentos
-                 FacConsumoMedicamento facMedicamento = new FacConsumoMedicamento();
-                        CfgMedicamento medicamento = cfgMedicamento.medicamentoXCodigo(item.getColumna2());
-                        if(medicamento!=null){
-                            facMedicamento.setCantidad(Integer.parseInt(item.getColumna4()));
-                            facMedicamento.setIdPaciente(pacienteSeleccionado);
-                            facMedicamento.setIdMedicamento(medicamento);
-                            if (idPrestador != null && idPrestador.length() != 0) {//validacion de campos obligatorios
-                                facMedicamento.setIdPrestador(usuariosFacade.find(Integer.parseInt(idPrestador)));
-                            }
-                            
-                            facMedicamento.setFecha(new Date());
-                            facMedicamento.setValorUnitario(medicamento.getValor());
-                            facMedicamento.setValorFinal(medicamento.getValor()*facMedicamento.getCantidad());
-                            facConsumoMedicamentoFacade.create(facMedicamento);
-                        }
+                FacConsumoMedicamento facMedicamento = new FacConsumoMedicamento();
+                CfgMedicamento medicamento = cfgMedicamento.medicamentoXCodigo(item.getColumna2());
+                if (medicamento != null) {
+                    facMedicamento.setCantidad(Integer.parseInt(item.getColumna4()));
+                    facMedicamento.setIdPaciente(pacienteSeleccionado);
+                    facMedicamento.setIdMedicamento(medicamento);
+                    if (idPrestador != null && idPrestador.length() != 0) {//validacion de campos obligatorios
+                        facMedicamento.setIdPrestador(usuariosFacade.find(Integer.parseInt(idPrestador)));
+                    }
+
+                    facMedicamento.setFecha(new Date());
+                    facMedicamento.setValorUnitario(medicamento.getValor());
+                    facMedicamento.setValorFinal(medicamento.getValor() * facMedicamento.getCantidad());
+                    facConsumoMedicamentoFacade.create(facMedicamento);
+                }
             }
         }
 
@@ -4129,7 +4234,6 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         nuevoRegistro.setFolio(registroFacade.buscarMaximoFolio(nuevoRegistro.getIdPaciente().getIdPaciente()) + 1);
         registroFacade.edit(nuevoRegistro);
 
-
         //servicios o examenes medicos asociados
         if (listaServicios != null) {
             for (FilaDataTable item : listaServicios) {
@@ -4148,7 +4252,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 itemsFacade.create(nuevoServicio);
 
             }
-        } 
+        }
         imprimirMensaje("Correcto", "Nuevo registro almacenado.", FacesMessage.SEVERITY_INFO);
         limpiarFormulario();
         valoresPorDefecto();
@@ -4201,7 +4305,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             hayPacienteSeleccionado = false;
             imprimirMensaje("Error", "Se debe seleccionar un paciente de la tabla", FacesMessage.SEVERITY_ERROR);
         }
-    } 
+    }
 
     public void calculo_imc_perimetro() {
         v = 0;
@@ -4298,13 +4402,13 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             v = 0;
             pas = 0;
             pad = 0;
-            if (pas_d != null && pad_d != null && pas_d > 0 && pad_d > 0) { 
+            if (pas_d != null && pad_d != null && pas_d > 0 && pad_d > 0) {
                 v++;
                 datosFormulario.setDato128(pas_d);
                 datosFormulario.setDato129(pad_d);
                 pas += pas_d;
                 pad += pad_d;
-                System.out.println(v+" "+pas_d+" "+pad_d+" "+pas+" "+pad);
+                System.out.println(v + " " + pas_d + " " + pad_d + " " + pas + " " + pad);
             }
             if (pas_i != null && pad_i != null && pas_i > 0 && pad_i > 0) {
                 v++;
@@ -4312,7 +4416,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 datosFormulario.setDato249(pad_i);
                 pas += pas_i;
                 pad += pad_i;
-                System.out.println(v+" "+pas_i+" "+pad_i+" "+pas+" "+pad);
+                System.out.println(v + " " + pas_i + " " + pad_i + " " + pas + " " + pad);
             }
             if (pas_c != null && pad_c != null && pas_c > 0 && pad_c > 0) {
                 v++;
@@ -4320,7 +4424,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 datosFormulario.setDato252(pad_c);
                 pas += pas_c;
                 pad += pad_c;
-                System.out.println(v+" "+pas_c+" "+pad_c+" "+pas+" "+pad);
+                System.out.println(v + " " + pas_c + " " + pad_c + " " + pas + " " + pad);
             }
             if (pas_ce != null && pad_ce != null && pad_ce > 0 && pas_ce > 0) {
                 v = 4;
@@ -4330,7 +4434,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 datosFormulario.setDato255(pad_ce);
                 pas += pas_ce;
                 pad += pad_ce;
-                System.out.println(v+" "+pas_ce+" "+pad_ce+" "+pas+" "+pad);
+                System.out.println(v + " " + pas_ce + " " + pad_ce + " " + pas + " " + pad);
             }
             if (v >= 2 && v <= 4) {
                 if (v == 4) {
@@ -4352,17 +4456,17 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 }
                 if ((pas >= 140 && pas <= 159) && (pad >= 90 && pad <= 99)) {
                     clasificacion_pa = "HIPERTENSIÓN GRADO I";
-                } 
+                }
                 if ((pas >= 160 && pas <= 179) && (pad >= 100 && pad <= 109)) {
                     clasificacion_pa = "HIPERTENSIÓN GRADO II";
-                } 
+                }
                 if (pas >= 180 && pad >= 110) {
                     clasificacion_pa = "HIPERTENSIÓN GRADO II";
-                } 
+                }
                 if (pas >= 140 && pad < 90) {
                     clasificacion_pa = "HIPERTENSIÓN SISTOLICA AISLADA";
-                } 
-                System.out.println(v+" "+clasificacion_pa+" "+pas+" "+pad);
+                }
+                System.out.println(v + " " + clasificacion_pa + " " + pas + " " + pad);
             } else {
                 pas_de = 0;
                 pad_de = 0;
@@ -5963,16 +6067,229 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
 
     /**
      * Método para buscar un medicamento bien sea por su código o nombre.
-     * 
-     * @param _txt cadena por la que se buscará el medicamento. 
-     * @return 
+     *
+     * @param _txt cadena por la que se buscará el medicamento.
+     * @return
      */
-     public List<String> autocompletarMedicamento(String _txt) { //retorna una lista con los medicamento que contengan el parametro txt
-         
+    public List<String> autocompletarMedicamento(String _txt) { //retorna una lista con los medicamento que contengan el parametro txt
+
         if (_txt != null && _txt.length() > 2) {
             return invBodegaProductosFacade.autocompletarMedicamentos(_txt.toUpperCase());
         } else {
             return null;
         }
+    }
+
+    public Boolean getFalla_atencion() {
+        return falla_atencion;
+    }
+
+    public void setFalla_atencion(Boolean falla_atencion) {
+        this.falla_atencion = falla_atencion;
+    }
+
+    /**
+     * @return the urlZonasActivasOleary
+     */
+    public String getUrlZonasActivasOleary() {
+        return urlZonasActivasOleary;
+    }
+
+    /**
+     * @param urlZonasActivasOleary the urlZonasActivasOleary to set
+     */
+    public void setUrlZonasActivasOleary(String urlZonasActivasOleary) {
+        this.urlZonasActivasOleary = urlZonasActivasOleary;
+    }
+
+    /**
+     * Obtiene el json correspondente al odontograma
+     *
+     * @return the El json con los datos correspondientes al odontograma
+     * @throws java.lang.NoSuchMethodException
+     * @throws java.lang.IllegalAccessException
+     * @throws java.lang.reflect.InvocationTargetException
+     */
+    public String getJsonOdontograma() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        List<String> valores = new ArrayList<>();
+        Class<DatosFormularioHistoria> clase = (Class<DatosFormularioHistoria>) datosFormulario.getClass();
+        for (int i = 90; i <= 505; i++) {
+            Method method = clase.getMethod(String.format("getDato%1$d", i));
+            Object valor = method.invoke(datosFormulario);
+            valores.add(String.format("%1$d=%2$s", i, "".equals(valor) ? loginMB.getRutaCarpetaImagenes() + "Reportes/dienteLimpiar.png" : valor));
+        }
+        Type listType = new TypeToken<List<String>>() {
+        }.getType();
+        this.jsonOdontograma = new Gson().toJson(valores, listType);
+        return jsonOdontograma;
+    }
+
+    /**
+     * Obtiene el json correspondente al odontograma de la evolucion
+     *
+     * @return the El json con los datos correspondientes al odontograma de
+     * evolucion
+     * @throws java.lang.NoSuchMethodException
+     * @throws java.lang.IllegalAccessException
+     * @throws java.lang.reflect.InvocationTargetException
+     */
+    public String getJsonEvolucion() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        List<String> valores = new ArrayList<>();
+        Class<DatosFormularioHistoria> clase = (Class<DatosFormularioHistoria>) datosFormulario.getClass();
+        for (int i = 878; i <= 1293; i++) {
+            Method method = clase.getMethod(String.format("getDato%1$d", i));
+            Object valor = method.invoke(datosFormulario);
+            valores.add(String.format("%1$d=%2$s", i, "".equals(valor) ? loginMB.getRutaCarpetaImagenes() + "Reportes/dienteLimpiar.png" : valor));
+        }
+        Type listType = new TypeToken<List<String>>() {
+        }.getType();
+        this.jsonEvolucion = new Gson().toJson(valores, listType);
+        return jsonEvolucion;
+    }
+
+    public String getJsonOleary1() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        List<String> valores = new ArrayList<>();
+        Class<DatosFormularioHistoria> clase = (Class<DatosFormularioHistoria>) datosFormulario.getClass();
+        for (int i = 523; i <= 682; i++) {
+            Method method = clase.getMethod(String.format("getDato%1$d", i));
+            Object valor = method.invoke(datosFormulario);
+            valores.add(String.format("%1$d=%2$s", i, "".equals(valor) ? loginMB.getRutaCarpetaImagenes() + "Reportes/dienteLimpiar.png" : valor));
+        }
+        Type listType = new TypeToken<List<String>>() {
+        }.getType();
+        this.jsonOleary1 = new Gson().toJson(valores, listType);
+        return jsonOleary1;
+    }
+
+    public String getJsonOleary2() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        List<String> valores = new ArrayList<>();
+        Class<DatosFormularioHistoria> clase = (Class<DatosFormularioHistoria>) datosFormulario.getClass();
+        for (int i = 687; i <= 846; i++) {
+            Method method = clase.getMethod(String.format("getDato%1$d", i));
+            Object valor = method.invoke(datosFormulario);
+            valores.add(String.format("%1$d=%2$s", i, "".equals(valor) ? loginMB.getRutaCarpetaImagenes() + "Reportes/olearyLimpio.png" : valor));
+        }
+        Type listType = new TypeToken<List<String>>() {
+        }.getType();
+        this.jsonOleary1 = new Gson().toJson(valores, listType);
+        return jsonOleary1;
+    }
+
+    /**
+     * @param jsonOdontograma the jsonOdontograma to set
+     */
+    public void setJsonOdontograma(String jsonOdontograma) {
+        this.jsonOdontograma = jsonOdontograma;
+    }
+
+    /**
+     * @return the edadAnios
+     */
+    public int getEdadAnios() {
+        edadAnios = this.calcularEdadInt(this.getPacienteSeleccionado().getFechaNacimiento());
+        return edadAnios;
+    }
+
+    /**
+     * @param edadAnios the edadAnios to set
+     */
+    public void setEdadAnios(int edadAnios) {
+        this.edadAnios = edadAnios;
+    }
+
+    /**
+     * @param jsonEvolucion the jsonEvolucion to set
+     */
+    public void setJsonEvolucion(String jsonEvolucion) {
+        this.jsonEvolucion = jsonEvolucion;
+    }
+
+    /**
+     * @param jsonOleary1 the jsonOleary1 to set
+     */
+    public void setJsonOleary1(String jsonOleary1) {
+        this.jsonOleary1 = jsonOleary1;
+    }
+
+    /**
+     * @param jsonOleary2 the jsonOleary2 to set
+     */
+    public void setJsonOleary2(String jsonOleary2) {
+        this.jsonOleary2 = jsonOleary2;
+    }
+
+    private boolean esCampoGraficaOdontologia(DatosFormularioHistoria datosReporte, List<HcDetalle> detalles, int contador) {
+        int posicion = detalles.get(contador).getHcCamposReg().getPosicion();
+        boolean retorno = false;
+        String basePath = this.loginMB.getRutaCarpetaImagenes();
+        if ((posicion >= 90 && posicion <= 505)//Odontograma
+                || (posicion >= 878 && posicion <= 1293)) {//Odontograma- evolucion tratamiento
+            int sustractor = (posicion >= 90 && posicion <= 505) ? 90 : 878;
+            if ((posicion - sustractor) % 8 == 0) {
+                List<String> valores = new ArrayList<>();
+                for (int i = contador; i < contador + 8; i++) {
+                    HcDetalle detalle = detalles.get(i);
+                    valores.add(detalle.getValor());
+                }
+                try {
+                    HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+                    String url = request.getRequestURL().toString().replaceAll("(?i)/OM.*$", "/om/recursos/img/dienteNormal.svg");
+                    SVGHelper.buildToothJpegFile(String.format("%1$sdato%2$d.svg", basePath, posicion), url, valores.toArray(new String[8]));
+                    datosReporte.setValor(detalles.get(contador).getHcCamposReg().getPosicion(), String.format("%1$sdato%2$d.jpg", basePath, posicion));
+                } catch (TranscoderException ex) {
+                    Logger.getLogger(HistoriasMB.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+                    throw new RuntimeException("Error construyendo imagen SVG-odontograma para campo: dato" + contador, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(HistoriasMB.class.getName()).log(Level.SEVERE, null, ex);
+                    throw new RuntimeException("Error construyendo imagen SVG-odontograma para campo: dato" + contador, ex);
+                } catch (TransformerException ex) {
+                    Logger.getLogger(HistoriasMB.class.getName()).log(Level.SEVERE, null, ex);
+                    throw new RuntimeException("Error construyendo imagen SVG-odontograma para campo: dato" + contador, ex);
+                }
+            }
+            retorno = true;
+        }
+        if ((posicion >= 523 && posicion <= 682)//Oleary1
+                || (posicion >= 687 && posicion <= 846)) {//Oleary2
+            int sustractor = (posicion >= 523 && posicion <= 682) ? 523 : 687;
+            if ((posicion - sustractor) % 5 == 0) {
+                List<String> valores = new ArrayList<>();
+                for (int i = contador; i < contador + 5; i++) {
+                    HcDetalle detalle = detalles.get(i);
+                    valores.add(detalle.getValor());
+                }
+                try {
+                    HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+                    String url = request.getRequestURL().toString().replaceAll("(?i)/OM.*$", "/om/recursos/img/oleary.svg");
+                    SVGHelper.buildOlearyJpegFile(String.format("%1$sdato%2$d.svg", basePath, posicion), url, valores.toArray(new String[5]));
+                    datosReporte.setValor(detalles.get(contador).getHcCamposReg().getPosicion(), String.format("%1$sdato%2$d.jpg", basePath, posicion));
+                } catch (TranscoderException ex) {
+                    Logger.getLogger(HistoriasMB.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+                    throw new RuntimeException("Error construyendo imagen SVG-oleary para campo: dato" + contador, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(HistoriasMB.class.getName()).log(Level.SEVERE, null, ex);
+                    throw new RuntimeException("Error construyendo imagen SVG-oleary para campo: dato" + contador, ex);
+                } catch (TransformerException ex) {
+                    Logger.getLogger(HistoriasMB.class.getName()).log(Level.SEVERE, null, ex);
+                    throw new RuntimeException("Error construyendo imagen SVG-oleary para campo: dato" + contador, ex);
+                }
+            }
+            retorno = true;
+        }
+        return retorno;
+    }
+
+    /**
+     * @return the listaOdontologos
+     */
+    public List<CfgUsuarios> getListaOdontologos() {
+        return listaOdontologos;
+    }
+
+    /**
+     * @param listaOdontologos the listaOdontologos to set
+     */
+    public void setListaOdontologos(List<CfgUsuarios> listaOdontologos) {
+        this.listaOdontologos = listaOdontologos;
     }
 }

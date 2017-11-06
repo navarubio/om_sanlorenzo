@@ -71,5 +71,17 @@ public class HcDetalleFacade extends AbstractFacade<HcDetalle> {
         }
         
     }
-    
+
+   public List<HcDetalle> buscarDetallesPorRegistro(int idRegistro) {
+        try {
+            return getEntityManager().createNativeQuery(
+                    " select hc_detalle.id_registro, hc_detalle.id_campo, hc_detalle.valor from hc_detalle\n"
+                    + " inner join hc_campos_reg\n"
+                    + " on hc_detalle.id_campo = hc_campos_reg.id_campo\n"
+                    + " where hc_detalle.id_registro = " + idRegistro + "\n"
+                    + " order by hc_campos_reg.posicion", HcDetalle.class).getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+    }    
 }
