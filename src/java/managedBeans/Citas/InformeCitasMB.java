@@ -33,7 +33,7 @@ import modelo.fachadas.FacServicioFacade;
  */
 @Named(value = "informeCitasMB")
 @ViewScoped
-public class InformeCitasMB extends MetodosGenerales implements java.io.Serializable{
+public class InformeCitasMB extends MetodosGenerales implements java.io.Serializable {
 
     @EJB
     private CfgUsuariosFacade medicoFacade;
@@ -41,7 +41,7 @@ public class InformeCitasMB extends MetodosGenerales implements java.io.Serializ
     private CitCitasFacade citaFacade;
     @EJB
     private CfgClasificacionesFacade clasificacionesFacade;
-    
+
     private String medico;
     private Date fechaDesde;
     private Date fechaHasta;
@@ -54,109 +54,124 @@ public class InformeCitasMB extends MetodosGenerales implements java.io.Serializ
     private List<CfgUsuarios> listaMedicos;
     private List<CitCitas> listaCitas;
     private List<CfgClasificaciones> listaMotivoConsulta;
+
     public InformeCitasMB() {
         medico = "";
-        administradora  ="";
+        administradora = "";
         motivoConsulta = "";
-        oportunidad  ="";
+        oportunidad = "";
         estado = "";
-        
+
     }
 
     @PostConstruct
-    public void init(){
+    public void init() {
         listaMedicos = medicoFacade.findPrestadores();
         listaCitas = new ArrayList<>();
         listaMotivoConsulta = clasificacionesFacade.buscarPorMaestro(ClasificacionesEnum.MotivoConsulta.toString());
     }
-    
-    public void limpiar(){
+
+    public void limpiar() {
         listaCitas.clear();
         renderBuscar = false;
     }
-    
-    public void consultar(){
+
+    public void consultar() {
         listaCitas.clear();
-        if(fechaDesde!=null && fechaHasta==null){
-            imprimirMensaje("Error al consultar", "Seleccione fecha hasta", FacesMessage.SEVERITY_ERROR);
-        }else if(fechaDesde==null && fechaHasta!=null){
-            imprimirMensaje("Error al consultar", "Seleccione fecha desde", FacesMessage.SEVERITY_ERROR);
-        }else{
-            String filtro="";
-            if (medico != null) {
-                if (!medico.equals("")) {
-                    filtro += " AND c.idPrestador.idUsuario =" + medico;
-                }
-            }
-            if (fechaDesde != null && fechaHasta != null) {
-                filtro += " AND c.fechaRegistro BETWEEN :param1 and :param2 ";
-            }
-            if(administradora!=null){
-                if(!administradora.equals("")){
-                    filtro += " AND c.idAdministradora.idAdministradora = "+administradora;
-                }
-            }
-            if(motivoConsulta!=null){
-                if(!motivoConsulta.equals("")){
-                    filtro += " AND c.tipoCita.id = "+motivoConsulta+"";
-                }
-            }
-            if(oportunidad!=null){
-                if(!oportunidad.equals("")){
-                    filtro +=" AND c.idTurno.estado='"+oportunidad+"'";
-                }
-            }
-            if(estado!=null){
-                if(!estado.equals("")){
-                    switch(estado){
-                        case "1"://Asignada
-                            filtro  += " AND c.atendida=false and c.cancelada=false and c.facturada=false";
-                            break;
-                        case "2"://Atendida
-                            filtro  += " AND c.atendida=true and c.facturada=false ";
-                            break;        
-                        case "3"://Cancelada
-                            filtro  += " AND c.cancelada=true";
-                            break;    
-                        case "4"://Facturada
-                            filtro  += " AND c.facturada=true";
-                            break;    
-                    }
-                }
-            }
-            if(estadoPaciente!=null){
-                if(!estadoPaciente.equals("")){
-                    filtro = "AND c.idPaciente.activo = ";
-                    if(estadoPaciente.equals("1")){
-                        filtro +="true" ;
-                    }else{
-                        filtro +="false" ;
-                    }
-                }
-            }
-            listaCitas = citaFacade.getInformeFiltro(filtro,fechaDesde, fechaHasta);
-            if (!listaCitas.isEmpty()) {
-                renderBuscar = true;
-            } else {
-                imprimirMensaje("No hay registros", "No se encontró registros", FacesMessage.SEVERITY_INFO);
-                renderBuscar = false;
+        if (medico == null) {
+            imprimirMensaje("Error al consultar", "Debe Ingresar Medico", FacesMessage.SEVERITY_ERROR);
+            return;
+        }
+        if (administradora == null) {
+            imprimirMensaje("Error al consultar", "Debe Ingresar Administradora", FacesMessage.SEVERITY_ERROR);
+            return;
+        }
+        if (fechaDesde == null || fechaHasta == null) {
+            imprimirMensaje("Error al consultar", "Debe seleccionar rango de fechas", FacesMessage.SEVERITY_ERROR);
+            return;
+        }
+        /*if (estadoPaciente == null) {
+             imprimirMensaje("Error al consultar", "Debe seleccionar estado del paciente", FacesMessage.SEVERITY_ERROR);
+            return;
+        }*/
+
+        String filtro = "";
+        if (medico != null) {
+            if (!medico.equals("")) {
+                filtro += " AND c.idPrestador.idUsuario =" + medico;
             }
         }
+        if (fechaDesde != null && fechaHasta != null) {
+            filtro += " AND c.fechaRegistro BETWEEN :param1 and :param2 ";
+        }
+        if (administradora != null) {
+            if (!administradora.equals("")) {
+                filtro += " AND c.idAdministradora.idAdministradora = " + administradora;
+            }
+        }
+        if (motivoConsulta != null) {
+            if (!motivoConsulta.equals("")) {
+                filtro += " AND c.tipoCita.id = " + motivoConsulta + "";
+            }
+        }
+        if (oportunidad != null) {
+            if (!oportunidad.equals("")) {
+                filtro += " AND c.idTurno.estado='" + oportunidad + "'";
+            }
+        }
+        if (estado != null) {
+            if (!estado.equals("")) {
+                switch (estado) {
+                    case "1"://Asignada
+                        filtro += " AND c.atendida=false and c.cancelada=false and c.facturada=false";
+                        break;
+                    case "2"://Atendida
+                        filtro += " AND c.atendida=true and c.facturada=false ";
+                        break;
+                    case "3"://Cancelada
+                        filtro += " AND c.cancelada=true";
+                        break;
+                    case "4"://Facturada
+                        filtro += " AND c.facturada=true";
+                        break;
+                }
+            }
+        }
+        if (estadoPaciente != null) {
+            if (!estadoPaciente.equals("")) {
+                filtro = "AND c.idPaciente.activo is ";
+                if (estadoPaciente.equals("1")) {
+                    filtro += "true";
+                } else {
+                    filtro += "false";
+                }
+            }
+        }
+        listaCitas = citaFacade.getInformeFiltro(filtro, fechaDesde, fechaHasta);
+        if (!listaCitas.isEmpty()) {
+            renderBuscar = true;
+        } else {
+            imprimirMensaje("No hay registros", "No se encontró registros", FacesMessage.SEVERITY_INFO);
+            renderBuscar = false;
+        }
+
     }
-    public void exportarCSV(){
+
+    public void exportarCSV() {
         FacesContext context = FacesContext.getCurrentInstance();
-        try{
+        try {
             FacesContext.getCurrentInstance().responseComplete();
             String baseURL = context.getExternalContext().getRequestContextPath();
             SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-            String url =  baseURL +"/InformeCitasServlet?medico="+medico+"&fechaDesde="+(fechaDesde!=null?formato.format(fechaDesde):"")+"&fechaHasta="+(fechaHasta!=null?formato.format(fechaHasta):"")+
-                    "&motivo="+motivoConsulta+"&oportunidad="+oportunidad+"&estado="+estado+"&administradora="+administradora+"&estadoPaciente="+estadoPaciente;
+            String url = baseURL + "/InformeCitasServlet?medico=" + medico + "&fechaDesde=" + (fechaDesde != null ? formato.format(fechaDesde) : "") + "&fechaHasta=" + (fechaHasta != null ? formato.format(fechaHasta) : "")
+                    + "&motivo=" + motivoConsulta + "&oportunidad=" + oportunidad + "&estado=" + estado + "&administradora=" + administradora + "&estadoPaciente=" + estadoPaciente;
             String encodeURL = context.getExternalContext().encodeResourceURL(url);
-        context.getExternalContext().redirect(encodeURL);
-        }  catch(Exception e)    {
+            context.getExternalContext().redirect(encodeURL);
+        } catch (Exception e) {
             e.printStackTrace();
-            }
+        }
     }
+
     public String getMedico() {
         return medico;
     }
@@ -253,7 +268,4 @@ public class InformeCitasMB extends MetodosGenerales implements java.io.Serializ
         this.estadoPaciente = estadoPaciente;
     }
 
-    
-    
-    
 }
