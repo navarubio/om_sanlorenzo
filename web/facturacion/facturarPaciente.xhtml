@@ -868,10 +868,11 @@
                 </p:panelGrid>
             </p:dialog>
 
-            <p:dialog id="IdDialogoAgregarServicio" header="AGREGAR SERVICIO A FACTURA" widgetVar="dialogoAgregarServicio" resizable="false" modal="true">
-                <p:panelGrid id="IdPanelAgregarServicio" styleClass="panelGridSinBordes" columns="2">
+            <p:dialog id="IdDialogoAgregarServicio" header="AGREGAR SERVICIO A FACTURA" widgetVar="dialogoAgregarServicio" resizable="false" modal="true" width="80%">
+                <p:panelGrid id="IdPanelAgregarServicio" styleClass="panelGridSinBordes" columns="2" style="width: 100%">
                     <p:outputLabel styleClass="campoObligatorio" value="Prestador" />
-                    <p:selectOneMenu style="width: 380px;" value="#{facturarPacienteMB.idPrestadorServicio}"  filter="true" filterMatchMode="contains">
+                    <p:selectOneMenu value="#{facturarPacienteMB.idPrestadorServicio}"  
+                                     filter="true" filterMatchMode="contains">
                         <f:selectItems
                             value="#{aplicacionGeneralMB.listaPrestadores}"
                             var="prestador"
@@ -879,7 +880,8 @@
                             itemValue="#{prestador.idUsuario}"/>
                     </p:selectOneMenu>
                     <p:outputLabel styleClass="campoObligatorio" value="Servicio" />
-                    <p:selectOneMenu id="IdListaServicio" style="width: 380px;" value="#{facturarPacienteMB.idServicioManual}"  filter="true" filterMatchMode="contains">
+                    <p:selectOneMenu id="IdListaServicio" value="#{facturarPacienteMB.idServicioManual}" 
+                                     filter="true" filterMatchMode="contains">
                         <p:ajax event="change"
                                 listener="#{facturarPacienteMB.cambiaServicio}"
                                 update="IdPanelAgregarServicio"/>
@@ -907,10 +909,10 @@
 
                     <p:outputLabel styleClass="campoNoObligatorio" value="Diagnóstico relacionado"/>
                     <p:autoComplete size="70" value="# {facturarPacienteMB.diagnosticoRelacionado}" completeMethod="# {facturarPacienteMB.autocompletarDiagnostico}" forceSelection="true"/ -->
-            <p:dialog id="IdDialogoAgregarPaquete" header="AGREGAR PAQUETE A FACTURA" widgetVar="dialogoAgregarPaquete" resizable="false" modal="true">
-                <p:panelGrid id="IdPanelAgregarPaquete" styleClass="panelGridSinBordes" columns="2">
+            <p:dialog id="IdDialogoAgregarPaquete" header="AGREGAR PAQUETE A FACTURA" widgetVar="dialogoAgregarPaquete" resizable="false" modal="true" width="80%">
+                <p:panelGrid id="IdPanelAgregarPaquete" styleClass="panelGridSinBordes" columns="2" style="width: 100%">
                     <p:outputLabel styleClass="campoObligatorio" value="Prestador" />
-                    <p:selectOneMenu style="width: 380px;" value="#{facturarPacienteMB.idPrestadorPaquete}"  filter="true" filterMatchMode="contains">
+                    <p:selectOneMenu  value="#{facturarPacienteMB.idPrestadorPaquete}"  filter="true" filterMatchMode="contains">
                         <f:selectItems
                             value="#{aplicacionGeneralMB.listaPrestadores}"
                             var="prestador"
@@ -918,7 +920,7 @@
                             itemValue="#{prestador.idUsuario}"/>
                     </p:selectOneMenu>
                     <p:outputLabel styleClass="campoObligatorio" value="Paquete" />
-                    <p:selectOneMenu id="IdListaPaquete" style="width: 380px;" value="#{facturarPacienteMB.idPaqueteManual}"  filter="true" filterMatchMode="contains">
+                    <p:selectOneMenu id="IdListaPaquete"  value="#{facturarPacienteMB.idPaqueteManual}"  filter="true" filterMatchMode="contains">
                         <p:ajax event="change"
                                 listener="#{facturarPacienteMB.cambiaPaquete}"
                                 update="IdPanelAgregarPaquete"/>
@@ -941,10 +943,10 @@
                         actionListener="#{facturarPacienteMB.agregarPaqueteAFactura}"/>
                 </p:panelGrid>
             </p:dialog>
-            <p:dialog id="IdDialogoAgregarMedicamento" header="AGREGAR MEDICAMENTO A FACTURA" widgetVar="dialogoAgregarMedicamento" resizable="false" modal="true">
-                <p:panelGrid id="IdPanelAgregarMedicamento" styleClass="panelGridSinBordes" columns="2">
+            <p:dialog id="IdDialogoAgregarMedicamento" header="AGREGAR MEDICAMENTO A FACTURA" widgetVar="dialogoAgregarMedicamento" resizable="false" modal="true" width="80%">
+                <p:panelGrid id="IdPanelAgregarMedicamento" styleClass="panelGridSinBordes" columns="2" style="width: 100%">
                     <p:outputLabel styleClass="campoObligatorio" value="Prestador" />
-                    <p:selectOneMenu style="width: 380px;" value="#{facturarPacienteMB.idPrestadorMedicamento}"  filter="true" filterMatchMode="contains">
+                    <p:selectOneMenu value="#{facturarPacienteMB.idPrestadorMedicamento}"  filter="true" filterMatchMode="contains">
                         <f:selectItems
                             value="#{aplicacionGeneralMB.listaPrestadores}"
                             var="prestador"
@@ -952,7 +954,7 @@
                             itemValue="#{prestador.idUsuario}"/>
                     </p:selectOneMenu>
                     <p:outputLabel styleClass="campoObligatorio" value="Medicamento" />
-                    <p:selectOneMenu id="IdListaMedicamento" style="width: 380px;" value="#{facturarPacienteMB.idMedicamentoManual}"  filter="true" filterMatchMode="contains">
+                    <p:selectOneMenu id="IdListaMedicamento" value="#{facturarPacienteMB.idMedicamentoManual}"  filter="true" filterMatchMode="contains">
                         <p:ajax event="change"
                                 listener="#{facturarPacienteMB.cambiaMedicamento}"
                                 update="IdPanelAgregarMedicamento"/>
@@ -975,10 +977,10 @@
                         actionListener="#{facturarPacienteMB.agregarMedicamentoAFactura}"/>
                 </p:panelGrid>
             </p:dialog>
-            <p:dialog id="IdDialogoAgregarInsumo" header="AGREGAR INSUMO A FACTURA" widgetVar="dialogoAgregarInsumo" resizable="false" modal="true">
-                <p:panelGrid id="IdPanelAgregarInsumo" styleClass="panelGridSinBordes" columns="2">
+            <p:dialog id="IdDialogoAgregarInsumo" header="AGREGAR INSUMO A FACTURA" widgetVar="dialogoAgregarInsumo" resizable="false" modal="true" width="80%">
+                <p:panelGrid id="IdPanelAgregarInsumo" styleClass="panelGridSinBordes" columns="2" style="width: 100%">
                     <p:outputLabel styleClass="campoObligatorio" value="Prestador" />
-                    <p:selectOneMenu style="width: 380px;" value="#{facturarPacienteMB.idPrestadorInsumo}"  filter="true" filterMatchMode="contains">
+                    <p:selectOneMenu value="#{facturarPacienteMB.idPrestadorInsumo}"  filter="true" filterMatchMode="contains">
                         <f:selectItems
                             value="#{aplicacionGeneralMB.listaPrestadores}"
                             var="prestador"
@@ -986,7 +988,7 @@
                             itemValue="#{prestador.idUsuario}"/>
                     </p:selectOneMenu>
                     <p:outputLabel styleClass="campoObligatorio" value="Insumo" />
-                    <p:selectOneMenu id="IdListaInsumo" style="width: 380px;" value="#{facturarPacienteMB.idInsumoManual}"  filter="true" filterMatchMode="contains">
+                    <p:selectOneMenu id="IdListaInsumo" value="#{facturarPacienteMB.idInsumoManual}"  filter="true" filterMatchMode="contains">
                         <p:ajax event="change"
                                 listener="#{facturarPacienteMB.cambiaInsumo}"
                                 update="IdPanelAgregarInsumo"/>

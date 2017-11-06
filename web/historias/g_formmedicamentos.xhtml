@@ -172,14 +172,17 @@
             </table>
 
             <p:dialog id="IdDialogoAgregarMedicamento" header="AGREGAR MEDICAMENTO" widgetVar="dialogoAgregarItemMedicamento" resizable="false" modal="true">  
-                <p:panelGrid id="IdPanelAgregarItemMedicamento" styleClass="panelGridSinBordes" columns="4">
-
-                    <p:outputLabel styleClass="campoObligatorio" value="Medicamento" />
-                    <p:selectOneMenu  style="width: 300px;" value="#{historiasMB.idMedicamento}"  filter="true" filterMatchMode="contains">
+                <p:panelGrid id="IdPanelAgregarItemMedicamento2" styleClass="panelGridSinBordes" columns="2">
+                      <p:outputLabel styleClass="campoObligatorio" value="Medicamento" />
+                    <p:selectOneMenu  value="#{historiasMB.idMedicamento}"  filter="true" filterMatchMode="contains">
                         <f:selectItem itemLabel="" itemValue=""/>
                         <f:selectItems value="#{aplicacionGeneralMB.listaMedicamentos}" var="p" itemLabel="#{p.nombreMedicamento}" itemValue="#{p.idMedicamento}" />
                         <f:ajax event="change" listener="#{historiasMB.cambiarMedicamento}" render="IdPanelAgregarItemMedicamento"/> 
                     </p:selectOneMenu>  
+                </p:panelGrid>
+                <p:panelGrid id="IdPanelAgregarItemMedicamento" styleClass="panelGridSinBordes" columns="4">
+                  
+                    
                     <p:outputLabel styleClass="campoObligatorio" value="Código" />
                     <p:inputText  value="#{historiasMB.codigo}"/>
                     <p:outputLabel styleClass="campoObligatorio" value="Cantidad" />
