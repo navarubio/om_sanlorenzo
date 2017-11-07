@@ -27,71 +27,74 @@
         <h:form id="IdFormRegistroClinico">  
             <p:growl id="IdMensajeUsuarios"  showDetail="true" sticky="false" autoUpdate="true" life="5000"/>
 
-            <table>
-                <tr><td colspan="2"><h2>HISTORIA CLÍNICA ODONTOLÓGICA</h2></td></tr>
-                <!--DATOS DEL PACIENTE-->
-                <tr><td colspan="2"><h2>DATOS DEL PACIENTE</h2></td></tr>         
-                <div>
-                    <tr>
-                        <td><p:outputLabel value="ZONA RESIDENCIAL:"/></td>
-                        <td><p:outputLabel value="FECHA DE VISITA AL ODONTÓLOGO:"/></td>
-                        <td><p:outputLabel value="DIRECCIÓN DEL TRABAJO:"/></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p:selectOneMenu styleClass="campoFormulario"   value="#{historiasMB.datosFormulario.dato4}">
-                                <f:selectItem itemLabel="" itemValue=""/>
-                                <f:selectItem itemLabel="URBANA" itemValue="URBANA" />
-                                <f:selectItem itemLabel="RURAL" itemValue="RURAL" />
-                            </p:selectOneMenu>
-                        </td>
-                        <td>
-                            <p:calendar navigator="true" locale="es" value="#{historiasMB.datosFormulario.dato5}" pattern="dd/MM/yyyy" mask="true">
-                                <f:convertDateTime pattern="dd/MM/yyyy"/>
-                            </p:calendar>
-                        </td>
-                        <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato2}" maxlength="40" placeholder="40 caracteres máximo"/>
-                        </td>
-                    </tr>
-                    <tr>
 
-                        <td><p:outputLabel value="TELÉFONO:"/></td>
-                        <td><p:outputLabel value="EN CASO DE ACCIDENTE AVISAR A:"/></td>
-                        <td><p:outputLabel value="PARENTESCO:"/></td>
-                    </tr>
-                    <tr>
-
-                        <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato3}" maxlength="10" placeholder="10 caracteres máximo"/>
-                        </td>
-                        <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato6}" maxlength="40" placeholder="40 caracteres máximo"/>
-                        </td>
-                        <td>
-                            <p:selectOneMenu styleClass="width1" value="#{historiasMB.datosFormulario.dato7}" filter="true" filterMatchMode="contains">
-                                <f:selectItem itemLabel="" itemValue=""/>
-                                <f:selectItems value="#{aplicacionGeneralMB.listaParentesco}" />
-                            </p:selectOneMenu>  
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><p:outputLabel value="REGIMEN:"/></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p:selectOneMenu styleClass="width1" value="#{historiasMB.datosFormulario.dato8}" filter="true" filterMatchMode="contains">
-                                <f:selectItem itemLabel="" itemValue=""/>
-                                <f:selectItems value="#{aplicacionGeneralMB.listaRegimen}" />
-                            </p:selectOneMenu>  
-                            <!--<p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato8}" maxlength="10" placeholder="10 caracteres máximo"/>-->
-                        </td>
-                    </tr>
-
-                </div>
-            </table>
             <br/><br/><br/>
             <p:accordionPanel prependId="false">
+                <p:tab title="DATOS DEL PACIENTE">
+                    <table>
+                        <!--DATOS DEL PACIENTE-->
+                        <tr><td colspan="2"><h2>DATOS DEL PACIENTE</h2></td></tr>         
+                        <div>
+                            <tr>
+                                <td><p:outputLabel value="ZONA RESIDENCIAL:"/></td>
+                                <td><p:outputLabel value="FECHA DE VISITA AL ODONTÓLOGO:"/></td>
+                                <td><p:outputLabel value="DIRECCIÓN DEL TRABAJO:"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p:selectOneMenu styleClass="campoFormulario"   value="#{historiasMB.datosFormulario.dato4}">
+                                        <f:selectItem itemLabel="" itemValue=""/>
+                                        <f:selectItem itemLabel="URBANA" itemValue="URBANA" />
+                                        <f:selectItem itemLabel="RURAL" itemValue="RURAL" />
+                                    </p:selectOneMenu>
+                                </td>
+                                <td>
+                                    <p:calendar navigator="true" locale="es" value="#{historiasMB.datosFormulario.dato5}" pattern="dd/MM/yyyy" mask="true">
+                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                    </p:calendar>
+                                </td>
+                                <td>
+                                    <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato2}" maxlength="40" placeholder="40 caracteres máximo"/>
+                                </td>
+                            </tr>
+                            <tr>
+
+                                <td><p:outputLabel value="TELÉFONO:"/></td>
+                                <td><p:outputLabel value="EN CASO DE ACCIDENTE AVISAR A:"/></td>
+                                <td><p:outputLabel value="PARENTESCO:"/></td>
+                            </tr>
+                            <tr>
+
+                                <td>
+                                    <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato3}" maxlength="10" placeholder="10 caracteres máximo"/>
+                                </td>
+                                <td>
+                                    <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato6}" maxlength="40" placeholder="40 caracteres máximo"/>
+                                </td>
+                                <td>
+                                    <p:selectOneMenu styleClass="width1" value="#{historiasMB.datosFormulario.dato7}" filter="true" filterMatchMode="contains">
+                                        <f:selectItem itemLabel="" itemValue=""/>
+                                        <f:selectItems value="#{aplicacionGeneralMB.listaParentesco}" />
+                                    </p:selectOneMenu>  
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><p:outputLabel value="REGIMEN:"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p:selectOneMenu styleClass="width1" value="#{historiasMB.datosFormulario.dato8}" filter="true" filterMatchMode="contains">
+                                        <f:selectItem itemLabel="" itemValue=""/>
+                                        <f:selectItems value="#{aplicacionGeneralMB.listaRegimen}" />
+                                    </p:selectOneMenu>  
+                                    <!--<p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato8}" maxlength="10" placeholder="10 caracteres máximo"/>-->
+                                </td>
+                            </tr>
+
+                        </div>
+                    </table>
+
+                </p:tab>
                 <p:tab title="DATOS DE CONSULTA" id="t1">
                     <table>
 
@@ -1184,243 +1187,245 @@
 
                 <p:tab title="DIAGNOSTICO">
                     <!--DIAGNÓSTICO-->
-                    <tr><td colspan="2"><h2>DIAGNÓSTICO</h2></td></tr>         
-                    <div>
-                        <tr>
-                            <td colspan="2">
-                                <p:outputLabel styleClass="labelFormulario" style="width2" value="DIAGNOSTICO PRINCIPAL"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <p:autoComplete size="88" placeholder="Digite el diagnóstico a buscar (por código CIE-10 o por nombre)" value="#{historiasMB.datosFormulario.dato848}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <p:outputLabel styleClass="labelFormulario" style="width2" value="DIAGNOSTICO RELACIONADO 2"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <p:autoComplete size="88" placeholder="Digite el diagnóstico a buscar (por código CIE-10 o por nombre)" value="#{historiasMB.datosFormulario.dato850}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <p:outputLabel styleClass="labelFormulario" style="width2" value="DIAGNOSTICO RELACIONADO 3"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <p:autoComplete size="88" placeholder="Digite el diagnóstico a buscar (por código CIE-10 o por nombre)" value="#{historiasMB.datosFormulario.dato852}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <p:outputLabel styleClass="labelFormulario" style="width2" value="DIAGNOSTICO RELACIONADO 4"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <p:autoComplete size="88" placeholder="Digite el diagnóstico a buscar (por código CIE-10 o por nombre)" value="#{historiasMB.datosFormulario.dato854}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <p:outputLabel styleClass="labelFormulario" style="width2" value="DIAGNOSTICO RELACIONADO 5"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <p:autoComplete size="88" placeholder="Digite el diagnóstico a buscar (por código CIE-10 o por nombre)" value="#{historiasMB.datosFormulario.dato856}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><p:outputLabel value="OBSERVACIONES:"/></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <p:inputTextarea styleClass="width2" value="#{historiasMB.datosFormulario.dato861}" counter="display5" maxlength="170" counterTemplate="{0} caracteres restantes." autoResize="false"/>
-                                <br/>
-                                <h:outputText id="display5" />
-                            </td>                   
-                        </tr> 
-                        <tr>
-                            <td colspan="2"><p:outputLabel value="REMISIÓN A ESPECIALISTA:"/></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <p:selectOneMenu styleClass="campoFormulario"   value="#{historiasMB.datosFormulario.dato862}">												
-                                    <f:selectItem itemLabel="" itemValue=""/>												
-                                    <f:selectItem itemLabel="SI" itemValue="SI" />												
-                                    <f:selectItem itemLabel="NO" itemValue="NO" />												
-                                </p:selectOneMenu> 							
-                            </td>
-                        </tr>
-                    </div>
+                    <table>
+                        <tr><td colspan="2"><h2>DIAGNÓSTICO</h2></td></tr>         
+                        <div>
+                            <tr>
+                                <td colspan="2">
+                                    <p:outputLabel styleClass="labelFormulario" style="width2" value="DIAGNOSTICO PRINCIPAL"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p:autoComplete size="88" placeholder="Digite el diagnóstico a buscar (por código CIE-10 o por nombre)" value="#{historiasMB.datosFormulario.dato848}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p:outputLabel styleClass="labelFormulario" style="width2" value="DIAGNOSTICO RELACIONADO 2"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p:autoComplete size="88" placeholder="Digite el diagnóstico a buscar (por código CIE-10 o por nombre)" value="#{historiasMB.datosFormulario.dato850}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p:outputLabel styleClass="labelFormulario" style="width2" value="DIAGNOSTICO RELACIONADO 3"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p:autoComplete size="88" placeholder="Digite el diagnóstico a buscar (por código CIE-10 o por nombre)" value="#{historiasMB.datosFormulario.dato852}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p:outputLabel styleClass="labelFormulario" style="width2" value="DIAGNOSTICO RELACIONADO 4"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p:autoComplete size="88" placeholder="Digite el diagnóstico a buscar (por código CIE-10 o por nombre)" value="#{historiasMB.datosFormulario.dato854}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p:outputLabel styleClass="labelFormulario" style="width2" value="DIAGNOSTICO RELACIONADO 5"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p:autoComplete size="88" placeholder="Digite el diagnóstico a buscar (por código CIE-10 o por nombre)" value="#{historiasMB.datosFormulario.dato856}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><p:outputLabel value="OBSERVACIONES:"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p:inputTextarea styleClass="width2" value="#{historiasMB.datosFormulario.dato861}" counter="display5" maxlength="170" counterTemplate="{0} caracteres restantes." autoResize="false"/>
+                                    <br/>
+                                    <h:outputText id="display5" />
+                                </td>                   
+                            </tr> 
+                            <tr>
+                                <td colspan="2"><p:outputLabel value="REMISIÓN A ESPECIALISTA:"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p:selectOneMenu styleClass="campoFormulario"   value="#{historiasMB.datosFormulario.dato862}">												
+                                        <f:selectItem itemLabel="" itemValue=""/>												
+                                        <f:selectItem itemLabel="SI" itemValue="SI" />												
+                                        <f:selectItem itemLabel="NO" itemValue="NO" />												
+                                    </p:selectOneMenu> 							
+                                </td>
+                            </tr>
+                        </div>
 
-                    <!--PLAN DE TRATAMIENTO-->
-                    <tr><td colspan="2"><h2>PLAN DE TRATAMIENTO</h2></td></tr>         
-                    <div>
-                        <tr>
-                            <td colspan="2"><p:outputLabel value="1. PROMOCIÓN:"/></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato863}" maxlength="80" placeholder="80 caracteres máximo"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><p:outputLabel value="2. PREVENCIÓN:"/></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato864}" maxlength="80" placeholder="80 caracteres máximo"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><p:outputLabel value="3. RADIOGRAFÍAS:"/></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato865}" maxlength="80" placeholder="80 caracteres máximo"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><p:outputLabel value="4. OPERATORIA:"/></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato866}" maxlength="80" placeholder="80 caracteres máximo"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><p:outputLabel value="5. ENDODONCIA:"/></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato867}" maxlength="80" placeholder="80 caracteres máximo"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><p:outputLabel value="6. PERIODONCIA:"/></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato868}" maxlength="80" placeholder="80 caracteres máximo"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><p:outputLabel value="7. PROSTODONCIA:"/></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato869}" maxlength="80" placeholder="80 caracteres máximo"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><p:outputLabel value="8. OCLUSIÓN:"/></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato870}" maxlength="80" placeholder="80 caracteres máximo"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><p:outputLabel value="9. CIRUGÍA:"/></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato871}" maxlength="80" placeholder="80 caracteres máximo"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><p:outputLabel value="10. OTROS:"/></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato872}" maxlength="80" placeholder="80 caracteres máximo"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><p:outputLabel value="PRONÓSTICO:"/></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato873}" maxlength="80" placeholder="80 caracteres máximo"/>
-                            </td>
-                        </tr>
-                    </div>
+                        <!--PLAN DE TRATAMIENTO-->
+                        <tr><td colspan="2"><h2>PLAN DE TRATAMIENTO</h2></td></tr>         
+                        <div>
+                            <tr>
+                                <td colspan="2"><p:outputLabel value="1. PROMOCIÓN:"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato863}" maxlength="80" placeholder="80 caracteres máximo"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><p:outputLabel value="2. PREVENCIÓN:"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato864}" maxlength="80" placeholder="80 caracteres máximo"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><p:outputLabel value="3. RADIOGRAFÍAS:"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato865}" maxlength="80" placeholder="80 caracteres máximo"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><p:outputLabel value="4. OPERATORIA:"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato866}" maxlength="80" placeholder="80 caracteres máximo"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><p:outputLabel value="5. ENDODONCIA:"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato867}" maxlength="80" placeholder="80 caracteres máximo"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><p:outputLabel value="6. PERIODONCIA:"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato868}" maxlength="80" placeholder="80 caracteres máximo"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><p:outputLabel value="7. PROSTODONCIA:"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato869}" maxlength="80" placeholder="80 caracteres máximo"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><p:outputLabel value="8. OCLUSIÓN:"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato870}" maxlength="80" placeholder="80 caracteres máximo"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><p:outputLabel value="9. CIRUGÍA:"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato871}" maxlength="80" placeholder="80 caracteres máximo"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><p:outputLabel value="10. OTROS:"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato872}" maxlength="80" placeholder="80 caracteres máximo"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><p:outputLabel value="PRONÓSTICO:"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato873}" maxlength="80" placeholder="80 caracteres máximo"/>
+                                </td>
+                            </tr>
+                        </div>
 
-                    <!--INTERPRETACIÓN AYUDAS DIAGNÓSTICAS-->
-                    <tr><td colspan="2"><h2>INTERPRETACIÓN AYUDAS DIAGNÓSTICAS</h2></td></tr>         
-                    <div>
-                        <tr>
-                            <td colspan="2"><p:outputLabel value="FECHA:"/></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <p:calendar navigator="true" locale="es" value="#{historiasMB.datosFormulario.dato874}" pattern="dd/MM/yyyy" mask="true">
-                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
-                                </p:calendar>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><p:outputLabel value="INTERPRETACIÓN:"/></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato875}" maxlength="70" placeholder="70 caracteres máximo"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><p:outputLabel value="FECHA:"/></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <p:calendar navigator="true" locale="es" value="#{historiasMB.datosFormulario.dato876}" pattern="dd/MM/yyyy" mask="true">
-                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
-                                </p:calendar>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><p:outputLabel value="INTERPRETACIÓN:"/></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato877}" maxlength="70" placeholder="70 caracteres máximo"/>
-                            </td>
-                        </tr>
-                    </div>
+                        <!--INTERPRETACIÓN AYUDAS DIAGNÓSTICAS-->
+                        <tr><td colspan="2"><h2>INTERPRETACIÓN AYUDAS DIAGNÓSTICAS</h2></td></tr>         
+                        <div>
+                            <tr>
+                                <td colspan="2"><p:outputLabel value="FECHA:"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p:calendar navigator="true" locale="es" value="#{historiasMB.datosFormulario.dato874}" pattern="dd/MM/yyyy" mask="true">
+                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                    </p:calendar>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><p:outputLabel value="INTERPRETACIÓN:"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato875}" maxlength="70" placeholder="70 caracteres máximo"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><p:outputLabel value="FECHA:"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p:calendar navigator="true" locale="es" value="#{historiasMB.datosFormulario.dato876}" pattern="dd/MM/yyyy" mask="true">
+                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                    </p:calendar>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><p:outputLabel value="INTERPRETACIÓN:"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato877}" maxlength="70" placeholder="70 caracteres máximo"/>
+                                </td>
+                            </tr>
+                        </div>
 
-                    <!--EVOLUCIÓN DE TRATAMIENTO - ODONTOGRAMA-->
-                    <tr class="primeraVez"><td colspan="2"><h2>EVOLUCIÓN DE TRATAMIENTO - ODONTOGRAMA</h2></td></tr>         
-                    <tr class="primeraVez">
-                        <td colspan="2">
-                            <h:outputText style="display:none" styleClass="valPrimeraVez" value="#{!historiasMB.modificandoRegCli}"/>
-                            <p:inputText style="display:none" id="jsonEvolucion" styleClass="jsonEvolucion" value="#{historiasMB.jsonEvolucion}"/>
-                            <div style="width: 100%;overflow: auto"><div class="evolucion"></div></div></td>
-                    </tr>
-                    <tr style="display: none"><td colspan="2" style="height: 10px"></td></tr>
-                    <tr style="display: none"><td colspan="2"><p:commandButton value="Guardar Evoluci&oacute;n" actionListener="#{historiasMB.guardarEvolucion()}" process="@form" onstart="getDataTeeth(evolData)"/></td></tr>      
-                    <tr style="display: none"><td colspan="2" style="height: 10px"></td></tr>
-                    <!--IDENTIFICACIÓN DEL ODONTÓLOGO-->
-                    <tr><td colspan="2"><h2>IDENTIFICACIÓN DEL ODONTÓLOGO</h2></td></tr>         
-                    <div>
-                        <tr>
-                            <td colspan="2"><p:outputLabel value="DILIGENCIÓ LA HISTORIA CLÍNICA COMPLETAMENTE:"/></td>
-                        </tr>
-                        <tr>
+                        <!--EVOLUCIÓN DE TRATAMIENTO - ODONTOGRAMA-->
+                        <tr class="primeraVez"><td colspan="2"><h2>EVOLUCIÓN DE TRATAMIENTO - ODONTOGRAMA</h2></td></tr>         
+                        <tr class="primeraVez">
                             <td colspan="2">
-                                <p:selectOneMenu styleClass="campoFormulario"   value="#{historiasMB.datosFormulario.dato1294}">
-                                    <f:selectItem itemLabel="" itemValue=""/>
-                                    <f:selectItem itemLabel="SI" itemValue="SI" />
-                                    <f:selectItem itemLabel="NO" itemValue="NO" />
-                                </p:selectOneMenu>
-                            </td>  
+                                <h:outputText style="display:none" styleClass="valPrimeraVez" value="#{!historiasMB.modificandoRegCli}"/>
+                                <p:inputText style="display:none" id="jsonEvolucion" styleClass="jsonEvolucion" value="#{historiasMB.jsonEvolucion}"/>
+                                <div style="width: 100%;overflow: auto"><div class="evolucion"></div></div></td>
                         </tr>
-                    </div>
+                        <tr style="display: none"><td colspan="2" style="height: 10px"></td></tr>
+                        <tr style="display: none"><td colspan="2"><p:commandButton value="Guardar Evoluci&oacute;n" actionListener="#{historiasMB.guardarEvolucion()}" process="@form" onstart="getDataTeeth(evolData)"/></td></tr>      
+                        <tr style="display: none"><td colspan="2" style="height: 10px"></td></tr>
+                        <!--IDENTIFICACIÓN DEL ODONTÓLOGO-->
+                        <tr><td colspan="2"><h2>IDENTIFICACIÓN DEL ODONTÓLOGO</h2></td></tr>         
+                        <div>
+                            <tr>
+                                <td colspan="2"><p:outputLabel value="DILIGENCIÓ LA HISTORIA CLÍNICA COMPLETAMENTE:"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p:selectOneMenu styleClass="campoFormulario"   value="#{historiasMB.datosFormulario.dato1294}">
+                                        <f:selectItem itemLabel="" itemValue=""/>
+                                        <f:selectItem itemLabel="SI" itemValue="SI" />
+                                        <f:selectItem itemLabel="NO" itemValue="NO" />
+                                    </p:selectOneMenu>
+                                </td>  
+                            </tr>
+                        </div>
+                    </table>
                 </p:tab>
 
                 <p:tab title="DESCRIPCION DE EVOLUCIÓN DE TRATAMIENTO EJECUTADO">
@@ -2574,8 +2579,8 @@
                         });
                     }
                 });
-                
-                function presion(){
+
+                function presion() {
                     console.log(odonData);
                 }
             </script>

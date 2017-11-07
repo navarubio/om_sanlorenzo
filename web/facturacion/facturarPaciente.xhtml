@@ -843,7 +843,7 @@
             <p:dialog id="IdDialogoGuardarFactura" header="CONFIRMAR LIQUIDAR FACTURA" widgetVar="dialogoConfirmarGuardarFactura" resizable="false" modal="true">
                 <p:panelGrid id="panelConfirmarGuardarFactura" styleClass="panelGridSinBordes" columns="1">
                     <p:inputTextarea
-                        value="Una ves liquidada una factura no puede ser modificada, simplemente anulada ¿ Confirma la liquidación de la nueva factura ?"
+                        value="Una vez liquidada una factura no puede ser modificada, simplemente anulada ¿ Confirma la liquidación de la nueva factura ?"
                         readonly="true"
                         styleClass="textAreaDialogo"/>
                     <p:commandButton
@@ -958,7 +958,8 @@
                         <p:ajax event="change"
                                 listener="#{facturarPacienteMB.cambiaMedicamento}"
                                 update="IdPanelAgregarMedicamento"/>
-                        <f:selectItems value="#{facturarPacienteMB.listaMedicamentosManual}" var="medicamento" itemLabel="#{medicamento.cfgMedicamento.idMedicamento} - #{medicamento.cfgMedicamento.nombreMedicamento}" itemValue="#{medicamento.cfgMedicamento.idMedicamento}"/>
+                        <f:selectItems value="#{facturarPacienteMB.listaMedicamentosManual}" var="medicamento"
+                                       itemLabel="#{medicamento.cfgMedicamento.codigoMedicamento} - #{medicamento.cfgMedicamento.nombreMedicamento}" itemValue="#{medicamento.cfgMedicamento.idMedicamento}"/>
                     </p:selectOneMenu>
                     <p:outputLabel styleClass="campoObligatorio" value="Fecha" />
                     <p:calendar navigator="true" locale="es" value="#{facturarPacienteMB.fechaMedicamento}" pattern="dd/MM/yyyy HH:mm:ss" mask="true" size="23" style="width: 200px;" />

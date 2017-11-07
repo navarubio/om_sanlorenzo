@@ -419,7 +419,7 @@
                                         <p:outputLabel styleClass="labelFormularioBold" value="Edad:" />
                                     </td>
                                     <td>
-                                        <p:inputText  styleClass="campoFormulario" id="edad_" size="20" value="#{PyP_Programas.item_servicios_editar.edad_ini}" >
+                                        <p:inputText  styleClass="campoFormulario" id="edad_" size="4" value="#{PyP_Programas.item_servicios_editar.edad_ini}" >
                                         </p:inputText>
                                         <p:watermark for="edad_" value="Edad Inicial"/>
                                         <p:selectOneMenu styleClass="campoFormulario"
@@ -435,7 +435,7 @@
                                         <p:outputLabel styleClass="labelFormularioBold" value="Edad Final:" />
                                     </td>
                                     <td>
-                                        <p:inputText  styleClass="campoFormulario" id="edad_fin_" size="20" value="#{PyP_Programas.item_servicios_editar.edad_fin}" >
+                                        <p:inputText  styleClass="campoFormulario" id="edad_fin_" size="4" value="#{PyP_Programas.item_servicios_editar.edad_fin}" >
                                         </p:inputText>
                                         <p:watermark for="edad_fin_" value="Edad Final"/>
                                         <p:selectOneMenu styleClass="campoFormulario"
@@ -540,7 +540,7 @@
                                         <p:outputLabel styleClass="labelFormularioBold" value="Edad:" />
                                     </td>
                                     <td>
-                                        <p:inputText  styleClass="campoFormulario" id="edad_m_e" size="20" value="#{PyP_Programas.item_medicamentos_editar.edad_ini}" >
+                                        <p:inputText  styleClass="campoFormulario" id="edad_m_e" size="4" value="#{PyP_Programas.item_medicamentos_editar.edad_ini}" >
                                         </p:inputText>
                                         <p:watermark for="edad_" value="Edad Inicial"/>
                                         <p:selectOneMenu styleClass="campoFormulario"
@@ -556,7 +556,7 @@
                                         <p:outputLabel styleClass="labelFormularioBold" value="Edad Final:" />
                                     </td>
                                     <td>
-                                        <p:inputText  styleClass="campoFormulario" id="edad_fin_m_e" size="20" value="#{PyP_Programas.item_medicamentos_editar.edad_fin}" >
+                                        <p:inputText  styleClass="campoFormulario" id="edad_fin_m_e" size="4" value="#{PyP_Programas.item_medicamentos_editar.edad_fin}" >
                                         </p:inputText>
                                         <p:watermark for="edad_fin_" value="Edad Final"/>
                                         <p:selectOneMenu styleClass="campoFormulario"
@@ -661,7 +661,7 @@
                                         <p:outputLabel styleClass="labelFormularioBold" value="Edad:" />
                                     </td>
                                     <td>
-                                        <p:inputText  styleClass="campoFormulario" id="edad_i_e" size="20" value="#{PyP_Programas.item_insumos_editar.edad_ini}" >
+                                        <p:inputText  styleClass="campoFormulario" id="edad_i_e" size="4" value="#{PyP_Programas.item_insumos_editar.edad_ini}" >
                                         </p:inputText>
                                         <p:watermark for="edad_" value="Edad Inicial"/>
                                         <p:selectOneMenu styleClass="campoFormulario"
@@ -677,7 +677,7 @@
                                         <p:outputLabel styleClass="labelFormularioBold" value="Edad Final:" />
                                     </td>
                                     <td>
-                                        <p:inputText  styleClass="campoFormulario" id="edad_fin_i_e" size="20" value="#{PyP_Programas.item_insumos_editar.edad_fin}" >
+                                        <p:inputText  styleClass="campoFormulario" id="edad_fin_i_e" size="4" value="#{PyP_Programas.item_insumos_editar.edad_fin}" >
                                         </p:inputText>
                                         <p:watermark for="edad_fin_" value="Edad Final"/>
                                         <p:selectOneMenu styleClass="campoFormulario"
@@ -742,7 +742,7 @@
                                             <p:outputLabel styleClass="labelFormularioBold" value="Servicio:" />
                                         </td>
                                         <td colspan="2">
-                                            <p:inputTextarea rows="3" cols="33" value="#{PyP_Programas.item_servicios.nombreActividad}"/>
+                                            <p:inputTextarea rows="3" cols="60" value="#{PyP_Programas.item_servicios.nombreActividad}"/>
                                         </td>
                                         <td>
                                             <p:commandButton
@@ -780,7 +780,7 @@
                                             <p:outputLabel styleClass="labelFormularioBold" value="Edad:" />
                                         </td>
                                         <td>
-                                            <p:inputText  styleClass="campoFormulario" id="edad22" size="20" value="#{PyP_Programas.item_servicios.edad_ini}" >
+                                            <p:inputText  styleClass="campoFormulario" id="edad22" size="4" value="#{PyP_Programas.item_servicios.edad_ini}" >
                                             </p:inputText>
                                             <p:watermark for="edad22" value="Edad Inicial"/>
                                             <p:selectOneMenu styleClass="campoFormulario"
@@ -796,7 +796,7 @@
                                             <p:outputLabel styleClass="labelFormularioBold" value="Edad Final:" />
                                         </td>
                                         <td>
-                                            <p:inputText  styleClass="campoFormulario" id="edad_fin22" size="20" value="#{PyP_Programas.item_servicios.edad_fin}" >
+                                            <p:inputText  styleClass="campoFormulario" id="edad_fin22" size="4" value="#{PyP_Programas.item_servicios.edad_fin}" >
                                             </p:inputText>
                                             <p:watermark for="edad_fin22" value="Edad Final"/>
                                             <p:selectOneMenu styleClass="campoFormulario"
@@ -863,7 +863,7 @@
                                                 <p:ajax event="change"
                                                         listener="#{PyP_Programas.cambiaMedicamento}"
                                                         update="actividad_m"/>
-                                                <f:selectItems value="#{PyP_Programas.listaMedicamentos}" var="medicamento" itemLabel="#{medicamento.idMedicamento}-#{medicamento.codigoMedicamento} - #{medicamento.nombreMedicamento}" itemValue="#{medicamento.idMedicamento}"/>
+                                                <f:selectItems value="#{PyP_Programas.listaMedicamentos}" var="medicamento" itemLabel="#{medicamento.codigoMedicamento}-#{medicamento.codigoMedicamento} - #{medicamento.nombreMedicamento}" itemValue="#{medicamento.idMedicamento}"/>
                                             </p:selectOneMenu>
                                         </td>
                                         <td>
@@ -903,7 +903,7 @@
                                             <p:outputLabel styleClass="labelFormularioBold" value="Edad:" />
                                         </td>
                                         <td>
-                                            <p:inputText  styleClass="campoFormulario" id="edad_m" size="20" value="#{PyP_Programas.item_medicamentos.edad_ini}" >
+                                            <p:inputText  styleClass="campoFormulario" id="edad_m" size="4" value="#{PyP_Programas.item_medicamentos.edad_ini}" >
                                             </p:inputText>
                                             <p:watermark for="edad_m" value="Edad Inicial"/>
                                             <p:selectOneMenu styleClass="campoFormulario"
@@ -918,10 +918,10 @@
                                             <p:outputLabel styleClass="labelFormularioBold" value="Edad Final:" />
                                         </td>
                                         <td>
-                                            <p:inputText  styleClass="campoFormulario" id="edad_fin_m" size="20" value="#{PyP_Programas.item_medicamentos.edad_fin}" >
+                                            <p:inputText  styleClass="campoFormulario" id="edad_fin_m" size="4" value="#{PyP_Programas.item_medicamentos.edad_fin}" >
                                             </p:inputText>
                                             <p:watermark for="edad_fin_m" value="Edad Final"/>
-                                            <p:selectOneMenu styleClass="campoFormulario"
+                                            <p:selectOneMenu styleClass="campoFormulario" 
                                                              value="#{PyP_Programas.item_medicamentos.edad_fin_list}"
                                                              >
                                                 <f:selectItem itemLabel="01 - AÑO" itemValue="#{0}"/>
@@ -1024,7 +1024,7 @@
                                             <p:outputLabel styleClass="labelFormularioBold" value="Edad:" />
                                         </td>
                                         <td>
-                                            <p:inputText  styleClass="campoFormulario" id="edad_i" size="20" value="#{PyP_Programas.item_insumos.edad_ini}" >
+                                            <p:inputText  styleClass="campoFormulario" id="edad_i" size="4" value="#{PyP_Programas.item_insumos.edad_ini}" >
                                             </p:inputText>
                                             <p:watermark for="edad_i" value="Edad Inicial"/>
                                             <p:selectOneMenu styleClass="campoFormulario"
@@ -1039,7 +1039,7 @@
                                             <p:outputLabel styleClass="labelFormularioBold" value="Edad Final:" />
                                         </td>
                                         <td>
-                                            <p:inputText  styleClass="campoFormulario" id="edad_fin_i" size="20" value="#{PyP_Programas.item_insumos.edad_fin}" >
+                                            <p:inputText  styleClass="campoFormulario" id="edad_fin_i" size="4" value="#{PyP_Programas.item_insumos.edad_fin}" >
                                             </p:inputText>
                                             <p:watermark for="edad_fin_i" value="Edad Final"/>
                                             <p:selectOneMenu styleClass="campoFormulario"

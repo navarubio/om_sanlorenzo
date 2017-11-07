@@ -176,7 +176,7 @@
                       <p:outputLabel styleClass="campoObligatorio" value="Medicamento" />
                     <p:selectOneMenu  value="#{historiasMB.idMedicamento}"  filter="true" filterMatchMode="contains">
                         <f:selectItem itemLabel="" itemValue=""/>
-                        <f:selectItems value="#{aplicacionGeneralMB.listaMedicamentos}" var="p" itemLabel="#{p.nombreMedicamento}" itemValue="#{p.idMedicamento}" />
+                        <f:selectItems value="#{aplicacionGeneralMB.listaMedicamentos}" var="p" itemLabel="#{p.codigoMedicamento} - #{p.nombreMedicamento}" itemValue="#{p.idMedicamento}" />
                         <f:ajax event="change" listener="#{historiasMB.cambiarMedicamento}" render="IdPanelAgregarItemMedicamento"/> 
                     </p:selectOneMenu>  
                 </p:panelGrid>

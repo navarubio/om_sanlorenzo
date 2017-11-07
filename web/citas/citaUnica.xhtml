@@ -93,23 +93,30 @@
                     <tr>
                         <td>
                             <p:outputLabel styleClass="labelFormularioBold" value="Servicio:"/>
-
-                            <p:selectOneMenu styleClass="campoFormulario" id="selectipocita" value="#{citasMB.idServicio}" style="width: 250px;" filter="true" filterMatchMode="contains">
+                        </td>
+                        <td>
+                            <p:selectOneMenu styleClass="campoFormulario" id="selectipocita" value="#{citasMB.idServicio}" filter="true" filterMatchMode="contains">
                                 <f:selectItem itemValue="0" itemLabel="..." />
                                 <f:selectItems  value="#{citasMB.listaServicios}" /> 
                                 <p:ajax event="change" update=":pdautorizacion campoautorizacion selectipocita" listener="#{citasMB.validarAutorizacion(1)}"/>
                             </p:selectOneMenu>
 
+                        </td>
+                        <td>
 
-                            <p:outputLabel styleClass="labelFormularioBold" value="Motivo Consulta:"/>
 
-                            <p:selectOneMenu styleClass="campoFormulario" id="selecmotitconsultas" value="#{citasMB.motivoConsultas}" style="width: 250px;">
-                                <f:selectItem itemValue="0" itemLabel="..." />
-                                <f:selectItems  value="#{citasMB.listaMotivo}" /> 
-                                <p:ajax event="change" update="@form"/>
-                            </p:selectOneMenu>                                
                             <p:outputLabel styleClass="labelFormularioBold" value="No Autorizacion:" rendered="#{!citasMB.rendBtnAutorizacion}"/>
-                            <p:outputLabel styleClass="labelFormulario" id="campoautorizacion" value="#{citasMB.autorizacionSeleccionada.numAutorizacion}"/>
+                            
+                            <p:outputLabel styleClass="labelFormulario" id="campoautorizacion" value="#{citasMB.autorizacionSeleccionada.numAutorizacion}"
+                                           />
+                            <p:commandButton 
+                                id="idBtnRefrescarAutorizacion"
+                                title="Buscar Nro de Autorizaciones"                                        
+                                styleClass="icon-search fg-lightBlue bg-white no-border campoFormulario"
+                                actionListener="#{citasMB.validarAutorizacion(1)}"
+                                update=":pdautorizacion campoautorizacion selectipocita"
+                                value="&nbsp;"
+                                style="font-size: 20px; width: 20px; height: 20px;"/>  
 
                             <p:commandButton 
                                 id="idBtnAutorizacion"
@@ -121,6 +128,18 @@
                                 style="font-size: 20px; width: 20px; height: 20px;"/>                                      
                         </td>
                     </tr>  
+                    <tr>
+                        <td>
+                            <p:outputLabel styleClass="labelFormularioBold" value="Motivo Consulta:"/>
+                        </td>
+                        <td colspan="2">
+                            <p:selectOneMenu styleClass="campoFormulario" id="selecmotitconsultas" value="#{citasMB.motivoConsultas}" style="width: 250px;">
+                                <f:selectItem itemValue="0" itemLabel="..." />
+                                <f:selectItems  value="#{citasMB.listaMotivo}" /> 
+                                <p:ajax event="change" update="@form"/>
+                            </p:selectOneMenu> 
+                        </td>
+                    </tr>
                 </table>
                 <p:fieldset id="prog" legend="PyP Programas"  rendered="#{citasMB.hayPacienteSeleccionado}"> 
                     <table>  

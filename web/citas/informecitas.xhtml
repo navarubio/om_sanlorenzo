@@ -5,7 +5,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">  
     <h:head>        
-        <title>Informe de citas</title>
+        <title>Consulta de citas</title>
         <link href="../../recursos/css/estilos.css" rel="stylesheet"/>        
         <link href="../../recursos/css/metro-bootstrap.css" rel="stylesheet"/>
         <link href="../../recursos/css/iconFont.css" rel="stylesheet"/>
@@ -17,7 +17,7 @@
 
             <p:growl id="IdMensajePeriodos"  showDetail="true" sticky="false" autoUpdate="true" life="2000"  />                        
             <p:tabView id="IdTabView" style=" width: 95%;  margin-left: 15px;" >                 
-                <p:tab title="Informe Citas">                    
+                <p:tab title="Consulta de Citas">                    
                     <p:panelGrid id="IdPanelFiltro" styleClass="panelGridSinBordes" columns="2" style="margin-right: auto;">                    
                         <h:panelGroup >
                             <p:outputLabel styleClass="campoObligatorio" value="Medico" style="width: 120px;"/>                        
@@ -80,7 +80,7 @@
                             </p:selectOneMenu>                     
                         </h:panelGroup>
                         <h:panelGroup>
-                            <p:outputLabel styleClass="labelFormulario" value="Pacientes"  style="width: 120px;"/>                        
+                            <p:outputLabel styleClass="campoObligatorio" value="Pacientes"  style="width: 120px;"/>                        
                             <p:selectOneMenu styleClass="campoFormulario" style="width: 200px;"  value="#{informeCitasMB.estadoPaciente}" filter="true">
                                 <f:selectItem itemLabel="--Seleccione Estado--" itemValue=""/>
                                 <f:selectItem itemLabel="ACTIVO" itemValue="1"/>
