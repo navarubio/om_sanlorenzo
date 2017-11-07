@@ -50,7 +50,7 @@ public class InformeCitasServlet extends HttpServlet {
          String oportunidad =  request.getParameter("oportunidad");
          String estado =  request.getParameter("estado");
          String estadoPaciente =  request.getParameter("estadoPaciente");
-         String nombreArchivo = "INFORME_CITAS.xls";
+         String nombreArchivo = "CONSULTA_DE_CITAS.xls";
          try {
              con = DBConnector.getInstance().getConnection();
 
@@ -123,7 +123,7 @@ public class InformeCitasServlet extends HttpServlet {
                 }
             }
             
-            if(estadoPaciente!=null){
+            /*if(estadoPaciente!=null){
                 if(!estadoPaciente.equals("")){
                     if(estadoPaciente.equals("1")){
                         filtro +=" AND paciente.activo=true";
@@ -131,7 +131,7 @@ public class InformeCitasServlet extends HttpServlet {
                         filtro +=" AND paciente.activo=false";
                     }
                 }
-            }
+            }*/
             
             query +=filtro+" "
                     + " group by cita.id_cita, cita.fecha_Registro,turnos.fecha_creacion,turnos.fecha,hora_ini,turnos.fecha,hora_fin, medico.primer_nombre,medico.segundo_nombre,medico.primer_apellido,medico.segundo_apellido,\n" +       "especialidad.descripcion ,sede.nombre_sede,consultorio.nom_consultorio,administradora.razon_social, " +
@@ -165,7 +165,7 @@ public class InformeCitasServlet extends HttpServlet {
              Row fila ;
             int i = 0;
             
-            hoja = libro.createSheet("INFORME DE CITAS");
+            hoja = libro.createSheet("CONSULTA DE CITAS");
             fila = hoja.createRow(i);
             
             celda = fila.createCell(0);

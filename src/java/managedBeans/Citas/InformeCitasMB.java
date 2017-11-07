@@ -60,6 +60,7 @@ public class InformeCitasMB extends MetodosGenerales implements java.io.Serializ
         administradora = "";
         motivoConsulta = "";
         oportunidad = "";
+        estadoPaciente = "1";
         estado = "";
 
     }
@@ -90,10 +91,10 @@ public class InformeCitasMB extends MetodosGenerales implements java.io.Serializ
             imprimirMensaje("Error al consultar", "Debe seleccionar rango de fechas", FacesMessage.SEVERITY_ERROR);
             return;
         }
-        /*if (estadoPaciente == null) {
+        if (estadoPaciente == null) {
              imprimirMensaje("Error al consultar", "Debe seleccionar estado del paciente", FacesMessage.SEVERITY_ERROR);
             return;
-        }*/
+        }
 
         String filtro = "";
         if (medico != null) {
@@ -126,27 +127,27 @@ public class InformeCitasMB extends MetodosGenerales implements java.io.Serializ
                         filtro += " AND c.atendida=false and c.cancelada=false and c.facturada=false";
                         break;
                     case "2"://Atendida
-                        filtro += " AND c.atendida=true and c.facturada=false ";
+                        filtro += " AND c.atendida=TRUE and c.facturada=FALSE ";
                         break;
                     case "3"://Cancelada
-                        filtro += " AND c.cancelada=true";
+                        filtro += " AND c.cancelada=TRUE";
                         break;
                     case "4"://Facturada
-                        filtro += " AND c.facturada=true";
+                        filtro += " AND c.facturada=TRUE";
                         break;
                 }
             }
         }
-        if (estadoPaciente != null) {
+        /*if (estadoPaciente != null) {
             if (!estadoPaciente.equals("")) {
-                filtro = "AND c.idPaciente.activo is ";
+                filtro = "AND c.idPaciente.activo=";
                 if (estadoPaciente.equals("1")) {
-                    filtro += "true";
+                    filtro += "TRUE";
                 } else {
-                    filtro += "false";
+                    filtro += "FALSE";
                 }
             }
-        }
+        }*/
         listaCitas = citaFacade.getInformeFiltro(filtro, fechaDesde, fechaHasta);
         if (!listaCitas.isEmpty()) {
             renderBuscar = true;

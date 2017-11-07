@@ -92,9 +92,9 @@ public class CitasMB extends MetodosGenerales implements Serializable {
     private CitCitas citaSeleccionada;
 
     private boolean estado;
-    private int motivoConsultas; 
+    private int motivoConsultas;
     private int motivoCancelacion;
-    private String descripcionCancelacion; 
+    private String descripcionCancelacion;
     private int idPrograma;
     private int idServicio;
     private String nombreServicio;
@@ -124,8 +124,7 @@ public class CitasMB extends MetodosGenerales implements Serializable {
     private CitCitas citaSelecionada;
     private int sede;
     private List<SelectItem> listaMotivo;
-    
-    
+
     //Programas
     private PyPprograma programaSeleccionadoTabla;
     public List<PyPProgramaItem> listaMedicamentosPrograma;
@@ -133,19 +132,19 @@ public class CitasMB extends MetodosGenerales implements Serializable {
     public PyPProgramaItem servicioSeleccionadoTabla;
     public PyPProgramaItem medicamentoSeleccionadoTabla;
 //    private pypbean programas = new pypbean();
-    
+
     @EJB
     PyPProgramas ProgramaFacade;
-    
+
     @EJB
     PyPprogramAsoc ProgramaFacadeAsoc;
-    
+
     @EJB
     PyPprogramaItems ProgramaFacadeItem;
-    
+
     @EJB
     CitCitasFacade citasFacade;
-    
+
     @EJB
     PypProgramaCitas citasProgramaCitas;
 
@@ -171,21 +170,21 @@ public class CitasMB extends MetodosGenerales implements Serializable {
     CfgUsuariosFacade usuariosFachada;
     @EJB
     FacManualTarifarioFacade manualFacade;
-    
+
     @EJB
     CfgDiasNoLaboralesFacade noLaborablesFacade;
 
-    public CitasMB() {        
+    public CitasMB() {
     }
 
     @PostConstruct
     private void inicializar() {
-        
+
         listaMedicamentosPrograma = new ArrayList<>();
         //-----------
         setListaPacientes(new LazyPacienteDataModel(pacientesFachada));
-        listaServicios = new ArrayList(); 
-        listaMotivo = new ArrayList(); 
+        listaServicios = new ArrayList();
+        listaMotivo = new ArrayList();
         setListaPrestadores(new LazyPrestadorDataModel(usuariosFachada));
         //setListaPrestadores(prestadoresFachada.findAll());
         cargarEspecialidadesPrestadores();
@@ -193,9 +192,9 @@ public class CitasMB extends MetodosGenerales implements Serializable {
         LoginMB loginMB = FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{loginMB}", LoginMB.class);
         sede = loginMB.getCentroDeAtencionactual().getIdSede();
     }
-    
-    public String genero_to_string(int genero){
-        switch(genero){
+
+    public String genero_to_string(int genero) {
+        switch (genero) {
             case 1:
                 return " MASCULINO";
             case 2:
@@ -204,11 +203,11 @@ public class CitasMB extends MetodosGenerales implements Serializable {
                 return " AMBOS";
             default:
                 return "";
-        } 
+        }
     }
-    
-    public String edad_to_string(int edad_list){
-        switch(edad_list){
+
+    public String edad_to_string(int edad_list) {
+        switch (edad_list) {
             case 0:
                 return " AÑO";
             case 1:
@@ -217,7 +216,7 @@ public class CitasMB extends MetodosGenerales implements Serializable {
                 return " DIA";
             default:
                 return "";
-        } 
+        }
     }
 
     //-----------------------------------------------------------------------------------
@@ -226,7 +225,7 @@ public class CitasMB extends MetodosGenerales implements Serializable {
     public void findPaciente() {
         if (getIdentificacion() != null) {
             if (!identificacion.isEmpty()) {
-                
+
                 //setPacienteSeleccionado(null);
                 pacienteSeleccionado = pacientesFachada.buscarPorIdentificacion(getIdentificacion());
                 if (pacienteSeleccionado == null) {
@@ -257,11 +256,11 @@ public class CitasMB extends MetodosGenerales implements Serializable {
         //loadEvents();
 
     }
-    
+
     public void crearPaciente() {
         RequestContext.getCurrentInstance().execute("window.parent.cargarTab('Paciente','configuraciones/pacientes.xhtml','-')");
     }
-    
+
     public void actualizarPaciente() {
         if (pacienteSeleccionado != null) {
             setHayPacienteSeleccionado(true);
@@ -278,24 +277,24 @@ public class CitasMB extends MetodosGenerales implements Serializable {
 
     private void CargarServicios() {
         listaServicios.clear();
-        listaServicios = new ArrayList(); 
+        listaServicios = new ArrayList();
         idServicio = 0;
-        if(pacienteSeleccionado.getIdContrato()!= null){
+        if (pacienteSeleccionado.getIdContrato() != null) {
             List<FacManualTarifarioServicio> servicios = pacienteSeleccionado.getIdContrato().getIdManualTarifario().getFacManualTarifarioServicioList();
             for (FacManualTarifarioServicio servicio : servicios) {
-                if(servicio.getFacServicio().getIdServicio() == 5865){
+                if (servicio.getFacServicio().getIdServicio() == 5865) {
                     getListaServicios().add(new SelectItem(servicio.getFacServicio().getIdServicio(), servicio.getFacServicio().getCodigoServicio() + " - " + servicio.getFacServicio().getNombreServicio()));
                     idServicio = 5865;
                 }
             }
             for (FacManualTarifarioServicio servicio : servicios) {
-                if(servicio.getFacServicio().getIdServicio() != 5865){
+                if (servicio.getFacServicio().getIdServicio() != 5865) {
                     getListaServicios().add(new SelectItem(servicio.getFacServicio().getIdServicio(), servicio.getFacServicio().getCodigoServicio() + " - " + servicio.getFacServicio().getNombreServicio()));
-                }else{
+                } else {
                     idServicio = 5865;
                 }
             }
-        }else{
+        } else {
             imprimirMensaje("Error", "El paciente no esta asosiado a un Contrato", FacesMessage.SEVERITY_ERROR);
         }
 //        RequestContext.getCurrentInstance().execute("PF('selectipocita').selectValue("+idServicio+")");
@@ -320,10 +319,10 @@ public class CitasMB extends MetodosGenerales implements Serializable {
         } else {
             setDisplayPrestador("none");
         }
-    } 
-    
+    }
+
     public void findprestador() {
-        
+
         if (id_prestador == null) {
             setEvenModel(null);
             return;
@@ -422,15 +421,12 @@ public class CitasMB extends MetodosGenerales implements Serializable {
             imprimirMensaje("Error", "El turno seleccionado esta programado para una fecha previa", FacesMessage.SEVERITY_ERROR);
             return;
         }
-        
-        CfgDiasNoLaborales noLabora=noLaborablesFacade.FindDiaNoLaboraleBySede(sede, turnoSeleccionado.getFecha());
-        if(noLabora!=null){
+
+        CfgDiasNoLaborales noLabora = noLaborablesFacade.FindDiaNoLaboraleBySede(sede, turnoSeleccionado.getFecha());
+        if (noLabora != null) {
             imprimirMensaje("Error", "El dia del turno seleccionado es no laborable", FacesMessage.SEVERITY_ERROR);
             return;
         }
-        
-        
-        
 
         //variable que controla si el servicio o tipo de cita seleccionado requiere autorizacion
 //        boolean ban = false;
@@ -472,7 +468,7 @@ public class CitasMB extends MetodosGenerales implements Serializable {
             nuevaCita.setIdTurno(turnoSeleccionado);
             nuevaCita.setIdPaquete(null);
             CfgClasificaciones clasificaciones;
-            if (motivoConsultas != 0) { 
+            if (motivoConsultas != 0) {
                 clasificaciones = clasificacionesFachada.find(motivoConsultas);
                 nuevaCita.setTipoCita(clasificaciones);
             }
@@ -505,9 +501,9 @@ public class CitasMB extends MetodosGenerales implements Serializable {
             }
             nuevaCita.setTieneRegAsociado(false);
             citasFacade.create(nuevaCita);
-            if(listaMedicamentosPrograma.size()>0){
+            if (listaMedicamentosPrograma.size() > 0) {
                 int i = 0;
-                while(i<listaMedicamentosPrograma.size()){
+                while (i < listaMedicamentosPrograma.size()) {
                     modelo.entidades.PypProgramaCita c = new modelo.entidades.PypProgramaCita();
                     c.setIdProgramaItem(listaMedicamentosPrograma.get(i).getIdProgramaItems());
                     c.setIdCita(nuevaCita.getIdCita());
@@ -527,6 +523,7 @@ public class CitasMB extends MetodosGenerales implements Serializable {
             setIdServicio(0);
             imprimirMensaje("Correto", "La cita ha sido creada.", FacesMessage.SEVERITY_INFO);
             loadEvents();
+            
             //carga la lista de citas que sera usada porla tabla que muestra las citas creadas para el prestador elegido
             //cargarCitas();
 
@@ -537,8 +534,10 @@ public class CitasMB extends MetodosGenerales implements Serializable {
             //context.execute("PF('dlgresult').show();");
         } else {
             imprimirMensaje("Error", "Es necesario seleccionar el paciente", FacesMessage.SEVERITY_ERROR);
+            return;
         }
-        liberarCampos(0);
+        liberarCampos(1);
+        limpiarServicioMotivoConsulta();
 
     }
 
@@ -632,60 +631,60 @@ public class CitasMB extends MetodosGenerales implements Serializable {
         if (idServicio != 0) {
             FacServicio facServicio = facServicioFacade.find(idServicio);
             setNombreServicio(facServicio.getNombreServicio());
-            if(facServicio != null){
-            if (facServicio.getAutorizacion()) {
-                if (pacienteSeleccionado != null) {
-                    if (pacienteSeleccionado.getIdAdministradora() == null) {
-                        idServicio = 0;
-                        RequestContext.getCurrentInstance().update("formCita");
-                        imprimirMensaje("Error", "Este paciente no tiene administradora, debe ingresar a pacientes y asignarle una administradora", FacesMessage.SEVERITY_ERROR);
-                        return;
-                    }
-                    //paciente particular no necesita validar autorizaciones
-                    if (pacienteSeleccionado.getIdAdministradora().getCodigoAdministradora().equals("1")) {
-                        autorizacionrequerida = false;
-                        autorizacionvalidada = false;
-                        setRendBtnAutorizacion(false);
-                        setAutorizacionSeleccionada(null);
-                        RequestContext context = RequestContext.getCurrentInstance();
-                        context.update("formCita");
-                        return;
-                    }
-                    autorizacionrequerida = true;
-                    CitAutorizaciones autorizacion = autorizacionesFacade.findAutorizacion(pacienteSeleccionado.getIdPaciente(), idServicio, pacienteSeleccionado.getIdAdministradora().getIdAdministradora());
-                    if (autorizacion != null) {
-                        autorizacionvalidada = true;
-                        setAutorizacionSeleccionada(autorizacion);
-                        if (ban == 1) {
-                            setAutorizacionServicioSeleccionado(autorizacionesServiciosFacade.buscarServicioPorAutorizacion(autorizacion.getIdAutorizacion(), idServicio));
-                            RequestContext context = RequestContext.getCurrentInstance();
-                            context.execute("PF('dlgresautorizacion').show();");
+            if (facServicio != null) {
+                if (facServicio.getAutorizacion()) {
+                    if (pacienteSeleccionado != null) {
+                        if (pacienteSeleccionado.getIdAdministradora() == null) {
+                            idServicio = 0;
+                            RequestContext.getCurrentInstance().update("formCita");
+                            imprimirMensaje("Error", "Este paciente no tiene administradora, debe ingresar a pacientes y asignarle una administradora", FacesMessage.SEVERITY_ERROR);
+                            return;
                         }
-                    } else {
-                        autorizacionvalidada = false;
-                        autorizacion = autorizacionesFacade.findAutorizacionDos(pacienteSeleccionado.getIdPaciente(), idServicio, pacienteSeleccionado.getIdAdministradora().getIdAdministradora());
-                        setAutorizacionSeleccionada(null);
-                        setAutorizacionServicioSeleccionado(null);
+                        //paciente particular no necesita validar autorizaciones
+                        if (pacienteSeleccionado.getIdAdministradora().getCodigoAdministradora().equals("1")) {
+                            autorizacionrequerida = false;
+                            autorizacionvalidada = false;
+                            setRendBtnAutorizacion(false);
+                            setAutorizacionSeleccionada(null);
+                            RequestContext context = RequestContext.getCurrentInstance();
+                            context.update("formCita");
+                            return;
+                        }
+                        autorizacionrequerida = true;                        
+                        CitAutorizaciones autorizacion = autorizacionesFacade.findAutorizacion(pacienteSeleccionado.getIdPaciente(), idServicio, pacienteSeleccionado.getIdAdministradora().getIdAdministradora());
+                        if (autorizacion != null) {
+                            autorizacionvalidada = true;
+                            setAutorizacionSeleccionada(autorizacion);
+                            if (ban == 1) {
+                                setAutorizacionServicioSeleccionado(autorizacionesServiciosFacade.buscarServicioPorAutorizacion(autorizacion.getIdAutorizacion(), idServicio));
+                                RequestContext context = RequestContext.getCurrentInstance();
+                                context.execute("PF('dlgresautorizacion').show();");
+                            }
+                        } else {
+                            autorizacionvalidada = false;
+                            autorizacion = autorizacionesFacade.findAutorizacionDos(pacienteSeleccionado.getIdPaciente(), idServicio, pacienteSeleccionado.getIdAdministradora().getIdAdministradora());
+                            setAutorizacionSeleccionada(null);
+                            setAutorizacionServicioSeleccionado(null);
 //                        RequestContext context = RequestContext.getCurrentInstance();
 //                        context.update("autorizar");
-                        if (ban == 1 && autorizacion == null) {
-                            setRendBtnAutorizacion(true);
-                            imprimirMensaje("Error", "El servicio requiere autorizacion y el paciente no posee una autorizacion vigente", FacesMessage.SEVERITY_ERROR);
-                        }
-                        if (ban == 1 && autorizacion != null) {
-                            setAutorizacionSeleccionada(autorizacion);
-                            imprimirMensaje("Error", "La autorizacion asociada al servicio no admite crear otra cita", FacesMessage.SEVERITY_ERROR);
+                            if (ban == 1 && autorizacion == null) {
+                                setRendBtnAutorizacion(true);
+                                imprimirMensaje("Error", "El servicio requiere autorizacion y el paciente no posee una autorizacion vigente", FacesMessage.SEVERITY_ERROR);
+                            }
+                            if (ban == 1 && autorizacion != null) {
+                                setAutorizacionSeleccionada(autorizacion);
+                                imprimirMensaje("Error", "La autorizacion asociada al servicio no admite crear otra cita", FacesMessage.SEVERITY_ERROR);
+                            }
                         }
                     }
-                }
-            } else {
-                autorizacionrequerida = false;
-                autorizacionvalidada = false;
-                setNombreServicio(null);
-                setAutorizacionSeleccionada(null);
+                } else {
+                    autorizacionrequerida = false;
+                    autorizacionvalidada = false;
+                    setNombreServicio(null);
+                    setAutorizacionSeleccionada(null);
 //                RequestContext context = RequestContext.getCurrentInstance();
 //                context.update("autorizar");
-            }
+                }
             }
 
         } else {
@@ -807,36 +806,35 @@ public class CitasMB extends MetodosGenerales implements Serializable {
             seleccionarCita(Long.parseLong(idTurno));
         }
     }
-    
+
     public void buscarPrograma() {
 //        listaServiciosPrograma = ProgramaFacadeItem.buscar_programas();
-        System.out.println(calcularEdadInt(pacienteSeleccionado.getFechaNacimiento())+" "+pacienteSeleccionado.getGenero().getObservacion());
-        listaServiciosPrograma = ProgramaFacadeItem.buscar_programas_val(calcularEdadInt(pacienteSeleccionado.getFechaNacimiento()),calcularEdadMes(pacienteSeleccionado.getFechaNacimiento()), pacienteSeleccionado.getGenero().getObservacion(),pacienteSeleccionado.getIdAdministradora().getIdAdministradora());
-        if(listaServiciosPrograma.isEmpty()){
-            listaServiciosPrograma = ProgramaFacadeItem.buscar_programas_val_(calcularEdadInt(pacienteSeleccionado.getFechaNacimiento()),calcularEdadMes(pacienteSeleccionado.getFechaNacimiento()), pacienteSeleccionado.getGenero().getObservacion(),pacienteSeleccionado.getIdAdministradora().getIdAdministradora());
+        System.out.println(calcularEdadInt(pacienteSeleccionado.getFechaNacimiento()) + " " + pacienteSeleccionado.getGenero().getObservacion());
+        listaServiciosPrograma = ProgramaFacadeItem.buscar_programas_val(calcularEdadInt(pacienteSeleccionado.getFechaNacimiento()), calcularEdadMes(pacienteSeleccionado.getFechaNacimiento()), pacienteSeleccionado.getGenero().getObservacion(), pacienteSeleccionado.getIdAdministradora().getIdAdministradora());
+        if (listaServiciosPrograma.isEmpty()) {
+            listaServiciosPrograma = ProgramaFacadeItem.buscar_programas_val_(calcularEdadInt(pacienteSeleccionado.getFechaNacimiento()), calcularEdadMes(pacienteSeleccionado.getFechaNacimiento()), pacienteSeleccionado.getGenero().getObservacion(), pacienteSeleccionado.getIdAdministradora().getIdAdministradora());
         }
         RequestContext.getCurrentInstance().execute("PF('wvTablaServiciosManual').clearFilters(); PF('wvTablaServiciosManual').getPaginator().setPage(0);");
         RequestContext.getCurrentInstance().execute("PF('dialogoBuscarManualesTarifarios').show()");
         RequestContext.getCurrentInstance().update("cargar");
     }
-    
-        
+
     public void cargarPrograma(ActionEvent actionEvent) {
         if (servicioSeleccionadoTabla == null) {
             imprimirMensaje("Error", "No se ha seleccionado ningún programa de promoción y prevención de la tabla", FacesMessage.SEVERITY_ERROR);
             return;
-        }  
-        int i = 0,o = 0;
-        if(listaMedicamentosPrograma.size()>0){
-            while(i < listaMedicamentosPrograma.size()){
-                if(listaMedicamentosPrograma.get(i).getIdProgramaItems().equals(servicioSeleccionadoTabla.getIdProgramaItems())){
+        }
+        int i = 0, o = 0;
+        if (listaMedicamentosPrograma.size() > 0) {
+            while (i < listaMedicamentosPrograma.size()) {
+                if (listaMedicamentosPrograma.get(i).getIdProgramaItems().equals(servicioSeleccionadoTabla.getIdProgramaItems())) {
                     imprimirMensaje("Error", "Programa ya cargado", FacesMessage.SEVERITY_ERROR);
                     o++;
                 }
                 i++;
             }
         }
-        if(o == 0){
+        if (o == 0) {
             listaMedicamentosPrograma.add(servicioSeleccionadoTabla);
             RequestContext.getCurrentInstance().execute("PF('dialogoBuscarManualesTarifarios').hide()");
             RequestContext.getCurrentInstance().update("formCita");
@@ -1246,7 +1244,7 @@ public class CitasMB extends MetodosGenerales implements Serializable {
 
     public void setProgramaSeleccionadoTabla(PyPprograma programaSeleccionadoTabla) {
         this.programaSeleccionadoTabla = programaSeleccionadoTabla;
-    } 
+    }
 
     public int getSede() {
         return sede;
@@ -1343,7 +1341,7 @@ public class CitasMB extends MetodosGenerales implements Serializable {
     public void setUsuariosFachada(CfgUsuariosFacade usuariosFachada) {
         this.usuariosFachada = usuariosFachada;
     }
- 
+
     public PyPprogramAsoc getProgramaFacadeAsoc() {
         return ProgramaFacadeAsoc;
     }
@@ -1358,7 +1356,7 @@ public class CitasMB extends MetodosGenerales implements Serializable {
 
     public void setProgramaFacadeItem(PyPprogramaItems ProgramaFacadeItem) {
         this.ProgramaFacadeItem = ProgramaFacadeItem;
-    } 
+    }
 
     public List<PyPProgramaItem> getListaServiciosPrograma() {
         return listaServiciosPrograma;
@@ -1385,7 +1383,7 @@ public class CitasMB extends MetodosGenerales implements Serializable {
     }
 
     public List<SelectItem> getListaMotivo() {
-        if(listaMotivo != null){
+        if (listaMotivo != null) {
             listaMotivo.clear();
         }
         List<SelectItem> listaRetorno = new ArrayList<>();
@@ -1394,14 +1392,14 @@ public class CitasMB extends MetodosGenerales implements Serializable {
             listaRetorno.add(new SelectItem(clasificacion.getId(), clasificacion.getCodigo() + " - " + clasificacion.getDescripcion()));
         }
         for (SelectItem servicio : listaRetorno) {
-            if(servicio.getValue().toString().equals("475")){
+            if (servicio.getValue().toString().equals("475")) {
                 listaMotivo.add(servicio);
             }
         }
         for (SelectItem servicio : listaRetorno) {
-            if(!servicio.getValue().toString().equals("475")){
+            if (!servicio.getValue().toString().equals("475")) {
                 listaMotivo.add(servicio);
-            }else{
+            } else {
                 motivoConsultas = 475;
             }
         }
@@ -1411,7 +1409,5 @@ public class CitasMB extends MetodosGenerales implements Serializable {
     public void setListaMotivo(List<SelectItem> listaMotivoConsulta) {
         this.listaMotivo = listaMotivoConsulta;
     }
-    
-    
-    
+
 }
