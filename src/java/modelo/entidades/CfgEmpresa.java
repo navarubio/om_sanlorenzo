@@ -90,8 +90,8 @@ public class CfgEmpresa implements Serializable {
     @JoinColumn(name = "cod_departamento", referencedColumnName = "id")
     @ManyToOne
     private CfgClasificaciones codDepartamento;
-    @OneToMany(mappedBy = "idEmpresa")
-    private List<InvLotes> invLotesList;
+    /*@OneToMany(mappedBy = "idEmpresa")
+    private List<InvLotes> invLotesList;*/
     public CfgEmpresa() {
     }
 
@@ -249,6 +249,7 @@ public class CfgEmpresa implements Serializable {
     public void setCodDepartamento(CfgClasificaciones codDepartamento) {
         this.codDepartamento = codDepartamento;
     }
+    /*
     @XmlTransient
     public List<InvLotes> getInvLotesList() {
         return invLotesList;
@@ -256,7 +257,7 @@ public class CfgEmpresa implements Serializable {
 
     public void setInvLotesList(List<InvLotes> invLotesList) {
         this.invLotesList = invLotesList;
-    }
+    }*/
 
     @Override
     public int hashCode() {

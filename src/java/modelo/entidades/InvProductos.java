@@ -77,6 +77,8 @@ public class InvProductos implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "costo")
     private Double costo;
+    @Column(name = "precio_venta")
+    private Double precioVenta;
     @Column(name = "stock_minimo")
     private Integer stockMinimo;
     @Column(name = "lote")
@@ -185,6 +187,16 @@ public class InvProductos implements Serializable {
     public void setCosto(Double costo) {
         this.costo = costo;
     }
+
+    public Double getPrecioVenta() {
+        return precioVenta;
+    }
+
+    public void setPrecioVenta(Double precioVenta) {
+        this.precioVenta = precioVenta;
+    }
+    
+    
 
     public Integer getStockMinimo() {
         return stockMinimo;

@@ -78,7 +78,7 @@ public class LoteMB extends MetodosGenerales implements java.io.Serializable{
     public void nuevo(){
         lote = new InvLotes();
         lote.setFechaVencimiento(new Date());
-        lote.setIdEmpresa(empresaActual);
+        //lote.setIdEmpresa(empresaActual);
         listaLoteProductos = new ArrayList<>();
         listaLoteProductosEliminar = new ArrayList<>();
     }
@@ -88,7 +88,7 @@ public class LoteMB extends MetodosGenerales implements java.io.Serializable{
                 if(lote.getIdLote()==null){
                     lote.setFechaCreacion(new Date());
                     lote.setUsuarioCrea(loginMB.getUsuarioActual());
-                    lote.setIdEmpresa(empresaActual);
+                    //lote.setIdEmpresa(empresaActual);
                     loteFachada.create(lote);
                     //guardamos el detalle
                     for(InvLoteProductos il:listaLoteProductos){

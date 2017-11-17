@@ -27,8 +27,12 @@ public class InvLotesFacade extends AbstractFacade<InvLotes> {
 
     public List<InvLotes> getLotesSinVencer(int idEmpresa){
         List<InvLotes> lista = new ArrayList<>();
-        String hql = "SELECT i FROM InvLotes i WHERE i.fechaVencimiento>=:fechaVencimiento and i.idEmpresa.codEmpresa=:idEmpresa";
-        Query query = getEntityManager().createQuery(hql).setParameter("fechaVencimiento", new Date()).setParameter("idEmpresa",idEmpresa);
+        String hql = "SELECT i FROM InvLotes i WHERE i.fechaVencimiento>=:fechaVencimiento "
+                //+ "and i.idEmpresa.codEmpresa=:idEmpresa"
+                ;
+        Query query = getEntityManager().createQuery(hql).setParameter("fechaVencimiento", new Date())
+                //.setParameter("idEmpresa",idEmpresa)
+                ;
         
         return query.getResultList();
     }

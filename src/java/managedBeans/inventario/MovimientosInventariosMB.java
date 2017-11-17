@@ -165,6 +165,9 @@ public class MovimientosInventariosMB extends MetodosGenerales implements java.i
         fechaMovimiento = new Date();
         //Cargamos la bodega asignada al usuario logueado
         bodegaOrigen = bodegaFachada.bodegaUsuarioReponsable(loginMB.getUsuarioActual().getIdUsuario());
+        if(bodegaOrigen==null){
+            imprimirMensaje("Iniciando", "Usuario Actual no este responsable de bodega", FacesMessage.SEVERITY_WARN);
+        }
         //cargamos los lotes creados por la empresa
         listaLote = loteFachada.getLotesSinVencer(loginMB.getEmpresaActual().getCodEmpresa());
         initRender();
@@ -1075,6 +1078,9 @@ public class MovimientosInventariosMB extends MetodosGenerales implements java.i
     }
     public void buscarCodigo(){//traslado bodega
         InvBodegas bodegaResponsable = bodegaFachada.bodegaUsuarioReponsable(loginMB.getUsuarioActual().getIdUsuario());
+        if(bodegaResponsable==null){
+            imprimirMensaje("Iniciando", "Usuario Actual no este responsable de bodega", FacesMessage.SEVERITY_WARN);
+        }
         if(!nroSalida.equals("")){
             InvMovimientos mov = movimientoFacade.getMovimientoNumero(nroSalida, "S",bodegaResponsable.getIdBodega());
             if(mov!=null){
@@ -1118,6 +1124,9 @@ public class MovimientosInventariosMB extends MetodosGenerales implements java.i
     public void buscarCodigoSalidaDevolucionCompra(){
         try {
             InvBodegas bodegaResponsable = bodegaFachada.bodegaUsuarioReponsable(loginMB.getUsuarioActual().getIdUsuario());
+            if(bodegaResponsable==null){
+                imprimirMensaje("Iniciando", "Usuario Actual no este responsable de bodega", FacesMessage.SEVERITY_WARN);
+            }
             if(!nroSalida.equals("")){
                 InvMovimientos mov = movimientoFacade.getMovimientoNumero(nroSalida, "S",bodegaResponsable.getIdBodega());
                 if(mov!=null){
@@ -1155,7 +1164,7 @@ public class MovimientosInventariosMB extends MetodosGenerales implements java.i
                             } else if (mov.getEstado().equals(TipoInventarioEnum.P.toString())) {
                                 imprimirMensaje("Salida", "El número de salida se encuentra pendiente", FacesMessage.SEVERITY_INFO);
                             } else {
-                                idLote = ordenCompra.getIdLote()!=null?ordenCompra.getIdLote().getIdLote():0;
+                                //idLote = ordenCompra.getIdLote()!=null?ordenCompra.getIdLote().getIdLote():0;
                                 bodegaDestino = mov.getIdBodegaDestino();
                                 movimientoSeleccionado = mov;
                                 renderForm = true;

@@ -71,9 +71,9 @@ public class InvBodegasFacade extends AbstractFacade<InvBodegas> {
             Query query = getEntityManager().createQuery(hql).setParameter("idUsuario", idUsuario);
             return (InvBodegas)query.getSingleResult();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Responsable de Bodega "+idUsuario+" invalido");
+            return null;
         }
-        return null;
     }
     
     /**

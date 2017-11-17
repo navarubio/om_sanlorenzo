@@ -61,9 +61,10 @@ public class InvLotes implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaCreacion;
     @OneToMany(mappedBy = "idLote")
+    /*El campo no existe
     @JoinColumn(name = "id_empresa", referencedColumnName = "cod_empresa")
     @ManyToOne
-    private CfgEmpresa idEmpresa;
+    private CfgEmpresa idEmpresa;*/
     private List<InvBodegaProductos> invBodegaProductosList;
     @OneToMany(mappedBy = "idLote")
     private List<InvLoteProductos> invLoteProductosList;
@@ -138,6 +139,8 @@ public class InvLotes implements Serializable {
     public void setUsuarioCrea(CfgUsuarios usuarioCrea) {
         this.usuarioCrea = usuarioCrea;
     }
+    /*
+    Campo Empresa No Existe
     public CfgEmpresa getIdEmpresa() {
         return idEmpresa;
     }
@@ -145,6 +148,7 @@ public class InvLotes implements Serializable {
     public void setIdEmpresa(CfgEmpresa idEmpresa) {
         this.idEmpresa = idEmpresa;
     }
+    */
     
     @XmlTransient
     public List<InvBodegaProductos> getInvBodegaProductosList() {

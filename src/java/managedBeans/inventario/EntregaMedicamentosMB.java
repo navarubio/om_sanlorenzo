@@ -122,7 +122,11 @@ public class EntregaMedicamentosMB extends MetodosGenerales implements java.io.S
         this.listaProductos = new ArrayList<>();
         this.datosFormulario = new DatosFormularioHistoria();
         this.bodega = bodegaFacade.bodegaUsuarioReponsable(loginMB.getUsuarioActual().getIdUsuario());
-        if(bodega!=null) centroAtencion = bodega.getIdSede().getNombreSede();
+        if(bodega!=null){
+            centroAtencion = bodega.getIdSede().getNombreSede();
+        }else{
+            imprimirMensaje("Iniciando", "Usuario Actual no este responsable de bodega", FacesMessage.SEVERITY_WARN);
+        }
         this.entregaMedicamentos = new InvEntregaMedicamentos();
         this.renderBoton = false;
     }
