@@ -1,0 +1,187 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"      
+      xmlns:pe="http://primefaces.org/ui/extensions" 
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Reporte de Movimientos de inventario</title>
+        <link href="../recursos/css/estilos.css" rel="stylesheet"/>        
+        <link href="../recursos/css/metro-bootstrap.css" rel="stylesheet"/>
+        <link href="../recursos/css/iconFont.css" rel="stylesheet"/>
+        <link href="../recursos/css/bootstrap.min.css" rel="stylesheet"/>        
+        <script type="text/javascript" src="../recursos/js/calendario.js"/>
+    </h:head>
+    <h:body>
+        <h:form id="IdFormMovimientosInventario" >
+            #{reporteMovimientoInventarioMB.init()}
+
+            <p:growl id="growl" showDetail="true" sticky="false" autoUpdate="true" life="2000"  />
+            <br/>            
+
+            <br/> 
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <p:outputLabel value="Categoría" /><br />
+                        <p:selectOneMenu filter="true" value="#{reporteMovimientoInventarioMB.categoria.idCategoria}"  style="width: 100%">
+                            <f:selectItem itemLabel="-- Seleccione Categoría --" itemValue="0" />
+                            <f:selectItems value="#{reporteMovimientoInventarioMB.listaCategorias}" 
+                                           var="categoria" itemLabel="#{categoria.nombre}" itemValue="#{categoria.idCategoria}" />
+                        </p:selectOneMenu>
+                    </div>
+                    <div class="col-sm-3">
+                        <p:outputLabel value="Tipo de Movimiento" />
+                        <p:selectOneMenu value="#{movimientosInventariosMB.tipoMovimiento}" style="width:100%;">
+                            <f:selectItem itemValue="0" itemLabel="-- Seleccione Movimiento --" />
+                            <f:selectItem itemValue="E" itemLabel="Entrada" />
+                            <f:selectItem itemValue="S" itemLabel="Salida" />
+                            <f:ajax listener="#{movimientosInventariosMB.validarTipoMovimiento}" 
+                                    event="change" render="IdFormMovimientosInventario:somTipoProceso" />
+                        </p:selectOneMenu>
+                    </div>
+                    <div class="col-sm-3">
+                        <p:outputLabel value="Tipo Proceso" 
+                                       />
+                        <br/>
+                        <p:selectOneMenu id="somTipoProceso" value="#{movimientosInventariosMB.tipoProceso}" style="width: 100%">
+                            <f:selectItem itemLabel="-- Seleccione proceso --" itemValue="0" />
+                            <f:selectItems value="#{movimientosInventariosMB.listaProcesos}" rendered="#{movimientosInventariosMB.renderProcesos}"/>
+                        </p:selectOneMenu>
+                    </div>
+                    <div class="col-sm-3">
+                        <p:outputLabel value="Bodega" /><br />
+                        <p:selectOneMenu filter="true" value="#{reporteMovimientoInventarioMB.bodega.idBodega}" style="width: 100%">
+                            <f:selectItem itemLabel="-- Seleccione Bodega --" itemValue="0" />
+                            <f:selectItems value="#{reporteMovimientoInventarioMB.listaBodegas}" 
+                                           var="bodega" itemLabel="#{bodega.nombre}" itemValue="#{bodega.idBodega}" />
+                        </p:selectOneMenu>
+                    </div>
+                </div>
+                <div class="row">
+                    
+                    <div class="col-sm-3">
+                        <p:outputLabel value="Lote"/><br />
+                        <p:selectOneMenu value="#{reporteMovimientoInventarioMB.idLote}" style="width: 100%">
+                            <f:selectItem itemValue="0" itemLabel="-- Seleccione Lote --" />
+                            <f:selectItems value="#{reporteMovimientoInventarioMB.listaLote}" var="lot" itemLabel="#{lot.codigo}" itemValue="#{lot.idLote}"/>
+                        </p:selectOneMenu>
+                    </div>
+                    <div class="col-sm-3">
+                        <p:outputLabel value="Filtrar Cantidad"/><br />
+                        <p:selectOneMenu value="#{reporteMovimientoInventarioMB.operador}" style="width: 100%">
+                            <f:selectItem itemValue="0" itemLabel="-- Seleccione Tipo Filtro --" />
+                            <f:selectItem itemValue="1" itemLabel="Igual a" />
+                            <f:selectItem itemValue="2" itemLabel="Mayor a" />
+                            <f:selectItem itemValue="3" itemLabel="Menor a" />
+                            <f:selectItem itemValue="4" itemLabel="Mayor o Igual" />
+                            <f:selectItem itemValue="5" itemLabel="Menor o Igual" />
+                        </p:selectOneMenu>
+                    </div>
+                    <div class="col-sm-1">
+                        <p:outputLabel value="Cantidad"/><br />
+                        <pe:inputNumber id="cantidadOperador"  style="width: 100%"
+                                        value="#{reporteMovimientoInventarioMB.cantidadOperador}">  
+                        </pe:inputNumber>  
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-sm-4">
+                        <p:outputLabel value="Fec. Desde" /><br />
+
+                        <p:calendar styleClass="campoFormulario"  style="width: 100%"
+                                    yearRange="c-100:c+100" navigator="true" mask="true" locale="es" pattern="dd/MM/yyyy"
+                                    maxdate="today" 
+                                    value="#{reporteMovimientoInventarioMB.fechaDesde}" size="14">
+
+                        </p:calendar>
+                    </div>
+                    <div class="col-sm-4">
+                        <p:outputLabel value="Fec. Hasta" /><br />
+
+                        <p:calendar styleClass="campoFormulario" 
+                                    yearRange="c-100:c+100" navigator="true" mask="true" locale="es" pattern="dd/MM/yyyy"
+                                    maxdate="today" 
+                                    value="#{reporteMovimientoInventarioMB.fechaHasta}" size="14">
+
+                        </p:calendar>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-sm-12" style="text-align: center">
+                        <br/><br/>
+                        <p:commandButton 
+                            value="Imprimir" icon="ui-icon-print"
+                            title="Generar Reporte PDF" 
+                            actionListener="#{reporteMovimientoInventarioMB.generarReporte}"
+                            ajax="false" onclick="this.form.target = '_blank'">
+
+                            <f:attribute name="logo_empresa"
+                                         value="#{loginMB.rutaCarpetaImagenes}#{loginMB.empresaActual.logo.urlImagen}" />
+                        </p:commandButton>                    
+                        <br/>
+                        <br/><br/>
+                        
+                    </div>
+                </div>
+                <div class="row">
+
+                    <!--<p:commandButton 
+                        title="Agregar producto" value="&nbsp;"                                        
+                        styleClass="icon-plus fg-lightBlue bg-white no-border"                    
+                        oncomplete="PF('IdDialogoBuscarProducto').show()"
+                        process="@this"
+                        style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/> 
+                    <br />
+                    -->
+
+                    <p:dataTable 
+                        id="IdTablaProductos" 
+                        var="prod" 
+                        widgetVar="wvTablaProductos"
+                        value="#{reporteMovimientoInventarioMB.listaProductos}"
+                        rowKey="#{prod.idProducto}"  
+                        selection="#{reporteMovimientoInventarioMB.listaProductosSeleccionados}" 
+                        paginator="true"
+                        style="width: 100%;"
+                        rows="10"                                    
+                        paginatorPosition="bottom"                                
+                        emptyMessage="No hay productos"
+                        scrollable="true" 
+                        currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                        paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"                                    
+                        pageLinks="5"                                   
+
+                        resizableColumns="true">  
+                        <f:facet name="header">
+                            Filtro de Productos
+                        </f:facet>
+                        <p:column selectionMode="multiple" style="width:8%;text-align:center"/>
+                        <p:column headerText="Código Producto" filterBy="#{prod.codigo}" filterMatchMode="contains">  
+                            #{prod.codigo}
+                        </p:column>                            
+                        <p:column headerText="Nombre Producto" filterBy="#{prod.nombre}" filterMatchMode="contains">  
+                            #{prod.nombre}
+                        </p:column>                            
+                        <p:column headerText="Nombre Genérico" filterBy="#{prod.nombreGenerico}" filterMatchMode="contains">  
+                            #{prod.nombreGenerico}
+                        </p:column>                            
+                        <p:column headerText="Presentación" filterBy="#{prod.idPresentacion.descripcion}" filterMatchMode="contains">  
+                            #{prod.idPresentacion.descripcion}
+                        </p:column>                                         
+                    </p:dataTable>  
+                </div>
+
+
+            </div>
+
+
+        </h:form>   
+    </h:body>
+</html>
+

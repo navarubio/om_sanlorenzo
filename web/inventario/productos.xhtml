@@ -158,6 +158,10 @@
                                 <p:outputLabel value="Stock Mínimo" />
                                 <p:inputText value="#{productoMB.producto.stockMinimo}" styleClass="form-control" id="txtStockimo"  onkeypress="return permite(event, 'num')"/>
                             </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Precio de Venta" />
+                                <p:inputText value="#{productoMB.producto.precioVenta}" styleClass="form-control" id="txtPrecioVenta"  onkeypress="return permite(event, 'num')"/>
+                            </div>
                         </div><!--/row-->
                         <div class="row">
                             <div class="col-sm-3 col-xs-12">
@@ -168,7 +172,7 @@
                                 </p:selectOneMenu>
                             </div>
                             <div class="col-sm-3 col-xs-12">
-                                <p:outputLabel value="Vía de Administración"/>
+                                <p:outputLabel value="Vía de Administración" />
                                 <p:selectOneMenu  value="#{productoMB.viaAdministracion.id}">
                                     <f:selectItem itemLabel="-- Seleccione una vía --" itemValue="0"/>
                                     <f:selectItems value="#{productoMB.listaViaAdministracion}" var="via" itemLabel="#{via.descripcion}" itemValue="#{via.id}" />
