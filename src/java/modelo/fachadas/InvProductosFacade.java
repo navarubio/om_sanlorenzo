@@ -54,4 +54,10 @@ public class InvProductosFacade extends AbstractFacade<InvProductos> {
         }
         return new ArrayList<>();
     }
+    
+    public List<Object> dataReporteMovimientoInventario(String _query){
+         Query query = getEntityManager().createNativeQuery(_query);
+         return query.getResultList();
+        
+    }
 }
