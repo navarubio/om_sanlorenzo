@@ -61,7 +61,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    
+
                     <div class="col-sm-3">
                         <p:outputLabel value="Lote"/><br />
                         <p:selectOneMenu value="#{reporteMovimientoInventarioMB.idLote}" style="width: 100%">
@@ -111,6 +111,51 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <br/>
+                </div>
+
+                <div class="row">
+                    <p:accordionPanel activeIndex="null">
+                        <p:tab title="Filtro de Productos" >
+                            <p:dataTable 
+                                id="IdTablaProductos" 
+                                var="prod" 
+                                widgetVar="wvTablaProductos"
+                                value="#{reporteMovimientoInventarioMB.listaProductos}"
+                                rowKey="#{prod.idProducto}"  
+                                selection="#{reporteMovimientoInventarioMB.listaProductosSeleccionados}" 
+                                paginator="true"
+                                style="width: 100%;"
+                                rows="10"                                    
+                                paginatorPosition="bottom"                                
+                                emptyMessage="No hay productos"
+                                scrollable="true" 
+                                currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"                                    
+                                pageLinks="5"                                   
+
+                                resizableColumns="true">  
+                                <f:facet name="header">
+                                    Filtro de Productos
+                                </f:facet>
+                                <p:column selectionMode="multiple" style="width:8%;text-align:center"/>
+                                <p:column headerText="Código Producto" filterBy="#{prod.codigo}" filterMatchMode="contains">  
+                                    #{prod.codigo}
+                                </p:column>                            
+                                <p:column headerText="Nombre Producto" filterBy="#{prod.nombre}" filterMatchMode="contains">  
+                                    #{prod.nombre}
+                                </p:column>                            
+                                <p:column headerText="Nombre Genérico" filterBy="#{prod.nombreGenerico}" filterMatchMode="contains">  
+                                    #{prod.nombreGenerico}
+                                </p:column>                            
+                                <p:column headerText="Presentación" filterBy="#{prod.idPresentacion.descripcion}" filterMatchMode="contains">  
+                                    #{prod.idPresentacion.descripcion}
+                                </p:column>                                         
+                            </p:dataTable>  
+                        </p:tab>
+                    </p:accordionPanel>
+                </div>
 
                 <div class="row">
                     <div class="col-sm-12" style="text-align: center">
@@ -123,61 +168,95 @@
 
                             <f:attribute name="logo_empresa"
                                          value="#{loginMB.rutaCarpetaImagenes}#{loginMB.empresaActual.logo.urlImagen}" />
-                        </p:commandButton>                    
+                        </p:commandButton>  
+
+                        <p:commandButton 
+                            value="Vista" icon="ui-icon-search"
+                            title="Generar Reporte " 
+                            action="#{reporteMovimientoInventarioMB.vistaPrevia()}"
+                            ajax="true" process="@form" update="tablaVista">
+                        </p:commandButton>   
                         <br/>
                         <br/><br/>
-                        
+
                     </div>
                 </div>
                 <div class="row">
+                    <p:dataTable id="tablaVista"
+                                 var="fila" value="#{reporteMovimientoInventarioMB.listaReporteCsv}"
+                                 style="margin-bottom:20px">
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Tipo de Movimiento" />
+                            </f:facet>
+                            <h:outputText value="#{fila.tipoMovimiento}" />
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Fecha" />
+                            </f:facet>
+                            <h:outputText value="#{fila.fecha}" />
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Usuario" />
+                            </f:facet>
+                            <h:outputText value="#{fila.usuario}" />
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nro Doc." />
+                            </f:facet>
+                            <h:outputText value="#{fila.numeroDocumento}" />
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Codigo" />
+                            </f:facet>
+                            <h:outputText value="#{fila.codigo}" />
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Producto" />
+                            </f:facet>
+                            <h:outputText value="#{fila.producto}" />
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Cantidad" />
+                            </f:facet>
+                            <h:outputText value="#{fila.cantidad}" />
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Costo" />
+                            </f:facet>
+                            <h:outputText value="#{fila.costo}" />
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Costo Total" />
+                            </f:facet>
+                            <h:outputText value="#{fila.costo_total}" />
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Precio Venta" />
+                            </f:facet>
+                            <h:outputText value="#{fila.precio}" />
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Valor" />
+                            </f:facet>
+                            <h:outputText value="#{fila.valor}" />
+                        </p:column>
+                    </p:dataTable>
 
-                    <!--<p:commandButton 
-                        title="Agregar producto" value="&nbsp;"                                        
-                        styleClass="icon-plus fg-lightBlue bg-white no-border"                    
-                        oncomplete="PF('IdDialogoBuscarProducto').show()"
-                        process="@this"
-                        style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/> 
-                    <br />
-                    -->
-
-                    <p:dataTable 
-                        id="IdTablaProductos" 
-                        var="prod" 
-                        widgetVar="wvTablaProductos"
-                        value="#{reporteMovimientoInventarioMB.listaProductos}"
-                        rowKey="#{prod.idProducto}"  
-                        selection="#{reporteMovimientoInventarioMB.listaProductosSeleccionados}" 
-                        paginator="true"
-                        style="width: 100%;"
-                        rows="10"                                    
-                        paginatorPosition="bottom"                                
-                        emptyMessage="No hay productos"
-                        scrollable="true" 
-                        currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
-                        paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"                                    
-                        pageLinks="5"                                   
-
-                        resizableColumns="true">  
-                        <f:facet name="header">
-                            Filtro de Productos
-                        </f:facet>
-                        <p:column selectionMode="multiple" style="width:8%;text-align:center"/>
-                        <p:column headerText="Código Producto" filterBy="#{prod.codigo}" filterMatchMode="contains">  
-                            #{prod.codigo}
-                        </p:column>                            
-                        <p:column headerText="Nombre Producto" filterBy="#{prod.nombre}" filterMatchMode="contains">  
-                            #{prod.nombre}
-                        </p:column>                            
-                        <p:column headerText="Nombre Genérico" filterBy="#{prod.nombreGenerico}" filterMatchMode="contains">  
-                            #{prod.nombreGenerico}
-                        </p:column>                            
-                        <p:column headerText="Presentación" filterBy="#{prod.idPresentacion.descripcion}" filterMatchMode="contains">  
-                            #{prod.idPresentacion.descripcion}
-                        </p:column>                                         
-                    </p:dataTable>  
+                    <p:commandButton value="Exportar CSV" icon="ui-icon-document">
+                        <p:dataExporter type="xls" target="tablaVista" fileName="movimientoinventario" />
+                    </p:commandButton>
                 </div>
-
-
             </div>
 
 
