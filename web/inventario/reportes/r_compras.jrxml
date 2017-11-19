@@ -2,13 +2,13 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="r_compras" pageWidth="612" pageHeight="1280" whenNoDataType="AllSectionsNoDetail" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="08360538-c547-4bf2-8668-cee4e7b97ca1">
 	<property name="ireport.zoom" value="1.1000000000000005"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="95"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="query" class="java.lang.String"/>
 	<parameter name="fechaDesde" class="java.lang.String"/>
 	<parameter name="fechaHasta" class="java.lang.String"/>
 	<parameter name="logoEmpresa" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[$p!{query}]]>
+		<![CDATA[$P!{query}]]>
 	</queryString>
 	<field name="nro_documento" class="java.lang.String"/>
 	<field name="fecha" class="java.lang.String"/>

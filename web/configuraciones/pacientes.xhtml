@@ -119,8 +119,16 @@
                                             </p:selectOneMenu>                                         
                                             <p:outputLabel   styleClass="campoObligatorio" value="Identificación"/>
                                             
-                                            <p:inputText id="identificacion" styleClass="campoFormulario" value="#{pacientesMB.identificacion}" onkeypress="return valida(event)">  
+                                            <p:inputText 
+                                                rendered="#{pacientesMB.nuevoRegistro}"
+                                                id="identificacion" styleClass="campoFormulario" value="#{pacientesMB.identificacion}" onkeypress="return valida(event)">  
                                                 <p:ajax event="blur" process="tipoIdentificacion,identificacion" update=":IdFormPrincipal" listener="#{pacientesMB.validarIdentificacion}"/>
+                                            </p:inputText> 
+                                            
+                                            <p:inputText 
+                                                rendered="#{!pacientesMB.nuevoRegistro}"
+                                                id="identificacionEdita" styleClass="campoFormulario" value="#{pacientesMB.identificacion}"
+                                                onkeypress="return valida(event)">  
                                             </p:inputText> 
 
                                             <p:outputLabel   styleClass="campoNoObligatorio" value="Lugar expedición"/>

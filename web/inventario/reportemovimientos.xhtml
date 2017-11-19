@@ -22,242 +22,796 @@
 
             <br/> 
             <div class="container">
-
                 <div class="row">
-                    <div class="col-sm-3">
-                        <p:outputLabel value="Categoría" /><br />
-                        <p:selectOneMenu filter="true" value="#{reporteMovimientoInventarioMB.categoria.idCategoria}"  style="width: 100%">
-                            <f:selectItem itemLabel="-- Seleccione Categoría --" itemValue="0" />
-                            <f:selectItems value="#{reporteMovimientoInventarioMB.listaCategorias}" 
-                                           var="categoria" itemLabel="#{categoria.nombre}" itemValue="#{categoria.idCategoria}" />
+                    <div class="col-sm-12 col-xs-12">
+                        <p:outputLabel value="Tipo de Reporte" /><br />
+                        <p:selectOneMenu value="#{reporteMovimientoInventarioMB.tipoReporte}"  style="width: 100%"
+                                         >
+                            <f:selectItem itemLabel="-- Seleccione Tipo de Reporte --" itemValue="0"/>
+                            <f:selectItem itemLabel="Movimiento de Inventario" itemValue="1"/>
+                            <f:selectItem itemLabel="Reporte de Kardex" itemValue="2"/>
+                            <f:selectItem itemLabel="Compras a proveedores" itemValue="3"/>
+                            <f:selectItem itemLabel="Vencimiento de Lotes" itemValue="4"/>
+                            <f:selectItem itemLabel="consumo Pacientes" itemValue="5"/>
+                            <f:ajax listener="#{reporteMovimientoInventarioMB.cambiarTipoReporte}" 
+                                    event="change" render="IdFormMovimientosInventario:opFiltros IdFormMovimientosInventario:IdDialogoBuscarProveedor IdFormMovimientosInventario:opBotones IdFormMovimientosInventario:opTablasCsv "/>
                         </p:selectOneMenu>
                     </div>
-                    <div class="col-sm-3">
-                        <p:outputLabel value="Tipo de Movimiento" />
-                        <p:selectOneMenu value="#{movimientosInventariosMB.tipoMovimiento}" style="width:100%;">
-                            <f:selectItem itemValue="0" itemLabel="-- Seleccione Movimiento --" />
-                            <f:selectItem itemValue="E" itemLabel="Entrada" />
-                            <f:selectItem itemValue="S" itemLabel="Salida" />
-                            <f:ajax listener="#{movimientosInventariosMB.validarTipoMovimiento}" 
-                                    event="change" render="IdFormMovimientosInventario:somTipoProceso" />
-                        </p:selectOneMenu>
+                </div>
+                <p:outputPanel id="opFiltros">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p:outputLabel value="Bodega" /><br />
+                            <p:selectOneMenu filter="true" value="#{reporteMovimientoInventarioMB.bodega.idBodega}" style="width: 100%">
+                                <f:selectItem itemLabel="-- Seleccione Bodega --" itemValue="0" />
+                                <f:selectItems value="#{reporteMovimientoInventarioMB.listaBodegas}" 
+                                               var="bodega" itemLabel="#{bodega.nombre}" itemValue="#{bodega.idBodega}" />
+                            </p:selectOneMenu>
+                        </div>
+                        <div class="col-sm-3">
+                            <p:outputLabel value="Categoría" /><br />
+                            <p:selectOneMenu filter="true" value="#{reporteMovimientoInventarioMB.categoria.idCategoria}"  style="width: 100%">
+                                <f:selectItem itemLabel="-- Seleccione Categoría --" itemValue="0" />
+                                <f:selectItems value="#{reporteMovimientoInventarioMB.listaCategorias}" 
+                                               var="categoria" itemLabel="#{categoria.nombre}" itemValue="#{categoria.idCategoria}" />
+                            </p:selectOneMenu>
+                        </div>
+                        <div class="col-sm-3">
+                            <p:outputLabel value="Tipo de Movimiento" />
+                            <p:selectOneMenu value="#{movimientosInventariosMB.tipoMovimiento}" style="width:100%;"
+                                             disabled="#{reporteMovimientoInventarioMB.tipoReporte ne 1}"
+                                             >
+                                <f:selectItem itemValue="0" itemLabel="-- Seleccione Movimiento --" />
+                                <f:selectItem itemValue="E" itemLabel="Entrada" />
+                                <f:selectItem itemValue="S" itemLabel="Salida" />
+                                <f:ajax listener="#{movimientosInventariosMB.validarTipoMovimiento}" 
+                                        event="change" render="IdFormMovimientosInventario:somTipoProceso" />
+                            </p:selectOneMenu>
+                        </div>
+                        <div class="col-sm-3">
+                            <p:outputLabel value="Tipo Proceso" 
+                                           />
+                            <br/>
+                            <p:selectOneMenu id="somTipoProceso" value="#{movimientosInventariosMB.tipoProceso}" style="width: 100%"
+                                             disabled="#{reporteMovimientoInventarioMB.tipoReporte ne 1}"
+                                             >
+                                <f:selectItem itemLabel="-- Seleccione proceso --" itemValue="0" />
+                                <f:selectItems value="#{movimientosInventariosMB.listaProcesos}" rendered="#{movimientosInventariosMB.renderProcesos}"/>
+                            </p:selectOneMenu>
+                        </div>
+
                     </div>
-                    <div class="col-sm-3">
-                        <p:outputLabel value="Tipo Proceso" 
-                                       />
+                    <div class="row">
+
+                        <div class="col-sm-3">
+                            <p:outputLabel value="Lote"/><br />
+                            <p:selectOneMenu value="#{reporteMovimientoInventarioMB.idLote}" style="width: 100%"
+                                             disabled="#{reporteMovimientoInventarioMB.tipoReporte ne 4}"
+                                             >
+                                <f:selectItem itemValue="0" itemLabel="-- Seleccione Lote --" />
+                                <f:selectItems value="#{reporteMovimientoInventarioMB.listaLote}" var="lot" itemLabel="#{lot.codigo}" itemValue="#{lot.idLote}"/>
+                            </p:selectOneMenu>
+                        </div>
+                        <div class="col-sm-3">
+                            <p:outputLabel value="Filtrar Cantidad de Movimiento" rendered="#{reporteMovimientoInventarioMB.tipoReporte eq 1}"/>
+                            <p:outputLabel value="Filtrar Existencia" rendered="#{reporteMovimientoInventarioMB.tipoReporte eq 2}"/>
+                            <p:outputLabel value="Filtrar Cantidad de Compra" rendered="#{reporteMovimientoInventarioMB.tipoReporte eq 3}"/>
+                            <p:outputLabel value="Filtrar Existencia Lote" rendered="#{reporteMovimientoInventarioMB.tipoReporte eq 4}"/>
+                            <p:outputLabel value="Filtrar Cantidad Consumo" rendered="#{reporteMovimientoInventarioMB.tipoReporte eq 5}"/>
+                            <br/>
+                            <p:selectOneMenu value="#{reporteMovimientoInventarioMB.operador}" style="width: 100%">
+                                <f:selectItem itemValue="0" itemLabel="-- Seleccione Tipo Filtro --" />
+                                <f:selectItem itemValue="1" itemLabel="Igual a" />
+                                <f:selectItem itemValue="2" itemLabel="Mayor a" />
+                                <f:selectItem itemValue="3" itemLabel="Menor a" />
+                                <f:selectItem itemValue="4" itemLabel="Mayor o Igual" />
+                                <f:selectItem itemValue="5" itemLabel="Menor o Igual" />
+                            </p:selectOneMenu>
+                        </div>
+                        <div class="col-sm-1">
+                            <p:outputLabel value="Cantidad"/><br />
+                            <pe:inputNumber id="cantidadOperador"  style="width: 100%"
+                                            value="#{reporteMovimientoInventarioMB.cantidadOperador}">  
+                            </pe:inputNumber>  
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                           <p:outputLabel value="Proveedor" /><br />
+                           <p:selectOneMenu filter="true" value="#{reporteMovimientoInventarioMB.proveedor.idProveedor}"  
+                                            disabled="#{reporteMovimientoInventarioMB.tipoReporte ne 3}"
+                                            style="width: 100%">
+                                <f:selectItem itemLabel="-- Seleccione Proveedor --" itemValue="0" />
+                                <f:selectItems value="#{reporteMovimientoInventarioMB.listaProveedores}" 
+                                               var="prove" itemLabel="#{prove.razonSocial}" itemValue="#{prove.idProveedor}" />
+                            </p:selectOneMenu>
+                        </div>
+                        <div class="col-sm-3 col-xs-12">
+                            <p:outputLabel value="Tipo Identificación Paciente"/>
+                            <p:selectOneMenu id="tipoIdentificacion" value="#{reporteMovimientoInventarioMB.tipoIdentificacion}"
+                                             disabled="#{reporteMovimientoInventarioMB.tipoReporte ne 5}">
+                                <f:selectItems value="#{reporteMovimientoInventarioMB.listaTipoIdentificacion}" var="ti" itemLabel="#{ti.observacion}" itemValue="#{ti.id}" />
+                            </p:selectOneMenu>
+                        </div>
+                        <div class="col-sm-3 col-xs-12">
+                            <p:outputLabel value="Identificación Paciente"/>
+                            <br/>
+                            <p:inputText  id="identificacion" value="#{reporteMovimientoInventarioMB.identificacion}"
+                                          disabled="#{reporteMovimientoInventarioMB.tipoReporte ne 5}"
+                                          styleClass="campoFormulario"  maxlength="10"
+                                          placeholder="Identificación Paciente" />
+                            <p:commandButton 
+                                title="Buscar Paciente" value="&nbsp;"                                        
+                                style="height: 20px;"
+                                styleClass="icon-search fg-lightBlue" 
+                                process="IdFormMovimientosInventario:tipoIdentificacion IdFormMovimientosInventario:identificacion"
+                                actionListener="#{reporteMovimientoInventarioMB.buscarPaciente}"
+                                disabled="#{reporteMovimientoInventarioMB.tipoReporte ne 5}"
+                                ajax="true"
+                                /> 
+                        </div>
+                        <div class="col-sm-1 col-xs-12">
+                            <h:outputText value="#{reporteMovimientoInventarioMB.paciente.nombreCompleto}"/>
+
+                        </div>    
+                    </div>
+                    <div class="row">
+
+                        <div class="col-sm-4">
+                            <p:outputLabel value="Fec. Desde" /><br />
+
+                            <p:calendar styleClass="campoFormulario"  style="width: 100%"
+                                        yearRange="c-100:c+100" navigator="true" mask="true" locale="es" pattern="dd/MM/yyyy"
+                                        maxdate="today" 
+                                        value="#{reporteMovimientoInventarioMB.fechaDesde}" size="14">
+
+                            </p:calendar>
+                        </div>
+                        <div class="col-sm-4">
+                            <p:outputLabel value="Fec. Hasta" /><br />
+
+                            <p:calendar styleClass="campoFormulario" 
+                                        yearRange="c-100:c+100" navigator="true" mask="true" locale="es" pattern="dd/MM/yyyy"
+                                        maxdate="today" 
+                                        value="#{reporteMovimientoInventarioMB.fechaHasta}" size="14">
+
+                            </p:calendar>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
                         <br/>
-                        <p:selectOneMenu id="somTipoProceso" value="#{movimientosInventariosMB.tipoProceso}" style="width: 100%">
-                            <f:selectItem itemLabel="-- Seleccione proceso --" itemValue="0" />
-                            <f:selectItems value="#{movimientosInventariosMB.listaProcesos}" rendered="#{movimientosInventariosMB.renderProcesos}"/>
-                        </p:selectOneMenu>
                     </div>
-                    <div class="col-sm-3">
-                        <p:outputLabel value="Bodega" /><br />
-                        <p:selectOneMenu filter="true" value="#{reporteMovimientoInventarioMB.bodega.idBodega}" style="width: 100%">
-                            <f:selectItem itemLabel="-- Seleccione Bodega --" itemValue="0" />
-                            <f:selectItems value="#{reporteMovimientoInventarioMB.listaBodegas}" 
-                                           var="bodega" itemLabel="#{bodega.nombre}" itemValue="#{bodega.idBodega}" />
-                        </p:selectOneMenu>
-                    </div>
-                </div>
-                <div class="row">
 
-                    <div class="col-sm-3">
-                        <p:outputLabel value="Lote"/><br />
-                        <p:selectOneMenu value="#{reporteMovimientoInventarioMB.idLote}" style="width: 100%">
-                            <f:selectItem itemValue="0" itemLabel="-- Seleccione Lote --" />
-                            <f:selectItems value="#{reporteMovimientoInventarioMB.listaLote}" var="lot" itemLabel="#{lot.codigo}" itemValue="#{lot.idLote}"/>
-                        </p:selectOneMenu>
-                    </div>
-                    <div class="col-sm-3">
-                        <p:outputLabel value="Filtrar Cantidad"/><br />
-                        <p:selectOneMenu value="#{reporteMovimientoInventarioMB.operador}" style="width: 100%">
-                            <f:selectItem itemValue="0" itemLabel="-- Seleccione Tipo Filtro --" />
-                            <f:selectItem itemValue="1" itemLabel="Igual a" />
-                            <f:selectItem itemValue="2" itemLabel="Mayor a" />
-                            <f:selectItem itemValue="3" itemLabel="Menor a" />
-                            <f:selectItem itemValue="4" itemLabel="Mayor o Igual" />
-                            <f:selectItem itemValue="5" itemLabel="Menor o Igual" />
-                        </p:selectOneMenu>
-                    </div>
-                    <div class="col-sm-1">
-                        <p:outputLabel value="Cantidad"/><br />
-                        <pe:inputNumber id="cantidadOperador"  style="width: 100%"
-                                        value="#{reporteMovimientoInventarioMB.cantidadOperador}">  
-                        </pe:inputNumber>  
-                    </div>
-                </div>
-                <div class="row">
+                    <div class="row">
+                        <p:accordionPanel activeIndex="null">
+                            <p:tab title="Filtro de Productos" >
+                                <p:dataTable 
+                                    id="IdTablaProductos" 
+                                    var="prod" 
+                                    widgetVar="wvTablaProductos"
+                                    value="#{reporteMovimientoInventarioMB.listaProductos}"
+                                    rowKey="#{prod.idProducto}"  
+                                    selection="#{reporteMovimientoInventarioMB.listaProductosSeleccionados}" 
+                                    paginator="true"
+                                    style="width: 100%;"
+                                    rows="10"                                    
+                                    paginatorPosition="bottom"                                
+                                    emptyMessage="No hay productos"
+                                    scrollable="true" 
+                                    currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                    paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"                                    
+                                    pageLinks="5"                                   
 
-                    <div class="col-sm-4">
-                        <p:outputLabel value="Fec. Desde" /><br />
-
-                        <p:calendar styleClass="campoFormulario"  style="width: 100%"
-                                    yearRange="c-100:c+100" navigator="true" mask="true" locale="es" pattern="dd/MM/yyyy"
-                                    maxdate="today" 
-                                    value="#{reporteMovimientoInventarioMB.fechaDesde}" size="14">
-
-                        </p:calendar>
+                                    resizableColumns="true">  
+                                    <f:facet name="header">
+                                        Filtro de Productos
+                                    </f:facet>
+                                    <p:column selectionMode="multiple" style="width:8%;text-align:center"/>
+                                    <p:column headerText="Código Producto" filterBy="#{prod.codigo}" filterMatchMode="contains">  
+                                        #{prod.codigo}
+                                    </p:column>                            
+                                    <p:column headerText="Nombre Producto" filterBy="#{prod.nombre}" filterMatchMode="contains">  
+                                        #{prod.nombre}
+                                    </p:column>                            
+                                    <p:column headerText="Nombre Genérico" filterBy="#{prod.nombreGenerico}" filterMatchMode="contains">  
+                                        #{prod.nombreGenerico}
+                                    </p:column>                            
+                                    <p:column headerText="Presentación" filterBy="#{prod.idPresentacion.descripcion}" filterMatchMode="contains">  
+                                        #{prod.idPresentacion.descripcion}
+                                    </p:column>                                         
+                                </p:dataTable>  
+                            </p:tab>
+                        </p:accordionPanel>
                     </div>
-                    <div class="col-sm-4">
-                        <p:outputLabel value="Fec. Hasta" /><br />
 
-                        <p:calendar styleClass="campoFormulario" 
-                                    yearRange="c-100:c+100" navigator="true" mask="true" locale="es" pattern="dd/MM/yyyy"
-                                    maxdate="today" 
-                                    value="#{reporteMovimientoInventarioMB.fechaHasta}" size="14">
+                </p:outputPanel>
 
-                        </p:calendar>
-                    </div>
-                </div>
 
                 <div class="row">
-                    <br/>
+                    <p:outputPanel id="opBotones">
+
+                        <div class="col-sm-12" style="text-align: center">
+                            <br/><br/>
+                            <!-- Movimientos-->
+                            <p:commandButton rendered="#{reporteMovimientoInventarioMB.tipoReporte eq 1}"
+                                             value="Imprimir" icon="ui-icon-print"
+                                             title="Generar Reporte PDF" 
+                                             actionListener="#{reporteMovimientoInventarioMB.generarReporteMovimientos}"
+                                             ajax="false" onclick="this.form.target = '_blank'">
+
+                                <f:attribute name="logo_empresa"
+                                             value="#{loginMB.rutaCarpetaImagenes}#{loginMB.empresaActual.logo.urlImagen}" />
+                            </p:commandButton>  
+
+                            <p:commandButton rendered="#{reporteMovimientoInventarioMB.tipoReporte eq 1}"
+                                             value="Vista" icon="ui-icon-search"
+                                             title="Generar Reporte " 
+                                             action="#{reporteMovimientoInventarioMB.vistaPreviaMovimientos()}"
+                                             ajax="true" process="@form" update="tablaVista">
+                            </p:commandButton>   
+                            <!-- Kardex-->
+                            <p:commandButton rendered="#{reporteMovimientoInventarioMB.tipoReporte eq 2}"
+                                             value="Imprimir" icon="ui-icon-print"
+                                             title="Generar Reporte PDF" 
+                                             actionListener="#{reporteMovimientoInventarioMB.generarReporteKardex}"
+                                             ajax="false" onclick="this.form.target = '_blank'">
+
+                                <f:attribute name="logo_empresa"
+                                             value="#{loginMB.rutaCarpetaImagenes}#{loginMB.empresaActual.logo.urlImagen}" />
+                            </p:commandButton>  
+
+                            <p:commandButton rendered="#{reporteMovimientoInventarioMB.tipoReporte eq 2}"
+                                             value="Vista" icon="ui-icon-search"
+                                             title="Generar Reporte " 
+                                             action="#{reporteMovimientoInventarioMB.vistaPreviaKardex()}"
+                                             ajax="true" process="@form" update="tablaVista2">
+                            </p:commandButton>  
+                            <!-- Proveedores-->
+                            <p:commandButton rendered="#{reporteMovimientoInventarioMB.tipoReporte eq 3}"
+                                             value="Imprimir" icon="ui-icon-print"
+                                             title="Generar Reporte PDF" 
+                                             actionListener="#{reporteMovimientoInventarioMB.generarReporteComprasProveedor}"
+                                             ajax="false" onclick="this.form.target = '_blank'">
+
+                                <f:attribute name="logo_empresa"
+                                             value="#{loginMB.rutaCarpetaImagenes}#{loginMB.empresaActual.logo.urlImagen}" />
+                            </p:commandButton>  
+
+                            <p:commandButton rendered="#{reporteMovimientoInventarioMB.tipoReporte eq 3}"
+                                             value="Vista" icon="ui-icon-search"
+                                             title="Generar Reporte " 
+                                             action="#{reporteMovimientoInventarioMB.vistaComprasProveedor}"
+                                             ajax="true" process="@form" update="tablaVista3">
+                            </p:commandButton>  
+                            <!-- Vencimiento-->
+                            <p:commandButton rendered="#{reporteMovimientoInventarioMB.tipoReporte eq 4}"
+                                             value="Imprimir" icon="ui-icon-print"
+                                             title="Generar Reporte PDF" 
+                                             actionListener="#{reporteMovimientoInventarioMB.generarReporteVencimientoLotes}"
+                                             ajax="false" onclick="this.form.target = '_blank'">
+
+                                <f:attribute name="logo_empresa"
+                                             value="#{loginMB.rutaCarpetaImagenes}#{loginMB.empresaActual.logo.urlImagen}" />
+                            </p:commandButton>  
+
+                            <p:commandButton rendered="#{reporteMovimientoInventarioMB.tipoReporte eq 4}"
+                                             value="Vista" icon="ui-icon-search"
+                                             title="Generar Reporte " 
+                                             action="#{reporteMovimientoInventarioMB.vistaPreviaVencimientoLotes()}"
+                                             ajax="true" process="@form" update="tablaVista4">
+                            </p:commandButton>  
+
+                            <!-- Consumos pacientes-->
+                            <p:commandButton rendered="#{reporteMovimientoInventarioMB.tipoReporte eq 5}"
+                                             value="Imprimir" icon="ui-icon-print"
+                                             title="Generar Reporte PDF" 
+                                             actionListener="#{reporteMovimientoInventarioMB.generarReporteConsumosPaciente}"
+                                             ajax="false" onclick="this.form.target = '_blank'">
+
+                                <f:attribute name="logo_empresa"
+                                             value="#{loginMB.rutaCarpetaImagenes}#{loginMB.empresaActual.logo.urlImagen}" />
+                            </p:commandButton>  
+
+                            <p:commandButton rendered="#{reporteMovimientoInventarioMB.tipoReporte eq 5}"
+                                             value="Vista" icon="ui-icon-search"
+                                             title="Generar Reporte " 
+                                             action="#{reporteMovimientoInventarioMB.vistaPreviaConsumoPacientes()}"
+                                             ajax="true" process="@form" update="tablaVista5">
+                            </p:commandButton>  
+                            <br/>
+                            <br/><br/>
+
+                        </div>
+                    </p:outputPanel>
                 </div>
 
+
                 <div class="row">
-                    <p:accordionPanel activeIndex="null">
-                        <p:tab title="Filtro de Productos" >
+                    <p:outputPanel id="opTablasCsv">
+
+                        <p:outputPanel id="opTabla1" rendered="#{reporteMovimientoInventarioMB.tipoReporte eq 1}">
+
+                            <p:dataTable id="tablaVista"
+                                         var="fila" value="#{reporteMovimientoInventarioMB.listaReporteCsv}"
+                                         style="margin-bottom:20px">
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Tipo de Movimiento" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.tipoMovimiento}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Fecha" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.fecha}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Usuario" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.usuario}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Nro Doc." />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.numeroDocumento}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Codigo" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.codigo}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Producto" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.producto}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Cantidad" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.cantidad}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Costo" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.costo}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Costo Total" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.costo_total}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Precio Venta" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.precio}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Valor" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.valor}" />
+                                </p:column>
+                            </p:dataTable>
+
+                            <p:commandButton value="Exportar CSV" icon="ui-icon-document">
+                                <p:dataExporter type="xls" target="tablaVista" fileName="movimientoinventario" />
+                            </p:commandButton>
+                        </p:outputPanel>
+                        <p:outputPanel id="opTabla2" rendered="#{reporteMovimientoInventarioMB.tipoReporte eq 2}">
+                            <!-- Kardex -->
+                            <p:dataTable id="tablaVista2"
+                                         var="fila" value="#{reporteMovimientoInventarioMB.listaReporteCsv}"
+                                         style="margin-bottom:20px">
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Bodega"/>
+                                    </f:facet>
+                                    <h:outputText value="#{fila.codigoBod}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Codigo Categoria"/>
+                                    </f:facet>
+                                    <h:outputText value="#{fila.codigoCat}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Categoria" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.nombreCat}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Codigo Producto" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.codigo}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Producto" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.producto}" />
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Stock Minimo" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.stockMinimo}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Stock Maximo" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.stockMaximo}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Entradas" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.entradas}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Salidas" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.salidas}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Existencia" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.existencia}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Costo" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.costo}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Costo Total" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.costo_total}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Precio Venta" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.precio}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="% Utilidad" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.utilidad}" />
+                                </p:column>
+                            </p:dataTable>
+
+                            <p:commandButton value="Exportar CSV" icon="ui-icon-document">
+                                <p:dataExporter type="xls" target="tablaVista2" fileName="kardex" />
+                            </p:commandButton>
+                        </p:outputPanel>
+                        <p:outputPanel id="opTabla3" rendered="#{reporteMovimientoInventarioMB.tipoReporte eq 3}">
+                            <!-- Compras Proveedor -->
+                            <p:dataTable id="tablaVista3"
+                                         var="fila" value="#{reporteMovimientoInventarioMB.listaReporteCsv}"
+                                         style="margin-bottom:20px">
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Fecha"/>
+                                    </f:facet>
+                                    <h:outputText value="#{fila.fecha}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Razon Social" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.nombreProv}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Codigo Categoria" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.codigoCat}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Producto" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.nombreCat}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Codigo Producto" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.codigo}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Producto" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.producto}" />
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Cantidad Solicitada" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.cantidadSolicitada}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Cantidad Entregada" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.cantidadEntregada}" />
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Vr Unidad" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.precio}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Vr Total" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.valor}" />
+                                </p:column>
+                            </p:dataTable>
+
+                            <p:commandButton value="Exportar CSV" icon="ui-icon-document">
+                                <p:dataExporter type="xls" target="tablaVista3" fileName="comprasproveedor" />
+                            </p:commandButton>
+                        </p:outputPanel>
+                        <p:outputPanel id="opTabla4" rendered="#{reporteMovimientoInventarioMB.tipoReporte eq 4}">
+                            <!-- Vencimiento lotes -->
+                            <p:dataTable id="tablaVista4"
+                                         var="fila" value="#{reporteMovimientoInventarioMB.listaReporteCsv}"
+                                         style="margin-bottom:20px">
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Codigo"/>
+                                    </f:facet>
+                                    <h:outputText value="#{fila.codigoBod}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Bodega"/>
+                                    </f:facet>
+                                    <h:outputText value="#{fila.nombreBod}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Codigo Categoria"/>
+                                    </f:facet>
+                                    <h:outputText value="#{fila.codigoCat}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Categoria" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.nombreCat}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Nro Lote" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.codigoLot}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Fecha Vencimiento" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.fecha}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Codigo Producto" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.codigo}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Producto" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.producto}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Stock Minimo" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.stockMinimo}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Stock Maximo" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.stockMaximo}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Existencia" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.existencia}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Costo" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.costo}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Costo Total" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.costo_total}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Precio Venta" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.precio}" />
+                                </p:column>
+
+                            </p:dataTable>
+
+                            <p:commandButton value="Exportar CSV" icon="ui-icon-document">
+                                <p:dataExporter type="xls" target="tablaVista4" fileName="lotes" />
+                            </p:commandButton>
+                        </p:outputPanel>
+                        <p:outputPanel id="opTabla5" rendered="#{reporteMovimientoInventarioMB.tipoReporte eq 5}">
+                            <!-- Vencimiento lotes -->
+                            <p:dataTable id="tablaVista5"
+                                         var="fila" value="#{reporteMovimientoInventarioMB.listaReporteCsv}"
+                                         style="margin-bottom:20px">
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Fecha"/>
+                                    </f:facet>
+                                    <h:outputText value="#{fila.usuario}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Fecha"/>
+                                    </f:facet>
+                                    <h:outputText value="#{fila.fecha}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Identificacion"/>
+                                    </f:facet>
+                                    <h:outputText value="#{fila.codigoPaciente}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Paciente" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.nombrePaciente}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Codigo Producto" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.codigo}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Producto" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.producto}" />
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Cantida Recibida" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.cantidadEntregada}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Costo" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.costo}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Costo Total" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.costo_total}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Precio Venta" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.precio}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Precio Venta" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.valor}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="% Utilidad" />
+                                    </f:facet>
+                                    <h:outputText value="#{fila.utilidad}" />
+                                </p:column>
+                            </p:dataTable>
+                            <p:commandButton value="Exportar CSV" icon="ui-icon-document">
+                                <p:dataExporter type="xls" target="tablaVista5" fileName="consumopacientes" />
+                            </p:commandButton>
+                        </p:outputPanel>
+                    </p:outputPanel>
+                </div>
+            </div>
+
+            <p:dialog id="IdDialogoBuscarProveedor" header="BUSCAR PROVEEDOR" widgetVar="dialogoProveedor" resizable="false" modal="true">  
+                <p:ajax event="close" oncomplete="PF('dialogoProveedor').clearFilters(); PF('dialogoProveedor').getPaginator().setPage(0);" update="IdTablaProveedor" />
+                <table>
+                    <tr>
+                        <td>
                             <p:dataTable 
-                                id="IdTablaProductos" 
-                                var="prod" 
-                                widgetVar="wvTablaProductos"
-                                value="#{reporteMovimientoInventarioMB.listaProductos}"
-                                rowKey="#{prod.idProducto}"  
-                                selection="#{reporteMovimientoInventarioMB.listaProductosSeleccionados}" 
+                                id="IdTablaProveedor" 
+                                var="prov" 
+                                widgetVar="wvTablaClasificaciones"
+                                value="#{reporteMovimientoInventarioMB.listaProveedores}"
+                                rowKey="#{prov.idProveedor}"  
+                                selection="#{reporteMovimientoInventarioMB.proveedorSeleccionado}" 
                                 paginator="true"
-                                style="width: 100%;"
+                                style="width: 600px; height: 300px;"
                                 rows="10"                                    
                                 paginatorPosition="bottom"                                
-                                emptyMessage="No hay productos"
+                                emptyMessage="No hay proveedor"
                                 scrollable="true" 
                                 currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"                                    
                                 pageLinks="5"                                   
+                                selectionMode="single"
 
-                                resizableColumns="true">  
-                                <f:facet name="header">
-                                    Filtro de Productos
-                                </f:facet>
-                                <p:column selectionMode="multiple" style="width:8%;text-align:center"/>
-                                <p:column headerText="Código Producto" filterBy="#{prod.codigo}" filterMatchMode="contains">  
-                                    #{prod.codigo}
+                                resizableColumns="true">                                   
+                                <p:column headerText="Código" filterBy="#{prov.codigoProveedor}" filterMatchMode="contains">  
+                                    #{prov.codigoProveedor}  
                                 </p:column>                            
-                                <p:column headerText="Nombre Producto" filterBy="#{prod.nombre}" filterMatchMode="contains">  
-                                    #{prod.nombre}
+                                <p:column headerText="Número Documento" filterBy="#{prov.numeroDocumento}" filterMatchMode="contains">  
+                                    #{prov.numeroDocumento}  
                                 </p:column>                            
-                                <p:column headerText="Nombre Genérico" filterBy="#{prod.nombreGenerico}" filterMatchMode="contains">  
-                                    #{prod.nombreGenerico}
+                                <p:column headerText="Razón Social" filterBy="#{prov.razonSocial}" filterMatchMode="contains">  
+                                    #{prov.razonSocial}
                                 </p:column>                            
-                                <p:column headerText="Presentación" filterBy="#{prod.idPresentacion.descripcion}" filterMatchMode="contains">  
-                                    #{prod.idPresentacion.descripcion}
-                                </p:column>                                         
+                                <p:column headerText="Contacto" filterBy="#{prov.contacto}" filterMatchMode="contains">  
+                                    #{prov.contacto}
+                                </p:column>                            
                             </p:dataTable>  
-                        </p:tab>
-                    </p:accordionPanel>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-12" style="text-align: center">
-                        <br/><br/>
-                        <p:commandButton 
-                            value="Imprimir" icon="ui-icon-print"
-                            title="Generar Reporte PDF" 
-                            actionListener="#{reporteMovimientoInventarioMB.generarReporte}"
-                            ajax="false" onclick="this.form.target = '_blank'">
-
-                            <f:attribute name="logo_empresa"
-                                         value="#{loginMB.rutaCarpetaImagenes}#{loginMB.empresaActual.logo.urlImagen}" />
-                        </p:commandButton>  
-
-                        <p:commandButton 
-                            value="Vista" icon="ui-icon-search"
-                            title="Generar Reporte " 
-                            action="#{reporteMovimientoInventarioMB.vistaPrevia()}"
-                            ajax="true" process="@form" update="tablaVista">
-                        </p:commandButton>   
-                        <br/>
-                        <br/><br/>
-
-                    </div>
-                </div>
-                <div class="row">
-                    <p:dataTable id="tablaVista"
-                                 var="fila" value="#{reporteMovimientoInventarioMB.listaReporteCsv}"
-                                 style="margin-bottom:20px">
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Tipo de Movimiento" />
-                            </f:facet>
-                            <h:outputText value="#{fila.tipoMovimiento}" />
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Fecha" />
-                            </f:facet>
-                            <h:outputText value="#{fila.fecha}" />
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Usuario" />
-                            </f:facet>
-                            <h:outputText value="#{fila.usuario}" />
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Nro Doc." />
-                            </f:facet>
-                            <h:outputText value="#{fila.numeroDocumento}" />
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Codigo" />
-                            </f:facet>
-                            <h:outputText value="#{fila.codigo}" />
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Producto" />
-                            </f:facet>
-                            <h:outputText value="#{fila.producto}" />
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Cantidad" />
-                            </f:facet>
-                            <h:outputText value="#{fila.cantidad}" />
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Costo" />
-                            </f:facet>
-                            <h:outputText value="#{fila.costo}" />
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Costo Total" />
-                            </f:facet>
-                            <h:outputText value="#{fila.costo_total}" />
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Precio Venta" />
-                            </f:facet>
-                            <h:outputText value="#{fila.precio}" />
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Valor" />
-                            </f:facet>
-                            <h:outputText value="#{fila.valor}" />
-                        </p:column>
-                    </p:dataTable>
-
-                    <p:commandButton value="Exportar CSV" icon="ui-icon-document">
-                        <p:dataExporter type="xls" target="tablaVista" fileName="movimientoinventario" />
-                    </p:commandButton>
-                </div>
-            </div>
+                        </td>    
+                    </tr>
+                    <tr>
+                        <td>
+                            <br/>
+                            <p:commandButton 
+                                value="Cargar seleccionado"                                
+                                process="@this"
+                                ajax="true"
+                                oncomplete="PF('dialogoProveedor').hide()"
+                                actionListener="#{reporteMovimientoInventarioMB.buscarProveedor}"/>
+                        </td>    
+                    </tr>
+                </table>
+            </p:dialog>
 
 
         </h:form>   
