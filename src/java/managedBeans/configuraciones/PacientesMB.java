@@ -313,6 +313,7 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
     }
 
     public void nuevoPaciente() {
+        nuevoRegistro = true;
         tituloTabPacientes = "Datos nuevo paciente";
         pacienteSeleccionado = null;
         archivoFirma = null;
@@ -806,6 +807,7 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
     }
 
     public void validarIdentificacion() {
+        nuevoRegistro=false;
         //System.out.println(tipoIdentificacion+""+identificacion);
         int cedula = pacientesFachada.numeroCedulas(identificacion + "");
         if (cedula > 0) {

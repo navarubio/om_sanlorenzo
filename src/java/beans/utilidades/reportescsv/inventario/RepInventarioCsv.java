@@ -21,11 +21,27 @@ public class RepInventarioCsv implements Serializable {
     private String producto;
     private String codigo;
     private double cantidad;
+    private double cantidadSolicitada;
+    private double cantidadEntregada;
     private double existencia;
     private double costo;
     private double costo_total;
     private double precio;
     private double valor;
+    private double entradas;
+    private double salidas;
+    private double stockMinimo;
+    private double stockMaximo;
+    private double utilidad;
+    private String nombreCat;
+    private String codigoCat;
+    private String nombreBod;
+    private String codigoBod;
+    private String codigoLot;
+    private String codigoProv;
+    private String nombreProv;
+    private String codigoPaciente;
+    private String nombrePaciente;
 
     public String getTipoMovimiento() {
         return tipoMovimiento;
@@ -132,5 +148,135 @@ public class RepInventarioCsv implements Serializable {
     public void setValor(double valor) {
         this.valor = valor;
     }
+
+    public double getEntradas() {
+        return entradas;
+    }
+
+    public void setEntradas(double entradas) {
+        this.entradas = entradas;
+    }
+
+    public double getSalidas() {
+        return salidas;
+    }
+
+    public void setSalidas(double salidas) {
+        this.salidas = salidas;
+    }
+
+    public double getStockMinimo() {
+        return stockMinimo;
+    }
+
+    public void setStockMinimo(double stockMinimo) {
+        this.stockMinimo = stockMinimo;
+    }
+
+    public double getStockMaximo() {
+        return stockMaximo;
+    }
+
+    public void setStockMaximo(double stockMaximo) {
+        this.stockMaximo = stockMaximo;
+    }
+
+    public double getUtilidad() {
+        return utilidad;
+    }
+
+    public void setUtilidad(double utilidad) {
+        this.utilidad = utilidad;
+    }
+
+    public String getNombreCat() {
+        return nombreCat;
+    }
+
+    public void setNombreCat(String nombreCat) {
+        this.nombreCat = nombreCat;
+    }
+
+    public String getCodigoCat() {
+        return codigoCat;
+    }
+
+    public void setCodigoCat(String codigoCat) {
+        this.codigoCat = codigoCat;
+    }
+
+    public String getNombreBod() {
+        return nombreBod;
+    }
+
+    public void setNombreBod(String nombreBod) {
+        this.nombreBod = nombreBod;
+    }
+
+    public String getCodigoBod() {
+        return codigoBod;
+    }
+
+    public void setCodigoBod(String codigoBod) {
+        this.codigoBod = codigoBod;
+    }
+
+    public String getCodigoLot() {
+        return codigoLot;
+    }
+
+    public void setCodigoLot(String codigoLot) {
+        this.codigoLot = codigoLot;
+    }
+
+    public String getCodigoProv() {
+        return codigoProv;
+    }
+
+    public void setCodigoProv(String codigoProv) {
+        this.codigoProv = codigoProv;
+    }
+
+    public String getNombreProv() {
+        return nombreProv;
+    }
+
+    public void setNombreProv(String nombreProv) {
+        this.nombreProv = nombreProv;
+    }
+
+    public double getCantidadSolicitada() {
+        return cantidadSolicitada;
+    }
+
+    public void setCantidadSolicitada(double cantidadSolicitada) {
+        this.cantidadSolicitada = cantidadSolicitada;
+    }
+
+    public double getCantidadEntregada() {
+        return cantidadEntregada;
+    }
+
+    public void setCantidadEntregada(double cantidadEntregada) {
+        this.cantidadEntregada = cantidadEntregada;
+    }
+
+    public String getCodigoPaciente() {
+        return codigoPaciente;
+    }
+
+    public void setCodigoPaciente(String codigoPaciente) {
+        this.codigoPaciente = codigoPaciente;
+    }
+
+    public String getNombrePaciente() {
+        return nombrePaciente;
+    }
+
+    public void setNombrePaciente(String nombrePaciente) {
+        this.nombrePaciente = nombrePaciente;
+    }
+    
+    
 
 }
