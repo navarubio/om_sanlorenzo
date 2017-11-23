@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="r_vencimiento_lotes" pageWidth="1280" pageHeight="612" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="1240" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="08360538-c547-4bf2-8668-cee4e7b97ca1">
-	<property name="ireport.zoom" value="0.5644739300537773"/>
+	<property name="ireport.zoom" value="0.6830134553650707"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="query" class="java.lang.String"/>
@@ -86,72 +86,72 @@ and db.id_lote=lot.id_lote]]>
 		<band splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="30" splitType="Stretch">
+		<band height="34" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="74805cc6-ba95-43de-b636-a9bdf6c603e5" x="0" y="0" width="200" height="30"/>
+				<reportElement uuid="74805cc6-ba95-43de-b636-a9bdf6c603e5" x="0" y="0" width="200" height="34"/>
 				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
 				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[Bodega]]></text>
+				<text><![CDATA[BODEGAS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="6f1803b6-59ae-43f9-8718-0a1f450dc418" x="680" y="0" width="80" height="30"/>
+				<reportElement uuid="6f1803b6-59ae-43f9-8718-0a1f450dc418" x="680" y="0" width="80" height="34"/>
 				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[Fec. Vencimiento]]></text>
+				<text><![CDATA[FEC. VENCIMIENTO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="e49451b8-4c58-4fd1-99d9-2c05f7ab4cd0" x="760" y="0" width="80" height="30"/>
+				<reportElement uuid="e49451b8-4c58-4fd1-99d9-2c05f7ab4cd0" x="760" y="0" width="80" height="34"/>
 				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[Stock Minimo]]></text>
+				<text><![CDATA[STOCK MINIMO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="d3b2c2b9-24f8-48ee-997e-540237142e16" x="840" y="0" width="80" height="30"/>
+				<reportElement uuid="d3b2c2b9-24f8-48ee-997e-540237142e16" x="840" y="0" width="80" height="34"/>
 				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[Stock Maximo]]></text>
+				<text><![CDATA[STOCK MAXIMO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="74805cc6-ba95-43de-b636-a9bdf6c603e5" x="200" y="0" width="200" height="30"/>
+				<reportElement uuid="74805cc6-ba95-43de-b636-a9bdf6c603e5" x="200" y="0" width="200" height="34"/>
 				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
 				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[Categoria]]></text>
+				<text><![CDATA[CODIGO + NOMBRE CATEGORIA	]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="74805cc6-ba95-43de-b636-a9bdf6c603e5" x="400" y="0" width="200" height="30"/>
+				<reportElement uuid="74805cc6-ba95-43de-b636-a9bdf6c603e5" x="400" y="0" width="200" height="34"/>
 				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
 				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[Producto]]></text>
+				<text><![CDATA[CODIGO  +  NOMBRE PRODUCTO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="9fd4148e-b3a8-472f-9fd1-d3f74a0bf46f" x="600" y="0" width="80" height="30"/>
+				<reportElement uuid="9fd4148e-b3a8-472f-9fd1-d3f74a0bf46f" x="600" y="0" width="80" height="34"/>
 				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[Nro. Lote]]></text>
+				<text><![CDATA[Nro. LOTE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="9fd4148e-b3a8-472f-9fd1-d3f74a0bf46f" x="1000" y="0" width="80" height="30"/>
+				<reportElement uuid="9fd4148e-b3a8-472f-9fd1-d3f74a0bf46f" x="1000" y="0" width="80" height="34"/>
 				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[Costo Unitario]]></text>
+				<text><![CDATA[COSTO UNIT.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="d3b2c2b9-24f8-48ee-997e-540237142e16" x="1160" y="0" width="80" height="30"/>
+				<reportElement uuid="d3b2c2b9-24f8-48ee-997e-540237142e16" x="1160" y="0" width="80" height="34"/>
 				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[precio_venta]]></text>
+				<text><![CDATA[PRECIO UNIT.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="d3b2c2b9-24f8-48ee-997e-540237142e16" x="920" y="0" width="80" height="30"/>
+				<reportElement uuid="d3b2c2b9-24f8-48ee-997e-540237142e16" x="920" y="0" width="80" height="34"/>
 				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[Existencia]]></text>
+				<text><![CDATA[EXISTENCIA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="d3b2c2b9-24f8-48ee-997e-540237142e16" x="1080" y="0" width="80" height="30"/>
+				<reportElement uuid="d3b2c2b9-24f8-48ee-997e-540237142e16" x="1080" y="0" width="80" height="34"/>
 				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[Costo Total]]></text>
+				<text><![CDATA[COSTO TOTAL]]></text>
 			</staticText>
 		</band>
 	</columnHeader>

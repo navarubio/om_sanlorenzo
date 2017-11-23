@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="r_movimiento_inventario" language="groovy" pageWidth="1000" pageHeight="612" orientation="Landscape" columnWidth="960" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="08360538-c547-4bf2-8668-cee4e7b97ca1">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="r_movimiento_inventario" pageWidth="1000" pageHeight="612" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="960" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="08360538-c547-4bf2-8668-cee4e7b97ca1">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -88,9 +88,9 @@
 		<band splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="26" splitType="Stretch">
+		<band height="32" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="74805cc6-ba95-43de-b636-a9bdf6c603e5" x="0" y="0" width="62" height="26"/>
+				<reportElement uuid="74805cc6-ba95-43de-b636-a9bdf6c603e5" x="0" y="0" width="62" height="32"/>
 				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -98,11 +98,11 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement/>
-				<text><![CDATA[Tipo]]></text>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[TIPO MOV.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="9fd4148e-b3a8-472f-9fd1-d3f74a0bf46f" x="560" y="0" width="80" height="26"/>
+				<reportElement uuid="9fd4148e-b3a8-472f-9fd1-d3f74a0bf46f" x="560" y="0" width="80" height="32"/>
 				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -110,11 +110,11 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement/>
-				<text><![CDATA[cantidad_recibida]]></text>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[CANTIDAD]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="6f1803b6-59ae-43f9-8718-0a1f450dc418" x="720" y="0" width="80" height="26"/>
+				<reportElement uuid="6f1803b6-59ae-43f9-8718-0a1f450dc418" x="720" y="0" width="80" height="32"/>
 				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -122,11 +122,11 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement/>
-				<text><![CDATA[costo Total]]></text>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[COSTO TOTAL]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="e49451b8-4c58-4fd1-99d9-2c05f7ab4cd0" x="800" y="0" width="80" height="26"/>
+				<reportElement uuid="e49451b8-4c58-4fd1-99d9-2c05f7ab4cd0" x="800" y="0" width="80" height="32"/>
 				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -134,11 +134,11 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement/>
-				<text><![CDATA[precio_venta]]></text>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Vr. UNIT]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="d3b2c2b9-24f8-48ee-997e-540237142e16" x="880" y="0" width="80" height="26"/>
+				<reportElement uuid="d3b2c2b9-24f8-48ee-997e-540237142e16" x="880" y="0" width="80" height="32"/>
 				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -146,11 +146,11 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement/>
-				<text><![CDATA[precio_venta]]></text>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Vr. TOTAL]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="74805cc6-ba95-43de-b636-a9bdf6c603e5" x="119" y="0" width="58" height="26"/>
+				<reportElement uuid="74805cc6-ba95-43de-b636-a9bdf6c603e5" x="119" y="0" width="58" height="32"/>
 				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -158,11 +158,11 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement/>
-				<text><![CDATA[Usuario]]></text>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[USUARIO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="74805cc6-ba95-43de-b636-a9bdf6c603e5" x="62" y="0" width="57" height="26"/>
+				<reportElement uuid="74805cc6-ba95-43de-b636-a9bdf6c603e5" x="62" y="0" width="57" height="32"/>
 				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -170,11 +170,11 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement/>
-				<text><![CDATA[Fecha]]></text>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[FEC. MOVIMIENTO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="74805cc6-ba95-43de-b636-a9bdf6c603e5" x="177" y="0" width="77" height="26"/>
+				<reportElement uuid="74805cc6-ba95-43de-b636-a9bdf6c603e5" x="177" y="0" width="77" height="32"/>
 				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -182,11 +182,11 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement/>
-				<text><![CDATA[Nro Documento]]></text>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[DOC. MOVIMIENTO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="74805cc6-ba95-43de-b636-a9bdf6c603e5" x="254" y="0" width="306" height="26"/>
+				<reportElement uuid="74805cc6-ba95-43de-b636-a9bdf6c603e5" x="254" y="0" width="306" height="32"/>
 				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -194,11 +194,11 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement/>
-				<text><![CDATA[Nro Documento]]></text>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[PRODUCTO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="9fd4148e-b3a8-472f-9fd1-d3f74a0bf46f" x="640" y="0" width="80" height="26"/>
+				<reportElement uuid="9fd4148e-b3a8-472f-9fd1-d3f74a0bf46f" x="640" y="0" width="80" height="32"/>
 				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -206,8 +206,8 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement/>
-				<text><![CDATA[Costo]]></text>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[COSTO UNIT.]]></text>
 			</staticText>
 		</band>
 	</columnHeader>

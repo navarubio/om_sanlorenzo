@@ -23,7 +23,10 @@
             <br/> 
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-12 col-xs-12">
+                    <div class="col-sm-4 col-xs-1">
+                        
+                    </div>
+                    <div class="col-sm-4 col-xs-11">
                         <p:outputLabel value="Tipo de Reporte" /><br />
                         <p:selectOneMenu value="#{reporteMovimientoInventarioMB.tipoReporte}"  style="width: 100%"
                                          >
@@ -37,7 +40,11 @@
                                     event="change" render="IdFormMovimientosInventario:opFiltros IdFormMovimientosInventario:IdDialogoBuscarProveedor IdFormMovimientosInventario:opBotones IdFormMovimientosInventario:opTablasCsv "/>
                         </p:selectOneMenu>
                     </div>
+                    <div class="col-sm-4 col-xs-1">
+                        
+                    </div>
                 </div>
+                <br/><br/>
                 <p:outputPanel id="opFiltros">
                     <div class="row">
                         <div class="col-sm-3">
@@ -93,14 +100,10 @@
                             </p:selectOneMenu>
                         </div>
                         <div class="col-sm-3">
-                            <p:outputLabel value="Filtrar Cantidad de Movimiento" rendered="#{reporteMovimientoInventarioMB.tipoReporte eq 1}"/>
-                            <p:outputLabel value="Filtrar Existencia" rendered="#{reporteMovimientoInventarioMB.tipoReporte eq 2}"/>
-                            <p:outputLabel value="Filtrar Cantidad de Compra" rendered="#{reporteMovimientoInventarioMB.tipoReporte eq 3}"/>
-                            <p:outputLabel value="Filtrar Existencia Lote" rendered="#{reporteMovimientoInventarioMB.tipoReporte eq 4}"/>
-                            <p:outputLabel value="Filtrar Cantidad Consumo" rendered="#{reporteMovimientoInventarioMB.tipoReporte eq 5}"/>
+                            <p:outputLabel value="Operador" />
                             <br/>
                             <p:selectOneMenu value="#{reporteMovimientoInventarioMB.operador}" style="width: 100%">
-                                <f:selectItem itemValue="0" itemLabel="-- Seleccione Tipo Filtro --" />
+                                <f:selectItem itemValue="0" itemLabel="-- Seleccione Operador --" />
                                 <f:selectItem itemValue="1" itemLabel="Igual a" />
                                 <f:selectItem itemValue="2" itemLabel="Mayor a" />
                                 <f:selectItem itemValue="3" itemLabel="Menor a" />
@@ -404,9 +407,9 @@
                                 </p:column>
                             </p:dataTable>
 
-                            <p:commandButton value="Exportar CSV" icon="ui-icon-document">
+                            <h:commandButton value="Exportar CSV Movimientos" >
                                 <p:dataExporter type="xls" target="tablaVista" fileName="movimientoinventario" />
-                            </p:commandButton>
+                            </h:commandButton>
                         </p:outputPanel>
                         <p:outputPanel id="opTabla2" rendered="#{reporteMovimientoInventarioMB.tipoReporte eq 2}">
                             <!-- Kardex -->
@@ -500,9 +503,9 @@
                                 </p:column>
                             </p:dataTable>
 
-                            <p:commandButton value="Exportar CSV" icon="ui-icon-document">
+                            <h:commandButton value="Exportar CSV Kardex">
                                 <p:dataExporter type="xls" target="tablaVista2" fileName="kardex" />
-                            </p:commandButton>
+                            </h:commandButton>
                         </p:outputPanel>
                         <p:outputPanel id="opTabla3" rendered="#{reporteMovimientoInventarioMB.tipoReporte eq 3}">
                             <!-- Compras Proveedor -->
@@ -573,9 +576,9 @@
                                 </p:column>
                             </p:dataTable>
 
-                            <p:commandButton value="Exportar CSV" icon="ui-icon-document">
+                            <h:commandButton value="Exportar CSV Compras">
                                 <p:dataExporter type="xls" target="tablaVista3" fileName="comprasproveedor" />
-                            </p:commandButton>
+                            </h:commandButton>
                         </p:outputPanel>
                         <p:outputPanel id="opTabla4" rendered="#{reporteMovimientoInventarioMB.tipoReporte eq 4}">
                             <!-- Vencimiento lotes -->
@@ -669,9 +672,9 @@
 
                             </p:dataTable>
 
-                            <p:commandButton value="Exportar CSV" icon="ui-icon-document">
+                            <h:commandButton value="Exportar CSV Lotes">
                                 <p:dataExporter type="xls" target="tablaVista4" fileName="lotes" />
-                            </p:commandButton>
+                            </h:commandButton>
                         </p:outputPanel>
                         <p:outputPanel id="opTabla5" rendered="#{reporteMovimientoInventarioMB.tipoReporte eq 5}">
                             <!-- Vencimiento lotes -->
@@ -752,9 +755,9 @@
                                     <h:outputText value="#{fila.utilidad}" />
                                 </p:column>
                             </p:dataTable>
-                            <p:commandButton value="Exportar CSV" icon="ui-icon-document">
+                            <h:commandButton value="Exportar CSV Consumos Pacientes" >
                                 <p:dataExporter type="xls" target="tablaVista5" fileName="consumopacientes" />
-                            </p:commandButton>
+                            </h:commandButton>
                         </p:outputPanel>
                     </p:outputPanel>
                 </div>
