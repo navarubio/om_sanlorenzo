@@ -95,7 +95,7 @@ public class ReporteMovimientoInventarioMB extends MetodosGenerales implements j
     private String operador;
     private double cantidadOperador;
     private int tipoReporte;
-    
+
     @PostConstruct()
     public void init() {
         if (listaCategorias == null) {
@@ -121,7 +121,7 @@ public class ReporteMovimientoInventarioMB extends MetodosGenerales implements j
         fechaDesde = new Date();
         fechaHasta = new Date();
     }
-    
+
     public void validarTipoMovimiento() {
         if (tipoMovimiento.equals("E")) {
             listaProcesos.clear();
@@ -136,34 +136,33 @@ public class ReporteMovimientoInventarioMB extends MetodosGenerales implements j
             listaProcesos.add(new SelectItem(7, "Devoluciones por compra"));
         }
     }
-    
+
     public void cambiarTipoReporte() {
         limpiarListasCsv();
         if (tipoReporte == 3) {
             cargarProveedores();
         }
-        
+
     }
-    
+
     private void limpiarListasCsv() {
         if (listaReporteCsv != null && !listaReporteCsv.isEmpty()) {
             listaReporteCsv.clear();
         }
     }
-    
-    
+
     public void cargarProveedores() {
         if (listaProveedores == null || listaProveedores.isEmpty()) {
             listaProveedores = proveedorFachada.getActivos();
         }
         //RequestContext.getCurrentInstance().execute("PF('dialogoProveedor').show();");
     }
-    
+
     public void buscarProveedor() {
         System.out.println("buscar proveedor");
         proveedor = proveedorSeleccionado;
-        if(proveedor==null){
-            proveedor=new InvProveedores();
+        if (proveedor == null) {
+            proveedor = new InvProveedores();
         }
         RequestContext.getCurrentInstance().update("IdFormOrdenCompra:opTotales");
     }
@@ -183,11 +182,11 @@ public class ReporteMovimientoInventarioMB extends MetodosGenerales implements j
             System.out.println("Query " + query);
             HashMap<String, Object> params = new HashMap<>();
             params.put("query", query);
-            params.put("bodega", (bodega != null && bodega.getIdBodega()!=null && bodega.getIdBodega() > 0) ? bodega.getCodigoBodega() + "-" + bodega.getNombre() : "TODAS");
+            params.put("bodega", (bodega != null && bodega.getIdBodega() != null && bodega.getIdBodega() > 0) ? bodega.getCodigoBodega() + "-" + bodega.getNombre() : "TODAS");
             params.put("fechaDesde", fec.fechaToString(fechaDesde, "dd/MM/yyyy"));
             params.put("fechaHasta", fec.fechaToString(fechaHasta, "dd/MM/yyyy"));
             params.put("logoEmpresa", logoEmpresa);
-            
+
             ServletContext servletContext = (ServletContext) facesContext.getExternalContext().getContext();
             String ruta = servletContext.getRealPath("inventario/reportes/r_movimiento_inventario.jasper");
             Connection con = DBConnector.getInstance().getConnection();
@@ -215,11 +214,11 @@ public class ReporteMovimientoInventarioMB extends MetodosGenerales implements j
             System.out.println("Query " + query);
             HashMap<String, Object> params = new HashMap<>();
             params.put("query", query);
-            params.put("bodega", (bodega != null && bodega.getIdBodega()!=null && bodega.getIdBodega() > 0) ? bodega.getCodigoBodega() + "-" + bodega.getNombre() : "TODAS");
+            params.put("bodega", (bodega != null && bodega.getIdBodega() != null && bodega.getIdBodega() > 0) ? bodega.getCodigoBodega() + "-" + bodega.getNombre() : "TODAS");
             params.put("fechaDesde", fec.fechaToString(fechaDesde, "dd/MM/yyyy"));
             params.put("fechaHasta", fec.fechaToString(fechaHasta, "dd/MM/yyyy"));
             params.put("logoEmpresa", logoEmpresa);
-            
+
             ServletContext servletContext = (ServletContext) facesContext.getExternalContext().getContext();
             String ruta = servletContext.getRealPath("inventario/reportes/r_kardex_valorizado.jasper");
             Connection con = DBConnector.getInstance().getConnection();
@@ -231,7 +230,7 @@ public class ReporteMovimientoInventarioMB extends MetodosGenerales implements j
             imprimirMensaje("Error al guardar", "Digite código del producto", FacesMessage.SEVERITY_ERROR);
         }
     }
-    
+
     public void generarReporteVencimientoLotes(ActionEvent actionEvent) {
         String logoEmpresa = (String) actionEvent.getComponent().getAttributes().get("logo_empresa");
         FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -242,11 +241,11 @@ public class ReporteMovimientoInventarioMB extends MetodosGenerales implements j
             System.out.println("Query " + query.toString());
             HashMap<String, Object> params = new HashMap<>();
             params.put("query", query.toString());
-            params.put("bodega", (bodega != null && bodega.getIdBodega()!=null && bodega.getIdBodega() > 0) ? bodega.getCodigoBodega() + "-" + bodega.getNombre() : "TODAS");
+            params.put("bodega", (bodega != null && bodega.getIdBodega() != null && bodega.getIdBodega() > 0) ? bodega.getCodigoBodega() + "-" + bodega.getNombre() : "TODAS");
             params.put("fechaDesde", fec.fechaToString(fechaDesde, "dd/MM/yyyy"));
             params.put("fechaHasta", fec.fechaToString(fechaHasta, "dd/MM/yyyy"));
             params.put("logoEmpresa", logoEmpresa);
-            
+
             ServletContext servletContext = (ServletContext) facesContext.getExternalContext().getContext();
             String ruta = servletContext.getRealPath("inventario/reportes/r_vencimiento_lotes.jasper");
             Connection con = DBConnector.getInstance().getConnection();
@@ -258,7 +257,7 @@ public class ReporteMovimientoInventarioMB extends MetodosGenerales implements j
             imprimirMensaje("Error al guardar", "Digite código del producto", FacesMessage.SEVERITY_ERROR);
         }
     }
-    
+
     public void generarReporteConsumosPaciente(ActionEvent actionEvent) {
         String logoEmpresa = (String) actionEvent.getComponent().getAttributes().get("logo_empresa");
         FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -273,7 +272,7 @@ public class ReporteMovimientoInventarioMB extends MetodosGenerales implements j
             params.put("fechaDesde", fec.fechaToString(fechaDesde, "dd/MM/yyyy"));
             params.put("fechaHasta", fec.fechaToString(fechaHasta, "dd/MM/yyyy"));
             params.put("logoEmpresa", logoEmpresa);
-            
+
             ServletContext servletContext = (ServletContext) facesContext.getExternalContext().getContext();
             String ruta = servletContext.getRealPath("inventario/reportes/r_consumos_pacientes.jasper");
             Connection con = DBConnector.getInstance().getConnection();
@@ -305,7 +304,7 @@ public class ReporteMovimientoInventarioMB extends MetodosGenerales implements j
             params.put("fechaDesde", fec.fechaToString(fechaDesde, "dd/MM/yyyy"));
             params.put("fechaHasta", fec.fechaToString(fechaHasta, "dd/MM/yyyy"));
             params.put("logoEmpresa", logoEmpresa);
-            
+
             ServletContext servletContext = (ServletContext) facesContext.getExternalContext().getContext();
             String ruta = servletContext.getRealPath("inventario/reportes/r_compras.jasper");
             Connection con = DBConnector.getInstance().getConnection();
@@ -343,13 +342,15 @@ public class ReporteMovimientoInventarioMB extends MetodosGenerales implements j
             fila.setValor(fila.getPrecio() * fila.getExistencia());
             listaReporteCsv.add(fila);
         }
-        
+
     }
-    
+
     public void vistaPreviaKardex() {
         listaReporteCsv = new ArrayList<>();
+        String query =queryKardex(true);
+        System.out.println(query);
         List<Object> arr
-                = productoFachada.dataReporteMovimientoInventario(queryKardex(true));
+                = productoFachada.dataReporteMovimientoInventario(query);
         RepInventarioCsv fila;
         for (Object object : arr) {
             Object[] campos = (Object[]) object;
@@ -360,12 +361,13 @@ public class ReporteMovimientoInventarioMB extends MetodosGenerales implements j
             fila.setNombreCat(campos[2].toString());
             fila.setCodigo(campos[3].toString());
             fila.setProducto(campos[4].toString());
-            fila.setStockMinimo((Integer) campos[5]);
-            fila.setStockMaximo((Integer) campos[6]);
-            fila.setCosto((Double) campos[7]);
-            fila.setPrecio((Double) campos[8]);
-            fila.setExistencia((Double) campos[9]);
-            fila.setEntradas((Double) campos[10]);
+            fila.setCodigoLot(campos[5].toString());
+            fila.setStockMinimo((Integer) campos[6]);
+            fila.setStockMaximo((Integer) campos[7]);
+            fila.setCosto((Double) campos[8]);
+            fila.setPrecio((Double) campos[9]);
+            fila.setExistencia((Double) campos[10]);
+            fila.setEntradas((Double) campos[11]);
             fila.setSalidas((Double) campos[11]);
             fila.setCosto_total(fila.getExistencia() * fila.getCosto());
             double utilidad = 0;
@@ -375,7 +377,7 @@ public class ReporteMovimientoInventarioMB extends MetodosGenerales implements j
             fila.setUtilidad(utilidad);
             listaReporteCsv.add(fila);
         }
-        
+
     }
 
     /**
@@ -404,7 +406,7 @@ public class ReporteMovimientoInventarioMB extends MetodosGenerales implements j
             fila.setValor(fila.getCantidad() * fila.getPrecio());
             listaReporteCsv.add(fila);
         }
-        
+
     }
 
     /**
@@ -469,7 +471,7 @@ public class ReporteMovimientoInventarioMB extends MetodosGenerales implements j
             fila.setUtilidad(utilidad);
             listaReporteCsv.add(fila);
         }
-        
+
     }
 
     /**
@@ -520,7 +522,7 @@ public class ReporteMovimientoInventarioMB extends MetodosGenerales implements j
         if (tipoProceso != null && !tipoProceso.equals("0")) {
             query.append(" AND cm.tipo_proceso='").append(tipoProceso)
                     .append("'");
-            
+
         }
         if (idLote > 0) {
             //TODO
@@ -529,7 +531,7 @@ public class ReporteMovimientoInventarioMB extends MetodosGenerales implements j
             String cadProductos = "0";
             for (InvProductos prod : listaProductosSeleccionados) {
                 cadProductos += "," + prod.getIdProducto();
-                
+
             }
             if (!cadProductos.equals("0")) {
                 query.append(" AND dm.id_producto in(")
@@ -555,7 +557,7 @@ public class ReporteMovimientoInventarioMB extends MetodosGenerales implements j
                     query.append(" and dm.cantidad_recibida<=").append(cantidadOperador);
                     break;
             }
-            
+
         }
         return query.toString();
     }
@@ -572,41 +574,48 @@ public class ReporteMovimientoInventarioMB extends MetodosGenerales implements j
         if (bodega != null && bodega.getIdBodega() > 0) {
             filtroBodega = bodega.getIdBodega();
         }
-        String group = " group by 1,2,3,4,5,6,7,cm.tipo_movimiento,id_bodega_destino,id_bodega_origen, pr.id_producto";
-        
-        StringBuilder query = new StringBuilder("SELECT ")
-                .append(" case when cm.tipo_movimiento='E' then  fcn_obtener_nombre_bodega(id_bodega_destino) else fcn_obtener_nombre_bodega(id_bodega_origen) END bodega, ");
-        
+
+        StringBuilder query = new StringBuilder("SELECT ");
+
         if (_separaProducto) {
-            query.append(" cat.codigo, cat.nombre categoria, ");
-            query.append(" pr.codigo, pr.nombre producto, ");
+            query.append(" mb.nombre bodega,")
+                    .append(" ca.codigo, ca.nombre categoria, ")
+                    .append(" pr.codigo, pr.nombre producto, ");
         } else {
-            query.append(" cat.codigo || '-' || cat.nombre categoria, ");
-            query.append(" pr.codigo || ' - ' ||  pr.nombre as producto, ");
+            query.append("  mb.codigo_bodega || '-' || mb.nombre bodega, ")
+                    .append(" ca.codigo || '-' || ca.nombre categoria,  ")
+                    .append(" pr.codigo || ' - ' ||  pr.nombre as producto, ");
         }
-        query.append(" pr.stock_minimo, pr.stock_maximo, pr.costo, pr.precio_venta,")
-                .append(" fcn_existencia_total(case when cm.tipo_movimiento='E' then id_bodega_destino else id_bodega_origen end, pr.id_producto)  existencia,")
-                .append(" sum(case when cm.tipo_movimiento='E' then cantidad_recibida else 0 end) entradas,")
-                .append(" sum(case when cm.tipo_movimiento='S' then cantidad_solicitada else 0 end) salidas")
-                .append(" FROM inv_movimientos cm, inv_movimiento_productos dm, inv_productos pr, inv_categorias cat")
-                .append(" where cm.id_movimiento=dm.id_movimiento and dm.id_producto=pr.id_producto")
-                .append(" and pr.id_categoria=cat.id_categoria");
-        query.append(" AND DATE(cm.fecha_movimiento) BETWEEN '")
+        query.append(" lo.codigo lote,")
+                .append(" pr.stock_minimo, pr.stock_maximo, pr.costo, pr.precio_venta,  db.existencia,")
+                //Entradas
+                .append(" fcn_obtener_movimientos_bodega(mb.id_bodega, pr.id_producto, 'E', '")
                 .append(fec.fechaToString(fechaDesde, "yyyy-MM-dd"))
-                .append("' AND '")
+                .append("', '")
                 .append(fec.fechaToString(fechaHasta, "yyyy-MM-dd"))
-                .append("'");
+                .append("') entradas,")
+                //Salidas
+                .append(" fcn_obtener_movimientos_bodega(mb.id_bodega, pr.id_producto, 'S', '")
+                .append(fec.fechaToString(fechaDesde, "yyyy-MM-dd"))
+                .append("', '")
+                .append(fec.fechaToString(fechaHasta, "yyyy-MM-dd"))
+                .append("') salidas")
+                
+                
+                .append(" from inv_bodegas mb, inv_bodega_productos  db, inv_productos pr, inv_categorias ca, inv_lotes lo")
+                .append(" where mb.id_bodega=db.id_bodega and db.id_producto=pr.id_producto and pr.id_categoria=ca.id_categoria")
+                .append(" and db.id_lote=lo.id_lote")
+                ;
         if (filtroBodega > 0) {
-            query.append(" AND (cm.id_bodega_origen=").append(filtroBodega)
-                    .append(" OR id_bodega_destino=").append(filtroBodega)
-                    .append(")");
+            query.append(" AND  mb.id_bodega=").append(filtroBodega);
+                    
         }
         if (categoria != null && categoria.getIdCategoria() > 0) {
             query.append(" AND pr.id_categoria='").append(categoria.getIdCategoria())
                     .append("'");
         }
         if (idLote > 0) {
-            //TODO
+            query.append(" and db.id_lote=").append(idLote);
         }
         if (listaProductosSeleccionados != null && !listaProductosSeleccionados.isEmpty()) {
             String cadProductos = "0";
@@ -615,12 +624,12 @@ public class ReporteMovimientoInventarioMB extends MetodosGenerales implements j
 
             }
             if (!cadProductos.equals("0")) {
-                query.append(" AND dm.id_producto in(")
+                query.append(" AND db.id_producto in(")
                         .append(cadProductos)
                         .append(")");
             }
         }
-        String filtroCantidad=" fcn_existencia_total(case when cm.tipo_movimiento='E' then id_bodega_destino else id_bodega_origen end, pr.id_producto) ";
+        String filtroCantidad = " db.existencia";
         if (operador != null && !operador.equals("0")) {
             switch (operador) {
                 case "1":
@@ -640,10 +649,9 @@ public class ReporteMovimientoInventarioMB extends MetodosGenerales implements j
                     break;
             }
         }
-        query.append(group);
         return query.toString();
     }
-    
+
     private String queryVencimientoLote(boolean _separarDescripciones) {
         Fechas fec = new Fechas();
         int filtroBodega = 0;
@@ -723,12 +731,12 @@ public class ReporteMovimientoInventarioMB extends MetodosGenerales implements j
     private String queryConsumoPacientes(boolean _separarDescripciones) {
         Fechas fec = new Fechas();
         int filtroPaciente = 0;
-        if (paciente != null && paciente .getIdPaciente()!=null && paciente.getIdPaciente() > 0) {
+        if (paciente != null && paciente.getIdPaciente() != null && paciente.getIdPaciente() > 0) {
             filtroPaciente = paciente.getIdPaciente();
         }
         StringBuilder query = new StringBuilder("SELECT ")
                 .append(" to_char(fecha_entrega,'dd/MM/yyy') fecha, numero_entrega,  login_usuario,");
-        
+
         if (_separarDescripciones) {
             query.append(" coalesce(mp.primer_nombre,'') || ' ' || coalesce(mp.segundo_nombre,'') || ' ' || coalesce(mp.primer_apellido,'') || ' ' || coalesce(mp.segundo_apellido,'') paciente,")
                     .append(" pr.codigo || ' ' || pr.nombre producto,");
@@ -742,7 +750,7 @@ public class ReporteMovimientoInventarioMB extends MetodosGenerales implements j
                 .append(" and me.id_paciente=mp.id_paciente ")
                 .append(" and de.id_producto=pr.id_producto")
                 .append(" and me.usuario_elabora=usu.id_usuario");
-        
+
         query.append(" AND DATE(me.fecha_entrega) BETWEEN '")
                 .append(fec.fechaToString(fechaDesde, "yyyy-MM-dd"))
                 .append("' AND '")
@@ -789,17 +797,17 @@ public class ReporteMovimientoInventarioMB extends MetodosGenerales implements j
         }
         return query.toString();
     }
-    
+
     private String queryInformeCompras(boolean _separarDescripciones) {
         Fechas fec = new Fechas();
         int filtroProveedor = 0;
-        if (proveedor != null && proveedor.getIdProveedor()!=null && proveedor.getIdProveedor()> 0) {
+        if (proveedor != null && proveedor.getIdProveedor() != null && proveedor.getIdProveedor() > 0) {
             filtroProveedor = proveedor.getIdProveedor();
         }
-        
+
         StringBuilder query = new StringBuilder("SELECT ")
                 .append("nro_documento, to_char(mo.fecha,'dd/MM/yyyy') fecha, mp.razon_social,");
-        
+
         if (_separarDescripciones) {
             query.append(" cat.codigo, cat.nombre categoria,")
                     .append(" pr.codigo, pr.nombre,");
@@ -812,14 +820,14 @@ public class ReporteMovimientoInventarioMB extends MetodosGenerales implements j
                 .append(" where mo.id_orden_compra=det.id_orden_compra")
                 .append(" and mo.id_proveedor=mp.id_proveedor and det.id_producto=pr.id_producto")
                 .append(" and pr.id_categoria=cat.id_categoria");
-        
+
         query.append(" AND DATE(mo.fecha) BETWEEN '")
                 .append(fec.fechaToString(fechaDesde, "yyyy-MM-dd"))
                 .append("' AND '")
                 .append(fec.fechaToString(fechaHasta, "yyyy-MM-dd"))
                 .append("'");
 
-         if (filtroProveedor > 0) {
+        if (filtroProveedor > 0) {
             query.append(" AND mo.id_proveedor=").append(filtroProveedor);
         }
         if (categoria != null && categoria.getIdCategoria() > 0) {
@@ -858,9 +866,9 @@ public class ReporteMovimientoInventarioMB extends MetodosGenerales implements j
             }
         }
         return query.toString();
-        
+
     }
-    
+
     public void buscarPaciente() {
         System.out.println("bscando paciente");
         System.out.println(tipoIdentificacion);
@@ -872,205 +880,205 @@ public class ReporteMovimientoInventarioMB extends MetodosGenerales implements j
             paciente = new CfgPacientes();
         }
     }
-    
+
     public List<InvBodegas> getListaBodegas() {
         return listaBodegas;
     }
-    
+
     public void setListaBodegas(List<InvBodegas> listaBodegas) {
         this.listaBodegas = listaBodegas;
     }
-    
+
     public List<InvCategorias> getListaCategorias() {
         return listaCategorias;
     }
-    
+
     public void setListaCategorias(List<InvCategorias> listaCategorias) {
         this.listaCategorias = listaCategorias;
     }
-    
+
     public List<InvProductos> getListaProductos() {
         return listaProductos;
     }
-    
+
     public void setListaProductos(List<InvProductos> listaProductos) {
         this.listaProductos = listaProductos;
     }
-    
+
     public List<InvProductos> getListaProductosSeleccionados() {
         return listaProductosSeleccionados;
     }
-    
+
     public void setListaProductosSeleccionados(List<InvProductos> listaProductosSeleccionados) {
         this.listaProductosSeleccionados = listaProductosSeleccionados;
     }
-    
+
     public List<SelectItem> getListaProcesos() {
         return listaProcesos;
     }
-    
+
     public void setListaProcesos(List<SelectItem> listaProcesos) {
         this.listaProcesos = listaProcesos;
     }
-    
+
     public String getTipoMovimiento() {
         return tipoMovimiento;
     }
-    
+
     public void setTipoMovimiento(String tipoMovimiento) {
         this.tipoMovimiento = tipoMovimiento;
     }
-    
+
     public String getTipoProceso() {
         return tipoProceso;
     }
-    
+
     public void setTipoProceso(String tipoProceso) {
         this.tipoProceso = tipoProceso;
     }
-    
+
     public Date getFechaDesde() {
         return fechaDesde;
     }
-    
+
     public void setFechaDesde(Date fechaDesde) {
         this.fechaDesde = fechaDesde;
     }
-    
+
     public Date getFechaHasta() {
         return fechaHasta;
     }
-    
+
     public void setFechaHasta(Date fechaHasta) {
         this.fechaHasta = fechaHasta;
     }
-    
+
     public InvCategorias getCategoria() {
         return categoria;
     }
-    
+
     public void setCategoria(InvCategorias categoria) {
         this.categoria = categoria;
     }
-    
+
     public InvProductos getProducto() {
         return producto;
     }
-    
+
     public void setProducto(InvProductos producto) {
         this.producto = producto;
     }
-    
+
     public InvBodegas getBodega() {
         return bodega;
     }
-    
+
     public void setBodega(InvBodegas bodega) {
         this.bodega = bodega;
     }
-    
+
     public List<InvLotes> getListaLote() {
         return listaLote;
     }
-    
+
     public void setListaLote(List<InvLotes> listaLote) {
         this.listaLote = listaLote;
     }
-    
+
     public int getIdLote() {
         return idLote;
     }
-    
+
     public void setIdLote(int idLote) {
         this.idLote = idLote;
     }
-    
+
     public String getOperador() {
         return operador;
     }
-    
+
     public void setOperador(String operador) {
         this.operador = operador;
     }
-    
+
     public double getCantidadOperador() {
         return cantidadOperador;
     }
-    
+
     public void setCantidadOperador(double cantidadOperador) {
         this.cantidadOperador = cantidadOperador;
     }
-    
+
     public List<RepInventarioCsv> getListaReporteCsv() {
         return listaReporteCsv;
     }
-    
+
     public void setListaReporteCsv(List<RepInventarioCsv> listaReporteCsv) {
         this.listaReporteCsv = listaReporteCsv;
     }
-    
+
     public List<InvProveedores> getListaProveedores() {
         return listaProveedores;
     }
-    
+
     public void setListaProveedores(List<InvProveedores> listaProveedores) {
         this.listaProveedores = listaProveedores;
     }
-    
+
     public InvProveedores getProveedor() {
         return proveedor;
     }
-    
+
     public void setProveedor(InvProveedores proveedor) {
         this.proveedor = proveedor;
     }
-    
+
     public InvProveedores getProveedorSeleccionado() {
         return proveedorSeleccionado;
     }
-    
+
     public void setProveedorSeleccionado(InvProveedores proveedorSeleccionado) {
         this.proveedorSeleccionado = proveedorSeleccionado;
     }
-    
+
     public CfgPacientes getPaciente() {
         return paciente;
     }
-    
+
     public void setPaciente(CfgPacientes paciente) {
         this.paciente = paciente;
     }
-    
+
     public String getIdentificacion() {
         return identificacion;
     }
-    
+
     public void setIdentificacion(String identificacion) {
         this.identificacion = identificacion;
     }
-    
+
     public int getTipoIdentificacion() {
         return tipoIdentificacion;
     }
-    
+
     public void setTipoIdentificacion(int tipoIdentificacion) {
         this.tipoIdentificacion = tipoIdentificacion;
     }
-    
+
     public List<CfgClasificaciones> getListaTipoIdentificacion() {
         return listaTipoIdentificacion;
     }
-    
+
     public void setListaTipoIdentificacion(List<CfgClasificaciones> listaTipoIdentificacion) {
         this.listaTipoIdentificacion = listaTipoIdentificacion;
     }
-    
+
     public int getTipoReporte() {
         return tipoReporte;
     }
-    
+
     public void setTipoReporte(int tipoReporte) {
         this.tipoReporte = tipoReporte;
     }
-    
+
 }
