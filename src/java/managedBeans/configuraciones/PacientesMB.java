@@ -142,9 +142,9 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
     private Boolean ver_ocupacion = false;
     private Boolean ver_estado_civil = false;
     private int años = 1;
-    
+
     //CASC20171103
-    private boolean tieneGestacion;    
+    private boolean tieneGestacion;
 
     private final static String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     private final static Pattern EMAIL_COMPILED_PATTERN = Pattern.compile(EMAIL_PATTERN);
@@ -160,15 +160,15 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
         limpiarFormulario();
         //listaCompletaOcupaciones = clasificacionesFachada.buscarPorMaestro("ocupaciones");
     }
-    
-     public void seleccionGenero(){
-         tieneGestacion=false;
-         if(genero!=null && genero.equals("277")){
-            tieneGestacion=true;
-         }else{
-             gestacion="";
-         }
-         System.out.println("Generooo " + genero);
+
+    public void seleccionGenero() {
+        tieneGestacion = false;
+        if (genero != null && genero.equals("277")) {
+            tieneGestacion = true;
+        } else {
+            gestacion = "";
+        }
+        System.out.println("Generooo " + genero);
     }
 
     public void cambiaFechaNacimiento(SelectEvent event) {
@@ -249,6 +249,11 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
         }
     }
 
+    public void limpiarNuevoRegistro() {
+        limpiarFormulario();
+        nuevoRegistro = true;
+    }
+
     public void limpiarFormulario() {
         tituloTabPacientes = "Datos nuevo paciente";
         pacienteSeleccionado = null;
@@ -263,7 +268,7 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
         fechaNacimiento = null;
         fechNacimiConvetEdad = "-";
         genero = "";
-        tieneGestacion=false;
+        tieneGestacion = false;
         grupoSanguineo = "";
         primerNombre = "";
         segundoNombre = "";
@@ -325,7 +330,7 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
         fechaNacimiento = null;
         fechNacimiConvetEdad = "-";
         genero = "";
-        tieneGestacion=false;
+        tieneGestacion = false;
         grupoSanguineo = "";
         primerNombre = "";
         segundoNombre = "";
@@ -649,6 +654,7 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
             actualizarPacienteExistente();
         }
         tabActivaPacientes = "0";
+        nuevoRegistro = true;
 
     }
 
@@ -807,7 +813,7 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
     }
 
     public void validarIdentificacion() {
-        nuevoRegistro=false;
+        nuevoRegistro = false;
         //System.out.println(tipoIdentificacion+""+identificacion);
         int cedula = pacientesFachada.numeroCedulas(identificacion + "");
         if (cedula > 0) {
