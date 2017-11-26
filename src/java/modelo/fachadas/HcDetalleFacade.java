@@ -27,7 +27,12 @@ public class HcDetalleFacade extends AbstractFacade<HcDetalle> {
                     + "from hc_registro h "
                     + "inner join hc_detalle hd on hd.id_registro = h.id_registro "
                     + "inner join hc_campos_reg hc on hc.id_campo=hd.id_campo "
-                    + "where hc.id_Campo in(35,108494,72,1474,1229,107641,107400) and  h.id_paciente= ? "
+                    + "where hc.id_Campo in"
+                    //Diagnosticos y diagnosticos principales 
+                    //+ "(35,108494,72,1474,1229,107641,107400) "
+                    //Se colocaron todos los que dicen principal o solo diagnostico en hc_campos_reg
+                    + " (262, 1229,72,35,1347,1357,1474,1062,1113,1564,1657,1661,1864, 107427, 107621, 107621, 108009, 108960, 109448)"
+                    + "and  h.id_paciente= ? "
                     + " and char_length(hd.valor)>0 order by hd.id_registro desc limit 1 ";
             Query query  =getEntityManager().createNativeQuery(sql).setParameter(1, idPaciente);
             List<String> lista  =query.getResultList();
@@ -44,7 +49,11 @@ public class HcDetalleFacade extends AbstractFacade<HcDetalle> {
                     + "from hc_registro h "
                     + "inner join hc_detalle hd on hd.id_registro = h.id_registro "
                     + "inner join hc_campos_reg hc on hc.id_campo=hd.id_campo "
-                    + "where hc.id_Campo in(1,108495,57,1230,107642,107401) and  h.id_paciente= ? "
+                    + "where hc.id_Campo in "
+                    //+ "(1,108495,57,1230,107642,107401)"
+                    //Se consulto en  hc_campos_reg todos los que tuvieran diagostico relacionado 1
+                    +"(1, 57, 1230, 1348,1358, 1658, 1662)"
+                    + " and  h.id_paciente= ? "
                     + " and char_length(hd.valor)>0 order by hd.id_registro desc limit 1 ";
             Query query  =getEntityManager().createNativeQuery(sql).setParameter(1, idPaciente);
             List<String> lista  =query.getResultList();
@@ -61,7 +70,16 @@ public class HcDetalleFacade extends AbstractFacade<HcDetalle> {
                     + "from hc_registro h "
                     + "inner join hc_detalle hd on hd.id_registro = h.id_registro "
                     + "inner join hc_campos_reg hc on hc.id_campo=hd.id_campo "
-                    + "where hc.id_Campo in(2,108496,61,1231,107643,107402) and  h.id_paciente= ? "
+                    + "where hc.id_Campo in"
+                    //+ "(2,108496,61,1231,107643,107402)"
+                    //Se consulto en  hc_campos_reg todos los que tuvieran diagostico relacionado 2 y 3
+                    + "("
+                    //Diagnosticos 2
+                    + "2, 61, 1231,1349,1659,1663,"
+                    //Diagnosticos 3
+                    + "37,70,1232,1350"
+                    + ")"
+                    + " and  h.id_paciente= ? "
                     + " and char_length(hd.valor)>0 order by hd.id_registro desc limit 1 ";
             Query query  =getEntityManager().createNativeQuery(sql).setParameter(1, idPaciente);
             List<String> lista  =query.getResultList();
