@@ -553,10 +553,12 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         //listaPacientesFiltro.addAll(listaPacientes);
         listaTipoRegistroClinico = tipoRegCliFacade.buscarTiposRegstroActivos();
         listaPrestadores = usuariosFacade.buscarUsuariosParaHistorias();
-         listaOdontologos = new ArrayList<>();
+        listaOdontologos = new ArrayList<>();
         for (CfgUsuarios usuario : listaPrestadores) {
-            if (Pattern.matches("460|461|462|463", usuario.getEspecialidad().getCodigo())) {
-                listaOdontologos.add(usuario);
+            if (usuario.getEspecialidad() != null) {
+                if (Pattern.matches("460|461|462|463", usuario.getEspecialidad().getCodigo())) {
+                    listaOdontologos.add(usuario);
+                }
             }
         }
         seleccionaTodosRegCliHis();

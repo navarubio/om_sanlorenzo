@@ -44,4 +44,16 @@ public class CitAutorizacionesServiciosFacade extends AbstractFacade<CitAutoriza
             return null;
         }
     }
+    
+      public CitAutorizacionesServicios consultarCitAutServ(int id) {
+        CitAutorizacionesServicios obj = null;
+        try {
+            String sql = "SELECT c FROM CitAutorizacionesServicios c WHERE c.idSincronizador = ?1 ";
+            Query query = getEntityManager().createQuery(sql);
+            query.setParameter(1, id);
+            obj = (CitAutorizacionesServicios) query.getSingleResult();
+        } catch (Exception e) {
+        }
+        return obj;
+    }
 }

@@ -102,4 +102,16 @@ public class HcDetalleFacade extends AbstractFacade<HcDetalle> {
             return null;
         }
     }    
+   
+     public HcDetalle consultarHcDetalleSinc(int id) {
+        HcDetalle obj = null;
+        try {
+            String sql = "SELECT c FROM HcDetalle c WHERE c.idSincronizador = ?1 ";
+            Query query = getEntityManager().createQuery(sql);
+            query.setParameter(1, id);
+            obj = (HcDetalle) query.getSingleResult();
+        } catch (Exception e) {
+        }
+        return obj;
+    }
 }

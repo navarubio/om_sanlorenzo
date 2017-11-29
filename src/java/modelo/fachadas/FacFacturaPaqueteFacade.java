@@ -6,6 +6,7 @@
 package modelo.fachadas;
 
 import javax.ejb.Stateless;
+import javax.persistence.Query;
 import modelo.entidades.FacFacturaPaquete;
 
 /**
@@ -19,4 +20,16 @@ public class FacFacturaPaqueteFacade extends AbstractFacade<FacFacturaPaquete> {
         super(FacFacturaPaquete.class);
     }
 
+    
+     public FacFacturaPaquete consultarFacFacturaPaq(int id) {
+        FacFacturaPaquete obj = null;
+        try {
+            String sql = "SELECT c FROM FacFacturaPaquete c WHERE c.idSincronizador = ?1 ";
+            Query query = getEntityManager().createQuery(sql);
+            query.setParameter(1, id);
+            obj = (FacFacturaPaquete) query.getSingleResult();
+        } catch (Exception e) {
+        }
+        return obj;
+    }
 }
