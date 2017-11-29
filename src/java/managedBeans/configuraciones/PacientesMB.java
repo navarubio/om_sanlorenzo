@@ -587,6 +587,7 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
             fechaVenceCarnet = null;
         }
         observaciones = pacienteSeleccionado.getObservaciones();
+        nuevoRegistro=false;
         tabActivaPacientes = "0";
         //System.out.println("Paciente ---> Id     :  " + pacienteSeleccionado.getIdPaciente());
         //System.out.println("Paciente ---> Nombre :  " + pacienteSeleccionado.getNombreCompleto());
@@ -813,7 +814,7 @@ public class PacientesMB extends MetodosGenerales implements Serializable {
     }
 
     public void validarIdentificacion() {
-        nuevoRegistro = false;
+        nuevoRegistro = true;
         //System.out.println(tipoIdentificacion+""+identificacion);
         int cedula = pacientesFachada.numeroCedulas(identificacion + "");
         if (cedula > 0) {
