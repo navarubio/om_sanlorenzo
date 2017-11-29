@@ -50,6 +50,7 @@ import modelo.entidades.sinc.SinTablas;
 @Stateless
 public class SincronizacionFacade {
 
+    
     //private Class<T> entityClass;
     @PersistenceContext(unitName = "OPENMEDICALPUREMOTO")
     private EntityManager em;
