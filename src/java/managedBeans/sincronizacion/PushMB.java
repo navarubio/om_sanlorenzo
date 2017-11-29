@@ -182,7 +182,7 @@ public class PushMB extends MetodosGenerales implements Serializable {
                 progreso = "Consultar registros a procesar";
                 List<SinStatus> pendientes = sinStatus.buscarOrdenado(true);
                 if (!pendientes.isEmpty()) {
-                    salto = 100 / pendientes.size();
+                    salto = 100.0 / pendientes.size();
                 }
                 progress = 0;
                 progreso = "Cantidad de registros " + pendientes.size();
@@ -195,7 +195,7 @@ public class PushMB extends MetodosGenerales implements Serializable {
                     //buscar en el remoto para ver si existe
                     System.out.println("Consulta registro en remoto");
                     SinStatus registroRemoto = sincronizador.existeRegistro(idTabla, idNodo, registro.getSinStatusPK().getIdLocal(), true);
-                    System.out.println("devolvio "+registroRemoto);
+                    System.out.println("devolvio " + registroRemoto);
                     progreso = "Procesando Tabla " + tabla + " " + registro.getSinStatusPK().getIdLocal();
                     //transaction.begin();
                     System.out.println(progreso);
@@ -206,9 +206,9 @@ public class PushMB extends MetodosGenerales implements Serializable {
                             if (p != null) {
                                 if (registroRemoto == null) {// no existe se debe insertar
                                     //buscamos el paciente por si otro nodo lo cargo
-                                    System.out.println("Consulta paciente remoto por identificacion "+p.getIdentificacion());
+                                    System.out.println("Consulta paciente remoto por identificacion " + p.getIdentificacion());
                                     CfgPacientes pRemoto = sincronizador.consultarPaciente(p.getIdentificacion());
-                                    System.out.println("Devolvio "+ pRemoto );
+                                    System.out.println("Devolvio " + pRemoto);
                                     if (pRemoto == null) {
                                         p.setIdPaciente(null);
                                     } else {
@@ -224,6 +224,10 @@ public class PushMB extends MetodosGenerales implements Serializable {
                                 id = sincronizador.guardarPaciente(p, idTabla, idNodo, registro.getSinStatusPK().getIdLocal());
                                 result = updateSinStatus(id, registro);
                                 pacientesSincronizados++;
+                            } else {
+                                System.out.println("No se encontro paciente  se colocarástatus null por eliminacion");
+                                registro.setStatus(false);
+                                sinStatus.edit(registro);
                             }
                             break;
                         case "cfg_horario":
@@ -522,7 +526,7 @@ public class PushMB extends MetodosGenerales implements Serializable {
                     } else {
                         transaction.rollback();
                     }*/
-                    progress += (int) salto;
+                    progress = (int) (progress + salto);
                 }
                 progress = 100;
                 progreso = "sincronización Finalizada";

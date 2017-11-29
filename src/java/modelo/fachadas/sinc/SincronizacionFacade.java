@@ -65,7 +65,8 @@ public class SincronizacionFacade {
     public List<Object> consultaNativaArreglo(String sql) {//consulta nativa que retorna una lista de listas
         try {
             return (List<Object>) getEntityManager().createNativeQuery(sql).getResultList();
-        } catch (Exception ex) {
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
             return null;
         }
     }
@@ -74,6 +75,7 @@ public class SincronizacionFacade {
         try {
             return Integer.parseInt(getEntityManager().createNativeQuery(sql).getSingleResult().toString());
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return 0;
         }
     }
@@ -93,6 +95,7 @@ public class SincronizacionFacade {
             query.setParameter(3, idRegistro);
             return (SinStatus) query.getSingleResult();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return null;
         }
     }
@@ -106,6 +109,7 @@ public class SincronizacionFacade {
             }
 
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -124,6 +128,7 @@ public class SincronizacionFacade {
             reg.setStatus(Boolean.FALSE);
             em.persist(reg);
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -139,6 +144,7 @@ public class SincronizacionFacade {
             }
             result = p.getIdPaciente();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             result = 0;
         }
         return result;
@@ -152,6 +158,7 @@ public class SincronizacionFacade {
             query.setParameter(1, id);
             obj = (CfgPacientes) query.getSingleResult();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
         return obj;
     }
@@ -164,6 +171,7 @@ public class SincronizacionFacade {
             query.setParameter(1, id);
             obj = (CfgPacientes) query.getSingleResult();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
         return obj;
     }
@@ -184,6 +192,7 @@ public class SincronizacionFacade {
             }
             result = h.getIdHorario();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             result = 0;
         }
         return result;
@@ -197,6 +206,7 @@ public class SincronizacionFacade {
             query.setParameter(1, id);
             obj = (CfgHorario) query.getSingleResult();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
         return obj;
     }
@@ -224,6 +234,7 @@ public class SincronizacionFacade {
             }
             result = h.getIdItemHorario();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             result = 0;
         }
         return result;
@@ -237,6 +248,7 @@ public class SincronizacionFacade {
             query.setParameter(1, id);
             obj = (CfgItemsHorario) query.getSingleResult();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
         return obj;
     }
@@ -246,6 +258,9 @@ public class SincronizacionFacade {
         try {
             SinStatus s = existeRegistro(consultarTabla("cfg_horario"), idNodo, t.getIdHorario().getIdHorario(), true);
             t.getIdHorario().setIdHorario(s.getSinStatusPK().getIdLocal());
+             if (t.getCitCitasList()!=null && !t.getCitCitasList().isEmpty()) {
+                t.getCitCitasList().clear();
+            }
             if (t.getIdTurno() == null) {
                 em.persist(t);
                 em.flush();
@@ -255,6 +270,7 @@ public class SincronizacionFacade {
             }
             result = t.getIdTurno();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             result = 0;
         }
         return result;
@@ -268,6 +284,7 @@ public class SincronizacionFacade {
             query.setParameter(1, id);
             obj = (CitTurnos) query.getSingleResult();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
         return obj;
     }
@@ -287,6 +304,7 @@ public class SincronizacionFacade {
             }
             result = p.getIdPaqMaestro();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             result = 0;
         }
         return result;
@@ -300,6 +318,7 @@ public class SincronizacionFacade {
             query.setParameter(1, id);
             obj = (CitPaqMaestro) query.getSingleResult();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
         return obj;
     }
@@ -318,6 +337,7 @@ public class SincronizacionFacade {
             }
             result = d.getIdPaqDetalle();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             result = 0;
         }
         return result;
@@ -331,6 +351,7 @@ public class SincronizacionFacade {
             query.setParameter(1, id);
             obj = (CitPaqDetalle) query.getSingleResult();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
         return obj;
     }
@@ -353,6 +374,7 @@ public class SincronizacionFacade {
             }
             result = c.getIdAutorizacion();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             result = 0;
         }
         return result;
@@ -366,6 +388,7 @@ public class SincronizacionFacade {
             query.setParameter(1, id);
             obj = (CitAutorizaciones) query.getSingleResult();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
         return obj;
     }
@@ -388,6 +411,7 @@ public class SincronizacionFacade {
             }
             result = c.getIdSincronizador();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             result = 0;
         }
         return result;
@@ -401,6 +425,7 @@ public class SincronizacionFacade {
             query.setParameter(1, id);
             obj = (CitAutorizacionesServicios) query.getSingleResult();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
         return obj;
     }
@@ -427,6 +452,7 @@ public class SincronizacionFacade {
             }
             result = c.getIdCita();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             result = 0;
         }
         return result;
@@ -440,6 +466,7 @@ public class SincronizacionFacade {
             query.setParameter(1, id);
             obj = (CitCitas) query.getSingleResult();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
         return obj;
     }
@@ -459,6 +486,7 @@ public class SincronizacionFacade {
             }
             result = h.getIdArchivo().intValue();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             result = 0;
         }
         return result;
@@ -472,6 +500,7 @@ public class SincronizacionFacade {
             query.setParameter(1, id);
             obj = (HcArchivos) query.getSingleResult();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
         return obj;
     }
@@ -491,6 +520,7 @@ public class SincronizacionFacade {
             }
             result = hi.getIdItem();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             result = 0;
         }
         return result;
@@ -504,6 +534,7 @@ public class SincronizacionFacade {
             query.setParameter(1, id);
             obj = (HcItems) query.getSingleResult();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
         return obj;
     }
@@ -523,6 +554,7 @@ public class SincronizacionFacade {
             }
             result = hc.getIdRepExamenes();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             result = 0;
         }
         return result;
@@ -536,6 +568,7 @@ public class SincronizacionFacade {
             query.setParameter(1, id);
             obj = (HcRepExamenes) query.getSingleResult();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
         return obj;
     }
@@ -556,6 +589,7 @@ public class SincronizacionFacade {
             }
             result = hd.getIdSincronizador();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             result = 0;
         }
         return result;
@@ -569,6 +603,7 @@ public class SincronizacionFacade {
             query.setParameter(1, id);
             obj = (HcDetalle) query.getSingleResult();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
         return obj;
     }
@@ -601,6 +636,7 @@ public class SincronizacionFacade {
             }
             result = h.getIdRegistro();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             result = 0;
         }
         return result;
@@ -614,6 +650,7 @@ public class SincronizacionFacade {
             query.setParameter(1, id);
             obj = (HcRegistro) query.getSingleResult();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
         return obj;
     }
@@ -630,6 +667,7 @@ public class SincronizacionFacade {
             }
             result = c.getIdCaja();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             result = 0;
         }
         return result;
@@ -643,6 +681,7 @@ public class SincronizacionFacade {
             query.setParameter(1, id);
             obj = (FacCaja) query.getSingleResult();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
         return obj;
     }
@@ -663,6 +702,7 @@ public class SincronizacionFacade {
             }
             result = c.getIdConsumoInsumo();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             result = 0;
         }
         return result;
@@ -684,6 +724,7 @@ public class SincronizacionFacade {
             }
             result = c.getIdConsumoMedicamento();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             result = 0;
         }
         return result;
@@ -705,6 +746,7 @@ public class SincronizacionFacade {
             }
             result = c.getIdConsumoPaquete();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             result = 0;
         }
         return result;
@@ -726,6 +768,7 @@ public class SincronizacionFacade {
             }
             result = c.getIdConsumoServicio();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             result = 0;
         }
         return result;
@@ -736,6 +779,7 @@ public class SincronizacionFacade {
             String hql = "SELECT c FROM FacConsecutivo c WHERE c.tipoDocumento.id = :tipo ORDER BY c.idConsecutivo";
             return getEntityManager().createQuery(hql).setParameter("tipo", tipo).getResultList();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return null;
         }
     }
