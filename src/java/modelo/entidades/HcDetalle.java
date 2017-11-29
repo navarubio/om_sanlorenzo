@@ -24,11 +24,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "hc_detalle", schema = "public")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "HcDetalle.findAll", query = "SELECT h FROM HcDetalle h"),
-    @NamedQuery(name = "HcDetalle.findByIdRegistro", query = "SELECT h FROM HcDetalle h WHERE h.hcDetallePK.idRegistro = :idRegistro"),
-    @NamedQuery(name = "HcDetalle.findByIdCampo", query = "SELECT h FROM HcDetalle h WHERE h.hcDetallePK.idCampo = :idCampo"),
+    @NamedQuery(name = "HcDetalle.findAll", query = "SELECT h FROM HcDetalle h")
+    ,
+    @NamedQuery(name = "HcDetalle.findByIdRegistro", query = "SELECT h FROM HcDetalle h WHERE h.hcDetallePK.idRegistro = :idRegistro")
+    ,
+    @NamedQuery(name = "HcDetalle.findByIdCampo", query = "SELECT h FROM HcDetalle h WHERE h.hcDetallePK.idCampo = :idCampo")
+    ,
     @NamedQuery(name = "HcDetalle.findByValor", query = "SELECT h FROM HcDetalle h WHERE h.valor = :valor")})
 public class HcDetalle implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected HcDetallePK hcDetallePK;
@@ -40,6 +44,10 @@ public class HcDetalle implements Serializable {
     @JoinColumn(name = "id_campo", referencedColumnName = "id_campo", nullable = false, insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private HcCamposReg hcCamposReg;
+
+    //Uso exclusivo para sincronizacion de datos
+    @Column(name = "id_sincronizador", insertable = false, updatable = false)
+    private Integer idSincronizador;
 
     public HcDetalle() {
     }
@@ -108,5 +116,15 @@ public class HcDetalle implements Serializable {
     public String toString() {
         return "entidades2.HcDetalle[ hcDetallePK=" + hcDetallePK + " ]";
     }
+
+    public Integer getIdSincronizador() {
+        return idSincronizador;
+    }
+
+    public void setIdSincronizador(Integer idSincronizador) {
+        this.idSincronizador = idSincronizador;
+    }
+
+    
     
 }

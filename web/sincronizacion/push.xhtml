@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>SINCRONIZACION DE SUBIDA</title>
+        <link href="../recursos/css/estilos.css" rel="stylesheet"/>        
+        <link href="../recursos/css/metro-bootstrap.css" rel="stylesheet"/>
+        <link href="../recursos/css/iconFont.css" rel="stylesheet"/>     
+    </h:head>
+    <h:body>
+        #{pushMB.init()}
+        <h:form id="frmSincronizacion">
+            <p:growl id="growl"  showDetail="true" sticky="false" autoUpdate="true" life="1800000"  />
+            <p:fieldset legend="Sincronizar Información Local hacia Remota">
+                <p:commandButton 
+                    title="La información almacenada en este Servidor es comparada y sincronizada con el Servidor Online" 
+                    value="Realizar Sincronización"                                        
+                    styleClass="icon-upload fg-lightBlue bg-white no-border" 
+                    rendered="#{pushMB.renderBoton}"
+                    type="button" 
+                    onclick="PF('pbAjax').start();PF('startButton2').disable();"  widgetVar="startButton2"  
+                    style="font-size: 20px; ">
+                    <p:confirm header="¿Continuar?" message="Tenga en cuenta una vez iniciado el proceso no se debe cancelar." icon="ui-icon-alert" />
+                    <p:ajax event="click" listener="#{pushMB.setDatos()}" update="growl"/>
+                </p:commandButton>  
+                <br/>
+                <br/>
+                <p:outputLabel value="¡ATENCIÓN! Este proceso es largo debe tener paciencia y verificar que el equipo este conectado." style="color: red;font-weight: bold"/>
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                </p:confirmDialog>
+            </p:fieldset>
+            <p:panel id="dialogo" > 
+                <p:progressBar widgetVar="pbAjax" ajax="true" value="#{pushMB.progress}" labelTemplate="{value}%" styleClass="animated" global="false">
+                    <p:ajax event="complete" listener="#{pushMB.onComplete}" update="growl" 
+                    oncomplete="PF('startButton2').enable();PF('statusDialog').hide()"/>
+                </p:progressBar>
+                <h:outputText value="#{pushMB.progreso}" style="color: blue;font-weight: bold"/> 
+                <br/>
+                <h:outputText value="#{pushMB.totalRegistros}" style="color: blue;font-weight: bold"/> 
+                <br/>
+                <h:outputText value="#{pushMB.pacientes}" style="color: blue;font-weight: bold"/> 
+                <br/>
+                <h:outputText value="#{pushMB.historias}" style="color: blue;font-weight: bold"/> 
+                <br/>
+                <h:outputText value="#{pushMB.facturas}" style="color: blue;font-weight: bold"/> 
+                <br/>
+                <p:outputLabel value="Si en el proceso se desconecta del internet reinicie el equipo y vuelva a empezar la sincronización." style="color: red;font-weight: bold"/>
+            </p:panel> 
+        </h:form>
+    </h:body>
+</html>
+

@@ -9,4 +9,13 @@
       <property name="eclipselink.canonicalmodel.subpackage" value="update"/>
     </properties>
   </persistence-unit>
+  <persistence-unit name="OPENMEDICALPUREMOTO" transaction-type="JTA">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <jta-data-source>online_remoto</jta-data-source>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <shared-cache-mode>NONE</shared-cache-mode>
+    <properties> 
+      <property name="eclipselink.canonicalmodel.subpackage" value="update"/>
+    </properties>
+  </persistence-unit>
 </persistence>

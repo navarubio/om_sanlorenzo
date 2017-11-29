@@ -24,13 +24,19 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "cit_autorizaciones_servicios", schema = "public")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "CitAutorizacionesServicios.findAll", query = "SELECT c FROM CitAutorizacionesServicios c"),
-    @NamedQuery(name = "CitAutorizacionesServicios.findByIdAutorizacion", query = "SELECT c FROM CitAutorizacionesServicios c WHERE c.citAutorizacionesServiciosPK.idAutorizacion = :idAutorizacion"),
-    @NamedQuery(name = "CitAutorizacionesServicios.findByIdServicio", query = "SELECT c FROM CitAutorizacionesServicios c WHERE c.citAutorizacionesServiciosPK.idServicio = :idServicio"),
-    @NamedQuery(name = "CitAutorizacionesServicios.findBySesionesAutorizadas", query = "SELECT c FROM CitAutorizacionesServicios c WHERE c.sesionesAutorizadas = :sesionesAutorizadas"),
-    @NamedQuery(name = "CitAutorizacionesServicios.findBySesionesPendientes", query = "SELECT c FROM CitAutorizacionesServicios c WHERE c.sesionesPendientes = :sesionesPendientes"),
+    @NamedQuery(name = "CitAutorizacionesServicios.findAll", query = "SELECT c FROM CitAutorizacionesServicios c")
+    ,
+    @NamedQuery(name = "CitAutorizacionesServicios.findByIdAutorizacion", query = "SELECT c FROM CitAutorizacionesServicios c WHERE c.citAutorizacionesServiciosPK.idAutorizacion = :idAutorizacion")
+    ,
+    @NamedQuery(name = "CitAutorizacionesServicios.findByIdServicio", query = "SELECT c FROM CitAutorizacionesServicios c WHERE c.citAutorizacionesServiciosPK.idServicio = :idServicio")
+    ,
+    @NamedQuery(name = "CitAutorizacionesServicios.findBySesionesAutorizadas", query = "SELECT c FROM CitAutorizacionesServicios c WHERE c.sesionesAutorizadas = :sesionesAutorizadas")
+    ,
+    @NamedQuery(name = "CitAutorizacionesServicios.findBySesionesPendientes", query = "SELECT c FROM CitAutorizacionesServicios c WHERE c.sesionesPendientes = :sesionesPendientes")
+    ,
     @NamedQuery(name = "CitAutorizacionesServicios.findBySesionesRealizadas", query = "SELECT c FROM CitAutorizacionesServicios c WHERE c.sesionesRealizadas = :sesionesRealizadas")})
 public class CitAutorizacionesServicios implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected CitAutorizacionesServiciosPK citAutorizacionesServiciosPK;
@@ -46,6 +52,10 @@ public class CitAutorizacionesServicios implements Serializable {
     @JoinColumn(name = "id_autorizacion", referencedColumnName = "id_autorizacion", nullable = false, insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private CitAutorizaciones citAutorizaciones;
+
+    //Uso exclusivo para sincronizacion de datos
+    @Column(name = "id_sincronizador", insertable = false, updatable = false)
+    private Integer idSincronizador;
 
     public CitAutorizacionesServicios() {
     }
@@ -130,5 +140,15 @@ public class CitAutorizacionesServicios implements Serializable {
     public String toString() {
         return "modelo.entidades.CitAutorizacionesServicios[ citAutorizacionesServiciosPK=" + citAutorizacionesServiciosPK + " ]";
     }
+
+    public Integer getIdSincronizador() {
+        return idSincronizador;
+    }
+
+    public void setIdSincronizador(Integer idSincronizador) {
+        this.idSincronizador = idSincronizador;
+    }
+
+    
     
 }

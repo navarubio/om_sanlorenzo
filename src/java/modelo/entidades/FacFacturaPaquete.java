@@ -27,20 +27,33 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "fac_factura_paquete", schema = "public")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "FacFacturaPaquete.findAll", query = "SELECT f FROM FacFacturaPaquete f"),
-    @NamedQuery(name = "FacFacturaPaquete.findByIdDetalle", query = "SELECT f FROM FacFacturaPaquete f WHERE f.facFacturaPaquetePK.idDetalle = :idDetalle"),
-    @NamedQuery(name = "FacFacturaPaquete.findByIdFactura", query = "SELECT f FROM FacFacturaPaquete f WHERE f.facFacturaPaquetePK.idFactura = :idFactura"),
-    @NamedQuery(name = "FacFacturaPaquete.findByFechaPaquete", query = "SELECT f FROM FacFacturaPaquete f WHERE f.fechaPaquete = :fechaPaquete"),
-    @NamedQuery(name = "FacFacturaPaquete.findByCantidadPaquete", query = "SELECT f FROM FacFacturaPaquete f WHERE f.cantidadPaquete = :cantidadPaquete"),
-    @NamedQuery(name = "FacFacturaPaquete.findByValorPaquete", query = "SELECT f FROM FacFacturaPaquete f WHERE f.valorPaquete = :valorPaquete"),
-    @NamedQuery(name = "FacFacturaPaquete.findByValorParcial", query = "SELECT f FROM FacFacturaPaquete f WHERE f.valorParcial = :valorParcial"),
-    @NamedQuery(name = "FacFacturaPaquete.findByValorUsuario", query = "SELECT f FROM FacFacturaPaquete f WHERE f.valorUsuario = :valorUsuario"),
-    @NamedQuery(name = "FacFacturaPaquete.findByValorEmpresa", query = "SELECT f FROM FacFacturaPaquete f WHERE f.valorEmpresa = :valorEmpresa"),
-    @NamedQuery(name = "FacFacturaPaquete.findByValorIva", query = "SELECT f FROM FacFacturaPaquete f WHERE f.valorIva = :valorIva"),
-    @NamedQuery(name = "FacFacturaPaquete.findByValorCree", query = "SELECT f FROM FacFacturaPaquete f WHERE f.valorCree = :valorCree"),
-    @NamedQuery(name = "FacFacturaPaquete.findByNumAutorizacion", query = "SELECT f FROM FacFacturaPaquete f WHERE f.numAutorizacion = :numAutorizacion"),
+    @NamedQuery(name = "FacFacturaPaquete.findAll", query = "SELECT f FROM FacFacturaPaquete f")
+    ,
+    @NamedQuery(name = "FacFacturaPaquete.findByIdDetalle", query = "SELECT f FROM FacFacturaPaquete f WHERE f.facFacturaPaquetePK.idDetalle = :idDetalle")
+    ,
+    @NamedQuery(name = "FacFacturaPaquete.findByIdFactura", query = "SELECT f FROM FacFacturaPaquete f WHERE f.facFacturaPaquetePK.idFactura = :idFactura")
+    ,
+    @NamedQuery(name = "FacFacturaPaquete.findByFechaPaquete", query = "SELECT f FROM FacFacturaPaquete f WHERE f.fechaPaquete = :fechaPaquete")
+    ,
+    @NamedQuery(name = "FacFacturaPaquete.findByCantidadPaquete", query = "SELECT f FROM FacFacturaPaquete f WHERE f.cantidadPaquete = :cantidadPaquete")
+    ,
+    @NamedQuery(name = "FacFacturaPaquete.findByValorPaquete", query = "SELECT f FROM FacFacturaPaquete f WHERE f.valorPaquete = :valorPaquete")
+    ,
+    @NamedQuery(name = "FacFacturaPaquete.findByValorParcial", query = "SELECT f FROM FacFacturaPaquete f WHERE f.valorParcial = :valorParcial")
+    ,
+    @NamedQuery(name = "FacFacturaPaquete.findByValorUsuario", query = "SELECT f FROM FacFacturaPaquete f WHERE f.valorUsuario = :valorUsuario")
+    ,
+    @NamedQuery(name = "FacFacturaPaquete.findByValorEmpresa", query = "SELECT f FROM FacFacturaPaquete f WHERE f.valorEmpresa = :valorEmpresa")
+    ,
+    @NamedQuery(name = "FacFacturaPaquete.findByValorIva", query = "SELECT f FROM FacFacturaPaquete f WHERE f.valorIva = :valorIva")
+    ,
+    @NamedQuery(name = "FacFacturaPaquete.findByValorCree", query = "SELECT f FROM FacFacturaPaquete f WHERE f.valorCree = :valorCree")
+    ,
+    @NamedQuery(name = "FacFacturaPaquete.findByNumAutorizacion", query = "SELECT f FROM FacFacturaPaquete f WHERE f.numAutorizacion = :numAutorizacion")
+    ,
     @NamedQuery(name = "FacFacturaPaquete.findByFechaAutorizacion", query = "SELECT f FROM FacFacturaPaquete f WHERE f.fechaAutorizacion = :fechaAutorizacion")})
 public class FacFacturaPaquete implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected FacFacturaPaquetePK facFacturaPaquetePK;
@@ -79,6 +92,10 @@ public class FacFacturaPaquete implements Serializable {
     @JoinColumn(name = "id_consultorio", referencedColumnName = "id_consultorio")
     @ManyToOne
     private CfgConsultorios idConsultorio;
+
+    //Uso exclusivo para sincronizacion de datos
+    @Column(name = "id_sincronizador", insertable = false, updatable = false)
+    private Integer idSincronizador;
 
     public FacFacturaPaquete() {
     }
@@ -235,5 +252,15 @@ public class FacFacturaPaquete implements Serializable {
     public String toString() {
         return "entidades.FacFacturaPaquete[ facFacturaPaquetePK=" + facFacturaPaquetePK + " ]";
     }
+
+    public Integer getIdSincronizador() {
+        return idSincronizador;
+    }
+
+    public void setIdSincronizador(Integer idSincronizador) {
+        this.idSincronizador = idSincronizador;
+    }
     
+    
+
 }

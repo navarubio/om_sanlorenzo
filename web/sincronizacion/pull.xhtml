@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Bajar Datos</title>
+        <link href="../recursos/css/estilos.css" rel="stylesheet"/>        
+        <link href="../recursos/css/metro-bootstrap.css" rel="stylesheet"/>
+        <link href="../recursos/css/iconFont.css" rel="stylesheet"/>     
+        <style tyle="text/css">
+            .animated .ui-progressbar-value {
+                background-image: url("/showcase/javax.faces.resource/demo/images/pbar-ani.gif.xhtml"); 
+            }
+        </style> 
+    </h:head>
+    <h:body>
+        #{pullMB.init()}
+        <h:form id="frmSincronizacion">
+            <p:growl id="growl"  showDetail="true" sticky="false" autoUpdate="true" life="1800000"  />
+            <p:fieldset legend="Sincronizar Información Remota hacia este Servidor Local">
+                <p:commandButton 
+                    title="La información almacenada en el Servidor Online es sincronizada con este servidor" 
+                    value="Realizar Sincronización"                                        
+                    styleClass="icon-upload fg-lightBlue bg-white no-border" 
+                    rendered="#{pullMB.renderBoton}"
+                    type="button" 
+                    onclick="PF('pbAjax').start();PF('startButton2').disable();"  widgetVar="startButton2"  
+                    style="font-size: 20px; ">
+                    <p:confirm header="¿Continuar?" message="Se almacena en este servidor toda la información alojada en el servidor Online" icon="ui-icon-alert" />
+                    <p:ajax event="click" listener="#{pullMB.pullDatos()}" update="growl"/>
+                </p:commandButton> 
+                <br/>
+                <br/>
+                <p:outputLabel value="¡ATENCIÓN! Este proceso es irreversible y eliminara toda información que no se halla sincronizado, se recomienda discreción." style="color: red;font-weight: bold"/>
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                </p:confirmDialog>
+            </p:fieldset>
+            <p:panel id="dialogo" > 
+                <p:progressBar widgetVar="pbAjax" ajax="true" value="#{pullMB.progress}" labelTemplate="{value}%" styleClass="animated" global="false">
+                    <p:ajax event="complete" listener="#{pullMB.onComplete}" update="growl" oncomplete="PF('startButton2').enable();PF('statusDialog').hide()"/>
+                </p:progressBar>
+                <h:outputText value="#{pullMB.progreso}" style="color: blue;font-weight: bold"/> 
+                <br/>
+                <h:outputText value="#{pullMB.totalRegistros}" style="color: blue;font-weight: bold"/> 
+                <br/>
+                <h:outputText value="#{pullMB.pacientes}" style="color: blue;font-weight: bold"/> 
+                <br/>
+                <h:outputText value="#{pullMB.historias}" style="color: blue;font-weight: bold"/> 
+                <br/>
+                <h:outputText value="#{pullMB.facturas}" style="color: blue;font-weight: bold"/> 
+                <br/>
+
+                <p:outputLabel value="Si en el proceso se desconecta del internet reinicie el equipo y vuelva a empezar la sincronización." style="color: red;font-weight: bold"/>
+            </p:panel> 
+            <p:confirmDialog widgetVar="dataChangeDlg" showEffect="fade" hideEffect="fade" header="¡ATENCIÓN!" message="Existen datos por sincronizar, si realiza la Actualización borrara toda la información almacenada, se recomienda subir la información.">
+            </p:confirmDialog>
+        </h:form>
+    </h:body>
+</html>

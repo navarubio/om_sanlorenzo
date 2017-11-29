@@ -27,20 +27,33 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "fac_factura_insumo", schema = "public")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "FacFacturaInsumo.findAll", query = "SELECT f FROM FacFacturaInsumo f"),
-    @NamedQuery(name = "FacFacturaInsumo.findByIdDetalle", query = "SELECT f FROM FacFacturaInsumo f WHERE f.facFacturaInsumoPK.idDetalle = :idDetalle"),
-    @NamedQuery(name = "FacFacturaInsumo.findByIdFactura", query = "SELECT f FROM FacFacturaInsumo f WHERE f.facFacturaInsumoPK.idFactura = :idFactura"),
-    @NamedQuery(name = "FacFacturaInsumo.findByFechaInsumo", query = "SELECT f FROM FacFacturaInsumo f WHERE f.fechaInsumo = :fechaInsumo"),
-    @NamedQuery(name = "FacFacturaInsumo.findByCantidadInsumo", query = "SELECT f FROM FacFacturaInsumo f WHERE f.cantidadInsumo = :cantidadInsumo"),
-    @NamedQuery(name = "FacFacturaInsumo.findByValorInsumo", query = "SELECT f FROM FacFacturaInsumo f WHERE f.valorInsumo = :valorInsumo"),
-    @NamedQuery(name = "FacFacturaInsumo.findByValorParcial", query = "SELECT f FROM FacFacturaInsumo f WHERE f.valorParcial = :valorParcial"),
-    @NamedQuery(name = "FacFacturaInsumo.findByValorUsuario", query = "SELECT f FROM FacFacturaInsumo f WHERE f.valorUsuario = :valorUsuario"),
-    @NamedQuery(name = "FacFacturaInsumo.findByValorEmpresa", query = "SELECT f FROM FacFacturaInsumo f WHERE f.valorEmpresa = :valorEmpresa"),
-    @NamedQuery(name = "FacFacturaInsumo.findByValorIva", query = "SELECT f FROM FacFacturaInsumo f WHERE f.valorIva = :valorIva"),
-    @NamedQuery(name = "FacFacturaInsumo.findByValorCree", query = "SELECT f FROM FacFacturaInsumo f WHERE f.valorCree = :valorCree"),
-    @NamedQuery(name = "FacFacturaInsumo.findByNumAutorizacion", query = "SELECT f FROM FacFacturaInsumo f WHERE f.numAutorizacion = :numAutorizacion"),
+    @NamedQuery(name = "FacFacturaInsumo.findAll", query = "SELECT f FROM FacFacturaInsumo f")
+    ,
+    @NamedQuery(name = "FacFacturaInsumo.findByIdDetalle", query = "SELECT f FROM FacFacturaInsumo f WHERE f.facFacturaInsumoPK.idDetalle = :idDetalle")
+    ,
+    @NamedQuery(name = "FacFacturaInsumo.findByIdFactura", query = "SELECT f FROM FacFacturaInsumo f WHERE f.facFacturaInsumoPK.idFactura = :idFactura")
+    ,
+    @NamedQuery(name = "FacFacturaInsumo.findByFechaInsumo", query = "SELECT f FROM FacFacturaInsumo f WHERE f.fechaInsumo = :fechaInsumo")
+    ,
+    @NamedQuery(name = "FacFacturaInsumo.findByCantidadInsumo", query = "SELECT f FROM FacFacturaInsumo f WHERE f.cantidadInsumo = :cantidadInsumo")
+    ,
+    @NamedQuery(name = "FacFacturaInsumo.findByValorInsumo", query = "SELECT f FROM FacFacturaInsumo f WHERE f.valorInsumo = :valorInsumo")
+    ,
+    @NamedQuery(name = "FacFacturaInsumo.findByValorParcial", query = "SELECT f FROM FacFacturaInsumo f WHERE f.valorParcial = :valorParcial")
+    ,
+    @NamedQuery(name = "FacFacturaInsumo.findByValorUsuario", query = "SELECT f FROM FacFacturaInsumo f WHERE f.valorUsuario = :valorUsuario")
+    ,
+    @NamedQuery(name = "FacFacturaInsumo.findByValorEmpresa", query = "SELECT f FROM FacFacturaInsumo f WHERE f.valorEmpresa = :valorEmpresa")
+    ,
+    @NamedQuery(name = "FacFacturaInsumo.findByValorIva", query = "SELECT f FROM FacFacturaInsumo f WHERE f.valorIva = :valorIva")
+    ,
+    @NamedQuery(name = "FacFacturaInsumo.findByValorCree", query = "SELECT f FROM FacFacturaInsumo f WHERE f.valorCree = :valorCree")
+    ,
+    @NamedQuery(name = "FacFacturaInsumo.findByNumAutorizacion", query = "SELECT f FROM FacFacturaInsumo f WHERE f.numAutorizacion = :numAutorizacion")
+    ,
     @NamedQuery(name = "FacFacturaInsumo.findByFechaAutorizacion", query = "SELECT f FROM FacFacturaInsumo f WHERE f.fechaAutorizacion = :fechaAutorizacion")})
 public class FacFacturaInsumo implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected FacFacturaInsumoPK facFacturaInsumoPK;
@@ -79,6 +92,10 @@ public class FacFacturaInsumo implements Serializable {
     @JoinColumn(name = "id_consultorio", referencedColumnName = "id_consultorio")
     @ManyToOne
     private CfgConsultorios idConsultorio;
+
+    //Uso exclusivo para sincronizacion de datos
+    @Column(name = "id_sincronizador", insertable = false, updatable = false)
+    private Integer idSincronizador;
 
     public FacFacturaInsumo() {
     }
@@ -235,5 +252,14 @@ public class FacFacturaInsumo implements Serializable {
     public String toString() {
         return "entidades.FacFacturaInsumo[ facFacturaInsumoPK=" + facFacturaInsumoPK + " ]";
     }
+
+    public Integer getIdSincronizador() {
+        return idSincronizador;
+    }
+
+    public void setIdSincronizador(Integer idSincronizador) {
+        this.idSincronizador = idSincronizador;
+    }
+
     
 }

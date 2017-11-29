@@ -79,7 +79,11 @@ public class FacFacturaMedicamento implements Serializable {
     @JoinColumn(name = "id_consultorio", referencedColumnName = "id_consultorio")
     @ManyToOne
     private CfgConsultorios idConsultorio;
-
+    
+    //Uso exclusivo para sincronizacion de datos
+    @Column(name = "id_sincronizador", insertable = false, updatable = false)
+    private Integer idSincronizador;
+    
     public FacFacturaMedicamento() {
     }
 
@@ -234,6 +238,14 @@ public class FacFacturaMedicamento implements Serializable {
     @Override
     public String toString() {
         return "entidades.FacFacturaMedicamento[ facFacturaMedicamentoPK=" + facFacturaMedicamentoPK + " ]";
+    }
+
+    public Integer getIdSincronizador() {
+        return idSincronizador;
+    }
+
+    public void setIdSincronizador(Integer idSincronizador) {
+        this.idSincronizador = idSincronizador;
     }
     
 }
