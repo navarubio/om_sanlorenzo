@@ -26,6 +26,7 @@ import managedBeans.seguridad.LoginMB;
 import modelo.entidades.CfgHorario;
 import modelo.entidades.CfgItemsHorario;
 import modelo.entidades.CfgPacientes;
+import modelo.entidades.CfgUsuarios;
 import modelo.entidades.CitAutorizaciones;
 import modelo.entidades.CitAutorizacionesServicios;
 import modelo.entidades.CitCitas;
@@ -52,6 +53,7 @@ import modelo.entidades.sinc.SinStatus;
 import modelo.fachadas.CfgHorarioFacade;
 import modelo.fachadas.CfgItemsHorarioFacade;
 import modelo.fachadas.CfgPacientesFacade;
+import modelo.fachadas.CfgUsuariosFacade;
 import modelo.fachadas.CitAutorizacionesFacade;
 import modelo.fachadas.CitAutorizacionesServiciosFacade;
 import modelo.fachadas.CitCitasFacade;
@@ -92,6 +94,8 @@ public class PushMB extends MetodosGenerales implements Serializable {
     private HcRegistroFacade registroFacade;
     @EJB
     private CfgHorarioFacade horarioFacade;
+    @EJB
+    private CfgUsuariosFacade usuarioFacade;
     @EJB
     private CfgItemsHorarioFacade itHorarioFacade;
     @EJB
@@ -201,6 +205,30 @@ public class PushMB extends MetodosGenerales implements Serializable {
                     //transaction.begin();
                     System.out.println(progreso);
                     switch (tabla) {
+                        case "cfg_usuarios":
+                            CfgUsuarios usuario = usuarioFacade.find(registro.getSinStatusPK().getIdLocal());
+                            if (usuario != null) {
+                                if (registroRemoto == null) {// no existe se debe insertar
+                                    //buscamos el paciente por si otro nodo lo cargo
+                                    System.out.println("Consulta usuario remoto por identificacion " + usuario.getIdentificacion());
+                                    CfgUsuarios uRemoto = sincronizador.consultarUsuarioIdentificacion(usuario.getIdentificacion());
+                                    System.out.println("Devolvio " + uRemoto);
+                                    if (uRemoto == null) {
+                                        usuario.setIdUsuario(null);
+                                    } else {
+                                        usuario.setIdUsuario(uRemoto.getIdUsuario());
+                                        registroRemoto = sincronizador.existeRegistro(idTabla, idNodo, uRemoto.getIdUsuario(), false);
+                                        registroRemoto.setStatus(Boolean.FALSE);
+                                        registroRemoto.setIdRemoto(registro.getSinStatusPK().getIdLocal());
+                                        sincronizador.guardarRegistro(registroRemoto);
+                                    }
+                                } else {
+                                    usuario.setIdUsuario(registroRemoto.getSinStatusPK().getIdLocal());
+                                }
+                                id = sincronizador.guardarUsuario(usuario, idTabla, idNodo, registro.getSinStatusPK().getIdLocal());
+                                result = updateSinStatus(id, registro);
+                            }
+                            break;
                         case "cfg_pacientes":
                             System.out.println("Consulta paciente local");
                             CfgPacientes p = pacientesFacade.find(registro.getSinStatusPK().getIdLocal());
@@ -241,6 +269,10 @@ public class PushMB extends MetodosGenerales implements Serializable {
                                 }
                                 id = sincronizador.guardarHorario(horario, idTabla, idNodo, registro.getSinStatusPK().getIdLocal());
                                 result = updateSinStatus(id, registro);
+                            }else{
+                                 System.out.println("No se encontro paciente  se colocarástatus null por eliminacion");
+                                registro.setStatus(false);
+                                sinStatus.edit(registro);
                             }
                             break;
                         case "cfg_items_horario":

@@ -16,6 +16,7 @@ import managedBeans.seguridad.LoginMB;
 import modelo.entidades.CfgHorario;
 import modelo.entidades.CfgItemsHorario;
 import modelo.entidades.CfgPacientes;
+import modelo.entidades.CfgUsuarios;
 import modelo.entidades.CitAutorizaciones;
 import modelo.entidades.CitAutorizacionesServicios;
 import modelo.entidades.CitCitas;
@@ -43,6 +44,7 @@ import modelo.entidades.sinc.SinNodos;
 import modelo.entidades.sinc.SinStatus;
 import modelo.entidades.sinc.SinStatusPK;
 import modelo.entidades.sinc.SinTablas;
+
 /**
  *
  * @author santos
@@ -50,7 +52,6 @@ import modelo.entidades.sinc.SinTablas;
 @Stateless
 public class SincronizacionFacade {
 
-    
     //private Class<T> entityClass;
     @PersistenceContext(unitName = "OPENMEDICALPUREMOTO")
     private EntityManager em;
@@ -258,7 +259,11 @@ public class SincronizacionFacade {
         try {
             SinStatus s = existeRegistro(consultarTabla("cfg_horario"), idNodo, t.getIdHorario().getIdHorario(), true);
             t.getIdHorario().setIdHorario(s.getSinStatusPK().getIdLocal());
-             if (t.getCitCitasList()!=null && !t.getCitCitasList().isEmpty()) {
+
+            SinStatus su = existeRegistro(consultarTabla("cfg_usuarios"), idNodo, t.getIdPrestador().getIdUsuario(), true);
+            t.getIdPrestador().setIdUsuario(su.getSinStatusPK().getIdLocal());
+
+            if (t.getCitCitasList() != null && !t.getCitCitasList().isEmpty()) {
                 t.getCitCitasList().clear();
             }
             if (t.getIdTurno() == null) {
@@ -328,6 +333,8 @@ public class SincronizacionFacade {
         try {
             SinStatus s = existeRegistro(consultarTabla("cit_paq_maestro"), idNodo, d.getIdPaqMaestro().getIdPaqMaestro(), true);
             d.getIdPaqMaestro().setIdPaqMaestro(s.getSinStatusPK().getIdLocal());
+            SinStatus su = existeRegistro(consultarTabla("cfg_usuarios"), idNodo, d.getIdPrestador().getIdUsuario(), true);
+            d.getIdPrestador().setIdUsuario(su.getSinStatusPK().getIdLocal());
             if (d.getIdPaqDetalle() == null) {
                 em.persist(d);
                 em.flush();
@@ -365,6 +372,10 @@ public class SincronizacionFacade {
             }
             s = existeRegistro(consultarTabla("cfg_pacientes"), idNodo, c.getPaciente().getIdPaciente(), true);
             c.getPaciente().setIdPaciente(s.getSinStatusPK().getIdLocal());
+
+            SinStatus su = existeRegistro(consultarTabla("cfg_usuarios"), idNodo, c.getIdUsuarioCreador().getIdUsuario(), true);
+            c.getIdUsuarioCreador().setIdUsuario(su.getSinStatusPK().getIdLocal());
+
             if (c.getIdAutorizacion() == null) {
                 em.persist(c);
                 em.flush();
@@ -404,7 +415,8 @@ public class SincronizacionFacade {
             if (c.getIdSincronizador() == null) {
                 em.persist(c);
                 em.flush();
-                c = em.find(CitAutorizacionesServicios.class, c.getCitAutorizacionesServiciosPK());
+                //Por mappeo se trea el id_sincronizador
+                //c = em.find(CitAutorizacionesServicios.class, c.getCitAutorizacionesServiciosPK());
                 guardarRegistro(idTabla, idNodo, c.getIdSincronizador(), idLocal);
             } else {
                 em.merge(c);
@@ -438,6 +450,10 @@ public class SincronizacionFacade {
             c.getIdTurno().setIdTurno(s.getSinStatusPK().getIdLocal());
             s = existeRegistro(consultarTabla("cfg_pacientes"), idNodo, c.getIdPaciente().getIdPaciente(), true);
             c.getIdPaciente().setIdPaciente(s.getSinStatusPK().getIdLocal());
+
+            SinStatus su = existeRegistro(consultarTabla("cfg_usuarios"), idNodo, c.getIdPrestador().getIdUsuario(), true);
+            c.getIdPrestador().setIdUsuario(su.getSinStatusPK().getIdLocal());
+
             if (c.getIdPaquete() != null) {
                 s = existeRegistro(consultarTabla("cit_paq_maestro"), idNodo, c.getIdPaquete().getIdPaqMaestro(), true);
                 c.getIdPaquete().setIdPaqMaestro(s.getSinStatusPK().getIdLocal());
@@ -616,6 +632,10 @@ public class SincronizacionFacade {
             //consultar id paciente
             s = existeRegistro(consultarTabla("cfg_pacientes"), idNodo, h.getIdPaciente().getIdPaciente(), true);
             h.getIdPaciente().setIdPaciente(s.getSinStatusPK().getIdLocal());
+            if (h.getIdMedico() != null) {
+                SinStatus su = existeRegistro(consultarTabla("cfg_usuarios"), idNodo, h.getIdMedico().getIdUsuario(), true);
+                h.getIdMedico().setIdUsuario(su.getSinStatusPK().getIdLocal());
+            }
             //consultar la cita asociada a la historia
             if (h.getIdCita() != null) {
                 s = existeRegistro(consultarTabla("cit_citas"), idNodo, h.getIdCita().getIdCita(), true);
@@ -659,6 +679,10 @@ public class SincronizacionFacade {
     public int guardarCaja(FacCaja c, int idTabla, int idNodo, int idLocal) {
         int result = 0;
         try {
+            if (c.getIdUsuario() != null) {
+                SinStatus su = existeRegistro(consultarTabla("cfg_usuarios"), idNodo, c.getIdUsuario().getIdUsuario(), true);
+                c.getIdUsuario().setIdUsuario(su.getSinStatusPK().getIdLocal());
+            }
             if (c.getIdCaja() == null) {
                 em.persist(c);
                 em.flush();
@@ -694,6 +718,10 @@ public class SincronizacionFacade {
             //consultar id paciente
             s = existeRegistro(consultarTabla("cfg_pacientes"), idNodo, c.getIdPaciente().getIdPaciente(), true);
             c.getIdPaciente().setIdPaciente(s.getSinStatusPK().getIdLocal());
+            if (c.getIdPrestador() != null) {
+                SinStatus su = existeRegistro(consultarTabla("cfg_usuarios"), idNodo, c.getIdPrestador().getIdUsuario(), true);
+                c.getIdPrestador().setIdUsuario(su.getSinStatusPK().getIdLocal());
+            }
             if (c.getIdConsumoInsumo() == null) {
                 em.persist(c);
                 em.flush();
@@ -716,6 +744,10 @@ public class SincronizacionFacade {
             //consultar id paciente
             s = existeRegistro(consultarTabla("cfg_pacientes"), idNodo, c.getIdPaciente().getIdPaciente(), true);
             c.getIdPaciente().setIdPaciente(s.getSinStatusPK().getIdLocal());
+            if (c.getIdPrestador() != null) {
+                SinStatus su = existeRegistro(consultarTabla("cfg_usuarios"), idNodo, c.getIdPrestador().getIdUsuario(), true);
+                c.getIdPrestador().setIdUsuario(su.getSinStatusPK().getIdLocal());
+            }
             if (c.getIdConsumoMedicamento() == null) {
                 em.persist(c);
                 em.flush();
@@ -738,6 +770,10 @@ public class SincronizacionFacade {
             //consultar id paciente
             s = existeRegistro(consultarTabla("cfg_pacientes"), idNodo, c.getIdPaciente().getIdPaciente(), true);
             c.getIdPaciente().setIdPaciente(s.getSinStatusPK().getIdLocal());
+            if (c.getIdPrestador() != null) {
+                SinStatus su = existeRegistro(consultarTabla("cfg_usuarios"), idNodo, c.getIdPrestador().getIdUsuario(), true);
+                c.getIdPrestador().setIdUsuario(su.getSinStatusPK().getIdLocal());
+            }
             if (c.getIdConsumoPaquete() == null) {
                 em.persist(c);
                 em.flush();
@@ -760,6 +796,10 @@ public class SincronizacionFacade {
             //consultar id paciente
             s = existeRegistro(consultarTabla("cfg_pacientes"), idNodo, c.getIdPaciente().getIdPaciente(), true);
             c.getIdPaciente().setIdPaciente(s.getSinStatusPK().getIdLocal());
+            if (c.getIdPrestador() != null) {
+                SinStatus su = existeRegistro(consultarTabla("cfg_usuarios"), idNodo, c.getIdPrestador().getIdUsuario(), true);
+                c.getIdPrestador().setIdUsuario(su.getSinStatusPK().getIdLocal());
+            }
             if (c.getIdConsumoServicio() == null) {
                 em.persist(c);
                 em.flush();
@@ -896,11 +936,15 @@ public class SincronizacionFacade {
             s = existeRegistro(consultarTabla("fac_factura_paciente"), idNodo, f.getFacFacturaInsumoPK().getIdFactura(), true);
             f.getFacFacturaInsumoPK().setIdFactura(s.getSinStatusPK().getIdLocal());
             f.setFacFacturaPaciente(null);
-
+            if (f.getIdMedico() != null) {
+                SinStatus su = existeRegistro(consultarTabla("cfg_usuarios"), idNodo, f.getIdMedico().getIdUsuario(), true);
+                f.getIdMedico().setIdUsuario(su.getSinStatusPK().getIdLocal());
+            }
             if (f.getIdSincronizador() == null) {
                 em.persist(f);
                 em.flush();
-                f = em.find(FacFacturaInsumo.class, f.getFacFacturaInsumoPK());
+                //Por mappeo se trea el id_sincronizador
+                //f = em.find(FacFacturaInsumo.class, f.getFacFacturaInsumoPK());
                 guardarRegistro(idTabla, idNodo, f.getIdSincronizador(), idLocal);
             } else {
                 em.merge(f);
@@ -920,10 +964,15 @@ public class SincronizacionFacade {
             s = existeRegistro(consultarTabla("fac_factura_paciente"), idNodo, f.getFacFacturaMedicamentoPK().getIdFactura(), true);
             f.getFacFacturaMedicamentoPK().setIdFactura(s.getSinStatusPK().getIdLocal());
             f.setFacFacturaPaciente(null);
+            if (f.getIdMedico() != null) {
+                SinStatus su = existeRegistro(consultarTabla("cfg_usuarios"), idNodo, f.getIdMedico().getIdUsuario(), true);
+                f.getIdMedico().setIdUsuario(su.getSinStatusPK().getIdLocal());
+            }
             if (f.getIdSincronizador() == null) {
                 em.persist(f);
                 em.flush();
-                f = em.find(FacFacturaMedicamento.class, f.getFacFacturaMedicamentoPK());
+                //Por mappeo se trea el id_sincronizador
+                //f = em.find(FacFacturaMedicamento.class, f.getFacFacturaMedicamentoPK());
                 guardarRegistro(idTabla, idNodo, f.getIdSincronizador(), idLocal);
             } else {
                 em.merge(f);
@@ -943,10 +992,15 @@ public class SincronizacionFacade {
             s = existeRegistro(consultarTabla("fac_factura_paciente"), idNodo, f.getFacFacturaPaquetePK().getIdFactura(), true);
             f.getFacFacturaPaquetePK().setIdFactura(s.getSinStatusPK().getIdLocal());
             f.setFacFacturaPaciente(null);
+            if (f.getIdMedico() != null) {
+                SinStatus su = existeRegistro(consultarTabla("cfg_usuarios"), idNodo, f.getIdMedico().getIdUsuario(), true);
+                f.getIdMedico().setIdUsuario(su.getSinStatusPK().getIdLocal());
+            }
             if (f.getIdSincronizador() == null) {
                 em.persist(f);
                 em.flush();
-                f = em.find(FacFacturaPaquete.class, f.getFacFacturaPaquetePK());
+                //Por mappeo se trea el id_sincronizador
+                //f = em.find(FacFacturaPaquete.class, f.getFacFacturaPaquetePK());
                 guardarRegistro(idTabla, idNodo, f.getIdSincronizador(), idLocal);
             } else {
                 em.merge(f);
@@ -966,10 +1020,15 @@ public class SincronizacionFacade {
             s = existeRegistro(consultarTabla("fac_factura_paciente"), idNodo, f.getFacFacturaServicioPK().getIdFactura(), true);
             f.getFacFacturaServicioPK().setIdFactura(s.getSinStatusPK().getIdLocal());
             f.setFacFacturaPaciente(null);
+            if (f.getIdMedico() != null) {
+                SinStatus su = existeRegistro(consultarTabla("cfg_usuarios"), idNodo, f.getIdMedico().getIdUsuario(), true);
+                f.getIdMedico().setIdUsuario(su.getSinStatusPK().getIdLocal());
+            }
             if (f.getIdSincronizador() == null) {
                 em.persist(f);
                 em.flush();
-                f = em.find(FacFacturaServicio.class, f.getFacFacturaServicioPK());
+                //Por mappeo se trea el id_sincronizador
+                //f = em.find(FacFacturaServicio.class, f.getFacFacturaServicioPK());
                 guardarRegistro(idTabla, idNodo, f.getIdSincronizador(), idLocal);
             } else {
                 em.merge(f);
@@ -1021,6 +1080,128 @@ public class SincronizacionFacade {
         } catch (Exception e) {
         }
         return id;
+    }
+
+    public int guardarUsuario(CfgUsuarios h, int idTabla, int idNodo, int idLocal) {
+        int result = 0;
+        if (h.getCitAutorizacionesList() != null && !h.getCitAutorizacionesList().isEmpty()) {
+            h.getCitAutorizacionesList().clear();
+        }
+        if (h.getCitCitasList() != null && !h.getCitCitasList().isEmpty()) {
+            h.getCitCitasList().clear();
+        }
+        if (h.getCitPaqDetalleList() != null && !h.getCitPaqDetalleList().isEmpty()) {
+            h.getCitPaqDetalleList().clear();
+        }
+        if (h.getCitTurnosList() != null && !h.getCitTurnosList().isEmpty()) {
+            h.getCitTurnosList().clear();
+        }
+        if (h.getFacCajaList() != null && !h.getFacCajaList().isEmpty()) {
+            h.getFacCajaList().clear();
+        }
+        if (h.getFacConsumoInsumoList() != null && !h.getFacConsumoInsumoList().isEmpty()) {
+            h.getFacConsumoInsumoList().clear();
+        }
+        if (h.getFacConsumoMedicamentoList() != null && !h.getFacConsumoMedicamentoList().isEmpty()) {
+            h.getFacConsumoMedicamentoList().clear();
+        }
+        if (h.getFacConsumoPaqueteList() != null && !h.getFacConsumoPaqueteList().isEmpty()) {
+            h.getFacConsumoPaqueteList().clear();
+        }
+        if (h.getFacConsumoServerciosGestionadosList() != null && !h.getFacConsumoServerciosGestionadosList().isEmpty()) {
+            h.getFacConsumoServerciosGestionadosList().clear();
+        }
+        if (h.getFacConsumoServicioList() != null && !h.getFacConsumoServicioList().isEmpty()) {
+            h.getFacConsumoServicioList().clear();
+        }
+        if (h.getFacFacturaInsumoList() != null && !h.getFacFacturaInsumoList().isEmpty()) {
+            h.getFacFacturaInsumoList().clear();
+        }
+        if (h.getFacFacturaMedicamentoList() != null && !h.getFacFacturaMedicamentoList().isEmpty()) {
+            h.getFacFacturaMedicamentoList().clear();
+        }
+        if (h.getFacFacturaPaqueteList() != null && !h.getFacFacturaPaqueteList().isEmpty()) {
+            h.getFacFacturaPaqueteList().clear();
+        }
+        if (h.getFacFacturaServicioList() != null && !h.getFacFacturaServicioList().isEmpty()) {
+            h.getFacFacturaServicioList().clear();
+        }
+        if (h.getHcRegistroList() != null && !h.getHcRegistroList().isEmpty()) {
+            h.getHcRegistroList().clear();
+        }
+        if (h.getIdPrestador() != null && !h.getIdPrestador().isEmpty()) {
+            h.getIdPrestador().clear();
+        }
+        if (h.getUrgAdmisionList() != null && !h.getUrgAdmisionList().isEmpty()) {
+            h.getUrgAdmisionList().clear();
+        }
+        if (h.getUrgControlPrescripcionMedicamentoList() != null && !h.getUrgControlPrescripcionMedicamentoList().isEmpty()) {
+            h.getUrgControlPrescripcionMedicamentoList().clear();
+        }
+        if (h.getUrgDestinoPacienteList() != null && !h.getUrgDestinoPacienteList().isEmpty()) {
+            h.getUrgDestinoPacienteList().clear();
+        }
+        if (h.getUrgDetalleConsultaAuditoriaList() != null && !h.getUrgDetalleConsultaAuditoriaList().isEmpty()) {
+            h.getUrgDetalleConsultaAuditoriaList().clear();
+        }
+
+        if (h.getUrgDetalleConsultaList() != null && !h.getUrgDetalleConsultaList().isEmpty()) {
+            h.getUrgDetalleConsultaList().clear();
+        }
+        if (h.getUrgNotasEnfermeriasList() != null && !h.getUrgNotasEnfermeriasList().isEmpty()) {
+            h.getUrgNotasEnfermeriasList().clear();
+        }
+
+        if (h.getUrgNotasMedicasList() != null && !h.getUrgNotasMedicasList().isEmpty()) {
+            h.getUrgNotasMedicasList().clear();
+        }
+
+        if (h.getUrgPrescripcionMedicamentoList() != null && !h.getUrgPrescripcionMedicamentoList().isEmpty()) {
+            h.getUrgPrescripcionMedicamentoList().clear();
+        }
+        if (h.getUrgTriageList() != null && !h.getUrgTriageList().isEmpty()) {
+            h.getUrgTriageList().clear();
+        }
+        try {
+            if (h.getIdUsuario() == null) {
+                em.persist(h);
+                em.flush();
+                guardarRegistro(idTabla, idNodo, h.getIdUsuario(), idLocal);
+            } else {
+                em.merge(h);
+            }
+            result = h.getIdUsuario();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            result = 0;
+        }
+        return result;
+    }
+
+    public CfgUsuarios consultarUsuario(int id) {
+        CfgUsuarios obj = null;
+        try {
+            String sql = "SELECT c FROM CfgUsuarios c WHERE c.idUsuario = ?1 ";
+            Query query = em.createQuery(sql);
+            query.setParameter(1, id);
+            obj = (CfgUsuarios) query.getSingleResult();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return obj;
+    }
+
+    public CfgUsuarios consultarUsuarioIdentificacion(String _identificacion) {
+        CfgUsuarios obj = null;
+        try {
+            String sql = "SELECT c FROM CfgUsuarios c WHERE c.identificacion = ?1 ";
+            Query query = em.createQuery(sql);
+            query.setParameter(1, _identificacion);
+            obj = (CfgUsuarios) query.getSingleResult();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return obj;
     }
 
     /*Pull*/

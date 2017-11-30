@@ -7,9 +7,12 @@ package modelo.entidades;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -94,7 +97,9 @@ public class FacFacturaInsumo implements Serializable {
     private CfgConsultorios idConsultorio;
 
     //Uso exclusivo para sincronizacion de datos
-    @Column(name = "id_sincronizador", insertable = false, updatable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id_sincronizador", nullable = false)
     private Integer idSincronizador;
 
     public FacFacturaInsumo() {

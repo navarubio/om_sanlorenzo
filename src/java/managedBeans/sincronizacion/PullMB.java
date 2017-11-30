@@ -22,6 +22,7 @@ import managedBeans.seguridad.LoginMB;
 import modelo.entidades.CfgHorario;
 import modelo.entidades.CfgItemsHorario;
 import modelo.entidades.CfgPacientes;
+import modelo.entidades.CfgUsuarios;
 import modelo.entidades.CitAutorizaciones;
 import modelo.entidades.CitAutorizacionesServicios;
 import modelo.entidades.CitCitas;
@@ -39,6 +40,7 @@ import modelo.entidades.HcRepExamenes;
 import modelo.fachadas.CfgHorarioFacade;
 import modelo.fachadas.CfgItemsHorarioFacade;
 import modelo.fachadas.CfgPacientesFacade;
+import modelo.fachadas.CfgUsuariosFacade;
 import modelo.fachadas.CitAutorizacionesFacade;
 import modelo.fachadas.CitAutorizacionesServiciosFacade;
 import modelo.fachadas.CitCitasFacade;
@@ -76,6 +78,8 @@ public class PullMB extends MetodosGenerales implements Serializable {
     @EJB
     private CfgHorarioFacade horarioFacade;
     @EJB
+    private CfgUsuariosFacade usuarioFacade;
+    @EJB
     private CfgItemsHorarioFacade itHorarioFacade;
     @EJB
     private CitTurnosFacade turnosFacade;
@@ -105,6 +109,7 @@ public class PullMB extends MetodosGenerales implements Serializable {
     private FacPeriodoFacade facPerFacade;
 
     private Integer progress;
+    private double dblProgreso;
     private String progreso = "-";
     private String pacientes = "-";
     private String historias = "-";
@@ -122,7 +127,7 @@ public class PullMB extends MetodosGenerales implements Serializable {
     public void init() {
         if (getConnectionStatus()) {
             renderBoton = true;
-            
+
         } else {
             imprimirMensaje("Sin acceso", "No posee acceso a internet", FacesMessage.SEVERITY_WARN);
         }
@@ -133,7 +138,8 @@ public class PullMB extends MetodosGenerales implements Serializable {
         int historiasSincronizadas = 0;
         int facturasSincronizadas = 0;
         String tabla = "";
-        int idTabla = 0, id = 0, salto = 100;
+        int idTabla = 0, id = 0;
+        double salto = 100;
         boolean result = false;
         int current = 0;
         progreso = "Verificar Status de conexion...";
@@ -145,7 +151,7 @@ public class PullMB extends MetodosGenerales implements Serializable {
                 progreso = "Consultar Registros pendientes por descargar";
                 List<SinStatus> pendientes = sincronizador.getRegistros(idNodo);
                 if (pendientes.size() > 0) {
-                    salto = 100 / pendientes.size();
+                    salto = (double) 100.0 / pendientes.size();
                 }
                 progress = 0;
                 progreso = "Cantidad de registros a procesar " + pendientes.size();
@@ -159,7 +165,22 @@ public class PullMB extends MetodosGenerales implements Serializable {
                     SinStatus registroLocal = sinFacade.existeRegistro(idTabla, registro.getSinStatusPK().getIdLocal(), true);
                     progreso = "Procesando tabla " + tabla + " identificador " + registro.getSinStatusPK().getIdLocal();
                     SinStatus s = null;
+                    SinStatus su = null;
                     switch (tabla) {
+                        case "cfg_usuarios":
+                            CfgUsuarios usuario = sincronizador.consultarUsuario(registro.getSinStatusPK().getIdLocal());
+                            if (usuario != null) {
+                                if (registroLocal == null) {// no existe se debe insertar
+                                    usuario.setIdUsuario(null);
+                                    usuarioFacade.create(usuario);
+                                    registroLocal = sinFacade.existeRegistro(idTabla, usuario.getIdUsuario(), false);
+                                } else {
+                                    usuario.setIdUsuario(registroLocal.getSinStatusPK().getIdLocal());
+                                    usuarioFacade.edit(usuario);
+                                }
+                                updateSinStatus(registroLocal, registro);
+                            }
+                            break;
                         case "cfg_pacientes":
                             CfgPacientes p = sincronizador.consultarPaciente(registro.getSinStatusPK().getIdLocal());
                             if (p != null) {
@@ -224,6 +245,8 @@ public class PullMB extends MetodosGenerales implements Serializable {
                             if (citPaqDet != null) {
                                 s = sinFacade.existeRegistro(sinTablaFacade.consultarIdTabla("cit_paq_maestro"), citPaqDet.getIdPaqMaestro().getIdPaqMaestro(), true);
                                 citPaqDet.getIdPaqMaestro().setIdPaqMaestro(s.getSinStatusPK().getIdLocal());
+                                su = sinFacade.existeRegistro(sinTablaFacade.consultarIdTabla("cfg_usuarios"), citPaqDet.getIdPrestador().getIdUsuario(), true);
+                                citPaqDet.getIdPrestador().setIdUsuario(su.getSinStatusPK().getIdLocal());
                                 if (registroLocal == null) {// no existe se debe insertar
                                     citPaqDet.setIdPaqDetalle(null);
                                     citPaqDetFacade.create(citPaqDet);
@@ -241,6 +264,9 @@ public class PullMB extends MetodosGenerales implements Serializable {
                                 if (!citAut.getCitAutorizacionesServiciosList().isEmpty()) {
                                     citAut.getCitAutorizacionesServiciosList().clear();
                                 }
+                                su = sinFacade.existeRegistro(sinTablaFacade.consultarIdTabla("cfg_usuarios"), citAut.getIdUsuarioCreador().getIdUsuario(), true);
+                                citAut.getIdUsuarioCreador().setIdUsuario(su.getSinStatusPK().getIdLocal());
+
                                 if (registroLocal == null) {// no existe se debe insertar
                                     citAut.setIdAutorizacion(null);
                                     citAutFacade.create(citAut);
@@ -276,6 +302,10 @@ public class PullMB extends MetodosGenerales implements Serializable {
                             if (turno != null) {
                                 s = sinFacade.existeRegistro(sinTablaFacade.consultarIdTabla("cfg_horario"), turno.getIdHorario().getIdHorario(), true);
                                 turno.getIdHorario().setIdHorario(s.getSinStatusPK().getIdLocal());
+
+                                su = sinFacade.existeRegistro(sinTablaFacade.consultarIdTabla("cfg_usuarios"), turno.getIdPrestador().getIdUsuario(), true);
+                                turno.getIdPrestador().setIdUsuario(su.getSinStatusPK().getIdLocal());
+
                                 if (registroLocal == null) {// no existe se debe insertar
                                     turno.setIdTurno(null);
                                     turnosFacade.create(turno);
@@ -294,6 +324,10 @@ public class PullMB extends MetodosGenerales implements Serializable {
                                 cita.getIdPaciente().setIdPaciente(s.getSinStatusPK().getIdLocal());
                                 s = sinFacade.existeRegistro(sinTablaFacade.consultarIdTabla("cit_turnos"), cita.getIdTurno().getIdTurno(), true);
                                 cita.getIdTurno().setIdTurno(s.getSinStatusPK().getIdLocal());
+
+                                su = sinFacade.existeRegistro(sinTablaFacade.consultarIdTabla("cfg_usuarios"), cita.getIdPrestador().getIdUsuario(), true);
+                                cita.getIdPrestador().setIdUsuario(su.getSinStatusPK().getIdLocal());
+
                                 if (cita.getIdPaquete() != null) {
                                     s = sinFacade.existeRegistro(sinTablaFacade.consultarIdTabla("cit_paq_maestro"), cita.getIdPaquete().getIdPaqMaestro(), true);
                                     cita.getIdPaquete().setIdPaqMaestro(s.getSinStatusPK().getIdLocal());
@@ -380,6 +414,10 @@ public class PullMB extends MetodosGenerales implements Serializable {
                             if (h != null) {
                                 s = sinFacade.existeRegistro(sinTablaFacade.consultarIdTabla("cfg_pacientes"), h.getIdPaciente().getIdPaciente(), true);
                                 h.getIdPaciente().setIdPaciente(s.getSinStatusPK().getIdLocal());
+                                if (h.getIdMedico() != null) {
+                                    su = sinFacade.existeRegistro(sinTablaFacade.consultarIdTabla("cfg_usuarios"), h.getIdMedico().getIdUsuario(), true);
+                                    h.getIdMedico().setIdUsuario(su.getSinStatusPK().getIdLocal());
+                                }
                                 if (h.getIdCita() != null) {
                                     s = sinFacade.existeRegistro(sinTablaFacade.consultarIdTabla("cit_citas"), h.getIdCita().getIdCita(), true);
                                     h.getIdCita().setIdCita(s.getSinStatusPK().getIdLocal());
@@ -405,6 +443,10 @@ public class PullMB extends MetodosGenerales implements Serializable {
                         case "fac_caja":
                             FacCaja f = sincronizador.consultarCaja(registro.getSinStatusPK().getIdLocal());
                             if (f != null) {
+                                if (f.getIdUsuario() != null) {
+                                    su = sinFacade.existeRegistro(sinTablaFacade.consultarIdTabla("cfg_usuarios"), f.getIdUsuario().getIdUsuario(), true);
+                                    f.getIdUsuario().setIdUsuario(su.getSinStatusPK().getIdLocal());
+                                }
                                 if (registroLocal == null) {// no existe se debe insertar
                                     f.setIdCaja(null);
                                     cajaFacade.create(f);
@@ -431,7 +473,8 @@ public class PullMB extends MetodosGenerales implements Serializable {
                             }
                             break;
                     }
-                    progress += salto;
+                    dblProgreso = (double) (dblProgreso + salto);
+                    progress = (int) dblProgreso;
                 }
                 progress = 100;
                 progreso = "sincronización Finalizada";
