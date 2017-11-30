@@ -171,8 +171,14 @@ public class PullMB extends MetodosGenerales implements Serializable {
                             CfgUsuarios usuario = sincronizador.consultarUsuario(registro.getSinStatusPK().getIdLocal());
                             if (usuario != null) {
                                 if (registroLocal == null) {// no existe se debe insertar
-                                    usuario.setIdUsuario(null);
-                                    usuarioFacade.create(usuario);
+                                    CfgUsuarios aux = usuarioFacade.buscarPorIdentificacion(usuario.getIdentificacion());
+                                    if (aux == null) {
+                                        usuario.setIdUsuario(null);
+                                        usuarioFacade.create(usuario);
+                                    } else {
+                                        usuario.setIdUsuario(aux.getIdUsuario());
+                                        usuarioFacade.edit(usuario);
+                                    }
                                     registroLocal = sinFacade.existeRegistro(idTabla, usuario.getIdUsuario(), false);
                                 } else {
                                     usuario.setIdUsuario(registroLocal.getSinStatusPK().getIdLocal());
@@ -185,8 +191,14 @@ public class PullMB extends MetodosGenerales implements Serializable {
                             CfgPacientes p = sincronizador.consultarPaciente(registro.getSinStatusPK().getIdLocal());
                             if (p != null) {
                                 if (registroLocal == null) {// no existe se debe insertar
-                                    p.setIdPaciente(null);
-                                    pacienteFacade.create(p);
+                                    CfgPacientes aux = pacienteFacade.buscarPorIdentificacion(p.getIdentificacion());
+                                    if (aux == null) {
+                                        p.setIdPaciente(null);
+                                        pacienteFacade.create(p);
+                                    } else {
+                                        p.setIdPaciente(aux.getIdPaciente());
+                                        pacienteFacade.edit(p);
+                                    }
                                     registroLocal = sinFacade.existeRegistro(idTabla, p.getIdPaciente(), false);
                                 } else {
                                     p.setIdPaciente(registroLocal.getSinStatusPK().getIdLocal());
