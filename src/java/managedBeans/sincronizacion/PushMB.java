@@ -143,6 +143,7 @@ public class PushMB extends MetodosGenerales implements Serializable {
     Connection conn;
 
     private Integer progress;
+    private double dblProgreso;
     private String progreso = "-";
     private String pacientes = "-";
     private String historias = "-";
@@ -182,7 +183,7 @@ public class PushMB extends MetodosGenerales implements Serializable {
                 progreso = "Consultar registros a procesar";
                 List<SinStatus> pendientes = sinStatus.buscarOrdenado(true);
                 if (!pendientes.isEmpty()) {
-                    salto = 100.0 / pendientes.size();
+                    salto = (double) 100.0 / pendientes.size();
                 }
                 progress = 0;
                 progreso = "Cantidad de registros " + pendientes.size();
@@ -526,7 +527,8 @@ public class PushMB extends MetodosGenerales implements Serializable {
                     } else {
                         transaction.rollback();
                     }*/
-                    progress = (int) (progress + salto);
+                    dblProgreso = (double) (dblProgreso + salto);
+                    progress = (int) dblProgreso;
                 }
                 progress = 100;
                 progreso = "sincronización Finalizada";

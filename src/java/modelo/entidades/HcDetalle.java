@@ -6,9 +6,12 @@
 package modelo.entidades;
 
 import java.io.Serializable;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -24,12 +27,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "hc_detalle", schema = "public")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "HcDetalle.findAll", query = "SELECT h FROM HcDetalle h")
-    ,
-    @NamedQuery(name = "HcDetalle.findByIdRegistro", query = "SELECT h FROM HcDetalle h WHERE h.hcDetallePK.idRegistro = :idRegistro")
-    ,
-    @NamedQuery(name = "HcDetalle.findByIdCampo", query = "SELECT h FROM HcDetalle h WHERE h.hcDetallePK.idCampo = :idCampo")
-    ,
+    @NamedQuery(name = "HcDetalle.findAll", query = "SELECT h FROM HcDetalle h"),
+    @NamedQuery(name = "HcDetalle.findByIdRegistro", query = "SELECT h FROM HcDetalle h WHERE h.hcDetallePK.idRegistro = :idRegistro"),
+    @NamedQuery(name = "HcDetalle.findByIdCampo", query = "SELECT h FROM HcDetalle h WHERE h.hcDetallePK.idCampo = :idCampo"),
     @NamedQuery(name = "HcDetalle.findByValor", query = "SELECT h FROM HcDetalle h WHERE h.valor = :valor")})
 public class HcDetalle implements Serializable {
 
@@ -46,7 +46,9 @@ public class HcDetalle implements Serializable {
     private HcCamposReg hcCamposReg;
 
     //Uso exclusivo para sincronizacion de datos
-    @Column(name = "id_sincronizador", insertable = false, updatable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id_sincronizador", nullable = false)
     private Integer idSincronizador;
 
     public HcDetalle() {
@@ -125,6 +127,4 @@ public class HcDetalle implements Serializable {
         this.idSincronizador = idSincronizador;
     }
 
-    
-    
 }

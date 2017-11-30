@@ -582,7 +582,8 @@ public class SincronizacionFacade {
             if (hd.getIdSincronizador() == null) {
                 em.persist(hd);
                 em.flush();
-                hd = em.find(HcDetalle.class, hd.getHcDetallePK());
+                //Por mappeo se trea el id_sincronizador
+                //hd = em.find(HcDetalle.class, hd.getHcDetallePK());
                 guardarRegistro(idTabla, idNodo, hd.getIdSincronizador(), idLocal);
             } else {
                 em.merge(hd);
