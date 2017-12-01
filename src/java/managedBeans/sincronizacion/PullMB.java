@@ -5,6 +5,7 @@
  */
 package managedBeans.sincronizacion;
 
+import beans.enumeradores.ClasificacionesEnum;
 import beans.utilidades.MetodosGenerales;
 import java.io.IOException;
 import java.io.Serializable;
@@ -140,6 +141,7 @@ public class PullMB extends MetodosGenerales implements Serializable {
         String tabla = "";
         int idTabla = 0, id = 0;
         double salto = 100;
+        boolean modificoUsuarios = false;
         boolean result = false;
         int current = 0;
         progreso = "Verificar Status de conexion...";
@@ -185,6 +187,7 @@ public class PullMB extends MetodosGenerales implements Serializable {
                                     usuarioFacade.edit(usuario);
                                 }
                                 updateSinStatus(registroLocal, registro);
+                                modificoUsuarios = true;
                             }
                             break;
                         case "cfg_pacientes":
@@ -494,6 +497,12 @@ public class PullMB extends MetodosGenerales implements Serializable {
                 historias = "Total Historias sincronizadas " + historiasSincronizadas;
                 facturas = "Total Facturas sincronizadas " + facturasSincronizadas;
                 totalRegistros = "Total Registros sincronizados " + pendientes.size();
+                if (modificoUsuarios) {
+
+                    loginMB = (LoginMB) FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{loginMB}", LoginMB.class);
+                    loginMB.getAplicacionGeneralMB().cargarClasificacion(ClasificacionesEnum.Usuarios);
+                    loginMB.getAplicacionGeneralMB().cargarClasificacion(ClasificacionesEnum.Prestadores);
+                }
 
             } catch (Exception e) {
                 System.out.println("" + e.getMessage());
