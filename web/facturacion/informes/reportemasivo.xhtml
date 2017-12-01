@@ -1,0 +1,474 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Reporte General</title>
+        <link href="../../recursos/css/estilos.css" rel="stylesheet"/>        
+        <link href="../../recursos/css/metro-bootstrap.css" rel="stylesheet"/>
+        <link href="../../recursos/css/iconFont.css" rel="stylesheet"/>
+        <script type="text/javascript" src="../../recursos/js/calendario.js"></script>  
+    </h:head>
+    <h:body>
+        #{informeMasivoMB.init()}
+        <h:form id="idFormInformeMasivo"> 
+            <p:panelGrid id="IdPanelFiltro" styleClass="panelGridSinBordes" columns="8" style="margin-right: auto;">                    
+                <h:panelGroup>
+                    <p:outputLabel styleClass="campoObligatorio" value="Administradora" style="width: 120px;"/>                        
+                    <p:selectOneMenu styleClass="campoFormulario" style="width: 200px;"  value="#{informeMasivoMB.idAdministradora}">
+                        <f:selectItem itemLabel="--Seleccione Administradora--" itemValue="0"/>
+                        <f:selectItems value="#{informeMasivoMB.listaAdministradora}" var="ad" itemLabel="#{ad.razonSocial}" itemValue="#{ad.idAdministradora}"/>
+                        <f:ajax event="change" render="@this" />
+                    </p:selectOneMenu>                     
+                </h:panelGroup>
+                <h:panelGroup>
+                    <p:commandButton 
+                        title       =   "Buscar" value="&nbsp;"                                        
+                        styleClass  =   "icon-search fg-lightBlue" 
+                        style       =   "height: 20px;"
+                        update      =   "opResultado"
+                        process     =   "idFormInformeMasivo"
+                        actionListener="#{informeMasivoMB.buscar}"
+                        />  
+                </h:panelGroup>
+            </p:panelGrid>
+            <p:outputPanel id="opResultado">
+                <p:dataTable id="idDataResultado"
+                             value="#{informeMasivoMB.listaResultados}"
+                             rows="10"                               
+                             var="res"
+                             paginator="true"
+                             scrollable="true"
+                             paginatorPosition="bottom"   
+                             scrollWidth="8010px" 
+                             emptyMessage="No hay resultado "
+                             rendered="#{informeMasivoMB.renderTabla}"
+                             >
+                    <p:column width="130px"  headerText="Primer Nombre">  
+                        <h:outputText value="#{res[2]}"/>
+                    </p:column>                            
+                    <p:column width="130px" headerText="Segundo Nombre">  
+                        <h:outputText value="#{res[3]}"/>
+                    </p:column>                            
+                    <p:column width="130px" headerText="Primer Apellido">  
+                        <h:outputText value="#{res[4]}"/>
+                    </p:column>                            
+                    <p:column width="130px" headerText="Segundo Apellido">  
+                        <h:outputText value="#{res[5]}"/>
+                    </p:column>                            
+                    <p:column width="130px" headerText="Tipo Identificación">  
+                        <h:outputText value="#{res[6]}"/>
+                    </p:column>                            
+                    <p:column width="130px" headerText="Identificación">  
+                        <h:outputText value="#{res[7]}"/>
+                    </p:column>                            
+                    <p:column width="130px" headerText="Fecha Nacimiento">  
+                        <h:outputText value="#{res[8]}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                    </p:column>                            
+                    <p:column width="130px" headerText="Edad">  
+                        <h:outputText value="#{res[8]}">
+                        </h:outputText>
+                    </p:column>                            
+                    <!--
+                    <p:column width="130px" headerText="Género">  
+                        <h:outputText value="#{res[10]}"/>
+                     </p:column>                            
+                     
+                     <p:column width="130px" headerText="Etnia">  
+                        <h:outputText value="#{res[11]}"/>
+                     </p:column>                
+                     
+                    <p:column width="130px" headerText="Grupo poblacion">  
+                        <h:outputText value="#{res[12]}"/>
+                     </p:column>                
+                     <p:column width="130px" headerText="Teléfono residencia">  
+                        <h:outputText value="#{res[13]}"/>
+                     </p:column>                
+                     <p:column width="130px" headerText="Zona">  
+                        <h:outputText value="#{res[14]}"/>
+                     </p:column>               
+                     <p:column width="130px" headerText="Dirección">  
+                        <h:outputText value="#{res[15]}"/>
+                     </p:column>                
+                     <p:column width="130px" headerText="Código IPS">  
+                        <h:outputText value="#{res[16]}"/>
+                     </p:column>                
+                     <p:column width="130px" headerText="fipn">  
+                        <h:outputText value="#{res[17]}"/>
+                     </p:column>               
+                     <p:column width="130px" headerText="Tabaquismo">  
+                        <h:outputText value="#{res[18]}"/>
+                     </p:column>                
+                     <p:column width="130px" headerText="Alcohol">  
+                        <h:outputText value="#{res[19]}"/>
+                     </p:column>                
+                     <p:column width="130px" headerText="Sedentarismo">  
+                        <h:outputText value="#{res[20]}"/>
+                     </p:column>   
+                     <p:column width="130px" headerText="Frutas y verduras">  
+                        <h:outputText value="#{res[21]}"/>
+                     </p:column>                
+                     <p:column width="130px" headerText="Dieta en grasa">  
+                        <h:outputText value="#{res[22]}"/>
+                     </p:column>                
+                     <p:column width="130px" headerText="Sal">  
+                        <h:outputText value="#{res[23]}"/>
+                     </p:column>              
+                    <p:column width="130px" headerText="Diagnóstico principal">  
+                        <h:outputText value="#{res[24]}"/>
+                     </p:column>                
+                     <p:column width="130px" headerText="Fecha Diagnóstico Principal">  
+                        <h:outputText value="#{res[25]}"/>
+                     </p:column>                
+                     <p:column width="130px" headerText="Diagnóstico Relacionado 2">  
+                        <h:outputText value="#{res[26]}"/>
+                     </p:column>                
+                     <p:column width="130px" headerText="Fecha Diagnóstico Relacionado 2">  
+                        <h:outputText value="#{res[27]}"/>
+                     </p:column>                
+                     <p:column width="130px" headerText="Tipo DM">  
+                        <h:outputText value="#{res[28]}"/>
+                     </p:column>                
+                     <p:column width="130px" headerText="Diagnóstico Relacionado 3">  
+                        <h:outputText value="#{res[29]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="Diagnóstico Relacionado 4">  
+                        <h:outputText value="#{res[30]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="Diagnóstico Relacionado 5">  
+                        <h:outputText value="#{res[31]}"/>
+                    </p:column>                
+                      
+                     <p:column width="130px" headerText="Observaciones">  
+                        <h:outputText value="#{res[32]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="dxerc">  
+                        <h:outputText value="#{res[33]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="etiologiaerc">  
+                        <h:outputText value="#{res[34]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="Sentado brazo derecho pas">  
+                        <h:outputText value="#{res[35]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="Sentado brazo derecho pad">  
+                        <h:outputText value="#{res[36]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="Observaciones sentado brazo derecho">  
+                        <h:outputText value="#{res[37]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="Sentado brazo izquierdo pas">  
+                        <h:outputText value="#{res[38]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="Sentado brazo izquierdo pad">  
+                        <h:outputText value="#{res[39]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="Observaciones sentado brazo izquierdo">  
+                        <h:outputText value="#{res[40]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="decúbito pas">  
+                        <h:outputText value="#{res[41]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="decúbito pad">  
+                        <h:outputText value="#{res[42]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="observaciones decúbito">  
+                        <h:outputText value="#{res[43]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="condiciones especiales pas">  
+                        <h:outputText value="#{res[44]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="condiciones especiales pad">  
+                        <h:outputText value="#{res[45]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="Observaciones condiciones especiales">  
+                        <h:outputText value="#{res[46]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="Tensión Arterial asistolica base">  
+                        <h:outputText value="#{res[47]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="Tensión Arterial diastolica base">  
+                        <h:outputText value="#{res[48]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="Fecha mantesión arterial base">  
+                        <h:outputText value="#{res[49]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="Última tensión asistólica">  
+                        <h:outputText value="#{res[50]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="ültima tensión diástolica">  
+                        <h:outputText value="#{res[51]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="clasificación hta">  
+                        <h:outputText value="#{res[52]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="Fecha útlima hta">  
+                        <h:outputText value="#{res[53]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="peso">  
+                        <h:outputText value="#{res[54]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="fecha último peso">  
+                        <h:outputText value="#{res[55]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="talla">  
+                        <h:outputText value="#{res[56]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="imc">  
+                        <h:outputText value="#{res[57]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="Clasificación imc">  
+                        <h:outputText value="#{res[58]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="Perimetro abdominal">  
+                        <h:outputText value="#{res[59]}"/>
+                     </p:column>                
+                     <p:column width="130px" headerText="Fecha último perimetro abdominal">  
+                        <h:outputText value="#{res[60]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="Clasificación rcv actuallib">  
+                        <h:outputText value="#{res[61]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="Fecha clasificación rcv actuallib">  
+                        <h:outputText value="#{res[62]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="clasificación rcv actual">  
+                        <h:outputText value="#{res[63]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="Fecha clasificación rcv actual">  
+                        <h:outputText value="#{res[64]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="glicemia basal">  
+                        <h:outputText value="#{res[65]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="Fecha glicemia basal">  
+                        <h:outputText value="#{res[66]}"/>
+                     </p:column>                
+                     <p:column width="130px" headerText="Parcial de orina    ">  
+                        <h:outputText value="#{res[67]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="Fecha parcial de orina">  
+                        <h:outputText value="#{res[68]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="Creatinina de sangre">  
+                        <h:outputText value="#{res[69]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="Fecha creatinina de sangre">  
+                        <h:outputText value="#{res[70]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="Colesterol total">  
+                        <h:outputText value="#{res[71]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="Fecha colesterol total">  
+                        <h:outputText value="#{res[72]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="hdl">  
+                        <h:outputText value="#{res[73]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="fecha adl">  
+                        <h:outputText value="#{res[74]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="ldl">  
+                        <h:outputText value="#{res[75]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="Fecha ldl">  
+                        <h:outputText value="#{res[76]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="Colesterol">  
+                        <h:outputText value="#{res[77]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="Fecha Colesterol ">  
+                        <h:outputText value="#{res[78]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="Hemoglobina glicolisada">  
+                        <h:outputText value="#{res[79]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="Fecha hemoglobina glicolisada">  
+                        <h:outputText value="#{res[80]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="relalbuminuria creatinuria">  
+                        <h:outputText value="#{res[81]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="fecha albuminuria creatinuria">  
+                        <h:outputText value="#{res[82]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="microalbuminuria">  
+                        <h:outputText value="#{res[83]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="fecha microalbuminuria">  
+                        <h:outputText value="#{res[84]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="reporte de ekg">  
+                        <h:outputText value="#{res[85]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="fecha ekg">  
+                        <h:outputText value="#{res[86]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="tfg">  
+                        <h:outputText value="#{res[87]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="estydio segun tfg">  
+                        <h:outputText value="#{res[88]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="MEDICAMENTO1">  
+                        <h:outputText value="#{res[89]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="MEDICAMENTO2">  
+                        <h:outputText value="#{res[90]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="MEDICAMENTO3">  
+                        <h:outputText value="#{res[91]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="MEDICAMENTO4">  
+                        <h:outputText value="#{res[92]}"/>
+                     </p:column>                
+                     <p:column width="130px" headerText="MEDICAMENTO5">  
+                        <h:outputText value="#{res[93]}"/>
+                     </p:column>                
+                     <p:column width="130px" headerText="MEDICAMENTO6">  
+                        <h:outputText value="#{res[94]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="MEDICAMENTO7">  
+                        <h:outputText value="#{res[95]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="MEDICAMENTO 8">  
+                        <h:outputText value="#{res[96]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="MEDICAMENTO 9">  
+                        <h:outputText value="#{res[97]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="MEDICAMENTO 10">  
+                        <h:outputText value="#{res[98]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="recibe inhibidorieca">  
+                        <h:outputText value="#{res[99]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="recibe antagonistaaraii">  
+                        <h:outputText value="#{res[100]}"/>
+                     </p:column>                
+                     
+                     <p:column width="130px" headerText="adherencia ttomorisky">  
+                        <h:outputText value="#{res[101]}"/>
+                     </p:column>                
+                     <p:column width="130px" headerText="tipo lesión organo blanco">  
+                        <h:outputText value="#{res[102]}"/>
+                     </p:column>                
+                     <p:column width="130px" headerText="novedades">  
+                        <h:outputText value="#{res[103]}"/>
+                     </p:column>                
+                     <p:column width="130px" headerText="fecha muerte">  
+                        <h:outputText value="#{res[104]}"/>
+                     </p:column>                
+                     <p:column width="130px" headerText="causa muerte">  
+                        <h:outputText value="#{res[105]}"/>
+                     </p:column>                
+                     <p:column width="130px" headerText="observaciones">  
+                        <h:outputText value="#{res[106]}"/>
+                     </p:column>                
+                     <p:column width="130px" headerText="nombre insulina">  
+                        <h:outputText value="#{res[107]}"/>
+                     </p:column>                
+                     <p:column width="130px" headerText="dosis insulina">  
+                        <h:outputText value="#{res[108]}"/>
+                     </p:column>                
+                     <p:column width="130px" headerText="aplica poblacion cohorte">  
+                        <h:outputText value="#{res[109]}"/>
+                     </p:column>                
+                    -->
+                    <p:column width="130px" headerText="poblacion nueva para base">  
+
+                        <h:outputText value="#{res[110]}"/>
+                    </p:column>                
+                    <p:column width="130px" headerText="Nombre sede">  
+                        <h:outputText value="#{res[112]}"/>
+                    </p:column>                
+
+                </p:dataTable>
+                <br />
+                <h:commandLink 
+                    title       =   "Exportar Excel" value="&nbsp; "                                        
+                    style       =   "height: 30px;font-size: 24px;"
+                    styleClass  =   "icon-file-excel fg-lightBlue" 
+                    rendered="#{informeMasivoMB.renderTabla}">
+
+                    <p:dataExporter  type="xls" target="idDataResultado" fileName="reporte_general" />
+                </h:commandLink>
+            </p:outputPanel>
+            <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+            <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                <p:graphicImage url="/recursos/Produccion/loading.gif" width="32" height="32"/>
+            </p:dialog>
+        </h:form>
+    </h:body>
+</html>
+
