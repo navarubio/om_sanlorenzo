@@ -212,6 +212,10 @@ public class PushMB extends MetodosGenerales implements Serializable {
                                     //buscamos el paciente por si otro nodo lo cargo
                                     System.out.println("Consulta usuario remoto por identificacion " + usuario.getIdentificacion());
                                     CfgUsuarios uRemoto = sincronizador.consultarUsuarioIdentificacion(usuario.getIdentificacion());
+                                    //Consultar de nuevo pero por login
+                                    if(uRemoto==null){
+                                        uRemoto = sincronizador.consultarUsuarioLogin(usuario.getLoginUsuario());
+                                    }
                                     System.out.println("Devolvio " + uRemoto);
                                     if (uRemoto == null) {
                                         usuario.setIdUsuario(null);

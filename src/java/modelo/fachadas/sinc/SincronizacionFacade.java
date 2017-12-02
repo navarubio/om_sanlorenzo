@@ -1203,6 +1203,19 @@ public class SincronizacionFacade {
         }
         return obj;
     }
+    
+      public CfgUsuarios consultarUsuarioLogin(String _login) {
+        CfgUsuarios obj = null;
+        try {
+            String sql = "SELECT c FROM CfgUsuarios c WHERE c.loginUsuario = ?1 ";
+            Query query = em.createQuery(sql);
+            query.setParameter(1, _login);
+            obj = (CfgUsuarios) query.getSingleResult();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return obj;
+    }
 
     /*Pull*/
     public List<SinStatus> getRegistros(int idNodo) {

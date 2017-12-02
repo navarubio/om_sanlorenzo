@@ -175,6 +175,9 @@ public class PullMB extends MetodosGenerales implements Serializable {
                                 if (registroLocal == null) {// no existe se debe insertar
                                     CfgUsuarios aux = usuarioFacade.buscarPorIdentificacion(usuario.getIdentificacion());
                                     if (aux == null) {
+                                        aux = usuarioFacade.buscarPorLogin(usuario.getLoginUsuario());
+                                    }
+                                    if (aux == null) {
                                         usuario.setIdUsuario(null);
                                         usuarioFacade.create(usuario);
                                     } else {
