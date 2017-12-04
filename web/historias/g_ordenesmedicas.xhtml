@@ -160,7 +160,7 @@
                     <p:outputLabel styleClass="campoObligatorio" value="Examen medico" />
                     <p:selectOneMenu  style="width: 300px;" value="#{historiasMB.idServicio}"  filter="true" filterMatchMode="contains">
                         <f:selectItem itemLabel="" itemValue=""/>
-                        <f:selectItems value="#{aplicacionGeneralMB.listaServicios}" var="p" itemLabel="#{p.nombreServicio}" itemValue="#{p.idServicio}" />
+                        <f:selectItems value="#{historiasMB.listaServiciosOrdenMedica}" var="p" itemLabel="#{p.nombreServicio}" itemValue="#{p.idServicio}" />
                         <f:ajax event="change" listener="#{historiasMB.cambiarServicio}" render="IdPanelAgregarItemServicio"/> 
                     </p:selectOneMenu>  
                     <p:outputLabel styleClass="campoObligatorio" value="Código" />
