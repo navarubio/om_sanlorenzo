@@ -1205,9 +1205,17 @@ public class RipsMB extends MetodosGenerales implements Serializable {
                     if (imprimirCabeceras) {
 //                        pw.println("num_fac,cod_pre,tip_ide,num_ide,fec_cons,num_aut,cod_proced,finali_con,cau_ext,cdiag_pri,cdiag_r1,cdiag_r2,cdiag_r3,tip_diag_pri,val_cons,val_cuo_mod,val_net");
                     }
+                    System.out.println("Total registros ac" + (ripSeleccionado.getRipsAcList()!=null?ripSeleccionado.getRipsAcList().size():0));
                     for (RipsAc ac : ripSeleccionado.getRipsAcList()) {
+                        
                        if(ac.getFinCon()!=null){
+                           /*
+                           CASC 20171205
+                           Comentado porque solicitud de Javier. Para que muestre todas las consultas
+                           ya que las vacias son por motivo de que la historia no se asocio.
+                           Cuando estaba comentado causaba inconsitenacia con lo facturado
                            if(!ac.getFinCon().equals("")){
+                            */
                             pw.print(
                                     ac.getNumFac() + ","
                                     + ac.getCodPre() + ","
@@ -1229,7 +1237,7 @@ public class RipsMB extends MetodosGenerales implements Serializable {
                                     if(i < ripSeleccionado.getRipsAcList().size()-1){
                                     pw.print(ln);
                                 }
-                           }
+                           //}
                         }
                         i++;
                        
