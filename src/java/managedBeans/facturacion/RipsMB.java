@@ -913,7 +913,7 @@ public class RipsMB extends MetodosGenerales implements Serializable {
                     RipsCt nuevoregistroRipCT = new RipsCt(llave);
                     nuevoregistroRipCT.setCodPres(empresaActual.getCodigoEmpresa());
                     nuevoregistroRipCT.setFecRem(new Date());
-                    nuevoregistroRipCT.setCodArc("AC" + nombreRIPS);
+                    nuevoregistroRipCT.setCodArc("AP" + nombreRIPS);
                     nuevoregistroRipCT.setTotalReg(contadorAP);
                     ripsCtFacade.create(nuevoregistroRipCT);
                 }
@@ -923,7 +923,7 @@ public class RipsMB extends MetodosGenerales implements Serializable {
                     RipsCt nuevoregistroRipCT = new RipsCt(llave);
                     nuevoregistroRipCT.setCodPres(empresaActual.getCodigoEmpresa());//Lo da el mimisterio, CONFIGURACION > EMPRESA
                     nuevoregistroRipCT.setFecRem(new Date());//fecha en que se creo cada uno de los archivo
-                    nuevoregistroRipCT.setCodArc("AP" + nombreRIPS);//< QUEDA PENDIENTE />
+                    nuevoregistroRipCT.setCodArc("AC" + nombreRIPS);//< QUEDA PENDIENTE />
                     nuevoregistroRipCT.setTotalReg(contadorAC);//Conteo de los registrso de cada archivo
                     ripsCtFacade.create(nuevoregistroRipCT);
                 }
