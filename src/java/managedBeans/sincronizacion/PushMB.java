@@ -191,6 +191,7 @@ public class PushMB extends MetodosGenerales implements Serializable {
                 }
                 progress = 0;
                 progreso = "Cantidad de registros " + pendientes.size();
+                int cantidadTotal = pendientes.size();
                 for (SinStatus registro : pendientes) {//resgistros a sincronizar ordenados por tabla
                     tabla = registro.getSinTablas().getTabla();
                     idTabla = registro.getSinTablas().getIdTabla();
@@ -198,9 +199,8 @@ public class PushMB extends MetodosGenerales implements Serializable {
                     current++;
                     progreso = "Sincronizando registro " + current + " de " + pendientes.size();
                     //buscar en el remoto para ver si existe
-                    System.out.println("Consulta registro en remoto");
                     SinStatus registroRemoto = sincronizador.existeRegistro(idTabla, idNodo, registro.getSinStatusPK().getIdLocal(), true);
-                    System.out.println("devolvio " + registroRemoto);
+                    System.out.println("Procesando " + current + "  DE  " + cantidadTotal);
                     progreso = "Procesando Tabla " + tabla + " " + registro.getSinStatusPK().getIdLocal();
                     //transaction.begin();
                     System.out.println(progreso);
@@ -213,7 +213,7 @@ public class PushMB extends MetodosGenerales implements Serializable {
                                     System.out.println("Consulta usuario remoto por identificacion " + usuario.getIdentificacion());
                                     CfgUsuarios uRemoto = sincronizador.consultarUsuarioIdentificacion(usuario.getIdentificacion());
                                     //Consultar de nuevo pero por login
-                                    if(uRemoto==null){
+                                    if (uRemoto == null) {
                                         uRemoto = sincronizador.consultarUsuarioLogin(usuario.getLoginUsuario());
                                     }
                                     System.out.println("Devolvio " + uRemoto);
@@ -273,8 +273,8 @@ public class PushMB extends MetodosGenerales implements Serializable {
                                 }
                                 id = sincronizador.guardarHorario(horario, idTabla, idNodo, registro.getSinStatusPK().getIdLocal());
                                 result = updateSinStatus(id, registro);
-                            }else{
-                                 System.out.println("No se encontro paciente  se colocarástatus null por eliminacion");
+                            } else {
+                                System.out.println("No se encontro paciente  se colocarástatus null por eliminacion");
                                 registro.setStatus(false);
                                 sinStatus.edit(registro);
                             }

@@ -1162,6 +1162,12 @@ public class SincronizacionFacade {
         if (h.getUrgTriageList() != null && !h.getUrgTriageList().isEmpty()) {
             h.getUrgTriageList().clear();
         }
+        if(h.getIdPerfil().getCfgOpcionesMenuList()!=null && !h.getIdPerfil().getCfgOpcionesMenuList().isEmpty()){
+            h.getIdPerfil().getCfgOpcionesMenuList().clear();
+        }
+        if(h.getIdPerfil().getCfgUsuariosList()!=null && !h.getIdPerfil().getCfgUsuariosList().isEmpty()){
+            h.getIdPerfil().getCfgUsuariosList().clear();
+        }
         try {
             if (h.getIdUsuario() == null) {
                 em.persist(h);
