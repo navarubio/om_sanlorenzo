@@ -89,4 +89,13 @@ public class CfgClasificacionesFacade extends AbstractFacade<CfgClasificaciones>
             return null;
         }
     }
+    
+    public List<CfgClasificaciones> buscarMunicipio() {
+        try {
+            String hql = "SELECT c FROM CfgClasificaciones c WHERE c.maestro.maestro LIKE 'Municipios' ORDER BY c.codigo";
+            return getEntityManager().createQuery(hql).getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

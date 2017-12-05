@@ -348,9 +348,13 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     List<FilaDataTable> lista_reportes = new ArrayList<>();
     boolean ver_ginecostetricos = false;
     private AplicacionGeneralMB aplicacionGeneralMB;
+    
+    private List<FacServicio> listaServiciosOrdenMedica = new ArrayList<FacServicio>();
     //---------------------------------------------------
     //----------------- FUNCIONES INICIALES -----------------------
     //---------------------------------------------------
+
+ 
 
     public HistoriasMB() {
         aplicacionGeneralMB = FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{aplicacionGeneralMB}", AplicacionGeneralMB.class);
@@ -366,11 +370,33 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     for (CfgClasificaciones mun : listaM) {
                         listaMunicipios.add(new SelectItem(mun.getId(), mun.getDescripcion()));
                     }
+                }else {
+                     List<CfgClasificaciones> listaM = clasificacionesFacade.buscarMunicipioPorDepartamento
+                         (clasificacionesFacade.find(Integer.parseInt(departamento)).getCodigo());
+                    for (CfgClasificaciones mun : listaM) {
+                        listaMunicipios.add(new SelectItem(mun.getId(), mun.getDescripcion()));
+                    }
                 }
             }
         } catch (Exception e) {
         }
     }
+    
+    /**
+     * Se cargan todos los municipios ya que no se cuenta con el departamento 
+     */
+     public void cargarMunicipiosDefault() {
+         try{
+              List<CfgClasificaciones> lstMun = clasificacionesFacade.buscarMunicipio();
+               for (CfgClasificaciones mun : lstMun) {
+                        listaMunicipios.add(new SelectItem(mun.getId(), mun.getDescripcion()));
+                    }
+         }catch(Exception e){
+             
+         }
+         
+          
+     }
 
     public void agregar_fila_reporte_examenes() {
         if (tipo != 0 && fecha != null && examen.length() > 0) {
@@ -577,6 +603,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         viaAdmin = "";
         posologia = "";
         observacion = "";
+        loadServiciosOrden();
 
     }
 
@@ -594,6 +621,12 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 String diagRel2 = detalleFacade.diagnosticoRel2(pacienteSeleccionado.getIdPaciente());
                 datosFormulario.setDato1(diagRel1);
                 datosFormulario.setDato2(diagRel2);
+            } else if (tipoRegistroClinicoActual.getIdTipoReg() == 20 || 
+                    tipoRegistroClinicoActual.getIdTipoReg() == 23){
+                urgenciasDefaultParams("No Refiere");
+            }else if(tipoRegistroClinicoActual.getIdTipoReg() == 21){
+                refContrRefDefaultParams("No Refiere");
+                cargarMunicipiosDefault();
             }
         }
         calculo_imc();
@@ -2622,6 +2655,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         listaMedicamentosFiltro.clear();
         listaServicios.clear();
         listaServiciosFiltro.clear();
+        listaServiciosOrdenMedica.clear();
 
     }
 
@@ -4580,7 +4614,59 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             imprimirMensaje("Error", "Se debe seleccionar un paciente de la tabla", FacesMessage.SEVERITY_ERROR);
         }
     }
+    
+    
+    public void urgenciasDefaultParams(String val) {
+        datosFormulario.setDato5(val);
+        datosFormulario.setDato6(val);
+        datosFormulario.setDato7(val);
+        datosFormulario.setDato8(val);
+        datosFormulario.setDato9(val);
+        datosFormulario.setDato10(val);
+        datosFormulario.setDato11(val);
+        datosFormulario.setDato12(val);
+        datosFormulario.setDato13(val);
+        datosFormulario.setDato14(val);
+        datosFormulario.setDato15(val);
+        datosFormulario.setDato16(val);
+        datosFormulario.setDato17(val);
+        datosFormulario.setDato18(val);
+        datosFormulario.setDato19(val);
+        datosFormulario.setDato20(val);
+        datosFormulario.setDato21(val);
+        datosFormulario.setDato22(val);
+        datosFormulario.setDato23(val);
+        datosFormulario.setDato24(val);
+        datosFormulario.setDato25(val);
+        datosFormulario.setDato26(val);
+        datosFormulario.setDato27(val);
+        datosFormulario.setDato28(val);
+        datosFormulario.setDato29(val);
+        datosFormulario.setDato30(val);
+        datosFormulario.setDato31(val);
+        datosFormulario.setDato32(val);
+        datosFormulario.setDato33(val);
+        datosFormulario.setDato34(val);
+        datosFormulario.setDato35(val);
+        datosFormulario.setDato36(val);
+        
+     }
 
+        public void refContrRefDefaultParams(String val) {
+        datosFormulario.setDato9(val);
+        datosFormulario.setDato10(val);
+        datosFormulario.setDato11(val);
+        datosFormulario.setDato12(val);
+        datosFormulario.setDato13(val);
+        datosFormulario.setDato14(val);
+        datosFormulario.setDato15(val);
+        datosFormulario.setDato16(val);
+        datosFormulario.setDato17(val);
+        }
+        
+        public void loadServiciosOrden(){
+            listaServiciosOrdenMedica = servicioFacade.buscarActivos();
+        }
     //---------------------------------------------------
     //-------- FUNCIONES TEXTOS PREDEFINIDOS ------------
     //---------------------------------------------------
@@ -6293,5 +6379,13 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
      */
     public void setListaOdontologos(List<CfgUsuarios> listaOdontologos) {
         this.listaOdontologos = listaOdontologos;
+    }
+    
+    public List<FacServicio> getListaServiciosOrdenMedica() {
+        return listaServiciosOrdenMedica;
+    }
+
+    public void setListaServiciosOrdenMedica(List<FacServicio> listaServiciosOrdenMedica) {
+        this.listaServiciosOrdenMedica = listaServiciosOrdenMedica;
     }
 }
