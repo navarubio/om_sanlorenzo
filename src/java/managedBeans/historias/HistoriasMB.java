@@ -4114,6 +4114,14 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 return;
             }
         }
+        //Nutricion 77
+        if (tipoRegistroClinicoActual.getIdTipoReg() == 77) {
+            if (datosFormulario.getDato191()==null || datosFormulario.getDato191().equals("")) {
+                imprimirMensaje("Error", "Debe Ingresar Diagnostico Principal", FacesMessage.SEVERITY_ERROR);
+                return;
+            }
+            
+        }
         nuevoRegistro.setFechaReg(fechaReg);
         nuevoRegistro.setFechaSis(fechaSis);
         nuevoRegistro.setIdPaciente(pacienteSeleccionado);
