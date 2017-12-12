@@ -372,12 +372,17 @@
                 <tr><td>&nbsp;</td></tr>
                 <tr>
                     <td colspan="1">
-                        <p:outputLabel value="FECHA-HORA REGISTRO"/><p:calendar navigator="true" locale="es" value="#{historiasMB.fechaReg}" pattern="dd/MM/yyyy HH:mm:ss" size="23" mask="true"  />
+                        <p:outputLabel value="FECHA-HORA REGISTRO"/>
+                    </td>
+                    <td>
+                        <p:outputLabel value="Municipio"/>
                     </td>
                       
                 </tr>
                 <tr>
-                    <td><p:outputLabel value="Municipio"/></td>
+                    <td>
+                        <p:calendar navigator="true" locale="es" value="#{historiasMB.fechaReg}" pattern="dd/MM/yyyy HH:mm:ss" size="23" mask="true"  />
+                    </td>
                     <td colspan="1">
                          <p:selectOneMenu  styleClass="campoFormulario" id="IdMunicipios" style="width: 315px;" value="#{historiasMB.datosFormulario.dato55}" filter="true" filterMatchMode="contains">
                             <f:selectItems value="#{historiasMB.listaMunicipios}" />

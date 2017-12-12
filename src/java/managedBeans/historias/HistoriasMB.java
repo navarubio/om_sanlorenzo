@@ -348,13 +348,11 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     List<FilaDataTable> lista_reportes = new ArrayList<>();
     boolean ver_ginecostetricos = false;
     private AplicacionGeneralMB aplicacionGeneralMB;
-    
+
     private List<FacServicio> listaServiciosOrdenMedica = new ArrayList<FacServicio>();
     //---------------------------------------------------
     //----------------- FUNCIONES INICIALES -----------------------
     //---------------------------------------------------
-
- 
 
     public HistoriasMB() {
         aplicacionGeneralMB = FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{aplicacionGeneralMB}", AplicacionGeneralMB.class);
@@ -370,9 +368,8 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     for (CfgClasificaciones mun : listaM) {
                         listaMunicipios.add(new SelectItem(mun.getId(), mun.getDescripcion()));
                     }
-                }else {
-                     List<CfgClasificaciones> listaM = clasificacionesFacade.buscarMunicipioPorDepartamento
-                         (clasificacionesFacade.find(Integer.parseInt(departamento)).getCodigo());
+                } else {
+                    List<CfgClasificaciones> listaM = clasificacionesFacade.buscarMunicipioPorDepartamento(clasificacionesFacade.find(Integer.parseInt(departamento)).getCodigo());
                     for (CfgClasificaciones mun : listaM) {
                         listaMunicipios.add(new SelectItem(mun.getId(), mun.getDescripcion()));
                     }
@@ -381,22 +378,21 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         } catch (Exception e) {
         }
     }
-    
+
     /**
-     * Se cargan todos los municipios ya que no se cuenta con el departamento 
+     * Se cargan todos los municipios ya que no se cuenta con el departamento
      */
-     public void cargarMunicipiosDefault() {
-         try{
-              List<CfgClasificaciones> lstMun = clasificacionesFacade.buscarMunicipio();
-               for (CfgClasificaciones mun : lstMun) {
-                        listaMunicipios.add(new SelectItem(mun.getId(), mun.getDescripcion()));
-                    }
-         }catch(Exception e){
-             
-         }
-         
-          
-     }
+    public void cargarMunicipiosDefault() {
+        try {
+            List<CfgClasificaciones> lstMun = clasificacionesFacade.buscarMunicipio();
+            for (CfgClasificaciones mun : lstMun) {
+                listaMunicipios.add(new SelectItem(mun.getId(), mun.getDescripcion()));
+            }
+        } catch (Exception e) {
+
+        }
+
+    }
 
     public void agregar_fila_reporte_examenes() {
         if (tipo != 0 && fecha != null && examen.length() > 0) {
@@ -621,10 +617,17 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 String diagRel2 = detalleFacade.diagnosticoRel2(pacienteSeleccionado.getIdPaciente());
                 datosFormulario.setDato1(diagRel1);
                 datosFormulario.setDato2(diagRel2);
-            } else if (tipoRegistroClinicoActual.getIdTipoReg() == 20 || 
-                    tipoRegistroClinicoActual.getIdTipoReg() == 23){
+            } else if (tipoRegistroClinicoActual.getIdTipoReg() == 20) {
                 urgenciasDefaultParams("No Refiere");
-            }else if(tipoRegistroClinicoActual.getIdTipoReg() == 21){
+            } else if (tipoRegistroClinicoActual.getIdTipoReg() == 23) {
+                historiaClinicaDefaultParams("No Refiere");
+            } else if (tipoRegistroClinicoActual.getIdTipoReg() == 37) {
+                clapOpsOmsDefaultParams("No Refiere");
+            } else if (tipoRegistroClinicoActual.getIdTipoReg() == 29) {
+                epicrisisDefaultParams("No Refiere");
+            } else if (tipoRegistroClinicoActual.getIdTipoReg() == 78 || tipoRegistroClinicoActual.getIdTipoReg() == 79) {
+                cancerCervixSenoDefaultParams("No Refiere");
+            } else if (tipoRegistroClinicoActual.getIdTipoReg() == 21) {
                 refContrRefDefaultParams("No Refiere");
                 cargarMunicipiosDefault();
             }
@@ -4116,11 +4119,11 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         }
         //Nutricion 77
         if (tipoRegistroClinicoActual.getIdTipoReg() == 77) {
-            if (datosFormulario.getDato191()==null || datosFormulario.getDato191().equals("")) {
+            if (datosFormulario.getDato191() == null || datosFormulario.getDato191().equals("")) {
                 imprimirMensaje("Error", "Debe Ingresar Diagnostico Principal", FacesMessage.SEVERITY_ERROR);
                 return;
             }
-            
+
         }
         nuevoRegistro.setFechaReg(fechaReg);
         nuevoRegistro.setFechaSis(fechaSis);
@@ -4622,9 +4625,69 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             imprimirMensaje("Error", "Se debe seleccionar un paciente de la tabla", FacesMessage.SEVERITY_ERROR);
         }
     }
-    
-    
-    public void urgenciasDefaultParams(String val) {
+
+    public void cancerCervixSenoDefaultParams(String val) {
+        datosFormulario.setDato8(val);
+        datosFormulario.setDato9(val);
+        datosFormulario.setDato10(val);
+        datosFormulario.setDato11(val);
+        datosFormulario.setDato12(val);
+        datosFormulario.setDato13(val);
+        datosFormulario.setDato14(val);
+
+        datosFormulario.setDato32(val);
+        datosFormulario.setDato33(val);
+        datosFormulario.setDato34(val);
+        datosFormulario.setDato35(val);
+        datosFormulario.setDato36(val);
+        datosFormulario.setDato37(val);
+        datosFormulario.setDato38(val);
+
+        datosFormulario.setDato40(val);
+
+    }
+
+    public void clapOpsOmsDefaultParams(String val) {
+        datosFormulario.setDato0(val);
+        datosFormulario.setDato2(val);
+        datosFormulario.setDato3(val);
+        datosFormulario.setDato4(val);
+        datosFormulario.setDato29(val);
+        datosFormulario.setDato53(val);
+        datosFormulario.setDato65(val);
+        datosFormulario.setDato73(val);
+        datosFormulario.setDato74(val);
+        datosFormulario.setDato83(val);
+        datosFormulario.setDato97(val);
+        datosFormulario.setDato110(val);
+        datosFormulario.setDato119(val);
+        datosFormulario.setDato124(val);
+        datosFormulario.setDato147(val);
+        datosFormulario.setDato152(val);
+
+    }
+
+    public void epicrisisDefaultParams(String val) {
+        datosFormulario.setDato2(val);
+        datosFormulario.setDato3(val);
+        datosFormulario.setDato4(val);
+        datosFormulario.setDato5(val);
+        datosFormulario.setDato6(val);
+        datosFormulario.setDato7(val);
+        datosFormulario.setDato8(val);
+        datosFormulario.setDato9(val);
+        datosFormulario.setDato10(val);
+        datosFormulario.setDato11(val);
+        datosFormulario.setDato12(val);
+        datosFormulario.setDato13(val);
+        datosFormulario.setDato14(val);
+        datosFormulario.setDato15(val);
+        datosFormulario.setDato16(val);
+    }
+
+    public void historiaClinicaDefaultParams(String val) {
+        datosFormulario.setDato3(val);
+        datosFormulario.setDato4(val);
         datosFormulario.setDato5(val);
         datosFormulario.setDato6(val);
         datosFormulario.setDato7(val);
@@ -4657,10 +4720,96 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         datosFormulario.setDato34(val);
         datosFormulario.setDato35(val);
         datosFormulario.setDato36(val);
-        
-     }
+        datosFormulario.setDato37(val);
+        datosFormulario.setDato38(val);
+        datosFormulario.setDato39(val);
+        datosFormulario.setDato40(val);
+        datosFormulario.setDato41(val);
+        datosFormulario.setDato42(val);
+        datosFormulario.setDato43(val);
+        datosFormulario.setDato44(val);
+        datosFormulario.setDato45(val);
+        datosFormulario.setDato46(val);
+        datosFormulario.setDato47(val);
+        datosFormulario.setDato48(val);
+        datosFormulario.setDato49(val);
+        datosFormulario.setDato50(val);
+        datosFormulario.setDato51(val);
+        datosFormulario.setDato52(val);
+        datosFormulario.setDato53(val);
+        datosFormulario.setDato54(val);
+        datosFormulario.setDato55(val);
+        datosFormulario.setDato56(val);
+        datosFormulario.setDato57(val);
+        datosFormulario.setDato58(val);
+        datosFormulario.setDato59(val);
+        datosFormulario.setDato60(val);
+        datosFormulario.setDato61(val);
+        datosFormulario.setDato62(val);
+        datosFormulario.setDato63(val);
+        datosFormulario.setDato64(val);
+        datosFormulario.setDato65(val);
+        datosFormulario.setDato66(val);
+        datosFormulario.setDato67(val);
+        datosFormulario.setDato68(val);
+        datosFormulario.setDato69(val);
+        datosFormulario.setDato70(val);
+        datosFormulario.setDato71(val);
+        datosFormulario.setDato72(val);
+        datosFormulario.setDato73(val);
+        datosFormulario.setDato74(val);
+        datosFormulario.setDato75(val);
+        datosFormulario.setDato76(val);
+        datosFormulario.setDato77(val);
+        datosFormulario.setDato78(val);
+        datosFormulario.setDato79(val);
+        datosFormulario.setDato80(val);
+        datosFormulario.setDato81(val);
+        datosFormulario.setDato82(val);
+        datosFormulario.setDato83(val);
+        datosFormulario.setDato84(val);
+        datosFormulario.setDato85(val);
+        datosFormulario.setDato86(val);
+        datosFormulario.setDato87(val);
+        datosFormulario.setDato88(val);
+        datosFormulario.setDato89(val);
+        datosFormulario.setDato90(val);
+        datosFormulario.setDato91(val);
+        datosFormulario.setDato92(val);
+        datosFormulario.setDato93(val);
+        datosFormulario.setDato94(val);
+        datosFormulario.setDato95(val);
+        datosFormulario.setDato96(val);
+        datosFormulario.setDato97(val);
+        datosFormulario.setDato98(val);
+        datosFormulario.setDato99(val);
+        datosFormulario.setDato100(val);
+        datosFormulario.setDato101(val);
+        datosFormulario.setDato102(val);
+        datosFormulario.setDato103(val);
+        datosFormulario.setDato104(val);
+        datosFormulario.setDato105(val);
+        datosFormulario.setDato106(val);
+        datosFormulario.setDato107(val);
+        datosFormulario.setDato108(val);
+        datosFormulario.setDato109(val);
+        datosFormulario.setDato110(val);
+        //
+        datosFormulario.setDato115(val);
+        datosFormulario.setDato116(val);
+        datosFormulario.setDato117(val);
 
-        public void refContrRefDefaultParams(String val) {
+    }
+
+    public void urgenciasDefaultParams(String val) {
+        //Motivo
+        datosFormulario.setDato3(val);
+        datosFormulario.setDato4(val);
+        //Disagnosticos
+        datosFormulario.setDato5(val);
+        datosFormulario.setDato6(val);
+        datosFormulario.setDato7(val);
+        datosFormulario.setDato8(val);
         datosFormulario.setDato9(val);
         datosFormulario.setDato10(val);
         datosFormulario.setDato11(val);
@@ -4670,11 +4819,170 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         datosFormulario.setDato15(val);
         datosFormulario.setDato16(val);
         datosFormulario.setDato17(val);
-        }
+        datosFormulario.setDato18(val);
+        datosFormulario.setDato19(val);
+        datosFormulario.setDato20(val);
+        datosFormulario.setDato21(val);
+        datosFormulario.setDato22(val);
+        datosFormulario.setDato23(val);
+        datosFormulario.setDato24(val);
+        datosFormulario.setDato25(val);
+        datosFormulario.setDato26(val);
+        datosFormulario.setDato27(val);
+        datosFormulario.setDato28(val);
+        datosFormulario.setDato29(val);
+        datosFormulario.setDato30(val);
+        datosFormulario.setDato31(val);
+        datosFormulario.setDato32(val);
+        datosFormulario.setDato33(val);
+        datosFormulario.setDato34(val);
+        datosFormulario.setDato35(val);
+        datosFormulario.setDato36(val);
+        //Revision por sistema
+        datosFormulario.setDato37(val);
+        datosFormulario.setDato38(val);
+        datosFormulario.setDato39(val);
+        datosFormulario.setDato40(val);
+        datosFormulario.setDato41(val);
+        datosFormulario.setDato42(val);
+        datosFormulario.setDato43(val);
+        datosFormulario.setDato44(val);
+        datosFormulario.setDato45(val);
+        datosFormulario.setDato46(val);
+        datosFormulario.setDato47(val);
+        datosFormulario.setDato48(val);
+        datosFormulario.setDato49(val);
+        datosFormulario.setDato50(val);
+        datosFormulario.setDato51(val);
+        datosFormulario.setDato52(val);
+        datosFormulario.setDato53(val);
+        datosFormulario.setDato54(val);
+        datosFormulario.setDato55(val);
+        datosFormulario.setDato56(val);
+        datosFormulario.setDato57(val);
+        //Signos Vitales
+        datosFormulario.setDato58(val);
+        datosFormulario.setDato59(val);
+        datosFormulario.setDato60(val);
+        datosFormulario.setDato61(val);
+        datosFormulario.setDato62(val);
+        datosFormulario.setDato63(val);
+        datosFormulario.setDato64(val);
+        //Examen Fisico
+        datosFormulario.setDato65(val);
+        datosFormulario.setDato66(val);
+        datosFormulario.setDato67(val);
+        datosFormulario.setDato68(val);
+        datosFormulario.setDato69(val);
+        datosFormulario.setDato70(val);
+        datosFormulario.setDato71(val);
+        datosFormulario.setDato72(val);
+        datosFormulario.setDato73(val);
+        datosFormulario.setDato74(val);
+        datosFormulario.setDato75(val);
+        datosFormulario.setDato76(val);
+        datosFormulario.setDato77(val);
+        datosFormulario.setDato78(val);
+        datosFormulario.setDato79(val);
+        datosFormulario.setDato80(val);
+        datosFormulario.setDato81(val);
+        datosFormulario.setDato82(val);
+        datosFormulario.setDato83(val);
+        datosFormulario.setDato84(val);
+        datosFormulario.setDato85(val);
+        //Factores
+        datosFormulario.setDato86(val);
+        datosFormulario.setDato87(val);
+        datosFormulario.setDato88(val);
+        datosFormulario.setDato89(val);
+        datosFormulario.setDato90(val);
+        datosFormulario.setDato91(val);
+        datosFormulario.setDato92(val);
+        datosFormulario.setDato93(val);
+        datosFormulario.setDato94(val);
+        datosFormulario.setDato95(val);
+        //Examen Mental
+        datosFormulario.setDato96(val);
+        datosFormulario.setDato97(val);
+        datosFormulario.setDato98(val);
+        datosFormulario.setDato99(val);
+        datosFormulario.setDato100(val);
+        datosFormulario.setDato101(val);
+        datosFormulario.setDato102(val);
+        datosFormulario.setDato103(val);
+        datosFormulario.setDato104(val);
+        datosFormulario.setDato105(val);
+        datosFormulario.setDato106(val);
+        datosFormulario.setDato107(val);
+        datosFormulario.setDato108(val);
+        datosFormulario.setDato109(val);
+        datosFormulario.setDato110(val);
+        datosFormulario.setDato111(val);
+        datosFormulario.setDato112(val);
+        datosFormulario.setDato113(val);
+        //
+        datosFormulario.setDato118(val);
+        datosFormulario.setDato119(val);
+        datosFormulario.setDato120(val);
+
+    }
+
+    public void refContrRefDefaultParams(String val) {
+        datosFormulario.setDato5(val);
+        datosFormulario.setDato6(val);
+        datosFormulario.setDato7(val);
+        datosFormulario.setDato8(val);
+        datosFormulario.setDato9(val);
+        datosFormulario.setDato10(val);
+        datosFormulario.setDato11(val);
+        datosFormulario.setDato12(val);
+        datosFormulario.setDato13(val);
+        datosFormulario.setDato14(val);
+        datosFormulario.setDato15(val);
+        datosFormulario.setDato16(val);
+        datosFormulario.setDato17(val);
         
-        public void loadServiciosOrden(){
-            listaServiciosOrdenMedica = servicioFacade.buscarActivos();
-        }
+        datosFormulario.setDato20(val);
+        datosFormulario.setDato21(val);
+        datosFormulario.setDato22(val);
+        datosFormulario.setDato23(val);
+        datosFormulario.setDato24(val);
+        datosFormulario.setDato25(val);
+        datosFormulario.setDato26(val);
+        datosFormulario.setDato27(val);
+        datosFormulario.setDato28(val);
+        datosFormulario.setDato29(val);
+        datosFormulario.setDato30(val);
+        datosFormulario.setDato31(val);
+        datosFormulario.setDato32(val);
+        datosFormulario.setDato33(val);
+        datosFormulario.setDato34(val);
+        datosFormulario.setDato35(val);
+        datosFormulario.setDato36(val);
+        datosFormulario.setDato37(val);
+        datosFormulario.setDato38(val);
+        datosFormulario.setDato39(val);
+        datosFormulario.setDato40(val);
+        
+        datosFormulario.setDato41(val);
+        datosFormulario.setDato42(val);
+        datosFormulario.setDato43(val);
+        datosFormulario.setDato44(val);
+        datosFormulario.setDato45(val);
+        datosFormulario.setDato46(val);
+        datosFormulario.setDato47(val);
+        datosFormulario.setDato48(val);
+        datosFormulario.setDato49(val);
+        datosFormulario.setDato50(val);
+        datosFormulario.setDato51(val);
+        
+        
+    }
+
+    public void loadServiciosOrden() {
+        listaServiciosOrdenMedica = servicioFacade.buscarActivos();
+    }
+
     //---------------------------------------------------
     //-------- FUNCIONES TEXTOS PREDEFINIDOS ------------
     //---------------------------------------------------
@@ -6388,7 +6696,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     public void setListaOdontologos(List<CfgUsuarios> listaOdontologos) {
         this.listaOdontologos = listaOdontologos;
     }
-    
+
     public List<FacServicio> getListaServiciosOrdenMedica() {
         return listaServiciosOrdenMedica;
     }

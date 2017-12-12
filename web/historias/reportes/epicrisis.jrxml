@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="epicrisis" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ded7cf54-7e84-4a37-82e0-3c2f923f0dee">
-	<property name="ireport.zoom" value="1.5"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="epicrisis" language="groovy" pageWidth="612" pageHeight="900" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ded7cf54-7e84-4a37-82e0-3c2f923f0dee">
+	<property name="ireport.zoom" value="1.1269722013523664"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="493"/>
+	<property name="ireport.y" value="524"/>
 	<field name="dato0" class="java.lang.Object">
 		<fieldDescription><![CDATA[dato0]]></fieldDescription>
 	</field>
@@ -398,7 +398,7 @@
 		</band>
 	</title>
 	<detail>
-		<band height="640" splitType="Stretch">
+		<band height="714" splitType="Stretch">
 			<frame>
 				<reportElement uuid="f1ac8c6e-a84f-4562-be89-cbd75472943a" mode="Opaque" x="0" y="12" width="572" height="13" backcolor="#CCCCCC"/>
 				<box>
@@ -722,7 +722,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="1" y="628" width="280" height="12"/>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="1" y="677" width="280" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="280" height="12"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
@@ -736,11 +736,11 @@
 				</line>
 			</frame>
 			<image scaleImage="FillFrame" onErrorType="Blank">
-				<reportElement uuid="9c3bbc6e-8311-410d-a87e-f822b43f3dd0" positionType="Float" x="36" y="546" width="204" height="82"/>
+				<reportElement uuid="9c3bbc6e-8311-410d-a87e-f822b43f3dd0" positionType="Float" x="36" y="595" width="204" height="82"/>
 				<imageExpression><![CDATA[$F{dato74}]]></imageExpression>
 			</image>
 			<frame>
-				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="291" y="628" width="280" height="12"/>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="291" y="677" width="280" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="280" height="12"/>
 					<textElement textAlignment="Center" markup="html">
@@ -768,9 +768,26 @@
 				<textFieldExpression><![CDATA[$F{dato10}]]></textFieldExpression>
 			</textField>
 			<image scaleImage="FillFrame" onErrorType="Blank">
-				<reportElement uuid="9c3bbc6e-8311-410d-a87e-f822b43f3dd0" positionType="Float" x="332" y="547" width="204" height="82"/>
+				<reportElement uuid="9c3bbc6e-8311-410d-a87e-f822b43f3dd0" positionType="Float" x="332" y="596" width="204" height="82"/>
 				<imageExpression><![CDATA[$F{dato68}]]></imageExpression>
 			</image>
+			<textField>
+				<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" x="0" y="529" width="572" height="36"/>
+				<textElement verticalAlignment="Top" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato16}]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement uuid="dcb1ce97-c2aa-406f-86d9-7bc94b502d17" x="0" y="529" width="572" height="36"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</frame>
 		</band>
 	</detail>
 </jasperReport>
