@@ -617,8 +617,14 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 String diagRel2 = detalleFacade.diagnosticoRel2(pacienteSeleccionado.getIdPaciente());
                 datosFormulario.setDato1(diagRel1);
                 datosFormulario.setDato2(diagRel2);
+            } else if (tipoRegistroClinicoActual.getIdTipoReg() == 12) {
+                citologiaDefaultParams("No Refiere");
             } else if (tipoRegistroClinicoActual.getIdTipoReg() == 20) {
                 urgenciasDefaultParams("No Refiere");
+            } else if (tipoRegistroClinicoActual.getIdTipoReg() == 80) {
+                resultadoCitologiaDefaultParams("No Refiere");
+            } else if (tipoRegistroClinicoActual.getIdTipoReg() == 81) {
+                suministroPlanificacionFamiliarDefaultParams("No Refiere");
             } else if (tipoRegistroClinicoActual.getIdTipoReg() == 23) {
                 historiaClinicaDefaultParams("No Refiere");
             } else if (tipoRegistroClinicoActual.getIdTipoReg() == 37) {
@@ -4801,6 +4807,197 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
 
     }
 
+    public void suministroPlanificacionFamiliarDefaultParams(String val) {
+        datosFormulario.setDato0(val);
+        datosFormulario.setDato2(val);
+        datosFormulario.setDato3(val);
+        datosFormulario.setDato4(val);
+        datosFormulario.setDato5(val);
+        datosFormulario.setDato6(val);
+        datosFormulario.setDato7(val);
+        datosFormulario.setDato8(val);
+        datosFormulario.setDato9(val);
+        datosFormulario.setDato10(val);
+        datosFormulario.setDato11(val);
+        datosFormulario.setDato12(val);
+        datosFormulario.setDato13(val);
+        datosFormulario.setDato14(val);
+        datosFormulario.setDato15(val);
+        datosFormulario.setDato16(val);
+    }
+
+    public void resultadoCitologiaDefaultParams(String val) {
+        datosFormulario.setDato3(val);
+        datosFormulario.setDato4(val);
+        datosFormulario.setDato5(val);
+        datosFormulario.setDato6(val);
+    }
+
+    public void citologiaDefaultParams(String val) {
+        datosFormulario.setDato3(val);
+        datosFormulario.setDato4(val);
+        datosFormulario.setDato5(val);
+        datosFormulario.setDato6(val);
+        datosFormulario.setDato7(val);
+        datosFormulario.setDato8(val);
+        datosFormulario.setDato9(val);
+        datosFormulario.setDato10(val);
+        datosFormulario.setDato11(val);
+        datosFormulario.setDato12(val);
+        datosFormulario.setDato13(val);
+        datosFormulario.setDato14(val);
+        datosFormulario.setDato15(val);
+        datosFormulario.setDato16(val);
+        datosFormulario.setDato17(val);
+        datosFormulario.setDato18(val);
+        datosFormulario.setDato19(val);
+        datosFormulario.setDato20(val);
+        datosFormulario.setDato21(val);
+        datosFormulario.setDato22(val);
+        datosFormulario.setDato23(val);
+        datosFormulario.setDato24(val);
+        datosFormulario.setDato25(val);
+        datosFormulario.setDato26(val);
+        datosFormulario.setDato27(val);
+        datosFormulario.setDato28(val);
+        datosFormulario.setDato29(val);
+        datosFormulario.setDato30(val);
+        datosFormulario.setDato31(val);
+        datosFormulario.setDato32(val);
+        datosFormulario.setDato33(val);
+        datosFormulario.setDato34(val);
+        datosFormulario.setDato35(val);
+        datosFormulario.setDato36(val);
+        datosFormulario.setDato37(val);
+        datosFormulario.setDato38(val);
+        datosFormulario.setDato39(val);
+        datosFormulario.setDato40(val);
+        datosFormulario.setDato41(val);
+        datosFormulario.setDato42(val);
+        datosFormulario.setDato43(val);
+        datosFormulario.setDato44(val);
+        datosFormulario.setDato45(val);
+        datosFormulario.setDato46(val);
+        datosFormulario.setDato47(val);
+        datosFormulario.setDato48(val);
+        datosFormulario.setDato49(val);
+        datosFormulario.setDato50(val);
+        datosFormulario.setDato51(val);
+        datosFormulario.setDato52(val);
+        datosFormulario.setDato53(val);
+        datosFormulario.setDato54(val);
+        datosFormulario.setDato55(val);
+        datosFormulario.setDato56(val);
+        datosFormulario.setDato57(val);
+        datosFormulario.setDato58(val);
+        datosFormulario.setDato59(val);
+        datosFormulario.setDato60(val);
+        datosFormulario.setDato61(val);
+        datosFormulario.setDato62(val);
+        datosFormulario.setDato63(val);
+        datosFormulario.setDato64(val);
+        datosFormulario.setDato65(val);
+        datosFormulario.setDato66(val);
+        datosFormulario.setDato67(val);
+        datosFormulario.setDato68(val);
+        datosFormulario.setDato69(val);
+        datosFormulario.setDato70(val);
+        datosFormulario.setDato71(val);
+        datosFormulario.setDato72(val);
+        datosFormulario.setDato73(val);
+        datosFormulario.setDato74(val);
+        datosFormulario.setDato75(val);
+        datosFormulario.setDato76(val);
+        datosFormulario.setDato77(val);
+        datosFormulario.setDato78(val);
+        datosFormulario.setDato79(val);
+        datosFormulario.setDato80(val);
+        datosFormulario.setDato81(val);
+        datosFormulario.setDato82(val);
+        datosFormulario.setDato83(val);
+        datosFormulario.setDato84(val);
+        datosFormulario.setDato85(val);
+        datosFormulario.setDato86(val);
+        datosFormulario.setDato87(val);
+        datosFormulario.setDato88(val);
+        datosFormulario.setDato89(val);
+        datosFormulario.setDato90(val);
+        datosFormulario.setDato91(val);
+        datosFormulario.setDato92(val);
+        datosFormulario.setDato93(val);
+        datosFormulario.setDato94(val);
+        datosFormulario.setDato95(val);
+        datosFormulario.setDato96(val);
+        datosFormulario.setDato97(val);
+        datosFormulario.setDato98(val);
+        datosFormulario.setDato99(val);
+        datosFormulario.setDato100(val);
+        datosFormulario.setDato101(val);
+        datosFormulario.setDato102(val);
+        datosFormulario.setDato103(val);
+        datosFormulario.setDato104(val);
+        datosFormulario.setDato105(val);
+        datosFormulario.setDato106(val);
+        datosFormulario.setDato107(val);
+        datosFormulario.setDato108(val);
+        datosFormulario.setDato109(val);
+        datosFormulario.setDato110(val);
+        datosFormulario.setDato111(val);
+        datosFormulario.setDato112(val);
+        datosFormulario.setDato113(val);
+        datosFormulario.setDato114(val);
+        datosFormulario.setDato115(val);
+        datosFormulario.setDato116(val);
+        datosFormulario.setDato117(val);
+        datosFormulario.setDato118(val);
+        datosFormulario.setDato119(val);
+        datosFormulario.setDato120(val);
+        datosFormulario.setDato121(val);
+        datosFormulario.setDato122(val);
+        datosFormulario.setDato123(val);
+        datosFormulario.setDato124(val);
+        datosFormulario.setDato125(val);
+        datosFormulario.setDato126(val);
+        datosFormulario.setDato127(val);
+        datosFormulario.setDato128(val);
+        datosFormulario.setDato129(val);
+        datosFormulario.setDato130(val);
+        datosFormulario.setDato131(val);
+        datosFormulario.setDato132(val);
+        datosFormulario.setDato133(val);
+        datosFormulario.setDato134(val);
+        datosFormulario.setDato135(val);
+        datosFormulario.setDato136(val);
+        datosFormulario.setDato137(val);
+        datosFormulario.setDato138(val);
+        datosFormulario.setDato139(val);
+        datosFormulario.setDato140(val);
+        datosFormulario.setDato141(val);
+        datosFormulario.setDato142(val);
+        datosFormulario.setDato143(val);
+        datosFormulario.setDato144(val);
+        datosFormulario.setDato145(val);
+        datosFormulario.setDato146(val);
+        datosFormulario.setDato147(val);
+        datosFormulario.setDato148(val);
+        datosFormulario.setDato149(val);
+        datosFormulario.setDato150(val);
+        datosFormulario.setDato151(val);
+        datosFormulario.setDato152(val);
+        datosFormulario.setDato153(val);
+        datosFormulario.setDato154(val);
+        datosFormulario.setDato155(val);
+        datosFormulario.setDato156(val);
+        datosFormulario.setDato157(val);
+        datosFormulario.setDato158(val);
+        datosFormulario.setDato159(val);
+        datosFormulario.setDato160(val);
+        datosFormulario.setDato161(val);
+        datosFormulario.setDato162(val);
+        datosFormulario.setDato163(val);
+        datosFormulario.setDato165(val);
+    }
+
     public void urgenciasDefaultParams(String val) {
         //Motivo
         datosFormulario.setDato3(val);
@@ -4941,7 +5138,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         datosFormulario.setDato15(val);
         datosFormulario.setDato16(val);
         datosFormulario.setDato17(val);
-        
+
         datosFormulario.setDato20(val);
         datosFormulario.setDato21(val);
         datosFormulario.setDato22(val);
@@ -4963,7 +5160,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         datosFormulario.setDato38(val);
         datosFormulario.setDato39(val);
         datosFormulario.setDato40(val);
-        
+
         datosFormulario.setDato41(val);
         datosFormulario.setDato42(val);
         datosFormulario.setDato43(val);
@@ -4975,8 +5172,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         datosFormulario.setDato49(val);
         datosFormulario.setDato50(val);
         datosFormulario.setDato51(val);
-        
-        
+
     }
 
     public void loadServiciosOrden() {
