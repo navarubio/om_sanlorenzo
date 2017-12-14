@@ -1,4 +1,4 @@
-/* 
+﻿/* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -60,7 +60,7 @@ VALUES (80, 'CONDUCTA' , '', 5 , 'CONDUCTA' );
 --SUMINISTRO  DE PLANIFICACION FAMILIAR
 insert into hc_tipo_reg
 SELECT 81, 'SUMINISTRO DE PLANIFICACION FAMILIAR' nombre, 
-'g_suministro_planificacion_familiar.xhtml' url_pagina,true as activo, 6 cant_campos, consecutivo
+'g_suministro_planificacion_familiar.xhtml' url_pagina,true as activo, 17 cant_campos, consecutivo
   FROM public.hc_tipo_reg where id_tipo_reg=80;
 
 
@@ -98,3 +98,45 @@ INSERT INTO public.hc_campos_reg(id_tipo_reg, nombre, tabla, posicion, nombre_pd
 VALUES (81, 'CONDUCTA' , '', 15 , 'CONDUCTA' );
 INSERT INTO public.hc_campos_reg(id_tipo_reg, nombre, tabla, posicion, nombre_pdf) 
 VALUES (81, 'PLAN' , '', 16 , 'PLAN' );
+
+
+--EVOLUCION HISTORICA GLANDULA MAMARIA
+insert into hc_tipo_reg
+SELECT 82, 'EVOLUCION HISTORICA GLANDULA MAMARIA' nombre, 
+'evolucion_historia_glandula_mamaria.xhtml' url_pagina,true as activo, 17 cant_campos, consecutivo
+  FROM public.hc_tipo_reg where id_tipo_reg=80;
+
+INSERT INTO public.hc_campos_reg(id_tipo_reg, nombre, tabla, posicion, nombre_pdf) 
+VALUES (82, 'Acompañante' , NULL, 0 , 'ACOMPAÑANTE' );
+INSERT INTO public.hc_campos_reg(id_tipo_reg, nombre, tabla, posicion, nombre_pdf) 
+VALUES (82, 'Parentesco' , 'cfg_clasificaciones', 1 , 'PARENTESCO' );
+INSERT INTO public.hc_campos_reg(id_tipo_reg, nombre, tabla, posicion, nombre_pdf) 
+VALUES (82, 'TELEFONO', '', 2 , 'TELEFONO' );
+INSERT INTO public.hc_campos_reg(id_tipo_reg, nombre, tabla, posicion, nombre_pdf) 
+VALUES (82, 'MOTIVO DE CONSULTA' , '', 3 , 'MOTIVO DE CONSULTA' );
+INSERT INTO public.hc_campos_reg(id_tipo_reg, nombre, tabla, posicion, nombre_pdf) 
+VALUES (82, 'ASIMETRIA' , '', 4 , 'ASIMETRIA' );
+INSERT INTO public.hc_campos_reg(id_tipo_reg, nombre, tabla, posicion, nombre_pdf) 
+VALUES (82, 'CAMBIO DENSIDAD MAMA DERECHA' , '', 5 , 'CAMBIO DENSIDAD MAMA DERECHA' );
+INSERT INTO public.hc_campos_reg(id_tipo_reg, nombre, tabla, posicion, nombre_pdf) 
+VALUES (82, 'CAMBIO DENSIDAD MAMA IZQUIERDA' , '', 6 , 'CAMBIO DENSIDAD MAMA IZQUIERDA' );
+INSERT INTO public.hc_campos_reg(id_tipo_reg, nombre, tabla, posicion, nombre_pdf) 
+VALUES (82, 'NODULO SUPERFICIAL MAMA DERECHA' , '', 7 , 'NODULO SUPERFICIAL MAMA DERECHA' );
+INSERT INTO public.hc_campos_reg(id_tipo_reg, nombre, tabla, posicion, nombre_pdf) 
+VALUES (82, 'NODULO SUPERFICIAL MAMA IZQUIERDA' , '', 8 , 'NODULO SUPERFICIAL MAMA IZQUIERDA' );
+INSERT INTO public.hc_campos_reg(id_tipo_reg, nombre, tabla, posicion, nombre_pdf) 
+VALUES (82, 'NODULO PROFUNDO MAMA IZQUIERDA' , '', 9 , 'NODULO PROFUNDO MAMA IZQUIERDA' );
+INSERT INTO public.hc_campos_reg(id_tipo_reg, nombre, tabla, posicion, nombre_pdf) 
+VALUES (82, 'NODULO PROFUNDO MAMA DERECHA' , '', 10 , 'NODULO PROFUNDO MAMA DERECHA' );
+INSERT INTO public.hc_campos_reg(id_tipo_reg, nombre, tabla, posicion, nombre_pdf) 
+VALUES (82, 'CAMBIOS EN LA PIEL MAMA DERECHA' , '', 11 , 'CAMBIOS EN LA PIEL MAMA DERECHA' );
+INSERT INTO public.hc_campos_reg(id_tipo_reg, nombre, tabla, posicion, nombre_pdf) 
+VALUES (82, 'CAMBIOS EN LA PIEL MAMA IZQUIERDA' , '', 12 , 'CAMBIOS EN LA PIEL MAMA IZQUIERDA' );
+INSERT INTO public.hc_campos_reg(id_tipo_reg, nombre, tabla, posicion, nombre_pdf) 
+VALUES (82, 'OTROS' , '', 13 , 'OTROS' );
+INSERT INTO public.hc_campos_reg(id_tipo_reg, nombre, tabla, posicion, nombre_pdf) 
+VALUES (82, 'DIAGNOSTICO' , '', 14 , 'DIAGNOSTICO' );
+INSERT INTO public.hc_campos_reg(id_tipo_reg, nombre, tabla, posicion, nombre_pdf) 
+VALUES (82, 'CONDUCTA' , '', 15 , 'CONDUCTA' );
+INSERT INTO public.hc_campos_reg(id_tipo_reg, nombre, tabla, posicion, nombre_pdf) 
+VALUES (82, 'CONTROL' , '', 16 , 'CONTROL' );
