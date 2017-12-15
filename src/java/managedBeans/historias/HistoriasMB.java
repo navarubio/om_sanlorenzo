@@ -183,7 +183,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
 
     public UploadedFile archivos;
     private String urlFile = "";
-
+    
     private String detalleTextoPredef = "";
     private String descriparchivo = "";
     private String idTextoPredef = "";
@@ -224,7 +224,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     private CfgEmpresa empresa;
     private LoginMB loginMB;
     private boolean btnEditarRendered = true;
-
+    
     private String turnoCita = "";//identificador del turno de la cita
     private boolean cargandoDesdeTab = false;
     private CitCitas citaActual = null;
@@ -233,20 +233,20 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     private List<SelectItem> listaMunicipios;
     private String departamento = "";
     private String municipio = "";
-
+    
     private final SimpleDateFormat sdfDate = new SimpleDateFormat("dd/MM/yyyy");
     private final SimpleDateFormat sdfHour = new SimpleDateFormat("HH:mm");
     private final SimpleDateFormat sdfDateHour = new SimpleDateFormat("dd/MM/yyyy HH:mm");
     private final SimpleDateFormat sdfFechaString = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);//Thu Apr 30 19:00:00 COT 2015
     private final DecimalFormat formateadorDecimal = new DecimalFormat("#.##");
-
+    
     private String etnia = "";
     private String ocupacion = "";
     private String escolaridad = "";
     private String religion = "";
     private String gestacion = "";
     private String discapacidad = "";
-
+    
     private Boolean victimaMaltrato = false; // Un booleano y un Str, el str es para mostrar nada, o SI o NO
     private String victimaMaltratoStr = "";
     private Boolean victimaConflicto = false;
@@ -255,9 +255,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     private String desplazadoStr = "";
     private Boolean poblacionLBGT = false;
     private String poblacionLBGTStr = "";
-
+    
     private String imc = "";
-
+    
     private List<FilaDataTable> listaEstructuraFamiliar = new ArrayList<>();
     private List<FilaDataTable> listaEstructuraFamiliarFiltro = new ArrayList<>();
     private List<FilaDataTable> listaMedicamentos = new ArrayList<>();
@@ -271,7 +271,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     private String edadFamiliar = "";
     private String parentescoFamiliar = "";
     private String ocupacionFamiliar = "";
-
+    
     private String idServicio;
     private String idMedicamento;
     private String codigo;
@@ -283,7 +283,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     private String viaAdmin;
     private String posologia;
     private String observacion;
-
+    
     private String numeroDiente = "";
     private int variableInicial;
     private String urlZonasActivasOleary = "";
@@ -335,20 +335,20 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     Integer pas_de = 0;
     Integer pad_de = 0;
     String clasificacion_pa = "Sin Dato...";
-
+    
     String clasificacion_peso = "Sin Dato...";
     Double peso = 0.0;
     Double talla = 0.0;
     Double peso_to = 0.0;
-
+    
     String clasificacion_perimetro = "Sin Dato...";
     Double perimetro = 0.0;
-
+    
     Date fecha;
     List<FilaDataTable> lista_reportes = new ArrayList<>();
     boolean ver_ginecostetricos = false;
     private AplicacionGeneralMB aplicacionGeneralMB;
-
+    
     private List<FacServicio> listaServiciosOrdenMedica = new ArrayList<FacServicio>();
     //---------------------------------------------------
     //----------------- FUNCIONES INICIALES -----------------------
@@ -357,7 +357,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     public HistoriasMB() {
         aplicacionGeneralMB = FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{aplicacionGeneralMB}", AplicacionGeneralMB.class);
     }
-
+    
     public void cargarMunicipios() {
         listaMunicipios = new ArrayList<>();
         try {
@@ -389,11 +389,11 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 listaMunicipios.add(new SelectItem(mun.getId(), mun.getDescripcion()));
             }
         } catch (Exception e) {
-
+            
         }
-
+        
     }
-
+    
     public void agregar_fila_reporte_examenes() {
         if (tipo != 0 && fecha != null && examen.length() > 0) {
             FilaDataTable nuevaFila = new FilaDataTable();
@@ -408,12 +408,12 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             imprimirMensaje("Error", "Faltan datos", FacesMessage.SEVERITY_ERROR);
         }
     }
-
+    
     public void quitar_fila_reporte_examenes() {
         if (reporte_seleccionado == null) {
             imprimirMensaje("Error", "Debe seleccionar una fila", FacesMessage.SEVERITY_ERROR);
         } else {
-
+            
             for (int i = 0; i < lista_reportes.size(); i++) {
                 if (lista_reportes.get(i).getColumna1().compareTo(reporte_seleccionado.getColumna1()) == 0) {
                     lista_reportes.remove(i);
@@ -427,9 +427,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             }
             reporte_seleccionado = null;
         }
-
+        
     }
-
+    
     public String tipo_reporte(String tipo_) {
         int tipo = Integer.parseInt(tipo_);
         if (tipo == 1) {
@@ -457,7 +457,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         }
         return null;
     }
-
+    
     public void cargarEstructuraFamiliar() {
         listaEstructuraFamiliar = new ArrayList<>();
         List<CfgFamiliar> listaM = null;
@@ -465,11 +465,11 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             listaM = familiarFacade.findFamiliaresByPaciente(pacienteSeleccionado);
             System.out.println("buscando familiares del paciente ... " + pacienteSeleccionado.getIdPaciente());
         }
-
+        
         if (listaM != null) {
-
+            
             System.out.println("Fam encontrados " + listaM.size());
-
+            
             for (CfgFamiliar cfgFamiliar : listaM) {
                 FilaDataTable r = new FilaDataTable();
                 r.setColumna1(cfgFamiliar.getNombre());
@@ -482,15 +482,15 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 r.setColumna8(cfgFamiliar.getIdPaciente().getIdPaciente().toString());
                 listaEstructuraFamiliar.add(r);
             }
-
+            
             System.out.println("listaEstructuraFamiliar.size = " + listaEstructuraFamiliar.size());
         } else {
-
+            
             System.out.println("Fam no encontrados ");
         }
-
+        
     }
-
+    
     public List<FilaDataTable> cargarListaMedicamentos(HcRegistro registro) {
         listaMedicamentos = new ArrayList<>();
         List<HcItems> listaM = null;
@@ -498,17 +498,17 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             listaM = itemsFacade.findByIdRegistro(registro);
             System.out.println("buscando medicamentos  de ... " + pacienteSeleccionado.getIdPaciente());
         }
-
+        
         List<FilaDataTable> listaItems = new ArrayList<>();
-
+        
         if (listaM != null) {
             System.out.println("reg encontrados " + listaM.size());
-
+            
             for (HcItems itemMedicamento : listaM) {
-
+                
                 if (itemMedicamento.getIdTabla() != null) {
                     CfgMedicamento medicamentoEncontrado = cfgMedicamento.find(Integer.parseInt(itemMedicamento.getIdTabla()));
-
+                    
                     FilaDataTable r = new FilaDataTable();
                     r.setColumna1(medicamentoEncontrado.getCodigoMedicamento());
                     r.setColumna2(medicamentoEncontrado.getNombreMedicamento());
@@ -522,16 +522,16 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     listaItems.add(r);
                 }
             }
-
+            
             System.out.println("medicamentos.size = " + listaItems.size());
         } else {
-
+            
             System.out.println("medicamentos no encontrados ");
         }
         return listaItems;
-
+        
     }
-
+    
     public List<FilaDataTable> cargarListaServicios(HcRegistro registro) {
         listaServicios = new ArrayList<>();
         List<HcItems> listaM = null;
@@ -539,16 +539,16 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             listaM = itemsFacade.findByIdRegistro(registro);
             System.out.println("buscando servicios  de ... " + pacienteSeleccionado.getIdPaciente());
         }
-
+        
         List<FilaDataTable> listaItems = new ArrayList<>();
-
+        
         if (listaM != null) {
             System.out.println("reg encontrados " + listaM.size());
-
+            
             for (HcItems itemS : listaM) {
-
+                
                 FacServicio servicioEncontrado = servicioFacade.buscarPorIdServicio(Integer.parseInt(itemS.getIdTabla()));
-
+                
                 FilaDataTable r = new FilaDataTable();
                 r.setColumna1(servicioEncontrado.getCodigoServicio());
                 r.setColumna2(servicioEncontrado.getNombreServicio());
@@ -556,16 +556,16 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 r.setColumna4(itemS.getObservacion());
                 listaItems.add(r);
             }
-
+            
             System.out.println("servicios.size = " + listaItems.size());
         } else {
-
+            
             System.out.println("servicios no encontrados ");
         }
         return listaItems;
-
+        
     }
-
+    
     @PostConstruct
     public void inicializar() {
         recargarMaestrosTxtPredefinidos();
@@ -585,9 +585,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         }
         seleccionaTodosRegCliHis();
         empresa = empresaFacade.findAll().get(0);
-
+        
         listaArchivo = new ArrayList();
-
+        
         medicamentoSeleccionado = new FilaDataTable();
         servicioSeleccionado = new FilaDataTable();
         codigo = "";
@@ -600,9 +600,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         posologia = "";
         observacion = "";
         loadServiciosOrden();
-
+        
     }
-
+    
     private void valoresPorDefecto() {
         if (tipoRegistroClinicoActual != null) {//validacion particular para asignar valores por defecto             
             if (tipoRegistroClinicoActual.getIdTipoReg() == 8) {//SOLICITUD DE AUTORIZACION DE SERVICIOS
@@ -640,26 +640,39 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 cargarMunicipiosDefault();
             }
         }
-        calculo_imc();
-        calculo_imc_perimetro();
-        calculo_imc_peso();
-        clasificacion_fisica();
+        //Para que no reemplace los cambpos de historias con valores por defecto
+        if (tipoRegistroClinicoActual != null
+                && tipoRegistroClinicoActual.getIdTipoReg() != 12
+                && tipoRegistroClinicoActual.getIdTipoReg() != 20
+                && tipoRegistroClinicoActual.getIdTipoReg() != 21
+                && tipoRegistroClinicoActual.getIdTipoReg() != 80
+                && tipoRegistroClinicoActual.getIdTipoReg() != 81
+                && tipoRegistroClinicoActual.getIdTipoReg() != 82
+                && tipoRegistroClinicoActual.getIdTipoReg() != 23
+                && tipoRegistroClinicoActual.getIdTipoReg() != 29
+                && tipoRegistroClinicoActual.getIdTipoReg() != 78
+                && tipoRegistroClinicoActual.getIdTipoReg() != 79) {
+            calculo_imc();
+            calculo_imc_perimetro();
+            calculo_imc_peso();
+            clasificacion_fisica();
+        }
     }
-
+    
     public void cargarDialogoAgregarFamiliar() {
-
+        
         nombreFamiliar = "";
         edadFamiliar = "";
         parentescoFamiliar = "";
         ocupacionFamiliar = "";
-
+        
         RequestContext.getCurrentInstance().update("IdFormDialogs:IdPanelAgregarFamiliar");
         RequestContext.getCurrentInstance().execute("PF('dialogoAgregarFamiliar').show();");
     }
-
+    
     public void cargarDialogoAgregarItemMedicamento() {
         System.out.println("From cargarDialogoAgregarItemMedicamento()");
-
+        
         medicamentoSeleccionado = new FilaDataTable();
         codigo = "";
         descripcion = "";
@@ -670,28 +683,28 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         viaAdmin = "";
         posologia = "";
         observacion = "";
-
+        
         RequestContext.getCurrentInstance().update("IdFormDialogs:IdPanelAgregarItemMedicamento");
         RequestContext.getCurrentInstance().execute("PF('dialogoAgregarItemMedicamento').show();");
     }
-
+    
     public void cargarDialogoAgregarItemServicio() {
         System.out.println("From cargarDialogoAgregarItemOrdenMedica()");
-
+        
         servicioSeleccionado = new FilaDataTable();
         codigo = "";
         descripcion = "";
         cantidad = 0;
         observacion = "";
-
+        
         RequestContext.getCurrentInstance().update("IdFormDialogs:IdPanelAgregarItemServicio");
         RequestContext.getCurrentInstance().execute("PF('dialogoAgregarItemServicio').show();");
     }
-
+    
     public void quitarFamiliar() {
-
+        
         System.out.println("From quitarFamiliar()" + listaEstructuraFamiliar.size());
-
+        
         CfgFamiliar familiar = new CfgFamiliar();
         familiar.setIdEstructuraFamiliar(Integer.parseInt(familiarSeleccionado.getColumna7()));
         familiar.setNombre(familiarSeleccionado.getColumna1());
@@ -699,49 +712,49 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         familiar.setIdParentesco(new CfgClasificaciones(Integer.parseInt(familiarSeleccionado.getColumna3())));
         familiar.setIdOcupacion(new CfgClasificaciones(Integer.parseInt(familiarSeleccionado.getColumna4())));
         familiar.setIdPaciente(new CfgPacientes(Integer.parseInt(familiarSeleccionado.getColumna8())));
-
+        
         familiarFacade.remove(familiar); //quitar de base de datos
 
         listaEstructuraFamiliar.remove(familiarSeleccionado); //quitar de lista
         System.out.println("/From quitarFamiliar()" + listaEstructuraFamiliar.size());
-
+        
         RequestContext.getCurrentInstance().update("tablaEstructuraFamiliar");
         RequestContext.getCurrentInstance().execute("PF('wvtablaEstructuraFamiliar').clearFilters(); PF('wvtablaEstructuraFamiliar').getPaginator().setPage(0);");
     }
-
+    
     public void quitarItemMedicamento() {
-
+        
         System.out.println("From quitarItemMedicamento()" + listaMedicamentos.size());
-
+        
         listaMedicamentos.remove(medicamentoSeleccionado); //quitar de lista
         System.out.println("/From quitarItemMedicamento()" + listaMedicamentos.size());
         RequestContext.getCurrentInstance().execute("PF('wvtablaMedicamentos').clearFilters(); PF('wvtablaMedicamentos').getPaginator().setPage(0);");
-
+        
         RequestContext.getCurrentInstance().update("tablaMedicamentos");
         RequestContext.getCurrentInstance().update("IdPanelAgregarItemMedicamento");
     }
-
+    
     public void quitarItemServicio() {
-
+        
         System.out.println("From quitarItemServicio()" + listaServicios.size());
-
+        
         listaServicios.remove(servicioSeleccionado); //quitar de lista
         System.out.println("/From quitarItemServicio()" + listaServicios.size());
-
+        
         RequestContext.getCurrentInstance().execute("PF('wvtablaServicios').clearFilters(); PF('wvtablaServicios').getPaginator().setPage(0);");
-
+        
         RequestContext.getCurrentInstance().update("tablaAgregarItemServicio");
         RequestContext.getCurrentInstance().update("IdPanelAgregarItemServicio");
     }
-
+    
     public void cerrar() {
         RequestContext.getCurrentInstance().execute("PF('dialogoAgregarFamiliar').hide(); PF('wvtablaEstructuraFamiliar').clearFilters(); PF('wvtablaEstructuraFamiliar').getPaginator().setPage(0);");
         RequestContext.getCurrentInstance().update("tablaEstructuraFamiliar");
     }
-
+    
     public void agregarFamiliar() {
         System.out.println("From agregarFamiliar()");
-
+        
         if (validacionCampoVacio(nombreFamiliar, "Nombre")) {
             return;
         }
@@ -751,13 +764,13 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         if (validacionCampoVacio(parentescoFamiliar, "Parentesco")) {
             return;
         }
-
+        
         familiarSeleccionado = new FilaDataTable();
         familiarSeleccionado.setColumna1(nombreFamiliar);
         familiarSeleccionado.setColumna2(edadFamiliar);
         familiarSeleccionado.setColumna3(parentescoFamiliar);
         familiarSeleccionado.setColumna4(ocupacionFamiliar);
-
+        
         CfgClasificaciones clasificacion;
         if (parentescoFamiliar != null) {
             clasificacion = clasificacionesFacade.find(Integer.parseInt(parentescoFamiliar));
@@ -766,7 +779,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             }
         } else {
             familiarSeleccionado.setColumna5("");
-
+            
         }
         System.out.println("ocupacionFamiliar " + ocupacionFamiliar);
         if (ocupacionFamiliar != null) {
@@ -777,20 +790,20 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         } else {
             familiarSeleccionado.setColumna6("");
         }
-
+        
         listaEstructuraFamiliar.add(familiarSeleccionado);
         RequestContext.getCurrentInstance().execute("PF('wvtablaEstructuraFamiliar').clearFilters(); PF('wvtablaEstructuraFamiliar').getPaginator().setPage(0);");
-
+        
         nombreFamiliar = "";
         edadFamiliar = "";
         parentescoFamiliar = "";
         ocupacionFamiliar = "";
         RequestContext.getCurrentInstance().update("tablaEstructuraFamiliar");
-
+        
         System.out.println("/From agregarFamiliar()");
-
+        
     }
-
+    
     public void agregarMedicamento() {
         System.out.println("From agregarMedicamento()");
         if (validacionCampoVacio(codigo, "Codigo")) {
@@ -817,15 +830,15 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         if (validacionCampoVacio(posologia, "Posología")) {
             return;
         }
-
+        
         medicamentoSeleccionado = new FilaDataTable();
-
+        
         System.out.println("Id Medicamento " + idMedicamento);
-
+        
         CfgMedicamento medicamento = cfgMedicamento.find(Integer.parseInt(idMedicamento));
-
+        
         System.out.println("Medicamento " + medicamento.getNombreMedicamento());
-
+        
         medicamentoSeleccionado.setColumna1(idMedicamento);
         medicamentoSeleccionado.setColumna2(codigo);
         medicamentoSeleccionado.setColumna3(descripcion);
@@ -837,7 +850,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         medicamentoSeleccionado.setColumna9(posologia);
         medicamentoSeleccionado.setColumna10(observacion);
         medicamentoSeleccionado.setColumna11("cfg_medicamento");
-
+        
         idMedicamento = "";
         codigo = "";
         descripcion = "";
@@ -848,20 +861,20 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         viaAdmin = "";
         posologia = "";
         observacion = "";
-
+        
         listaMedicamentos.add(medicamentoSeleccionado);
         RequestContext.getCurrentInstance().execute("PF('wvtablaMedicamentos').clearFilters(); PF('wvtablaMedicamentos').getPaginator().setPage(0);");
-
+        
         RequestContext.getCurrentInstance().update("tablaMedicamentos");
         RequestContext.getCurrentInstance().update("IdPanelAgregarItemMedicamento");
-
+        
         System.out.println("/From agregarMedicamento()");
-
+        
     }
-
+    
     public void agregarServicio() {
         System.out.println("From agregarServicio()");
-
+        
         if (validacionCampoVacio(codigo, "Código")) {
             return;
         }
@@ -871,18 +884,18 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         if (validacionCampoVacio(cantidad.toString(), "Cantidad")) {
             return;
         }
-
+        
         servicioSeleccionado = new FilaDataTable();
-
+        
         System.out.println("Id servicio " + idServicio);
-
+        
         servicioSeleccionado.setColumna1(idServicio);
         servicioSeleccionado.setColumna2(codigo);
         servicioSeleccionado.setColumna3(descripcion);
         servicioSeleccionado.setColumna4(cantidad.toString());
         servicioSeleccionado.setColumna5(observacion);
         servicioSeleccionado.setColumna6("fac_servicio");
-
+        
         idServicio = "";
         codigo = "";
         descripcion = "";
@@ -893,49 +906,49 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         viaAdmin = "";
         posologia = "";
         observacion = "";
-
+        
         listaServicios.add(servicioSeleccionado);
         RequestContext.getCurrentInstance().execute("PF('wvtablaServicios').clearFilters(); PF('wvtablaServicios').getPaginator().setPage(0);");
-
+        
         RequestContext.getCurrentInstance().update("tablaAgregarItemServicio");
         RequestContext.getCurrentInstance().update("IdPanelAgregarItemServicio");
-
+        
         System.out.println("/From agregarServicio()");
-
+        
     }
-
+    
     public void cerrarFormMedicamentos() {
         RequestContext.getCurrentInstance().execute("PF('dialogoAgregarItemMedicamento').hide(); PF('wvtablaMedicamentos').clearFilters(); PF('wvtablaMedicamentos').getPaginator().setPage(0);");
         RequestContext.getCurrentInstance().update("tablaAgregarItemMedicamento");
     }
-
+    
     public void cerrarFormServicios() {
         RequestContext.getCurrentInstance().execute("PF('dialogoAgregarItemServicio').hide(); PF('wvtablaServicios').clearFilters(); PF('wvtablaServicios').getPaginator().setPage(0);");
         RequestContext.getCurrentInstance().update("tablaAgregarItemServicio");
     }
-
+    
     public void cambiarMedicamento() {
         System.out.println("Id Medicamento " + idMedicamento);
         CfgMedicamento medicamento = cfgMedicamento.find(Integer.parseInt(idMedicamento));
         codigo = medicamento.getCodigoMedicamento();
         descripcion = medicamento.getCodigoMedicamento();
-
+        
         presentacion = medicamento.getFormaMedicamento();
         concentracion = medicamento.getConcentracion();
         viaAdmin = medicamento.getModAdmin();
-
+        
         System.out.println("Medicamento " + medicamento.getNombreMedicamento());
     }
-
+    
     public void cambiarServicio() {
         System.out.println("Id Servicio " + idServicio);
         FacServicio servicio = servicioFacade.buscarPorIdServicio(Integer.parseInt(idServicio));
         codigo = servicio.getCodigoServicio();
         descripcion = servicio.getNombreServicio();
-
+        
         System.out.println("Servicio " + servicio.getNombreServicio());
     }
-
+    
     private String calcularIMC(float peso, float talla) {
 
         //Infrapeso	IMC menos de 18.5
@@ -946,7 +959,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         //        
         float metros = talla / 100;
         float imcCalculado = peso / (metros * metros);
-
+        
         String textoImc = "";
         if (imcCalculado < 18.5) {
             textoImc = "Infrapeso";
@@ -962,84 +975,84 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         double imcCalculadoD = (double) ((int) (imcCalculado * 100) / 100.0);
         return String.valueOf(imcCalculadoD) + ", " + textoImc;
     }
-
+    
     public void calcularIMCHisCliTriage() {
         try {
             float peso = Float.parseFloat(datosFormulario.getDato28().toString());
             float talla = Float.parseFloat(datosFormulario.getDato29().toString());
             datosFormulario.setDato30(calcularIMC(peso, talla));
-
+            
         } catch (Exception e) {
             System.out.println("" + e.getMessage());
         }
     }
-
+    
     public void calcularIMCMaterna() {
         try {
             float peso = Float.parseFloat(datosFormulario.getDato148().toString());
             float talla = Float.parseFloat(datosFormulario.getDato149().toString());
             datosFormulario.setDato150(calcularIMC(peso, talla));
-
+            
         } catch (NumberFormatException e) {
             System.out.println("" + e.getMessage());
         }
     }
-
+    
     public void calcularIMCHisCliUrgencias() {
         try {
             float peso = Float.parseFloat(datosFormulario.getDato65().toString());
             float talla = Float.parseFloat(datosFormulario.getDato66().toString());
             datosFormulario.setDato67(calcularIMC(peso, talla));
-
+            
         } catch (Exception e) {
             System.out.println("" + e.getMessage());
         }
     }
-
+    
     public void calcularIMCHisCliVisual() {
         try {
             float peso = Float.parseFloat(datosFormulario.getDato20().toString());
             float talla = Float.parseFloat(datosFormulario.getDato21().toString());
             datosFormulario.setDato22(calcularIMC(peso, talla));
-
+            
         } catch (Exception e) {
             System.out.println("" + e.getMessage());
         }
     }
-
+    
     public void calcularIMCCitologia() {
         try {
             float peso = Float.parseFloat(datosFormulario.getDato132().toString());
             float talla = Float.parseFloat(datosFormulario.getDato133().toString());
             datosFormulario.setDato134(calcularIMC(peso, talla));
-
+            
         } catch (Exception e) {
             System.out.println("" + e.getMessage());
         }
     }
-
+    
     public void calcularIMCHisRefContraRef() {
         try {
             float peso = Float.parseFloat(datosFormulario.getDato18().toString());
             float talla = Float.parseFloat(datosFormulario.getDato19().toString());
             datosFormulario.setDato20(calcularIMC(peso, talla));
-
+            
         } catch (Exception e) {
             System.out.println("" + e.getMessage());
         }
     }
-
+    
     public void calcularIMCHisClinica() {
         try {
             float peso = Float.parseFloat(datosFormulario.getDato60().toString());
             float talla = Float.parseFloat(datosFormulario.getDato61().toString());
             datosFormulario.setDato62(calcularIMC(peso, talla));
-
+            
         } catch (Exception e) {
             System.out.println("" + e.getMessage());
         }
     }
-
+    
     public void cargarDesdeTab(String id) {//cargar paciente y desde Tab agenda prestador                
         cargandoDesdeTab = true;
         turnoCita = "";
@@ -1074,30 +1087,30 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             regCliSelHistorial[i] = listaTipoRegistroClinico.get(i).getIdTipoReg().toString();
         }
     }
-
+    
     public void cargarHistorialCompleto() {
         btnHistorialDisabled = true;
         btnPdfAgrupadoDisabled = true;
         seleccionaTodosRegCliHis();//selecciona todos los tipos de registros clinicos
         cargarHistorial();//realiza la creacion del arbol historial
     }
-
+    
     public void cargarHistorial() {
         //genera un arbol con los registros clinicos de un paciente(depende de los seleccionados en 'IdComboTipReg')
 
         treeNodeRaiz = new DefaultTreeNode(new NodoArbolHistorial(TipoNodoEnum.RAIZ_HISTORIAL, null, -1, -1, null, null), null);
         NodoArbolHistorial nodoSeleccionTodoNada = new NodoArbolHistorial(TipoNodoEnum.NOVALUE, null, -1, -1, null, "Selección Todo/Ninguno");
-
+        
         TreeNode nodoInicial = new DefaultTreeNode(nodoSeleccionTodoNada, treeNodeRaiz);
         nodoInicial.setExpanded(true);
-
+        
         treeNodesSeleccionados = null;
         btnPdfAgrupadoDisabled = true;
         btnHistorialDisabled = true;
         boolean exitenRegistros = false;
         boolean usarFiltroFechas = false;
         boolean usarFiltroAutorizacion = false;
-
+        
         if (pacienteSeleccionado == null) {
             imprimirMensaje("Error", "No hay un paciente seleccionado", FacesMessage.SEVERITY_ERROR);
             RequestContext.getCurrentInstance().update("IdFormHistorias:IdPanelHistorico");
@@ -1111,7 +1124,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         if (filtroFechaInicial != null && filtroFechaFinal != null) {
             usarFiltroFechas = true;
         }
-
+        
         if (validarNoVacio(filtroAutorizacion)) {
             usarFiltroAutorizacion = true;
         }
@@ -1125,7 +1138,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         } else {//no usar filtro, se busca todos
             listaRegistrosPaciente = registroFacade.buscarOrdenadoPorFecha(pacienteSeleccionado.getIdPaciente());// pacienteSeleccionado.getHcRegistroList();//buscar por orden de fecha decendente            
         }
-
+        
         NodoArbolHistorial nodHisNuevo;//esta dentro de un TreeNode
         NodoArbolHistorial nodHisFecha;//
         NodoArbolHistorial nodHisComparar;//
@@ -1166,7 +1179,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
 
         //RequestContext.getCurrentInstance().update("IdFormHistorias:IdPanelHistorico");
     }
-
+    
     private boolean estaEnListaTipRegHis(String idBuscado) {
         //buscar si un el tipo de registro se debe o no listar el el arbol del historial
         for (String idTipRegCliSelHis : regCliSelHistorial) {
@@ -1176,13 +1189,13 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         }
         return false;
     }
-
+    
     public void seleccionaNodoArbol() {//determinar si se activan los botenes de 'editar' y 'PDF' del historial
         btnHistorialDisabled = true;
         btnPdfAgrupadoDisabled = true;
         boolean igualTipoRegistro = true;//determinar si los registros seleccionados son del mismo tipo para activar o no btnPdfAgrupadoDisabled
         int tipoRegistroEncontrado = -1;
-
+        
         if (treeNodesSeleccionados != null) {
             int contadorRegistrosSeleccionadosHistorial = 0;
             for (TreeNode nodo : treeNodesSeleccionados) {
@@ -1214,7 +1227,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             }
         }
     }
-
+    
     public void cargarRegistroClinico() {//cargar un registro clinico seleccionado en el arbol de historial de paciente
         //System.out.println("Se INgreso a cargar registro");
         if (treeNodesSeleccionados == null) {
@@ -1232,7 +1245,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             imprimirMensaje("Error", "Se debe seleccionar un registro del histórico", FacesMessage.SEVERITY_ERROR);
             return;
         }
-
+        
         tipoRegistroClinico = "";
         tipoRegistroClinico = String.valueOf(nodArbolHisSeleccionado.getIdTipoRegistro());//se posicione el combo
         limpiarFormulario();
@@ -1273,7 +1286,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             } else {
                 System.out.println("Error: no se encontro hc_campos_reg.id_campo= " + detalle.getHcDetallePK().getIdCampo());
             }
-
+            
             cargarMunicipios();//intento cargar municipios sea o no necesario
 
         }
@@ -1282,7 +1295,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         RequestContext.getCurrentInstance().execute("PF('dlgHistorico').hide();");
         RequestContext.getCurrentInstance().update("IdFormHistorias");
     }
-
+    
     public String tipo_paciente() {
         if (pacienteSeleccionado != null) {
             if (pacienteSeleccionado.getParentesco_a() != null) {
@@ -1346,7 +1359,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         }
         datosReporte.setValor(59, "<b>DIRECCION: </b> " + obtenerCadenaNoNula(pacienteSeleccionado.getDireccion()));
         datosReporte.setValor(60, "<b>TELEFONO: </b> " + obtenerCadenaNoNula(pacienteSeleccionado.getTelefonoResidencia()));
-
+        
         if (pacienteSeleccionado.getTipoIdentificacion() != null) {
             datosReporte.setValor(69, pacienteSeleccionado.getTipoIdentificacion().getDescripcion() + " " + pacienteSeleccionado.getIdentificacion());
             datosReporte.setValor(61, "<b>IDENTIFICACION: </b> " + pacienteSeleccionado.getTipoIdentificacion().getDescripcion() + " " + pacienteSeleccionado.getIdentificacion());
@@ -1393,7 +1406,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         }
 //        System.out.println("Imagen logo empres -> " + loginMB.getRutaCarpetaImagenes() + loginMB.getEmpresaActual().getLogo().getUrlImagen());
         System.out.println("Datos encontrados ... " + listaCamposDeRegistroEncontrado.size());
-
+        
         if (regEncontrado.getIdMedico() != null) {
             datosReporte.setValor(71, regEncontrado.getIdMedico().nombreCompleto());//NOMBRE MEDICO
             datosReporte.setValor(86, regEncontrado.getIdMedico().getTelefonoResidencia());//TELEFONO MEDICO
@@ -1509,9 +1522,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
      * @param regEncontrado
      */
     private void cargarFuenteDatosReportesGrandes(HcRegistro regEncontrado) {
-
+        
         System.out.println("iniciando Desde cargarFuenteDatosReportesGrandes ... ");
-
+        
         listaRegistrosParaPdf = new ArrayList<>();
         DatosFormularioHistoria datosReporte = new DatosFormularioHistoria();
         List<HcDetalle> listaCamposDeRegistroEncontrado = regEncontrado.getHcDetalleList();//busca todos los datos
@@ -1647,7 +1660,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         } else {
             datosReporte.setValor(228, null);//IMAGEN LOGO
         }
-
+        
         if (regEncontrado.getIdMedico() != null) {
 
             //71
@@ -1746,7 +1759,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         datosReporte.setValor(191, "<b>E.S.E.IO :</b>" + loginMB.getEmpresaActual().getCodMunicipio().getDescripcion());
         datosReporte.setValor(192, "<b>ESPECIALIDAD :</b>" + regEncontrado.getIdMedico().getEspecialidad().getDescripcion());
         datosReporte.setValor(193, "<b>NIVEL :</b>" + loginMB.getEmpresaActual().getNivel());
-
+        
         datosReporte.setValor(262, "<b>EDAD EN MESES :</b>" + calcularEdad(pacienteSeleccionado.getFechaNacimiento()));
 
         //Paciente
@@ -1805,7 +1818,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 datosReporte.setValor(campoDeRegistroEncontrado.getHcCamposReg().getPosicion(), "<b>" + campoDeRegistroEncontrado.getHcCamposReg().getNombrePdf() + " </b>" + campoDeRegistroEncontrado.getValor());
             }
         }
-
+        
         List<DatosSubReporteHistoria> listaDatosAdicionales = new ArrayList<>();
         if (regEncontrado.getIdTipoReg().getIdTipoReg() == 17) { //psicologia
 //            cargarEstructuraFamiliar();
@@ -1817,14 +1830,14 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 datosS.setDato2(item.getColumna5());
                 datosS.setDato3(item.getColumna6());
                 listaDatosAdicionales.add(datosS);
-
+                
                 System.out.println("Familiar " + item.getColumna1());
             }
         }
-
+        
         if (regEncontrado.getIdTipoReg().getIdTipoReg() == 19) { //formulacion medicamentos
             List<FilaDataTable> listaMedicamentosParaReporte = cargarListaMedicamentos(regEncontrado);
-
+            
             for (FilaDataTable item : listaMedicamentosParaReporte) {
                 DatosSubReporteHistoria datosS = new DatosSubReporteHistoria();
                 datosS.setDato0(item.getColumna1());
@@ -1839,12 +1852,12 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 listaDatosAdicionales.add(datosS);
                 System.out.println("Medicamento  " + item.getColumna1());
             }
-
+            
         }
-
+        
         if (regEncontrado.getIdTipoReg().getIdTipoReg() == 25) { //ordenes medicas
             List<FilaDataTable> listaServiciosParaReporte = cargarListaServicios(regEncontrado);
-
+            
             for (FilaDataTable item : listaServiciosParaReporte) {
                 DatosSubReporteHistoria datosS = new DatosSubReporteHistoria();
                 datosS.setDato0(item.getColumna1());
@@ -1854,11 +1867,11 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 listaDatosAdicionales.add(datosS);
                 System.out.println("Servicio  " + item.getColumna1());
             }
-
+            
         }
-
+        
         System.out.println("listaDatosAdicionales size " + listaDatosAdicionales.size());
-
+        
         datosReporte.setListaDatosAdicionales(listaDatosAdicionales);//CUANDO SE USE SUBRREPORTES USAR ESTA LINEA
         listaRegistrosParaPdf.add(datosReporte);
     }
@@ -1870,9 +1883,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
      * @param regEncontrado
      */
     private void cargarFuenteDatosReportesXL(HcRegistro regEncontrado) {
-
+        
         System.out.println("iniciando Desde cargarFuenteDatosReportesXL ... ");
-
+        
         listaRegistrosParaPdf = new ArrayList<>();
         DatosFormularioHistoria datosReporte = new DatosFormularioHistoria();
         List<HcDetalle> listaCamposDeRegistroEncontrado = regEncontrado.getHcDetalleList();//busca todos los datos
@@ -1900,13 +1913,13 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         } else {
             datosReporte.setValor(1704, "<b>EDAD: </b> ");
         }
-
+        
         if (pacienteSeleccionado.getGenero() != null) {
             datosReporte.setValor(1705, "<b>SEXO: </b> " + pacienteSeleccionado.getGenero().getDescripcion());//SEXO
         } else {
             datosReporte.setValor(1705, "<b>SEXO: </b> ");
         }
-
+        
         if (pacienteSeleccionado.getRegimen() != null) {
             datosReporte.setValor(1706, "<b>COBERTURA EN SALUD: </b>" + pacienteSeleccionado.getRegimen().getDescripcion());//COBERTURA EN SALUD
         } else {
@@ -1925,7 +1938,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         } else {
             datosReporte.setValor(1708, null);//IMAGEN LOGO
         }
-
+        
         datosReporte.setValor(1709, empresa.getNomRepLegal());//NOMBRE REP. LEGAL
         datosReporte.setValor(1710, empresa.getTipoDoc().getDescripcion() + ":" + empresa.getNumIdentificacion() + " " + empresa.getObservaciones());//OPTOMETRA U.L SALLE-BOGOTA        
         datosReporte.setValor(1711, empresa.getRazonSocial());//
@@ -1960,28 +1973,28 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         } else {
             datosReporte.setValor(1720, "<b>ESTADO CIVIL: </b> ");
         }
-
+        
         datosReporte.setValor(1721, "<b>OCUPACIÓN :</b>" + ocupacion);
         if (regEncontrado.getIdMedico() != null) {
             datosReporte.setValor(1722, regEncontrado.getIdMedico().nombreCompleto());//NOMBRE MEDICO
         }
-
+        
         if (regEncontrado.getIdMedico().getFirma() != null) {
             datosReporte.setValor(1723, loginMB.getRutaCarpetaImagenes() + regEncontrado.getIdMedico().getFirma().getUrlImagen());//IMAGEN DE FIRMA DE MEDICO    
         } else {
             datosReporte.setValor(1723, null);
         }
-
+        
         if (regEncontrado.getIdMedico().getEspecialidad() != null) {
             datosReporte.setValor(1724, datosReporte.getValor(1722) + " <br/> " + regEncontrado.getIdMedico().getEspecialidad().getDescripcion());//PARA FIRMA  NOMBRE MEDICO
         }
-
+        
         if (pacienteSeleccionado.getFirma() != null) {
             datosReporte.setValor(1725, loginMB.getRutaCarpetaImagenes() + pacienteSeleccionado.getFirma().getUrlImagen());//firma paciente
         } else {
             datosReporte.setValor(1725, null);
         }
-
+        
         if (pacienteSeleccionado.getTipoIdentificacion() != null) {
             datosReporte.setValor(1726, pacienteSeleccionado.getTipoIdentificacion().getDescripcion() + " " + pacienteSeleccionado.getIdentificacion());//IDENTIFICACION
         } else {
@@ -2034,11 +2047,11 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 datosReporte.setValor(campoDeRegistroEncontrado.getHcCamposReg().getPosicion(), "<b>" + campoDeRegistroEncontrado.getHcCamposReg().getNombrePdf() + " </b>" + campoDeRegistroEncontrado.getValor());
             }
         }
-
+        
         List<DatosSubReporteHistoria> listaDatosAdicionales = new ArrayList<>();
-
+        
         System.out.println("listaDatosAdicionales size " + listaDatosAdicionales.size());
-
+        
         datosReporte.setListaDatosAdicionales(listaDatosAdicionales);//CUANDO SE USE SUBRREPORTES USAR ESTA LINEA
         listaRegistrosParaPdf.add(datosReporte);
     }
@@ -2049,9 +2062,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
      * @param regEncontrado
      */
     private void cargarFuenteDatosReportesExtraGrandes(HcRegistro regEncontrado) {
-
+        
         System.out.println("iniciando Desde cargarFuenteDatosReportesExtraGrandes ... ");
-
+        
         listaRegistrosParaPdf = new ArrayList<>();
         DatosFormularioHistoria datosReporte = new DatosFormularioHistoria();
         DatosFormularioHistoria datosReporte2 = new DatosFormularioHistoria();
@@ -2095,7 +2108,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         } else {
             datosReporte.setValor(627, "<b>ENTIDAD: </b> ");
         }
-
+        
         if (pacienteSeleccionado.getFechaNacimiento() != null) {
             datosReporte.setValor(628, "<b>EDAD: </b> " + calcularEdad(pacienteSeleccionado.getFechaNacimiento()));//EDAD
             datosReporte.setValor(629, "<b>FECHA NACIMIENTO: </b>" + sdfDate.format(pacienteSeleccionado.getFechaNacimiento()));//FECHA DE NACIMIENTO
@@ -2103,19 +2116,19 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             datosReporte.setValor(628, "<b>EDAD: </b> ");
             datosReporte.setValor(629, "<b>FECHA NACIMIENTO: </b>");
         }
-
+        
         if (pacienteSeleccionado.getGenero() != null) {
             datosReporte.setValor(630, "<b>SEXO: </b> " + pacienteSeleccionado.getGenero().getDescripcion());//SEXO
         } else {
             datosReporte.setValor(630, "<b>SEXO: </b> ");
         }
-
+        
         if (pacienteSeleccionado.getOcupacion() != null) {
             datosReporte.setValor(631, "<b>OCUPACION: </b> " + pacienteSeleccionado.getOcupacion().getDescripcion());//OCUPACION
         } else {
             datosReporte.setValor(631, "<b>OCUPACION: </b> ");
         }
-
+        
         datosReporte.setValor(632, "<b>DIRECCION: </b> " + obtenerCadenaNoNula(pacienteSeleccionado.getDireccion()));//DIRECCION
         datosReporte.setValor(633, "<b>TELEFONO: </b> " + obtenerCadenaNoNula(pacienteSeleccionado.getTelefonoResidencia()));//TELEFONO
 
@@ -2126,7 +2139,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             datosReporte.setValor(634, pacienteSeleccionado.getIdentificacion());
             datosReporte.setValor(635, "<b>IDENTIFICACION: </b> " + pacienteSeleccionado.getIdentificacion());
         }
-
+        
         if (pacienteSeleccionado.getRegimen() != null) {
             datosReporte.setValor(636, "<b>TIPO AFILIACION: </b> " + pacienteSeleccionado.getRegimen().getDescripcion());//TIPO AFILIACION
             datosReporte.setValor(637, "<b>COBERTURA EN SALUD: </b>" + pacienteSeleccionado.getRegimen().getDescripcion());//COBERTURA EN SALUD
@@ -2154,25 +2167,25 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         } else {
             datosReporte.setValor(640, "<b>ESTADO CIVIL: </b> ");
         }
-
+        
         if (pacienteSeleccionado.getDepartamento() != null) {
             datosReporte.setValor(641, "<b>DEPARTAMENTO: </b>" + pacienteSeleccionado.getDepartamento().getDescripcion() + " " + pacienteSeleccionado.getDepartamento().getCodigo());//DEPARTAMENTO
         } else {
             datosReporte.setValor(641, "<b>DEPARTAMENTO: </b>");
         }
-
+        
         if (pacienteSeleccionado.getMunicipio() != null) {
             datosReporte.setValor(642, "<b>MUNICIPIO: </b>" + pacienteSeleccionado.getMunicipio().getDescripcion() + " " + pacienteSeleccionado.getMunicipio().getCodigo());//MUNICIPIO            
         } else {
             datosReporte.setValor(642, "<b>MUNICIPIO: </b>");
         }
-
+        
         if (pacienteSeleccionado.getFirma() != null) {
             datosReporte.setValor(643, loginMB.getRutaCarpetaImagenes() + pacienteSeleccionado.getFirma().getUrlImagen());//firma paciente
         } else {
             datosReporte.setValor(643, null);
         }
-
+        
         if (regEncontrado.getIdTipoReg().getIdTipoReg() == 54 || regEncontrado.getIdTipoReg().getIdTipoReg() == 77) {
             List<RepExamenes> RepExamenes2 = new ArrayList<>();
             List<HcRepExamenes> lista = hcRepFacade.buscarRepUltimo(regEncontrado.getIdPaciente().getIdPaciente());
@@ -2193,7 +2206,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             }
             datosReporte.setListaRepExamenes(RepExamenes1);
         }
-
+        
         datosReporte.setValor(644, pacienteSeleccionado.nombreCompleto() + "<br/>" + datosReporte.getValor(634));//NOMBRE EN FIRMA PACIENTE   
 
         //DATOS DEL ACUDIENTE (ACOMPAÑANTE).
@@ -2226,7 +2239,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         } else {
             datosReporte.setValor(680, null);//IMAGEN LOGO
         }
-
+        
         if (regEncontrado.getIdMedico() != null) {
             datosReporte.setValor(681, regEncontrado.getIdMedico().nombreCompleto());//NOMBRE MEDICO
             datosReporte.setValor(682, regEncontrado.getIdMedico().getTelefonoResidencia());//TELEFONO MEDICO
@@ -2246,7 +2259,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 datosReporte.setValor(689, null);
             }
         }
-
+        
         datosReporte.setValor(690, "<b>Dirección: </b> " + empresa.getDireccion() + "      " + empresa.getWebsite() + "      <b>Teléfono: </b> " + empresa.getTelefono1());//DIR TEL EMPRESA        
         datosReporte.setValor(691, "<b>NOMBRE: </b>" + empresa.getRazonSocial());//NOMBRE EMPRESA                
         datosReporte.setValor(692, "<b>CODIGO: </b>" + empresa.getCodigoEmpresa());//CODIGO EMPRESA                
@@ -2324,10 +2337,10 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 }
             }
             calculo_imc_peso();
-
+            
             datosReporte.setValor(710, formateadorDecimal.format(peso_to) + "");
             datosReporte.setValor(711, clasificacion_peso);
-
+            
             v = 0;
             clasificacion_perimetro = "Sin Dato...";
             if (regEncontrado.getIdTipoReg().getIdTipoReg() == 54) {
@@ -2430,11 +2443,11 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 datosReporte.setValor(campoDeRegistroEncontrado.getHcCamposReg().getPosicion(), "<b>" + campoDeRegistroEncontrado.getHcCamposReg().getNombrePdf() + " </b>" + campoDeRegistroEncontrado.getValor());
             }
         }
-
+        
         List<DatosSubReporteHistoria> listaDatosAdicionales = new ArrayList<>();
         if (regEncontrado.getIdTipoReg().getIdTipoReg() == 17) { //psicologia
             cargarEstructuraFamiliar();
-
+            
             for (FilaDataTable item : listaEstructuraFamiliar) {
                 DatosSubReporteHistoria datosS = new DatosSubReporteHistoria();
                 datosS.setDato0(item.getColumna1());
@@ -2442,14 +2455,14 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 datosS.setDato2(item.getColumna5());
                 datosS.setDato3(item.getColumna6());
                 listaDatosAdicionales.add(datosS);
-
+                
                 System.out.println("Familiar " + item.getColumna1());
             }
         }
-
+        
         if (regEncontrado.getIdTipoReg().getIdTipoReg() == 19) { //formulacion medicamentos
             List<FilaDataTable> listaMedicamentosParaReporte = cargarListaMedicamentos(regEncontrado);
-
+            
             for (FilaDataTable item : listaMedicamentosParaReporte) {
                 DatosSubReporteHistoria datosS = new DatosSubReporteHistoria();
                 datosS.setDato0(item.getColumna1());
@@ -2464,12 +2477,12 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 listaDatosAdicionales.add(datosS);
                 System.out.println("Medicamento  " + item.getColumna1());
             }
-
+            
         }
-
+        
         if (regEncontrado.getIdTipoReg().getIdTipoReg() == 25) { //ordenes medicas
             List<FilaDataTable> listaServiciosParaReporte = cargarListaServicios(regEncontrado);
-
+            
             for (FilaDataTable item : listaServiciosParaReporte) {
                 DatosSubReporteHistoria datosS = new DatosSubReporteHistoria();
                 datosS.setDato0(item.getColumna1());
@@ -2479,15 +2492,15 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 listaDatosAdicionales.add(datosS);
                 System.out.println("Servicio  " + item.getColumna1());
             }
-
+            
         }
-
+        
         System.out.println("listaDatosAdicionales size " + listaDatosAdicionales.size());
-
+        
         datosReporte.setListaDatosAdicionales(listaDatosAdicionales);//CUANDO SE USE SUBRREPORTES USAR ESTA LINEA
         listaRegistrosParaPdf.add(datosReporte);
     }
-
+    
     public void generarPdf() throws JRException, IOException {//genera un pdf de una historia seleccionada en el historial        
         //----------------------------------------------------------------------
         //VALIDACIONES NECESARIAS-----------------------------------------------
@@ -2540,7 +2553,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         } else {
             cargarFuenteDatos(regEncontrado);
         }
-
+        
         System.out.println("...Num datos encontrados " + listaRegistrosParaPdf.size());
 
         //----------------------------------------------------------------------
@@ -2553,22 +2566,28 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         rutaReporte = rutaReporte + regEncontrado.getIdTipoReg().getUrlPagina();
         rutaReporte = rutaReporte.substring(0, rutaReporte.length() - 6);//quito .xhtml
         rutaReporte = rutaReporte + ".jasper";
-
+        
         String fecha_registro = sdfDateHour.format(regEncontrado.getFechaReg());
-
+        
         System.out.println("Reporte --> " + rutaReporte);
         System.out.println("....................................");
-
+        
         List<JasperPrint> list = new ArrayList<JasperPrint>();
-
+        
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        String urlImagenes = request.getRequestURL().toString();
+        urlImagenes = urlImagenes.substring(0, urlImagenes.indexOf("historias.xhtml"))+"img/";
+        HashMap mapParams = new HashMap();
+        mapParams.put("urlBaseImagenes", urlImagenes);
+        
         beanCollectionDataSource = new JRBeanCollectionDataSource(listaRegistrosParaPdf);
         httpServletResponse = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
         try (ServletOutputStream servletOutputStream = httpServletResponse.getOutputStream()) {
             httpServletResponse.setContentType("application/pdf");
             ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-            JasperPrint jasperPrint = JasperFillManager.fillReport(servletContext.getRealPath(rutaReporte), new HashMap(), beanCollectionDataSource);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(servletContext.getRealPath(rutaReporte), mapParams, beanCollectionDataSource);
             list.add(jasperPrint);
-
+            
             if (regEncontrado.getIdTipoReg().getIdTipoReg() == 54) {
                 rutaReporte = "historias/reportes/s_paraclinicossolicitados.jasper";
                 beanCollectionDataSource = new JRBeanCollectionDataSource(listaRegistrosParaPdf);
@@ -2584,14 +2603,16 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
                 jasperPrint = JasperFillManager.fillReport(servletContext.getRealPath(rutaReporte), new HashMap(), beanCollectionDataSource);
                 list.add(jasperPrint);
-
+                
             }
-
+            
             JRPdfExporter exporter = new JRPdfExporter();
             exporter.setParameter(JRPdfExporterParameter.JASPER_PRINT_LIST, list);
             exporter.setParameter(JRPdfExporterParameter.OUTPUT_STREAM, servletOutputStream);
             exporter.exportReport();
             FacesContext.getCurrentInstance().responseComplete();
+        } catch (Exception ex) {
+            System.out.println("Error generando reporte " + ex.getMessage());
         }
     }
 
@@ -2658,7 +2679,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 }
             }
         }
-
+        
         datosFormulario = new DatosFormularioHistoria();
         listaEstructuraFamiliar.clear();
         listaEstructuraFamiliarFiltro.clear();
@@ -2667,27 +2688,27 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         listaServicios.clear();
         listaServiciosFiltro.clear();
         listaServiciosOrdenMedica.clear();
-
+        
     }
-
+    
     public void btnLimpiarFormulario() {//no se carga ultimo registro
         limpiarFormulario();
         valoresPorDefecto();
         modificandoRegCli = false;
     }
-
+    
     public void cambiaTipoRegistroClinico() {//cambia el combo 'tipo de registro clinico'
         modificandoRegCli = false;
         limpiarFormulario();
         cargarUltimoRegistro();
         valoresPorDefecto();
     }
-
+    
     public void manageFile(FileUploadEvent event) {
         if (!"".equals(descriparchivo)) {
-
+            
             try {
-
+                
                 UploadedFile file = event.getFile();
                 SimpleDateFormat dt = new SimpleDateFormat("yyyyymmddhhmmss");
                 String nomarch = "HC_" + pacienteSeleccionado.getIdPaciente() + "_" + dt.format(new Date())//diferenciar el usuario actual
@@ -2706,25 +2727,25 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                         listaArchivo = hcArchivosFacade.getHcArchivosByPaciente(pacienteSeleccionado);
                         imprimirMensaje("Información", "El archivo se guardo", FacesMessage.SEVERITY_INFO);
                         descriparchivo = "";
-
+                        
                     } catch (Exception e) {
                         imprimirMensaje("Error", "El archivo no se guardo", FacesMessage.SEVERITY_WARN);
-
+                        
                     }
-
+                    
                 }
-
+                
             } catch (Exception ex) {
                 System.out.println("Error 20 en " + this.getClass().getName() + ":" + ex.toString());
             }
-
+            
         } else {
             imprimirMensaje("Error", "Agregar una descripcion porfavor y seleccionar de nuevo el archivo", FacesMessage.SEVERITY_WARN);
-
+            
         }
-
+        
     }
-
+    
     public void downloadArchivo() throws FileNotFoundException, MagicParseException, MagicMatchNotFoundException, MagicException {
         if (archivoSeleccionado != null) {
             File f = new File(archivoSeleccionado.getUrlFile());
@@ -2733,7 +2754,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             fileDownload = new DefaultStreamedContent(stream, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", f.getName());
         }
     }
-
+    
     public void guardarOdontograma() {
         Type listType = new TypeToken<List<String>>() {
         }.getType();
@@ -2749,7 +2770,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             }
         }
     }
-
+    
     public void guardarEvolucion() {
         Type listType = new TypeToken<List<String>>() {
         }.getType();
@@ -2765,7 +2786,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             }
         }
     }
-
+    
     public void guardarOleary1() {
         Type listType = new TypeToken<List<String>>() {
         }.getType();
@@ -2781,7 +2802,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             }
         }
     }
-
+    
     public void guardarOleary2() {
         Type listType = new TypeToken<List<String>>() {
         }.getType();
@@ -2797,7 +2818,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             }
         }
     }
-
+    
     private void cargarUltimoRegistro() {
         mostrarFormularioRegistroClinico();
         if (tipoRegistroClinicoActual != null) {
@@ -3022,7 +3043,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                             datosFormulario.setDato48(datosFormulario_nutricion.getDato291());
                         }
                     }
-
+                    
                     if (datosFormulario.getDato49().equals("")) {//ENF. ENDOCRINA
                         if (!datosFormulario_nutricion.getDato21().equals("")) {
                             datosFormulario.setDato49(datosFormulario_nutricion.getDato21());
@@ -3033,7 +3054,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                             datosFormulario.setDato50(datosFormulario_nutricion.getDato292());
                         }
                     }
-
+                    
                     if (datosFormulario.getDato51().equals("")) {//ACV
                         if (!datosFormulario_nutricion.getDato22().equals("")) {
                             datosFormulario.setDato51(datosFormulario_nutricion.getDato22());
@@ -3044,7 +3065,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                             datosFormulario.setDato52(datosFormulario_nutricion.getDato293());
                         }
                     }
-
+                    
                     if (datosFormulario.getDato53().equals("")) {//GENITOURINARIO
                         if (!datosFormulario_nutricion.getDato23().equals("")) {
                             datosFormulario.setDato53(datosFormulario_nutricion.getDato23());
@@ -3055,7 +3076,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                             datosFormulario.setDato54(datosFormulario_nutricion.getDato294());
                         }
                     }
-
+                    
                     if (datosFormulario.getDato55().equals("")) {//DIABETES
                         if (!datosFormulario_nutricion.getDato24().equals("")) {
                             datosFormulario.setDato55(datosFormulario_nutricion.getDato24());
@@ -3066,7 +3087,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                             datosFormulario.setDato56(datosFormulario_nutricion.getDato295());
                         }
                     }
-
+                    
                     if (datosFormulario.getDato57().equals("")) {//ENF. RENAL
                         if (!datosFormulario_nutricion.getDato25().equals("")) {
                             datosFormulario.setDato57(datosFormulario_nutricion.getDato25());
@@ -3077,7 +3098,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                             datosFormulario.setDato58(datosFormulario_nutricion.getDato296());
                         }
                     }
-
+                    
                     if (datosFormulario.getDato59().equals("")) {//EPOC
                         if (!datosFormulario_nutricion.getDato26().equals("")) {
                             datosFormulario.setDato59(datosFormulario_nutricion.getDato26());
@@ -3088,7 +3109,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                             datosFormulario.setDato60(datosFormulario_nutricion.getDato297());
                         }
                     }
-
+                    
                     if (datosFormulario.getDato61().equals("")) {//CA. GÁSTRICO
                         if (!datosFormulario_nutricion.getDato27().equals("")) {
                             datosFormulario.setDato61(datosFormulario_nutricion.getDato27());
@@ -3099,7 +3120,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                             datosFormulario.setDato62(datosFormulario_nutricion.getDato298());
                         }
                     }
-
+                    
                     if (datosFormulario.getDato63().equals("")) {//DISLIPIDEMIA
                         if (!datosFormulario_nutricion.getDato28().equals("")) {
                             datosFormulario.setDato63(datosFormulario_nutricion.getDato28());
@@ -3110,7 +3131,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                             datosFormulario.setDato64(datosFormulario_nutricion.getDato299());
                         }
                     }
-
+                    
                     if (datosFormulario.getDato65().equals("")) {//OBESIDAD
                         if (!datosFormulario_nutricion.getDato29().equals("")) {
                             datosFormulario.setDato65(datosFormulario_nutricion.getDato29());
@@ -3121,7 +3142,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                             datosFormulario.setDato66(datosFormulario_nutricion.getDato300());
                         }
                     }
-
+                    
                     if (datosFormulario.getDato67().equals("")) {//ASMA
                         if (!datosFormulario_nutricion.getDato30().equals("")) {
                             datosFormulario.setDato67(datosFormulario_nutricion.getDato30());
@@ -3132,7 +3153,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                             datosFormulario.setDato68(datosFormulario_nutricion.getDato301());
                         }
                     }
-
+                    
                     if (datosFormulario.getDato69().equals("")) {//CA. MAMA
                         if (!datosFormulario_nutricion.getDato31().equals("")) {
                             datosFormulario.setDato69(datosFormulario_nutricion.getDato31());
@@ -3143,7 +3164,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                             datosFormulario.setDato70(datosFormulario_nutricion.getDato302());
                         }
                     }
-
+                    
                     if (datosFormulario.getDato71().equals("")) {//ENF. CORONARIA
                         if (!datosFormulario_nutricion.getDato32().equals("")) {
                             datosFormulario.setDato71(datosFormulario_nutricion.getDato32());
@@ -3154,7 +3175,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                             datosFormulario.setDato72(datosFormulario_nutricion.getDato303());
                         }
                     }
-
+                    
                     if (datosFormulario.getDato73().equals("")) {//ENF. VASCULAR
                         if (!datosFormulario_nutricion.getDato33().equals("")) {
                             datosFormulario.setDato73(datosFormulario_nutricion.getDato33());
@@ -3165,7 +3186,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                             datosFormulario.setDato74(datosFormulario_nutricion.getDato304());
                         }
                     }
-
+                    
                     if (datosFormulario.getDato75().equals("")) {//QUIRÚRGICOS
                         if (!datosFormulario_nutricion.getDato35().equals("")) {
                             datosFormulario.setDato75(datosFormulario_nutricion.getDato35());
@@ -3176,7 +3197,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                             datosFormulario.setDato76(datosFormulario_nutricion.getDato305());
                         }
                     }
-
+                    
                     if (datosFormulario.getDato77().equals("")) {//EPIMIOLOGICOS
                         if (!datosFormulario_nutricion.getDato36().equals("")) {
                             datosFormulario.setDato77(datosFormulario_nutricion.getDato36());
@@ -3187,7 +3208,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                             datosFormulario.setDato78(datosFormulario_nutricion.getDato306());
                         }
                     }
-
+                    
                     if (datosFormulario.getDato79().equals("")) {//TRAUMAS
                         if (!datosFormulario_nutricion.getDato38().equals("")) {
                             datosFormulario.setDato79(datosFormulario_nutricion.getDato38());
@@ -3198,7 +3219,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                             datosFormulario.setDato80(datosFormulario_nutricion.getDato308());
                         }
                     }
-
+                    
                     if (datosFormulario.getDato81().equals("")) {//CA. CÉRVIX
                         if (!datosFormulario_nutricion.getDato37().equals("")) {
                             datosFormulario.setDato81(datosFormulario_nutricion.getDato37());
@@ -3209,7 +3230,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                             datosFormulario.setDato82(datosFormulario_nutricion.getDato307());
                         }
                     }
-
+                    
                     if (datosFormulario.getDato83().equals("")) {//ALÉRGICOS
                         if (!datosFormulario_nutricion.getDato39().equals("")) {
                             datosFormulario.setDato83(datosFormulario_nutricion.getDato39());
@@ -3220,7 +3241,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                             datosFormulario.setDato84(datosFormulario_nutricion.getDato309());
                         }
                     }
-
+                    
                     if (datosFormulario.getDato85().equals("")) {//FIEBRE REUMÁTICA
                         if (!datosFormulario_nutricion.getDato319().equals("")) {
                             datosFormulario.setDato85(datosFormulario_nutricion.getDato319());
@@ -3231,7 +3252,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                             datosFormulario.setDato86(datosFormulario_nutricion.getDato320());
                         }
                     }
-
+                    
                     if (datosFormulario.getDato87().equals("")) {//ENFERMEDADES DE TRANSMISIÓN SEXUAL
                         if (!datosFormulario_nutricion.getDato321().equals("")) {
                             datosFormulario.setDato87(datosFormulario_nutricion.getDato321());
@@ -3242,7 +3263,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                             datosFormulario.setDato88(datosFormulario_nutricion.getDato322());
                         }
                     }
-
+                    
                     if (datosFormulario.getDato89().equals("")) {//LEISHMANIASIS
                         if (!datosFormulario_nutricion.getDato323().equals("")) {
                             datosFormulario.setDato89(datosFormulario_nutricion.getDato323());
@@ -3253,7 +3274,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                             datosFormulario.setDato90(datosFormulario_nutricion.getDato324());
                         }
                     }
-
+                    
                     if (datosFormulario.getDato91().equals("")) {//LEPRA
                         if (!datosFormulario_nutricion.getDato325().equals("")) {
                             datosFormulario.setDato91(datosFormulario_nutricion.getDato325());
@@ -3264,7 +3285,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                             datosFormulario.setDato92(datosFormulario_nutricion.getDato326());
                         }
                     }
-
+                    
                     if (datosFormulario.getDato93().equals("")) {//MALARIA
                         if (!datosFormulario_nutricion.getDato327().equals("")) {
                             datosFormulario.setDato93(datosFormulario_nutricion.getDato327());
@@ -3275,7 +3296,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                             datosFormulario.setDato94(datosFormulario_nutricion.getDato328());
                         }
                     }
-
+                    
                     if (datosFormulario.getDato95().toString().equals("")) {//DENGUE
                         if (!datosFormulario_nutricion.getDato329().equals("")) {
                             datosFormulario.setDato95(datosFormulario_nutricion.getDato329());
@@ -3286,7 +3307,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                             datosFormulario.setDato96(datosFormulario_nutricion.getDato330());
                         }
                     }
-
+                    
                     if (datosFormulario.getDato97().equals("")) {//FIEBRE AMARILLA
                         if (!datosFormulario_nutricion.getDato331().equals("")) {
                             datosFormulario.setDato97(datosFormulario_nutricion.getDato331());
@@ -3829,7 +3850,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         //RequestContext.getCurrentInstance().update("IdFormHistorias");
 
     }
-
+    
     private void mostrarFormularioRegistroClinico() {//permite visualizar un formulario dependiendo de la seleccion en el combo 'tipo de registro clinico'
         if (tipoRegistroClinico != null && tipoRegistroClinico.length() != 0) {
             tipoRegistroClinicoActual = tipoRegCliFacade.find(Integer.parseInt(tipoRegistroClinico));
@@ -3841,7 +3862,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             nombreTipoRegistroClinico = "";
         }
     }
-
+    
     public void cambiaMedico() {//cambia el combo 'medico'(actualiza el campo especialidad)
         if (idPrestador != null && idPrestador.length() != 0) {
             especialidadPrestador = usuariosFacade.find(Integer.parseInt(idPrestador)).getEspecialidad().getDescripcion();
@@ -3849,7 +3870,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             especialidadPrestador = "";
         }
     }
-
+    
     public void cambiaFalla() {
         falla_atencion = false;
         if (datosFormulario.getDato248().equals("SI")) {
@@ -3860,12 +3881,12 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         }
 //        RequestContext.getCurrentInstance().update("IdFormRegistroClinico");
     }
-
+    
     public void actualizarRegistro() {//actualizacion de un registro clinico existente
         List<HcDetalle> listaDetalle = new ArrayList<>();
         HcDetalle nuevoDetalle;
         HcCamposReg campoResgistro;
-
+        
         guardarOdontograma();
         guardarEvolucion();
         guardarOleary1();
@@ -3966,7 +3987,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
      * por cada zona
      */
     public void guardarDetalleDiente(int _variableInicial) {
-
+        
         datosFormulario.setValor(_variableInicial, loginMB.getRutaCarpetaImagenes() + "Reportes/dienteLimpiar.png");//Se pone "dienteLimpiar" ya que el estado general no se combina con los detallados.	
         datosFormulario.setValor(_variableInicial + 1, detDiente1);
         datosFormulario.setValor(_variableInicial + 2, detDiente2);
@@ -3975,7 +3996,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         datosFormulario.setValor(_variableInicial + 5, detDiente5);
         datosFormulario.setValor(_variableInicial + 6, detDiente6);
         datosFormulario.setValor(_variableInicial + 7, detDiente7);
-
+        
         RequestContext.getCurrentInstance().execute("PF('dlgDetalleDiente').hide();");
     }
 
@@ -3998,7 +4019,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         detDiente5 = (String) datosFormulario.getValor(_variableInicial + 5);
         detDiente6 = (String) datosFormulario.getValor(_variableInicial + 6);
         detDiente7 = (String) datosFormulario.getValor(_variableInicial + 7);
-
+        
         numeroDiente = _diente;
         variableInicial = _variableInicial;
         RequestContext.getCurrentInstance().execute("PF('dlgDetalleDiente').show();");
@@ -4022,7 +4043,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         datosFormulario.setValor(_variableInicial + 5, "");
         datosFormulario.setValor(_variableInicial + 6, "");
         datosFormulario.setValor(_variableInicial + 7, "");
-
+        
     }
 
     /**
@@ -4063,7 +4084,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         detOleary2 = (String) datosFormulario.getValor(_variableInicial + 2);
         detOleary3 = (String) datosFormulario.getValor(_variableInicial + 3);
         detOleary4 = (String) datosFormulario.getValor(_variableInicial + 4);
-
+        
         RequestContext.getCurrentInstance().execute("PF('dlgDetalleDienteOleary').show();");
     }
 
@@ -4080,14 +4101,14 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         datosFormulario.setValor(_variableInicial + 2, detOleary2);
         datosFormulario.setValor(_variableInicial + 3, detOleary3);
         datosFormulario.setValor(_variableInicial + 4, detOleary4);
-
+        
         RequestContext.getCurrentInstance().execute("PF('dlgDetalleDienteOleary').hide();");
     }
-
+    
     public void guardarRegistro() {//guardar un nuevo registro clinico        
 
         System.out.println("Iniciando el guardado del registro");
-
+        
         HcRegistro nuevoRegistro = new HcRegistro();
         List<HcDetalle> listaDetalle = new ArrayList<>();
         HcDetalle nuevoDetalle;
@@ -4131,12 +4152,12 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 imprimirMensaje("Error", "Debe Ingresar Diagnostico Principal", FacesMessage.SEVERITY_ERROR);
                 return;
             }
-
+            
         }
         nuevoRegistro.setFechaReg(fechaReg);
         nuevoRegistro.setFechaSis(fechaSis);
         nuevoRegistro.setIdPaciente(pacienteSeleccionado);
-
+        
         if (validarNoVacio(turnoCita)) {
             List<CitCitas> listaCitas = turnosFacade.find(Integer.parseInt(turnoCita)).getCitCitasList();
             CitCitas citaAtendida = null;
@@ -4204,7 +4225,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 }
             }
         }
-
+        
         if (lista_reportes.size() > 0) {
             for (FilaDataTable rep : lista_reportes) {
                 System.out.println(new Date(rep.getColumna3()) + " ");
@@ -4245,7 +4266,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     if (idPrestador != null && idPrestador.length() != 0) {//validacion de campos obligatorios
                         facMedicamento.setIdPrestador(usuariosFacade.find(Integer.parseInt(idPrestador)));
                     }
-
+                    
                     facMedicamento.setFecha(new Date());
                     facMedicamento.setValorUnitario(medicamento.getValor());
                     facMedicamento.setValorFinal(medicamento.getValor() * facMedicamento.getCantidad());
@@ -4253,7 +4274,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 }
             }
         }
-
+        
         if (listaEstructuraFamiliar != null) {
             //guardar estructura familiar si es que existe
             for (FilaDataTable familiar : listaEstructuraFamiliar) {
@@ -4263,14 +4284,14 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 fam.setEdad(Integer.parseInt(familiar.getColumna2()));
                 CfgClasificaciones parentesco1 = new CfgClasificaciones(Integer.parseInt(familiar.getColumna3()));
                 CfgClasificaciones ocupacion1 = new CfgClasificaciones(Integer.parseInt(familiar.getColumna4()));
-
+                
                 fam.setIdParentesco(parentesco1);
                 fam.setIdOcupacion(ocupacion1);
-
+                
                 familiarFacade.create(fam);
             }
         }
-
+        
         if (tipoRegistroClinicoActual.getIdTipoReg() == 8) {//SOLICITUD DE AUTORIZACION DE SERVICIOS            
             tipoRegistroClinicoActual.setConsecutivo(tipoRegistroClinicoActual.getConsecutivo() + 1);
             tipoRegCliFacade.edit(tipoRegistroClinicoActual);//incrementar consecutivo a tipo de registro clinico actual           
@@ -4284,7 +4305,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             nuevoDetalle.setValor(String.valueOf(tipoRegistroClinicoActual.getConsecutivo()));
             listaDetalle.add(nuevoDetalle);
         }
-
+        
         nuevoRegistro.setHcDetalleList(listaDetalle);
         nuevoRegistro.setFolio(registroFacade.buscarMaximoFolio(nuevoRegistro.getIdPaciente().getIdPaciente()) + 1);
         registroFacade.edit(nuevoRegistro);
@@ -4305,7 +4326,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
 //                nuevoMedicamento.setViaAdmin(item.getViaAdmin());
 
                 itemsFacade.create(nuevoServicio);
-
+                
             }
         }
         imprimirMensaje("Correcto", "Nuevo registro almacenado.", FacesMessage.SEVERITY_INFO);
@@ -4316,7 +4337,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         RequestContext.getCurrentInstance().update("IdFormRegistroClinico");
         RequestContext.getCurrentInstance().update("IdFormHistorias");
     }
-
+    
     public List<String> autocompletarDiagnostico(String txt) {//retorna una lista con los diagnosticos que contengan el parametro txt
         if (txt != null && txt.length() > 2) {
             return diagnosticoFacade.autocompletarDiagnostico(txt);
@@ -4324,7 +4345,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             return null;
         }
     }
-
+    
     public List<String> autocompletarDiagnosticoPrincipal(String txt) {//retorna una lista con los diagnosticos que contengan el parametro txt
         System.out.println(txt);
         if (txt != null && txt.length() > 2) {
@@ -4339,7 +4360,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     //---------------------------------------------------
     public void validarIdentificacion() {//verifica si existe la identificacion de lo contrario abre un dialogo para seleccionar el paciente de una tabla
         pacienteTmp = pacientesFacade.buscarPorIdentificacion(identificacionPaciente);
-
+        
         if (pacienteTmp != null) {
             tipoRegistroClinico = "";
             urlPagina = "";
@@ -4347,12 +4368,12 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             pacienteSeleccionadoTabla = pacienteTmp;
             hayPacienteSeleccionado = true;//se pueden mostrar opciones
             cargarPaciente();
-
+            
         } else {
             RequestContext.getCurrentInstance().execute("PF('dlgSeleccionarPaciente').show();");
         }
     }
-
+    
     public void editarPaciente() {//se invoca funcion javaScript(cargarPaciente -> home.xhtml) que carga la pestaña de pacientes y los datos del paciende seleccionado
         if (pacienteSeleccionado != null) {
             RequestContext.getCurrentInstance().execute("window.parent.cargarPaciente('Pacientes','configuraciones/pacientes.xhtml','" + pacienteSeleccionado.getIdPaciente() + "')");
@@ -4361,7 +4382,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             imprimirMensaje("Error", "Se debe seleccionar un paciente de la tabla", FacesMessage.SEVERITY_ERROR);
         }
     }
-
+    
     public void calculo_imc_perimetro() {
         v = 0;
         clasificacion_perimetro = "Sin Dato...";
@@ -4389,7 +4410,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             }
         }
     }
-
+    
     public void calculo_imc_peso() {
         if (tipoRegistroClinicoActual != null) {
             v = 0;
@@ -4425,9 +4446,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 datosFormulario.setDato22(talla);
             }
         }
-
+        
     }
-
+    
     public void clasificacion_fisica() {
         datosFormulario.setDato15(horas);
         datosFormulario.setDato258(minutos);
@@ -4439,7 +4460,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             clasificacion_f = "SEDENTARISMO";
         }
     }
-
+    
     public void signos_vitales_update() {
         if (fc != null) {
             datosFormulario.setDato125(fc);
@@ -4451,7 +4472,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             datosFormulario.setDato127(t);
         }
     }
-
+    
     public void calculo_imc() {
         if (tipoRegistroClinicoActual != null) {
             v = 0;
@@ -4531,10 +4552,10 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             pad_de = pad;
         }
     }
-
+    
     public void cargarPaciente() {//cargar un paciente desde del dialogo de buscar paciente o al digitar una identificacion valida(esta en pacientes)        
         if (pacienteSeleccionadoTabla != null) {
-
+            
             turnoCita = "";
             pacienteSeleccionado = pacientesFacade.find(pacienteSeleccionadoTabla.getIdPaciente());
             listaArchivo = hcArchivosFacade.getHcArchivosByPaciente(pacienteSeleccionado);
@@ -4633,7 +4654,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             imprimirMensaje("Error", "Se debe seleccionar un paciente de la tabla", FacesMessage.SEVERITY_ERROR);
         }
     }
-
+    
     public void cancerCervixSenoDefaultParams(String _val) {
         datosFormulario.setDato8(_val);
         datosFormulario.setDato9(_val);
@@ -4642,7 +4663,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         datosFormulario.setDato12(_val);
         datosFormulario.setDato13(_val);
         datosFormulario.setDato14(_val);
-
+        
         datosFormulario.setDato32(_val);
         datosFormulario.setDato33(_val);
         datosFormulario.setDato34(_val);
@@ -4650,11 +4671,11 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         datosFormulario.setDato36(_val);
         datosFormulario.setDato37(_val);
         datosFormulario.setDato38(_val);
-
+        
         datosFormulario.setDato40(_val);
-
+        
     }
-
+    
     public void clapOpsOmsDefaultParams(String _val) {
         datosFormulario.setDato0(_val);
         datosFormulario.setDato2(_val);
@@ -4672,9 +4693,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         datosFormulario.setDato124(_val);
         datosFormulario.setDato147(_val);
         datosFormulario.setDato152(_val);
-
+        
     }
-
+    
     public void epicrisisDefaultParams(String _val) {
         datosFormulario.setDato2(_val);
         datosFormulario.setDato3(_val);
@@ -4692,7 +4713,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         datosFormulario.setDato15(_val);
         datosFormulario.setDato16(_val);
     }
-
+    
     public void evolucionHistoriaGlandulaMamariaDefaultParams(String _val) {
         datosFormulario.setDato0(_val);
         datosFormulario.setDato2(_val);
@@ -4700,9 +4721,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         datosFormulario.setDato13(_val);
         datosFormulario.setDato15(_val);
         datosFormulario.setDato16(_val);
-
+        
     }
-
+    
     public void historiaClinicaDefaultParams(String _val) {
         datosFormulario.setDato3(_val);
         datosFormulario.setDato4(_val);
@@ -4816,9 +4837,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         datosFormulario.setDato115(_val);
         datosFormulario.setDato116(_val);
         datosFormulario.setDato117(_val);
-
+        
     }
-
+    
     public void suministroPlanificacionFamiliarDefaultParams(String _val) {
         datosFormulario.setDato0(_val);
         datosFormulario.setDato2(_val);
@@ -4837,14 +4858,14 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         datosFormulario.setDato15(_val);
         datosFormulario.setDato16(_val);
     }
-
+    
     public void resultadoCitologiaDefaultParams(String _val) {
         datosFormulario.setDato3(_val);
         datosFormulario.setDato4(_val);
         datosFormulario.setDato5(_val);
         datosFormulario.setDato6(_val);
     }
-
+    
     public void citologiaDefaultParams(String _val) {
         datosFormulario.setDato3(_val);
         datosFormulario.setDato4(_val);
@@ -5009,7 +5030,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         datosFormulario.setDato163(_val);
         datosFormulario.setDato165(_val);
     }
-
+    
     public void urgenciasDefaultParams(String _val) {
         //Motivo
         datosFormulario.setDato3(_val);
@@ -5133,9 +5154,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         datosFormulario.setDato118(_val);
         datosFormulario.setDato119(_val);
         datosFormulario.setDato120(_val);
-
+        
     }
-
+    
     public void refContrRefDefaultParams(String _val) {
         datosFormulario.setDato5(_val);
         datosFormulario.setDato6(_val);
@@ -5150,7 +5171,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         datosFormulario.setDato15(_val);
         datosFormulario.setDato16(_val);
         datosFormulario.setDato17(_val);
-
+        
         datosFormulario.setDato20(_val);
         datosFormulario.setDato21(_val);
         datosFormulario.setDato22(_val);
@@ -5172,7 +5193,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         datosFormulario.setDato38(_val);
         datosFormulario.setDato39(_val);
         datosFormulario.setDato40(_val);
-
+        
         datosFormulario.setDato41(_val);
         datosFormulario.setDato42(_val);
         datosFormulario.setDato43(_val);
@@ -5184,9 +5205,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         datosFormulario.setDato49(_val);
         datosFormulario.setDato50(_val);
         datosFormulario.setDato51(_val);
-
+        
     }
-
+    
     public void loadServiciosOrden() {
         listaServiciosOrdenMedica = servicioFacade.buscarActivos();
     }
@@ -5199,7 +5220,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         posListaTxtPredef = Integer.parseInt(posVec);//determinar la posicion en el vector 'estructuraCampos' al usar un texto predefinido
 
     }
-
+    
     public void usarTextoPredefinido() {//asignar el texto predefinido a un 'p:editor'
         if (detalleTextoPredef != null && detalleTextoPredef.length() != 0) {
             datosFormulario.setValor(posListaTxtPredef, detalleTextoPredef);
@@ -5209,14 +5230,14 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             imprimirMensaje("Error", "El texto predefinido está vacio", FacesMessage.SEVERITY_ERROR);
         }
     }
-
+    
     private void recargarMaestrosTxtPredefinidos() {//carga la lista de textos predefinidos (se usa en cualquier p:editor)
         listaMaestrosTxtPredefinidos = maestrosTxtPredefinidosFacade.findAll();
         idMaestroTextoPredef = "";
         nombreTextoPredefinido = "";
         cambiaMaestro();
     }
-
+    
     public void cambiaMaestro() {//cambia la clasificacion cuando se esta en el dialogo de textos predefinidos
         idTextoPredef = "";
         if (idMaestroTextoPredef != null && idMaestroTextoPredef.length() != 0) {
@@ -5229,7 +5250,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         }
         cambiaTextoPredefinido();
     }
-
+    
     public void cambiaTextoPredefinido() {//usado en dialogo 'textosPredefinidos' cuando cambia el combo de 'textos predefinidos', permite cargar el texto predefinido en el p:ditor 
         if (idTextoPredef != null && idTextoPredef.length() != 0) {
             txtPredefinidoActual = txtPredefinidosFacade.find(Integer.parseInt(idTextoPredef));
@@ -5241,7 +5262,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             nombreTextoPredefinido = "";
         }
     }
-
+    
     public void guardarTextoPredefinido() {//almacenar en la base de datos el texto predefinido
         if (txtPredefinidoActual != null) {//se cargo uno
             if (txtPredefinidoActual.getNombre().compareTo(nombreTextoPredefinido) == 0) {//son los mismos se actualiza
@@ -5290,7 +5311,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             }
         }
     }
-
+    
     public void eliminarPredefinido() {//eliminar un texto predefinido de una categoria seleccionada
         if (idTextoPredef != null && idTextoPredef.length() != 0) {
             txtPredefinidosFacade.remove(txtPredefinidosFacade.find(Integer.parseInt(idTextoPredef)));
@@ -5315,1364 +5336,1364 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     public List<CfgPacientes> getListaPacientes() {
         return listaPacientes;
     }
-
+    
     public void setListaPacientes(List<CfgPacientes> listaPacientes) {
         this.listaPacientes = listaPacientes;
     }
-
+    
     public List<CfgPacientes> getListaPacientesFiltro() {
         return listaPacientesFiltro;
     }
-
+    
     public void setListaPacientesFiltro(List<CfgPacientes> listaPacientesFiltro) {
         this.listaPacientesFiltro = listaPacientesFiltro;
     }
-
+    
     public CfgPacientes getPacienteSeleccionado() {
         return pacienteSeleccionado;
     }
-
+    
     public void setPacienteSeleccionado(CfgPacientes pacienteSeleccionado) {
         this.pacienteSeleccionado = pacienteSeleccionado;
     }
-
+    
     public String getIdentificacionPaciente() {
         return identificacionPaciente;
     }
-
+    
     public void setIdentificacionPaciente(String identificacionPaciente) {
         this.identificacionPaciente = identificacionPaciente;
     }
-
+    
     public String getUrlPagina() {
         return urlPagina;
     }
-
+    
     public void setUrlPagina(String urlPagina) {
         this.urlPagina = urlPagina;
     }
-
+    
     public String getTipoRegistroClinico() {
         return tipoRegistroClinico;
     }
-
+    
     public void setTipoRegistroClinico(String tipoRegistroClinico) {
         this.tipoRegistroClinico = tipoRegistroClinico;
     }
-
+    
     public boolean isHayPacienteSeleccionado() {
         return hayPacienteSeleccionado;
     }
-
+    
     public void setHayPacienteSeleccionado(boolean hayPacienteSeleccionado) {
         this.hayPacienteSeleccionado = hayPacienteSeleccionado;
     }
-
+    
     public String getUrlFoto() {
         return urlFoto;
     }
-
+    
     public void setUrlFoto(String urlFoto) {
         this.urlFoto = urlFoto;
     }
-
+    
     public String getTipoIdentificacion() {
         return tipoIdentificacion;
     }
-
+    
     public void setTipoIdentificacion(String tipoIdentificacion) {
         this.tipoIdentificacion = tipoIdentificacion;
     }
-
+    
     public String getNombrePaciente() {
         return nombrePaciente;
     }
-
+    
     public void setNombrePaciente(String nombrePaciente) {
         this.nombrePaciente = nombrePaciente;
     }
-
+    
     public String getGeneroPaciente() {
         return generoPaciente;
     }
-
+    
     public void setGeneroPaciente(String generoPaciente) {
         this.generoPaciente = generoPaciente;
     }
-
+    
     public String getEdadPaciente() {
         return edadPaciente;
     }
-
+    
     public void setEdadPaciente(String edadPaciente) {
         this.edadPaciente = edadPaciente;
     }
-
+    
     public String getAdministradoraPaciente() {
         return administradoraPaciente;
     }
-
+    
     public String geturlFile() {
         return urlFile;
     }
-
+    
     public void seturlFile(String urlFile) {
         this.urlFile = urlFile;
     }
-
+    
     public void setAdministradoraPaciente(String administradoraPaciente) {
         this.administradoraPaciente = administradoraPaciente;
     }
-
+    
     public String getNombreTipoRegistroClinico() {
         return nombreTipoRegistroClinico;
     }
-
+    
     public void setNombreTipoRegistroClinico(String nombreTipoRegistroClinico) {
         this.nombreTipoRegistroClinico = nombreTipoRegistroClinico;
     }
-
+    
     public List<CfgMaestrosTxtPredefinidos> getListaMaestrosTxtPredefinidos() {
         return listaMaestrosTxtPredefinidos;
     }
-
+    
     public void setListaMaestrosTxtPredefinidos(List<CfgMaestrosTxtPredefinidos> listaMaestrosTxtPredefinidos) {
         this.listaMaestrosTxtPredefinidos = listaMaestrosTxtPredefinidos;
     }
-
+    
     public List<CfgTxtPredefinidos> getListaTxtPredefinidos() {
         return listaTxtPredefinidos;
     }
-
+    
     public void setListaTxtPredefinidos(List<CfgTxtPredefinidos> listaTxtPredefinidos) {
         this.listaTxtPredefinidos = listaTxtPredefinidos;
     }
-
+    
     public String getDetalleTextoPredef() {
         return detalleTextoPredef;
     }
-
+    
     public void setDetalleTextoPredef(String detalleTextoPredef) {
         this.detalleTextoPredef = detalleTextoPredef;
     }
-
+    
     public String getIdTextoPredef() {
         return idTextoPredef;
     }
-
+    
     public void setIdTextoPredef(String idTextoPredef) {
         this.idTextoPredef = idTextoPredef;
     }
-
+    
     public String getIdMaestroTextoPredef() {
         return idMaestroTextoPredef;
     }
-
+    
     public void setIdMaestroTextoPredef(String idMaestroTextoPredef) {
         this.idMaestroTextoPredef = idMaestroTextoPredef;
     }
-
+    
     public String getNombreTextoPredefinido() {
         return nombreTextoPredefinido;
     }
-
+    
     public void setNombreTextoPredefinido(String nombreTextoPredefinido) {
         this.nombreTextoPredefinido = nombreTextoPredefinido;
     }
-
+    
     public DatosFormularioHistoria getDatosFormulario() {
         return datosFormulario;
     }
-
+    
     public boolean ValidarDato(Object _dato, String _dato2) {
         return _dato.toString().compareTo(_dato2) == 0;
     }
-
+    
     public void setDatosFormulario(DatosFormularioHistoria datosFormulario) {
         this.datosFormulario = datosFormulario;
     }
-
+    
     public String getIdEditorSeleccionado() {
         return idEditorSeleccionado;
     }
-
+    
     public void setIdEditorSeleccionado(String idEditorSeleccionado) {
         this.idEditorSeleccionado = idEditorSeleccionado;
     }
-
+    
     public String getIdPrestador() {
         return idPrestador;
     }
-
+    
     public void setIdPrestador(String idPrestador) {
         this.idPrestador = idPrestador;
     }
-
+    
     public String getEspecialidadPrestador() {
         return especialidadPrestador;
     }
-
+    
     public void setEspecialidadPrestador(String especialidadPrestador) {
         this.especialidadPrestador = especialidadPrestador;
     }
-
+    
     public Date getFechaReg() {
         return fechaReg;
     }
-
+    
     public void setFechaReg(Date fechaReg) {
         this.fechaReg = fechaReg;
     }
-
+    
     public Date getFechaSis() {
         return fechaSis;
     }
-
+    
     public void setFechaSis(Date fechaSis) {
         this.fechaSis = fechaSis;
     }
-
+    
     public String[] getRegCliSelHistorial() {
         return regCliSelHistorial;
     }
-
+    
     public void setRegCliSelHistorial(String[] regCliSelHistorial) {
         this.regCliSelHistorial = regCliSelHistorial;
     }
-
+    
     public TreeNode getTreeNodeRaiz() {
         return treeNodeRaiz;
     }
-
+    
     public void setTreeNodeRaiz(TreeNode treeNodeRaiz) {
         this.treeNodeRaiz = treeNodeRaiz;
     }
-
+    
     public TreeNode[] getTreeNodesSeleccionados() {
         return treeNodesSeleccionados;
     }
-
+    
     public void setTreeNodesSeleccionados(TreeNode[] treeNodesSeleccionados) {
         this.treeNodesSeleccionados = treeNodesSeleccionados;
     }
-
+    
     public boolean isModificandoRegCli() {
         return modificandoRegCli;
     }
-
+    
     public void setModificandoRegCli(boolean modificandoRegCli) {
         this.modificandoRegCli = modificandoRegCli;
     }
-
+    
     public LoginMB getLoginMB() {
         return loginMB;
     }
-
+    
     public void setLoginMB(LoginMB loginMB) {
         this.loginMB = loginMB;
     }
-
+    
     public boolean isBtnHistorialDisabled() {
         return btnHistorialDisabled;
     }
-
+    
     public void setBtnHistorialDisabled(boolean btnHistorialDisabled) {
         this.btnHistorialDisabled = btnHistorialDisabled;
     }
-
+    
     public CfgPacientes getPacienteSeleccionadoTabla() {
         return pacienteSeleccionadoTabla;
     }
-
+    
     public void setPacienteSeleccionadoTabla(CfgPacientes pacienteSeleccionadoTabla) {
         this.pacienteSeleccionadoTabla = pacienteSeleccionadoTabla;
     }
-
+    
     public boolean isBtnPdfAgrupadoDisabled() {
         return btnPdfAgrupadoDisabled;
     }
-
+    
     public void setBtnPdfAgrupadoDisabled(boolean btnPdfAgrupadoDisabled) {
         this.btnPdfAgrupadoDisabled = btnPdfAgrupadoDisabled;
     }
-
+    
     public String getFiltroAutorizacion() {
         return filtroAutorizacion;
     }
-
+    
     public void setFiltroAutorizacion(String filtroAutorizacion) {
         this.filtroAutorizacion = filtroAutorizacion;
     }
-
+    
     public Date getFiltroFechaInicial() {
         return filtroFechaInicial;
     }
-
+    
     public void setFiltroFechaInicial(Date filtroFechaInicial) {
         this.filtroFechaInicial = filtroFechaInicial;
     }
-
+    
     public Date getFiltroFechaFinal() {
         return filtroFechaFinal;
     }
-
+    
     public void setFiltroFechaFinal(Date filtroFechaFinal) {
         this.filtroFechaFinal = filtroFechaFinal;
     }
-
+    
     public boolean isBtnEditarRendered() {
         return btnEditarRendered;
     }
-
+    
     public void setBtnEditarRendered(boolean btnEditarRendered) {
         this.btnEditarRendered = btnEditarRendered;
     }
-
+    
     public List<CfgUsuarios> getListaPrestadores() {
         return listaPrestadores;
     }
-
+    
     public void setListaPrestadores(List<CfgUsuarios> listaPrestadores) {
         this.listaPrestadores = listaPrestadores;
     }
-
+    
     public String getTurnoCita() {
         return turnoCita;
     }
-
+    
     public void setTurnoCita(String turnoCita) {
         this.turnoCita = turnoCita;
     }
-
+    
     public List<SelectItem> getListaMunicipios() {
         return listaMunicipios;
     }
-
+    
     public void setListaMunicipios(List<SelectItem> listaMunicipios) {
         this.listaMunicipios = listaMunicipios;
     }
-
+    
     public String getDepartamento() {
         return departamento;
     }
-
+    
     public void setDepartamento(String departamento) {
         this.departamento = departamento;
     }
-
+    
     public String getMunicipio() {
         return municipio;
     }
-
+    
     public void setMunicipio(String municipio) {
         this.municipio = municipio;
     }
-
+    
     public String getReligion() {
         return religion;
     }
-
+    
     public void setReligion(String religion) {
         this.religion = religion;
     }
-
+    
     public String getGestacion() {
         return gestacion;
     }
-
+    
     public void setGestacion(String gestacion) {
         this.gestacion = gestacion;
     }
-
+    
     public String getDiscapacidad() {
         return discapacidad;
     }
-
+    
     public void setDiscapacidad(String discapacidad) {
         this.discapacidad = discapacidad;
     }
-
+    
     public Boolean getVictimaMaltrato() {
         return victimaMaltrato;
     }
-
+    
     public void setVictimaMaltrato(Boolean victimaMaltrato) {
         this.victimaMaltrato = victimaMaltrato;
     }
-
+    
     public Boolean getVictimaConflicto() {
         return victimaConflicto;
     }
-
+    
     public void setVictimaConflicto(Boolean victimaConflicto) {
         this.victimaConflicto = victimaConflicto;
     }
-
+    
     public Boolean getDesplazado() {
         return desplazado;
     }
-
+    
     public void setDesplazado(Boolean desplazado) {
         this.desplazado = desplazado;
     }
-
+    
     public Boolean getPoblacionLBGT() {
         return poblacionLBGT;
     }
-
+    
     public void setPoblacionLBGT(Boolean poblacionLBGT) {
         this.poblacionLBGT = poblacionLBGT;
     }
-
+    
     public String getImc() {
         return imc;
     }
-
+    
     public void setImc(String imc) {
         this.imc = imc;
     }
-
+    
     public String getEscolaridad() {
         return escolaridad;
     }
-
+    
     public void setEscolaridad(String escolaridad) {
         this.escolaridad = escolaridad;
     }
-
+    
     public String getOcupacion() {
         return ocupacion;
     }
-
+    
     public void setOcupacion(String ocupacion) {
         this.ocupacion = ocupacion;
     }
-
+    
     public String getEtnia() {
         return etnia;
     }
-
+    
     public void setEtnia(String etnia) {
         this.etnia = etnia;
     }
-
+    
     public String getVictimaMaltratoStr() {
         return victimaMaltratoStr;
     }
-
+    
     public void setVictimaMaltratoStr(String victimaMaltratoStr) {
         this.victimaMaltratoStr = victimaMaltratoStr;
     }
-
+    
     public String getVictimaConflictoStr() {
         return victimaConflictoStr;
     }
-
+    
     public void setVictimaConflictoStr(String victimaConflictoStr) {
         this.victimaConflictoStr = victimaConflictoStr;
     }
-
+    
     public String getDesplazadoStr() {
         return desplazadoStr;
     }
-
+    
     public void setDesplazadoStr(String desplazadoStr) {
         this.desplazadoStr = desplazadoStr;
     }
-
+    
     public String getPoblacionLBGTStr() {
         return poblacionLBGTStr;
     }
-
+    
     public void setPoblacionLBGTStr(String poblacionLBGTStr) {
         this.poblacionLBGTStr = poblacionLBGTStr;
     }
-
+    
     public List<FilaDataTable> getListaEstructuraFamiliar() {
         return listaEstructuraFamiliar;
     }
-
+    
     public void setListaEstructuraFamiliar(List<FilaDataTable> listaEstructuraFamiliar) {
         this.listaEstructuraFamiliar = listaEstructuraFamiliar;
     }
-
+    
     public List<FilaDataTable> getListaEstructuraFamiliarFiltro() {
         return listaEstructuraFamiliarFiltro;
     }
-
+    
     public void setListaEstructuraFamiliarFiltro(List<FilaDataTable> listaEstructuraFamiliarFiltro) {
         this.listaEstructuraFamiliarFiltro = listaEstructuraFamiliarFiltro;
     }
-
+    
     public FilaDataTable getFamiliarSeleccionado() {
         return familiarSeleccionado;
     }
-
+    
     public void setFamiliarSeleccionado(FilaDataTable familiarSeleccionado) {
         this.familiarSeleccionado = familiarSeleccionado;
     }
-
+    
     public String getNombreFamiliar() {
         return nombreFamiliar;
     }
-
+    
     public void setNombreFamiliar(String nombreFamiliar) {
         this.nombreFamiliar = nombreFamiliar;
     }
-
+    
     public String getEdadFamiliar() {
         return edadFamiliar;
     }
-
+    
     public void setEdadFamiliar(String edadFamiliar) {
         this.edadFamiliar = edadFamiliar;
     }
-
+    
     public String getParentescoFamiliar() {
         return parentescoFamiliar;
     }
-
+    
     public void setParentescoFamiliar(String parentescoFamiliar) {
         this.parentescoFamiliar = parentescoFamiliar;
     }
-
+    
     public String getOcupacionFamiliar() {
         return ocupacionFamiliar;
     }
-
+    
     public void setOcupacionFamiliar(String ocupacionFamiliar) {
         this.ocupacionFamiliar = ocupacionFamiliar;
     }
-
+    
     public List<FilaDataTable> getListaMedicamentos() {
         return listaMedicamentos;
     }
-
+    
     public void setListaMedicamentos(List<FilaDataTable> listaMedicamentos) {
         this.listaMedicamentos = listaMedicamentos;
     }
-
+    
     public List<FilaDataTable> getListaMedicamentosFiltro() {
         return listaMedicamentosFiltro;
     }
-
+    
     public void setListaMedicamentosFiltro(List<FilaDataTable> listaMedicamentosFiltro) {
         this.listaMedicamentosFiltro = listaMedicamentosFiltro;
     }
-
+    
     public FilaDataTable getMedicamentoSeleccionado() {
         System.out.println(" ... getMedicamentoSeleccionado() ... ");
         return medicamentoSeleccionado;
     }
-
+    
     public void setMedicamentoSeleccionado(FilaDataTable medicamentoSeleccionado) {
         this.medicamentoSeleccionado = medicamentoSeleccionado;
     }
-
+    
     public String getCodigo() {
         return codigo;
     }
-
+    
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
-
+    
     public String getDescripcion() {
         return descripcion;
     }
-
+    
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
+    
     public Integer getCantidad() {
         return cantidad;
     }
-
+    
     public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }
-
+    
     public String getDosis() {
         return dosis;
     }
-
+    
     public void setDosis(String dosis) {
         this.dosis = dosis;
     }
-
+    
     public String getPresentacion() {
         return presentacion;
     }
-
+    
     public void setPresentacion(String presentacion) {
         this.presentacion = presentacion;
     }
-
+    
     public String getViaAdmin() {
         return viaAdmin;
     }
-
+    
     public void setViaAdmin(String viaAdmin) {
         this.viaAdmin = viaAdmin;
     }
-
+    
     public String getPosologia() {
         return posologia;
     }
-
+    
     public void setPosologia(String posologia) {
         this.posologia = posologia;
     }
-
+    
     public String getObservacion() {
         return observacion;
     }
-
+    
     public void setObservacion(String observacion) {
         this.observacion = observacion;
     }
-
+    
     public String getConcentracion() {
         return concentracion;
     }
-
+    
     public void setConcentracion(String concentracion) {
         this.concentracion = concentracion;
     }
-
+    
     public String getIdMedicamento() {
         return idMedicamento;
     }
-
+    
     public void setIdMedicamento(String idMedicamento) {
         this.idMedicamento = idMedicamento;
     }
-
+    
     public List<FilaDataTable> getListaServicios() {
         return listaServicios;
     }
-
+    
     public void setListaServicios(List<FilaDataTable> listaServicios) {
         this.listaServicios = listaServicios;
     }
-
+    
     public List<FilaDataTable> getListaServiciosFiltro() {
         return listaServiciosFiltro;
     }
-
+    
     public void setListaServiciosFiltro(List<FilaDataTable> listaServiciosFiltro) {
         this.listaServiciosFiltro = listaServiciosFiltro;
     }
-
+    
     public FilaDataTable getServicioSeleccionado() {
         return servicioSeleccionado;
     }
-
+    
     public void setServicioSeleccionado(FilaDataTable servicioSeleccionado) {
         this.servicioSeleccionado = servicioSeleccionado;
     }
-
+    
     public String getIdServicio() {
         return idServicio;
     }
-
+    
     public void setIdServicio(String idServicio) {
         this.idServicio = idServicio;
     }
-
+    
     public String getDetDiente1() {
         return detDiente1;
     }
-
+    
     public void setDetDiente1(String detDiente1) {
         this.detDiente1 = detDiente1;
     }
-
+    
     public String getDetDiente2() {
         return detDiente2;
     }
-
+    
     public void setDetDiente2(String detDiente2) {
         this.detDiente2 = detDiente2;
     }
-
+    
     public String getDetDiente3() {
         return detDiente3;
     }
-
+    
     public void setDetDiente3(String detDiente3) {
         this.detDiente3 = detDiente3;
     }
-
+    
     public String getDetDiente4() {
         return detDiente4;
     }
-
+    
     public void setDetDiente4(String detDiente4) {
         this.detDiente4 = detDiente4;
     }
-
+    
     public String getDetDiente5() {
         return detDiente5;
     }
-
+    
     public void setDetDiente5(String detDiente5) {
         this.detDiente5 = detDiente5;
     }
-
+    
     public String getDetDiente6() {
         return detDiente6;
     }
-
+    
     public void setDetDiente6(String detDiente6) {
         this.detDiente6 = detDiente6;
     }
-
+    
     public String getDetDiente7() {
         return detDiente7;
     }
-
+    
     public void setDetDiente7(String detDiente7) {
         this.detDiente7 = detDiente7;
     }
-
+    
     public String getNumeroDiente() {
         return numeroDiente;
     }
-
+    
     public void setNumeroDiente(String numeroDiente) {
         this.numeroDiente = numeroDiente;
     }
-
+    
     public String getDetOleary1() {
         return detOleary1;
     }
-
+    
     public void setDetOleary1(String detOleary1) {
         this.detOleary1 = detOleary1;
     }
-
+    
     public String getDetOleary2() {
         return detOleary2;
     }
-
+    
     public void setDetOleary2(String detOleary2) {
         this.detOleary2 = detOleary2;
     }
-
+    
     public String getDetOleary3() {
         return detOleary3;
     }
-
+    
     public void setDetOleary3(String detOleary3) {
         this.detOleary3 = detOleary3;
     }
-
+    
     public String getDetOleary4() {
         return detOleary4;
     }
-
+    
     public void setDetOleary4(String detOleary4) {
         this.detOleary4 = detOleary4;
     }
-
+    
     public int getVariableInicial() {
         return variableInicial;
     }
-
+    
     public void setVariableInicial(int variableInicial) {
         this.variableInicial = variableInicial;
     }
-
+    
     public List<HcArchivos> getListaArchivo() {
         return listaArchivo;
     }
-
+    
     public HcArchivos getArchivoSeleccionado() {
         return archivoSeleccionado;
     }
-
+    
     public void setArchivoSeleccionado(HcArchivos archivoSeleccionado) {
         this.archivoSeleccionado = archivoSeleccionado;
     }
-
+    
     public StreamedContent getFileDownload() {
         return fileDownload;
     }
-
+    
     public String getDescriparchivo() {
         return descriparchivo;
     }
-
+    
     public void setDescriparchivo(String descriparchivo) {
         this.descriparchivo = descriparchivo;
     }
-
+    
     public List<FilaDataTable> getLista_reportes() {
         return lista_reportes;
     }
-
+    
     public void setLista_reportes(List<FilaDataTable> lista_reportes) {
         this.lista_reportes = lista_reportes;
     }
-
+    
     public FilaDataTable getReporte_seleccionado() {
         return reporte_seleccionado;
     }
-
+    
     public void setReporte_seleccionado(FilaDataTable reporte_seleccionado) {
         this.reporte_seleccionado = reporte_seleccionado;
     }
-
+    
     public HcRepExamenes getAgregar_fila_reporte() {
         return agregar_fila_reporte;
     }
-
+    
     public void setAgregar_fila_reporte(HcRepExamenes agregar_fila_reporte) {
         this.agregar_fila_reporte = agregar_fila_reporte;
     }
-
+    
     public String getExamen() {
         return examen;
     }
-
+    
     public void setExamen(String examen) {
         this.examen = examen;
     }
-
+    
     public int getPosicion() {
         return posicion;
     }
-
+    
     public void setPosicion(int posicion) {
         this.posicion = posicion;
     }
-
+    
     public Date getFecha() {
         return fecha;
     }
-
+    
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
-
+    
     public int getTipo() {
         return tipo;
     }
-
+    
     public void setTipo(int tipo) {
         this.tipo = tipo;
     }
-
+    
     public boolean isVer_ginecostetricos() {
         return ver_ginecostetricos;
     }
-
+    
     public void setVer_ginecostetricos(boolean ver_ginecostetricos) {
         this.ver_ginecostetricos = ver_ginecostetricos;
     }
-
+    
     public Integer getPas_d() {
         return pas_d;
     }
-
+    
     public void setPas_d(Integer pas_d) {
         this.pas_d = pas_d;
     }
-
+    
     public Integer getPad_d() {
         return pad_d;
     }
-
+    
     public void setPad_d(Integer pad_d) {
         this.pad_d = pad_d;
     }
-
+    
     public Integer getPas_i() {
         return pas_i;
     }
-
+    
     public void setPas_i(Integer pas_i) {
         this.pas_i = pas_i;
     }
-
+    
     public Integer getPad_i() {
         return pad_i;
     }
-
+    
     public void setPad_i(Integer pad_i) {
         this.pad_i = pad_i;
     }
-
+    
     public Integer getPas_c() {
         return pas_c;
     }
-
+    
     public void setPas_c(Integer pas_c) {
         this.pas_c = pas_c;
     }
-
+    
     public Integer getPad_c() {
         return pad_c;
     }
-
+    
     public void setPad_c(Integer pad_c) {
         this.pad_c = pad_c;
     }
-
+    
     public Integer getPas_ce() {
         return pas_ce;
     }
-
+    
     public void setPas_ce(Integer pas_ce) {
         this.pas_ce = pas_ce;
     }
-
+    
     public Integer getPad_ce() {
         return pad_ce;
     }
-
+    
     public void setPad_ce(Integer pad_ce) {
         this.pad_ce = pad_ce;
     }
-
+    
     public Integer getPas_de() {
         return pas_de;
     }
-
+    
     public void setPas_de(Integer pas_de) {
         this.pas_de = pas_de;
     }
-
+    
     public Integer getPad_de() {
         return pad_de;
     }
-
+    
     public void setPad_de(Integer pad_de) {
         this.pad_de = pad_de;
     }
-
+    
     public String getClasificacion_pa() {
         return clasificacion_pa;
     }
-
+    
     public void setClasificacion_pa(String clasificacion_pa) {
         this.clasificacion_pa = clasificacion_pa;
     }
-
+    
     public int getPas() {
         return pas;
     }
-
+    
     public void setPas(int pas) {
         this.pas = pas;
     }
-
+    
     public int getPad() {
         return pad;
     }
-
+    
     public void setPad(int pad) {
         this.pad = pad;
     }
-
+    
     public int getV() {
         return v;
     }
-
+    
     public void setV(int v) {
         this.v = v;
     }
-
+    
     public String getClasificacion_peso() {
         return clasificacion_peso;
     }
-
+    
     public void setClasificacion_peso(String clasificacion_peso) {
         this.clasificacion_peso = clasificacion_peso;
     }
-
+    
     public Double getPeso() {
         return peso;
     }
-
+    
     public void setPeso(Double peso) {
         this.peso = peso;
     }
-
+    
     public Double getTalla() {
         return talla;
     }
-
+    
     public void setTalla(Double talla) {
         this.talla = talla;
     }
-
+    
     public Double getPeso_to() {
         return peso_to;
     }
-
+    
     public void setPeso_to(Double peso_to) {
         this.peso_to = peso_to;
     }
-
+    
     public String getClasificacion_perimetro() {
         return clasificacion_perimetro;
     }
-
+    
     public void setClasificacion_perimetro(String clasificacion_perimetro) {
         this.clasificacion_perimetro = clasificacion_perimetro;
     }
-
+    
     public Double getPerimetro() {
         return perimetro;
     }
-
+    
     public void setPerimetro(Double perimetro) {
         this.perimetro = perimetro;
     }
-
+    
     public int getHoras() {
         return horas;
     }
-
+    
     public void setHoras(int horas) {
         this.horas = horas;
     }
-
+    
     public int getMinutos() {
         return minutos;
     }
-
+    
     public void setMinutos(int minutos) {
         this.minutos = minutos;
     }
-
+    
     public String getClasificacion_f() {
         return clasificacion_f;
     }
-
+    
     public void setClasificacion_f(String clasificacion_f) {
         this.clasificacion_f = clasificacion_f;
     }
-
+    
     public HcRegistroFacade getRegistroFacade() {
         return registroFacade;
     }
-
+    
     public void setRegistroFacade(HcRegistroFacade registroFacade) {
         this.registroFacade = registroFacade;
     }
-
+    
     public CitTurnosFacade getTurnosFacade() {
         return turnosFacade;
     }
-
+    
     public void setTurnosFacade(CitTurnosFacade turnosFacade) {
         this.turnosFacade = turnosFacade;
     }
-
+    
     public CitCitasFacade getCitasFacade() {
         return citasFacade;
     }
-
+    
     public void setCitasFacade(CitCitasFacade citasFacade) {
         this.citasFacade = citasFacade;
     }
-
+    
     public HcTipoRegFacade getTipoRegCliFacade() {
         return tipoRegCliFacade;
     }
-
+    
     public void setTipoRegCliFacade(HcTipoRegFacade tipoRegCliFacade) {
         this.tipoRegCliFacade = tipoRegCliFacade;
     }
-
+    
     public HcCamposRegFacade getCamposRegFacade() {
         return camposRegFacade;
     }
-
+    
     public void setCamposRegFacade(HcCamposRegFacade camposRegFacade) {
         this.camposRegFacade = camposRegFacade;
     }
-
+    
     public CfgPacientesFacade getPacientesFacade() {
         return pacientesFacade;
     }
-
+    
     public void setPacientesFacade(CfgPacientesFacade pacientesFacade) {
         this.pacientesFacade = pacientesFacade;
     }
-
+    
     public CfgMaestrosTxtPredefinidosFacade getMaestrosTxtPredefinidosFacade() {
         return maestrosTxtPredefinidosFacade;
     }
-
+    
     public void setMaestrosTxtPredefinidosFacade(CfgMaestrosTxtPredefinidosFacade maestrosTxtPredefinidosFacade) {
         this.maestrosTxtPredefinidosFacade = maestrosTxtPredefinidosFacade;
     }
-
+    
     public CfgClasificacionesFacade getMaestrosClasificacionesFacade() {
         return maestrosClasificacionesFacade;
     }
-
+    
     public void setMaestrosClasificacionesFacade(CfgClasificacionesFacade maestrosClasificacionesFacade) {
         this.maestrosClasificacionesFacade = maestrosClasificacionesFacade;
     }
-
+    
     public CfgTxtPredefinidosFacade getTxtPredefinidosFacade() {
         return txtPredefinidosFacade;
     }
-
+    
     public void setTxtPredefinidosFacade(CfgTxtPredefinidosFacade txtPredefinidosFacade) {
         this.txtPredefinidosFacade = txtPredefinidosFacade;
     }
-
+    
     public CfgDiagnosticoFacade getDiagnosticoFacade() {
         return diagnosticoFacade;
     }
-
+    
     public void setDiagnosticoFacade(CfgDiagnosticoFacade diagnosticoFacade) {
         this.diagnosticoFacade = diagnosticoFacade;
     }
-
+    
     public CfgDiagnosticoPrincipalFacade getDiagnosticoPrincipalFacade() {
         return diagnosticoPrincipalFacade;
     }
-
+    
     public void setDiagnosticoPrincipalFacade(CfgDiagnosticoPrincipalFacade diagnosticoPrincipalFacade) {
         this.diagnosticoPrincipalFacade = diagnosticoPrincipalFacade;
     }
-
+    
     public CfgUsuariosFacade getUsuariosFacade() {
         return usuariosFacade;
     }
-
+    
     public void setUsuariosFacade(CfgUsuariosFacade usuariosFacade) {
         this.usuariosFacade = usuariosFacade;
     }
-
+    
     public CfgClasificacionesFacade getClasificacionesFacade() {
         return clasificacionesFacade;
     }
-
+    
     public void setClasificacionesFacade(CfgClasificacionesFacade clasificacionesFacade) {
         this.clasificacionesFacade = clasificacionesFacade;
     }
-
+    
     public FacServicioFacade getServicioFacade() {
         return servicioFacade;
     }
-
+    
     public void setServicioFacade(FacServicioFacade servicioFacade) {
         this.servicioFacade = servicioFacade;
     }
-
+    
     public CfgEmpresaFacade getEmpresaFacade() {
         return empresaFacade;
     }
-
+    
     public void setEmpresaFacade(CfgEmpresaFacade empresaFacade) {
         this.empresaFacade = empresaFacade;
     }
-
+    
     public CfgFamiliarFacade getFamiliarFacade() {
         return familiarFacade;
     }
-
+    
     public void setFamiliarFacade(CfgFamiliarFacade familiarFacade) {
         this.familiarFacade = familiarFacade;
     }
-
+    
     public HcItemsFacade getItemsFacade() {
         return itemsFacade;
     }
-
+    
     public void setItemsFacade(HcItemsFacade itemsFacade) {
         this.itemsFacade = itemsFacade;
     }
-
+    
     public CfgMedicamentoFacade getCfgMedicamento() {
         return cfgMedicamento;
     }
-
+    
     public void setCfgMedicamento(CfgMedicamentoFacade cfgMedicamento) {
         this.cfgMedicamento = cfgMedicamento;
     }
-
+    
     public HcArchivosFacade getHcArchivosFacade() {
         return hcArchivosFacade;
     }
-
+    
     public void setHcArchivosFacade(HcArchivosFacade hcArchivosFacade) {
         this.hcArchivosFacade = hcArchivosFacade;
     }
-
+    
     public HcRepExamenesFacade getHcRepFacade() {
         return hcRepFacade;
     }
-
+    
     public void setHcRepFacade(HcRepExamenesFacade hcRepFacade) {
         this.hcRepFacade = hcRepFacade;
     }
-
+    
     public HcTipoReg getTipoRegistroClinicoActual() {
         return tipoRegistroClinicoActual;
     }
-
+    
     public void setTipoRegistroClinicoActual(HcTipoReg tipoRegistroClinicoActual) {
         this.tipoRegistroClinicoActual = tipoRegistroClinicoActual;
     }
-
+    
     public CfgPacientes getPacienteTmp() {
         return pacienteTmp;
     }
-
+    
     public void setPacienteTmp(CfgPacientes pacienteTmp) {
         this.pacienteTmp = pacienteTmp;
     }
-
+    
     public CfgTxtPredefinidos getTxtPredefinidoActual() {
         return txtPredefinidoActual;
     }
-
+    
     public void setTxtPredefinidoActual(CfgTxtPredefinidos txtPredefinidoActual) {
         this.txtPredefinidoActual = txtPredefinidoActual;
     }
-
+    
     public CfgClasificaciones getClasificacionBuscada() {
         return clasificacionBuscada;
     }
-
+    
     public void setClasificacionBuscada(CfgClasificaciones clasificacionBuscada) {
         this.clasificacionBuscada = clasificacionBuscada;
     }
-
+    
     public CfgDiagnostico getDiagnosticoBuscado() {
         return diagnosticoBuscado;
     }
-
+    
     public void setDiagnosticoBuscado(CfgDiagnostico diagnosticoBuscado) {
         this.diagnosticoBuscado = diagnosticoBuscado;
     }
-
+    
     public FacServicio getServicioBuscado() {
         return servicioBuscado;
     }
-
+    
     public void setServicioBuscado(FacServicio servicioBuscado) {
         this.servicioBuscado = servicioBuscado;
     }
-
+    
     public UploadedFile getArchivos() {
         return archivos;
     }
-
+    
     public void setArchivos(UploadedFile archivos) {
         this.archivos = archivos;
     }
-
+    
     public String getUrlFile() {
         return urlFile;
     }
-
+    
     public void setUrlFile(String urlFile) {
         this.urlFile = urlFile;
     }
-
+    
     public int getPosListaTxtPredef() {
         return posListaTxtPredef;
     }
-
+    
     public void setPosListaTxtPredef(int posListaTxtPredef) {
         this.posListaTxtPredef = posListaTxtPredef;
     }
-
+    
     public DatosFormularioHistoria getDatosFormulario_nutricion() {
         return datosFormulario_nutricion;
     }
-
+    
     public void setDatosFormulario_nutricion(DatosFormularioHistoria datosFormulario_nutricion) {
         this.datosFormulario_nutricion = datosFormulario_nutricion;
     }
-
+    
     public List<HcTipoReg> getListaTipoRegistroClinico() {
         return listaTipoRegistroClinico;
     }
-
+    
     public void setListaTipoRegistroClinico(List<HcTipoReg> listaTipoRegistroClinico) {
         this.listaTipoRegistroClinico = listaTipoRegistroClinico;
     }
-
+    
     public HcRegistro getRegistroEncontrado() {
         return registroEncontrado;
     }
-
+    
     public void setRegistroEncontrado(HcRegistro registroEncontrado) {
         this.registroEncontrado = registroEncontrado;
     }
-
+    
     public List<DatosFormularioHistoria> getListaRegistrosParaPdf() {
         return listaRegistrosParaPdf;
     }
-
+    
     public void setListaRegistrosParaPdf(List<DatosFormularioHistoria> listaRegistrosParaPdf) {
         this.listaRegistrosParaPdf = listaRegistrosParaPdf;
     }
-
+    
     public CfgEmpresa getEmpresa() {
         return empresa;
     }
-
+    
     public void setEmpresa(CfgEmpresa empresa) {
         this.empresa = empresa;
     }
-
+    
     public boolean isCargandoDesdeTab() {
         return cargandoDesdeTab;
     }
-
+    
     public void setCargandoDesdeTab(boolean cargandoDesdeTab) {
         this.cargandoDesdeTab = cargandoDesdeTab;
     }
-
+    
     public CitCitas getCitaActual() {
         return citaActual;
     }
-
+    
     public void setCitaActual(CitCitas citaActual) {
         this.citaActual = citaActual;
     }
-
+    
     public Integer getFc() {
         return fc;
     }
-
+    
     public void setFc(Integer fc) {
         this.fc = fc;
     }
-
+    
     public Integer getFr() {
         return fr;
     }
-
+    
     public void setFr(Integer fr) {
         this.fr = fr;
     }
-
+    
     public Double getT() {
         return t;
     }
-
+    
     public void setT(Double t) {
         this.t = t;
     }
-
+    
     public DatosFormularioHistoria getDatosFormulario_formmedicamentos() {
         return datosFormulario_formmedicamentos;
     }
-
+    
     public void setDatosFormulario_formmedicamentos(DatosFormularioHistoria datosFormulario_formmedicamentos) {
         this.datosFormulario_formmedicamentos = datosFormulario_formmedicamentos;
     }
@@ -6691,11 +6712,11 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             return null;
         }
     }
-
+    
     public Boolean getFalla_atencion() {
         return falla_atencion;
     }
-
+    
     public void setFalla_atencion(Boolean falla_atencion) {
         this.falla_atencion = falla_atencion;
     }
@@ -6758,7 +6779,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         this.jsonEvolucion = new Gson().toJson(valores, listType);
         return jsonEvolucion;
     }
-
+    
     public String getJsonOleary1() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         List<String> valores = new ArrayList<>();
         Class<DatosFormularioHistoria> clase = (Class<DatosFormularioHistoria>) datosFormulario.getClass();
@@ -6772,7 +6793,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         this.jsonOleary1 = new Gson().toJson(valores, listType);
         return jsonOleary1;
     }
-
+    
     public String getJsonOleary2() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         List<String> valores = new ArrayList<>();
         Class<DatosFormularioHistoria> clase = (Class<DatosFormularioHistoria>) datosFormulario.getClass();
@@ -6829,7 +6850,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     public void setJsonOleary2(String jsonOleary2) {
         this.jsonOleary2 = jsonOleary2;
     }
-
+    
     private boolean esCampoGraficaOdontologia(DatosFormularioHistoria datosReporte, List<HcDetalle> detalles, int contador) {
         int posicion = detalles.get(contador).getHcCamposReg().getPosicion();
         boolean retorno = false;
@@ -6904,11 +6925,11 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     public void setListaOdontologos(List<CfgUsuarios> listaOdontologos) {
         this.listaOdontologos = listaOdontologos;
     }
-
+    
     public List<FacServicio> getListaServiciosOrdenMedica() {
         return listaServiciosOrdenMedica;
     }
-
+    
     public void setListaServiciosOrdenMedica(List<FacServicio> listaServiciosOrdenMedica) {
         this.listaServiciosOrdenMedica = listaServiciosOrdenMedica;
     }

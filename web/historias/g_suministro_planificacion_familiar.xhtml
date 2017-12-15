@@ -227,7 +227,10 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <p:inputTextarea  styleClass="width2"  value="#{historiasMB.datosFormulario.dato14}"/>
+                        <p:autoComplete size="100" value="#{historiasMB.datosFormulario.dato14}" 
+                                        requiredMessage="Debe diligenciar los diagnosticos" 
+                                        completeMethod="#{historiasMB.autocompletarDiagnostico}"
+                                        forceSelection="true"/>
 
                     </td>                    
                 </tr>
