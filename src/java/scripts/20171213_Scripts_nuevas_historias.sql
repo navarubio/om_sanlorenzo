@@ -103,7 +103,7 @@ VALUES (81, 'PLAN' , '', 16 , 'PLAN' );
 --EVOLUCION HISTORICA GLANDULA MAMARIA
 insert into hc_tipo_reg
 SELECT 82, 'EVOLUCION HISTORICA GLANDULA MAMARIA' nombre, 
-'evolucion_historia_glandula_mamaria.xhtml' url_pagina,true as activo, 17 cant_campos, consecutivo
+'g_evolucion_historia_glandula_mamaria.xhtml' url_pagina,true as activo, 17 cant_campos, consecutivo
   FROM public.hc_tipo_reg where id_tipo_reg=80;
 
 INSERT INTO public.hc_campos_reg(id_tipo_reg, nombre, tabla, posicion, nombre_pdf) 
