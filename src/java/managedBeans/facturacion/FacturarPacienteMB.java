@@ -938,11 +938,14 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
 
         } else {//ADMINISTRADORA DE PACIENTE NO ES PARTICULAR(SI IMPORTA EL REGIMEN)
             for (FacContrato contrato : pacienteSeleccionado.getIdAdministradora().getFacContratoList()) {//System.err.println("TIPO CONTRATO: " + contrato.getTipoContrato().getDescripcion() + " - ID REGIMEN PACIENTE " + pacienteSeleccionado.getRegimen().getId() + " - ID TIPO CONTRATO " + contrato.getTipoContrato().getId());
-                if (Objects.equals(pacienteSeleccionado.getRegimen().getId(), contrato.getTipoContrato().getId())) {
+                /*CASC 20171218 
+                Se cambio para que mostrara todos los contratos de la administrada
+                */
+                //if (Objects.equals(pacienteSeleccionado.getRegimen().getId(), contrato.getTipoContrato().getId())) {
                     if (contrato.getIdManualTarifario() != null) {
                         listaContratosAplican.add(contrato);
                     }
-                }
+                //}
             }
         }
 
