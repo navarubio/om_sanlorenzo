@@ -180,6 +180,9 @@ public class CfgClasificaciones implements Serializable {
     private List<UrgDetalleConsulta> urgDetalleConsultaList;
     @OneToMany(mappedBy = "ambitoDestinoPaciente")
     private List<UrgPlanManejoPaciente> urgDestinoPacienteList;
+    
+    @OneToMany(mappedBy = "ambito")
+    private List<FacFacturaPaciente> facFacturaPaciente;
 
     public CfgClasificaciones() {
     }
@@ -757,6 +760,14 @@ public class CfgClasificaciones implements Serializable {
 
     public void setFacProgramaList1(List<FacPrograma> facProgramaList1) {
         this.facProgramaList1 = facProgramaList1;
+    }
+
+    public List<FacFacturaPaciente> getFacFacturaPaciente() {
+        return facFacturaPaciente;
+    }
+
+    public void setFacFacturaPaciente(List<FacFacturaPaciente> facFacturaPaciente) {
+        this.facFacturaPaciente = facFacturaPaciente;
     }
 
     @XmlTransient

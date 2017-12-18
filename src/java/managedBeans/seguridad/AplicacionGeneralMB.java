@@ -120,6 +120,7 @@ public class AplicacionGeneralMB {
     private List<SelectItem> listaFinalidadConsulta;
     private List<SelectItem> listaFinalidadProcedimiento;
     private List<SelectItem> listaAmbito;
+    private List<SelectItem> listaAmbitoFactura;
     private List<SelectItem> listaActoQuirurgico;
     private List<SelectItem> listaPersonalAtiende;
     private List<SelectItem> listaCausaExterna;
@@ -333,6 +334,7 @@ public class AplicacionGeneralMB {
             cargarClasificacion(ClasificacionesEnum.ActoQuirurgico);
             cargarClasificacion(ClasificacionesEnum.Administradoras);
             cargarClasificacion(ClasificacionesEnum.Ambito);
+            cargarClasificacion(ClasificacionesEnum.AmbitoFactura);
             cargarClasificacion(ClasificacionesEnum.CategoriaPaciente);
             cargarClasificacion(ClasificacionesEnum.CausaExterna);
             cargarClasificacion(ClasificacionesEnum.ClasificacionEvento);
@@ -397,6 +399,9 @@ public class AplicacionGeneralMB {
                 break;
             case Ambito:
                 listaAmbito = cargarClasificacion(maestro.toString());
+                break;
+            case AmbitoFactura:
+                listaAmbitoFactura = cargarClasificacion(maestro.toString());
                 break;
             case CategoriaPaciente:
                 listaCategoriaPaciente = cargarClasificacion(maestro.toString());
@@ -1047,6 +1052,16 @@ public class AplicacionGeneralMB {
     public void setListaAmbito(List<SelectItem> listaAmbito) {
         this.listaAmbito = listaAmbito;
     }
+
+    public List<SelectItem> getListaAmbitoFactura() {
+        return listaAmbitoFactura;
+    }
+
+    public void setListaAmbitoFactura(List<SelectItem> listaAmbitoFactura) {
+        this.listaAmbitoFactura = listaAmbitoFactura;
+    }
+    
+    
 
     public List<SelectItem> getListaActoQuirurgico() {
         return listaActoQuirurgico;

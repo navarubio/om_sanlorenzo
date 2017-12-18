@@ -55,7 +55,7 @@
 
                             <p:outputLabel styleClass="campoNoObligatorio"  value="Administradora: "  rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
                             <p:inputText id="IdAdministradora" styleClass="labelFormulario" readonly="true" style="width: 405px; overflow: hidden; display: inline-block; text-overflow:ellipsis; white-space: nowrap;" value="#{facturarPacienteMB.administradoraPaciente}" rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
-                            
+
                         </td>
                     </tr>
                     <tr>
@@ -82,7 +82,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">
+                        <td>
                             <p:outputLabel   styleClass="campoObligatorio" value="Documento" rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
                             <p:selectOneMenu id="IdComboDocumento" styleClass="campoFormulario" style="width: 293px; #{facturarPacienteMB.estiloDocumento}" value="#{facturarPacienteMB.documento}"  filter="true" filterMatchMode="contains" rendered="#{facturarPacienteMB.pacienteSeleccionado != null}">
                                 <p:ajax event="change" update="IdpanelDatosPaciente" listener="#{facturarPacienteMB.cambiaDocumento}"/>
@@ -95,13 +95,46 @@
                                 <p:ajax event="dateSelect" update="IdpanelDatosPaciente IdPanelResultados" listener="#{facturarPacienteMB.validaPeriodoImpuestos}"/>
                             </p:calendar>
                             <p:tooltip for="IdFechaFactura" value="#{facturarPacienteMB.msjHtmlPeriodo}" escape="false" />
-                            
+                        </td>
+                        <td>
+                            <p:outputLabel styleClass="campoNoObligatorio" value="Médico Atiende: " rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
+                            <p:inputText   styleClass="labelFormulario"    value="#{facturarPacienteMB.medico}" readonly="true"  rendered="#{facturarPacienteMB.pacienteSeleccionado != null}" style="width: 270px;"/>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <p:outputLabel styleClass="campoNoObligatorio" value="Médico Atiende: " rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
-                            <p:inputText   styleClass="labelFormulario"    value="#{facturarPacienteMB.medico}" readonly="true"  rendered="#{facturarPacienteMB.pacienteSeleccionado != null}" style="width: 270px;"/>
+                            <p:outputLabel styleClass="campoNoObligatorio" value="Ambito" rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>                                
+                            <p:selectOneMenu styleClass="campoFormulario"   style="width: 150px;" value="#{facturarPacienteMB.ambito}"
+                                             rendered="#{facturarPacienteMB.pacienteSeleccionado != null}">
+                                <f:selectItems value="#{aplicacionGeneralMB.listaAmbitoFactura}"/>
+                                <p:ajax event="change" update="IdFormFacturacion:idFechaDesdeAmbito IdFormFacturacion:idFechaHastaAmbito"
+                                        process="@this"
+                                        listener="#{facturarPacienteMB.cambioAmbito}"/>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel   styleClass="campoNoObligatorio" value="Desde" 
+                                             rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
+                            
+                           
+                            <p:calendar  id="idFechaDesdeAmbito"  styleClass="campoFormulario"  navigator="true" locale="es" 
+                                         style="#{facturarPacienteMB.estiloPeriodo}" value="#{facturarPacienteMB.fechaDesdeHambito}"
+                                         pattern="dd/MM/yyyy" mask="true" size="18" 
+                                         disabled="#{facturarPacienteMB.codigoAmbito eq 1}"
+                                         rendered="#{facturarPacienteMB.pacienteSeleccionado != null}">
+                            </p:calendar>
+                            <p:tooltip for="idFechaDesdeAmbito" value="Fechade Inicio segun ambito" escape="false" />
+
+                            <p:outputLabel   styleClass="campoNoObligatorio" value="Hasta" 
+                                             rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
+                            <p:calendar  id="idFechaHastaAmbito"  styleClass="campoFormulario"  navigator="true" locale="es" 
+                                         style="#{facturarPacienteMB.estiloPeriodo}" value="#{facturarPacienteMB.fechaHastaHambito}"
+                                         pattern="dd/MM/yyyy" mask="true" size="18" 
+                                         disabled="#{facturarPacienteMB.codigoAmbito eq 1}"
+                                         rendered="#{facturarPacienteMB.pacienteSeleccionado != null}">
+                            </p:calendar>
+                            <p:tooltip for="idFechaHastaAmbito" value="Fechade Final segun ambito" escape="false" />
+
+
                         </td>
                     </tr>
                 </table>
@@ -380,62 +413,62 @@
             </p:tabView>
             <p:panel style="text-align: right">
                 &nbsp;
-                    <p:commandButton
-                        title="Nueva factura" value="&nbsp;"
-                        styleClass="icon-new fg-lightBlue bg-white no-border"
-                        onclick="PF('dlgSeleccionarPaciente').show();" 
-                        style="font-size: 20px; width: 20px; height: 20px;"
-                        rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
-                    &nbsp; 
-                    <p:commandButton
-                        title="Buscar factura" value="&nbsp;"
-                        styleClass="icon-search fg-lightBlue bg-white no-border"
-                        onclick="PF('dlgSeleccionarFactura').show();"
-                        style="font-size: 20px; width: 20px; height: 20px;"
-                        rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
-                    &nbsp;
-                    <p:commandButton
-                        title="Liquidar" value="&nbsp;"
-                        styleClass="icon-floppy fg-lightBlue bg-white no-border"
-                        update="IdMensajeFacturacion"
-                        actionListener="#{facturarPacienteMB.guardarFactura}"
-                        style="font-size: 20px; width: 20px; height: 20px;"
-                        rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
-                    &nbsp;
-                    <p:commandButton
-                        id="IdBtnConsumos"
-                        title="Consumos" value="&nbsp;"
-                        styleClass="icon-cart-2 fg-lightBlue bg-white"
-                        actionListener="#{facturarPacienteMB.cargarDialogoConsumos}"
-                        style="font-size: 20px; font-size: 20px;  height: 25px; #{facturarPacienteMB.estiloBtnConsumos}"
-                        rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
-                    <p:tooltip for="IdBtnConsumos" value="#{facturarPacienteMB.msjHtmlBtnConsumos}" escape="false"/>
-                    &nbsp;
+                <p:commandButton
+                    title="Nueva factura" value="&nbsp;"
+                    styleClass="icon-new fg-lightBlue bg-white no-border"
+                    onclick="PF('dlgSeleccionarPaciente').show();" 
+                    style="font-size: 20px; width: 20px; height: 20px;"
+                    rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
+                &nbsp; 
+                <p:commandButton
+                    title="Buscar factura" value="&nbsp;"
+                    styleClass="icon-search fg-lightBlue bg-white no-border"
+                    onclick="PF('dlgSeleccionarFactura').show();"
+                    style="font-size: 20px; width: 20px; height: 20px;"
+                    rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
+                &nbsp;
+                <p:commandButton
+                    title="Liquidar" value="&nbsp;"
+                    styleClass="icon-floppy fg-lightBlue bg-white no-border"
+                    update="IdMensajeFacturacion"
+                    actionListener="#{facturarPacienteMB.guardarFactura}"
+                    style="font-size: 20px; width: 20px; height: 20px;"
+                    rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
+                &nbsp;
+                <p:commandButton
+                    id="IdBtnConsumos"
+                    title="Consumos" value="&nbsp;"
+                    styleClass="icon-cart-2 fg-lightBlue bg-white"
+                    actionListener="#{facturarPacienteMB.cargarDialogoConsumos}"
+                    style="font-size: 20px; font-size: 20px;  height: 25px; #{facturarPacienteMB.estiloBtnConsumos}"
+                    rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
+                <p:tooltip for="IdBtnConsumos" value="#{facturarPacienteMB.msjHtmlBtnConsumos}" escape="false"/>
+                &nbsp;
 <!--                    <p:outputLabel styleClass="campoNoObligatorio" value="VLR PARCIAL " rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
-                    <p:outputLabel styleClass="labelFormulario"    value="#{facturarPacienteMB.valorParcial}"  rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>-->
-                    <p:outputLabel  styleClass="campoNoObligatorio" value="COPAGO" rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
-                    <p:outputLabel id="IdCopago" styleClass="labelFormulario"    value="#{facturarPacienteMB.valorCopagoTotal}" rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
-                    <p:outputLabel  styleClass="campoNoObligatorio" value="CUOTA MOD." rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
-                    <p:outputLabel id="IdCuota" styleClass="labelFormulario"    value="#{facturarPacienteMB.valorCuotaModeradoraTotal}" rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
-                    <p:outputLabel styleClass="campoNoObligatorio" value="VLR EMPRESA" rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
-                    <p:outputLabel styleClass="labelFormulario"    value="#{facturarPacienteMB.valorEmpresa}" rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
-                    <p:outputLabel styleClass="campoNoObligatorio" value="VLR USUARIO" rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
-                    <p:outputLabel styleClass="labelFormulario"    value="#{facturarPacienteMB.valorUsuario}" rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
-                    <p:outputLabel styleClass="campoNoObligatorio" value="VLR FACTURA" rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
-                    <p:outputLabel styleClass="labelFormulario"    value="#{facturarPacienteMB.valorTotal}" rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
-                    
-                    <p:outputLabel styleClass="campoNoObligatorio" value="IVA" rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
-                    <p:outputLabel styleClass="labelFormulario"    value="#{facturarPacienteMB.valorIvaStr}" rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
-                    <p:outputLabel styleClass="campoNoObligatorio" value="CREE" rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
-                    <p:outputLabel styleClass="labelFormulario"    value="#{facturarPacienteMB.valorCreeStr}" rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
-                    
+                <p:outputLabel styleClass="labelFormulario"    value="#{facturarPacienteMB.valorParcial}"  rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>-->
+                <p:outputLabel  styleClass="campoNoObligatorio" value="COPAGO" rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
+                <p:outputLabel id="IdCopago" styleClass="labelFormulario"    value="#{facturarPacienteMB.valorCopagoTotal}" rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
+                <p:outputLabel  styleClass="campoNoObligatorio" value="CUOTA MOD." rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
+                <p:outputLabel id="IdCuota" styleClass="labelFormulario"    value="#{facturarPacienteMB.valorCuotaModeradoraTotal}" rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
+                <p:outputLabel styleClass="campoNoObligatorio" value="VLR EMPRESA" rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
+                <p:outputLabel styleClass="labelFormulario"    value="#{facturarPacienteMB.valorEmpresa}" rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
+                <p:outputLabel styleClass="campoNoObligatorio" value="VLR USUARIO" rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
+                <p:outputLabel styleClass="labelFormulario"    value="#{facturarPacienteMB.valorUsuario}" rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
+                <p:outputLabel styleClass="campoNoObligatorio" value="VLR FACTURA" rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
+                <p:outputLabel styleClass="labelFormulario"    value="#{facturarPacienteMB.valorTotal}" rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
+
+                <p:outputLabel styleClass="campoNoObligatorio" value="IVA" rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
+                <p:outputLabel styleClass="labelFormulario"    value="#{facturarPacienteMB.valorIvaStr}" rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
+                <p:outputLabel styleClass="campoNoObligatorio" value="CREE" rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
+                <p:outputLabel styleClass="labelFormulario"    value="#{facturarPacienteMB.valorCreeStr}" rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
+
             </p:panel>
             <br/>
             <p:panel id="IdPanelResultados" style="margin-top: -13px; padding-top: 0px; border: none;"  rendered="#{facturarPacienteMB.pacienteSeleccionado != null}">
                 <table class="centrar" >
                     <tr>
                         <td style="text-align: left;">
-                            
+
                             <p:outputLabel styleClass="campoNoObligatorio" value="IVA " rendered="false"/>
                             <p:outputLabel id="IdIva" styleClass="labelFormulario"    value="#{facturarPacienteMB.valorIvaStr}" style="#{facturarPacienteMB.estiloIva}" rendered="false"/>
                             <p:tooltip for="IdIva" value="#{facturarPacienteMB.msjHtmlIva}" escape="false"/>
@@ -448,19 +481,19 @@
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            
+
                             <p:tooltip for="IdCopago" value="#{facturarPacienteMB.msjHtmlCopago}" escape="false"/>
                             <p:tooltip for="IdCuota" value="#{facturarPacienteMB.msjHtmlCuotaModeradora}" escape="false"/>
                         </td>
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            
+
                         </td>
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            
+
                         </td>
                     </tr>
                 </table>

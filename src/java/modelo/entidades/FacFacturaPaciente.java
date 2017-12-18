@@ -35,28 +35,49 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "fac_factura_paciente", schema = "public")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "FacFacturaPaciente.findAll", query = "SELECT f FROM FacFacturaPaciente f"),
-    @NamedQuery(name = "FacFacturaPaciente.findByIdFacturaPaciente", query = "SELECT f FROM FacFacturaPaciente f WHERE f.idFacturaPaciente = :idFacturaPaciente"),
-    @NamedQuery(name = "FacFacturaPaciente.findByCodigoDocumento", query = "SELECT f FROM FacFacturaPaciente f WHERE f.codigoDocumento = :codigoDocumento"),
-    @NamedQuery(name = "FacFacturaPaciente.findByFechaElaboracion", query = "SELECT f FROM FacFacturaPaciente f WHERE f.fechaElaboracion = :fechaElaboracion"),
-    @NamedQuery(name = "FacFacturaPaciente.findByNumeroAutorizacion", query = "SELECT f FROM FacFacturaPaciente f WHERE f.numeroAutorizacion = :numeroAutorizacion"),
-    @NamedQuery(name = "FacFacturaPaciente.findByFechaAutorizacion", query = "SELECT f FROM FacFacturaPaciente f WHERE f.fechaAutorizacion = :fechaAutorizacion"),
-    @NamedQuery(name = "FacFacturaPaciente.findByObservacion", query = "SELECT f FROM FacFacturaPaciente f WHERE f.observacion = :observacion"),
-    @NamedQuery(name = "FacFacturaPaciente.findByResolucionDian", query = "SELECT f FROM FacFacturaPaciente f WHERE f.resolucionDian = :resolucionDian"),
-    @NamedQuery(name = "FacFacturaPaciente.findByIva", query = "SELECT f FROM FacFacturaPaciente f WHERE f.iva = :iva"),
-    @NamedQuery(name = "FacFacturaPaciente.findByCree", query = "SELECT f FROM FacFacturaPaciente f WHERE f.cree = :cree"),
-    @NamedQuery(name = "FacFacturaPaciente.findByCopago", query = "SELECT f FROM FacFacturaPaciente f WHERE f.copago = :copago"),
-    @NamedQuery(name = "FacFacturaPaciente.findByCuotaModeradora", query = "SELECT f FROM FacFacturaPaciente f WHERE f.cuotaModeradora = :cuotaModeradora"),
-    @NamedQuery(name = "FacFacturaPaciente.findByAnulada", query = "SELECT f FROM FacFacturaPaciente f WHERE f.anulada = :anulada"),
-    @NamedQuery(name = "FacFacturaPaciente.findByValorParcial", query = "SELECT f FROM FacFacturaPaciente f WHERE f.valorParcial = :valorParcial"),
-    @NamedQuery(name = "FacFacturaPaciente.findByValorEmpresa", query = "SELECT f FROM FacFacturaPaciente f WHERE f.valorEmpresa = :valorEmpresa"),
-    @NamedQuery(name = "FacFacturaPaciente.findByValorTotal", query = "SELECT f FROM FacFacturaPaciente f WHERE f.valorTotal = :valorTotal"),
-    @NamedQuery(name = "FacFacturaPaciente.findByNumeroDocumento", query = "SELECT f FROM FacFacturaPaciente f WHERE f.numeroDocumento = :numeroDocumento"),
-    @NamedQuery(name = "FacFacturaPaciente.findByFacturarComoParticular", query = "SELECT f FROM FacFacturaPaciente f WHERE f.facturarComoParticular = :facturarComoParticular"),
-    @NamedQuery(name = "FacFacturaPaciente.findByObservacionAnulacion", query = "SELECT f FROM FacFacturaPaciente f WHERE f.observacionAnulacion = :observacionAnulacion"),
-    @NamedQuery(name = "FacFacturaPaciente.findByFechaSistema", query = "SELECT f FROM FacFacturaPaciente f WHERE f.fechaSistema = :fechaSistema"),
+    @NamedQuery(name = "FacFacturaPaciente.findAll", query = "SELECT f FROM FacFacturaPaciente f")
+    ,
+    @NamedQuery(name = "FacFacturaPaciente.findByIdFacturaPaciente", query = "SELECT f FROM FacFacturaPaciente f WHERE f.idFacturaPaciente = :idFacturaPaciente")
+    ,
+    @NamedQuery(name = "FacFacturaPaciente.findByCodigoDocumento", query = "SELECT f FROM FacFacturaPaciente f WHERE f.codigoDocumento = :codigoDocumento")
+    ,
+    @NamedQuery(name = "FacFacturaPaciente.findByFechaElaboracion", query = "SELECT f FROM FacFacturaPaciente f WHERE f.fechaElaboracion = :fechaElaboracion")
+    ,
+    @NamedQuery(name = "FacFacturaPaciente.findByNumeroAutorizacion", query = "SELECT f FROM FacFacturaPaciente f WHERE f.numeroAutorizacion = :numeroAutorizacion")
+    ,
+    @NamedQuery(name = "FacFacturaPaciente.findByFechaAutorizacion", query = "SELECT f FROM FacFacturaPaciente f WHERE f.fechaAutorizacion = :fechaAutorizacion")
+    ,
+    @NamedQuery(name = "FacFacturaPaciente.findByObservacion", query = "SELECT f FROM FacFacturaPaciente f WHERE f.observacion = :observacion")
+    ,
+    @NamedQuery(name = "FacFacturaPaciente.findByResolucionDian", query = "SELECT f FROM FacFacturaPaciente f WHERE f.resolucionDian = :resolucionDian")
+    ,
+    @NamedQuery(name = "FacFacturaPaciente.findByIva", query = "SELECT f FROM FacFacturaPaciente f WHERE f.iva = :iva")
+    ,
+    @NamedQuery(name = "FacFacturaPaciente.findByCree", query = "SELECT f FROM FacFacturaPaciente f WHERE f.cree = :cree")
+    ,
+    @NamedQuery(name = "FacFacturaPaciente.findByCopago", query = "SELECT f FROM FacFacturaPaciente f WHERE f.copago = :copago")
+    ,
+    @NamedQuery(name = "FacFacturaPaciente.findByCuotaModeradora", query = "SELECT f FROM FacFacturaPaciente f WHERE f.cuotaModeradora = :cuotaModeradora")
+    ,
+    @NamedQuery(name = "FacFacturaPaciente.findByAnulada", query = "SELECT f FROM FacFacturaPaciente f WHERE f.anulada = :anulada")
+    ,
+    @NamedQuery(name = "FacFacturaPaciente.findByValorParcial", query = "SELECT f FROM FacFacturaPaciente f WHERE f.valorParcial = :valorParcial")
+    ,
+    @NamedQuery(name = "FacFacturaPaciente.findByValorEmpresa", query = "SELECT f FROM FacFacturaPaciente f WHERE f.valorEmpresa = :valorEmpresa")
+    ,
+    @NamedQuery(name = "FacFacturaPaciente.findByValorTotal", query = "SELECT f FROM FacFacturaPaciente f WHERE f.valorTotal = :valorTotal")
+    ,
+    @NamedQuery(name = "FacFacturaPaciente.findByNumeroDocumento", query = "SELECT f FROM FacFacturaPaciente f WHERE f.numeroDocumento = :numeroDocumento")
+    ,
+    @NamedQuery(name = "FacFacturaPaciente.findByFacturarComoParticular", query = "SELECT f FROM FacFacturaPaciente f WHERE f.facturarComoParticular = :facturarComoParticular")
+    ,
+    @NamedQuery(name = "FacFacturaPaciente.findByObservacionAnulacion", query = "SELECT f FROM FacFacturaPaciente f WHERE f.observacionAnulacion = :observacionAnulacion")
+    ,
+    @NamedQuery(name = "FacFacturaPaciente.findByFechaSistema", query = "SELECT f FROM FacFacturaPaciente f WHERE f.fechaSistema = :fechaSistema")
+    ,
     @NamedQuery(name = "FacFacturaPaciente.findByValorUsuario", query = "SELECT f FROM FacFacturaPaciente f WHERE f.valorUsuario = :valorUsuario")})
 public class FacFacturaPaciente implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -135,6 +156,16 @@ public class FacFacturaPaciente implements Serializable {
     @JoinColumn(name = "tipo_documento", referencedColumnName = "id")
     @ManyToOne
     private CfgClasificaciones tipoDocumento;
+    @JoinColumn(name = "ambito", referencedColumnName = "id")
+    @ManyToOne
+    private CfgClasificaciones ambito;
+    @Column(name = "fecha_desde_ambito")
+    @Temporal(TemporalType.DATE)
+    private Date fechaDesdeAmbito;
+    @Column(name = "fecha_hasta_ambito")
+    @Temporal(TemporalType.DATE)
+    private Date fechaHastaAmbito;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "facFacturaPaciente")
     private List<FacFacturaInsumo> facFacturaInsumoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "facFacturaPaciente")
@@ -399,7 +430,33 @@ public class FacFacturaPaciente implements Serializable {
     public void setTipoDocumento(CfgClasificaciones tipoDocumento) {
         this.tipoDocumento = tipoDocumento;
     }
+
+    public CfgClasificaciones getAmbito() {
+        return ambito;
+    }
+
+    public void setAmbito(CfgClasificaciones ambito) {
+        this.ambito = ambito;
+    }
+
+    public Date getFechaDesdeAmbito() {
+        return fechaDesdeAmbito;
+    }
+
+    public void setFechaDesdeAmbito(Date fechaDesdeAmbito) {
+        this.fechaDesdeAmbito = fechaDesdeAmbito;
+    }
+
+    public Date getFechaHastaAmbito() {
+        return fechaHastaAmbito;
+    }
+
+    public void setFechaHastaAmbito(Date fechaHastaAmbito) {
+        this.fechaHastaAmbito = fechaHastaAmbito;
+    }
     
+    
+
     public Boolean getFacturadaEnAdmi() {
         return facturadaEnAdmi;
     }
@@ -450,5 +507,5 @@ public class FacFacturaPaciente implements Serializable {
     public String toString() {
         return "modelo.entidades.FacFacturaPaciente[ idFacturaPaciente=" + idFacturaPaciente + " ]";
     }
-    
+
 }

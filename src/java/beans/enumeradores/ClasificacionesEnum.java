@@ -16,6 +16,7 @@ public enum ClasificacionesEnum {
     //---------------------------------------------
     ActoQuirurgico,//Acto quirurgico correspondiente a un servicio"
     Ambito,//Ambito de realización del procedimiento"
+    AmbitoFactura, //Ambito para la facturacion
     CategoriaPaciente,//Ingresos en SMLMV
     CausaExterna,//Identificador de la causa externa que origina el servicio de salud"
     ClasificacionEvento,//clasificacion evento(formulario referencia)

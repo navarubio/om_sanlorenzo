@@ -229,7 +229,7 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
     private boolean facturarComoParticularDisabled = false;//si administradora no es particular se puede facturar como administradora
     private String msjBtnFacturarParticular = "Facturar como particular: NO";
     private boolean cargandoDesdeTab = false;
-    private boolean guardando=false; //Indica que documento esta siendo guarddo y asi evitamos que al dar varios clicks en boton intente enviar varias veces a guardar
+    private boolean guardando = false; //Indica que documento esta siendo guarddo y asi evitamos que al dar varios clicks en boton intente enviar varias veces a guardar
 
     //------- CONSUMOS --------------
     private String tituloTabServiciosConsumo = "Servicios (0)";
@@ -367,6 +367,12 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
     private int cantidadPaquete = 1;
     private double valorUnitarioPaquete = 0;
     private double valorFinalPaquete = 0;
+
+    //-------------AMBITO FACTURA--------------
+    private int ambito = 1;
+    private String codigoAmbito = "";
+    private Date fechaDesdeHambito;
+    private Date fechaHastaHambito;
 
     private List<FacContrato> listaContratosAplican;//contratos que se pueden aplicar para la facturacion
     private String idContratoActual;
@@ -940,11 +946,11 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
             for (FacContrato contrato : pacienteSeleccionado.getIdAdministradora().getFacContratoList()) {//System.err.println("TIPO CONTRATO: " + contrato.getTipoContrato().getDescripcion() + " - ID REGIMEN PACIENTE " + pacienteSeleccionado.getRegimen().getId() + " - ID TIPO CONTRATO " + contrato.getTipoContrato().getId());
                 /*CASC 20171218 
                 Se cambio para que mostrara todos los contratos de la administrada
-                */
+                 */
                 //if (Objects.equals(pacienteSeleccionado.getRegimen().getId(), contrato.getTipoContrato().getId())) {
-                    if (contrato.getIdManualTarifario() != null) {
-                        listaContratosAplican.add(contrato);
-                    }
+                if (contrato.getIdManualTarifario() != null) {
+                    listaContratosAplican.add(contrato);
+                }
                 //}
             }
         }
@@ -1071,14 +1077,14 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
         }
         //Consultar ultimo medico
         CitCitas cita = citasFacade.ultimaCitaPaciente(pacienteSeleccionado.getIdPaciente());
-        if(cita!=null && cita.getIdPrestador()!=null){
-            medico = 
-                    cita.getIdPrestador().getPrimerNombre() 
-                    +" "+ cita.getIdPrestador().getSegundoNombre() 
-                    +" "+ cita.getIdPrestador().getPrimerApellido() 
-                    +" "+cita.getIdPrestador().getSegundoApellido();
+        if (cita != null && cita.getIdPrestador() != null) {
+            medico
+                    = cita.getIdPrestador().getPrimerNombre()
+                    + " " + cita.getIdPrestador().getSegundoNombre()
+                    + " " + cita.getIdPrestador().getPrimerApellido()
+                    + " " + cita.getIdPrestador().getSegundoApellido();
         }
-        
+
         recargarFilasTablasConsumo();
 //        recalcularValorFactura();
         if (!cargandoDesdeTab) {//cuando se esta cargando desde tab no se ejecuta esta funcion por que probocaria error
@@ -1124,6 +1130,16 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
         }
         //System.out.println("CargarDatosPaciente desde confirmarCambioManualTarifario");
         cargarDatosPaciente();
+    }
+
+    public void cambioAmbito() {
+        CfgClasificaciones amb = clasificacionesFachada.find(ambito);
+        if (amb != null) {
+            codigoAmbito = amb.getCodigo();
+        }
+        fechaDesdeHambito = null;
+        fechaHastaHambito = null;
+
     }
 
     public void limpiarFormularioFacturacion() {
@@ -1197,7 +1213,12 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
         valorParcial = 0;
         valorTotal = 0;
         valorCuotaModeradora = 0;
-        guardando=false;
+        guardando = false;
+        //Ambito
+        codigoAmbito = "1";
+        ambito=1;
+        fechaDesdeHambito = null;
+        fechaHastaHambito = null;
 //        if(pacienteSeleccionado==null){
 //            //System.out.println("1. Aqui va null");
 //        }else{
@@ -1518,15 +1539,20 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
             imprimirMensaje("Error", "Contrato no vigente", FacesMessage.SEVERITY_ERROR);
             return;
         }
+        if (codigoAmbito != null && !codigoAmbito.equals("1")) {
+            if (fechaDesdeHambito == null || fechaHastaHambito == null) {
+                imprimirMensaje("Error", "Debe ingresar Rango de FechasSegun Ambito", FacesMessage.SEVERITY_ERROR);
+                return;
+            }
+        }
         RequestContext.getCurrentInstance().execute("PF('dialogoConfirmarGuardarFactura').show();");
     }
 
-    
     public void confirmarGuardarFactura(ActionEvent actionEvent) {
-        if(guardando){
+        if (guardando) {
             return;
         }
-        guardando=true;
+        guardando = true;
         try {
 
             String numDocStr;
@@ -1580,6 +1606,13 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
             nuevaFactura.setFacturarComoParticular(facturarComoParticular);
             nuevaFactura.setFechaSistema(new Date());
             nuevaFactura.setIdCita(citaActual);
+            //Ambito
+            CfgClasificaciones amb = clasificacionesFachada.find(ambito);
+            nuevaFactura.setAmbito(amb);
+            if (amb != null && !amb.getCodigo().equals("1")) {
+                nuevaFactura.setFechaDesdeAmbito(fechaDesdeHambito);
+                nuevaFactura.setFechaHastaAmbito(fechaHastaHambito);
+            }
 
             facturaPacienteFacade.create(nuevaFactura);
             if (citaActual != null) {//ya se facturo la cita
@@ -1745,10 +1778,12 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
             imprimirMensaje("Correcto", nuevaFactura.getTipoDocumento().getDescripcion() + " " + numDocStr + " se ha creado.", FacesMessage.SEVERITY_INFO);
             generarPdf_Factura(nuevaFactura);
             numDocStr = "";
+
         } catch (JRException | IOException ex) {
-            Logger.getLogger(FacturarPacienteMB.class.getName()).log(Level.SEVERE, null, ex);
-        }finally{
-            guardando=false;
+            Logger.getLogger(FacturarPacienteMB.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            guardando = false;
         }
     }
 
@@ -4022,6 +4057,38 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
 
     public void setValorCuotaModeradoraTotal(double valorCuotaModeradoraTotal) {
         this.valorCuotaModeradoraTotal = valorCuotaModeradoraTotal;
+    }
+
+    public String getCodigoAmbito() {
+        return codigoAmbito;
+    }
+
+    public void setCodigoAmbito(String codigoAmbito) {
+        this.codigoAmbito = codigoAmbito;
+    }
+
+    public int getAmbito() {
+        return ambito;
+    }
+
+    public void setAmbito(int ambito) {
+        this.ambito = ambito;
+    }
+
+    public Date getFechaDesdeHambito() {
+        return fechaDesdeHambito;
+    }
+
+    public void setFechaDesdeHambito(Date fechaDesdeHambito) {
+        this.fechaDesdeHambito = fechaDesdeHambito;
+    }
+
+    public Date getFechaHastaHambito() {
+        return fechaHastaHambito;
+    }
+
+    public void setFechaHastaHambito(Date fechaHastaHambito) {
+        this.fechaHastaHambito = fechaHastaHambito;
     }
 
 }
