@@ -56,18 +56,16 @@
                             <p:outputLabel styleClass="campoNoObligatorio"  value="Administradora: "  rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
                             <p:inputText id="IdAdministradora" styleClass="labelFormulario" readonly="true" style="width: 405px; overflow: hidden; display: inline-block; text-overflow:ellipsis; white-space: nowrap;" value="#{facturarPacienteMB.administradoraPaciente}" rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p:commandButton
+                             <p:commandButton
                                 value="#{facturarPacienteMB.msjBtnFacturarParticular}"
                                 title="Usar manual tarifario de administradora ó Particular"
                                 onclick="PF('dlgFacturarComoParticular').show();"
                                 rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"
                                 disabled="#{facturarPacienteMB.facturarComoParticularDisabled}"/>
                         </td>
-                        <td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
                             <p:commandButton title="Buscar factura" value="Facturas existentes" onclick="PF('dlgSeleccionarFactura').show();" rendered="#{facturarPacienteMB.pacienteSeleccionado == null}"/>
                             <p:outputLabel   styleClass="campoObligatorio" value="Contrato" rendered="#{facturarPacienteMB.pacienteSeleccionado != null}"/>
                             <p:selectOneMenu id="IdComboContrato" styleClass="campoFormulario" value="#{facturarPacienteMB.idContratoActual}"  filter="true" filterMatchMode="contains" rendered="#{facturarPacienteMB.pacienteSeleccionado != null}" style="width: 315px; #{facturarPacienteMB.estiloAdministradoraPaciente}">

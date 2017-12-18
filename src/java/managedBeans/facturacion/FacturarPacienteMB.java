@@ -371,6 +371,7 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
     //-------------AMBITO FACTURA--------------
     private int ambito = 1;
     private String codigoAmbito = "";
+    CfgClasificaciones cfgAmbito;
     private Date fechaDesdeHambito;
     private Date fechaHastaHambito;
 
@@ -508,25 +509,23 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
                 cajaSeleccionada = listaCajas.get(0);
                 return true;
             }
+        } else if (loginMB.getUsuarioActual().getFacCajaList() == null || loginMB.getUsuarioActual().getFacCajaList().isEmpty()) {
+            mensajeConfiguracion = "No se puede facturar: \n"
+                    + "Paciente: " + pacienteSeleccionado.nombreCompleto() + " \n"
+                    + "RazÃ³n: El usuario actual no tiene una caja asignada";
+            return false;
         } else {
-            if (loginMB.getUsuarioActual().getFacCajaList() == null || loginMB.getUsuarioActual().getFacCajaList().isEmpty()) {
-                mensajeConfiguracion = "No se puede facturar: \n"
-                        + "Paciente: " + pacienteSeleccionado.nombreCompleto() + " \n"
-                        + "RazÃ³n: El usuario actual no tiene una caja asignada";
-                return false;
+            listaCajas = loginMB.getUsuarioActual().getFacCajaList();
+            caja = listaCajas.get(0).getIdCaja().toString();
+            if (listaCajas.get(0).getCerrada()) {
+                msjHtmlCaja = "La caja <br/>esta cerrada";
+                estiloCaja = "border-color: orange; border-width: 2px; border-style: solid; border-radius: 7px 7px 7px 7px;";
             } else {
-                listaCajas = loginMB.getUsuarioActual().getFacCajaList();
-                caja = listaCajas.get(0).getIdCaja().toString();
-                if (listaCajas.get(0).getCerrada()) {
-                    msjHtmlCaja = "La caja <br/>esta cerrada";
-                    estiloCaja = "border-color: orange; border-width: 2px; border-style: solid; border-radius: 7px 7px 7px 7px;";
-                } else {
-                    msjHtmlCaja = "Correcto: <br/>Caja abierta";
-                    estiloCaja = "";
-                }
-                cajaSeleccionada = listaCajas.get(0);
-                return true;
+                msjHtmlCaja = "Correcto: <br/>Caja abierta";
+                estiloCaja = "";
             }
+            cajaSeleccionada = listaCajas.get(0);
+            return true;
         }
     }
 
@@ -627,27 +626,26 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
                 listaDocumentos.add(contratoActual.getTipoFacturacion());
             }
             //System.out.println("Aqui8");
-        } else {//evento
-            //System.out.println("Aqui9");
-            if (contratoActual.getTipoFacturacion().getCodigo().compareTo("06") == 0) {//todos
-                //System.out.println("Aqui10");
-                for (int i = 0; i < listaDocumentos.size(); i++) {
-                    //System.out.println("Aqui11");
-                    if (listaDocumentos.get(i).getDescripcion().compareTo("Orden de Servicio") == 0
-                            || listaDocumentos.get(i).getDescripcion().compareTo("Orden de Servicio Extramural") == 0
-                            || listaDocumentos.get(i).getDescripcion().compareTo("Recibo de Caja") == 0) {
-                        //System.out.println("Aqui12");
-                    } else {
-                        //System.out.println("Aqui13");
-                        listaDocumentos.remove(i);
-                        i--;
-                    }
+        } else//evento
+        //System.out.println("Aqui9");
+        if (contratoActual.getTipoFacturacion().getCodigo().compareTo("06") == 0) {//todos
+            //System.out.println("Aqui10");
+            for (int i = 0; i < listaDocumentos.size(); i++) {
+                //System.out.println("Aqui11");
+                if (listaDocumentos.get(i).getDescripcion().compareTo("Orden de Servicio") == 0
+                        || listaDocumentos.get(i).getDescripcion().compareTo("Orden de Servicio Extramural") == 0
+                        || listaDocumentos.get(i).getDescripcion().compareTo("Recibo de Caja") == 0) {
+                    //System.out.println("Aqui12");
+                } else {
+                    //System.out.println("Aqui13");
+                    listaDocumentos.remove(i);
+                    i--;
                 }
-            } else {
-                //System.out.println("Aqui14");
-                listaDocumentos = new ArrayList<>();
-                listaDocumentos.add(contratoActual.getTipoFacturacion());
             }
+        } else {
+            //System.out.println("Aqui14");
+            listaDocumentos = new ArrayList<>();
+            listaDocumentos.add(contratoActual.getTipoFacturacion());
         }
         //System.out.println("Aqui15  " + listaDocumentos.size());
         if (!listaDocumentos.isEmpty()) {
@@ -719,19 +717,18 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
                 valorCopago = 0;
                 msjHtmlCopago = "No aplica copago<br/> a cotizante";
             }
-        } else {//no es cotizante
-            if (contratoActual.getCpc()) {//aplica copago a no cotizante
-                if (facturadoAnteriormente) {
-                    valorCopago = 0;//aqui toma el valor de copago nivel_1 pero se debe escoger dependiendo del nivel de usuario
-                    msjHtmlCopago = "Aplica copago a beneficiario<br/> pero ya se cobro anteriormente ";
-                } else {
-                    valorCopago = contratoActual.getCp1();//aqui toma el valor de copago nivel_1 pero se debe escoger dependiendo del nivel de usuario
-                    msjHtmlCopago = "Aplica copago<br/> a beneficiario";
-                }
-            } else {//no aplica copago a no cotizante
-                valorCopago = 0;
-                msjHtmlCopago = "No aplica copago<br/> a beneficiario";
+        } else//no es cotizante
+        if (contratoActual.getCpc()) {//aplica copago a no cotizante
+            if (facturadoAnteriormente) {
+                valorCopago = 0;//aqui toma el valor de copago nivel_1 pero se debe escoger dependiendo del nivel de usuario
+                msjHtmlCopago = "Aplica copago a beneficiario<br/> pero ya se cobro anteriormente ";
+            } else {
+                valorCopago = contratoActual.getCp1();//aqui toma el valor de copago nivel_1 pero se debe escoger dependiendo del nivel de usuario
+                msjHtmlCopago = "Aplica copago<br/> a beneficiario";
             }
+        } else {//no aplica copago a no cotizante
+            valorCopago = 0;
+            msjHtmlCopago = "No aplica copago<br/> a beneficiario";
         }
         //------CUOTA MODERADORA----------------
         if (esCotizante) {//es cotizante
@@ -747,19 +744,18 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
                 valorCuotaModeradora = 0;
                 msjHtmlCuotaModeradora = "No aplica cuota moderadora<br/> a cotizante";
             }
-        } else {//no es cotizante
-            if (contratoActual.getCmc()) {//aplica cuota moderadora a no cotizante
-                if (facturadoAnteriormente) {
-                    valorCuotaModeradora = 0;//aqui toma el valor de copago nivel_1 pero se debe escoger dependiendo del nivel de usuario
-                    msjHtmlCuotaModeradora = "Aplica cuota moderadora a beneficiario<br/> pero ya se cobro anteriormente";
-                } else {
-                    valorCuotaModeradora = contratoActual.getCm1();//aqui toma el valor de copago nivel_1 pero se debe escoger dependiendo del nivel de usuario
-                    msjHtmlCuotaModeradora = "Aplica cuota moderadora<br/> a beneficiario";
-                }
-            } else {//no aplica cuota moderadora a no cotizante
-                valorCuotaModeradora = 0;
-                msjHtmlCuotaModeradora = "No aplica cuota moderadora<br/> a beneficiario";
+        } else//no es cotizante
+        if (contratoActual.getCmc()) {//aplica cuota moderadora a no cotizante
+            if (facturadoAnteriormente) {
+                valorCuotaModeradora = 0;//aqui toma el valor de copago nivel_1 pero se debe escoger dependiendo del nivel de usuario
+                msjHtmlCuotaModeradora = "Aplica cuota moderadora a beneficiario<br/> pero ya se cobro anteriormente";
+            } else {
+                valorCuotaModeradora = contratoActual.getCm1();//aqui toma el valor de copago nivel_1 pero se debe escoger dependiendo del nivel de usuario
+                msjHtmlCuotaModeradora = "Aplica cuota moderadora<br/> a beneficiario";
             }
+        } else {//no aplica cuota moderadora a no cotizante
+            valorCuotaModeradora = 0;
+            msjHtmlCuotaModeradora = "No aplica cuota moderadora<br/> a beneficiario";
         }
     }
 
@@ -1215,8 +1211,8 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
         valorCuotaModeradora = 0;
         guardando = false;
         //Ambito
-        codigoAmbito = "1";
-        ambito=1;
+        codigoAmbito = null;
+        ambito = 1;
         fechaDesdeHambito = null;
         fechaHastaHambito = null;
 //        if(pacienteSeleccionado==null){
@@ -1539,8 +1535,14 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
             imprimirMensaje("Error", "Contrato no vigente", FacesMessage.SEVERITY_ERROR);
             return;
         }
-        if (codigoAmbito != null && !codigoAmbito.equals("1")) {
-            if (fechaDesdeHambito == null || fechaHastaHambito == null) {
+        
+        cfgAmbito=cfgAmbito = clasificacionesFachada.find(ambito);
+        if(cfgAmbito==null){
+            imprimirMensaje("Error", "Debe Seleccionar Ambito", FacesMessage.SEVERITY_ERROR);
+            return;
+        } else {
+            if (!cfgAmbito.getCodigo().equals("1")  &&
+                    (fechaDesdeHambito == null || fechaHastaHambito == null)) {
                 imprimirMensaje("Error", "Debe ingresar Rango de FechasSegun Ambito", FacesMessage.SEVERITY_ERROR);
                 return;
             }
@@ -1607,9 +1609,8 @@ public class FacturarPacienteMB extends MetodosGenerales implements Serializable
             nuevaFactura.setFechaSistema(new Date());
             nuevaFactura.setIdCita(citaActual);
             //Ambito
-            CfgClasificaciones amb = clasificacionesFachada.find(ambito);
-            nuevaFactura.setAmbito(amb);
-            if (amb != null && !amb.getCodigo().equals("1")) {
+            nuevaFactura.setAmbito(cfgAmbito);
+            if (cfgAmbito != null && !cfgAmbito.getCodigo().equals("1")) {
                 nuevaFactura.setFechaDesdeAmbito(fechaDesdeHambito);
                 nuevaFactura.setFechaHastaAmbito(fechaHastaHambito);
             }
