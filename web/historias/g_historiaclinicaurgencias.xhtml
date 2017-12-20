@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core">  
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">  
     <h:head>
         <title>Usuarios</title>
         <link href="../recursos/css/estilos.css" rel="stylesheet"/>        
@@ -783,6 +784,67 @@
                         <p:inputTextarea  cols="89"  value="#{historiasMB.datosFormulario.dato119}"/>
                     </td>
                 </tr>
+                <tr>
+                    <td colspan="2"><h2>3047</h2></td>
+                </tr>
+                <tr>
+                    <td><p:outputLabel value="Cobertura" /></td>
+                    <td><p:outputLabel value="Triage" /></td>
+                </tr>
+                <tr>
+                    <td>
+                        <p:selectOneMenu  styleClass="width1" value="#{historiasMB.datosFormulario.dato121}">
+                            <f:selectItem itemLabel="" itemValue=""/>
+                            <f:selectItem itemLabel="Regimen Contributivo" itemValue="Regimen Contributivo"/>
+                            <f:selectItem itemLabel="Regimen Subsidiado" itemValue="Regimen Subsidiado"/>
+                        </p:selectOneMenu>  
+                    </td>
+                    <td>
+                        <p:selectOneMenu  styleClass="width1" value="#{historiasMB.datosFormulario.dato122}">
+                            <f:selectItem itemLabel="" itemValue=""/>
+                            <f:selectItem itemLabel="AMARILLO ROJO VERDE" itemValue="AMARILLO ROJO VERDE"/>
+                            <f:selectItem itemLabel="ROJO" itemValue="ROJO"/>
+                            <f:selectItem itemLabel="NARANJA" itemValue="NARANJA"/>
+                            <f:selectItem itemLabel="AMARILLO" itemValue="AMARILLO"/>
+                            <f:selectItem itemLabel="VERDE" itemValue="VERDE"/>
+                            <f:selectItem itemLabel="AZUL" itemValue="AZUL"/>
+                        </p:selectOneMenu>  
+                    </td>     
+                </tr>
+                <tr>
+                    <td colspan="2"><p:outputLabel value="Origen de Atención" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p:inputText styleClass="width1" value="#{historiasMB.datosFormulario.dato123}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td><p:outputLabel value="Remitido" /></td>
+                    <td><p:outputLabel value="Destino" /></td>
+                </tr>
+                <tr>
+                    <td>
+                        <p:selectOneMenu  styleClass="width1" value="#{historiasMB.datosFormulario.dato124}">
+                            <f:selectItem itemLabel="" itemValue=""/>
+                            <f:selectItem itemLabel="SI" itemValue="SI"/>
+                            <f:selectItem itemLabel="NO" itemValue="NO"/>
+                        </p:selectOneMenu>  
+                    </td>
+                    <td>
+                        <p:selectOneMenu  styleClass="width1" value="#{historiasMB.datosFormulario.dato125}">
+                            <f:selectItem itemLabel="" itemValue=""/>
+                            <f:selectItem itemLabel="REMISION" itemValue="REMISION"/>
+                            <f:selectItem itemLabel="CONTRAREMISION" itemValue="CONTRAREMISION"/>
+                            <f:selectItem itemLabel="DOMICILIO" itemValue="DOMICILIO"/>
+                            <f:selectItem itemLabel="INTERNACION" itemValue="INTERNACION"/>
+                            <f:selectItem itemLabel="OBSERVACION" itemValue="OBSERVACION"/>
+                            <f:selectItem itemLabel="OTRO" itemValue="OTRO"/>
+                        </p:selectOneMenu>  
+                    </td>     
+                </tr>
+
+
                 <tr>
                     <td colspan="2">
                         <h2>
