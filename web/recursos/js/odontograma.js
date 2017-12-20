@@ -1,6 +1,6 @@
 var imagePath = '';
 var adulto = false;
-var odonData = {selected: 'clean', idJsonField: '.jsonOdontograma', idMasterContainer: '.odontograma', idBaseContainer: 'odo', values: {}};
+var odonData = {selected: 'clean', idJsonField: '.jsonOdontograma', idMasterContainer: '.odontograma', idBaseContainer: 'odo', idCariados: '.odoCariados', idPerdidos: '.odoPerdidos', idObturados: '.odoObturados', idSanos: '.odoSanos', values: {}};
 var evolData = {selected: 'clean', idJsonField: '.jsonEvolucion', idMasterContainer: '.evolucion', idBaseContainer: 'evo', values: {}};
 function setDataGraphics() {
     getDataTeeth(odonData);
@@ -41,7 +41,7 @@ function drawTable(container, data) {
                     data.selected = $(this).text().replace(/ /g, '_');
                 });
     });
-    $(container).append('<table style="margin:0 auto;"><tbody>\n\
+    $(container).append('<table class="teeth" style="margin:0 auto"><tbody>\n\
 <tr class="adu"><td>18</td><td>17</td><td>16</td><td>15</td><td>14</td><td>13</td><td>12</td><td>11</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td></tr>\n\
 <tr class="nin"><td>58</td><td>57</td><td>56</td><td>55</td><td>54</td><td>53</td><td>52</td><td>51</td><td>61</td><td>62</td><td>63</td><td>64</td><td>65</td><td>66</td><td>67</td><td>68</td></tr>\n\
 <tr class="nin"><td>88</td><td>87</td><td>86</td><td>85</td><td>84</td><td>83</td><td>82</td><td>81</td><td>71</td><td>72</td><td>73</td><td>74</td><td>75</td><td>76</td><td>77</td><td>78</td></tr>\n\
@@ -190,6 +190,44 @@ function onClickTooth(element, data) {
         element.style({'fill': data.values[data.selected].color})
                 .data({selected: data.selected});
     }
+    if (/^odo$/.test(data.idBaseContainer)) {
+        setTimeout(function () {
+            calcData(data);
+        }, 10);
+    }
+}
+function calcData(data) {
+    var sanos = 0;
+    var obturados = 0;
+    var cariados = 0;
+    var perdidos = 0;
+    $.each($(data.idMasterContainer + ' table:last').find((adulto ? '.adu' : '.nin') + ' td'), function (index, td) {
+        var idContainer = $(td).attr('id');
+        if ($('#' + idContainer + '-d').length) {
+            var sano = true;
+            var aux = SVG.get(idContainer + '-d').data('selected');
+            if (aux !== 'LIMPIAR') {
+                perdidos += (/^DIENTE_EXTRAIDO|EXODONCIA_INDICADA$/.test(aux) ? 1 : 0);
+                obturados += (/^PROTESIS_FIJA_PONTICO|DIENTE_REMP_PROTESIS_TOTAL_O_PARCIAL|PROVISIONAL|DIENTE_REMP_PROTESIS_REMOVIBLE|IMPLANTE$/.test(aux) ? 1 : 0);
+                sano = false;
+            } else {
+                for (j = 1; j < 8; j++) {
+                    var aux = SVG.get(idContainer + '-z' + j).data('selected');
+                    sano = sano && /^LIMPIAR$/.test(aux);
+                    if (aux !== 'LIMPIAR') {
+                        obturados += (!/^CARIES$/.test(aux) ? 1 : 0);
+                        cariados += (/^CARIES$/.test(aux) ? 1 : 0);
+                        break;
+                    }
+                }
+            }
+            sanos += (sano ? 1 : 0);
+        }
+    });
+    $(data.idSanos).val(sanos);
+    $(data.idObturados).val(obturados);
+    $(data.idPerdidos).val(perdidos);
+    $(data.idCariados).val(cariados);
 }
 function cleanTooth(idContainer) {
     var values = ['EXODONCIA_INDICADA', 'DIENTE_EXTRAIDO', 'DIENTE_SIN_ERUPCIONAR', 'PROTESIS_FIJA_PONTICO', 'DIENTE_REMP_PROTESIS_TOTAL_O_PARCIAL', 'PROVISIONAL', 'DIENTE_REMP_PROTESIS_REMOVIBLE', 'DIENTE_EN_ERUPCION', 'DIENTE_PARCIALMENTE_ERUPCIONADO', 'SELLANTE_EN_BOCA', 'IMPLANTE'];
