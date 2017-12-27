@@ -145,6 +145,10 @@
                                                     event="dateSelect"
                                                     listener="#{pacientesMB.cambiaFechaNacimiento(event)}"
                                                     rendered="IdEdad"/> 
+                                                <p:ajax 
+                                                    event="change"
+                                                    listener="#{pacientesMB.cambiaFechaNacimiento(event)}"
+                                                    rendered="IdEdad"/> 
                                             </p:calendar>
                                             <p:outputLabel   styleClass="campoNoObligatorio" id="IdEdad" value="#{pacientesMB.fechNacimiConvetEdad}" style="width: 72px;" />
                                             <p:outputLabel   styleClass="campoObligatorio" value="Género"/>

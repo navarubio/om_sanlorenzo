@@ -3,6 +3,7 @@
 	<property name="ireport.zoom" value="1.2745232708414267"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="458"/>
+	<parameter name="urlBaseImagenes" class="java.lang.String"/>
 	<field name="dato0" class="java.lang.Object">
 		<fieldDescription><![CDATA[dato0]]></fieldDescription>
 	</field>
@@ -1140,7 +1141,7 @@
 			</frame>
 			<image>
 				<reportElement uuid="8b63d2d4-7578-48fe-a03b-1fd3e6132711" x="113" y="447" width="321" height="202"/>
-				<imageExpression><![CDATA["/home/casc/Descargas/imagen_historia.jpg"]]></imageExpression>
+				<imageExpression><![CDATA[$P{urlBaseImagenes}+"imagen_glandula_mamaria.jpg"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement uuid="210900f6-54eb-46c3-a757-055de2646682" x="3" y="420" width="229" height="20"/>

@@ -44,9 +44,20 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <p:inputTextarea  cols="80" value="#{historiasMB.datosFormulario.dato1}"/>
+                        <p:inputTextarea id="dato1"  cols="80" value="#{historiasMB.datosFormulario.dato1}"/>
 
                     </td>                    
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p:selectOneMenu  value="#{historiasMB.valorDefecto1}" styleClass="campoFormulario">
+                            <f:selectItems value="#{historiasMB.listaValoresDefecto}"/>
+                        </p:selectOneMenu>  
+                        &nbsp;
+                        <p:commandButton value="Valor por Defecto" actionListener="#{historiasMB.cambiarValorDefecto(1)}" 
+                                         update="dato1 IdFocus">
+                        </p:commandButton>
+                    </td>
                 </tr>
 
                 <!--Ant personales-->
@@ -60,8 +71,8 @@
                         <td><p:outputLabel value="Patologicos" /></td>
                     </tr>
                     <tr>
-                        <td><p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato2}"/></td>
-                        <td><p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato3}"/></td>
+                        <td><p:inputText id="dato2" styleClass="width1" value="#{historiasMB.datosFormulario.dato2}"/></td>
+                        <td><p:inputText id="dato3" styleClass="width1" value="#{historiasMB.datosFormulario.dato3}"/></td>
                     </tr>
 
                     <tr>
@@ -69,41 +80,52 @@
                         <td><p:outputLabel value="Quirurgicos" /></td>
                     </tr>
                     <tr>
-                        <td><p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato4}"/></td>
-                        <td><p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato5}"/></td>
+                        <td><p:inputText id="dato4" styleClass="width1" value="#{historiasMB.datosFormulario.dato4}"/></td>
+                        <td><p:inputText id="dato5" styleClass="width1" value="#{historiasMB.datosFormulario.dato5}"/></td>
                     </tr>
                     <tr>                   
                         <td><p:outputLabel value="Inf. transmisión sexual" /></td>
                         <td><p:outputLabel value="Alérgicos" /></td>
                     </tr>
                     <tr>
-                        <td><p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato6}"/></td>
-                        <td><p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato7}"/></td>
+                        <td><p:inputText id="dato6" styleClass="width1" value="#{historiasMB.datosFormulario.dato6}"/></td>
+                        <td><p:inputText id="dato7" styleClass="width1" value="#{historiasMB.datosFormulario.dato7}"/></td>
                     </tr>
                     <tr>
                         <td><p:outputLabel value="Inmunológicos" /></td>
                         <td><p:outputLabel value="Tóxicos" /></td>
                     </tr>
                     <tr>
-                        <td><p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato8}"/></td>
-                        <td><p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato9}"/></td>
+                        <td><p:inputText id="dato8" styleClass="width1" value="#{historiasMB.datosFormulario.dato8}"/></td>
+                        <td><p:inputText id="dato9" styleClass="width1" value="#{historiasMB.datosFormulario.dato9}"/></td>
                     </tr>
                     <tr>
                         <td><p:outputLabel value="Farmacológicos" /></td>
                         <td><p:outputLabel value="Cirugías/hospitalizaciones" /></td>
                     </tr>
                     <tr>
-                        <td><p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato10}"/></td>
-                        <td><p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato11}"/></td>
+                        <td><p:inputText id="dato10" styleClass="width1" value="#{historiasMB.datosFormulario.dato10}"/></td>
+                        <td><p:inputText id="dato11" styleClass="width1" value="#{historiasMB.datosFormulario.dato11}"/></td>
                     </tr>
                     <tr><td><p:outputLabel value="Nutricionales" /></td>
                         <td><p:outputLabel value="Otros antecedentes" /></td>
                     </tr>
                     <tr>
-                        <td><p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato12}"/></td>
-                        <td><p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato13}"/></td>
+                        <td><p:inputText id="dato12" styleClass="width1" value="#{historiasMB.datosFormulario.dato12}"/></td>
+                        <td><p:inputText id="dato13" styleClass="width1" value="#{historiasMB.datosFormulario.dato13}"/></td>
                     </tr>
                 </div>
+                <tr>
+                    <td colspan="2">
+                        <p:selectOneMenu  value="#{historiasMB.valorDefecto2}" styleClass="campoFormulario">
+                            <f:selectItems value="#{historiasMB.listaValoresDefecto}"/>
+                        </p:selectOneMenu>  
+                        &nbsp;
+                        <p:commandButton value="Valor por Defecto" actionListener="#{historiasMB.cambiarValorDefecto(2)}" 
+                                         update="dato2 dato3 dato4 dato5 dato6 dato7 dato8 dato9 dato10 dato11 dato12 dato13">
+                        </p:commandButton>
+                    </td>
+                </tr>
                 <!--Fin antecedentes personales-->
 
                 <!--ANTECEDENTES FAMILIARES-->
@@ -116,8 +138,8 @@
                     <td><p:outputLabel value="Patologicos" /></td>
                 </tr>
                 <tr>
-                    <td><p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato14}"/></td>
-                    <td><p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato15}"/></td>
+                    <td><p:inputText id="dato14" styleClass="width1" value="#{historiasMB.datosFormulario.dato14}"/></td>
+                    <td><p:inputText id="dato15" styleClass="width1" value="#{historiasMB.datosFormulario.dato15}"/></td>
                 </tr>
 
                 <tr>
@@ -125,8 +147,8 @@
                     <td><p:outputLabel value="Farmacologicos" /></td>
                 </tr>
                 <tr>
-                    <td><p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato16}"/></td>
-                    <td><p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato17}"/></td>
+                    <td><p:inputText id="dato16" styleClass="width1" value="#{historiasMB.datosFormulario.dato16}"/></td>
+                    <td><p:inputText id="dato17" styleClass="width1" value="#{historiasMB.datosFormulario.dato17}"/></td>
                 </tr>
 
                 <tr>
@@ -134,8 +156,8 @@
                     <td><p:outputLabel value="Obstetricos" /></td>
                 </tr>
                 <tr>
-                    <td><p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato18}"/></td>
-                    <td><p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato19}"/></td>
+                    <td><p:inputText id="dato18" styleClass="width1" value="#{historiasMB.datosFormulario.dato18}"/></td>
+                    <td><p:inputText id="dato19" styleClass="width1" value="#{historiasMB.datosFormulario.dato19}"/></td>
                 </tr>
 
                 <tr>
@@ -143,10 +165,20 @@
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
-                    <td><p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato20}"/></td>
+                    <td><p:inputText id="dato20" styleClass="width1" value="#{historiasMB.datosFormulario.dato20}"/></td>
                     <td>&nbsp;</td>
                 </tr>
-
+                <tr>
+                    <td colspan="2">
+                        <p:selectOneMenu  value="#{historiasMB.valorDefecto3}" styleClass="campoFormulario">
+                            <f:selectItems value="#{historiasMB.listaValoresDefecto}"/>
+                        </p:selectOneMenu>  
+                        &nbsp;
+                        <p:commandButton value="Valor por Defecto" actionListener="#{historiasMB.cambiarValorDefecto(3)}" 
+                                         update="dato14 dato15 dato16 dato17 dato18 dato19 dato20">
+                        </p:commandButton>
+                    </td>
+                </tr>
                 <!--Fin ant. familiares-->
 
 
@@ -161,8 +193,8 @@
                     <td><p:outputLabel value="Frecuencia respiratoria" /></td>
                 </tr>
                 <tr>
-                    <td><p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato21}"/></td>
-                    <td><p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato22}"/></td>
+                    <td><p:inputText id="dato21" styleClass="width1" value="#{historiasMB.datosFormulario.dato21}"/></td>
+                    <td><p:inputText id="dato22" styleClass="width1" value="#{historiasMB.datosFormulario.dato22}"/></td>
                 </tr>
 
                 <tr>
@@ -170,8 +202,8 @@
                     <td><p:outputLabel value="Saturacion" /></td>
                 </tr>
                 <tr>
-                    <td><p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato23}"/></td>
-                    <td><p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato24}"/></td>
+                    <td><p:inputText id="dato23" styleClass="width1" value="#{historiasMB.datosFormulario.dato23}"/></td>
+                    <td><p:inputText id="dato24" styleClass="width1" value="#{historiasMB.datosFormulario.dato24}"/></td>
                 </tr>
 
                 <tr>
@@ -179,16 +211,27 @@
                     <td><p:outputLabel value="Precion A. Distolica" /></td>
                 </tr>
                 <tr>
-                    <td><p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato25}"/></td>
-                    <td><p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato26}"/></td>
+                    <td><p:inputText id="dato25" styleClass="width1" value="#{historiasMB.datosFormulario.dato25}"/></td>
+                    <td><p:inputText id="dato26" styleClass="width1" value="#{historiasMB.datosFormulario.dato26}"/></td>
                 </tr>
                 <tr>
                     <td><p:outputLabel value="Pulso" /></td>
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
-                    <td><p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato27}"/></td>
+                    <td><p:inputText id="dato27" styleClass="width1" value="#{historiasMB.datosFormulario.dato27}"/></td>
                     <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p:selectOneMenu  value="#{historiasMB.valorDefecto4}" styleClass="campoFormulario">
+                            <f:selectItems value="#{historiasMB.listaValoresDefecto}"/>
+                        </p:selectOneMenu>  
+                        &nbsp;
+                        <p:commandButton value="Valor por Defecto" actionListener="#{historiasMB.cambiarValorDefecto(4)}" 
+                                         update="dato21 dato22 dato23 dato24 dato25 dato26 dato27">
+                        </p:commandButton>
+                    </td>
                 </tr>
                 <!-- Fin de Signos vitales-->
 
@@ -204,12 +247,12 @@
                 </tr>    
                 <tr>
                     <td colspan="1">
-                        <p:inputText styleClass="width1"  value="#{historiasMB.datosFormulario.dato28}">
+                        <p:inputText id="dato28" styleClass="width1"  value="#{historiasMB.datosFormulario.dato28}">
                             <p:ajax event="change" listener="#{historiasMB.calcularIMCHisCliTriage}" update="txtImc"/>
                         </p:inputText>
                     </td>
                     <td colspan="1">
-                        <p:inputText styleClass="width1"  value="#{historiasMB.datosFormulario.dato29}">
+                        <p:inputText id="dato29" styleClass="width1"  value="#{historiasMB.datosFormulario.dato29}">
                             <p:ajax event="change" listener="#{historiasMB.calcularIMCHisCliTriage}" update="txtImc"/>
                         </p:inputText>
                     </td>
@@ -221,6 +264,18 @@
                 <tr>
                     <td colspan="1">
                         <p:inputText styleClass="width1" readonly = "true" id="txtImc" value="#{historiasMB.datosFormulario.dato30}"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <p:selectOneMenu  value="#{historiasMB.valorDefecto5}" styleClass="campoFormulario">
+                            <f:selectItems value="#{historiasMB.listaValoresDefecto}"/>
+                        </p:selectOneMenu>  
+                        &nbsp;
+                        <p:commandButton value="Valor por Defecto" actionListener="#{historiasMB.cambiarValorDefecto(5)}" 
+                                         update="dato28 dato29 txtImc">
+                        </p:commandButton>
                     </td>
                 </tr>
                 <!--FIN DE EXAMEN FÍSICO-->

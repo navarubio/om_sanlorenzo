@@ -26,7 +26,7 @@
             <p:growl id="IdMensajeUsuarios"  showDetail="true" sticky="false" autoUpdate="true" life="2000"/>
             <table style="margin-left: auto; margin-right: auto;">
 
-                <tr><td colspan="2"><h2>HISTORIA CLÍNICA DE PREVENCIÓN DE CÁNCER DE DE SENO</h2></td></tr>
+                <tr><td colspan="2"><h2>HISTORIA CLÍNICA DE PREVENCIÓN DE CÁNCER DE SENO</h2></td></tr>
 
                 <!--DATOS DEL PACIENTE-->
                 <div>
@@ -92,56 +92,83 @@
                 <!--MOTIVO DE CONSULTA-->
                 <tr><td colspan="2"><h2>MOTIVO DE CONSULTA</h2></td></tr>
                 <div>
+                    
+                        <tr>
+                            <td colspan="2">
+                                <p:inputTextarea styleClass="width2" id="dato8" value="#{historiasMB.datosFormulario.dato8}" counter="display" 
+                                                 maxlength="500" counterTemplate="{0} caracteres restantes." autoResize="false"/>
+                                <br/>
+                                <h:outputText id="display" />
+                            </td>                   
+                        </tr>
+                    
                     <tr>
                         <td colspan="2">
-                            <p:inputTextarea styleClass="width2" value="#{historiasMB.datosFormulario.dato8}" counter="display" maxlength="140" counterTemplate="{0} caracteres restantes." autoResize="false"/>
-                            <br/>
-                            <h:outputText id="display" />
-                        </td>                   
+                            <p:selectOneMenu  value="#{historiasMB.valorDefecto1}" styleClass="campoFormulario">
+                                <f:selectItems value="#{historiasMB.listaValoresDefecto}"/>
+                            </p:selectOneMenu>  
+                            &nbsp;
+                            <p:commandButton value="Valor por Defecto" actionListener="#{historiasMB.cambiarValorDefecto(1)}" 
+                                             update="dato8">
+                            </p:commandButton>
+                        </td>
                     </tr>
+
                 </div>
                 <!--ENFERMEDAD ACTUAL-->
                 <tr><td colspan="2"><h2>ENFERMEDAD ACTUAL</h2></td></tr>
                 <div>
-                    <tr>
-                        <td colspan="2">
-                            <p:inputTextarea styleClass="width2" value="#{historiasMB.datosFormulario.dato9}" counter="display2" maxlength="140" counterTemplate="{0} caracteres restantes." autoResize="false"/>
-                            <br/>
-                            <h:outputText id="display2" />
-                        </td>                   
-                    </tr>
+                    
+                        <tr>
+                            <td colspan="2">
+                                <p:inputTextarea id="dato9" styleClass="width2" value="#{historiasMB.datosFormulario.dato9}" counter="display2" maxlength="500" counterTemplate="{0} caracteres restantes." autoResize="false"/>
+                                <br/>
+                                <h:outputText id="display2" />
+                            </td>                   
+                        </tr>
 
-                    <tr>
-                        <td><p:outputLabel value="ANTECEDENTES FAMILIARES:"/></td>
-                        <td><p:outputLabel value="ANTECEDENTES PERSONALES:"/></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato10}" maxlength="60" placeholder="60 caracteres máximo"/> 
-                        </td> 
-                        <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato11}" maxlength="60" placeholder="60 caracteres máximo"/>
-                        </td> 
-                    </tr>
-                    <tr>
-                        <td><p:outputLabel value="PATOLÓGICOS:"/></td>
-                        <td><p:outputLabel value="QUIRÚRGICOS:"/></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato12}" maxlength="60" placeholder="60 caracteres máximo"/> 
-                        </td> 
-                        <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato13}" maxlength="60" placeholder="60 caracteres máximo"/>
-                        </td> 
-                    </tr>
-                    <tr>
-                        <td colspan="2"><p:outputLabel value="TÓXICOS:"/></td>
-                    </tr>
+                        <tr>
+                            <td><p:outputLabel value="ANTECEDENTES FAMILIARES:"/></td>
+                            <td><p:outputLabel value="ANTECEDENTES PERSONALES:"/></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:inputText id="dato10" styleClass="width1" value="#{historiasMB.datosFormulario.dato10}" maxlength="60" placeholder="60 caracteres máximo"/> 
+                            </td> 
+                            <td>
+                                <p:inputText id="dato11" styleClass="width1" value="#{historiasMB.datosFormulario.dato11}" maxlength="60" placeholder="60 caracteres máximo"/>
+                            </td> 
+                        </tr>
+                        <tr>
+                            <td><p:outputLabel value="PATOLÓGICOS:"/></td>
+                            <td><p:outputLabel value="QUIRÚRGICOS:"/></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:inputText id="dato12" styleClass="width1" value="#{historiasMB.datosFormulario.dato12}" maxlength="60" placeholder="60 caracteres máximo"/> 
+                            </td> 
+                            <td>
+                                <p:inputText id="dato13" styleClass="width1" value="#{historiasMB.datosFormulario.dato13}" maxlength="60" placeholder="60 caracteres máximo"/>
+                            </td> 
+                        </tr>
+                        <tr>
+                            <td colspan="2"><p:outputLabel value="TÓXICOS:"/></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <p:inputText id="dato14" styleClass="width2" value="#{historiasMB.datosFormulario.dato14}" maxlength="60" placeholder="60 caracteres máximo"/> 
+                            </td> 
+                        </tr>
+                    
                     <tr>
                         <td colspan="2">
-                            <p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato14}" maxlength="60" placeholder="60 caracteres máximo"/> 
-                        </td> 
+                            <p:selectOneMenu value="#{historiasMB.valorDefecto2}" styleClass="campoFormulario">
+                                <f:selectItems value="#{historiasMB.listaValoresDefecto}"/>
+                            </p:selectOneMenu>  
+                            <p:commandButton value="Valor por Defecto" actionListener="#{historiasMB.cambiarValorDefecto(2)}" 
+                                             update="dato9 dato10 dato11 dato12 dato13 dato14">
+                            </p:commandButton>
+                        </td>
                     </tr>
                 </div>
 
@@ -151,43 +178,55 @@
                 <!--GINECO-OBSTÉTRICOS-->
                 <tr><td colspan="2"><h2>GINECO-OBSTÉTRICOS</h2></td></tr>
                 <div>
+                    
+                        <tr>
+                            <td><p:outputLabel value="MENARQUIA:"/></td>
+                            <td><p:outputLabel value="CICLO MENSTRUAL:"/></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:inputText id="dato15" styleClass="width1" value="#{historiasMB.datosFormulario.dato15}" maxlength="10" placeholder="10 caracteres máximo"/> 
+                            </td> 
+                            <td>
+                                <p:inputText id="dato16" styleClass="width1" value="#{historiasMB.datosFormulario.dato16}" maxlength="10" placeholder="10 caracteres máximo"/>
+                            </td> 
+                        </tr>
+                        <tr>
+                            <td><p:outputLabel value="FUM:"/></td>
+                            <td><p:outputLabel value="SEXARQUIA:"/></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:calendar id="dato17" navigator="true" locale="es" value="#{historiasMB.datosFormulario.dato17}" pattern="dd/MM/yyyy" mask="true">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </p:calendar>
+                            </td> 
+                            <td>
+                                <p:inputText id="dato18" styleClass="width1" value="#{historiasMB.datosFormulario.dato18}" maxlength="10" placeholder="10 caracteres máximo"/>
+                            </td> 
+                        </tr>
+                        <tr>
+                            <td><p:outputLabel value="NRO COMPAÑEROS SEXUAL:"/></td>
+                            <td><p:outputLabel value="ITS:"/></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:inputText id="dato19" styleClass="width1" value="#{historiasMB.datosFormulario.dato19}" maxlength="4" placeholder="4 caracteres máximo"/>
+                            </td> 
+                            <td>
+                                <p:inputText id="dato20" styleClass="width1" value="#{historiasMB.datosFormulario.dato20}" maxlength="20" placeholder="20 caracteres máximo"/>
+                            </td> 
+                        </tr>
+                    
                     <tr>
-                        <td><p:outputLabel value="MENARQUIA:"/></td>
-                        <td><p:outputLabel value="CICLO MENSTRUAL:"/></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato15}" maxlength="10" placeholder="10 caracteres máximo"/> 
-                        </td> 
-                        <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato16}" maxlength="10" placeholder="10 caracteres máximo"/>
-                        </td> 
-                    </tr>
-                    <tr>
-                        <td><p:outputLabel value="FUM:"/></td>
-                        <td><p:outputLabel value="SEXARQUIA:"/></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p:calendar navigator="true" locale="es" value="#{historiasMB.datosFormulario.dato17}" pattern="dd/MM/yyyy" mask="true">
-                                <f:convertDateTime pattern="dd/MM/yyyy"/>
-                            </p:calendar>
-                        </td> 
-                        <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato18}" maxlength="10" placeholder="10 caracteres máximo"/>
-                        </td> 
-                    </tr>
-                    <tr>
-                        <td><p:outputLabel value="NRO COMPAÑEROS SEXUAL:"/></td>
-                        <td><p:outputLabel value="ITS:"/></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato19}" maxlength="4" placeholder="4 caracteres máximo"/>
-                        </td> 
-                        <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato20}" maxlength="20" placeholder="20 caracteres máximo"/>
-                        </td> 
+                        <td colspan="2">
+                            <p:selectOneMenu value="#{historiasMB.valorDefecto3}" styleClass="campoFormulario">
+                                <f:selectItems value="#{historiasMB.listaValoresDefecto}"/>
+                            </p:selectOneMenu>  
+                            <p:commandButton value="Valor por Defecto" actionListener="#{historiasMB.cambiarValorDefecto(3)}" 
+                                             update="dato15 dato16 dato18 dato19 dato20">
+                            </p:commandButton>
+                        </td>
                     </tr>
                 </div>
 
@@ -195,73 +234,85 @@
                 <!--EMBARAZADA:-->
                 <tr><td colspan="2"><h2>EMBARAZADA:</h2></td></tr>
                 <div>
-                    <tr>
-                        <td><p:outputLabel value="SI:"/></td>
-                        <td><p:outputLabel value="EG:"/></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato21}" maxlength="6" placeholder="6 caracteres máximo"/> 
-                        </td> 
-                        <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato22}" maxlength="6" placeholder="6 caracteres máximo"/>
-                        </td> 
-                    </tr>
-                    <tr>
-                        <td><p:outputLabel value="FPP:"/></td>
-                        <td><p:outputLabel value="NO:"/></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato23}" maxlength="6" placeholder="6 caracteres máximo"/> 
-                        </td> 
-                        <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato24}" maxlength="6" placeholder="6 caracteres máximo"/>
-                        </td> 
-                    </tr>
-                    <tr>
-                        <td><p:outputLabel value="P:"/></td>
-                        <td><p:outputLabel value="A:"/></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato25}" maxlength="6" placeholder="6 caracteres máximo"/> 
-                        </td> 
-                        <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato26}" maxlength="6" placeholder="6 caracteres máximo"/>
-                        </td> 
-                    </tr>
-                    <tr>
-                        <td><p:outputLabel value="C:"/></td>
-                        <td><p:outputLabel value="FUP:"/></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato27}" maxlength="6" placeholder="6 caracteres máximo"/> 
-                        </td> 
-                        <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato28}" maxlength="6" placeholder="6 caracteres máximo"/>
-                        </td> 
-                    </tr>
-                    <tr>
-                        <td><p:outputLabel value="FUC:"/></td>
-                        <td><p:outputLabel value="RESULTADO:"/></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato29}" maxlength="6" placeholder="6 caracteres máximo"/> 
-                        </td> 
-                        <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato30}" maxlength="35" placeholder="35 caracteres máximo"/>
-                        </td> 
-                    </tr>
-                    <tr>
-                        <td colspan="2"><p:outputLabel value="TRATAMIENTOS O PRECEDIMIENTOS:"/></td>
-                    </tr>
+                    
+                        <tr>
+                            <td><p:outputLabel value="SI:"/></td>
+                            <td><p:outputLabel value="EG:"/></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:inputText id="dato21" styleClass="width1" value="#{historiasMB.datosFormulario.dato21}" maxlength="6" placeholder="6 caracteres máximo"/> 
+                            </td> 
+                            <td>
+                                <p:inputText id="dato22" styleClass="width1" value="#{historiasMB.datosFormulario.dato22}" maxlength="6" placeholder="6 caracteres máximo"/>
+                            </td> 
+                        </tr>
+                        <tr>
+                            <td><p:outputLabel value="FPP:"/></td>
+                            <td><p:outputLabel value="NO:"/></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:inputText id="dato23" styleClass="width1" value="#{historiasMB.datosFormulario.dato23}" maxlength="6" placeholder="6 caracteres máximo"/> 
+                            </td> 
+                            <td>
+                                <p:inputText id="dato24" styleClass="width1" value="#{historiasMB.datosFormulario.dato24}" maxlength="6" placeholder="6 caracteres máximo"/>
+                            </td> 
+                        </tr>
+                        <tr>
+                            <td><p:outputLabel value="P:"/></td>
+                            <td><p:outputLabel value="A:"/></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:inputText id="dato25" styleClass="width1" value="#{historiasMB.datosFormulario.dato25}" maxlength="6" placeholder="6 caracteres máximo"/> 
+                            </td> 
+                            <td>
+                                <p:inputText id="dato26" styleClass="width1" value="#{historiasMB.datosFormulario.dato26}" maxlength="6" placeholder="6 caracteres máximo"/>
+                            </td> 
+                        </tr>
+                        <tr>
+                            <td><p:outputLabel value="C:"/></td>
+                            <td><p:outputLabel value="FUP:"/></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:inputText id="dato27" styleClass="width1" value="#{historiasMB.datosFormulario.dato27}" maxlength="6" placeholder="6 caracteres máximo"/> 
+                            </td> 
+                            <td>
+                                <p:inputText id="dato28" styleClass="width1" value="#{historiasMB.datosFormulario.dato28}" maxlength="6" placeholder="6 caracteres máximo"/>
+                            </td> 
+                        </tr>
+                        <tr>
+                            <td><p:outputLabel value="FUC:"/></td>
+                            <td><p:outputLabel value="RESULTADO:"/></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:inputText id="dato29" styleClass="width1" value="#{historiasMB.datosFormulario.dato29}" maxlength="6" placeholder="6 caracteres máximo"/> 
+                            </td> 
+                            <td>
+                                <p:inputText id="dato30" styleClass="width1" value="#{historiasMB.datosFormulario.dato30}" maxlength="35" placeholder="35 caracteres máximo"/>
+                            </td> 
+                        </tr>
+                        <tr>
+                            <td colspan="2"><p:outputLabel value="TRATAMIENTOS O PRECEDIMIENTOS:"/></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <p:inputText id="dato31" styleClass="width1" value="#{historiasMB.datosFormulario.dato31}" maxlength="60" placeholder="60 caracteres máximo"/> 
+                            </td> 
+                        </tr>
+                    
                     <tr>
                         <td colspan="2">
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato31}" maxlength="60" placeholder="60 caracteres máximo"/> 
-                        </td> 
+                            <p:selectOneMenu value="#{historiasMB.valorDefecto4}" styleClass="campoFormulario">
+                                <f:selectItems value="#{historiasMB.listaValoresDefecto}"/>
+                            </p:selectOneMenu>  
+                            <p:commandButton value="Valor por Defecto" actionListener="#{historiasMB.cambiarValorDefecto(4)}" 
+                                             update="dato21 dato22 dato23 dato24 dato25 dato26 dato27 dato28 dato29 dato30 dato31">
+                            </p:commandButton>
+                        </td>
                     </tr>
                 </div>
 
@@ -270,91 +321,114 @@
                 <!--REFIERE SIGNOS DE VIOLENCIOA Y/O MALTRATO-->
                 <tr><td colspan="2"><h2>REFIERE SIGNOS DE VIOLENCIOA Y/O MALTRATO</h2></td></tr>
                 <div>
-                    <tr>
-                        <td><p:outputLabel value="FÍSICO:"/></td>
-                        <td><p:outputLabel value="SEXUAL:"/></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato32}" maxlength="30" placeholder="30 caracteres máximo"/> 
-                        </td> 
-                        <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato33}" maxlength="30" placeholder="30 caracteres máximo"/>
-                        </td> 
-                    </tr>
-                    <tr>
-                        <td colspan="2"><p:outputLabel value="PSICOLÓGICO:"/></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato34}" maxlength="70" placeholder="70 caracteres máximo"/> 
-                        </td> 
-                    </tr>
-                    <tr>
-                        <td colspan="2"><p:outputLabel value="VALORACIÓN BIOPSICO-SOCIAL:"/></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <p:inputTextarea styleClass="width2" value="#{historiasMB.datosFormulario.dato35}" counter="display3" maxlength="140" counterTemplate="{0} caracteres restantes." autoResize="false"/>
-                            <br/>
-                            <h:outputText id="display3" />
-                        </td>                   
-                    </tr>
-                    <tr>
-                        <td colspan="2"><p:outputLabel value="REVISIÓN POR SISTEMAS:"/></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <p:inputTextarea styleClass="width2" value="#{historiasMB.datosFormulario.dato36}" counter="display4" maxlength="140" counterTemplate="{0} caracteres restantes." autoResize="false"/>
-                            <br/>
-                            <h:outputText id="display4" />
-                        </td>                   
-                    </tr>
-                     <tr>
-                        <td colspan="2"><p:outputLabel value="EXÁMEN FÍSICO:"/></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato37}" maxlength="70" placeholder="70 caracteres máximo"/> 
-                        </td> 
-                    </tr>
-                     <tr>
-                        <td colspan="2"><p:outputLabel value="EXAMEN GINECOLÓGICO:"/></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato38}" maxlength="70" placeholder="70 caracteres máximo"/> 
-                        </td> 
-                    </tr>
+                    
+                        <tr>
+                            <td><p:outputLabel value="FÍSICO:"/></td>
+                            <td><p:outputLabel value="SEXUAL:"/></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:inputText id="dato32" styleClass="width1" value="#{historiasMB.datosFormulario.dato32}" maxlength="30" placeholder="30 caracteres máximo"/> 
+                            </td> 
+                            <td>
+                                <p:inputText id="dato33" styleClass="width1" value="#{historiasMB.datosFormulario.dato33}" maxlength="30" placeholder="30 caracteres máximo"/>
+                            </td> 
+                        </tr>
+                        <tr>
+                            <td colspan="2"><p:outputLabel value="PSICOLÓGICO:"/></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <p:inputText id="dato34" styleClass="width1" value="#{historiasMB.datosFormulario.dato34}" maxlength="70" placeholder="70 caracteres máximo"/> 
+                            </td> 
+                        </tr>
+                        <tr>
+                            <td colspan="2"><p:outputLabel value="VALORACIÓN BIOPSICO-SOCIAL:"/></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <p:inputTextarea id="dato35" styleClass="width2" value="#{historiasMB.datosFormulario.dato35}" counter="display3" maxlength="500" counterTemplate="{0} caracteres restantes." autoResize="false"/>
+                                <br/>
+                                <h:outputText id="display3" />
+                            </td>                   
+                        </tr>
+                        <tr>
+                            <td colspan="2"><p:outputLabel value="REVISIÓN POR SISTEMAS:"/></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <p:inputTextarea id="dato36" styleClass="width2" value="#{historiasMB.datosFormulario.dato36}" counter="display4" maxlength="500" counterTemplate="{0} caracteres restantes." autoResize="false"/>
+                                <br/>
+                                <h:outputText id="display4" />
+                            </td>                   
+                        </tr>
+                        <tr>
+                            <td colspan="2"><p:outputLabel value="EXÁMEN FÍSICO:"/></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <p:inputText id="dato37" styleClass="width1" value="#{historiasMB.datosFormulario.dato37}" maxlength="70" placeholder="70 caracteres máximo"/> 
+                            </td> 
+                        </tr>
+                        <tr>
+                            <td colspan="2"><p:outputLabel value="EXAMEN GINECOLÓGICO:"/></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <p:inputText id="dato38" styleClass="width1" value="#{historiasMB.datosFormulario.dato38}" maxlength="70" placeholder="70 caracteres máximo"/> 
+                            </td> 
+                        </tr>
+                    
                 </div>
-                
+                <tr>
+                    <td colspan="2">
+                        <p:selectOneMenu value="#{historiasMB.valorDefecto5}" styleClass="campoFormulario">
+                            <f:selectItems value="#{historiasMB.listaValoresDefecto}"/>
+                        </p:selectOneMenu>  
+                        <p:commandButton value="Valor por Defecto" actionListener="#{historiasMB.cambiarValorDefecto(5)}" 
+                                         update="dato32 dato33 dato34 dato35 dato36 dato37 dato38">
+                        </p:commandButton>
+                    </td>
+                </tr>
                 <tr>
                     <td colspan="2"><h2>DIAGNOSTICO</h2></td>
                 </tr>
                 <div>
-                    <tr>
-                        <td colspan="2">
-                            <p:outputLabel styleClass="labelFormulario" style="width2" value="DIAGNOSTICO:"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <p:autoComplete size="100" value="#{historiasMB.datosFormulario.dato39}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/>
-                        </td>
-                    </tr>
                     
-                    <tr>
-                        <td colspan="2"><p:outputLabel value="TRATAMIENTO:"/></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <p:inputTextarea styleClass="width2" value="#{historiasMB.datosFormulario.dato40}" counter="display5" maxlength="140" counterTemplate="{0} caracteres restantes." autoResize="false"/>
-                            <br/>
-                            <h:outputText id="display5" />
-                        </td>                   
-                    </tr>
-                </div>
+                        <tr>
+                            <td colspan="2">
+                                <p:outputLabel styleClass="labelFormulario" style="width2" value="DIAGNOSTICO:"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <p:autoComplete id="dato39" size="100" value="#{historiasMB.datosFormulario.dato39}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/>
+                            </td>
+                        </tr>
 
+                        <tr>
+                            <td colspan="2"><p:outputLabel value="TRATAMIENTO:"/></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <p:inputTextarea id="dato40" styleClass="width2" value="#{historiasMB.datosFormulario.dato40}" counter="display5" maxlength="500" counterTemplate="{0} caracteres restantes." autoResize="false"/>
+                                <br/>
+                                <h:outputText id="display5" />
+                            </td>                   
+                        </tr>
+                    
+                </div>
+                <tr>
+                    <td colspan="2">
+                        <p:selectOneMenu value="#{historiasMB.valorDefecto6}" styleClass="campoFormulario">
+                            <f:selectItems value="#{historiasMB.listaValoresDefecto}"/>
+                        </p:selectOneMenu>  
+                        &nbsp;
+                        <p:commandButton value="Valor por Defecto" actionListener="#{historiasMB.cambiarValorDefecto(6)}" 
+                                         update="dato39 dato40">
+                        </p:commandButton>
+                    </td>
+                </tr>
 
                 <tr><td colspan="2">&nbsp;</td></tr>
                 <tr>

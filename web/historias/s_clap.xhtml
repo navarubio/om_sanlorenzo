@@ -57,8 +57,6 @@
                         </td> 
                     </tr>
                 </div>
-
-
                 <!--DATOS DE LA CONSULTA-->
                 <tr><td colspan="2"><h2>DATOS DE LA CONSULTA</h2></td></tr>
                 <div>
@@ -67,7 +65,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <p:inputTextarea styleClass="width2" value="#{historiasMB.datosFormulario.dato2}" counter="display" maxlength="140" counterTemplate="{0} caracteres restantes." autoResize="false"/>
+                            <p:inputTextarea id="dato2" styleClass="width2" value="#{historiasMB.datosFormulario.dato2}" counter="display" maxlength="500" counterTemplate="{0} caracteres restantes." autoResize="false"/>
                             <br/>
                             <h:outputText id="display" />
                         </td>                   
@@ -77,7 +75,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <p:inputTextarea styleClass="width2" value="#{historiasMB.datosFormulario.dato3}" counter="display2" maxlength="140" counterTemplate="{0} caracteres restantes." autoResize="false"/>
+                            <p:inputTextarea  id="dato3" styleClass="width2" value="#{historiasMB.datosFormulario.dato3}" counter="display2" maxlength="500" counterTemplate="{0} caracteres restantes." autoResize="false"/>
                             <br/>
                             <h:outputText id="display2" />
                         </td>                   
@@ -87,15 +85,26 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <p:inputTextarea styleClass="width2" value="#{historiasMB.datosFormulario.dato4}" counter="display3" maxlength="140" counterTemplate="{0} caracteres restantes." autoResize="false"/>
+                            <p:inputTextarea id="dato4" styleClass="width2" value="#{historiasMB.datosFormulario.dato4}" counter="display3" maxlength="500" counterTemplate="{0} caracteres restantes." autoResize="false"/>
                             <br/>
                             <h:outputText id="display3" />
                         </td>                   
                     </tr>
                 </div>
+                <tr>
+                    <td colspan="2">
+                        <p:selectOneMenu  value="#{historiasMB.valorDefecto1}" styleClass="campoFormulario">
+                            <f:selectItems value="#{historiasMB.listaValoresDefecto}"/>
+                        </p:selectOneMenu>  
+                        &nbsp;
+                        <p:commandButton value="Valor por Defecto" actionListener="#{historiasMB.cambiarValorDefecto(1)}" 
+                                         update="dato2 dato3 dato4">
+                        </p:commandButton>
+                    </td>
+                </tr>
 
 
-                <!--ANTECEDENTES PERSONALES-->
+                <!--ANTECEcto2NTES PERSONALES-->
                 <tr><td colspan="2"><h2>ANTECEDENTES PERSONALES</h2></td></tr>
                 <div>
                     <tr>
@@ -377,12 +386,23 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <p:inputTextarea styleClass="width2" value="#{historiasMB.datosFormulario.dato29}" counter="display4" maxlength="140" counterTemplate="{0} caracteres restantes." autoResize="false"/>
+                            <p:inputTextarea id="dato29" styleClass="width2" value="#{historiasMB.datosFormulario.dato29}" counter="display4" maxlength="500" counterTemplate="{0} caracteres restantes." autoResize="false"/>
                             <br/>
                             <h:outputText id="display4" />
                         </td>                   
                     </tr>
                 </div>
+                <tr>
+                    <td colspan="2">
+                        <p:selectOneMenu  value="#{historiasMB.valorDefecto2}" styleClass="campoFormulario">
+                            <f:selectItems value="#{historiasMB.listaValoresDefecto}"/>
+                        </p:selectOneMenu>  
+                        &nbsp;
+                        <p:commandButton value="Valor por Defecto" actionListener="#{historiasMB.cambiarValorDefecto(2)}" 
+                                         update="dato29">
+                        </p:commandButton>
+                    </td>
+                </tr>
 
 
 
@@ -575,10 +595,10 @@
                     </tr>
                     <tr>
                         <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato46}" maxlength="25" placeholder="25 caracteres máximo"/>
+                            <p:inputText id="dato46" styleClass="width1" value="#{historiasMB.datosFormulario.dato46}" maxlength="25" placeholder="25 caracteres máximo"/>
                         </td> 
                         <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato47}" maxlength="25" placeholder="25 caracteres máximo"/>
+                            <p:inputText id="dato47" styleClass="width1" value="#{historiasMB.datosFormulario.dato47}" maxlength="25" placeholder="25 caracteres máximo"/>
                         </td> 
                     </tr>
                     <tr>
@@ -633,7 +653,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato52}" maxlength="10" placeholder="10 caracteres máximo"/>
+                            <p:inputText id="dato52" styleClass="width1" value="#{historiasMB.datosFormulario.dato52}" maxlength="10" placeholder="10 caracteres máximo"/>
                         </td> 
                     </tr>
                     <tr>
@@ -641,12 +661,23 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <p:inputTextarea styleClass="width2" value="#{historiasMB.datosFormulario.dato53}" counter="display5" maxlength="160" counterTemplate="{0} caracteres restantes." autoResize="false"/>
+                            <p:inputTextarea id="dato53" styleClass="width2" value="#{historiasMB.datosFormulario.dato53}" counter="display5" maxlength="160" counterTemplate="{0} caracteres restantes." autoResize="false"/>
                             <br/>
                             <h:outputText id="display5" />
                         </td>  
                     </tr>
                 </div>
+                <tr>
+                    <td colspan="2">
+                        <p:selectOneMenu  value="#{historiasMB.valorDefecto3}" styleClass="campoFormulario">
+                            <f:selectItems value="#{historiasMB.listaValoresDefecto}"/>
+                        </p:selectOneMenu>  
+                        &nbsp;
+                        <p:commandButton value="Valor por Defecto" actionListener="#{historiasMB.cambiarValorDefecto(3)}" 
+                                         update="dato46 dato47 dato52 dato53">
+                        </p:commandButton>
+                    </td>
+                </tr>
 
 
 
@@ -682,10 +713,10 @@
                     </tr>
                     <tr>
                         <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato56}" maxlength="2" placeholder="2 caracteres máximo"/>
+                            <p:inputText id="dato56" styleClass="width1" value="#{historiasMB.datosFormulario.dato56}" maxlength="2" placeholder="2 caracteres máximo"/>
                         </td> 
                         <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato57}" maxlength="2" placeholder="2 caracteres máximo"/>
+                            <p:inputText id="dato57" styleClass="width1" value="#{historiasMB.datosFormulario.dato57}" maxlength="2" placeholder="2 caracteres máximo"/>
                         </td> 
                     </tr>
                     <tr>
@@ -706,10 +737,10 @@
                     </tr>
                     <tr>
                         <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato59}" maxlength="2" placeholder="2 caracteres máximo"/>
+                            <p:inputText id="dato59" styleClass="width1" value="#{historiasMB.datosFormulario.dato59}" maxlength="2" placeholder="2 caracteres máximo"/>
                         </td>
                         <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato60}" maxlength="40" placeholder="40 caracteres máximo"/>
+                            <p:inputText id="dato60" styleClass="width1" value="#{historiasMB.datosFormulario.dato60}" maxlength="40" placeholder="40 caracteres máximo"/>
                         </td>
                     </tr>
                     <tr>
@@ -725,7 +756,7 @@
                             </p:selectOneMenu> 
                         </td>
                         <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato62}" maxlength="20" placeholder="20 caracteres máximo"/>
+                            <p:inputText id="dato62" styleClass="width1" value="#{historiasMB.datosFormulario.dato62}" maxlength="20" placeholder="20 caracteres máximo"/>
                         </td>
                     </tr>
                     <tr>
@@ -741,7 +772,7 @@
                             </p:selectOneMenu> 
                         </td>
                         <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato64}" maxlength="20" placeholder="20 caracteres máximo"/>
+                            <p:inputText id="dato64" styleClass="width1" value="#{historiasMB.datosFormulario.dato64}" maxlength="20" placeholder="20 caracteres máximo"/>
                         </td>
                     </tr>
                     <tr>
@@ -749,10 +780,21 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato65}" maxlength="70" placeholder="70 caracteres máximo"/>
+                            <p:inputText id="dato65" styleClass="width2" value="#{historiasMB.datosFormulario.dato65}" maxlength="70" placeholder="70 caracteres máximo"/>
                         </td> 
                     </tr>
                 </div>
+                <tr>
+                    <td colspan="2">
+                        <p:selectOneMenu  value="#{historiasMB.valorDefecto4}" styleClass="campoFormulario">
+                            <f:selectItems value="#{historiasMB.listaValoresDefecto}"/>
+                        </p:selectOneMenu>  
+                        &nbsp;
+                        <p:commandButton value="Valor por Defecto" actionListener="#{historiasMB.cambiarValorDefecto(4)}" 
+                                         update="dato56 dato57 dato59 dato60 dato62 dato64 dato65">
+                        </p:commandButton>
+                    </td>
+                </tr>
 
 
                 <!--TRABAJO-->
@@ -773,7 +815,7 @@
                             </p:selectOneMenu>  
                         </td> 
                         <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato67}" maxlength="2" placeholder="2 caracteres máximo"/>
+                            <p:inputText id="dato67" styleClass="width1" value="#{historiasMB.datosFormulario.dato67}" maxlength="2" placeholder="2 caracteres máximo"/>
                         </td> 
                     </tr>
                     <tr>
@@ -782,7 +824,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato68}" maxlength="3" placeholder="3 caracteres máximo"/>
+                            <p:inputText id="dato68" styleClass="width1" value="#{historiasMB.datosFormulario.dato68}" maxlength="3" placeholder="3 caracteres máximo"/>
                         </td> 
                         <td>
                             <p:selectOneMenu styleClass="campoFormulario"   value="#{historiasMB.datosFormulario.dato69}">
@@ -838,7 +880,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato73}" maxlength="70" placeholder="70 caracteres máximo"/>
+                            <p:inputText id="dato73" styleClass="width2" value="#{historiasMB.datosFormulario.dato73}" maxlength="70" placeholder="70 caracteres máximo"/>
                         </td> 
                     </tr>
                     <tr>
@@ -846,11 +888,21 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato74}" maxlength="70" placeholder="70 caracteres máximo"/>
+                            <p:inputText id="dato74" styleClass="width2" value="#{historiasMB.datosFormulario.dato74}" maxlength="70" placeholder="70 caracteres máximo"/>
                         </td> 
                     </tr>
                 </div>
-
+                <tr>
+                    <td colspan="2">
+                        <p:selectOneMenu  value="#{historiasMB.valorDefecto5}" styleClass="campoFormulario">
+                            <f:selectItems value="#{historiasMB.listaValoresDefecto}"/>
+                        </p:selectOneMenu>  
+                        &nbsp;
+                        <p:commandButton value="Valor por Defecto" actionListener="#{historiasMB.cambiarValorDefecto(5)}" 
+                                         update="dato67 dato68 dato73 dato74">
+                        </p:commandButton>
+                    </td>
+                </tr>
 
 
                 <!--VIDA SOCIAL-->
@@ -904,10 +956,10 @@
                     </tr>
                     <tr>
                         <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato79}" maxlength="3" placeholder="3 caracteres máximo"/>
+                            <p:inputText id="dato79" styleClass="width1" value="#{historiasMB.datosFormulario.dato79}" maxlength="3" placeholder="3 caracteres máximo"/>
                         </td> 
                         <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato80}" maxlength="2" placeholder="2 caracteres máximo"/>
+                            <p:inputText id="dato80" styleClass="width1" value="#{historiasMB.datosFormulario.dato80}" maxlength="2" placeholder="2 caracteres máximo"/>
                         </td>  
                     </tr>
                     <tr>
@@ -923,7 +975,7 @@
                             </p:selectOneMenu>  
                         </td> 
                         <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato82}" maxlength="50" placeholder="50 caracteres máximo"/>
+                            <p:inputText id="dato82" styleClass="width1" value="#{historiasMB.datosFormulario.dato82}" maxlength="50" placeholder="50 caracteres máximo"/>
                         </td>  
                     </tr>
                     <tr>
@@ -931,10 +983,22 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato83}" maxlength="70" placeholder="70 caracteres máximo"/>
+                            <p:inputText id="dato83" styleClass="width2" value="#{historiasMB.datosFormulario.dato83}" maxlength="70" placeholder="70 caracteres máximo"/>
                         </td> 
                     </tr>
                 </div>
+                <tr>
+                    <td colspan="2">
+                        <p:selectOneMenu  value="#{historiasMB.valorDefecto6}" styleClass="campoFormulario">
+                            <f:selectItems value="#{historiasMB.listaValoresDefecto}"/>
+                        </p:selectOneMenu>  
+                        &nbsp;
+                        <p:commandButton value="Valor por Defecto" actionListener="#{historiasMB.cambiarValorDefecto(6)}" 
+                                         update="dato79 dato80 dato82 dato83">
+                        </p:commandButton>
+                    </td>
+                </tr>
+
 
 
                 <!--HÁBITOS-->
@@ -953,7 +1017,7 @@
                             </p:selectOneMenu>  
                         </td> 
                         <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato85}" maxlength="2" placeholder="2 caracteres máximo"/>
+                            <p:inputText id="dato85" styleClass="width1" value="#{historiasMB.datosFormulario.dato85}" maxlength="2" placeholder="2 caracteres máximo"/>
                         </td> 
                     </tr>
                     <tr>
@@ -969,7 +1033,7 @@
                             </p:selectOneMenu>  
                         </td> 
                         <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato87}" maxlength="2" placeholder="2 caracteres máximo"/>
+                            <p:inputText id="dato87" styleClass="width1" value="#{historiasMB.datosFormulario.dato87}" maxlength="2" placeholder="2 caracteres máximo"/>
                         </td> 
                     </tr>
                     <tr>
@@ -978,10 +1042,10 @@
                     </tr>
                     <tr>
                         <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato88}" maxlength="2" placeholder="2 caracteres máximo"/>
+                            <p:inputText id="dato88" styleClass="width1" value="#{historiasMB.datosFormulario.dato88}" maxlength="2" placeholder="2 caracteres máximo"/>
                         </td> 
                         <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato89}" maxlength="2" placeholder="2 caracteres máximo"/>
+                            <p:inputText id="dato89" styleClass="width1" value="#{historiasMB.datosFormulario.dato89}" maxlength="2" placeholder="2 caracteres máximo"/>
                         </td> 
                     </tr>
                     <tr>
@@ -990,10 +1054,10 @@
                     </tr>
                     <tr>
                         <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato90}" maxlength="2" placeholder="2 caracteres máximo"/>
+                            <p:inputText id="dato90" styleClass="width1" value="#{historiasMB.datosFormulario.dato90}" maxlength="2" placeholder="2 caracteres máximo"/>
                         </td> 
                         <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato91}" maxlength="3" placeholder="3 caracteres máximo"/>
+                            <p:inputText id="dato91" styleClass="width1" value="#{historiasMB.datosFormulario.dato91}" maxlength="3" placeholder="3 caracteres máximo"/>
                         </td> 
                     </tr>
                     <tr>
@@ -1001,7 +1065,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato92}" maxlength="3" placeholder="3 caracteres máximo"/>
+                            <p:inputText id="dato92" styleClass="width1" value="#{historiasMB.datosFormulario.dato92}" maxlength="3" placeholder="3 caracteres máximo"/>
                         </td> 
                     </tr>
                     <tr>
@@ -1017,7 +1081,7 @@
                             </p:selectOneMenu>  
                         </td> 
                         <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato94}" maxlength="30" placeholder="30 caracteres máximo"/>
+                            <p:inputText id="dato94" styleClass="width1" value="#{historiasMB.datosFormulario.dato94}" maxlength="30" placeholder="30 caracteres máximo"/>
                         </td> 
                     </tr>
                     <tr>
@@ -1033,7 +1097,7 @@
                             </p:selectOneMenu>  
                         </td> 
                         <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato96}" maxlength="30" placeholder="30 caracteres máximo"/>
+                            <p:inputText id="dato96" styleClass="width1" value="#{historiasMB.datosFormulario.dato96}" maxlength="30" placeholder="30 caracteres máximo"/>
                         </td> 
                     </tr>
                     <tr>
@@ -1041,10 +1105,22 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato97}" maxlength="70" placeholder="70 caracteres máximo"/>
+                            <p:inputText id="dato97" styleClass="width2" value="#{historiasMB.datosFormulario.dato97}" maxlength="70" placeholder="70 caracteres máximo"/>
                         </td> 
                     </tr>
                 </div>
+                <tr>
+                    <td colspan="2">
+                        <p:selectOneMenu  value="#{historiasMB.valorDefecto7}" styleClass="campoFormulario">
+                            <f:selectItems value="#{historiasMB.listaValoresDefecto}"/>
+                        </p:selectOneMenu>  
+                        &nbsp;
+                        <p:commandButton value="Valor por Defecto" actionListener="#{historiasMB.cambiarValorDefecto(7)}" 
+                                         update="dato85 dato87 dato88 dato89 dato90 dato91 dato92 dato94 dato96 dato97">
+                        </p:commandButton>
+                    </td>
+                </tr>
+
 
                 <!--GINECO UROLÓGICO-->
                 <tr><td colspan="2"><h2>GINECO UROLÓGICO</h2></td></tr>
@@ -1056,10 +1132,10 @@
                     </tr>
                     <tr>
                         <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato98}" maxlength="2" placeholder="2 caracteres máximo"/>
+                            <p:inputText id="dato98" styleClass="width1" value="#{historiasMB.datosFormulario.dato98}" maxlength="2" placeholder="2 caracteres máximo"/>
                         </td> 
                         <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato99}" maxlength="2" placeholder="2 caracteres máximo"/>
+                            <p:inputText id="dato99" styleClass="width1" value="#{historiasMB.datosFormulario.dato99}" maxlength="2" placeholder="2 caracteres máximo"/>
                         </td> 
                     </tr>
                     <tr>
@@ -1155,7 +1231,7 @@
                             </p:selectOneMenu>  
                         </td> 
                         <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato109}" maxlength="20" placeholder="20 caracteres máximo"/>
+                            <p:inputText id="dato109" styleClass="width1" value="#{historiasMB.datosFormulario.dato109}" maxlength="20" placeholder="20 caracteres máximo"/>
                         </td> 
                     </tr>
                     <tr>
@@ -1163,11 +1239,21 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato110}" maxlength="70" placeholder="70 caracteres máximo"/>
+                            <p:inputText id="dato110" styleClass="width2" value="#{historiasMB.datosFormulario.dato110}" maxlength="70" placeholder="70 caracteres máximo"/>
                         </td> 
                     </tr>
                 </div>
-
+                <tr>
+                    <td colspan="2">
+                        <p:selectOneMenu  value="#{historiasMB.valorDefecto8}" styleClass="campoFormulario">
+                            <f:selectItems value="#{historiasMB.listaValoresDefecto}"/>
+                        </p:selectOneMenu>  
+                        &nbsp;
+                        <p:commandButton value="Valor por Defecto" actionListener="#{historiasMB.cambiarValorDefecto(8)}" 
+                                         update="dato98 dato99 dato109 dato110">
+                        </p:commandButton>
+                    </td>
+                </tr>
 
                 <!--SEXUALIDAD-->
                 <tr><td colspan="2"><h2>SEXUALIDAD</h2></td></tr>
@@ -1208,7 +1294,7 @@
                             </p:selectOneMenu>  
                         </td> 
                         <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato114}" maxlength="2" placeholder="2 caracteres máximo"/> 
+                            <p:inputText id="dato114" styleClass="width1" value="#{historiasMB.datosFormulario.dato114}" maxlength="2" placeholder="2 caracteres máximo"/> 
                         </td>  
                     </tr>
                     <tr>
@@ -1261,10 +1347,22 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato119}" maxlength="70" placeholder="70 caracteres máximo"/>
+                            <p:inputText id="dato119" styleClass="width2" value="#{historiasMB.datosFormulario.dato119}" maxlength="70" placeholder="70 caracteres máximo"/>
                         </td> 
                     </tr>
                 </div>
+
+                <tr>
+                    <td colspan="2">
+                        <p:selectOneMenu  value="#{historiasMB.valorDefecto9}" styleClass="campoFormulario">
+                            <f:selectItems value="#{historiasMB.listaValoresDefecto}"/>
+                        </p:selectOneMenu>  
+                        &nbsp;
+                        <p:commandButton value="Valor por Defecto" actionListener="#{historiasMB.cambiarValorDefecto(9)}" 
+                                         update="dato114 dato119">
+                        </p:commandButton>
+                    </td>
+                </tr>
 
 
                 <!--SITUACIÓN PSICOEMOCIONAL-->
@@ -1323,10 +1421,21 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato124}" maxlength="70" placeholder="70 caracteres máximo"/>
+                            <p:inputText id="dato124" styleClass="width2" value="#{historiasMB.datosFormulario.dato124}" maxlength="70" placeholder="70 caracteres máximo"/>
                         </td> 
                     </tr>
                 </div>
+                <tr>
+                    <td colspan="2">
+                        <p:selectOneMenu  value="#{historiasMB.valorDefecto10}" styleClass="campoFormulario">
+                            <f:selectItems value="#{historiasMB.listaValoresDefecto}"/>
+                        </p:selectOneMenu>  
+                        &nbsp;
+                        <p:commandButton value="Valor por Defecto" actionListener="#{historiasMB.cambiarValorDefecto(10)}" 
+                                         update="dato124">
+                        </p:commandButton>
+                    </td>
+                </tr>
 
 
                 <!--EXAMEN FÍSICO-->
@@ -1338,10 +1447,10 @@
                     </tr>
                     <tr>
                         <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato125}" maxlength="5" placeholder="5 caracteres máximo"/> 
+                            <p:inputText id="dato125" styleClass="width1" value="#{historiasMB.datosFormulario.dato125}" maxlength="5" placeholder="5 caracteres máximo"/> 
                         </td> 
                         <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato126}" maxlength="5" placeholder="5 caracteres máximo"/>
+                            <p:inputText id="dato126" styleClass="width1" value="#{historiasMB.datosFormulario.dato126}" maxlength="5" placeholder="5 caracteres máximo"/>
                         </td>  
                     </tr>
                     <tr>
@@ -1350,10 +1459,10 @@
                     </tr>
                     <tr>
                         <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato127}" maxlength="10" placeholder="10 caracteres máximo"/> 
+                            <p:inputText id="dato127" styleClass="width1" value="#{historiasMB.datosFormulario.dato127}" maxlength="10" placeholder="10 caracteres máximo"/> 
                         </td> 
                         <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato128}" maxlength="10" placeholder="10 caracteres máximo"/>
+                            <p:inputText id="dato128" styleClass="width1" value="#{historiasMB.datosFormulario.dato128}" maxlength="10" placeholder="10 caracteres máximo"/>
                         </td>  
                     </tr>
                     <tr>
@@ -1362,10 +1471,10 @@
                     </tr>
                     <tr>
                         <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato129}" maxlength="10" placeholder="10 caracteres máximo"/> 
+                            <p:inputText id="dato129" styleClass="width1" value="#{historiasMB.datosFormulario.dato129}" maxlength="10" placeholder="10 caracteres máximo"/> 
                         </td> 
                         <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato130}" maxlength="10" placeholder="10 caracteres máximo"/>
+                            <p:inputText id="dato130" styleClass="width1" value="#{historiasMB.datosFormulario.dato130}" maxlength="10" placeholder="10 caracteres máximo"/>
                         </td>  
                     </tr>
                     <tr>
@@ -1373,7 +1482,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato131}" maxlength="5" placeholder="5 caracteres máximo"/> 
+                            <p:inputText  id="dato131" styleClass="width1" value="#{historiasMB.datosFormulario.dato131}" maxlength="5" placeholder="5 caracteres máximo"/> 
                         </td> 
                     </tr>
                     <tr><td colspan="2"><h3>PARÁMETROS NORMALES</h3></td></tr>
@@ -1535,10 +1644,21 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato147}" maxlength="140" placeholder="140 caracteres máximo"/>
+                            <p:inputText id="dato147" styleClass="width2" value="#{historiasMB.datosFormulario.dato147}" maxlength="500" placeholder="140 caracteres máximo"/>
                         </td> 
                     </tr>
                 </div>
+                <tr>
+                    <td colspan="2">
+                        <p:selectOneMenu  value="#{historiasMB.valorDefecto11}" styleClass="campoFormulario">
+                            <f:selectItems value="#{historiasMB.listaValoresDefecto}"/>
+                        </p:selectOneMenu>  
+                        &nbsp;
+                        <p:commandButton value="Valor por Defecto" actionListener="#{historiasMB.cambiarValorDefecto(11)}" 
+                                         update="dato125 dato126 dato127 dato128 dato129 dato130 dato131 dato147">
+                        </p:commandButton>
+                    </td>
+                </tr>
 
                 <tr>
                     <td colspan="2"><h2>DIAGNOSTICO</h2></td>
@@ -1551,7 +1671,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <p:autoComplete size="100" value="#{historiasMB.datosFormulario.dato148}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/>
+                            <p:autoComplete id="dato148" size="100" value="#{historiasMB.datosFormulario.dato148}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/>
                         </td>
                     </tr>
                     <tr>
@@ -1561,7 +1681,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <p:autoComplete size="100" value="#{historiasMB.datosFormulario.dato149}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/>
+                            <p:autoComplete id="dato149" size="100" value="#{historiasMB.datosFormulario.dato149}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/>
                         </td>
                     </tr>
                     <tr>
@@ -1571,7 +1691,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <p:autoComplete size="100" value="#{historiasMB.datosFormulario.dato150}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/>
+                            <p:autoComplete id="dato150" size="100" value="#{historiasMB.datosFormulario.dato150}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/>
                         </td>
                     </tr>
                     <tr>
@@ -1581,10 +1701,22 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <p:autoComplete size="100" value="#{historiasMB.datosFormulario.dato151}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/>
+                            <p:autoComplete id="dato151" size="100" value="#{historiasMB.datosFormulario.dato151}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/>
                         </td>
                     </tr>
                 </div>
+                <tr>
+                    <td colspan="2">
+                        <p:selectOneMenu  value="#{historiasMB.valorDefecto12}" styleClass="campoFormulario">
+                            <f:selectItems value="#{historiasMB.listaValoresDefecto}"/>
+                        </p:selectOneMenu>  
+                        &nbsp;
+                        <p:commandButton value="Valor por Defecto" actionListener="#{historiasMB.cambiarValorDefecto(12)}" 
+                                         update="dato148 dato149 dato150 dato151">
+                        </p:commandButton>
+                    </td>
+                </tr>
+
 
                 <tr>
                     <td colspan="2"><h2>INDICACIONES E INTERCONSULTAS</h2></td>
@@ -1595,13 +1727,23 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <p:inputTextarea styleClass="width2" value="#{historiasMB.datosFormulario.dato152}" counter="display6" maxlength="210" counterTemplate="{0} caracteres restantes." autoResize="false"/>
+                            <p:inputTextarea id="dato152" styleClass="width2" value="#{historiasMB.datosFormulario.dato152}" counter="display6" maxlength="500" counterTemplate="{0} caracteres restantes." autoResize="false"/>
                             <br/>
                             <h:outputText id="display6" />
                         </td>                   
                     </tr>
                 </div>
-
+                <tr>
+                    <td colspan="2">
+                        <p:selectOneMenu  value="#{historiasMB.valorDefecto13}" styleClass="campoFormulario">
+                            <f:selectItems value="#{historiasMB.listaValoresDefecto}"/>
+                        </p:selectOneMenu>  
+                        &nbsp;
+                        <p:commandButton value="Valor por Defecto" actionListener="#{historiasMB.cambiarValorDefecto(13)}" 
+                                         update="dato152">
+                        </p:commandButton>
+                    </td>
+                </tr>
 
                 <tr>
                     <td colspan="2"><p:outputLabel value="FECHA DE PRÓXIMA VISITA:"/></td>

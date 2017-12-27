@@ -154,11 +154,22 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <p:inputTextarea  styleClass="width2"  value="#{historiasMB.datosFormulario.dato3}"/>
+                            <p:inputTextarea id="dato3" styleClass="width2" value="#{historiasMB.datosFormulario.dato3}"/>
 
                         </td>                    
                     </tr>
                 </div>
+                <tr>
+                    <td colspan="2">
+                        <p:selectOneMenu  value="#{historiasMB.valorDefecto1}" styleClass="campoFormulario">
+                            <f:selectItems value="#{historiasMB.listaValoresDefecto}"/>
+                        </p:selectOneMenu>  
+                        &nbsp;
+                        <p:commandButton value="Valor por Defecto" actionListener="#{historiasMB.cambiarValorDefecto(1)}" 
+                                         update="dato3">
+                        </p:commandButton>
+                    </td>
+                </tr>
                 <div>
                     <tr>
                         <td colspan="2"><h2><p:outputLabel value="EVALUACIÓN FÍSICA"/></h2></td>                                        
@@ -261,13 +272,25 @@
                     </tr>
                     <tr>
                         <td colspan="2"> 
-                            <p:inputTextarea  value="#{historiasMB.datosFormulario.dato13}"
-                                              maxlength="400" counterTemplate="{0} caracteres restantes." 
-                                              styleClass="width2"/>
+                            <p:inputTextarea id="dato13" value="#{historiasMB.datosFormulario.dato13}"
+                                             maxlength="400" counterTemplate="{0} caracteres restantes." 
+                                             styleClass="width2"/>
                         </td>
                     </tr>
                 </div>
-                
+                <tr>
+                    <td colspan="2">
+                        <p:selectOneMenu  value="#{historiasMB.valorDefecto2}" styleClass="campoFormulario">
+                            <f:selectItems value="#{historiasMB.listaValoresDefecto}"/>
+                        </p:selectOneMenu>  
+                        &nbsp;
+                        <p:commandButton value="Valor por Defecto" actionListener="#{historiasMB.cambiarValorDefecto(2)}" 
+                                         update="dato13">
+                        </p:commandButton>
+                    </td>
+                </tr>
+
+
                 <div>
                     <tr>
                         <td colspan="2"><h2><p:outputLabel value="GRÁFICO DE EVALUACIÓN FÍSICA"/></h2></td>                                        
@@ -286,23 +309,56 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <p:autoComplete size="100" value="#{historiasMB.datosFormulario.dato14}" 
+                            <p:autoComplete id="dato14" size="100" value="#{historiasMB.datosFormulario.dato14}" 
                                             requiredMessage="Debe diligenciar los diagnosticos" 
                                             completeMethod="#{historiasMB.autocompletarDiagnostico}"
                                             forceSelection="true"/>
                         </td>
                     </tr>
                     <tr>
+                        <td colspan="2">
+                            <p:selectOneMenu  value="#{historiasMB.valorDefecto3}" styleClass="campoFormulario">
+                                <f:selectItems value="#{historiasMB.listaValoresDefecto}"/>
+                            </p:selectOneMenu>  
+                            &nbsp;
+                            <p:commandButton value="Valor por Defecto" actionListener="#{historiasMB.cambiarValorDefecto(3)}" 
+                                             update="dato14">
+                            </p:commandButton>
+                        </td>
+                    </tr>
+                    <tr>
                         <td colspan="2"><h2><p:outputLabel value="CONDUCTA"/></h2></td>
                     </tr>
                     <tr>
-                        <td colspan="2"><p:inputTextarea styleClass="width2" value="#{historiasMB.datosFormulario.dato15}"/></td>
+                        <td colspan="2"><p:inputTextarea id="dato15" styleClass="width2" value="#{historiasMB.datosFormulario.dato15}"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p:selectOneMenu  value="#{historiasMB.valorDefecto4}" styleClass="campoFormulario">
+                                <f:selectItems value="#{historiasMB.listaValoresDefecto}"/>
+                            </p:selectOneMenu>  
+                            &nbsp;
+                            <p:commandButton value="Valor por Defecto" actionListener="#{historiasMB.cambiarValorDefecto(4)}" 
+                                             update="dato15">
+                            </p:commandButton>
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="2"><h2><p:outputLabel value="CONTROL"/></h2></td>
                     </tr>
                     <tr>
-                        <td colspan="2"><p:inputTextarea styleClass="width2" value="#{historiasMB.datosFormulario.dato16}"/></td>
+                        <td colspan="2"><p:inputTextarea id="dato16" styleClass="width2" value="#{historiasMB.datosFormulario.dato16}"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p:selectOneMenu  value="#{historiasMB.valorDefecto5}" styleClass="campoFormulario">
+                                <f:selectItems value="#{historiasMB.listaValoresDefecto}"/>
+                            </p:selectOneMenu>  
+                            &nbsp;
+                            <p:commandButton value="Valor por Defecto" actionListener="#{historiasMB.cambiarValorDefecto(5)}" 
+                                             update="dato16">
+                            </p:commandButton>
+                        </td>
                     </tr>
                 </div>
 
