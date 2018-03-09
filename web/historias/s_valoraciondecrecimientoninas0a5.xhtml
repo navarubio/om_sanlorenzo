@@ -19,6 +19,7 @@
 
 
                     });
+                    
         </script>
     </h:head>
     <h:body>
@@ -26,12 +27,12 @@
             <p:growl id="IdMensajeUsuarios"  showDetail="true" sticky="false" autoUpdate="true" life="4000"/>
             <table style="margin-left: auto; margin-right: auto;">
 
-                <tr><td colspan="2"><h2>VALORACIÓN DE CRECIMIENTO PARA NIÑAS DE 0 A 5 AÑOS</h2></td></tr>
+                <tr><td colspan="2"><h2>VALORACIÓN DE CRECIMIENTO PARA NIÑAS DE 0 A 2 AÑOS</h2></td></tr>
                 <tr><td colspan="2"><h3>DATOS DEL PACIENTE</h3></td></tr>
                 <div>
                     <tr>
-                        <td><p:outputLabel value="PESO AL NACER: (grs)"/></td>
-                        <td><p:outputLabel value="TALLA AL NACER: (cms)"/></td>
+                        <td><p:outputLabel value="PESO : (Kg)"/></td>
+                        <td><p:outputLabel value="TALLA (cm)"/></td>
                     </tr>
                     <tr>
                         <td>
@@ -41,8 +42,40 @@
                             <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato1}" maxlength="10" placeholder="10 caracteres máximo"/>
                         </td>                  
                     </tr>
+                    <tr>
+                        <td><p:outputLabel value="PERÍMETRO CEFÁLICO : (cm)"/></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato2}" maxlength="10" placeholder="10 caracteres máximo"/>
+                        </td>               
+                        
+                    </tr>
                 </div>
-
+            </table>
+            <table style="margin-left: 280px;; margin-right: auto;">
+                <tr>
+                    <td colspan="2">
+                        <p:tabView>
+                            <p:tab title="Peso Edad Niña 0 a 2 años">
+                                <p:chart widgetVar="chart" type="line" model="#{historiasMB.lineModel1}"   style="height:500px; "/>
+                                
+                            </p:tab>
+                            <p:tab title="Talla Edad Niña 0 a 2 años">
+                                <p:chart type="line"  model="#{historiasMB.lineModel2}"  style="height:500px; "/>
+                            </p:tab>
+                            <p:tab title="Indice Masa Corporal Niña  0 a 2 años">
+                                    <p:chart type="line" model="#{historiasMB.lineModel3}"  style="height:500px; "/>
+                            </p:tab>
+                            <p:tab title="Perímetro Cefálico Niña  0 a 2 años">
+                                    <p:chart type="line" model="#{historiasMB.lineModel4}"  style="height:500px; "/>
+                            </p:tab>
+                        </p:tabView>
+                            
+                    </td>
+                </tr>
+            </table>
+            <table style="margin-left: 280px;; margin-right: auto;">
                 <tr><td colspan="2">&nbsp;</td></tr>
                 <tr>
                     <td colspan="2">

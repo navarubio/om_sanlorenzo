@@ -6,6 +6,7 @@
 package managedBeans.historias;
 
 import java.util.List;
+import modelo.entidades.HcDetalle;
 
 /**
  *
@@ -286,7 +287,10 @@ public class DatosFormularioHistoria {
     private Object dato270 = "";
     private List<DatosSubReporteHistoria> listaDatosAdicionales;//USADO PARA SUB REPORTE
     private List<RepExamenes> listaRepExamenes;//HISTORIA RCV
-
+    private List<DatosGrafica> listaDatosPesos;
+    private List<DatosGrafica> listaDatosTalla;
+    private List<DatosGrafica> listaDatosIMC;
+    private List<DatosGrafica> listaDatosPC;
     /**/
     //Bloque de datos utilizados solamente por los reportes de odontología que son muy grandes "xl_nombreReporte".
     private Object dato271 = "";
@@ -22302,6 +22306,38 @@ public class DatosFormularioHistoria {
 
     public void setListaRepExamenes(List<RepExamenes> listaRepExamenes) {
         this.listaRepExamenes = listaRepExamenes;
+    }
+
+    public List<DatosGrafica> getListaDatosPesos() {
+        return listaDatosPesos;
+    }
+
+    public void setListaDatosPesos(List<DatosGrafica> listaDatosPesos) {
+        this.listaDatosPesos = listaDatosPesos;
+    }
+
+    public List<DatosGrafica> getListaDatosTalla() {
+        return listaDatosTalla;
+    }
+
+    public void setListaDatosTalla(List<DatosGrafica> listaDatosTalla) {
+        this.listaDatosTalla = listaDatosTalla;
+    }
+
+    public List<DatosGrafica> getListaDatosIMC() {
+        return listaDatosIMC;
+    }
+
+    public void setListaDatosIMC(List<DatosGrafica> listaDatosIMC) {
+        this.listaDatosIMC = listaDatosIMC;
+    }
+
+    public List<DatosGrafica> getListaDatosPC() {
+        return listaDatosPC;
+    }
+
+    public void setListaDatosPC(List<DatosGrafica> listaDatosPC) {
+        this.listaDatosPC = listaDatosPC;
     }
     
 }

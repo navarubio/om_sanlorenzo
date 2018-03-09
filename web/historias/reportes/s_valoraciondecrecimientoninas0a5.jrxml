@@ -1,68 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="s_valoraciondecrecimientoninas0a5" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="043e1104-03f5-4d8d-9d53-252350687cfb">
-	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.zoom" value="0.75"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
-	<field name="dato0" class="java.lang.Object">
-		<fieldDescription><![CDATA[dato0]]></fieldDescription>
-	</field>
-	<field name="dato1" class="java.lang.Object">
-		<fieldDescription><![CDATA[dato1]]></fieldDescription>
-	</field>
-	<field name="dato600" class="java.lang.Object">
-		<fieldDescription><![CDATA[dato600]]></fieldDescription>
-	</field>
-	<field name="dato601" class="java.lang.Object">
-		<fieldDescription><![CDATA[dato601]]></fieldDescription>
-	</field>
-	<field name="dato602" class="java.lang.Object">
-		<fieldDescription><![CDATA[dato602]]></fieldDescription>
-	</field>
-	<field name="dato626" class="java.lang.Object">
-		<fieldDescription><![CDATA[dato626]]></fieldDescription>
-	</field>
-	<field name="dato628" class="java.lang.Object">
-		<fieldDescription><![CDATA[dato628]]></fieldDescription>
-	</field>
-	<field name="dato629" class="java.lang.Object">
-		<fieldDescription><![CDATA[dato629]]></fieldDescription>
-	</field>
-	<field name="dato630" class="java.lang.Object">
-		<fieldDescription><![CDATA[dato630]]></fieldDescription>
-	</field>
-	<field name="dato637" class="java.lang.Object">
-		<fieldDescription><![CDATA[dato637]]></fieldDescription>
-	</field>
-	<field name="dato657" class="java.lang.Object">
-		<fieldDescription><![CDATA[dato657]]></fieldDescription>
-	</field>
-	<field name="dato680" class="java.lang.Object">
-		<fieldDescription><![CDATA[dato680]]></fieldDescription>
-	</field>
-	<field name="dato686" class="java.lang.Object">
-		<fieldDescription><![CDATA[dato686]]></fieldDescription>
-	</field>
-	<field name="dato689" class="java.lang.Object">
-		<fieldDescription><![CDATA[dato689]]></fieldDescription>
-	</field>
-	<field name="dato699" class="java.lang.Object">
-		<fieldDescription><![CDATA[dato699]]></fieldDescription>
-	</field>
-	<field name="dato700" class="java.lang.Object">
-		<fieldDescription><![CDATA[dato700]]></fieldDescription>
-	</field>
-	<field name="dato701" class="java.lang.Object">
-		<fieldDescription><![CDATA[dato701]]></fieldDescription>
-	</field>
-	<field name="dato702" class="java.lang.Object">
-		<fieldDescription><![CDATA[dato702]]></fieldDescription>
-	</field>
-	<field name="dato741" class="java.lang.Object">
-		<fieldDescription><![CDATA[dato741]]></fieldDescription>
-	</field>
-	<field name="dato742" class="java.lang.Object">
-		<fieldDescription><![CDATA[dato742]]></fieldDescription>
-	</field>
+	<property name="ireport.y" value="787"/>
+	<subDataset name="itemPeso" uuid="40434851-8913-4f7f-aa88-b4148a5ecfd3">
+		<field name="valor" class="java.math.BigDecimal"/>
+		<field name="valorX" class="java.lang.Integer"/>
+	</subDataset>
+	<subDataset name="itemTalla" uuid="5d439092-0a7a-4876-9f7c-8d473adb139b">
+		<field name="valor" class="java.math.BigDecimal"/>
+		<field name="valorX" class="java.math.BigDecimal"/>
+	</subDataset>
+	<subDataset name="itemIMC" uuid="2623837c-c0af-461b-86ac-aa568696093e">
+		<field name="valor" class="java.math.BigDecimal"/>
+		<field name="valorX" class="java.math.BigDecimal"/>
+	</subDataset>
+	<subDataset name="itemPC" uuid="b2afba6f-e771-441d-aae2-6227ade43ed4">
+		<field name="valor" class="java.math.BigDecimal"/>
+		<field name="valorX" class="java.math.BigDecimal"/>
+	</subDataset>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="dato680" class="java.lang.String"/>
+	<field name="dato601" class="java.lang.String"/>
+	<field name="dato600" class="java.lang.String"/>
+	<field name="dato699" class="java.lang.String"/>
+	<field name="dato700" class="java.lang.String"/>
+	<field name="dato701" class="java.lang.String"/>
+	<field name="dato602" class="java.lang.String"/>
+	<field name="dato626" class="java.lang.String"/>
+	<field name="dato628" class="java.lang.String"/>
+	<field name="dato630" class="java.lang.String"/>
+	<field name="dato637" class="java.lang.String"/>
+	<field name="dato657" class="java.lang.String"/>
+	<field name="dato629" class="java.lang.String"/>
+	<field name="dato0" class="java.lang.String"/>
+	<field name="dato1" class="java.lang.String"/>
+	<field name="dato99" class="java.lang.String"/>
+	<field name="dato742" class="java.lang.String"/>
+	<field name="dato702" class="java.lang.String"/>
+	<field name="dato741" class="java.lang.String"/>
+	<field name="listaDatosPesos" class="java.util.List"/>
+	<field name="listaDatosTalla" class="java.util.List"/>
+	<field name="listaDatosIMC" class="java.util.List"/>
+	<field name="listaDatosPC" class="java.util.List"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -310,10 +292,35 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="759169f6-414c-4f7e-ada1-ea77b07b0d96" positionType="Float" x="0" y="0" width="572" height="624"/>
-					<imageExpression><![CDATA[$F{dato741}]]></imageExpression>
-				</image>
+				<lineChart>
+					<chart>
+						<reportElement uuid="52ca4dba-c782-471d-a1b6-a53477e82083" x="17" y="12" width="542" height="612"/>
+						<chartTitle>
+							<titleExpression><![CDATA["Peso para la edad Niñas de 0 a 2 años"]]></titleExpression>
+						</chartTitle>
+						<chartSubtitle/>
+						<chartLegend/>
+					</chart>
+					<categoryDataset>
+						<dataset>
+							<datasetRun subDataset="itemPeso" uuid="62f820e2-a881-4d21-b3be-6b2eba754c01">
+								<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listaDatosPesos})]]></dataSourceExpression>
+							</datasetRun>
+						</dataset>
+						<categorySeries>
+							<seriesExpression><![CDATA["Peso (kg)"]]></seriesExpression>
+							<categoryExpression><![CDATA[$F{valorX}]]></categoryExpression>
+							<valueExpression><![CDATA[$F{valor}]]></valueExpression>
+						</categorySeries>
+					</categoryDataset>
+					<linePlot>
+						<plot/>
+						<categoryAxisLabelExpression><![CDATA["Edad en Meses"]]></categoryAxisLabelExpression>
+						<valueAxisLabelExpression><![CDATA["Peso (kg)"]]></valueAxisLabelExpression>
+						<rangeAxisMinValueExpression><![CDATA[1]]></rangeAxisMinValueExpression>
+						<rangeAxisMaxValueExpression><![CDATA[18]]></rangeAxisMaxValueExpression>
+					</linePlot>
+				</lineChart>
 			</frame>
 		</band>
 		<band height="675">
@@ -325,10 +332,104 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="759169f6-414c-4f7e-ada1-ea77b07b0d96" positionType="Float" x="0" y="0" width="572" height="664"/>
-					<imageExpression><![CDATA[$F{dato742}]]></imageExpression>
-				</image>
+				<lineChart>
+					<chart>
+						<reportElement uuid="9d01d92e-d2bb-4a7f-8511-458553074bc8" x="17" y="25" width="542" height="281"/>
+						<chartTitle>
+							<titleExpression><![CDATA["Talla para la edad Niñas de 0 a 2 años"]]></titleExpression>
+						</chartTitle>
+						<chartSubtitle/>
+						<chartLegend/>
+					</chart>
+					<categoryDataset>
+						<dataset>
+							<datasetRun subDataset="itemTalla" uuid="45f3a9fa-be04-4158-9da7-39d82bc5323e">
+								<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listaDatosTalla})]]></dataSourceExpression>
+							</datasetRun>
+						</dataset>
+						<categorySeries>
+							<seriesExpression><![CDATA["Talla (cm)"]]></seriesExpression>
+							<categoryExpression><![CDATA[$F{valorX}]]></categoryExpression>
+							<valueExpression><![CDATA[$F{valor}]]></valueExpression>
+						</categorySeries>
+					</categoryDataset>
+					<linePlot>
+						<plot/>
+						<categoryAxisLabelExpression><![CDATA["Edad en Meses"]]></categoryAxisLabelExpression>
+						<valueAxisLabelExpression><![CDATA["Talla (cm)"]]></valueAxisLabelExpression>
+						<rangeAxisMinValueExpression><![CDATA[40]]></rangeAxisMinValueExpression>
+						<rangeAxisMaxValueExpression><![CDATA[95]]></rangeAxisMaxValueExpression>
+					</linePlot>
+				</lineChart>
+				<lineChart>
+					<chart>
+						<reportElement uuid="536013cd-06b4-4f98-9146-6e683c87ccda" x="17" y="317" width="542" height="334"/>
+						<chartTitle>
+							<titleExpression><![CDATA["Indice de masa corporal Niñas de 0 a 2 años"]]></titleExpression>
+						</chartTitle>
+						<chartSubtitle/>
+						<chartLegend/>
+					</chart>
+					<categoryDataset>
+						<dataset>
+							<datasetRun subDataset="itemIMC" uuid="925a8b97-bce1-4bf8-b541-979e164cfc9c">
+								<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listaDatosIMC})]]></dataSourceExpression>
+							</datasetRun>
+						</dataset>
+						<categorySeries>
+							<seriesExpression><![CDATA["IMC (kg/m2)"]]></seriesExpression>
+							<categoryExpression><![CDATA[$F{valorX}]]></categoryExpression>
+							<valueExpression><![CDATA[$F{valor}]]></valueExpression>
+						</categorySeries>
+					</categoryDataset>
+					<linePlot>
+						<plot/>
+						<categoryAxisLabelExpression><![CDATA["Edad en Meses"]]></categoryAxisLabelExpression>
+						<valueAxisLabelExpression><![CDATA["IMC (kg/m2)"]]></valueAxisLabelExpression>
+						<rangeAxisMinValueExpression><![CDATA[9]]></rangeAxisMinValueExpression>
+						<rangeAxisMaxValueExpression><![CDATA[22]]></rangeAxisMaxValueExpression>
+					</linePlot>
+				</lineChart>
+			</frame>
+		</band>
+		<band height="675">
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="25" width="572" height="650" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<lineChart>
+					<chart>
+						<reportElement uuid="207d0fbb-d229-4e63-9850-4c72b93b61de" x="17" y="21" width="552" height="421"/>
+						<chartTitle>
+							<titleExpression><![CDATA["Perímetro Cefálico Niñas de 0 a 2 años"]]></titleExpression>
+						</chartTitle>
+						<chartSubtitle/>
+						<chartLegend/>
+					</chart>
+					<categoryDataset>
+						<dataset>
+							<datasetRun subDataset="itemPC" uuid="e4c65aaf-61c1-43bd-b60d-096aef824990">
+								<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listaDatosPC})]]></dataSourceExpression>
+							</datasetRun>
+						</dataset>
+						<categorySeries>
+							<seriesExpression><![CDATA["Perímetro Cefálico(cm)"]]></seriesExpression>
+							<categoryExpression><![CDATA[$F{valorX}]]></categoryExpression>
+							<valueExpression><![CDATA[$F{valor}]]></valueExpression>
+						</categorySeries>
+					</categoryDataset>
+					<linePlot>
+						<plot/>
+						<categoryAxisLabelExpression><![CDATA["Edad en Meses"]]></categoryAxisLabelExpression>
+						<valueAxisLabelExpression><![CDATA["Perímetro Cefálico (cm)"]]></valueAxisLabelExpression>
+						<rangeAxisMinValueExpression><![CDATA[30]]></rangeAxisMinValueExpression>
+						<rangeAxisMaxValueExpression><![CDATA[56]]></rangeAxisMaxValueExpression>
+					</linePlot>
+				</lineChart>
 			</frame>
 		</band>
 	</detail>

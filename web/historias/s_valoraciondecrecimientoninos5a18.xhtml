@@ -20,10 +20,18 @@
 
                     });
         </script>
+        <script type="text/javascript">
+        function exportChart() {
+        // exportAsImage() will return a base64 png encoded string
+        img = chart.exportAsImage();
+        document.getElementById('hform:b64').value = img.src;
+        }
+    </script>
     </h:head>
     <h:body>
         <h:form id="IdFormRegistroClinico">  
             <p:growl id="IdMensajeUsuarios"  showDetail="true" sticky="false" autoUpdate="true" life="4000"/>
+            <h:inputText id="b64" value="#{historiasMB.base64Str}" />
             <table style="margin-left: auto; margin-right: auto;">
 
                 <tr><td colspan="2"><h2>VALORACIÓN DE CRECIMIENTO PARA NIÑOS DE 5 A 18 AÑOS</h2></td></tr>
@@ -42,8 +50,40 @@
                         </td>                  
                     </tr>
                 </div>
-
+                <tr><td colspan="2"><h3>DATOS CONSULTA</h3></td></tr>
+                 <div>
+                    <tr>
+                        <td><p:outputLabel value="PESO  (kg)"/></td>
+                        <td><p:outputLabel value="TALLA (cms)"/></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato2}" maxlength="10" placeholder="10 caracteres máximo"/>
+                        </td>               
+                        <td>
+                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato3}" maxlength="10" placeholder="10 caracteres máximo"/>
+                        </td>                  
+                    </tr>
+                </div>
                 <tr><td colspan="2">&nbsp;</td></tr>
+            </table>
+            <table style="margin-left: 280px;; margin-right: auto;">
+                <tr>
+                    <td colspan="2">
+                        <p:tabView>
+                            <p:tab title="Talla Edad Niño 15 a 18 años">
+                                <p:chart type="line" model="#{historiasMB.lineModel1}"   style="height:500px;width: 700px;"/>
+                                
+                            </p:tab>
+                            <p:tab title="Indice Masa Corporal Niña  0 a 2 años">
+                                <p:chart type="line"  model="#{historiasMB.lineModel2}"  style="height:600px;width: 700px; "/>
+                            </p:tab>
+                        </p:tabView>
+                            
+                    </td>
+                </tr>
+            </table>
+            <table style="margin-left: 280px;; margin-right: auto;">
                 <tr>
                     <td colspan="2">
                         <p:outputLabel value="FECHA-HORA REGISTRO"/><p:calendar navigator="true" locale="es" value="#{historiasMB.fechaReg}" pattern="dd/MM/yyyy HH:mm:ss" size="23" mask="true"  />

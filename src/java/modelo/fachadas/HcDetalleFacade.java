@@ -5,6 +5,7 @@
  */
 package modelo.fachadas;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.Query;
@@ -93,10 +94,10 @@ public class HcDetalleFacade extends AbstractFacade<HcDetalle> {
    public List<HcDetalle> buscarDetallesPorRegistro(int idRegistro) {
         try {
             return getEntityManager().createNativeQuery(
-                    " select hc_detalle.id_registro, hc_detalle.id_campo, hc_detalle.valor from hc_detalle\n"
-                    + " inner join hc_campos_reg\n"
-                    + " on hc_detalle.id_campo = hc_campos_reg.id_campo\n"
-                    + " where hc_detalle.id_registro = " + idRegistro + "\n"
+                    " select hc_detalle.id_registro, hc_detalle.id_campo, hc_detalle.valor from hc_detalle "
+                    + " inner join hc_campos_reg "
+                    + " on hc_detalle.id_campo = hc_campos_reg.id_campo "
+                    + " where hc_detalle.id_registro = " + idRegistro + " "
                     + " order by hc_campos_reg.posicion", HcDetalle.class).getResultList();
         } catch (Exception e) {
             return null;
@@ -114,4 +115,61 @@ public class HcDetalleFacade extends AbstractFacade<HcDetalle> {
         }
         return obj;
     }
+     
+     public List<HcDetalle> getValoresGraficas(int idPaciente,int posicion,int tipoReg){
+         List<HcDetalle> lista = new ArrayList<>();
+         try {
+             String sql =   "select  hd.valor, " +
+                            "(DATE_PART('year', h.fecha_reg::date) - DATE_PART('year', c.fecha_nacimiento::date)) * 12 + " +
+                            " (DATE_PART('month', h.fecha_reg::date) - DATE_PART('month', c.fecha_nacimiento::date)) valorX " +
+                            "from hc_registro h " +
+                            "inner join hc_detalle hd on hd.id_Registro = h.id_Registro " +
+                            "inner join cfg_pacientes c on c.id_paciente = h.id_paciente " +
+                            "inner join hc_campos_reg hc on hc.id_tipo_reg = h.id_tipo_reg and hc.posicion=? and hd.id_campo = hc.id_campo " +
+                            "where c.id_paciente=? and h.id_tipo_reg=? " +
+                            "order by h.id_registro";
+                
+            Query query  =getEntityManager().createNativeQuery(sql).setParameter(1, posicion)
+                    .setParameter(2, idPaciente).setParameter(3, tipoReg);
+            List<Object[]> lst = query.getResultList();
+            for(Object[] m: lst){
+                HcDetalle hc =new HcDetalle();
+                hc.setValor(m[0].toString());
+                int pos = m[1].toString().indexOf(".");
+                hc.setValorX(Long.valueOf(m[1].toString().substring(0, pos)));
+                lista.add(hc);
+            }
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+         return lista;
+     }
+     
+     public List<HcDetalle> getValoresGraficasAnnio(int idPaciente,int posicion,int tipoReg){
+         List<HcDetalle> lista = new ArrayList<>();
+         try {
+             String sql =   "select  hd.valor, " +
+                            "(DATE_PART('year', h.fecha_reg::date) - DATE_PART('year', c.fecha_nacimiento::date)) valorX " +
+                            "from hc_registro h " +
+                            "inner join hc_detalle hd on hd.id_Registro = h.id_Registro " +
+                            "inner join cfg_pacientes c on c.id_paciente = h.id_paciente " +
+                            "inner join hc_campos_reg hc on hc.id_tipo_reg = h.id_tipo_reg and hc.posicion=? and hd.id_campo = hc.id_campo " +
+                            "where c.id_paciente=? and h.id_tipo_reg=? " +
+                            "order by h.id_registro";
+                
+            Query query  =getEntityManager().createNativeQuery(sql).setParameter(1, posicion)
+                    .setParameter(2, idPaciente).setParameter(3, tipoReg);
+            List<Object[]> lst = query.getResultList();
+            for(Object[] m: lst){
+                HcDetalle hc =new HcDetalle();
+                hc.setValor(m[0].toString());
+                int pos = m[1].toString().indexOf(".");
+                hc.setValorX(Long.valueOf(m[1].toString().substring(0, pos)));
+                lista.add(hc);
+            }
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+         return lista;
+     }
 }

@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -51,6 +52,9 @@ public class HcDetalle implements Serializable {
     @Column(name = "id_sincronizador", nullable = false)
     private Integer idSincronizador;
 
+    
+    @Transient
+    private Long valorX;
     public HcDetalle() {
     }
 
@@ -125,6 +129,14 @@ public class HcDetalle implements Serializable {
 
     public void setIdSincronizador(Integer idSincronizador) {
         this.idSincronizador = idSincronizador;
+    }
+
+    public Long getValorX() {
+        return valorX;
+    }
+
+    public void setValorX(Long valorX) {
+        this.valorX = valorX;
     }
 
 }
