@@ -57,28 +57,33 @@
                     </tr>
                     <tr>
                         <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato2}" maxlength="10" placeholder="10 caracteres máximo"/>
+                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato2}" maxlength="10" placeholder="10 caracteres máximo">
+                                <p:ajax event="blur" update="IdFormRegistroClinico:graphic" process="@this" listener="#{historiasMB.validardatoPeso}" />
+                            </p:inputText>
                         </td>               
                         <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato3}" maxlength="10" placeholder="10 caracteres máximo"/>
+                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato3}" maxlength="10" placeholder="10 caracteres máximo">
+                                <p:ajax event="blur" update="IdFormRegistroClinico:graphic" process="@this" listener="#{historiasMB.validardatoTalla}" />
+                            </p:inputText>
                         </td>                  
                     </tr>
                 </div>
                 <tr><td colspan="2">&nbsp;</td></tr>
             </table>
-            <table style="margin-left: 280px;; margin-right: auto;">
+            <table style="margin-left: 200px;; margin-right: auto;">
                 <tr>
                     <td colspan="2">
-                        <p:tabView>
-                            <p:tab title="Talla Edad Niño 5 a 18 años">
-                                <p:chart type="line" model="#{historiasMB.lineModel1}"   style="height:500px;width: 700px;"/>
-                                
-                            </p:tab>
-                            <p:tab title="Indice Masa Corporal Niño 5 a 18 años">
-                                <p:chart type="line"  model="#{historiasMB.lineModel2}"  style="height:600px;width: 700px; "/>
-                            </p:tab>
-                        </p:tabView>
-                            
+                        <p:outputPanel id="graphic">
+                            <p:tabView>
+                                <p:tab title="Talla Edad Niño 5 a 18 años">
+                                    <p:chart type="line" model="#{historiasMB.lineModel1}"   style="height:500px;width: 700px;"/>
+
+                                </p:tab>
+                                <p:tab title="Indice Masa Corporal Niño 5 a 18 años">
+                                    <p:chart type="line"  model="#{historiasMB.lineModel2}"  style="height:600px;width: 700px; "/>
+                                </p:tab>
+                            </p:tabView>
+                        </p:outputPanel>
                     </td>
                 </tr>
             </table>

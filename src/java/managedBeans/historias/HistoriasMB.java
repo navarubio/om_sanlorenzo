@@ -388,6 +388,14 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
      private LineChartModel lineModel3 = new LineChartModel();
      private LineChartModel lineModel4 = new LineChartModel();
     
+     LineChartSeries seriesLinealTalla = new LineChartSeries();
+     LineChartSeries seriesLinealPeso= new LineChartSeries();
+     LineChartSeries seriesLinealIMC= new LineChartSeries();
+     LineChartSeries seriesLinealCefalico= new LineChartSeries();
+     List<HcDetalle> listaTalla = new ArrayList<>();
+     List<HcDetalle> listaPeso = new ArrayList<>();
+     List<HcDetalle> listaIMC = new ArrayList<>();
+     List<HcDetalle> listaCefalico = new ArrayList<>();
     //---------------------------------------------------
     //----------------- FUNCIONES INICIALES -----------------------
     //---------------------------------------------------
@@ -1539,21 +1547,271 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             clasificacion_fisica();
         }
     }
+    public void validardatoTalla05() {
+        try {
+            List<Integer> listaEdad = getYear(pacienteSeleccionado.getFechaNacimiento());
+
+            if (!listaEdad.isEmpty()) {
+                if(listaTalla.isEmpty())seriesLinealTalla = new LineChartSeries();
+                seriesLinealTalla.set(listaEdad.get(1), Long.valueOf(datosFormulario.getDato1().toString()));
+                HcDetalle hc = new HcDetalle();
+                hc.setValorX(Long.valueOf(listaEdad.get(1)));
+                hc.setValor(datosFormulario.getDato1().toString());
+                listaTalla.add(hc);
+            }
+            LineChartModel model = new LineChartModel();
+            model.addSeries(seriesLinealTalla);
+            lineModel2 = model;
+            lineModel2.setTitle("Talla para la edad Niñas de 0 a 2 años");
+            lineModel2.setLegendPosition("e");
+            lineModel2.setLegendPlacement(LegendPlacement.OUTSIDE);
+            lineModel2.setShowPointLabels(true);
+            //lineModel2.getAxes().put(AxisType.X);
+
+            Axis xAxis = lineModel2.getAxis(AxisType.X);
+            xAxis.setMin(0);
+            xAxis.setMax(24);
+            xAxis.setTickInterval("1");
+            xAxis.setLabel("Meses");
+
+            /*,,,,,4F4B4A,*/
+            Axis yAxis = lineModel2.getAxis(AxisType.Y);
+            yAxis.setTickInterval("5");
+            yAxis.setLabel("Talla (cm)");
+            yAxis.setMin(40);
+            yAxis.setMax(95);
+
+            lineModel2.setSeriesColors("D9300B");
+
+            //cargamos imc
+            //cargamos imc
+            if(listaPeso.size()==1) seriesLinealIMC=new LineChartSeries();
+            if (!listaTalla.isEmpty() && !listaPeso.isEmpty()) {
+                model = new LineChartModel();
+                for (int i = 0; i < listaTalla.size(); i++) {
+                    float pesoC = Long.valueOf(listaPeso.get(i).getValor());
+                    float tallaC = Long.valueOf(listaTalla.get(i).getValor());
+                    float metros = tallaC / 100;
+                    float imcCalculado = pesoC / (metros * metros);
+                    seriesLinealIMC.set(listaTalla.get(i).getValorX(), imcCalculado);
+                }
+
+                model.addSeries(seriesLinealIMC);
+                lineModel3 = model;
+
+                lineModel3.setTitle("IMC para la edad Niñas de 0 a 2 años");
+                lineModel3.setLegendPosition("e");
+                lineModel3.setShowPointLabels(true);
+                //lineModel3.getAxes().put(AxisType.X, new CategoryAxis("Meses"));
+                lineModel3.setLegendPlacement(LegendPlacement.OUTSIDE);
+
+                xAxis = lineModel3.getAxis(AxisType.X);
+                xAxis.setMin(0);
+                xAxis.setMax(24);
+                xAxis.setTickInterval("1");
+                xAxis.setLabel("Meses");
+
+                yAxis = lineModel3.getAxis(AxisType.Y);
+                yAxis.setLabel("IMC (kg/m2)");
+                yAxis.setTickInterval("1");
+                yAxis.setMin(9);
+                yAxis.setMax(22);
+
+                lineModel3.setSeriesColors("D9300B");
+            }
+            RequestContext.getCurrentInstance().update(":IdFormRegistroClinico:tallaModel");
+        } catch (Exception e) {
+        }
+    }
+
+    public void validardatoPeso05() {
+        try {
+            List<Integer> listaEdad = getYear(pacienteSeleccionado.getFechaNacimiento());
+            if (!listaEdad.isEmpty()) {
+                if(listaPeso.isEmpty())seriesLinealPeso = new LineChartSeries();
+                seriesLinealPeso.set(listaEdad.get(1), Long.valueOf(datosFormulario.getDato0().toString()));
+                HcDetalle hc = new HcDetalle();
+                hc.setValorX(Long.valueOf(listaEdad.get(1)));
+                hc.setValor(datosFormulario.getDato0().toString());
+                listaPeso.add(hc);
+            }
+            LineChartModel model = new LineChartModel();
+            model.addSeries(seriesLinealPeso);
+            lineModel1 = model;
+
+            lineModel1.setTitle("Peso para la edad Niñas de 0 a 2 años");
+            lineModel1.setLegendPosition("e");
+            lineModel1.setShowPointLabels(true);
+
+            lineModel1.setLegendPlacement(LegendPlacement.OUTSIDE);
+            Axis xAxis = lineModel1.getAxis(AxisType.X);
+            xAxis.setMin(0);
+            xAxis.setMax(24);
+            xAxis.setTickInterval("1");
+            xAxis.setLabel("Meses");
+
+            Axis yAxis = lineModel1.getAxis(AxisType.Y);
+            yAxis.setLabel("Peso (kg)");
+            yAxis.setMin(0);
+            yAxis.setMax(18);
+            yAxis.setTickInterval("1");
+            //#4F4B4A
+
+            lineModel1.setSeriesColors("D9300B");
+            RequestContext.getCurrentInstance().update(":IdFormRegistroClinico:tallaModel");
+        } catch (Exception e) {
+        }
+    }
+
+    public void validardatoPerimetroCefalico05() {
+        try {
+            List<Integer> listaEdad = getYear(pacienteSeleccionado.getFechaNacimiento());
+
+            if (!listaEdad.isEmpty()) {
+                if(listaCefalico.isEmpty())seriesLinealCefalico = new LineChartSeries();
+                seriesLinealCefalico.set(listaEdad.get(1), Long.valueOf(datosFormulario.getDato2().toString()));
+                HcDetalle hc = new HcDetalle();
+                hc.setValorX(Long.valueOf(listaEdad.get(0)));
+                hc.setValor(datosFormulario.getDato2().toString());
+                listaCefalico.add(hc);
+            }
+            LineChartModel model = new LineChartModel();
+            model.addSeries(seriesLinealCefalico);
+            lineModel4 = model;
+
+            lineModel4 = model;
+            lineModel4.setTitle("Perímetro Cefálico para la edad Niñas de 0 a 2 años");
+            lineModel4.setLegendPosition("e");
+            lineModel4.setShowPointLabels(true);
+            lineModel4.setLegendPlacement(LegendPlacement.OUTSIDE);
+            //lineModel4.getAxes().put(AxisType.X, new CategoryAxis("Meses"));
+
+            Axis xAxis = lineModel4.getAxis(AxisType.X);
+            xAxis.setMin(0);
+            xAxis.setMax(24);
+            xAxis.setTickInterval("1");
+            xAxis.setLabel("Meses");
+
+            Axis yAxis = lineModel4.getAxis(AxisType.Y);
+            yAxis.setLabel("Perímetro Cefálico (cm)");
+            yAxis.setTickInterval("2");
+            yAxis.setMin(30);
+            yAxis.setMax(56);
+
+            //lineModel4.getAxes().put(AxisType.Y2, y2Axis);
+            lineModel4.setSeriesColors("D9300B");
+            RequestContext.getCurrentInstance().update(":IdFormRegistroClinico:tallaModel");
+        } catch (Exception e) {
+        }
+    }
     
+    public void validardatoPeso(){
+        List<Integer> listaEdad = getYear(pacienteSeleccionado.getFechaNacimiento());
+        if(!listaEdad.isEmpty()){
+            seriesLinealPeso.set(listaEdad.get(0), Long.valueOf(datosFormulario.getDato2().toString()));
+            HcDetalle hc = new HcDetalle();
+            hc.setValorX(Long.valueOf(listaEdad.get(0)));
+            hc.setValor(datosFormulario.getDato2().toString());
+            listaPeso.add(hc);
+        }
+    }
+    public void validardatoTalla(){
+        List<Integer> listaEdad = getYear(pacienteSeleccionado.getFechaNacimiento());
+        
+        if(!listaEdad.isEmpty()){
+            if(listaTalla.isEmpty())seriesLinealTalla = new LineChartSeries();
+            seriesLinealTalla.set(listaEdad.get(0), Long.valueOf(datosFormulario.getDato3().toString()));
+            HcDetalle hc = new HcDetalle();
+            hc.setValorX(Long.valueOf(listaEdad.get(0)));
+            hc.setValor(datosFormulario.getDato3().toString());
+            listaTalla.add(hc);
+        }
+        LineChartModel model = new LineChartModel();
+        model.addSeries(seriesLinealTalla);
+        lineModel1 = model;
+        if(tipoRegistroClinicoActual.getIdTipoReg()==70){
+                lineModel1.setTitle("Talla para la edad Niños de 5 a 18 años");
+            }else{
+                lineModel1.setTitle("Talla para la edad Niñas de 5 a 18 años");
+            }
+            lineModel1.setLegendPosition("e");
+            lineModel1.setShowPointLabels(true);
+
+            lineModel1.setLegendPlacement(LegendPlacement.OUTSIDE);
+            Axis xAxis = lineModel1.getAxis(AxisType.X);
+            xAxis.setMin(5);
+            xAxis.setMax(18);
+            xAxis.setTickInterval("1");
+            xAxis.setLabel("Edad en Años");
+
+            Axis yAxis = lineModel1.getAxis(AxisType.Y);
+            yAxis.setLabel("Talla (cm)");
+            yAxis.setMin(90);
+            yAxis.setMax(200);
+            yAxis.setTickInterval("10");
+            //#4F4B4A
+
+            lineModel1.setSeriesColors("D9300B");
+            if(listaPeso.size()==1)seriesLinealTalla =new LineChartSeries();
+            //cargamos imc
+            if(!listaTalla.isEmpty() && !listaPeso.isEmpty()){
+                model = new LineChartModel();
+                for (int i = 0; i < listaTalla.size(); i++) {
+                    float pesoC = Long.valueOf(listaPeso.get(i).getValor());
+                    float tallaC = Long.valueOf(listaTalla.get(i).getValor());
+                    float metros = tallaC / 100;
+                    float imcCalculado = pesoC / (metros * metros);
+                    seriesLinealIMC.set(listaTalla.get(i).getValorX(), imcCalculado);
+                }
+
+                model.addSeries(seriesLinealIMC);
+                lineModel2 = model;
+                if(tipoRegistroClinicoActual.getIdTipoReg()==70){
+                    lineModel2.setTitle("IMC para la edad Niños de 5 a 18 años");
+                }else{
+                    lineModel2.setTitle("IMC para la edad Niñas de 5 a 18 años");
+                }
+                    
+            
+            lineModel2.setLegendPosition("e");
+            lineModel2.setShowPointLabels(true);
+            //lineModel3.getAxes().put(AxisType.X, new CategoryAxis("Meses"));
+            lineModel2.setLegendPlacement(LegendPlacement.OUTSIDE);
+
+            xAxis = lineModel2.getAxis(AxisType.X);
+            xAxis.setMin(5);
+            xAxis.setMax(18);
+            xAxis.setTickInterval("1");
+            xAxis.setLabel("Edad en Años");
+
+            yAxis = lineModel2.getAxis(AxisType.Y);
+            yAxis.setLabel("IMC (kg/m2)");
+            yAxis.setTickInterval("2");
+            yAxis.setMin(11);
+            yAxis.setMax(36);
+
+            lineModel2.setSeriesColors("D9300B");
+            }
+            RequestContext.getCurrentInstance().update(":IdFormRegistroClinico:tallaModel");
+    }
     private void loadGraphicValoracion0_18() {
         try {
-            List<Long> listaPeso = new ArrayList();
-            List<Long> listaTalla = new ArrayList();
+            List<Long> listaPesoC = new ArrayList();
+            List<Long> listaTallaC = new ArrayList();
             LineChartModel model = new LineChartModel();
-            LineChartSeries seriesLineal = new LineChartSeries();
-            seriesLineal.setLabel("Talla (cm)");
-            List<HcDetalle> lista = detalleFacade.getValoresGraficasAnnio(pacienteSeleccionado.getIdPaciente(), 3, tipoRegistroClinicoActual.getIdTipoReg());
-            for (HcDetalle hc : lista) {
-                seriesLineal.set(hc.getValorX(), Long.valueOf(hc.getValor()));
-                listaTalla.add(Long.valueOf(hc.getValor()));
+            seriesLinealTalla = new LineChartSeries();
+            seriesLinealTalla.setLabel("Talla (cm)");
+            listaTalla = detalleFacade.getValoresGraficasAnnio(pacienteSeleccionado.getIdPaciente(), 3, tipoRegistroClinicoActual.getIdTipoReg());
+            for (HcDetalle hc : listaTalla) {
+                seriesLinealTalla.set(hc.getValorX(), Long.valueOf(hc.getValor()));
+                //listaTalla.add(Long.valueOf(hc.getValor()));
+            }
+            
+            if(listaTalla.isEmpty()){
+                seriesLinealTalla.set(0,0);
             }
 
-            model.addSeries(seriesLineal);
+            model.addSeries(seriesLinealTalla);
             lineModel1 = model;
             if(tipoRegistroClinicoActual.getIdTipoReg()==70){
                 lineModel1.setTitle("Talla para la edad Niños de 5 a 18 años");
@@ -1580,24 +1838,25 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             lineModel1.setSeriesColors("D9300B");
 
             //cargamos peso
-            lista = detalleFacade.getValoresGraficasAnnio(pacienteSeleccionado.getIdPaciente(), 2, tipoRegistroClinicoActual.getIdTipoReg());
-            for (HcDetalle hc : lista) {
-                listaPeso.add(Long.valueOf(hc.getValor()));
-            }
+            listaPeso = detalleFacade.getValoresGraficasAnnio(pacienteSeleccionado.getIdPaciente(), 2, tipoRegistroClinicoActual.getIdTipoReg());
+           
 
             //IMC
             model = new LineChartModel();
-            seriesLineal = new LineChartSeries();
-            seriesLineal.setLabel("IMC (kg/m2)");
-            for (int i = 0; i < lista.size(); i++) {
-                float pesoC = listaPeso.get(i).floatValue();
-                float tallaC = listaTalla.get(i).floatValue();
+            seriesLinealIMC = new LineChartSeries();
+            seriesLinealIMC.setLabel("IMC (kg/m2)");
+            for (int i = 0; i < listaTalla.size(); i++) {
+                float pesoC = Long.valueOf(listaPeso.get(i).getValor());
+                float tallaC = Long.valueOf(listaTalla.get(i).getValor());
                 float metros = tallaC / 100;
                 float imcCalculado = pesoC / (metros * metros);
-                seriesLineal.set(lista.get(i).getValorX(), imcCalculado);
+                seriesLinealIMC.set(listaTalla.get(i).getValorX(), imcCalculado);
             }
 
-            model.addSeries(seriesLineal);
+            if(listaTalla.isEmpty()){
+                seriesLinealIMC.set(0,0);
+            }
+            model.addSeries(seriesLinealIMC);
             lineModel2 = model;
             if(tipoRegistroClinicoActual.getIdTipoReg()==70){
                 lineModel2.setTitle("IMC para la edad Niños de 5 a 18 años");
@@ -1630,20 +1889,21 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     }
     private void loadGraphic(){
          try{
-                    List<Long> listaPeso = new ArrayList();
-                    List<Long> listaTalla = new ArrayList();
                     //Cargamos peso
                     LineChartModel model = new LineChartModel();
-                    LineChartSeries series1 = new LineChartSeries();
+                    seriesLinealPeso = new LineChartSeries();
                     
-                    series1.setLabel("Peso (kg)");
-                    List<HcDetalle> lista = detalleFacade.getValoresGraficas(pacienteSeleccionado.getIdPaciente(), 0, tipoRegistroClinicoActual.getIdTipoReg());
-                    for(HcDetalle hc:lista){
-                        series1.set(hc.getValorX(), Long.valueOf(hc.getValor()));
-                        listaPeso.add(Long.valueOf(hc.getValor()));
+                    seriesLinealPeso.setLabel("Peso (kg)");
+                    listaPeso = detalleFacade.getValoresGraficas(pacienteSeleccionado.getIdPaciente(), 0, tipoRegistroClinicoActual.getIdTipoReg());
+                    for(HcDetalle hc:listaPeso){
+                        seriesLinealPeso.set(hc.getValorX(), Long.valueOf(hc.getValor()));
+                        //listaPeso.add(Long.valueOf(hc.getValor()));
                     }
                     
-                    model.addSeries(series1);
+                    if(listaPeso.isEmpty()){
+                        seriesLinealPeso.set(-1,-1);
+                    }       
+                    model.addSeries(seriesLinealPeso);
                     lineModel1 = model;
                     lineModel1.setTitle("Peso para la edad Niñas de 0 a 2 años");
                     lineModel1.setLegendPosition("e");
@@ -1669,15 +1929,17 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     /////FIN PESO
                     //Cargamos talla
                     model = new LineChartModel();
-                    series1 = new LineChartSeries();
-                    series1.setLabel("Talla (cm)");
-                    lista = detalleFacade.getValoresGraficas(pacienteSeleccionado.getIdPaciente(), 1, tipoRegistroClinicoActual.getIdTipoReg());
-                    for(HcDetalle hc:lista){
-                        series1.set(hc.getValorX(), Long.valueOf(hc.getValor()));
-                        listaTalla.add(Long.valueOf(hc.getValor()));
+                    seriesLinealTalla = new LineChartSeries();
+                    seriesLinealTalla.setLabel("Talla (cm)");
+                    listaTalla = detalleFacade.getValoresGraficas(pacienteSeleccionado.getIdPaciente(), 1, tipoRegistroClinicoActual.getIdTipoReg());
+                    for(HcDetalle hc:listaTalla){
+                        seriesLinealTalla.set(hc.getValorX(), Long.valueOf(hc.getValor()));
                     }
                     
-                    model.addSeries(series1);
+                    if(listaTalla.isEmpty()){
+                        seriesLinealTalla.set(-1,-1);
+                    }
+                    model.addSeries(seriesLinealTalla);
                     lineModel2 = model;
                     lineModel2.setTitle("Talla para la edad Niñas de 0 a 2 años");
                     lineModel2.setLegendPosition("e");
@@ -1706,17 +1968,19 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                      
                     
                     model = new LineChartModel();
-                    series1 = new LineChartSeries();
-                    series1.setLabel("IMC (kg/m2)");
-                    for(int i=0;i<lista.size();i++){
-                        float pesoC= listaPeso.get(i).floatValue();
-                        float tallaC= listaTalla.get(i).floatValue();
+                    seriesLinealIMC = new LineChartSeries();
+                    seriesLinealIMC.setLabel("IMC (kg/m2)");
+                    for(int i=0;i<listaPeso.size();i++){
+                        float pesoC= Long.valueOf(listaPeso.get(i).getValor());
+                        float tallaC= Long.valueOf(listaTalla.get(i).getValor());
                         float metros = tallaC / 100;
                         float imcCalculado = pesoC / (metros * metros);
-                        series1.set(lista.get(i).getValorX(), imcCalculado);
+                        seriesLinealIMC.set(listaPeso.get(i).getValorX(), imcCalculado);
                     }
-
-                    model.addSeries(series1);
+                    if(listaPeso.isEmpty() || listaTalla.isEmpty()){
+                        seriesLinealIMC.set(-1,-1);
+                    }
+                    model.addSeries(seriesLinealIMC);
                     lineModel3 = model;
                     lineModel3.setTitle("IMC para la edad Niñas de 0 a 2 años");
                     lineModel3.setLegendPosition("e");
@@ -1743,14 +2007,16 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     
                     
                     model = new LineChartModel();
-                    series1 = new LineChartSeries();
-                    series1.setLabel("Perímetro Cefálico (cm)");
-                    lista = detalleFacade.getValoresGraficas(pacienteSeleccionado.getIdPaciente(), 2, tipoRegistroClinicoActual.getIdTipoReg());
-                    for(HcDetalle hc:lista){
-                        series1.set(hc.getValorX(), Long.valueOf(hc.getValor()));
+                    seriesLinealCefalico = new LineChartSeries();
+                    seriesLinealCefalico.setLabel("Perímetro Cefálico (cm)");
+                    listaCefalico = detalleFacade.getValoresGraficas(pacienteSeleccionado.getIdPaciente(), 2, tipoRegistroClinicoActual.getIdTipoReg());
+                    for(HcDetalle hc:listaCefalico){
+                        seriesLinealCefalico.set(hc.getValorX(), Long.valueOf(hc.getValor()));
                     }
-                    
-                    model.addSeries(series1);
+                    if(listaCefalico.isEmpty()){
+                        seriesLinealCefalico.set(-1,-1);
+                    }
+                    model.addSeries(seriesLinealCefalico);
                     lineModel4 = model;
                     lineModel4.setTitle("Perímetro Cefálico para la edad Niñas de 0 a 2 años");
                     lineModel4.setLegendPosition("e");
@@ -3230,7 +3496,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             datosReporte.setListaDatosIMC(listaGrafica);
             
             //pc
-            lista1 =  detalleFacade.getValoresGraficasAnnio(pacienteSeleccionado.getIdPaciente(),2,regEncontrado.getIdTipoReg().getIdTipoReg());
+            lista1 =  detalleFacade.getValoresGraficas(pacienteSeleccionado.getIdPaciente(),2,regEncontrado.getIdTipoReg().getIdTipoReg());
             listaGrafica = new ArrayList();
             for(HcDetalle hc:lista1){
                 DatosGrafica dg = new DatosGrafica();
@@ -4093,7 +4359,11 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                                     break;
                             }
                         } else {//simplemente es texto
+                            try{
                             datosFormulario.setValor(campo.getPosicion(), detalle.getValor());
+                            }catch(Exception e){
+                                
+                            }
                         }//System.out.println("Se coloco en datosFormulario." + campo.getPosicion() + " el valor de " + detalle.getValor());
                     } else {
                         System.out.println("Error: no se encontro hc_campos_reg.id_campo= " + detalle.getHcDetallePK().getIdCampo());

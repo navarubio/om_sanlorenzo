@@ -10,7 +10,9 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -398,5 +400,21 @@ public class MetodosGenerales {
         }
         return false;
     }
+     
+     public List<Integer> getYear(Date fechaNacimiento){
+         List<Integer> listaValores= new ArrayList<>();
+         try {
+             Calendar inicio = new GregorianCalendar();
+            Calendar fin = new GregorianCalendar();
+            inicio.setTime(fechaNacimiento);
+            fin.setTime(new Date());
+            int difA = fin.get(Calendar.YEAR) - inicio.get(Calendar.YEAR);
+            int difM = difA * 12 + fin.get(Calendar.MONTH) - inicio.get(Calendar.MONTH);
+            listaValores.add(difA);
+            listaValores.add(difM);
+         } catch (Exception e) {
+         }
+         return listaValores;
+     }
 
 }
