@@ -193,3 +193,13 @@ insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,84,'EV
 insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,84,'PAUTAS PARA EL DESARROLLO DEL MENOR:',null,190,'PAUTAS PARA EL DESARROLLO DEL MENOR:');
 insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,84,'DIAGNOSTICO:',null,191,'DIAGNOSTICO:');
 insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,84,'TRATAMIENTO:',null,192,'TRATAMIENTO:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,84,'TELEFONO:',null,193,'TELEFONO:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,84,'TOXICO:',null,194,'TOXICO:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,84,'FARMACOLOGICO:',null,195,'FARMACOLOGICO:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,84,'CUANTO MIDIO AL NACER:',null,196,'CUANTO MIDIO AL NACER:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,84,'QUIRURGICOS:',null,197,'QUIRURGICOS:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,84,'HEMOCLASIFICACION:',null,198,'HEMOCLASIFICACION:');
+update hc_tipo_reg set url_pagina='g_aiepi_menor_2_meses.xhtml' where id_tipo_reg=84;
+update hc_tipo_reg set cant_campos=199  where id_Tipo_reg=84;
+update hc_campos_reg set nombre='TSH' where id_campo=112471;
+

@@ -1,5 +1,5 @@
 insert into hc_tipo_reg
-values(83,'HISTORIA CLINICA PREVENCION DE ENFERMEDADES CRONICAS','g_historia_prevencion_enfermedades_cronicas',true,224,0);
+values(83,'HISTORIA CLINICA PREVENCION DE ENFERMEDADES CRONICAS','s_historia_prevencion_enfermedades_cronicas.xhtml',true,226,0);
 
 ---Antes de ejecutar los registros actualizar la secuencia hc_campos_reg_id_campo_seq al último valor de la tabla hc_campos_reg
 
@@ -227,8 +227,13 @@ insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,83,'CL
 insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,83,'TRATAMIENTO',null,221,'TRATAMIENTO');
 insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,83,'FARMACOLOGICO:',null,222,'FARMACOLOGICO:');
 insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,83,'VALORACION OTROS SERVICIOS:',null,223,'VALORACION OTROS SERVICIOS:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,83,'Parentesco:',null,224,'Parentesco:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,83,'Telefono:',null,225,'Telefono:');
 
 
+
+update hc_campos_Reg set nombre='CITA DE CONTROL' where id_campo=112294;
+update hc_tipo_reg set url_pagina='g_historia_prevencion_enfermedades_cronicas.xhtml' where id_tipo_reg=83;
 
 
 

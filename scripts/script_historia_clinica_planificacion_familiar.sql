@@ -151,3 +151,14 @@ insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,85,'IN
 insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,85,'DESCRIPCION DEL PROCEDIMIENTO',null,148,'DESCRIPCION DEL PROCEDIMIENTO');
 insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,85,'DIAGNOSTICO:',null,149,'DIAGNOSTICO:');
 insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,85,'TIPO DE DIAGNOSTICO',null,150,'TIPO DE DIAGNOSTICO');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,85,'TUMORES',null,151,'TUMORES');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,85,'MENTALES',null,152,'MENTALES');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,85,'OBSERVACIONES',null,153,'OBSERVACIONES');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,85,'HIPERTENSION',null,154,'HIPERTENSION');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,85,'DIABETES',null,155,'DIABETES');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,85,'CARDIOPATIAS',null,156,'CARDIOPATIAS');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,85,'HEPATOPATIAS',null,157,'HEPATOPATIAS');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,85,'PROSPECCION',null,158,'PROSPECCION');
+
+update hc_tipo_reg set cant_campos=159  where id_Tipo_reg=85;
+

@@ -1,0 +1,38 @@
+insert into hc_tipo_reg values(87,'CONCEPTO MEDICO','g_concepto_medico.xhtml',true,35,0);
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,87,'DIAGNOSTICO DE INGRESO:',null,0,'DIAGNOSTICO DE INGRESO:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,87,'OBSERVACIONES:',null,1,'OBSERVACIONES:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,87,'GRUPO SANGINEO:',null,2,'GRUPO SANGINEO:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,87,'PATOLOGICOS:',null,3,'PATOLOGICOS:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,87,'TRAUMATICOS:',null,4,'TRAUMATICOS:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,87,'QUIRURGICOS:',null,5,'QUIRURGICOS:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,87,'INF. TRANSMISIÓN SEXUAL:',null,6,'INF. TRANSMISIÓN SEXUAL:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,87,'INMUNOLOGICOS:',null,7,'INMUNOLOGICOS:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,87,'FARMACOLOGICOS:',null,8,'FARMACOLOGICOS:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,87,'NUTRICIONALES:',null,9,'NUTRICIONALES:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,87,'EXAMEN FISICO:',null,10,'EXAMEN FISICO:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,87,'ASPECTO GENERAL:',null,11,'ASPECTO GENERAL:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,87,'PESO:',null,12,'PESO:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,87,'TALLA:',null,13,'TALLA:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,87,'IMC:',null,14,'IMC:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,87,'SINTOMATICO DE PIEL:',null,15,'SINTOMATICO DE PIEL:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,87,'SINTOMATICO RESPIRATORIO:',null,16,'SINTOMATICO RESPIRATORIO:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,87,'SINDROME FEBRIL:',null,17,'SINDROME FEBRIL:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,87,'CABEZA:',null,18,'CABEZA:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,87,'OJOS:',null,19,'OJOS:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,87,'OIDOS:',null,20,'OIDOS:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,87,'NARIZ:',null,21,'NARIZ:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,87,'OTORRINOLARINGOLOGIA:',null,22,'OTORRINOLARINGOLOGIA:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,87,'CUELLO:',null,23,'CUELLO:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,87,'TORAX:',null,24,'TORAX:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,87,'PULMONAR:',null,25,'PULMONAR:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,87,'CARDIOVASCULAR:',null,26,'CARDIOVASCULAR:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,87,'PERFUSION:',null,27,'PERFUSION:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,87,'ABDOMEN:',null,28,'ABDOMEN:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,87,'EXTREMIDADES:',null,29,'EXTREMIDADES:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,87,'SISTEMA MUSCULOESQUELETICO:',null,30,'SISTEMA MUSCULOESQUELETICO:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,87,'GENITOURINARIO:',null,31,'GENITOURINARIO:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,87,'NEUROLOGICO:',null,32,'NEUROLOGICO:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,87,'PIEL:',null,33,'PIEL:');
+insert into hc_campos_reg (select nextval('hc_campos_reg_id_campo_seq')+1,87,'OBSERVACIONES:',null,34,'OBSERVACIONES:');
+
+
