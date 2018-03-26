@@ -3438,9 +3438,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         datosReporte.setValor(82, "<b>" + empresa.getTipoDoc().getDescripcion() + ": </b>  " + empresa.getNumIdentificacion());//NIT        
         datosReporte.setValor(83, empresa.getWebsite());//sitio web       
 
-        datosReporte.setValor(97, empresa.getNomRepLegal());//CONSTANSA PORTILLA BENAVIDES
+        datosReporte.setValor(100, empresa.getNomRepLegal());//CONSTANSA PORTILLA BENAVIDES
         datosReporte.setValor(98, empresa.getTipoDoc().getDescripcion() + ":" + empresa.getNumIdentificacion() + " " + empresa.getObservaciones());//OPTOMETRA U.L SALLE-BOGOTA        
-        datosReporte.setValor(100, empresa.getRazonSocial());//
+        datosReporte.setValor(97, empresa.getRazonSocial());//
         datosReporte.setValor(99, "CONSULTORIO " + empresa.getDireccion() + " " + empresa.getCodMunicipio().getDescripcion() + "  TELEFONO: " + empresa.getTelefono1());//CONSULTRIO
         //datosReporte.setValor(85, "<b>ASEGURADORA RESPONSABLE DE LA ATENCION, NUMERO DE POLIZA SI ES SOAT Y VIGENCIA: </b> ");
 
@@ -3714,11 +3714,11 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         datosReporte.setValor(245, empresa.getWebsite());//sitio web       
 
         //97
-        datosReporte.setValor(246, empresa.getNomRepLegal());//CONSTANSA PORTILLA BENAVIDES
+        datosReporte.setValor(248, empresa.getNomRepLegal());//CONSTANSA PORTILLA BENAVIDES
         //98
         datosReporte.setValor(247, empresa.getTipoDoc().getDescripcion() + ":" + empresa.getNumIdentificacion() + " " + empresa.getObservaciones());//OPTOMETRA U.L SALLE-BOGOTA        
         //100
-        datosReporte.setValor(248, empresa.getRazonSocial());//
+        datosReporte.setValor(246, empresa.getRazonSocial());//
         //99
         datosReporte.setValor(249, "CONSULTORIO " + empresa.getDireccion() + " " + empresa.getCodMunicipio().getDescripcion() + "  TELEFONO: " + empresa.getTelefono1());//CONSULTRIO
         //datosReporte.setValor(85, "<b>ASEGURADORA RESPONSABLE DE LA ATENCION, NUMERO DE POLIZA SI ES SOAT Y VIGENCIA: </b> ");
@@ -3943,9 +3943,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             datosReporte.setValor(1708, null);//IMAGEN LOGO
         }
 
-        datosReporte.setValor(1709, empresa.getNomRepLegal());//NOMBRE REP. LEGAL
+        datosReporte.setValor(1711, empresa.getNomRepLegal());//NOMBRE REP. LEGAL
         datosReporte.setValor(1710, empresa.getTipoDoc().getDescripcion() + ":" + empresa.getNumIdentificacion() + " " + empresa.getObservaciones());//OPTOMETRA U.L SALLE-BOGOTA        
-        datosReporte.setValor(1711, empresa.getRazonSocial());//
+        datosReporte.setValor(1709, empresa.getRazonSocial());//
         datosReporte.setValor(1712, "CONSULTORIO " + empresa.getDireccion() + " " + empresa.getCodMunicipio().getDescripcion() + "  TELEFONO: " + empresa.getTelefono1());//CONSULTRIO
 
         //ENFOQUE DIFERENCIAL  
@@ -4367,9 +4367,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         datosReporte.setValor(697, "<b>" + empresa.getTipoDoc().getDescripcion() + ": </b>  " + empresa.getNumIdentificacion());//NIT        
         datosReporte.setValor(698, empresa.getWebsite());//sitio web       
 
-        datosReporte.setValor(699, empresa.getNomRepLegal());//NOMBRE REP. LEGAL
+        datosReporte.setValor(701, empresa.getNomRepLegal());//NOMBRE REP. LEGAL
         datosReporte.setValor(700, empresa.getTipoDoc().getDescripcion() + ":" + empresa.getNumIdentificacion() + " " + empresa.getObservaciones());//OPTOMETRA U.L SALLE-BOGOTA        
-        datosReporte.setValor(701, empresa.getRazonSocial());//
+        datosReporte.setValor(699, empresa.getRazonSocial());//
         datosReporte.setValor(702, "CONSULTORIO " + empresa.getDireccion() + " " + empresa.getCodMunicipio().getDescripcion() + "  TELEFONO: " + empresa.getTelefono1());//CONSULTRIO
 
         //datos informacion general de referencia-contrareferencia

@@ -372,9 +372,9 @@ public class pypbean extends MetodosGenerales implements Serializable {
                     imprimirMensaje("Error", "La edad inicial no debe ser mayor a la final.", FacesMessage.SEVERITY_WARN);
                 } else {
                     List<PyPProgramaItem> buscado = ProgramaItems.buscar_programas_idservicios(programaSeleccionadoTabla.getIdPrograma(), item_servicios.getIdServicio());
-                    if (buscado.size() > 0) {
+                    /*if (buscado.size() > 0) {
                         imprimirMensaje("Error", "Ya tiene agregado este servicio.", FacesMessage.SEVERITY_ERROR);
-                    } else {
+                    } else */
                         item_servicios.setIdPrograma(programaSeleccionadoTabla.getIdPrograma());
                         item_servicios.setIdInsumo(null);
                         item_servicios.setIdMedicamento(null);
@@ -384,7 +384,7 @@ public class pypbean extends MetodosGenerales implements Serializable {
                         RequestContext.getCurrentInstance().execute("PF('dialogoAgregarServicio').hide(); PF('wvTablaServiciosManual').clearFilters(); PF('wvTablaServiciosManual').getPaginator().setPage(0);");
                         RequestContext.getCurrentInstance().update("IdFormManuales:IdTabView");
                         imprimirMensaje("Correcto", "Servicio agregado al programa.", FacesMessage.SEVERITY_INFO);
-                    }
+                    //}
                 }
             }
         } catch (Exception e) {

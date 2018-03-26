@@ -327,7 +327,7 @@
                                 var="manual"
                                 widgetVar="wvTablaManualesTarifarios"
                                 value="#{PyP_Programas.listaProgramas}"
-                                rowKey="#{manual.codigoPrograma}"
+                                rowKey="#{manual.idPrograma}"
                                 selection="#{PyP_Programas.programaSeleccionadoTabla}"
                                 paginator="true"
                                 style="width: 90%; height: 300px;"
@@ -818,6 +818,9 @@
                                             </p:inputText>
                                             <p:watermark for="dosis22" value="Dosis"/>
                                         </td>
+                                        
+                                    </tr>
+                                    <tr>
                                         <td>
                                             <p:outputLabel styleClass="labelFormularioBold" value="Frecuencia:" />
                                         </td>
@@ -826,8 +829,6 @@
                                             </p:inputText>
                                             <p:watermark for="frecuencia22" value="Frecuencia"/>
                                         </td>
-                                    </tr>
-                                    <tr>
                                         <td>
                                             <p:outputLabel styleClass="labelFormularioBold" value="Meta:" />
                                         </td>
