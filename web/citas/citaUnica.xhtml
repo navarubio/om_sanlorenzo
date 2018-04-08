@@ -82,7 +82,13 @@
                             <p:outputLabel styleClass="labelFormularioBold" value="Contrato:" rendered="#{citasMB.hayPacienteSeleccionado}"/>
                             <p:outputLabel styleClass="labelFormulario" id="idcontrato" value="#{citasMB.pacienteSeleccionado.idContrato.descripcion}" rendered="#{citasMB.hayPacienteSeleccionado}"/>
                         </td>
+                        <td>
+                            <p:graphicImage url="#{citasMB.semaforo}"
+                                            rendered="#{citasMB.hayPacienteSeleccionado}"
+                                            width="38" height="38"/>
+                        </td>
                     </tr>
+                    
                 </table>   
             </h:form>
         </p:fieldset>

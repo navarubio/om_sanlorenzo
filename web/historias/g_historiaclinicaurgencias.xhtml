@@ -68,7 +68,17 @@
                     </tr>
                 </div>
                 <!--FIN DATOS DEL ACUDIENTE-->
-
+                <div>
+                    <tr><td colspan="1"><h2>INGRESO Y SALIDA</h2></td></tr> 
+                    <tr>
+                        <td><p:outputLabel value="Fecha Ingreso" /></td>
+                        <td><p:outputLabel value="Fecha Salida" /></td>
+                    </tr>
+                    <tr>
+                        <td><p:calendar navigator="true" locale="es" value="#{historiasMB.datosFormulario.dato162}" pattern="dd/MM/yyyy HH:mm:ss" size="23" mask="true" ><f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/></p:calendar></td>
+                        <td><p:calendar navigator="true" locale="es" value="#{historiasMB.datosFormulario.dato163}" pattern="dd/MM/yyyy HH:mm:ss" size="23" mask="true" ><f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/></p:calendar></td>
+                    </tr>
+                </div>
                 <!--ENFOQUE DIFERENCIAL-->
                 <div>
                     <tr><td colspan="1"><h2>ENFOQUE DIFERENCIAL</h2></td></tr>         

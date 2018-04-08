@@ -131,6 +131,7 @@ public class CitasMB extends MetodosGenerales implements Serializable {
     public List<PyPProgramaItem> listaServiciosPrograma;
     public PyPProgramaItem servicioSeleccionadoTabla;
     public PyPProgramaItem medicamentoSeleccionadoTabla;
+    private String semaforo="../recursos/img/semaforo3.png";
 //    private pypbean programas = new pypbean();
 
     @EJB
@@ -241,6 +242,11 @@ public class CitasMB extends MetodosGenerales implements Serializable {
 //                    buscarPrograma();
                     //descomentar cuando los servicios dependen del genero, edad, zona y administradora del paciente
                     //loadServicios(null);
+                    try {
+                        semaforo = ProgramaFacadeItem.validarSemaforo(calcularEdadInt(pacienteSeleccionado.getFechaNacimiento()), calcularEdadMes(pacienteSeleccionado.getFechaNacimiento()),pacienteSeleccionado.getGenero().getObservacion(),  pacienteSeleccionado.getIdAdministradora().getIdAdministradora(), pacienteSeleccionado.getIdPaciente());
+                    } catch (Exception e) {
+                    }
+                    
                 }
             } else {
                 setPacienteSeleccionado(null);
@@ -270,6 +276,11 @@ public class CitasMB extends MetodosGenerales implements Serializable {
             }
             setDisplayPaciente("block");
             setTipoIdentificacion(String.valueOf(pacienteSeleccionado.getTipoIdentificacion().getId()));
+            try {
+                semaforo = ProgramaFacadeItem.validarSemaforo(calcularEdadInt(pacienteSeleccionado.getFechaNacimiento()), calcularEdadMes(pacienteSeleccionado.getFechaNacimiento()),pacienteSeleccionado.getGenero().getObservacion(),  pacienteSeleccionado.getIdAdministradora().getIdAdministradora(), pacienteSeleccionado.getIdPaciente());
+            } catch (Exception e) {
+            }
+            
         }
         CargarServicios();
         limpiarServicioMotivoConsulta();
@@ -1408,6 +1419,14 @@ public class CitasMB extends MetodosGenerales implements Serializable {
 
     public void setListaMotivo(List<SelectItem> listaMotivoConsulta) {
         this.listaMotivo = listaMotivoConsulta;
+    }
+
+    public String getSemaforo() {
+        return semaforo;
+    }
+
+    public void setSemaforo(String semaforo) {
+        this.semaforo = semaforo;
     }
 
 }

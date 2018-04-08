@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="515" leftMargin="40" rightMargin="40" topMargin="40" bottomMargin="40" uuid="9f7fc654-ee1d-4b56-916d-b168aa7d7a43">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="864"/>
+	<property name="ireport.y" value="0"/>
 	<style name="table 4_TD" mode="Opaque" backcolor="#FFFFFF">
 		<box>
 			<pen lineWidth="0.5" lineColor="#000000"/>
@@ -413,6 +413,7 @@
 	<field name="listaDatosAdicionales" class="java.util.List">
 		<fieldDescription><![CDATA[listaDatosAdicionales]]></fieldDescription>
 	</field>
+	<field name="dato200" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -428,33 +429,33 @@
 					<imageExpression><![CDATA[$F{dato70}]]></imageExpression>
 				</image>
 				<frame>
-					<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="367" y="5" width="138" height="12"/>
+					<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="367" y="1" width="138" height="12"/>
 					<textField isStretchWithOverflow="true">
 						<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="138" height="12"/>
 						<textElement markup="html">
-							<font fontName="SansSerif" size="9"/>
+							<font fontName="SansSerif" size="7"/>
 							<paragraph leftIndent="5"/>
 						</textElement>
 						<textFieldExpression><![CDATA[$F{dato50}]]></textFieldExpression>
 					</textField>
 				</frame>
 				<frame>
-					<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="367" y="18" width="138" height="12"/>
+					<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="367" y="13" width="138" height="12"/>
 					<textField isStretchWithOverflow="true">
 						<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="138" height="12"/>
 						<textElement markup="html">
-							<font fontName="SansSerif" size="9"/>
+							<font fontName="SansSerif" size="7"/>
 							<paragraph leftIndent="5"/>
 						</textElement>
 						<textFieldExpression><![CDATA[$F{dato51}]]></textFieldExpression>
 					</textField>
 				</frame>
 				<frame>
-					<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="367" y="31" width="138" height="12"/>
+					<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="367" y="25" width="147" height="12"/>
 					<textField isStretchWithOverflow="true">
-						<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="138" height="12"/>
+						<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="146" height="12"/>
 						<textElement markup="html">
-							<font fontName="SansSerif" size="9"/>
+							<font fontName="SansSerif" size="7"/>
 							<paragraph leftIndent="5"/>
 						</textElement>
 						<textFieldExpression><![CDATA[$F{dato54}]]></textFieldExpression>
@@ -511,15 +512,23 @@
 					</textElement>
 					<text><![CDATA[HISTORIA CLINICA TRIAGE]]></text>
 				</staticText>
+				<textField>
+					<reportElement uuid="066c3b81-95b1-4eac-83b9-7220c5e934d9" x="367" y="37" width="146" height="11"/>
+					<box leftPadding="5"/>
+					<textElement markup="html">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA["<b>FECHA IMPRESION:</b> "+new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new java.util.Date())]]></textFieldExpression>
+				</textField>
 			</frame>
 		</band>
 	</title>
 	<detail>
 		<band height="397" splitType="Stretch">
 			<frame>
-				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="12" width="385" height="12"/>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="12" width="211" height="12"/>
 				<textField isStretchWithOverflow="true">
-					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="385" height="12"/>
+					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="209" height="12"/>
 					<textElement markup="html">
 						<font fontName="SansSerif" size="9"/>
 						<paragraph leftIndent="5"/>
@@ -550,7 +559,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" mode="Transparent" x="0" y="48" width="257" height="12"/>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" mode="Transparent" x="0" y="60" width="257" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="250" height="12"/>
 					<textElement markup="html">
@@ -572,7 +581,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="257" y="48" width="258" height="12"/>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="257" y="60" width="258" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="250" height="12"/>
 					<textElement markup="html">
@@ -583,7 +592,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="60" width="257" height="12"/>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="72" width="257" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="250" height="12"/>
 					<textElement markup="html">
@@ -594,7 +603,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="72" width="515" height="12" backcolor="#E6E6E6"/>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="84" width="515" height="12" backcolor="#E6E6E6"/>
 				<staticText>
 					<reportElement uuid="217e7781-c369-49f2-bef4-df8bb3095af2" x="0" y="0" width="251" height="12"/>
 					<textElement>
@@ -605,7 +614,7 @@
 				</staticText>
 			</frame>
 			<frame>
-				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="84" width="515" height="12"/>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="96" width="515" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="515" height="12"/>
 					<textElement markup="html">
@@ -627,7 +636,7 @@
 				</staticText>
 			</frame>
 			<frame>
-				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" mode="Transparent" x="0" y="36" width="257" height="12"/>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" mode="Transparent" x="0" y="48" width="257" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="250" height="12"/>
 					<textElement markup="html">
@@ -638,7 +647,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" mode="Transparent" x="257" y="36" width="258" height="12"/>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" mode="Transparent" x="257" y="48" width="258" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="163" height="12"/>
 					<textElement markup="html">
@@ -649,7 +658,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="257" y="60" width="258" height="12"/>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="257" y="72" width="258" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="250" height="12"/>
 					<textElement markup="html">
@@ -660,7 +669,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" mode="Transparent" x="0" y="96" width="515" height="12"/>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" mode="Transparent" x="0" y="108" width="515" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="515" height="12"/>
 					<textElement markup="html">
@@ -1031,6 +1040,39 @@
 						<paragraph leftIndent="5"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{dato30}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="7f631f43-3f8e-4323-ab7c-83be265c3272" style="table 4_TD" positionType="Float" x="210" y="12" width="175" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="ce37a94e-ad6e-478f-b5fc-7ffb1be101d4" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="175" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato200}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="36" width="331" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" x="0" y="0" width="329" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato55}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="331" y="36" width="183" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" x="0" y="0" width="180" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato65}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>

@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="g_historiaclinicaurgencias" pageWidth="595" pageHeight="842" columnWidth="515" leftMargin="40" rightMargin="40" topMargin="40" bottomMargin="40" uuid="9f7fc654-ee1d-4b56-916d-b168aa7d7a43">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="84"/>
-	<property name="ireport.y" value="2733"/>
+	<property name="ireport.y" value="2601"/>
 	<style name="table 4_TD" mode="Opaque" backcolor="#FFFFFF">
 		<box>
 			<pen lineWidth="0.5" lineColor="#000000"/>
@@ -818,6 +818,7 @@
 	<field name="listaDatosAdicionales" class="java.util.List">
 		<fieldDescription><![CDATA[listaDatosAdicionales]]></fieldDescription>
 	</field>
+	<field name="dato270" class="java.lang.String"/>
 	<group name="paginaN">
 		<groupExpression><![CDATA[$V{PAGE_COUNT}]]></groupExpression>
 	</group>
@@ -839,22 +840,22 @@
 					<imageExpression><![CDATA[$F{dato228}]]></imageExpression>
 				</image>
 				<frame>
-					<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="367" y="5" width="138" height="12"/>
+					<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="367" y="1" width="138" height="12"/>
 					<textField isStretchWithOverflow="true">
 						<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" x="0" y="0" width="138" height="12"/>
 						<textElement markup="html">
-							<font fontName="SansSerif" size="9"/>
+							<font fontName="SansSerif" size="7"/>
 							<paragraph leftIndent="5"/>
 						</textElement>
 						<textFieldExpression><![CDATA[$F{dato206}]]></textFieldExpression>
 					</textField>
 				</frame>
 				<frame>
-					<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="367" y="18" width="138" height="12"/>
+					<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="367" y="12" width="138" height="12"/>
 					<textField isStretchWithOverflow="true">
 						<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" x="0" y="0" width="138" height="12"/>
 						<textElement markup="html">
-							<font fontName="SansSerif" size="9"/>
+							<font fontName="SansSerif" size="7"/>
 							<paragraph leftIndent="5"/>
 						</textElement>
 						<textFieldExpression><![CDATA[$F{dato207}]]></textFieldExpression>
@@ -912,26 +913,26 @@
 					<text><![CDATA[HISTORIA CLINICA  URGENCIAS]]></text>
 				</staticText>
 				<textField isStretchWithOverflow="true">
-					<reportElement uuid="13fde49d-7849-49c0-b75d-76e69d3cc57a" positionType="Float" x="367" y="31" width="138" height="12"/>
+					<reportElement uuid="13fde49d-7849-49c0-b75d-76e69d3cc57a" positionType="Float" x="367" y="23" width="146" height="12"/>
 					<textElement markup="html">
-						<font fontName="SansSerif" size="9"/>
+						<font fontName="SansSerif" size="7"/>
 						<paragraph leftIndent="5"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{dato209}]]></textFieldExpression>
 				</textField>
 				<frame>
-					<reportElement uuid="4ae4e292-3b14-4d61-88a9-38eeac9f510d" positionType="Float" x="367" y="44" width="138" height="12"/>
+					<reportElement uuid="4ae4e292-3b14-4d61-88a9-38eeac9f510d" positionType="Float" x="367" y="48" width="138" height="12"/>
 					<textField>
 						<reportElement uuid="068129ed-d829-4725-8f9c-be76b588040d" x="29" y="0" width="13" height="12"/>
 						<textElement textAlignment="Center">
-							<font size="9"/>
+							<font size="7"/>
 						</textElement>
 						<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 					</textField>
 					<staticText>
 						<reportElement uuid="d9152ce0-d426-48f4-af7f-3f5ce9ff6f85" x="1" y="0" width="34" height="12"/>
 						<textElement>
-							<font size="9" isBold="false"/>
+							<font size="7" isBold="false"/>
 							<paragraph leftIndent="5"/>
 						</textElement>
 						<text><![CDATA[PAG.]]></text>
@@ -939,7 +940,7 @@
 					<staticText>
 						<reportElement uuid="58148155-ad5d-4fdf-a185-83370a201d15" x="40" y="0" width="20" height="12"/>
 						<textElement>
-							<font size="9" isBold="false"/>
+							<font size="7" isBold="false"/>
 							<paragraph leftIndent="5"/>
 						</textElement>
 						<text><![CDATA[DE]]></text>
@@ -947,11 +948,19 @@
 					<textField evaluationTime="Report" isBlankWhenNull="true">
 						<reportElement uuid="0dff0d20-739e-4f46-ac4d-8ddaedc1c513" x="59" y="0" width="13" height="12"/>
 						<textElement textAlignment="Center">
-							<font size="9"/>
+							<font size="7"/>
 						</textElement>
 						<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 					</textField>
 				</frame>
+				<textField>
+					<reportElement uuid="066c3b81-95b1-4eac-83b9-7220c5e934d9" x="367" y="35" width="146" height="11"/>
+					<box leftPadding="5"/>
+					<textElement markup="html">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA["<b>FECHA IMPRESION:</b> "+new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new java.util.Date())]]></textFieldExpression>
+				</textField>
 			</frame>
 		</band>
 	</pageHeader>
@@ -969,9 +978,9 @@
 				</staticText>
 			</frame>
 			<frame>
-				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="22" width="385" height="12"/>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="22" width="210" height="12"/>
 				<textField isStretchWithOverflow="true">
-					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" x="0" y="0" width="385" height="12"/>
+					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" x="0" y="0" width="210" height="12"/>
 					<textElement markup="html">
 						<font fontName="SansSerif" size="9"/>
 						<paragraph leftIndent="5"/>
@@ -1002,7 +1011,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="257" y="58" width="258" height="12"/>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="257" y="70" width="258" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" x="0" y="0" width="257" height="12"/>
 					<textElement markup="html">
@@ -1013,7 +1022,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="58" width="257" height="12"/>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="70" width="257" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" x="0" y="0" width="250" height="12"/>
 					<textElement markup="html">
@@ -1024,7 +1033,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="120" width="252" height="12"/>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="114" width="252" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" x="0" y="0" width="250" height="12"/>
 					<textElement markup="html">
@@ -1035,7 +1044,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="252" y="120" width="263" height="12"/>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="252" y="114" width="263" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" x="0" y="0" width="253" height="12"/>
 					<textElement markup="html">
@@ -1046,7 +1055,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="252" y="132" width="263" height="12"/>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="252" y="126" width="263" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" x="0" y="0" width="255" height="12"/>
 					<textElement markup="html">
@@ -1057,12 +1066,9 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="168" width="515" height="12"/>
-			</frame>
-			<frame>
-				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="192" width="252" height="12"/>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="194" width="515" height="12"/>
 				<textField isStretchWithOverflow="true">
-					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" x="0" y="0" width="250" height="12"/>
+					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" x="0" y="0" width="515" height="12"/>
 					<textElement markup="html">
 						<font fontName="SansSerif" size="9"/>
 						<paragraph leftIndent="5"/>
@@ -1071,7 +1077,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="252" y="216" width="263" height="12"/>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="252" y="230" width="263" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="e2a1ff10-320a-4088-986a-6929ef2d28cb" positionType="Float" x="0" y="0" width="255" height="12"/>
 					<textElement markup="html">
@@ -1082,7 +1088,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="216" width="252" height="12"/>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="230" width="252" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" x="0" y="0" width="238" height="12"/>
 					<textElement markup="html">
@@ -1093,7 +1099,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="228" width="253" height="12"/>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="242" width="253" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="a9266445-524a-401f-a3b2-159f1f16044e" positionType="Float" x="0" y="0" width="238" height="12"/>
 					<textElement markup="html">
@@ -1104,7 +1110,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="250" width="515" height="12"/>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="254" width="515" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" x="0" y="0" width="500" height="12"/>
 					<textElement markup="html">
@@ -1115,7 +1121,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="262" width="515" height="12"/>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="266" width="515" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="c859a557-46ba-4e51-b969-81c47e90dc92" positionType="Float" x="1" y="0" width="499" height="12"/>
 					<textElement markup="html">
@@ -1126,7 +1132,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="250" y="305" width="265" height="12"/>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="250" y="295" width="265" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" x="0" y="0" width="265" height="12"/>
 					<textElement markup="html">
@@ -1137,7 +1143,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="329" width="250" height="12"/>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="319" width="250" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" x="0" y="0" width="248" height="12"/>
 					<textElement markup="html">
@@ -1148,10 +1154,18 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="250" y="341" width="265" height="12"/>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="250" y="331" width="265" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" x="0" y="0" width="248" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato13}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="353" width="250" height="12"/>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="343" width="250" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" x="0" y="0" width="248" height="12"/>
 					<textElement markup="html">
@@ -1162,7 +1176,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="108" width="515" height="12" backcolor="#E6E6E6"/>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="102" width="515" height="12" backcolor="#E6E6E6"/>
 				<staticText>
 					<reportElement uuid="8a5da003-dfb4-45bf-9de5-a9566b4623c8" x="0" y="0" width="159" height="12"/>
 					<textElement>
@@ -1173,7 +1187,7 @@
 				</staticText>
 			</frame>
 			<frame>
-				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="168" width="515" height="12" backcolor="#E6E6E6"/>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="170" width="515" height="12" backcolor="#E6E6E6"/>
 				<staticText>
 					<reportElement uuid="217e7781-c369-49f2-bef4-df8bb3095af2" x="0" y="0" width="252" height="12"/>
 					<textElement>
@@ -1184,7 +1198,7 @@
 				</staticText>
 			</frame>
 			<frame>
-				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="293" width="515" height="12" backcolor="#E6E6E6"/>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="283" width="515" height="12" backcolor="#E6E6E6"/>
 				<staticText>
 					<reportElement uuid="217e7781-c369-49f2-bef4-df8bb3095af2" x="2" y="0" width="252" height="12"/>
 					<textElement>
@@ -1195,7 +1209,7 @@
 				</staticText>
 			</frame>
 			<frame>
-				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="365" width="250" height="12"/>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="355" width="250" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" x="0" y="0" width="245" height="12"/>
 					<textElement markup="html">
@@ -1206,7 +1220,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="eaf073df-58d3-4d37-a256-e388bb6bcd80" style="table 4_TD" positionType="Float" x="0" y="144" width="252" height="12"/>
+				<reportElement uuid="eaf073df-58d3-4d37-a256-e388bb6bcd80" style="table 4_TD" positionType="Float" x="0" y="138" width="252" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" x="0" y="0" width="250" height="12"/>
 					<textElement markup="html">
@@ -1217,10 +1231,10 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="bffc049f-8011-4ca6-a535-c18967957a6f" style="table 4_TD" positionType="Float" x="252" y="144" width="263" height="12"/>
+				<reportElement uuid="bffc049f-8011-4ca6-a535-c18967957a6f" style="table 4_TD" positionType="Float" x="252" y="138" width="263" height="12"/>
 			</frame>
 			<frame>
-				<reportElement uuid="dcf97883-6bdf-4163-bd2f-15cc21510677" style="table 4_TD" positionType="Float" x="0" y="132" width="252" height="12"/>
+				<reportElement uuid="dcf97883-6bdf-4163-bd2f-15cc21510677" style="table 4_TD" positionType="Float" x="0" y="126" width="252" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" x="0" y="0" width="250" height="12"/>
 					<textElement markup="html">
@@ -1231,7 +1245,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="18205252-fc2e-489d-ad9d-e65c05cb4974" style="table 4_TD" positionType="Float" x="0" y="180" width="252" height="12"/>
+				<reportElement uuid="18205252-fc2e-489d-ad9d-e65c05cb4974" style="table 4_TD" positionType="Float" x="0" y="182" width="252" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" x="0" y="0" width="252" height="12"/>
 					<textElement markup="html">
@@ -1242,7 +1256,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="371080e8-6841-447d-8489-00c86c2dedd4" style="table 4_TD" positionType="Float" x="252" y="180" width="263" height="12"/>
+				<reportElement uuid="371080e8-6841-447d-8489-00c86c2dedd4" style="table 4_TD" positionType="Float" x="252" y="182" width="263" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" x="0" y="0" width="253" height="12"/>
 					<textElement markup="html">
@@ -1253,9 +1267,9 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="c79c9764-2f29-4d95-8495-f81857c59749" style="table 4_TD" positionType="Float" x="252" y="192" width="263" height="12"/>
+				<reportElement uuid="c79c9764-2f29-4d95-8495-f81857c59749" style="table 4_TD" positionType="Float" x="0" y="206" width="515" height="12"/>
 				<textField isStretchWithOverflow="true">
-					<reportElement uuid="16adb542-2c71-4758-bc5b-189844726ff5" positionType="Float" x="0" y="0" width="253" height="12"/>
+					<reportElement uuid="16adb542-2c71-4758-bc5b-189844726ff5" positionType="Float" x="0" y="0" width="515" height="12"/>
 					<textElement markup="html">
 						<font fontName="SansSerif" size="9"/>
 						<paragraph leftIndent="5"/>
@@ -1264,7 +1278,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="9fdd1b82-096a-41c1-ac80-11d4b337847f" style="table 4_TD" positionType="Float" x="252" y="204" width="263" height="12"/>
+				<reportElement uuid="9fdd1b82-096a-41c1-ac80-11d4b337847f" style="table 4_TD" positionType="Float" x="252" y="218" width="263" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="7583eaad-323a-49bf-a695-4f065bf5044b" positionType="Float" x="0" y="0" width="253" height="12"/>
 					<textElement markup="html">
@@ -1275,7 +1289,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="85bd171a-96fd-465e-8e7b-de044dab9603" style="table 4_TD" positionType="Float" x="252" y="228" width="263" height="12"/>
+				<reportElement uuid="85bd171a-96fd-465e-8e7b-de044dab9603" style="table 4_TD" positionType="Float" x="252" y="242" width="263" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="4bee8740-a237-4b18-a91b-f6c82cf84a15" positionType="Float" x="1" y="0" width="252" height="12"/>
 					<textElement markup="html">
@@ -1286,7 +1300,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="a82d5cc7-df84-4cf9-988b-85d37deb2b42" style="table 4_TD" positionType="Float" x="250" y="317" width="265" height="12"/>
+				<reportElement uuid="a82d5cc7-df84-4cf9-988b-85d37deb2b42" style="table 4_TD" positionType="Float" x="250" y="307" width="265" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="b2601c6d-14ac-4444-ad2f-df9a714df888" positionType="Float" x="0" y="0" width="265" height="12"/>
 					<textElement markup="html">
@@ -1296,16 +1310,8 @@
 					<textFieldExpression><![CDATA[$F{dato9}]]></textFieldExpression>
 				</textField>
 			</frame>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" x="251" y="341" width="263" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato13}]]></textFieldExpression>
-			</textField>
 			<frame>
-				<reportElement uuid="6a7adad8-f77e-438c-a247-31008850a8d8" style="table 4_TD" positionType="Float" x="1" y="396" width="514" height="12"/>
+				<reportElement uuid="6a7adad8-f77e-438c-a247-31008850a8d8" style="table 4_TD" positionType="Float" x="0" y="396" width="514" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="14dccd46-d3f8-4a24-8599-3eb0cf84cd96" positionType="Float" x="0" y="0" width="504" height="12"/>
 					<textElement markup="html">
@@ -1349,7 +1355,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="29769963-962d-43c0-912d-aefa716573f1" style="table 4_TD" positionType="Float" x="0" y="469" width="250" height="12"/>
+				<reportElement uuid="29769963-962d-43c0-912d-aefa716573f1" style="table 4_TD" positionType="Float" x="0" y="476" width="250" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="b8c6fe92-4046-4240-8505-9dd1ea84098b" positionType="Float" x="0" y="0" width="240" height="12"/>
 					<textElement markup="html">
@@ -1360,7 +1366,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="b5b71351-6962-4bf4-b3ff-9d78866f672c" style="table 4_TD" positionType="Float" x="0" y="481" width="250" height="12"/>
+				<reportElement uuid="b5b71351-6962-4bf4-b3ff-9d78866f672c" style="table 4_TD" positionType="Float" x="0" y="488" width="250" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="669f93b1-58fe-4965-9017-335ee8e1d35e" positionType="Float" x="0" y="0" width="240" height="12"/>
 					<textElement markup="html">
@@ -1404,7 +1410,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="b0c8ab13-b84f-49c6-83ad-cd5a50ff1920" style="table 4_TD" positionType="Float" x="250" y="469" width="265" height="12"/>
+				<reportElement uuid="b0c8ab13-b84f-49c6-83ad-cd5a50ff1920" style="table 4_TD" positionType="Float" x="250" y="476" width="265" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="f3860e19-9bec-47f1-a4f4-0c66a9941253" positionType="Float" x="0" y="0" width="260" height="12"/>
 					<textElement markup="html">
@@ -1415,7 +1421,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="5d92ad77-6891-4bf8-b9e4-3cc1ef5db5a6" style="table 4_TD" positionType="Float" x="250" y="481" width="265" height="12"/>
+				<reportElement uuid="5d92ad77-6891-4bf8-b9e4-3cc1ef5db5a6" style="table 4_TD" positionType="Float" x="250" y="488" width="265" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="bb2a151c-c4f4-4b48-a4ac-697a86244f21" positionType="Float" x="0" y="0" width="262" height="12"/>
 					<textElement markup="html">
@@ -1426,7 +1432,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="900e75b8-3d8f-4b04-b385-375dd49b7703" style="table 4_TD" positionType="Float" x="0" y="493" width="250" height="12"/>
+				<reportElement uuid="900e75b8-3d8f-4b04-b385-375dd49b7703" style="table 4_TD" positionType="Float" x="0" y="500" width="250" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="78d4c5f8-be4c-4322-890a-f2404487ad6d" positionType="Float" x="0" y="0" width="240" height="12"/>
 					<textElement markup="html">
@@ -1437,7 +1443,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="31c12755-766f-434c-aa31-0b5cce3fb010" style="table 4_TD" positionType="Float" x="250" y="493" width="265" height="12"/>
+				<reportElement uuid="31c12755-766f-434c-aa31-0b5cce3fb010" style="table 4_TD" positionType="Float" x="250" y="500" width="265" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="e382dfa4-5861-41ad-b14a-3a8c1bb71394" positionType="Float" x="0" y="0" width="260" height="12"/>
 					<textElement markup="html">
@@ -1448,7 +1454,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="0e4dd8d3-e599-472c-909e-0a35924621b0" style="table 4_TD" positionType="Float" x="0" y="505" width="250" height="12"/>
+				<reportElement uuid="0e4dd8d3-e599-472c-909e-0a35924621b0" style="table 4_TD" positionType="Float" x="0" y="512" width="250" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="808c07d4-3e90-4c7a-b793-dc77b0cae9d5" positionType="Float" x="0" y="0" width="240" height="12"/>
 					<textElement markup="html">
@@ -1525,7 +1531,7 @@
 				</textField>
 			</frame>
 			<textField isStretchWithOverflow="true">
-				<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" style="table 4_TD" positionType="Float" x="0" y="305" width="250" height="12"/>
+				<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" style="table 4_TD" positionType="Float" x="0" y="295" width="250" height="12"/>
 				<textElement markup="html">
 					<font fontName="SansSerif" size="9"/>
 					<paragraph leftIndent="5"/>
@@ -1533,7 +1539,7 @@
 				<textFieldExpression><![CDATA[$F{dato6}]]></textFieldExpression>
 			</textField>
 			<frame>
-				<reportElement uuid="44ca2431-1dca-407d-968d-11c068dd5463" style="table 4_TD" positionType="Float" x="0" y="317" width="250" height="12"/>
+				<reportElement uuid="44ca2431-1dca-407d-968d-11c068dd5463" style="table 4_TD" positionType="Float" x="0" y="307" width="250" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="cd4bd411-59be-43f4-a4dd-e6b0f4cd8056" positionType="Float" x="0" y="0" width="250" height="12"/>
 					<textElement markup="html">
@@ -1544,7 +1550,7 @@
 				</textField>
 			</frame>
 			<textField isStretchWithOverflow="true">
-				<reportElement uuid="1e0bbf42-0098-4b65-a1e9-31c5a02a9e34" style="table 4_TD" positionType="Float" x="250" y="329" width="265" height="12"/>
+				<reportElement uuid="1e0bbf42-0098-4b65-a1e9-31c5a02a9e34" style="table 4_TD" positionType="Float" x="250" y="319" width="265" height="12"/>
 				<textElement markup="html">
 					<font fontName="SansSerif" size="9"/>
 					<paragraph leftIndent="5"/>
@@ -1552,7 +1558,7 @@
 				<textFieldExpression><![CDATA[$F{dato11}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement uuid="5b8f57bc-c6af-408b-8109-17877b206fb1" style="table 4_TD" positionType="Float" x="0" y="341" width="250" height="12"/>
+				<reportElement uuid="5b8f57bc-c6af-408b-8109-17877b206fb1" style="table 4_TD" positionType="Float" x="0" y="331" width="250" height="12"/>
 				<textElement markup="html">
 					<font fontName="SansSerif" size="9"/>
 					<paragraph leftIndent="5"/>
@@ -1562,7 +1568,7 @@
 			<frame>
 				<reportElement uuid="7f631f43-3f8e-4323-ab7c-83be265c3272" style="table 4_TD" positionType="Float" x="385" y="22" width="130" height="12"/>
 				<textField isStretchWithOverflow="true">
-					<reportElement uuid="ce37a94e-ad6e-478f-b5fc-7ffb1be101d4" positionType="Float" x="0" y="0" width="122" height="12"/>
+					<reportElement uuid="ce37a94e-ad6e-478f-b5fc-7ffb1be101d4" positionType="Float" x="0" y="0" width="127" height="12"/>
 					<textElement markup="html">
 						<font fontName="SansSerif" size="9"/>
 						<paragraph leftIndent="5"/>
@@ -1571,18 +1577,18 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="a5820815-d960-405c-8e24-d977fec060fc" style="table 4_TD" positionType="Float" x="257" y="46" width="258" height="12"/>
+				<reportElement uuid="a5820815-d960-405c-8e24-d977fec060fc" style="table 4_TD" positionType="Float" x="257" y="58" width="258" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="c60c4dde-74c3-4ac0-b5eb-d207a9ff5c01" positionType="Float" x="0" y="0" width="257" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato265}]]></textFieldExpression>
+				</textField>
 			</frame>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="c60c4dde-74c3-4ac0-b5eb-d207a9ff5c01" positionType="Float" x="257" y="46" width="257" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato265}]]></textFieldExpression>
-			</textField>
 			<frame>
-				<reportElement uuid="7ece3d65-ade2-405e-9b39-d0e2d8dd7115" style="table 4_TD" positionType="Float" x="0" y="46" width="257" height="12"/>
+				<reportElement uuid="7ece3d65-ade2-405e-9b39-d0e2d8dd7115" style="table 4_TD" positionType="Float" x="0" y="58" width="257" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="4714ab0f-0fc4-4459-b9bf-19e749b7ada9" positionType="Float" x="0" y="0" width="250" height="12"/>
 					<textElement markup="html">
@@ -1593,7 +1599,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="a316332a-50d5-463e-a0e8-0d0afd55ecd5" style="table 4_TD" positionType="Float" x="0" y="70" width="257" height="12"/>
+				<reportElement uuid="a316332a-50d5-463e-a0e8-0d0afd55ecd5" style="table 4_TD" positionType="Float" x="0" y="82" width="257" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="44d180b0-10b3-4e74-8089-0c8a14ffac2c" positionType="Float" x="0" y="0" width="250" height="12"/>
 					<textElement markup="html">
@@ -1604,7 +1610,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="7f8a92cb-d1a2-410f-95ac-93f2dd47d6bf" style="table 4_TD" positionType="Float" x="257" y="70" width="258" height="12"/>
+				<reportElement uuid="7f8a92cb-d1a2-410f-95ac-93f2dd47d6bf" style="table 4_TD" positionType="Float" x="257" y="82" width="258" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="225b50a7-5e16-4911-bf4d-791bfaf09de6" positionType="Float" x="0" y="0" width="250" height="12"/>
 					<textElement markup="html">
@@ -1615,7 +1621,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="9c5b2613-e9e0-4bb4-96e1-f0f8323f02ed" style="table 4_TD" positionType="Float" x="0" y="204" width="252" height="12"/>
+				<reportElement uuid="9c5b2613-e9e0-4bb4-96e1-f0f8323f02ed" style="table 4_TD" positionType="Float" x="0" y="218" width="252" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="3fced32c-9020-4231-8263-3776352e0f5a" positionType="Float" x="0" y="0" width="250" height="12"/>
 					<textElement markup="html">
@@ -1626,16 +1632,16 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="7c0591d9-0703-4c55-976d-e22d616825fc" style="table 4_TD" positionType="Float" x="250" y="353" width="265" height="12"/>
+				<reportElement uuid="7c0591d9-0703-4c55-976d-e22d616825fc" style="table 4_TD" positionType="Float" x="250" y="343" width="265" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="ed2873d6-19d3-47c5-8cf5-a2956a42c4bf" positionType="Float" x="0" y="0" width="249" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato5}]]></textFieldExpression>
+				</textField>
 			</frame>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="ed2873d6-19d3-47c5-8cf5-a2956a42c4bf" positionType="Float" x="250" y="353" width="264" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato5}]]></textFieldExpression>
-			</textField>
 			<frame>
 				<reportElement uuid="5a56f8c2-0ca9-4b04-b9b5-942c79ce24c4" style="table 4_TD" positionType="Float" x="0" y="384" width="515" height="12" backcolor="#E6E6E6"/>
 				<staticText>
@@ -1648,7 +1654,7 @@
 				</staticText>
 			</frame>
 			<frame>
-				<reportElement uuid="7277e024-06ed-447c-bc8a-c59f79e1ac41" style="table 4_TD" positionType="Float" x="0" y="457" width="515" height="12" backcolor="#E6E6E6"/>
+				<reportElement uuid="7277e024-06ed-447c-bc8a-c59f79e1ac41" style="table 4_TD" positionType="Float" x="0" y="464" width="515" height="12" backcolor="#E6E6E6"/>
 				<staticText>
 					<reportElement uuid="18f9d6e6-db8e-4508-8361-8a35b92ba215" x="0" y="0" width="252" height="12"/>
 					<textElement>
@@ -1680,19 +1686,74 @@
 					<text><![CDATA[ANTECEDENTES FAMILIARES]]></text>
 				</staticText>
 			</frame>
+			<frame>
+				<reportElement uuid="7f631f43-3f8e-4323-ab7c-83be265c3272" style="table 4_TD" positionType="Float" x="210" y="22" width="175" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="ce37a94e-ad6e-478f-b5fc-7ffb1be101d4" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="175" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato212}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="46" width="332" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="332" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato270}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="332" y="46" width="183" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="183" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato223}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="eaf073df-58d3-4d37-a256-e388bb6bcd80" style="table 4_TD" positionType="Float" x="0" y="154" width="251" height="12"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" x="0" y="0" width="250" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato162}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="251" y="154" width="263" height="12"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" x="0" y="0" width="255" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato163}]]></textFieldExpression>
+				</textField>
+			</frame>
 		</band>
 		<band height="651">
 			<frame>
 				<reportElement uuid="36b9008b-b3cc-4144-992a-a9802c22ca46" style="table 4_TD" positionType="Float" x="0" y="107" width="251" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="a9e981c0-0a37-4d0a-9695-c56faf86bdb4" positionType="Float" x="0" y="0" width="239" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato37}]]></textFieldExpression>
+				</textField>
 			</frame>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="a9e981c0-0a37-4d0a-9695-c56faf86bdb4" positionType="Float" x="0" y="107" width="239" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato37}]]></textFieldExpression>
-			</textField>
 			<frame>
 				<reportElement uuid="05c78736-e618-4562-b683-4924b5e85e2d" style="table 4_TD" positionType="Float" x="0" y="23" width="251" height="12"/>
 				<textField isStretchWithOverflow="true">
@@ -1706,27 +1767,91 @@
 			</frame>
 			<frame>
 				<reportElement uuid="91d619c1-4aaa-4335-89fe-55e50f9171eb" style="table 4_TD" positionType="Float" x="251" y="23" width="264" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="a604fdbc-0aaf-4d98-9310-8b74b23e718e" positionType="Float" x="0" y="0" width="238" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato39}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<frame>
 				<reportElement uuid="1dfed7eb-198c-47f6-aad9-6de604950e20" style="table 4_TD" positionType="Float" x="0" y="35" width="251" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="807fc570-1e39-4803-ab43-d328b3cc9e63" positionType="Float" x="0" y="0" width="240" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato40}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<frame>
 				<reportElement uuid="452b442f-602c-43a9-838e-6a5840b3bbb3" style="table 4_TD" positionType="Float" x="251" y="35" width="264" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="93dc34b0-9aa0-4699-8d7d-76b2a7addafb" positionType="Float" x="0" y="0" width="240" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato41}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<frame>
 				<reportElement uuid="1c2336e0-75d3-483f-b0eb-dfa85ec7ad02" style="table 4_TD" positionType="Float" x="0" y="47" width="251" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="6be7bf0f-205d-453f-bd58-92c1a1238fa4" positionType="Float" x="0" y="0" width="240" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato42}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<frame>
 				<reportElement uuid="d0eeff4c-bc51-4fbd-b057-3b9ff5b70d9e" style="table 4_TD" positionType="Float" x="251" y="47" width="264" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="fe016d19-773d-451d-8bd8-4f46bed79459" positionType="Float" x="0" y="0" width="240" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato43}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<frame>
 				<reportElement uuid="9a1fbf02-6f2f-44e6-9b70-9d9206ef369d" style="table 4_TD" positionType="Float" x="0" y="59" width="251" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="57996dfc-0599-46d0-833a-091cc53d7de5" positionType="Float" x="0" y="0" width="240" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato44}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<frame>
 				<reportElement uuid="d3994258-8283-4dc8-88d1-358b5df6b2d6" style="table 4_TD" positionType="Float" x="251" y="59" width="264" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="15b5b5a9-5b7c-457a-9805-460e428b4f31" positionType="Float" x="0" y="0" width="240" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato45}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<frame>
 				<reportElement uuid="03c64eb7-7f03-4400-84db-4b8f06581629" style="table 4_TD" positionType="Float" x="0" y="71" width="251" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="747ec3e6-0860-4708-b65f-0c01c2f45f3f" positionType="Float" x="0" y="0" width="240" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato46}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<frame>
 				<reportElement uuid="171c2ab4-48d5-4c5a-9304-862c4bf68a06" style="table 4_TD" positionType="Float" x="251" y="71" width="264" height="12"/>
@@ -1741,131 +1866,91 @@
 			</frame>
 			<frame>
 				<reportElement uuid="26b23bbb-6b81-48b9-a19c-e922b80c5ca8" style="table 4_TD" positionType="Float" x="0" y="83" width="251" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="12fa8dc1-ebaf-45db-860a-5632e97fdcf1" positionType="Float" x="0" y="0" width="240" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato48}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<frame>
 				<reportElement uuid="909af1c3-8730-47f8-9dd0-b1510cf6da7e" style="table 4_TD" positionType="Float" x="251" y="83" width="264" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="0b4daa6c-3b57-411e-a055-b92aaa906979" positionType="Float" x="0" y="0" width="240" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato49}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<frame>
 				<reportElement uuid="904c9886-5210-4ed0-8e63-2e2e9104f4f5" style="table 4_TD" positionType="Float" x="0" y="95" width="251" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="e1fb35db-8f83-4e75-9527-ce346e6aba50" positionType="Float" x="0" y="0" width="240" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato50}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<frame>
 				<reportElement uuid="e394996e-a49b-4789-9ded-b34b98dbc697" style="table 4_TD" positionType="Float" x="251" y="95" width="264" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="67a30fca-4b9a-4fee-8e2e-71e5e9052155" positionType="Float" x="0" y="0" width="240" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato51}]]></textFieldExpression>
+				</textField>
 			</frame>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="a604fdbc-0aaf-4d98-9310-8b74b23e718e" positionType="Float" x="251" y="24" width="240" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato39}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="807fc570-1e39-4803-ab43-d328b3cc9e63" positionType="Float" x="0" y="35" width="240" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato40}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="93dc34b0-9aa0-4699-8d7d-76b2a7addafb" positionType="Float" x="251" y="36" width="240" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato41}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="6be7bf0f-205d-453f-bd58-92c1a1238fa4" positionType="Float" x="0" y="48" width="240" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato42}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="fe016d19-773d-451d-8bd8-4f46bed79459" positionType="Float" x="251" y="48" width="240" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato43}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="747ec3e6-0860-4708-b65f-0c01c2f45f3f" positionType="Float" x="0" y="72" width="240" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato46}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="12fa8dc1-ebaf-45db-860a-5632e97fdcf1" positionType="Float" x="0" y="84" width="240" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato48}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="57996dfc-0599-46d0-833a-091cc53d7de5" positionType="Float" x="0" y="60" width="240" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato44}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="15b5b5a9-5b7c-457a-9805-460e428b4f31" positionType="Float" x="251" y="60" width="240" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato45}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="0b4daa6c-3b57-411e-a055-b92aaa906979" positionType="Float" x="251" y="84" width="240" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato49}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="e1fb35db-8f83-4e75-9527-ce346e6aba50" positionType="Float" x="0" y="95" width="240" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato50}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="67a30fca-4b9a-4fee-8e2e-71e5e9052155" positionType="Float" x="251" y="95" width="240" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato51}]]></textFieldExpression>
-			</textField>
 			<frame>
 				<reportElement uuid="77af809e-a82b-414a-9235-bac569e9aa51" style="table 4_TD" positionType="Float" x="0" y="119" width="251" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="01cf0373-f4ed-4e89-968d-3fe8b858e767" positionType="Float" x="0" y="0" width="240" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato52}]]></textFieldExpression>
+				</textField>
 			</frame>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="01cf0373-f4ed-4e89-968d-3fe8b858e767" positionType="Float" x="0" y="119" width="240" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato52}]]></textFieldExpression>
-			</textField>
 			<frame>
 				<reportElement uuid="594b5115-bcaf-4e73-bb0d-5d8ce23401da" style="table 4_TD" positionType="Float" x="0" y="131" width="251" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="ba8a9e98-3ca7-4bc5-845a-0ab3a0a2b1ef" positionType="Float" x="0" y="0" width="240" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato54}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<frame>
 				<reportElement uuid="9c04c912-eb8a-4029-be0c-360075ee98f3" style="table 4_TD" positionType="Float" x="0" y="143" width="251" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="87b426f8-b250-48b8-8543-23bdeeef7551" positionType="Float" x="0" y="0" width="240" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato56}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<frame>
 				<reportElement uuid="5c2b7ad1-a289-46a6-a095-b0cf437540cf" style="table 4_TD" positionType="Float" x="0" y="178" width="251" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="aa65d59c-7ee9-4809-8fb1-e0465b3b6078" positionType="Float" x="0" y="0" width="238" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato58}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<frame>
 				<reportElement uuid="1509420a-62dc-4ac1-aa14-9022acee36df" style="table 4_TD" positionType="Float" x="0" y="188" width="251" height="12"/>
@@ -1880,32 +1965,72 @@
 			</frame>
 			<frame>
 				<reportElement uuid="85c0b7cf-95fe-4f8f-94d0-0a5274668e9e" style="table 4_TD" positionType="Float" x="0" y="200" width="251" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="2467f11e-03fb-4815-8d33-02451af08820" positionType="Float" x="0" y="0" width="240" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato62}]]></textFieldExpression>
+				</textField>
 			</frame>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="ba8a9e98-3ca7-4bc5-845a-0ab3a0a2b1ef" positionType="Float" x="-1" y="131" width="240" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato54}]]></textFieldExpression>
-			</textField>
 			<frame>
 				<reportElement uuid="d2b41b09-62e4-4f28-934e-7ea9b2377394" style="table 4_TD" positionType="Float" x="251" y="107" width="264" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="99a183c3-b2f3-4627-a83e-042521ebe1e8" positionType="Float" x="0" y="0" width="240" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato53}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<frame>
 				<reportElement uuid="cad098a8-e658-4fa7-ba15-e4199c4434ab" style="table 4_TD" positionType="Float" x="251" y="119" width="264" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="e11dd350-b7ca-4810-8686-42694db4da52" positionType="Float" x="0" y="0" width="240" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato55}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<frame>
 				<reportElement uuid="35771029-b636-4584-b307-b48ca517b7ab" style="table 4_TD" positionType="Float" x="251" y="131" width="264" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="afb32b5d-3202-4959-ac1e-4a2530b94bf1" positionType="Float" x="0" y="0" width="240" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato57}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<frame>
 				<reportElement uuid="88f31df7-77c9-45ed-90eb-6e06f7dae633" style="table 4_TD" positionType="Float" x="251" y="178" width="264" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="0b278cd4-0108-41af-b16f-3837d318a3bb" positionType="Float" x="0" y="0" width="240" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato59}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="87109b84-675f-458e-a37d-cc3f60ac80dd" style="table 4_TD" positionType="Float" x="0" y="239" width="251" height="12"/>
+				<reportElement uuid="87109b84-675f-458e-a37d-cc3f60ac80dd" style="table 4_TD" positionType="Float" x="0" y="232" width="251" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="e6ccce9e-9e18-4051-99e0-4c761e4a71ab" positionType="Float" x="0" y="0" width="240" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato64}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="87267787-fee5-4cf2-9193-dedf8a7ad0a7" style="table 4_TD" positionType="Float" x="0" y="251" width="251" height="12"/>
+				<reportElement uuid="87267787-fee5-4cf2-9193-dedf8a7ad0a7" style="table 4_TD" positionType="Float" x="0" y="244" width="251" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="75780191-7aec-48c0-98c2-9773cf4ba1a5" positionType="Float" x="0" y="0" width="240" height="12"/>
 					<textElement markup="html">
@@ -1917,114 +2042,50 @@
 			</frame>
 			<frame>
 				<reportElement uuid="2b48f004-2f21-4a1a-ba7f-ce5ebbef3280" style="table 4_TD" positionType="Float" x="251" y="188" width="264" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="9103c64e-8004-4331-8d21-68a80b2147d0" positionType="Float" x="0" y="0" width="240" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato61}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<frame>
 				<reportElement uuid="b5f6f239-790c-4f0e-8ae3-56bc9a044860" style="table 4_TD" positionType="Float" x="251" y="200" width="264" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="dda54e5d-2317-4d8c-aa82-c80702fa0312" positionType="Float" x="0" y="0" width="240" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato63}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="d603aa86-1404-4ef3-aa99-c29e2eedab0b" style="table 4_TD" positionType="Float" x="251" y="251" width="264" height="12"/>
+				<reportElement uuid="d603aa86-1404-4ef3-aa99-c29e2eedab0b" style="table 4_TD" positionType="Float" x="251" y="244" width="264" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="441e31af-f80e-4428-98a1-38b6fd2c67ff" positionType="Float" x="0" y="0" width="240" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato67}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="e552a907-4661-4a1f-9e8a-f32daa684ea8" style="table 4_TD" positionType="Float" x="251" y="239" width="264" height="12"/>
+				<reportElement uuid="e552a907-4661-4a1f-9e8a-f32daa684ea8" style="table 4_TD" positionType="Float" x="251" y="232" width="264" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="52d9f6af-7b18-4cb0-bebf-374e55b18e81" positionType="Float" x="0" y="0" width="240" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato65}]]></textFieldExpression>
+				</textField>
 			</frame>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="0b278cd4-0108-41af-b16f-3837d318a3bb" positionType="Float" x="251" y="176" width="240" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato59}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="87b426f8-b250-48b8-8543-23bdeeef7551" positionType="Float" x="0" y="143" width="240" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato56}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="aa65d59c-7ee9-4809-8fb1-e0465b3b6078" positionType="Float" x="0" y="177" width="240" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato58}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="2467f11e-03fb-4815-8d33-02451af08820" positionType="Float" x="0" y="200" width="240" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato62}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="e6ccce9e-9e18-4051-99e0-4c761e4a71ab" positionType="Float" x="0" y="239" width="240" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato64}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="99a183c3-b2f3-4627-a83e-042521ebe1e8" positionType="Float" x="251" y="107" width="240" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato53}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="e11dd350-b7ca-4810-8686-42694db4da52" positionType="Float" x="251" y="119" width="240" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato55}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="afb32b5d-3202-4959-ac1e-4a2530b94bf1" positionType="Float" x="251" y="131" width="240" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato57}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="9103c64e-8004-4331-8d21-68a80b2147d0" positionType="Float" x="251" y="188" width="240" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato61}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="dda54e5d-2317-4d8c-aa82-c80702fa0312" positionType="Float" x="251" y="200" width="240" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato63}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="52d9f6af-7b18-4cb0-bebf-374e55b18e81" positionType="Float" x="251" y="239" width="240" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato65}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="441e31af-f80e-4428-98a1-38b6fd2c67ff" positionType="Float" x="251" y="251" width="240" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato67}]]></textFieldExpression>
-			</textField>
 			<frame>
-				<reportElement uuid="51c9d0e7-1723-4905-b54c-5f1ebd983643" style="table 4_TD" positionType="Float" x="0" y="263" width="251" height="12"/>
+				<reportElement uuid="51c9d0e7-1723-4905-b54c-5f1ebd983643" style="table 4_TD" positionType="Float" x="0" y="256" width="251" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="78c1e440-97e0-4b11-bede-000a6cdd612a" positionType="Float" x="0" y="0" width="240" height="12"/>
 					<textElement markup="html">
@@ -2035,7 +2096,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="42e9b0a5-96af-4099-8557-1f9a9021211c" style="table 4_TD" positionType="Float" x="0" y="275" width="251" height="12"/>
+				<reportElement uuid="42e9b0a5-96af-4099-8557-1f9a9021211c" style="table 4_TD" positionType="Float" x="0" y="268" width="251" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="cd7b2f4d-e27f-49b9-b990-0c0fd5708d39" positionType="Float" x="0" y="0" width="240" height="12"/>
 					<textElement markup="html">
@@ -2046,7 +2107,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="5adde847-01bb-4226-9062-e1e40e777ff3" style="table 4_TD" positionType="Float" x="0" y="287" width="515" height="12"/>
+				<reportElement uuid="5adde847-01bb-4226-9062-e1e40e777ff3" style="table 4_TD" positionType="Float" x="0" y="280" width="515" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="62b2ea92-601e-4453-9b22-08dd038e5880" positionType="Float" x="0" y="0" width="510" height="12"/>
 					<textElement markup="html">
@@ -2057,27 +2118,27 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="9528a289-765f-47b4-8e6e-ca8b165cec04" style="table 4_TD" positionType="Float" x="251" y="263" width="264" height="12"/>
+				<reportElement uuid="9528a289-765f-47b4-8e6e-ca8b165cec04" style="table 4_TD" positionType="Float" x="251" y="256" width="264" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="7714dfe4-2e90-4f7d-b112-05e3de339b38" positionType="Float" x="0" y="0" width="240" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato69}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="d9faad14-11c0-4e65-b137-9f409ac4dd93" style="table 4_TD" positionType="Float" x="251" y="275" width="264" height="12"/>
+				<reportElement uuid="d9faad14-11c0-4e65-b137-9f409ac4dd93" style="table 4_TD" positionType="Float" x="251" y="268" width="264" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="4f930c31-6fb5-4875-8e84-0618240e34e7" positionType="Float" x="0" y="0" width="240" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato71}]]></textFieldExpression>
+				</textField>
 			</frame>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="4f930c31-6fb5-4875-8e84-0618240e34e7" positionType="Float" x="251" y="275" width="240" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato71}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="7714dfe4-2e90-4f7d-b112-05e3de339b38" positionType="Float" x="251" y="263" width="240" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato69}]]></textFieldExpression>
-			</textField>
 			<frame>
 				<reportElement uuid="ba8c688e-0a9e-472c-ba90-c9d2520245c7" style="table 4_TD" positionType="Float" x="0" y="166" width="515" height="12" backcolor="#E6E6E6"/>
 				<staticText>
@@ -2090,7 +2151,7 @@
 				</staticText>
 			</frame>
 			<frame>
-				<reportElement uuid="91794b10-5667-4e37-a882-a675f445f55f" style="table 4_TD" positionType="Float" x="0" y="299" width="251" height="12"/>
+				<reportElement uuid="91794b10-5667-4e37-a882-a675f445f55f" style="table 4_TD" positionType="Float" x="0" y="292" width="251" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="c8a0f84c-6b58-4192-9ffc-4cba9ebddc5d" positionType="Float" x="0" y="0" width="240" height="12"/>
 					<textElement markup="html">
@@ -2101,7 +2162,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="103dca16-03ef-4f32-9768-1a2f45904498" style="table 4_TD" positionType="Float" x="0" y="311" width="251" height="13"/>
+				<reportElement uuid="103dca16-03ef-4f32-9768-1a2f45904498" style="table 4_TD" positionType="Float" x="0" y="304" width="251" height="13"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="8048bf5a-4d5d-4ac7-a000-185e89f66f0b" positionType="Float" x="0" y="0" width="240" height="12"/>
 					<textElement markup="html">
@@ -2112,7 +2173,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="00ae10f6-be3b-4a25-b7e9-049bbe29dba4" style="table 4_TD" positionType="Float" x="0" y="324" width="251" height="12"/>
+				<reportElement uuid="00ae10f6-be3b-4a25-b7e9-049bbe29dba4" style="table 4_TD" positionType="Float" x="0" y="317" width="251" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="755854c4-d515-4f19-beb3-02ab876d1b77" positionType="Float" x="0" y="0" width="240" height="12"/>
 					<textElement markup="html">
@@ -2123,7 +2184,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="93d09ef1-803e-4ced-99e3-097ac10db5f2" style="table 4_TD" positionType="Float" x="0" y="335" width="251" height="12"/>
+				<reportElement uuid="93d09ef1-803e-4ced-99e3-097ac10db5f2" style="table 4_TD" positionType="Float" x="0" y="328" width="251" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="0849f5cc-0a53-405b-a473-1962e049202f" positionType="Float" x="0" y="0" width="240" height="12"/>
 					<textElement markup="html">
@@ -2134,20 +2195,20 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="dd8d48f3-b870-43d4-af55-5e337417ab41" style="table 4_TD" positionType="Float" x="0" y="347" width="251" height="12"/>
-			</frame>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="c6f8aabb-40a2-4b9a-b601-1f0d9f78eaed" positionType="Float" x="0" y="347" width="240" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato81}]]></textFieldExpression>
-			</textField>
-			<frame>
-				<reportElement uuid="0a2f1290-6b27-4cc8-a78e-80a4ed715a44" style="table 4_TD" positionType="Float" x="0" y="359" width="251" height="12"/>
+				<reportElement uuid="dd8d48f3-b870-43d4-af55-5e337417ab41" style="table 4_TD" positionType="Float" x="0" y="340" width="515" height="12"/>
 				<textField isStretchWithOverflow="true">
-					<reportElement uuid="7b74009a-0378-477f-9dc3-21e3174a8295" positionType="Float" x="0" y="0" width="240" height="12"/>
+					<reportElement uuid="c6f8aabb-40a2-4b9a-b601-1f0d9f78eaed" positionType="Float" x="0" y="0" width="499" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato81}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="0a2f1290-6b27-4cc8-a78e-80a4ed715a44" style="table 4_TD" positionType="Float" x="0" y="364" width="515" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="7b74009a-0378-477f-9dc3-21e3174a8295" positionType="Float" x="0" y="0" width="489" height="12"/>
 					<textElement markup="html">
 						<font fontName="SansSerif" size="9"/>
 						<paragraph leftIndent="5"/>
@@ -2156,7 +2217,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="51094d39-d2a0-4a81-ad7c-5e59d2cb9e85" style="table 4_TD" positionType="Float" x="0" y="398" width="251" height="12"/>
+				<reportElement uuid="51094d39-d2a0-4a81-ad7c-5e59d2cb9e85" style="table 4_TD" positionType="Float" x="0" y="405" width="251" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="095c2e3b-7fcd-4d7c-b9bf-422b14a4c418" positionType="Float" x="0" y="0" width="240" height="12"/>
 					<textElement markup="html">
@@ -2167,7 +2228,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="29d601fb-4539-408f-861f-1b8a53ef177f" style="table 4_TD" positionType="Float" x="0" y="410" width="515" height="12"/>
+				<reportElement uuid="29d601fb-4539-408f-861f-1b8a53ef177f" style="table 4_TD" positionType="Float" x="0" y="417" width="515" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="63299016-56c8-4524-8243-37831702a0e1" positionType="Float" x="0" y="0" width="500" height="12"/>
 					<textElement markup="html">
@@ -2178,33 +2239,62 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="9157c9d3-a15c-4fba-9b14-d0787e6bf8c2" style="table 4_TD" positionType="Float" x="251" y="299" width="264" height="12"/>
-			</frame>
-			<frame>
-				<reportElement uuid="ef41f2d4-db28-49fc-96c2-e279cb0c7bb0" style="table 4_TD" positionType="Float" x="251" y="311" width="264" height="13"/>
-			</frame>
-			<frame>
-				<reportElement uuid="751a430a-4ab3-409b-b770-d7b93895aa6a" style="table 4_TD" positionType="Float" x="251" y="323" width="264" height="12"/>
-			</frame>
-			<frame>
-				<reportElement uuid="8992de80-0cfc-4802-ab36-611854b507be" style="table 4_TD" positionType="Float" x="251" y="335" width="264" height="12"/>
-			</frame>
-			<frame>
-				<reportElement uuid="c00ff55d-1735-4f32-839d-fed6f9df5a86" style="table 4_TD" positionType="Float" x="251" y="347" width="264" height="12"/>
-			</frame>
-			<frame>
-				<reportElement uuid="d94d2214-93cc-4087-82cc-fade4d0d476a" style="table 4_TD" positionType="Float" x="251" y="359" width="264" height="12"/>
+				<reportElement uuid="9157c9d3-a15c-4fba-9b14-d0787e6bf8c2" style="table 4_TD" positionType="Float" x="251" y="292" width="264" height="12"/>
 				<textField isStretchWithOverflow="true">
-					<reportElement uuid="5b2277af-787c-4851-bba3-d7e85bb2cc46" positionType="Float" x="0" y="0" width="238" height="12"/>
+					<reportElement uuid="053fe47d-62a7-45e7-8d35-8d241c6e2d0f" positionType="Float" x="0" y="0" width="240" height="12"/>
 					<textElement markup="html">
 						<font fontName="SansSerif" size="9"/>
 						<paragraph leftIndent="5"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{dato84}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{dato74}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="803f4586-ed2d-4a21-8a6b-4177e1d157c4" style="table 4_TD" positionType="Float" x="251" y="398" width="264" height="12"/>
+				<reportElement uuid="ef41f2d4-db28-49fc-96c2-e279cb0c7bb0" style="table 4_TD" positionType="Float" x="251" y="304" width="264" height="13"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="bf6b1b68-481e-4a0e-85a9-e616af9acb20" positionType="Float" x="0" y="0" width="240" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato76}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="751a430a-4ab3-409b-b770-d7b93895aa6a" style="table 4_TD" positionType="Float" x="251" y="316" width="264" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="680b2e71-f5f8-4a13-bc5a-c943154159da" positionType="Float" x="0" y="0" width="240" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato78}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="8992de80-0cfc-4802-ab36-611854b507be" style="table 4_TD" positionType="Float" x="251" y="328" width="264" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="bdd9c7a9-3ae5-49f1-bc74-f4561a616194" positionType="Float" x="0" y="0" width="240" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato80}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="c00ff55d-1735-4f32-839d-fed6f9df5a86" style="table 4_TD" positionType="Float" x="0" y="352" width="515" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="e1a75353-55c1-4d70-8a8d-215ba0e2c083" positionType="Float" x="0" y="0" width="499" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato82}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="803f4586-ed2d-4a21-8a6b-4177e1d157c4" style="table 4_TD" positionType="Float" x="251" y="405" width="264" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="7f892b11-9bb2-41d4-b311-5c296cbab7b3" positionType="Float" x="1" y="0" width="250" height="12"/>
 					<textElement markup="html">
@@ -2214,48 +2304,8 @@
 					<textFieldExpression><![CDATA[$F{dato86}]]></textFieldExpression>
 				</textField>
 			</frame>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="053fe47d-62a7-45e7-8d35-8d241c6e2d0f" positionType="Float" x="251" y="300" width="240" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato74}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="bdd9c7a9-3ae5-49f1-bc74-f4561a616194" positionType="Float" x="251" y="336" width="240" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato80}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="bf6b1b68-481e-4a0e-85a9-e616af9acb20" positionType="Float" x="251" y="312" width="240" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato76}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="680b2e71-f5f8-4a13-bc5a-c943154159da" positionType="Float" x="251" y="324" width="240" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato78}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="e1a75353-55c1-4d70-8a8d-215ba0e2c083" positionType="Float" x="251" y="348" width="240" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato82}]]></textFieldExpression>
-			</textField>
 			<frame>
-				<reportElement uuid="7e9df108-0260-4dc9-8f65-0a37f1662d47" style="table 4_TD" positionType="Float" x="0" y="422" width="251" height="12"/>
+				<reportElement uuid="7e9df108-0260-4dc9-8f65-0a37f1662d47" style="table 4_TD" positionType="Float" x="0" y="429" width="251" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="ba5b72bb-9027-4fb6-8242-79a19f79a9c8" positionType="Float" x="0" y="0" width="240" height="12"/>
 					<textElement markup="html">
@@ -2266,7 +2316,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="729aa170-9a2b-4513-8a0a-9784331febc7" style="table 4_TD" positionType="Float" x="0" y="434" width="251" height="12"/>
+				<reportElement uuid="729aa170-9a2b-4513-8a0a-9784331febc7" style="table 4_TD" positionType="Float" x="0" y="441" width="251" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="25adff62-d083-43fc-906c-79e92e69182b" positionType="Float" x="0" y="0" width="240" height="12"/>
 					<textElement markup="html">
@@ -2277,7 +2327,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="bbf41146-1dfc-41e7-908b-28e40c856df2" style="table 4_TD" positionType="Float" x="0" y="446" width="251" height="12"/>
+				<reportElement uuid="bbf41146-1dfc-41e7-908b-28e40c856df2" style="table 4_TD" positionType="Float" x="0" y="453" width="251" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="01011679-c939-4030-b167-e84f558ee4ea" positionType="Float" x="0" y="0" width="240" height="12"/>
 					<textElement markup="html">
@@ -2288,7 +2338,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="ce2994d2-cc4b-4a17-8a5d-9caf73a013d9" style="table 4_TD" positionType="Float" x="0" y="458" width="251" height="12"/>
+				<reportElement uuid="ce2994d2-cc4b-4a17-8a5d-9caf73a013d9" style="table 4_TD" positionType="Float" x="0" y="465" width="251" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="df2a290e-4c47-473c-9a79-e576f0807ee4" positionType="Float" x="0" y="0" width="240" height="12"/>
 					<textElement markup="html">
@@ -2310,7 +2360,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="770fb56c-bab6-4a1a-b00e-f9d4565dcd9c" style="table 4_TD" positionType="Float" x="251" y="446" width="264" height="12"/>
+				<reportElement uuid="770fb56c-bab6-4a1a-b00e-f9d4565dcd9c" style="table 4_TD" positionType="Float" x="251" y="453" width="264" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="c8c1a05c-b091-461f-bad6-538629c65efc" positionType="Float" x="0" y="0" width="250" height="12"/>
 					<textElement markup="html">
@@ -2321,7 +2371,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="aa731d4a-12e5-45d5-862f-31b1dc6b1818" style="table 4_TD" positionType="Float" x="251" y="458" width="264" height="12"/>
+				<reportElement uuid="aa731d4a-12e5-45d5-862f-31b1dc6b1818" style="table 4_TD" positionType="Float" x="251" y="465" width="264" height="12"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="0da11687-a3f7-4c93-828e-6e90ee7b2607" positionType="Float" x="0" y="0" width="250" height="12"/>
 					<textElement markup="html">
@@ -2329,17 +2379,6 @@
 						<paragraph leftIndent="5"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{dato93}]]></textFieldExpression>
-				</textField>
-			</frame>
-			<frame>
-				<reportElement uuid="6af18d36-dd42-41da-a0bf-5149126bb78b" style="table 4_TD" positionType="Float" x="0" y="495" width="515" height="12"/>
-				<textField isStretchWithOverflow="true">
-					<reportElement uuid="b5c4efee-b546-445c-a143-6bacfc6eb84a" positionType="Float" x="0" y="0" width="510" height="12"/>
-					<textElement markup="html">
-						<font fontName="SansSerif" size="9"/>
-						<paragraph leftIndent="5"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{dato95}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -2355,7 +2394,7 @@
 			</frame>
 			<elementGroup>
 				<frame>
-					<reportElement uuid="80c20ab6-1e55-43cf-a1e5-966a84c7bc06" style="table 4_TD" positionType="Float" x="251" y="422" width="264" height="12"/>
+					<reportElement uuid="80c20ab6-1e55-43cf-a1e5-966a84c7bc06" style="table 4_TD" positionType="Float" x="251" y="429" width="264" height="12"/>
 					<textField isStretchWithOverflow="true">
 						<reportElement uuid="c9f93b59-7f4d-4a10-a084-3ed35c51906c" stretchType="RelativeToTallestObject" x="0" y="0" width="250" height="12"/>
 						<textElement markup="html">
@@ -2367,7 +2406,7 @@
 				</frame>
 			</elementGroup>
 			<frame>
-				<reportElement uuid="549e6e6c-ed9d-427d-acfb-c62a17dea49e" style="table 4_TD" positionType="Float" x="0" y="483" width="515" height="12" backcolor="#E6E6E6"/>
+				<reportElement uuid="549e6e6c-ed9d-427d-acfb-c62a17dea49e" style="table 4_TD" positionType="Float" x="0" y="495" width="515" height="12" backcolor="#E6E6E6"/>
 				<staticText>
 					<reportElement uuid="96fceef3-ddfb-4060-aaa7-ae67513a1bbc" x="0" y="0" width="252" height="12"/>
 					<textElement>
@@ -2509,7 +2548,7 @@
 				</staticText>
 			</frame>
 			<frame>
-				<reportElement uuid="453e6f71-ad62-4558-bc92-4773a64c1760" style="table 4_TD" positionType="Float" x="0" y="386" width="515" height="12" backcolor="#E6E6E6"/>
+				<reportElement uuid="453e6f71-ad62-4558-bc92-4773a64c1760" style="table 4_TD" positionType="Float" x="0" y="393" width="515" height="12" backcolor="#E6E6E6"/>
 				<staticText>
 					<reportElement uuid="dc1c9eba-d9ba-4525-9898-af212a909838" x="0" y="0" width="252" height="12"/>
 					<textElement>
@@ -2520,7 +2559,7 @@
 				</staticText>
 			</frame>
 			<frame>
-				<reportElement uuid="1e194239-785c-468d-880a-0a5c5345bcfa" style="table 4_TD" positionType="Float" x="0" y="222" width="515" height="12" backcolor="#E6E6E6"/>
+				<reportElement uuid="1e194239-785c-468d-880a-0a5c5345bcfa" style="table 4_TD" positionType="Float" x="0" y="220" width="515" height="12" backcolor="#E6E6E6"/>
 				<staticText>
 					<reportElement uuid="87dd8a5c-3fd0-4e75-9cfd-04963619de3d" x="0" y="0" width="252" height="12"/>
 					<textElement>
@@ -2531,7 +2570,7 @@
 				</staticText>
 			</frame>
 			<textField isStretchWithOverflow="true">
-				<reportElement uuid="5097a246-88ce-490f-b0eb-3d3c120705d7" positionType="Float" x="0" y="626" width="515" height="12"/>
+				<reportElement uuid="5097a246-88ce-490f-b0eb-3d3c120705d7" positionType="Float" x="0" y="615" width="515" height="12"/>
 				<box>
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -2545,8 +2584,19 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{dato113}]]></textFieldExpression>
 			</textField>
+			<frame>
+				<reportElement uuid="0a2f1290-6b27-4cc8-a78e-80a4ed715a44" style="table 4_TD" positionType="Float" x="0" y="376" width="515" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="7b74009a-0378-477f-9dc3-21e3174a8295" positionType="Float" x="0" y="0" width="489" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato84}]]></textFieldExpression>
+				</textField>
+			</frame>
 		</band>
-		<band height="179">
+		<band height="103">
 			<staticText>
 				<reportElement uuid="96fceef3-ddfb-4060-aaa7-ae67513a1bbc" mode="Opaque" x="0" y="0" width="515" height="12" backcolor="#E6E6E6"/>
 				<box>
@@ -2571,7 +2621,7 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement markup="html">
+				<textElement markup="styled">
 					<font fontName="SansSerif" size="9"/>
 					<paragraph leftIndent="5"/>
 				</textElement>
@@ -2661,7 +2711,7 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement markup="html">
+				<textElement markup="styled">
 					<font fontName="SansSerif" size="9"/>
 					<paragraph leftIndent="5"/>
 				</textElement>
@@ -3148,7 +3198,7 @@
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="115">
+		<band height="103">
 			<line>
 				<reportElement uuid="eab9670c-6faa-4f32-b945-3933c1079775" x="262" y="82" width="252" height="1"/>
 			</line>

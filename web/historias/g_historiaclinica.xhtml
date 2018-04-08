@@ -197,7 +197,14 @@
                     <tr>
                         <td colspan="2"><h2><p:outputLabel value="ANTECEDENTES PERSONALES" /></h2></td>
                     </tr>
-
+                     <tr>
+                        <td><p:outputLabel value="Generales"/></td>
+                        <td><p:outputLabel value="Otros Antecedentes"/></td>
+                    </tr>    
+                    <tr>
+                        <td><p:inputText id="dato118" styleClass="width1" value="#{historiasMB.datosFormulario.dato118}"/></td>
+                        <td><p:inputText id="dato119" styleClass="width1" value="#{historiasMB.datosFormulario.dato119}"/></td>
+                    </tr>
                     <tr>
                         <td><p:outputLabel value="Grupo sanguineo" /></td>
                         <td><p:outputLabel value="Patológicos" /></td>
@@ -244,6 +251,12 @@
                         <td><p:inputText id="dato13" styleClass="width1" value="#{historiasMB.datosFormulario.dato13}"/></td>
                         <td><p:inputText id="dato14" styleClass="width1" value="#{historiasMB.datosFormulario.dato14}"/></td>
                     </tr>
+                    <tr>
+                        <td><p:outputLabel value="Observaciones"/></td>
+                    </tr>
+                    <tr>
+                        <td><p:inputText id="dato126" styleClass="width1" value="#{historiasMB.datosFormulario.dato126}"/></td>
+                    </tr>
                 </div>
                 <tr>
                     <td colspan="2">
@@ -286,6 +299,12 @@
                         <td><p:inputText id="dato19" styleClass="width1" value="#{historiasMB.datosFormulario.dato19}"/></td>
                         <td><p:inputText id="dato20" styleClass="width1" value="#{historiasMB.datosFormulario.dato20}"/></td>
                     </tr>
+                     <tr>
+                         <td><p:outputLabel value="Muertos"/></td>
+                    </tr>    
+                    <tr>
+                        <td><p:inputText id="dato120" styleClass="width1" value="#{historiasMB.datosFormulario.dato120}"/></td>
+                    </tr>
                 </div>
                 <tr>
                     <td colspan="2">
@@ -305,6 +324,14 @@
                 <div>
                     <tr>
                         <td colspan="2"><h2><p:outputLabel value="ANTECEDENTES GINECOLÓGICOS" /></h2></td>
+                    </tr>
+                    <tr>
+                        <td><p:outputLabel value="Fecha Última Menstruación"/></td>
+                        <td><p:outputLabel value="Menopausia"/></td>
+                    </tr>
+                    <tr>
+                        <td><p:inputText id="dato121" styleClass="width1" value="#{historiasMB.datosFormulario.dato121}"/></td>
+                        <td><p:inputText id="dato122" styleClass="width1" value="#{historiasMB.datosFormulario.dato122}"/></td>
                     </tr>
                     <tr>
                         <td><p:outputLabel value="Menarquias/Espermarca" /></td>
@@ -656,10 +683,19 @@
                     </tr>
                     <tr>
                         <td><p:outputLabel value="Piel"/></td>
+                        <td><p:outputLabel value="Sintomático nervioso periférico:"/></td>
+                        <td><p:inputText id="dato125" styleClass="width1" value="#{historiasMB.datosFormulario.dato125}"/></td>
                     </tr>    
                     <tr>
                         <td><p:inputText id="dato81" styleClass="width1" value="#{historiasMB.datosFormulario.dato81}"/></td>
                     </tr>
+                    <tr>
+                        <td><p:outputLabel value="Observaciones"/></td>
+                    </tr>
+                    <tr>
+                        <td><p:inputText id="dato138" styleClass="width1" value="#{historiasMB.datosFormulario.dato138}"/></td>
+                    </tr>
+                    
                 </div>
                 <tr>
                     <td colspan="2">
@@ -969,48 +1005,32 @@
                         </h2>
                     </td>
                 </tr>
-                <tr>
-                    <td><p:outputLabel value="Generales"/></td>
-                    <td><p:outputLabel value="Otros Antecedentes"/></td>
-                </tr>    
-                <tr>
-                    <td><p:inputText id="dato118" styleClass="width1" value="#{historiasMB.datosFormulario.dato118}"/></td>
-                    <td><p:inputText id="dato119" styleClass="width1" value="#{historiasMB.datosFormulario.dato119}"/></td>
-                </tr>
+               
 
-                <tr>
-                    <td><p:outputLabel value="Muertos"/></td>
-                    <td><p:outputLabel value="Fecha Última Menstruación"/></td>
-                </tr>    
-                <tr>
-                    <td><p:inputText id="dato120" styleClass="width1" value="#{historiasMB.datosFormulario.dato120}"/></td>
-                    <td><p:inputText id="dato121" styleClass="width1" value="#{historiasMB.datosFormulario.dato121}"/></td>
-                </tr>
                 
                 <tr>
-                    <td><p:outputLabel value="Menopausia"/></td>
+                    
                     <td><p:outputLabel value="EX mama/Fecha/Resultado"/></td>
                 </tr>    
                 <tr>
-                    <td><p:inputText id="dato122" styleClass="width1" value="#{historiasMB.datosFormulario.dato122}"/></td>
                     <td><p:inputText id="dato123" styleClass="width1" value="#{historiasMB.datosFormulario.dato123}"/></td>
                 </tr>
                 
                 <tr>
                     <td><p:outputLabel value="Tensión arterial"/></td>
-                    <td><p:outputLabel value="Sintomático nervioso periférico:"/></td>
+                    
                 </tr>    
                 <tr>
                     <td><p:inputText id="dato124" styleClass="width1" value="#{historiasMB.datosFormulario.dato124}"/></td>
-                    <td><p:inputText id="dato125" styleClass="width1" value="#{historiasMB.datosFormulario.dato125}"/></td>
+                    
                 </tr>
                 
                 <tr>
-                    <td><p:outputLabel value="Observaciones"/></td>
+                    
                     <td><p:outputLabel value="Sueño"/></td>
                 </tr>    
                 <tr>
-                    <td><p:inputText id="dato126" styleClass="width1" value="#{historiasMB.datosFormulario.dato126}"/></td>
+                    
                     <td><p:inputText id="dato127" styleClass="width1" value="#{historiasMB.datosFormulario.dato127}"/></td>
                 </tr>
                 
@@ -1060,11 +1080,11 @@
                 </tr>
                 
                 <tr>
-                    <td><p:outputLabel value="Observaciones"/></td>
+                    
                     <td><p:outputLabel value="Crecimiento"/></td>
                 </tr>    
                 <tr>
-                    <td><p:inputText id="dato138" styleClass="width1" value="#{historiasMB.datosFormulario.dato138}"/></td>
+                    
                     <td><p:inputText id="dato139" styleClass="width1" value="#{historiasMB.datosFormulario.dato139}"/></td>
                 </tr>
                 

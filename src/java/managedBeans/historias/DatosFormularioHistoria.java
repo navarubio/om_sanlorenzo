@@ -1392,6 +1392,43 @@ public class DatosFormularioHistoria {
     private Object dato1452 = "";
     private Object dato1453 = "";
     private Object dato1454 = "";
+    private Object dato1455 = "";
+    private Object dato1456 = "";
+    private Object dato1457 = "";
+    private Object dato1458 = "";
+    private Object dato1459 = "";
+    private Object dato1460 = "";
+    private Object dato1461 = "";
+    private Object dato1462 = "";
+    private Object dato1463 = "";
+    private Object dato1464 = "";
+    private Object dato1465 = "";
+    private Object dato1466 = "";
+    private Object dato1467 = "";
+    private Object dato1468 = "";
+    private Object dato1469 = "";
+    private Object dato1470 = "";
+    private Object dato1471 = "";
+    private Object dato1472 = "";
+    private Object dato1473 = "";
+    private Object dato1474 = "";
+    private Object dato1475 = "";
+    private Object dato1476 = "";
+    private Object dato1477 = "";
+    private Object dato1478 = "";
+    private Object dato1479 = "";
+    private Object dato1480 = "";
+    private Object dato1481 = "";
+    private Object dato1482 = "";
+    private Object dato1483 = "";
+    private Object dato1484 = "";
+    private Object dato1485 = "";
+    private Object dato1486 = "";
+    private Object dato1487 = "";
+    private Object dato1488 = "";
+    private Object dato1489 = "";
+    private Object dato1490 = "";
+    
     private Object dato1700 = "";
     private Object dato1701 = "";
     private Object dato1702 = "";
@@ -5916,6 +5953,114 @@ public class DatosFormularioHistoria {
             case 1454:
                 dato1454 = valor;
                 break;
+            case 1455:
+                dato1455 = valor;
+                break;
+            case 1456:
+                dato1456 = valor;
+                break;
+            case 1457:
+                dato1457 = valor;
+                break;
+            case 1458:
+                dato1458 = valor;
+                break;
+            case 1459:
+                dato1459 = valor;
+                break;
+            case 1460:
+                dato1460 = valor;
+                break;
+            case 1461:
+                dato1461 = valor;
+                break;
+            case 1462:
+                dato1462 = valor;
+                break;
+            case 1463:
+                dato1463 = valor;
+                break;
+            case 1464:
+                dato1464 = valor;
+                break;
+            case 1465:
+                dato1465 = valor;
+                break;
+            case 1466:
+                dato1466 = valor;
+                break;
+            case 1467:
+                dato1467 = valor;
+                break;
+            case 1468:
+                dato1468 = valor;
+                break;
+            case 1469:
+                dato1469 = valor;
+                break;
+            case 1470:
+                dato1470 = valor;
+                break;
+            case 1471:
+                dato1471 = valor;
+                break;
+             case 1472:
+                dato1472 = valor;
+                break;
+             case 1473:
+                dato1473 = valor;
+                break;
+             case 1474:
+                dato1474 = valor;
+                break;
+             case 1475:
+                dato1475 = valor;
+                break;
+             case 1476:
+                dato1476 = valor;
+                break;
+              case 1477:
+                dato1477 = valor;
+                break;
+             case 1478:
+                dato1478 = valor;
+                break;
+            case 1479:
+                dato1479 = valor;
+                break;
+            case 1480:
+                dato1480 = valor;
+                break;
+            case 1481:
+                dato1481 = valor;
+                break;
+            case 1482:
+                dato1482 = valor;
+                break;
+            case 1483:
+                dato1483 = valor;
+                break;
+            case 1484:
+                dato1484 = valor;
+                break;
+            case 1485:
+                dato1485 = valor;
+                break;
+            case 1486:
+                dato1486 = valor;
+                break;
+             case 1487:
+                dato1487 = valor;
+                break;
+            case 1488:
+                dato1488 = valor;
+                break;
+            case 1489:
+                dato1489 = valor;
+                break;
+            case 1490:
+                dato1490 = valor;
+                break;
             case 1700:
                 dato1700 = valor;
                 break;
@@ -10433,6 +10578,43 @@ public class DatosFormularioHistoria {
         dato1452 = "";
         dato1453 = "";
         dato1454 = "";
+        dato1455 = "";
+        dato1456 = "";
+        dato1457 = "";
+        dato1458 = "";
+        dato1459 = "";
+        dato1460 = "";
+        dato1461 = "";
+        dato1462 = "";
+        dato1463 = "";
+        dato1464 = "";
+        dato1465 = "";
+        dato1466 = "";
+        dato1467 = "";
+        dato1468 = "";
+        dato1469 = "";
+        dato1470 = "";
+        dato1471 = "";
+        dato1472 = "";
+        dato1473 = "";
+        dato1474 = "";
+        dato1475 = "";
+        dato1476 = "";
+        dato1477 = "";
+        dato1478 = "";
+        dato1479 = "";
+        dato1480 = "";
+        dato1481 = "";
+        dato1482 = "";
+        dato1483 = "";
+        dato1484 = "";
+        dato1485 = "";
+        dato1486 = "";
+        dato1487 = "";
+        dato1488 = "";
+        dato1489 = "";
+        dato1490 = "";
+        
 
     }
 
@@ -22178,6 +22360,294 @@ public class DatosFormularioHistoria {
 
     public void setDato1454(Object dato1454) {
         this.dato1454 = dato1454;
+    }
+
+    public Object getDato1455() {
+        return dato1455;
+    }
+
+    public void setDato1455(Object dato1455) {
+        this.dato1455 = dato1455;
+    }
+
+    public Object getDato1456() {
+        return dato1456;
+    }
+
+    public void setDato1456(Object dato1456) {
+        this.dato1456 = dato1456;
+    }
+
+    public Object getDato1457() {
+        return dato1457;
+    }
+
+    public void setDato1457(Object dato1457) {
+        this.dato1457 = dato1457;
+    }
+
+    public Object getDato1458() {
+        return dato1458;
+    }
+
+    public void setDato1458(Object dato1458) {
+        this.dato1458 = dato1458;
+    }
+
+    public Object getDato1459() {
+        return dato1459;
+    }
+
+    public void setDato1459(Object dato1459) {
+        this.dato1459 = dato1459;
+    }
+
+    public Object getDato1460() {
+        return dato1460;
+    }
+
+    public void setDato1460(Object dato1460) {
+        this.dato1460 = dato1460;
+    }
+
+    public Object getDato1461() {
+        return dato1461;
+    }
+
+    public void setDato1461(Object dato1461) {
+        this.dato1461 = dato1461;
+    }
+
+    public Object getDato1462() {
+        return dato1462;
+    }
+
+    public void setDato1462(Object dato1462) {
+        this.dato1462 = dato1462;
+    }
+
+    public Object getDato1463() {
+        return dato1463;
+    }
+
+    public void setDato1463(Object dato1463) {
+        this.dato1463 = dato1463;
+    }
+
+    public Object getDato1464() {
+        return dato1464;
+    }
+
+    public void setDato1464(Object dato1464) {
+        this.dato1464 = dato1464;
+    }
+
+    public Object getDato1465() {
+        return dato1465;
+    }
+
+    public void setDato1465(Object dato1465) {
+        this.dato1465 = dato1465;
+    }
+
+    public Object getDato1466() {
+        return dato1466;
+    }
+
+    public void setDato1466(Object dato1466) {
+        this.dato1466 = dato1466;
+    }
+
+    public Object getDato1467() {
+        return dato1467;
+    }
+
+    public void setDato1467(Object dato1467) {
+        this.dato1467 = dato1467;
+    }
+
+    public Object getDato1468() {
+        return dato1468;
+    }
+
+    public void setDato1468(Object dato1468) {
+        this.dato1468 = dato1468;
+    }
+
+    public Object getDato1469() {
+        return dato1469;
+    }
+
+    public void setDato1469(Object dato1469) {
+        this.dato1469 = dato1469;
+    }
+
+    public Object getDato1470() {
+        return dato1470;
+    }
+
+    public void setDato1470(Object dato1470) {
+        this.dato1470 = dato1470;
+    }
+
+    public Object getDato1471() {
+        return dato1471;
+    }
+
+    public void setDato1471(Object dato1471) {
+        this.dato1471 = dato1471;
+    }
+
+    public Object getDato1472() {
+        return dato1472;
+    }
+
+    public void setDato1472(Object dato1472) {
+        this.dato1472 = dato1472;
+    }
+
+    public Object getDato1473() {
+        return dato1473;
+    }
+
+    public void setDato1473(Object dato1473) {
+        this.dato1473 = dato1473;
+    }
+
+    public Object getDato1474() {
+        return dato1474;
+    }
+
+    public void setDato1474(Object dato1474) {
+        this.dato1474 = dato1474;
+    }
+
+    public Object getDato1475() {
+        return dato1475;
+    }
+
+    public void setDato1475(Object dato1475) {
+        this.dato1475 = dato1475;
+    }
+
+    public Object getDato1476() {
+        return dato1476;
+    }
+
+    public void setDato1476(Object dato1476) {
+        this.dato1476 = dato1476;
+    }
+
+    public Object getDato1477() {
+        return dato1477;
+    }
+
+    public void setDato1477(Object dato1477) {
+        this.dato1477 = dato1477;
+    }
+
+    public Object getDato1478() {
+        return dato1478;
+    }
+
+    public void setDato1478(Object dato1478) {
+        this.dato1478 = dato1478;
+    }
+
+    public Object getDato1479() {
+        return dato1479;
+    }
+
+    public void setDato1479(Object dato1479) {
+        this.dato1479 = dato1479;
+    }
+
+    public Object getDato1480() {
+        return dato1480;
+    }
+
+    public void setDato1480(Object dato1480) {
+        this.dato1480 = dato1480;
+    }
+
+    public Object getDato1481() {
+        return dato1481;
+    }
+
+    public void setDato1481(Object dato1481) {
+        this.dato1481 = dato1481;
+    }
+
+    public Object getDato1482() {
+        return dato1482;
+    }
+
+    public void setDato1482(Object dato1482) {
+        this.dato1482 = dato1482;
+    }
+
+    public Object getDato1483() {
+        return dato1483;
+    }
+
+    public void setDato1483(Object dato1483) {
+        this.dato1483 = dato1483;
+    }
+
+    public Object getDato1484() {
+        return dato1484;
+    }
+
+    public void setDato1484(Object dato1484) {
+        this.dato1484 = dato1484;
+    }
+
+    public Object getDato1485() {
+        return dato1485;
+    }
+
+    public void setDato1485(Object dato1485) {
+        this.dato1485 = dato1485;
+    }
+
+    public Object getDato1486() {
+        return dato1486;
+    }
+
+    public void setDato1486(Object dato1486) {
+        this.dato1486 = dato1486;
+    }
+
+    public Object getDato1487() {
+        return dato1487;
+    }
+
+    public void setDato1487(Object dato1487) {
+        this.dato1487 = dato1487;
+    }
+
+    public Object getDato1488() {
+        return dato1488;
+    }
+
+    public void setDato1488(Object dato1488) {
+        this.dato1488 = dato1488;
+    }
+
+    public Object getDato1489() {
+        return dato1489;
+    }
+
+    public void setDato1489(Object dato1489) {
+        this.dato1489 = dato1489;
+    }
+
+    public Object getDato1490() {
+        return dato1490;
+    }
+
+    public void setDato1490(Object dato1490) {
+        this.dato1490 = dato1490;
     }
 
     public Object getDato1713() {

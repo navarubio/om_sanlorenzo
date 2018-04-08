@@ -51,14 +51,14 @@ public class PyPprogramaItems extends AbstractFacade<PyPProgramaItem>  {
                     break;
             }
             query = getEntityManager().createQuery("SELECT m FROM PyPProgramaItem m "
-                    + "where m.edad_ini_list = :list and "
-                    + ":age >= m.edad_ini and "
-                    + ":age <= m.edad_fin and "
-                    + "m.genero = :genero and EXISTS (SELECT 1 FROM PyPprogramaAsoc p where p.idPrograma = m.idPrograma and p.idAdministradora = :administradora)")
-                    .setParameter("list", list)
-                    .setParameter("age", edad_year)
-                    .setParameter("genero", gen)   
-                    .setParameter("administradora", administradora);   
+                    + "where "
+                    + ":age between m.edad_ini and "
+                    + " m.edad_fin and "
+                    + "m.genero in( "+gen+","+"0)" )//and EXISTS (SELECT 1 FROM PyPprogramaAsoc p where p.idPrograma = m.idPrograma and p.idAdministradora = :administradora)")
+                    //.setParameter("list", list)
+                    .setParameter("age", edad_year);
+                    //.setParameter("genero", gen)   ;
+                    //.setParameter("administradora", administradora);   
             return query.getResultList();
         } catch (Exception e) {
             System.out.println(e);
@@ -74,15 +74,24 @@ public class PyPprogramaItems extends AbstractFacade<PyPProgramaItem>  {
                 edad_year = Integer.parseInt(edad_mes) ;
                 list++;
             }
+            int gen=0;
+            switch (genero) {
+                case "F":
+                    gen = 2;
+                    break;
+                case "M":
+                    gen = 1;
+                    break;
+            }
             query = getEntityManager().createQuery("SELECT m FROM PyPProgramaItem m "
-                    + "where m.edad_ini_list = :list and "
-                    + ":age >= m.edad_ini and "
-                    + ":age <= m.edad_fin and "
-                    + "m.genero = :genero and EXISTS (SELECT 1 FROM PyPprogramaAsoc p where p.idPrograma = m.idPrograma and p.idAdministradora = :administradora)")
-                    .setParameter("list", list)
-                    .setParameter("age", edad_year)
-                    .setParameter("genero", 0)   
-                    .setParameter("administradora", administradora);   
+                    + "where "
+                    + ":age between m.edad_ini and "
+                    + " m.edad_fin and "
+                    + "m.genero in( "+gen+","+"0)" )//and EXISTS (SELECT 1 FROM PyPprogramaAsoc p where p.idPrograma = m.idPrograma and p.idAdministradora = :administradora)")
+                    //.setParameter("list", list)
+                    .setParameter("age", edad_year);
+                    
+                    //.setParameter("administradora", administradora);   
             return query.getResultList();
         } catch (Exception e) {
             System.out.println(e);
@@ -102,6 +111,53 @@ public class PyPprogramaItems extends AbstractFacade<PyPProgramaItem>  {
         return null;
     }
 
+    public String validarSemaforo(int edad_year,String edad_mes, String genero, int administradora, int idPaciente){
+        
+        String valor="../recursos/img/semaforo3.png";
+        try {
+            if(Integer.parseInt(edad_mes) < 12 && edad_year == 0){
+                edad_year = Integer.parseInt(edad_mes) ;
+            }
+            //System.out.println(genero);
+            int generoV= genero.equals("F")?2:1;
+            Query query = getEntityManager().createNativeQuery("select c.id_Cita, c.atendida " +
+                " from pyp_programa_item pp" +
+                " left join pyp_programa_cita p on p.id_programa_items=pp.id_programa_items" +
+                " left join cit_citas c  on p.id_cita = c.id_cita and c.id_paciente="+idPaciente  +
+                " where "+ edad_year+"between pp.edad_inicial and pp.edad_final  "+
+                " and pp.genero in("+generoV+","+0+") order by 1 ");
+            /*System.out.println("select c.id_Cita, c.atendida " +
+                " from pyp_programa_item pp" +
+                " left join pyp_programa_cita p on p.id_programa_items=pp.id_programa_items" +
+                " left join cit_citas c  on p.id_cita = c.id_cita and c.id_paciente="+idPaciente  +
+                " where "+ edad_year+" between pp.edad_inicial and pp.edad_final  "+
+                " and pp.genero in("+generoV+","+0+") order by 1 " );*/
+            List<Object[]> lst = query.getResultList();
+            int totalCitado=0;
+            for(Object[] c: lst){
+                if(c[0]==null){
+                    valor="../recursos/img/semaforo1.png";
+                    break;
+                }else{
+                    if(c[1]!=null){
+                        System.out.println(c[1].toString());
+                        if(c[1].toString().equals("false")){
+                            valor="../recursos/img/semaforo2.png";
+                            break;
+                        }else if(c[1].toString().equals("true")){
+                            totalCitado++;
+                        }
+                    }
+                }
+            }
+            if(lst.isEmpty())valor="../recursos/img/semaforo1.png";
+            if(totalCitado==lst.size())valor="../recursos/img/semaforo3.png";
+            if(totalCitado>0)valor="../recursos/img/semaforo2.png";
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return valor;
+    }
     public List<PyPProgramaItem> buscar_programas_idItem(Integer programas) {
         Query query;
         try { 
