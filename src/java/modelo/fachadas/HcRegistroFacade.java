@@ -251,4 +251,15 @@ public class HcRegistroFacade extends AbstractFacade<HcRegistro> {
         }
         return registro;
     }
+    
+     public List<HcRegistro> buscarOrdenadoPorFechaNoImpresas(int _limite) {//buscar todos los registros clinicos de un paciente
+        try {
+            String hql = "SELECT u FROM HcRegistro u WHERE u.impreso=FALSE ORDER BY u.fechaReg";
+            Query query=getEntityManager().createQuery(hql);
+            query.setMaxResults(_limite);
+            return query.getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

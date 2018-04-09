@@ -14,7 +14,7 @@ import beans.utilidades.MetodosGenerales;
 import beans.utilidades.Oportunidad;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File; 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
@@ -452,10 +452,27 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
         List<Object[]> progra;
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
+        /*
+       CASC 20180407
+        Antes consultaba fecha inicio y fecha fin para filtrar pacientes por 
+        fecha de nacimiento. Ahora se va a cambiar para que consulte los que 
+        tengan atenciones hc_registro entre esas fechas
         user = pacientesFachada.buscarOrdenado(idAdministradora, fechaInicial, fechaFinal);
-        carga_4505(user);
-        RequestContext.getCurrentInstance().update("form4505");
-        setRenBuscar(true);
+         */
+        try {
+            post_filtrar = new ArrayList<>();
+            user = pacientesFachada.buscarPacientesAtendidosAdministradora(idAdministradora, fechaInicial, fechaFinal);
+            if (user == null || user.isEmpty()) {
+                imprimirMensaje("Error", "No se Consiguieron pacientes", FacesMessage.SEVERITY_ERROR);
+                return;
+            }
+            carga_4505(user);
+            RequestContext.getCurrentInstance().update("form4505");
+            setRenBuscar(true);
+        } catch (Exception ex) {
+            imprimirMensaje("Error", ex.getMessage(), FacesMessage.SEVERITY_ERROR);
+            return;
+        }
 
     }
 
@@ -539,6 +556,8 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
                     }
                 } catch (IllegalArgumentException | IllegalAccessException e) {
                     value = field.get(r);
+                } catch (NullPointerException e) {
+                    value = "";
                 }
                 valor += value + "|";
             }
@@ -553,7 +572,7 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
     }
 
     public void carga_4505(List<CfgPacientes> user) {
-
+        System.out.println("Iniciando cargar 4505 , nro de pacientes " + user.size());
         SimpleDateFormat usuario_nacimiento = new SimpleDateFormat("EE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat sdfDateHour = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -563,6 +582,7 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
         int i = 1;
         System.out.println(new Date());
         for (CfgPacientes r : user) {
+            System.out.println("Procesando " + i + " de " + user.size());
             try {
                 Informe4505 u = new Informe4505();
                 u.setTipo_registro("2");
@@ -1025,7 +1045,7 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
                 Logger.getLogger(ReporteInforme.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        System.out.println(new Date());
+        System.out.println("fin");
 
     }
 

@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="evolucion_historia_glandula_mamaria" pageWidth="595" pageHeight="842" columnWidth="515" leftMargin="40" rightMargin="40" topMargin="40" bottomMargin="40" uuid="9f7fc654-ee1d-4b56-916d-b168aa7d7a43">
 	<property name="ireport.zoom" value="1.401975597925572"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="1056"/>
+	<property name="ireport.y" value="0"/>
 	<style name="table 4_TD" mode="Opaque" backcolor="#FFFFFF">
 		<box>
 			<pen lineWidth="0.5" lineColor="#000000"/>
@@ -954,7 +954,7 @@
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="657" splitType="Stretch">
+		<band height="596" splitType="Stretch">
 			<frame>
 				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="10" width="515" height="12" backcolor="#E6E6E6"/>
 				<staticText>
@@ -978,9 +978,9 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="34" width="385" height="12"/>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="0" y="34" width="356" height="12"/>
 				<textField isStretchWithOverflow="true">
-					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="385" height="12"/>
+					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="356" height="12"/>
 					<textElement markup="html">
 						<font fontName="SansSerif" size="9"/>
 						<paragraph leftIndent="5"/>
@@ -989,9 +989,9 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="385" y="34" width="130" height="12"/>
+				<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" style="table 4_TD" positionType="Float" x="356" y="34" width="159" height="12"/>
 				<textField isStretchWithOverflow="true">
-					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="122" height="12"/>
+					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="149" height="12"/>
 					<textElement markup="html">
 						<font fontName="SansSerif" size="9"/>
 						<paragraph leftIndent="5"/>
@@ -1227,15 +1227,15 @@
 			</frame>
 			<frame>
 				<reportElement uuid="a5820815-d960-405c-8e24-d977fec060fc" style="table 4_TD" positionType="Float" x="257" y="46" width="258" height="12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="c60c4dde-74c3-4ac0-b5eb-d207a9ff5c01" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="250" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato265}]]></textFieldExpression>
+				</textField>
 			</frame>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="c60c4dde-74c3-4ac0-b5eb-d207a9ff5c01" positionType="Float" stretchType="RelativeToTallestObject" x="257" y="46" width="257" height="12"/>
-				<textElement markup="html">
-					<font fontName="SansSerif" size="9"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato265}]]></textFieldExpression>
-			</textField>
 			<frame>
 				<reportElement uuid="7ece3d65-ade2-405e-9b39-d0e2d8dd7115" style="table 4_TD" positionType="Float" x="0" y="46" width="257" height="12"/>
 				<textField isStretchWithOverflow="true">
@@ -1600,7 +1600,7 @@
 						<font fontName="SansSerif" size="9"/>
 						<paragraph leftIndent="5"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{dato264}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{dato234}]]></textFieldExpression>
 				</textField>
 				<line>
 					<reportElement uuid="eab9670c-6faa-4f32-b945-3933c1079775" x="0" y="0" width="252" height="1"/>

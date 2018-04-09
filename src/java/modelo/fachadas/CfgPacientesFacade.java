@@ -181,4 +181,46 @@ public class CfgPacientesFacade extends AbstractFacade<CfgPacientes> {
         return getEntityManager();
     }
 
+     public List<CfgPacientes> buscarPacientesAtendidosAdministradora(int administradora, Date inicio, Date fin) {
+        System.out.println("Administ " + administradora);
+        System.out.println("Iniio " + inicio);
+        System.out.println("Fin " + fin);
+        StringBuilder cadPacientes = new StringBuilder("-1");
+        try {
+            String queryHistorias
+                    = " SELECT distinct(h.idPaciente.idPaciente)"
+                    + " FROM HcRegistro h "
+                    + " where  h.fechaReg >= ?1 and h.fechaReg <= ?2 "
+                    + " and h.idPaciente.idAdministradora.idAdministradora = ?3 ";
+
+            if (inicio == null || fin == null) {
+                throw new Exception("Debe Ingresar Fechas");
+            } else {
+                Query q = getEntityManager().createQuery(queryHistorias);
+                q.setParameter(1, inicio);
+                q.setParameter(2, fin);
+                q.setParameter(3, administradora);
+                List<Object> arrPacientes
+                        = q.getResultList();
+                if (arrPacientes != null && !arrPacientes.isEmpty()) {
+                    for (Object pac : arrPacientes) {
+                        cadPacientes.append(",").append(pac.toString());
+                    }
+                }
+            }
+            String hql = "SELECT c FROM CfgPacientes c "
+                    + "where c.idPaciente IN("
+                    + cadPacientes.toString()
+                    + ")"
+                    //+ "and c.idAdministradora.idAdministradora = ?1 "
+                    + "ORDER BY c.primerNombre ASC";
+            Query q2 = getEntityManager().createQuery(hql);
+            //q2.setParameter(1, administradora);
+            return q2.getResultList();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
 }
