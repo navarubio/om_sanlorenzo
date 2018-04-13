@@ -86,6 +86,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.export.JRCsvExporter;
 import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
+import org.apache.commons.lang3.StringUtils;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.CellEditEvent;
 import org.primefaces.model.DefaultStreamedContent;
@@ -541,27 +542,634 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
 
     public void generarInforme() throws IOException, IllegalArgumentException, IllegalAccessException {
         SimpleDateFormat file_ = new SimpleDateFormat("yyyyMMdd");
-        String csvFile = "SGD280RPED" + file_.format(new Date()) + "NIT000052054575S01.TXT";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String csvFile = "SGD280RPED" + file_.format(fechaFinal) + "NIT000052054575S01.TXT";
         FileWriter writer = new FileWriter(csvFile);
         String valor = "";
+        
+        // Generar registro tipo 1. Primer registro del archivo
+        valor += "1";//tipo de registro
+        valor += "|";
+        valor += "";//código de la EPS o de la Dirección Territorial de Salud 
+        valor += "|";
+        valor += sdf.format(fechaInicial);//fecha inicial del período de la información reportada 
+        valor += "|";
+        valor += sdf.format(fechaFinal);//fecha final del período de la información reportada 
+        valor += "|";
+        valor += post_filtrar.size();//cantidad de registros tipo 2
+        
+        writer.append(valor);
+        writer.append("\n");
+        
+        // Generar registros tipo 2.
         for (Informe4505 r : post_filtrar) {
-            valor = "";
-            for (Field field : r.getClass().getDeclaredFields()) {
-                field.setAccessible(true);
-                String name = field.getName();
-                Object value = field.get(r);
-                try {
-                    if (value.toString().length() > 9) {
-                        value = new SimpleDateFormat("yyyy-MM-dd").format(field.get(r));
-                    }
-                } catch (IllegalArgumentException | IllegalAccessException e) {
-                    value = field.get(r);
-                } catch (NullPointerException e) {
-                    value = "";
-                }
-                valor += value + "|";
-            }
-            writer.append(valor.substring(0, valor.length() - 1));
+            valor = "2" + "|";//tipo de registro
+            valor += r.getConsecutivo_registro()  + "|";
+
+            if (StringUtils.isNumeric(r.getCodigo_habilitacion_ips_primaria()))
+                valor += r.getCodigo_habilitacion_ips_primaria() + "|";
+            else
+                valor += 99 + "|";
+            
+            valor += r.getTipo_identificacion_usuario().substring(0, Math.min(r.getTipo_identificacion_usuario().length(), 2)) + "|";
+            
+            valor += r.getNumero_identificacion_usuario().substring(0, Math.min(r.getNumero_identificacion_usuario().length(), 18)) + "|";
+            
+            valor += r.getPrimer_apellido_usuario().substring(0, Math.min(r.getPrimer_apellido_usuario().length(), 30)) + "|";
+            
+            if (StringUtils.isAnyBlank(r.getSegundo_apellido_usuario()))
+                valor += "NONE" + "|";
+            else
+                valor += r.getSegundo_apellido_usuario().substring(0, Math.min(r.getSegundo_apellido_usuario().length(), 30)) + "|";
+            
+            valor += r.getPrimer_nombre_usuario().substring(0, Math.min(r.getPrimer_nombre_usuario().length(), 30)) + "|";
+            
+            if (StringUtils.isAnyBlank(r.getSegundo_nombre_usuario()))
+                valor += "NONE" + "|";
+            else
+                valor += r.getSegundo_nombre_usuario().substring(0, Math.min(r.getSegundo_nombre_usuario().length(), 30)) + "|";
+            
+            valor += sdf.format(r.getFecha_nacimiento()) + "|";//campo 9 (fecha nacimiento)
+            
+            valor += r.getSexo().substring(0, Math.min(r.getSexo().length(), 1)) + "|";//campo 10 (sexo)
+            
+            if (StringUtils.isNumeric(r.getCodigo_pertenencia_etnica()))
+                valor += r.getCodigo_pertenencia_etnica() + "|";
+            else
+                valor += 6 + "|";
+            
+            if (StringUtils.isNumeric(r.getCodigo_ocupacion()))
+                valor += r.getCodigo_ocupacion() + "|";
+            else
+                valor += "9999" + "|";
+            
+            if (StringUtils.isNumeric(r.getCodigo_nivel_educativo()))
+                valor += r.getCodigo_nivel_educativo() + "|";
+            else
+                valor += "1" + "|";//No Definido
+            
+            if (StringUtils.isNumeric(r.getGestacion()))
+                valor += r.getGestacion() + "|";
+            else
+                valor += "3" + "|";//Riesgo no evaluado
+            
+            if (StringUtils.isNumeric(r.getSifilis_gestacional_congenita()))
+                valor += r.getSifilis_gestacional_congenita() + "|";
+            else
+                valor += "4" + "|";//Riesgo no evaluado
+            
+            if (StringUtils.isNumeric(r.getHipertension_gestacional_congenita()))
+                valor += r.getHipertension_gestacional_congenita() + "|";
+            else
+                valor += "3" + "|";//Riesgo no evaluado
+            
+            if (StringUtils.isNumeric(r.getHipotiroidismo_congenito()))
+                valor += r.getHipotiroidismo_congenito() + "|";
+            else
+                valor += "3" + "|";//Riesgo no evaluado
+            
+            if (StringUtils.isNumeric(r.getSintomatico_respiratorio()))
+                valor += r.getSintomatico_respiratorio() + "|";
+            else
+                valor += "2" + "|";//Riesgo no evaluado
+            
+            if (StringUtils.isNumeric(r.getTuberculosis_multidrogoresistente()))
+                valor += r.getTuberculosis_multidrogoresistente() + "|";
+            else
+                valor += "3" + "|";//Riesgo no evaluado
+            
+            if (StringUtils.isNumeric(r.getLepra()))
+                valor += r.getLepra() + "|";
+            else
+                valor += "3" + "|";//Riesgo no evaluado
+            
+            //campo 20 (Lepra)
+            if (StringUtils.isNumeric(r.getLepra()))
+                valor += r.getLepra() + "|";
+            else
+                valor += "3" + "|";//Riesgo no evaluado
+            
+            if (StringUtils.isNumeric(r.getObesidad_desutricion_proteico_calorica()))
+                valor += r.getObesidad_desutricion_proteico_calorica() + "|";
+            else
+                valor += "3" + "|";//Riesgo no evaluado
+            
+            if (StringUtils.isNumeric(r.getMujer_victima_maltrato()))
+                valor += r.getMujer_victima_maltrato() + "|";
+            else
+                valor += "4" + "|";//Riesgo no evaluado
+            
+            if (StringUtils.isNumeric(r.getVictima_violencia_sexual()))
+                valor += r.getVictima_violencia_sexual() + "|";
+            else
+                valor += "3" + "|";//Riesgo no evaluado
+            
+            if (StringUtils.isNumeric(r.getInfecciones_transmision_sexual()))
+                valor += r.getInfecciones_transmision_sexual() + "|";
+            else
+                valor += "3" + "|";//Riesgo no evaluado
+            
+            if (StringUtils.isNumeric(r.getEnfermedad_salud_mental()))
+                valor += r.getEnfermedad_salud_mental() + "|";
+            else
+                valor += "3" + "|";//Riesgo no evaluado
+            
+            if (StringUtils.isNumeric(r.getCancer_cervix()))
+                valor += r.getCancer_cervix() + "|";
+            else
+                valor += "3" + "|";//Riesgo no evaluado
+            
+            if (StringUtils.isNumeric(r.getCancer_seno()))
+                valor += r.getCancer_seno() + "|";
+            else
+                valor += "3" + "|";//Riesgo no evaluado
+            
+            if (StringUtils.isNumeric(r.getFluorosis_dental()))
+                valor += r.getFluorosis_dental() + "|";
+            else
+                valor += "3" + "|";//Riesgo no evaluado
+            
+            if (null != r.getFecha_peso())
+                valor += sdf.format(r.getFecha_peso()) + "|";//campo 29 (fecha del peso)
+            else
+                valor += "1800-01-01" + "|";
+            
+            //campo 30 (Peso en Kilogramos)
+            if (StringUtils.isNumeric(r.getPeso_kilogramos()))
+                valor += r.getPeso_kilogramos() + "|";
+            else
+                valor += "999" + "|";
+            
+            if (null != r.getFecha_talla())
+                valor += sdf.format(r.getFecha_talla()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            if (StringUtils.isNumeric(r.getTalla_metros()))
+                valor += r.getTalla_metros() + "|";
+            else
+                valor += "999" + "|";
+            
+            if (null != r.getFecha_probable_parto())
+                valor += sdf.format(r.getFecha_probable_parto()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            if (StringUtils.isNumeric(r.getEdad_gestacional_nacer()))
+                valor += r.getEdad_gestacional_nacer() + "|";
+            else
+                valor += "99" + "|";
+            
+            if (StringUtils.isNumeric(r.getEdad_gestacional_nacer()))
+                valor += r.getEdad_gestacional_nacer() + "|";
+            else
+                valor += "99" + "|";
+            
+            //campo 35 (BCG)
+            if (StringUtils.isNumeric(r.getBcg()))
+                valor += r.getBcg() + "|";
+            else
+                valor += "2" + "|";//Sin dato
+            
+            if (StringUtils.isNumeric(r.getHepatitis_b_menores_1_año()))
+                valor += r.getHepatitis_b_menores_1_año() + "|";
+            else
+                valor += "4" + "|";//Sin dato
+            
+            if (StringUtils.isNumeric(r.getPentavalente()))
+                valor += r.getPentavalente() + "|";
+            else
+                valor += "3" + "|";//Sin dato
+            
+            if (StringUtils.isNumeric(r.getPolio()))
+                valor += r.getPolio() + "|";
+            else
+                valor += "5" + "|";//Sin dato
+            
+            if (StringUtils.isNumeric(r.getDpt_menores_5_años()))
+                valor += r.getDpt_menores_5_años() + "|";
+            else
+                valor += "5" + "|";//Sin dato
+            
+            //campo 40 (Rotavirus)
+            if (StringUtils.isNumeric(r.getRotavirus()))
+                valor += r.getRotavirus() + "|";
+            else
+                valor += "2" + "|";//Sin dato
+            
+            if (StringUtils.isNumeric(r.getNeumococo()))
+                valor += r.getNeumococo() + "|";
+            else
+                valor += "3" + "|";//Sin dato
+            
+            if (StringUtils.isNumeric(r.getInfluenza_niños()))
+                valor += r.getInfluenza_niños() + "|";
+            else
+                valor += "3" + "|";//Sin dato
+            
+            if (StringUtils.isNumeric(r.getFiebre_amarilla_niños_1_año()))
+                valor += r.getFiebre_amarilla_niños_1_año() + "|";
+            else
+                valor += "1" + "|";//Sin dato
+            
+            if (StringUtils.isNumeric(r.getHepatitis_a()))
+                valor += r.getHepatitis_a() + "|";
+            else
+                valor += "1" + "|";//Sin dato
+            
+            //campo 45 (Triple Viral Niños)
+            if (StringUtils.isNumeric(r.getTriple_viral_niños()))
+                valor += r.getTriple_viral_niños() + "|";
+            else
+                valor += "2" + "|";//Sin dato
+            
+            if (StringUtils.isNumeric(r.getVirus_papiloma_humano()))
+                valor += r.getVirus_papiloma_humano() + "|";
+            else
+                valor += "3" + "|";//Sin dato
+            
+            if (StringUtils.isNumeric(r.getTd_tt_mujeres_edad_fertil_15_49_años()))
+                valor += r.getTd_tt_mujeres_edad_fertil_15_49_años() + "|";
+            else
+                valor += "5" + "|";//Sin dato
+            
+            if (StringUtils.isNumeric(r.getControl_placa_bacteriana()))
+                valor += r.getControl_placa_bacteriana() + "|";
+            else
+                valor += "7" + "|";//Sin dato
+            
+            //campo 49 (Fecha atención parto o cesárea)
+            if (null != r.getFecha_atencion_parto_cesarea())
+                valor += sdf.format(r.getFecha_atencion_parto_cesarea()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            //campo 50 (Fecha salida de la atención del parto o cesárea)
+            if (null != r.getFecha_salida_atencion_parto_cesarea())
+                valor += sdf.format(r.getFecha_salida_atencion_parto_cesarea()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            if (null != r.getFecha_consejeria_lactancia_materna())
+                valor += sdf.format(r.getFecha_consejeria_lactancia_materna()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            if (null != r.getControl_recien_nacido())
+                valor += sdf.format(r.getControl_recien_nacido()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            if (null != r.getPlanificacion_familiar_primera_vez())
+                valor += sdf.format(r.getPlanificacion_familiar_primera_vez()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            if (null != r.getSuministro_metodo_anticonceptivo())
+                valor += sdf.format(r.getSuministro_metodo_anticonceptivo()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            if (null != r.getFecha_suministro_medico_anticonceptivo())
+                valor += sdf.format(r.getFecha_suministro_medico_anticonceptivo()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            //campo 55 (Fecha Suministro de Método Anticonceptivo)
+            if (null != r.getFecha_suministro_medico_anticonceptivo())
+                valor += sdf.format(r.getFecha_suministro_medico_anticonceptivo()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            if (null != r.getControl_prenatal_primera_vez())
+                valor += sdf.format(r.getControl_prenatal_primera_vez()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            if (StringUtils.isNumeric(r.getControl_prenatal()))
+                valor += r.getControl_prenatal() + "|";
+            else
+                valor += "999" + "|";//Sin dato
+            
+            if (null != r.getUltimo_control_prenatal())
+                valor += sdf.format(r.getUltimo_control_prenatal()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            if (StringUtils.isNumeric(r.getSuministro_acido_folico_ultimo_control_prenatal()))
+                valor += r.getSuministro_acido_folico_ultimo_control_prenatal() + "|";
+            else
+                valor += "5" + "|";//Registro no Evaluado
+            
+            //campo 60 (Suministro de Sulfato Ferroso en el Último Control Prenatal)
+            if (StringUtils.isNumeric(r.getSuministro_sulfato_ferroso_ultimo_control_prenatal()))
+                valor += r.getSuministro_sulfato_ferroso_ultimo_control_prenatal() + "|";
+            else
+                valor += "5" + "|";//Registro no Evaluado
+            
+            if (StringUtils.isNumeric(r.getSuministro_carbonato_calcio_ultimo_control_prenatal()))
+                valor += r.getSuministro_carbonato_calcio_ultimo_control_prenatal() + "|";
+            else
+                valor += "5" + "|";//Registro no Evaluado
+            
+            if (null != r.getValoracion_agudeza_visual())
+                valor += sdf.format(r.getValoracion_agudeza_visual()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            if (null != r.getConsulta_oftalmologia())
+                valor += sdf.format(r.getConsulta_oftalmologia()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            if (null != r.getFecha_diagnostico_desnutricion_proteico_calorica())
+                valor += sdf.format(r.getFecha_diagnostico_desnutricion_proteico_calorica()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            if (null != r.getConsulta_mujero_menor_maltratado())
+                valor += sdf.format(r.getConsulta_mujero_menor_maltratado()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            if (null != r.getConsulta_victimas_violencia_sexual())
+                valor += sdf.format(r.getConsulta_victimas_violencia_sexual()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            if (null != r.getConsulta_nutricion())
+                valor += sdf.format(r.getConsulta_nutricion()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            if (null != r.getConsulta_psicologica())
+                valor += sdf.format(r.getConsulta_psicologica()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            if (null != r.getConsulta_crecimiento_desarrollo_primera_vez())
+                valor += sdf.format(r.getConsulta_crecimiento_desarrollo_primera_vez()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            //campo 70 (Suministro de Sulfato Ferroso en la Última Consulta del Menor de 10 años)
+            if (StringUtils.isNumeric(r.getSuministro_sulfato_ferroso_ultima_consulta_menor_10_años()))
+                valor += r.getSuministro_sulfato_ferroso_ultima_consulta_menor_10_años() + "|";
+            else
+                valor += "5" + "|";//Registro no Evaluado
+            
+            if (StringUtils.isNumeric(r.getSuministro_vitamina_a_ultima_consulta_menor_10_años()))
+                valor += r.getSuministro_vitamina_a_ultima_consulta_menor_10_años() + "|";
+            else
+                valor += "5" + "|";//Registro no Evaluado
+            
+            if (null != r.getConsulta_joven_primera_vez())
+                valor += sdf.format(r.getConsulta_joven_primera_vez()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            if (null != r.getConsulta_adulto_primera_vez())
+                valor += sdf.format(r.getConsulta_adulto_primera_vez()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            if (StringUtils.isNumeric(r.getPreservativos_entregados_pacientes_con_its()))
+                valor += r.getPreservativos_entregados_pacientes_con_its() + "|";
+            else
+                valor += "999" + "|";//Sin dato
+            
+            //campo 75 (Asesoría Pre test Elisa para VIH)
+            if (null != r.getAsesoria_pre_test_elisa_vih())
+                valor += sdf.format(r.getAsesoria_pre_test_elisa_vih()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            if (null != r.getAsesoria_pos_test_elisa_vih())
+                valor += sdf.format(r.getAsesoria_pos_test_elisa_vih()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            if (StringUtils.isNumeric(r.getPaciente_diagnostico_salud_mental_recibio_atencion_ultimos_6_meses_equipo_interdisciplinario_completo()))
+                valor += r.getPaciente_diagnostico_salud_mental_recibio_atencion_ultimos_6_meses_equipo_interdisciplinario_completo() + "|";
+            else
+                valor += "6" + "|";//Sin dato
+            
+            if (null != r.getFecha_antigeno_superficie_hepatitis_b_gestantes())
+                valor += sdf.format(r.getFecha_antigeno_superficie_hepatitis_b_gestantes()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            if (StringUtils.isNumeric(r.getResultado_antigeno_superficie_hepatitis_b_gestantes()))
+                valor += r.getResultado_antigeno_superficie_hepatitis_b_gestantes() + "|";
+            else
+                valor += "2" + "|";//Sin dato
+            
+            //campo 80 (Fecha Serología para Sífilis)
+            if (null != r.getFecha_serologia_sifilis())
+                valor += sdf.format(r.getFecha_serologia_sifilis()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            if (StringUtils.isNumeric(r.getResultado_serologia_sifilis()))
+                valor += r.getResultado_serologia_sifilis() + "|";
+            else
+                valor += "2" + "|";//Sin dato
+            
+            if (null != r.getFecha_toma_elisa_vih())
+                valor += sdf.format(r.getFecha_toma_elisa_vih()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            if (StringUtils.isNumeric(r.getResultado_elisa_vih()))
+                valor += r.getResultado_elisa_vih() + "|";
+            else
+                valor += "3" + "|";//Sin dato
+            
+            if (null != r.getFecha_tsh_neonatal())
+                valor += sdf.format(r.getFecha_tsh_neonatal()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            //campo 85 (Resultado de TSH Neonatal)
+            if (StringUtils.isNumeric(r.getResultado_tsh_neonatal()))
+                valor += r.getResultado_tsh_neonatal() + "|";
+            else
+                valor += "3" + "|";//Sin dato
+            
+            if (StringUtils.isNumeric(r.getTamizaje_cancer_cuello_uterino()))
+                valor += r.getTamizaje_cancer_cuello_uterino() + "|";
+            else
+                valor += "8" + "|";//Sin dato
+            
+            if (null != r.getCitologia_cervico_uterina())
+                valor += sdf.format(r.getCitologia_cervico_uterina()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            if (StringUtils.isNumeric(r.getCitologia_cervico_uterina_resultados_bethesda()))
+                valor += r.getCitologia_cervico_uterina_resultados_bethesda() + "|";
+            else
+                valor += "99" + "|";//Sin dato
+            
+            if (StringUtils.isNumeric(r.getCalidad_muestra_citologia_cervicouterina()))
+                valor += r.getCalidad_muestra_citologia_cervicouterina() + "|";
+            else
+                valor += "99" + "|";//Sin dato
+            
+            //campo 90 (Código de habilitación IPS donde se toma Citología Cervicouterina)
+            if (StringUtils.isNumeric(r.getCodigo_habilitacion_ips_donde_toma_citologia_cervicouterina()))
+                valor += r.getCodigo_habilitacion_ips_donde_toma_citologia_cervicouterina() + "|";
+            else
+                valor += "99" + "|";//Sin dato
+            
+            if (null != r.getFecha_colposcopia())
+                valor += sdf.format(r.getFecha_colposcopia()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            if (StringUtils.isNumeric(r.getCodigo_habilitacion_ips_donde_toma_colposcopia()))
+                valor += r.getCodigo_habilitacion_ips_donde_toma_colposcopia() + "|";
+            else
+                valor += "99" + "|";//Sin dato
+            
+            if (null != r.getFecha_biopsia_cervical())
+                valor += sdf.format(r.getFecha_biopsia_cervical()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            if (StringUtils.isNumeric(r.getResultado_biopsia_cervical()))
+                valor += r.getResultado_biopsia_cervical() + "|";
+            else
+                valor += "99" + "|";//Sin dato
+            
+            //campo 95 (Código de habilitación IPS donde se toma Biopsia Cervical)
+            if (StringUtils.isNumeric(r.getCodigo_habilitacion_ips_donde_toma_biopsia_cervical()))
+                valor += r.getCodigo_habilitacion_ips_donde_toma_biopsia_cervical() + "|";
+            else
+                valor += "99" + "|";//Sin dato
+            
+            if (null != r.getFecha_mamografia())
+                valor += sdf.format(r.getFecha_mamografia()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            if (StringUtils.isNumeric(r.getResultado_mamografia()))
+                valor += r.getResultado_mamografia() + "|";
+            else
+                valor += "99" + "|";//Sin dato
+            
+            if (StringUtils.isNumeric(r.getCodigo_habilitacion_ips_donde_toma_mamografia()))
+                valor += r.getCodigo_habilitacion_ips_donde_toma_mamografia() + "|";
+            else
+                valor += "99" + "|";//Sin dato
+            
+            if (null != r.getFecha_toma_biopsia_seno_bacaf())
+                valor += sdf.format(r.getFecha_toma_biopsia_seno_bacaf()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            //campo 100 (Fecha Resultado Biopsia Seno por BACAF)
+            if (null != r.getFecha_resultado_biopsia_seno_bacaf())
+                valor += sdf.format(r.getFecha_resultado_biopsia_seno_bacaf()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            if (StringUtils.isNumeric(r.getBiopsia_seno_bacaf()))
+                valor += r.getBiopsia_seno_bacaf() + "|";
+            else
+                valor += "99" + "|";//Sin dato
+            
+            if (StringUtils.isNumeric(r.getCodigo_habilitacion_ips_donde_toma_biopsia_seno_bacaf()))
+                valor += r.getCodigo_habilitacion_ips_donde_toma_biopsia_seno_bacaf() + "|";
+            else
+                valor += "99" + "|";//Sin dato
+            
+            if (null != r.getFecha_toma_hemoglobina())
+                valor += sdf.format(r.getFecha_toma_hemoglobina()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            if (StringUtils.isNumeric(r.getHemoglobina()))
+                valor += r.getHemoglobina() + "|";
+            else
+                valor += "9998" + "|";//No aplica
+            
+            //campo 105 (Fecha de la Toma de Glicemia Basal)
+            if (null != r.getFecha_toma_glicemia_basal())
+                valor += sdf.format(r.getFecha_toma_glicemia_basal()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            if (null != r.getFecha_creatinina())
+                valor += sdf.format(r.getFecha_creatinina()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            if (StringUtils.isNumeric(r.getCreatinina()))
+                valor += r.getCreatinina() + "|";
+            else
+                valor += "999" + "|";//Sin dato
+            
+            if (null != r.getFecha_hemoglobina_glicosilada())
+                valor += sdf.format(r.getFecha_hemoglobina_glicosilada()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            if (StringUtils.isNumeric(r.getHemoglobina_glicosilada()))
+                valor += r.getHemoglobina_glicosilada() + "|";
+            else
+                valor += "999" + "|";//Sin dato
+            
+            //campo 110 (Fecha Toma de Microalbuminuria)
+            if (null != r.getFecha_toma_microalbuminuria())
+                valor += sdf.format(r.getFecha_toma_microalbuminuria()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            if (null != r.getFecha_toma_hdl())
+                valor += sdf.format(r.getFecha_toma_hdl()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            if (null != r.getFecha_toma_baciloscopia_diagnostico())
+                valor += sdf.format(r.getFecha_toma_baciloscopia_diagnostico()) + "|";
+            else
+                valor += "1800-01-01" + "|";
+            
+            if (StringUtils.isNumeric(r.getBaciloscopia_diagnostico()))
+                valor += r.getBaciloscopia_diagnostico() + "|";
+            else
+                valor += "3" + "|";//Sin dato
+            
+            if (StringUtils.isNumeric(r.getTratamiento_hipotiroidismo_congenito()))
+                valor += r.getTratamiento_hipotiroidismo_congenito() + "|";
+            else
+                valor += "6" + "|";//Sin dato
+            
+            //campo 115
+            if (StringUtils.isNumeric(r.getTratamiento_sifilis_gestacional()))
+                valor += r.getTratamiento_sifilis_gestacional() + "|";
+            else
+                valor += "6" + "|";//Sin dato
+            
+            if (StringUtils.isNumeric(r.getTratamiento_sifilis_congenita()))
+                valor += r.getTratamiento_sifilis_congenita() + "|";
+            else
+                valor += "6" + "|";//Sin dato
+            
+            if (StringUtils.isNumeric(r.getTratamiento_terminado_lepra()))
+                valor += r.getTratamiento_terminado_lepra() + "|";
+            else
+                valor += "7" + "|";//Sin dato
+            
+            //campo 118 
+            if (null != r.getFecha_terminacion_tratamiento_leishmaniasis())
+                valor += sdf.format(r.getFecha_terminacion_tratamiento_leishmaniasis());
+            else
+                valor += "1800-01-01";
+            
+            
+            writer.append(valor);
             writer.append("\n");
         }
         writer.flush();

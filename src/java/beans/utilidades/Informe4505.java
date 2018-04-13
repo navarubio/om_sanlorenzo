@@ -260,6 +260,14 @@ public class Informe4505 {
     public void setSifilis_gestacional_congenita(String sifilis_gestacional_congenita) {
         this.sifilis_gestacional_congenita = sifilis_gestacional_congenita;
     }
+    
+    public String getHipertension_gestacional_congenita() {
+        return hipertension_gestacional_congenita;
+    }
+
+    public void setHipertension_gestacional_congenita(String hipertension_gestacional_congenita) {
+        this.hipertension_gestacional_congenita = hipertension_gestacional_congenita;
+    }
 
     public String getHipotiroidismo_congenito() {
         return hipotiroidismo_congenito;
@@ -1075,14 +1083,6 @@ public class Informe4505 {
 
     public void setFecha_terminacion_tratamiento_leishmaniasis(Date fecha_terminacion_tratamiento_leishmaniasis) {
         this.fecha_terminacion_tratamiento_leishmaniasis = fecha_terminacion_tratamiento_leishmaniasis;
-    }
-
-    public String getHipertension_gestacional_congenita() {
-        return hipertension_gestacional_congenita;
-    }
-
-    public void setHipertension_gestacional_congenita(String hipertension_gestacional_congenita) {
-        this.hipertension_gestacional_congenita = hipertension_gestacional_congenita;
     }
 
 }
