@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8' ?>
+x<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -124,16 +124,16 @@
                         <h:outputText value="#{resolucion.sexo}"/>
                     </p:column>
                     <p:column width="130px" headerText="Etnica"  >
-                        <h:outputText value="#{reporteInforme.getDescripcion(1,resolucion.codigo_pertenencia_etnica)}"/>
+                        <h:outputText value="#{resolucion.codigo_pertenencia_etnica}"/>
                     </p:column>
                     <p:column width="130px" headerText="Ocupación"  >
-                        <h:outputText value="#{reporteInforme.getDescripcion(2,resolucion.codigo_ocupacion)}"/>
+                        <h:outputText value="#{resolucion.codigo_ocupacion}"/>
                     </p:column>
                     <p:column width="130px" headerText="Nivel"  >
-                        <h:outputText value="#{reporteInforme.getDescripcion(3,resolucion.codigo_nivel_educativo)}"/>
+                        <h:outputText value="#{resolucion.codigo_nivel_educativo}"/>
                     </p:column>
                     <p:column width="130px" headerText="Gestación"  >
-                        <h:outputText value="#{resolucion.gestacion} #{reporteInforme.getDescripcion(4,resolucion.gestacion)}"/>
+                        <h:outputText value="#{resolucion.gestacion}"/>
                     </p:column>
                     <p:column width="130px" headerText="Sifilis Gestacional"  >
                         <h:outputText value="#{resolucion.sifilis_gestacional_congenita}"/>
