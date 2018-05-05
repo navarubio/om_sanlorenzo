@@ -161,12 +161,12 @@ public class HcRegistroFacade extends AbstractFacade<HcRegistro> {
     public HcRegistro buscarRegistroConDiagnosticoSegunCita(String idCita) {
         try {
             return (HcRegistro) getEntityManager().createNativeQuery(""
-                    + " select * \n"
-                    + " from hc_registro  \n"
-                    + " where \n"
-                    + " id_cita = " + idCita + " AND \n"
-                    + " id_tipo_reg in (1,2,5,7,8,54,77)  \n"
-                    + " ORDER BY fecha_reg DESC\n"
+                    + " select * "
+                    + " from hc_registro  "
+                    + " where "
+                    + " id_cita = " + idCita + " AND "
+                    + " id_tipo_reg in (1,2,5,7,8,54,77)  "
+                    + " ORDER BY fecha_reg DESC"
                     + " LIMIT 1", HcRegistro.class).getSingleResult(); 
         } catch (Exception e) {
             return null;
@@ -261,5 +261,45 @@ public class HcRegistroFacade extends AbstractFacade<HcRegistro> {
         } catch (Exception e) {
             return null;
         }
+    }
+     
+    public String getFechaValor(int pacienteId,String valor){
+        try {
+            String sql  ="select to_char(max(hr.fecha_sis),'YYYY-MM-DD') " +
+                        "from hc_campos_Reg  h " +
+                        "inner join hc_detalle hd on hd.id_campo = h.id_Campo " +
+                        "inner join hc_registro hr on hr.id_Registro = hd.id_registro " +
+                        "where nombre like '%"+valor+"%' and id_paciente=? ";
+            Query query = getEntityManager().createNativeQuery(sql).setParameter(1, pacienteId);
+            return query.getSingleResult().toString();
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    public String getValorXCampo(int pacienteId,String valor){
+        try {
+            String sql  ="select hd.valor " +
+                        "from hc_campos_Reg  h " +
+                        "inner join hc_detalle hd on hd.id_campo = h.id_Campo " +
+                        "inner join hc_registro hr on hr.id_Registro = hd.id_registro "  +
+                        "where nombre like '%"+valor+"%' and id_paciente=? ";
+            Query query = getEntityManager().createNativeQuery(sql).setParameter(1, pacienteId);
+            return query.getSingleResult().toString();
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+     public String getFechaValorHC(int pacienteId,int tipoHC){
+        try {
+            String sql  ="select to_char(max(h.fecha_sis),'YYYY-MM-DD') " +
+                        "from hc_registro  h " +
+                        "where h.id_Tipo_reg =? and h.id_paciente=? ";
+            Query query = getEntityManager().createNativeQuery(sql).setParameter(1, tipoHC).setParameter(2, pacienteId);
+            return query.getSingleResult().toString();
+        } catch (Exception e) {
+        }
+        return null;
     }
 }

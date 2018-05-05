@@ -1,0 +1,2531 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="s_formatotriaje" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="463ea85f-3c47-4531-95f1-2254df10217a">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="2"/>
+	<property name="ireport.y" value="1227"/>
+	<field name="dato0" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato0]]></fieldDescription>
+	</field>
+	<field name="dato1" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato1]]></fieldDescription>
+	</field>
+	<field name="dato2" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato2]]></fieldDescription>
+	</field>
+	<field name="dato3" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato3]]></fieldDescription>
+	</field>
+	<field name="dato4" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato4]]></fieldDescription>
+	</field>
+	<field name="dato5" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato5]]></fieldDescription>
+	</field>
+	<field name="dato6" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato6]]></fieldDescription>
+	</field>
+	<field name="dato7" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato7]]></fieldDescription>
+	</field>
+	<field name="dato8" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato8]]></fieldDescription>
+	</field>
+	<field name="dato9" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato9]]></fieldDescription>
+	</field>
+	<field name="dato10" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato10]]></fieldDescription>
+	</field>
+	<field name="dato11" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato11]]></fieldDescription>
+	</field>
+	<field name="dato12" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato12]]></fieldDescription>
+	</field>
+	<field name="dato13" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato13]]></fieldDescription>
+	</field>
+	<field name="dato14" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato14]]></fieldDescription>
+	</field>
+	<field name="dato15" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato15]]></fieldDescription>
+	</field>
+	<field name="dato16" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato16]]></fieldDescription>
+	</field>
+	<field name="dato17" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato17]]></fieldDescription>
+	</field>
+	<field name="dato18" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato18]]></fieldDescription>
+	</field>
+	<field name="dato19" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato19]]></fieldDescription>
+	</field>
+	<field name="dato20" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato20]]></fieldDescription>
+	</field>
+	<field name="dato21" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato21]]></fieldDescription>
+	</field>
+	<field name="dato22" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato22]]></fieldDescription>
+	</field>
+	<field name="dato23" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato23]]></fieldDescription>
+	</field>
+	<field name="dato24" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato24]]></fieldDescription>
+	</field>
+	<field name="dato25" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato25]]></fieldDescription>
+	</field>
+	<field name="dato26" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato26]]></fieldDescription>
+	</field>
+	<field name="dato27" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato27]]></fieldDescription>
+	</field>
+	<field name="dato28" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato28]]></fieldDescription>
+	</field>
+	<field name="dato29" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato29]]></fieldDescription>
+	</field>
+	<field name="dato600" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato600]]></fieldDescription>
+	</field>
+	<field name="dato601" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato601]]></fieldDescription>
+	</field>
+	<field name="dato602" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato602]]></fieldDescription>
+	</field>
+	<field name="dato626" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato626]]></fieldDescription>
+	</field>
+	<field name="dato628" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato628]]></fieldDescription>
+	</field>
+	<field name="dato629" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato629]]></fieldDescription>
+	</field>
+	<field name="dato630" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato630]]></fieldDescription>
+	</field>
+	<field name="dato632" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato632]]></fieldDescription>
+	</field>
+	<field name="dato633" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato633]]></fieldDescription>
+	</field>
+	<field name="dato635" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato635]]></fieldDescription>
+	</field>
+	<field name="dato637" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato637]]></fieldDescription>
+	</field>
+	<field name="dato642" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato642]]></fieldDescription>
+	</field>
+	<field name="dato643" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato643]]></fieldDescription>
+	</field>
+	<field name="dato644" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato644]]></fieldDescription>
+	</field>
+	<field name="dato646" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato646]]></fieldDescription>
+	</field>
+	<field name="dato657" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato657]]></fieldDescription>
+	</field>
+	<field name="dato680" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato680]]></fieldDescription>
+	</field>
+	<field name="dato688" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato688]]></fieldDescription>
+	</field>
+	<field name="dato689" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato689]]></fieldDescription>
+	</field>
+	<field name="dato699" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato699]]></fieldDescription>
+	</field>
+	<field name="dato700" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato700]]></fieldDescription>
+	</field>
+	<field name="dato701" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato701]]></fieldDescription>
+	</field>
+	<field name="dato702" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato702]]></fieldDescription>
+	</field>
+	<field name="dato686" class="java.lang.Object"/>
+	<field name="dato30" class="java.lang.Object"/>
+	<field name="dato31" class="java.lang.Object"/>
+	<field name="dato32" class="java.lang.Object"/>
+	<field name="dato33" class="java.lang.Object"/>
+	<field name="dato34" class="java.lang.Object"/>
+	<field name="dato35" class="java.lang.Object"/>
+	<field name="dato36" class="java.lang.Object"/>
+	<field name="dato37" class="java.lang.Object"/>
+	<field name="dato38" class="java.lang.Object"/>
+	<field name="dato39" class="java.lang.Object"/>
+	<field name="dato40" class="java.lang.Object"/>
+	<field name="dato41" class="java.lang.Object"/>
+	<field name="dato42" class="java.lang.Object"/>
+	<field name="dato43" class="java.lang.Object"/>
+	<field name="dato44" class="java.lang.Object"/>
+	<field name="dato45" class="java.lang.Object"/>
+	<field name="dato46" class="java.lang.Object"/>
+	<field name="dato47" class="java.lang.Object"/>
+	<field name="dato48" class="java.lang.Object"/>
+	<field name="dato49" class="java.lang.Object"/>
+	<field name="dato50" class="java.lang.Object"/>
+	<field name="dato51" class="java.lang.Object"/>
+	<field name="dato52" class="java.lang.Object"/>
+	<field name="dato53" class="java.lang.Object"/>
+	<field name="dato54" class="java.lang.Object"/>
+	<field name="dato55" class="java.lang.Object"/>
+	<field name="dato56" class="java.lang.Object"/>
+	<field name="dato57" class="java.lang.Object"/>
+	<field name="dato58" class="java.lang.Object"/>
+	<field name="dato59" class="java.lang.Object"/>
+	<field name="dato60" class="java.lang.Object"/>
+	<field name="dato61" class="java.lang.Object"/>
+	<field name="dato62" class="java.lang.Object"/>
+	<field name="dato63" class="java.lang.Object"/>
+	<field name="dato64" class="java.lang.Object"/>
+	<field name="dato65" class="java.lang.Object"/>
+	<field name="dato66" class="java.lang.Object"/>
+	<field name="dato67" class="java.lang.Object"/>
+	<field name="dato68" class="java.lang.Object"/>
+	<field name="dato69" class="java.lang.Object"/>
+	<field name="dato70" class="java.lang.Object"/>
+	<field name="dato71" class="java.lang.Object"/>
+	<field name="dato72" class="java.lang.Object"/>
+	<field name="dato73" class="java.lang.Object"/>
+	<field name="dato74" class="java.lang.Object"/>
+	<field name="dato75" class="java.lang.Object"/>
+	<field name="dato76" class="java.lang.Object"/>
+	<field name="dato77" class="java.lang.Object"/>
+	<field name="dato78" class="java.lang.Object"/>
+	<field name="dato79" class="java.lang.Object"/>
+	<field name="dato80" class="java.lang.Object"/>
+	<field name="dato81" class="java.lang.Object"/>
+	<field name="dato82" class="java.lang.Object"/>
+	<field name="dato83" class="java.lang.Object"/>
+	<field name="dato84" class="java.lang.Object"/>
+	<field name="dato85" class="java.lang.Object"/>
+	<field name="dato86" class="java.lang.Object"/>
+	<field name="dato87" class="java.lang.Object"/>
+	<field name="dato88" class="java.lang.Object"/>
+	<field name="dato89" class="java.lang.Object"/>
+	<field name="dato90" class="java.lang.Object"/>
+	<field name="dato91" class="java.lang.Object"/>
+	<field name="dato92" class="java.lang.Object"/>
+	<field name="dato93" class="java.lang.Object"/>
+	<field name="dato94" class="java.lang.Object"/>
+	<field name="dato95" class="java.lang.Object"/>
+	<field name="dato96" class="java.lang.Object"/>
+	<field name="dato97" class="java.lang.Object"/>
+	<field name="dato98" class="java.lang.Object"/>
+	<field name="dato99" class="java.lang.Object"/>
+	<field name="dato100" class="java.lang.Object"/>
+	<field name="dato101" class="java.lang.Object"/>
+	<field name="dato102" class="java.lang.Object"/>
+	<field name="dato103" class="java.lang.Object"/>
+	<field name="dato104" class="java.lang.Object"/>
+	<field name="dato105" class="java.lang.Object"/>
+	<field name="dato106" class="java.lang.Object"/>
+	<field name="dato107" class="java.lang.Object"/>
+	<field name="dato108" class="java.lang.Object"/>
+	<field name="dato109" class="java.lang.Object"/>
+	<field name="dato110" class="java.lang.Object"/>
+	<field name="dato111" class="java.lang.Object"/>
+	<field name="dato112" class="java.lang.Object"/>
+	<field name="dato113" class="java.lang.Object"/>
+	<field name="dato114" class="java.lang.Object"/>
+	<field name="dato115" class="java.lang.Object"/>
+	<field name="dato116" class="java.lang.Object"/>
+	<field name="dato117" class="java.lang.Object"/>
+	<field name="dato118" class="java.lang.Object"/>
+	<field name="dato119" class="java.lang.Object"/>
+	<field name="dato120" class="java.lang.Object"/>
+	<field name="dato121" class="java.lang.Object"/>
+	<field name="dato122" class="java.lang.Object"/>
+	<field name="dato123" class="java.lang.Object"/>
+	<field name="dato124" class="java.lang.Object"/>
+	<field name="dato125" class="java.lang.Object"/>
+	<field name="dato126" class="java.lang.Object"/>
+	<field name="dato127" class="java.lang.Object"/>
+	<field name="dato128" class="java.lang.Object"/>
+	<field name="dato129" class="java.lang.Object"/>
+	<field name="dato130" class="java.lang.Object"/>
+	<field name="dato131" class="java.lang.Object"/>
+	<field name="dato132" class="java.lang.Object"/>
+	<field name="dato133" class="java.lang.Object"/>
+	<field name="dato134" class="java.lang.Object"/>
+	<field name="dato135" class="java.lang.Object"/>
+	<field name="dato136" class="java.lang.Object"/>
+	<field name="dato137" class="java.lang.Object"/>
+	<field name="dato138" class="java.lang.Object"/>
+	<field name="dato139" class="java.lang.Object"/>
+	<field name="dato140" class="java.lang.Object"/>
+	<field name="dato141" class="java.lang.Object"/>
+	<field name="dato142" class="java.lang.Object"/>
+	<field name="dato143" class="java.lang.Object"/>
+	<field name="dato144" class="java.lang.Object"/>
+	<field name="dato145" class="java.lang.Object"/>
+	<field name="dato146" class="java.lang.Object"/>
+	<field name="dato147" class="java.lang.Object"/>
+	<field name="dato148" class="java.lang.Object"/>
+	<field name="dato149" class="java.lang.Object"/>
+	<field name="dato150" class="java.lang.Object"/>
+	<field name="dato151" class="java.lang.Object"/>
+	<field name="dato152" class="java.lang.Object"/>
+	<field name="dato153" class="java.lang.Object"/>
+	<field name="dato154" class="java.lang.Object"/>
+	<field name="dato155" class="java.lang.Object"/>
+	<field name="dato156" class="java.lang.Object"/>
+	<field name="dato157" class="java.lang.Object"/>
+	<field name="dato158" class="java.lang.Object"/>
+	<field name="dato159" class="java.lang.Object"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="77" splitType="Stretch">
+			<frame>
+				<reportElement uuid="8c3c6500-b0ac-4237-ab34-fe5e78823fd1" positionType="Float" x="0" y="0" width="572" height="77"/>
+				<rectangle radius="3">
+					<reportElement uuid="3dc8551e-a7ac-4d75-b1d2-d35c2605e1b1" positionType="Float" x="0" y="0" width="572" height="75"/>
+				</rectangle>
+				<image scaleImage="FillFrame" onErrorType="Blank">
+					<reportElement uuid="9c3bbc6e-8311-410d-a87e-f822b43f3dd0" positionType="Float" x="2" y="3" width="88" height="70"/>
+					<imageExpression><![CDATA[$F{dato680}]]></imageExpression>
+				</image>
+				<frame>
+					<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="434" y="1" width="138" height="12"/>
+					<textField isStretchWithOverflow="true">
+						<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="1" y="0" width="136" height="12"/>
+						<textElement markup="html">
+							<font fontName="SansSerif" size="9"/>
+							<paragraph leftIndent="5"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{dato601}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="433" y="11" width="138" height="12"/>
+					<textField isStretchWithOverflow="true">
+						<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="1" y="0" width="136" height="12"/>
+						<textElement markup="html">
+							<font fontName="SansSerif" size="9"/>
+							<paragraph leftIndent="5"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{dato600}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="90" y="0" width="344" height="13"/>
+					<textField isStretchWithOverflow="true">
+						<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="344" height="13"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+							<font fontName="SansSerif" size="10" isBold="true"/>
+							<paragraph leftIndent="5"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{dato699}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="90" y="13" width="344" height="10"/>
+					<textField isStretchWithOverflow="true">
+						<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="344" height="10"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+							<font fontName="SansSerif" size="7" isBold="false"/>
+							<paragraph leftIndent="5"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{dato700}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="90" y="23" width="344" height="13"/>
+					<textField isStretchWithOverflow="true">
+						<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="344" height="13"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+							<font fontName="SansSerif" size="10" isBold="true"/>
+							<paragraph leftIndent="5"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{dato701}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="90" y="36" width="344" height="10"/>
+					<textField isStretchWithOverflow="true">
+						<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="344" height="10"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+							<font fontName="SansSerif" size="7" isBold="false"/>
+							<paragraph leftIndent="5"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{dato702}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<staticText>
+					<reportElement uuid="faf14165-e485-4341-90a0-429fd8508710" x="90" y="46" width="345" height="29"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="12" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[ESCALA ABREVIADA DE DESARROLLO]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="13fde49d-7849-49c0-b75d-76e69d3cc57a" positionType="Float" stretchType="RelativeToTallestObject" x="434" y="23" width="136" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato602}]]></textFieldExpression>
+				</textField>
+				<frame>
+					<reportElement uuid="4ae4e292-3b14-4d61-88a9-38eeac9f510d" positionType="Float" x="433" y="34" width="136" height="12"/>
+					<textField>
+						<reportElement uuid="068129ed-d829-4725-8f9c-be76b588040d" x="29" y="0" width="13" height="12"/>
+						<textElement textAlignment="Center">
+							<font size="9"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement uuid="d9152ce0-d426-48f4-af7f-3f5ce9ff6f85" x="1" y="0" width="34" height="12"/>
+						<textElement>
+							<font size="9" isBold="false"/>
+							<paragraph leftIndent="5"/>
+						</textElement>
+						<text><![CDATA[PAG.]]></text>
+					</staticText>
+					<staticText>
+						<reportElement uuid="58148155-ad5d-4fdf-a185-83370a201d15" x="40" y="0" width="20" height="12"/>
+						<textElement>
+							<font size="9" isBold="false"/>
+							<paragraph leftIndent="5"/>
+						</textElement>
+						<text><![CDATA[DE]]></text>
+					</staticText>
+					<textField evaluationTime="Report" isBlankWhenNull="true">
+						<reportElement uuid="0dff0d20-739e-4f46-ac4d-8ddaedc1c513" x="59" y="0" width="13" height="12"/>
+						<textElement textAlignment="Center">
+							<font size="9"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+					</textField>
+				</frame>
+			</frame>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="571" splitType="Stretch">
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="0" width="572" height="13" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<staticText>
+					<reportElement uuid="c4a9d40c-6222-4a68-bda2-352d503adaad" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="572" height="13" backcolor="#CCCCCC"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[DATOS DEL PACIENTE]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="13" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textField>
+					<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="363" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement markup="html">
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato626}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="363" y="0" width="97" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement markup="html">
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato628}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="460" y="0" width="112" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement markup="html">
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato630}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="25" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textField>
+					<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="380" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement markup="html">
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato646}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="380" y="0" width="192" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement markup="html">
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato629}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="36" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textField>
+					<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="286" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement markup="html">
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato635}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="286" y="0" width="286" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement markup="html">
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato642}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="48" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textField>
+					<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="286" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement markup="html">
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato637}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="286" y="0" width="286" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement markup="html">
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato657}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="60" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textField>
+					<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="415" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement markup="html">
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato632}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="415" y="0" width="157" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement markup="html">
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato633}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="77" width="41" height="13" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<staticText>
+					<reportElement uuid="c4a9d40c-6222-4a68-bda2-352d503adaad" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="41" height="13" backcolor="#CCCCCC"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ITEM]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="90" y="77" width="219" height="13" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<staticText>
+					<reportElement uuid="c4a9d40c-6222-4a68-bda2-352d503adaad" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="219" height="13" backcolor="#CCCCCC"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[DESCRIPCION]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="309" y="77" width="68" height="13" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<staticText>
+					<reportElement uuid="c4a9d40c-6222-4a68-bda2-352d503adaad" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="68" height="13" backcolor="#CCCCCC"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[MOT. GRUP.]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="377" y="77" width="82" height="13" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<staticText>
+					<reportElement uuid="c4a9d40c-6222-4a68-bda2-352d503adaad" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="82" height="13" backcolor="#CCCCCC"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[MOT. F. ADAP.]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="459" y="77" width="60" height="13" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<staticText>
+					<reportElement uuid="c4a9d40c-6222-4a68-bda2-352d503adaad" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="60" height="13" backcolor="#CCCCCC"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[AUD.LEN.]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="519" y="77" width="53" height="13" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<staticText>
+					<reportElement uuid="c4a9d40c-6222-4a68-bda2-352d503adaad" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="53" height="13" backcolor="#CCCCCC"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[PER.SOC.]]></text>
+				</staticText>
+			</frame>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="0" y="90" width="41" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[0]]></text>
+			</staticText>
+			<frame>
+				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="41" y="77" width="49" height="13" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<staticText>
+					<reportElement uuid="c4a9d40c-6222-4a68-bda2-352d503adaad" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="49" height="13" backcolor="#CCCCCC"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[EDAD]]></text>
+				</staticText>
+			</frame>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="41" y="90" width="49" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[<1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="41" y="103" width="49" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[1 a 3]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="0" y="103" width="41" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="0" y="116" width="41" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="0" y="129" width="41" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[3]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="0" y="142" width="41" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[4]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="0" y="155" width="41" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[5]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="0" y="168" width="41" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[6]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="0" y="181" width="41" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[7]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="0" y="194" width="41" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[8]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="0" y="207" width="41" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[9]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="0" y="220" width="41" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[10]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="0" y="233" width="41" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[11]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="0" y="246" width="41" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[12]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="0" y="259" width="41" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[13]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="0" y="272" width="41" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[14]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="0" y="285" width="41" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[15]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="0" y="298" width="41" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[16]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="0" y="311" width="41" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[17]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="0" y="324" width="41" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[18]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="0" y="337" width="41" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[19]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="0" y="350" width="41" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[20]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="0" y="389" width="41" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[23]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="0" y="376" width="41" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[22]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="0" y="363" width="41" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[21]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="0" y="402" width="41" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[24]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="0" y="415" width="41" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[25]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="0" y="428" width="41" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[26]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="0" y="441" width="41" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[27]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="0" y="454" width="41" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[28]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="0" y="467" width="41" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[29]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="0" y="480" width="41" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[30]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="0" y="493" width="41" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[31]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="0" y="506" width="41" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[32]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="0" y="558" width="41" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[36]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="0" y="532" width="41" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[34]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="0" y="545" width="41" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[35]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="0" y="519" width="41" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[33]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="41" y="116" width="49" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[1 a 3]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="41" y="129" width="49" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[1 a 3]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="41" y="142" width="49" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[4 a 6]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="41" y="155" width="49" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[4 a 6]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="41" y="168" width="49" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[4 a 6]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="41" y="181" width="49" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[7 a 9]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="41" y="194" width="49" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[7 a 9]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="41" y="207" width="49" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[7 a 9]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="41" y="220" width="49" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[10 a 12]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="41" y="233" width="49" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[10 a 12]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="41" y="246" width="49" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[10 a 12]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="41" y="259" width="49" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[13 a 18]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="41" y="272" width="49" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[13 a 18]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="41" y="285" width="49" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[13 a 18]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="41" y="298" width="49" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[19 a 24]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="41" y="311" width="49" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[19 a 24]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="41" y="324" width="49" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[19 a 24]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="41" y="337" width="49" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[25 a 36]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="41" y="350" width="49" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[25 a 36]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="41" y="363" width="49" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[25 a 36]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="41" y="376" width="49" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[37 a 48]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="41" y="389" width="49" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[37 a 48]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="41" y="402" width="49" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[37 a 48]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="41" y="415" width="49" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[49 a 60]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="41" y="428" width="49" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[49 a 60]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="41" y="441" width="49" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[49 a 60]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="41" y="454" width="49" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[61 a 72]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="41" y="467" width="49" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[61 a 72]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="41" y="480" width="49" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[61 a 72]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="41" y="493" width="49" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[73 a 64]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="41" y="506" width="49" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[73 a 64]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="41" y="519" width="49" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[73 a 64]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="41" y="532" width="49" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[85 a 93]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="41" y="545" width="49" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[85 a 93]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="41" y="558" width="49" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[85 a 93]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="90" y="90" width="219" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Patea (vigorosamente)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="90" y="103" width="219" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Levanta la cabeza en prona]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="90" y="116" width="219" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Levanta cabeza pecho en prona]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="90" y="129" width="219" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Sostiene cabeza al levantarlo de los brazos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="90" y="142" width="219" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Control de cabeza sentado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="90" y="155" width="219" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Se voltea de un lado a otro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="90" y="168" width="219" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Intenta sentarse solo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="90" y="181" width="219" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Se sostiene sentado con ayuda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="90" y="194" width="219" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Se arrastra en posición prona]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="90" y="207" width="219" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Se sienta por sí solo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="90" y="220" width="219" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Gatea (bien)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="90" y="233" width="219" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Se agarra y se sostiene de pie]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="90" y="246" width="219" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Se  para solo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="90" y="259" width="219" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Da pasitos solo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="90" y="272" width="219" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Camina solo bien]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="90" y="285" width="219" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Corre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="90" y="298" width="219" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Patea la pelota]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="90" y="337" width="219" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Se empina en ambos pies]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="90" y="324" width="219" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Salta en los dos pies]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="90" y="311" width="219" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Lanza la pelota con las manos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="90" y="350" width="219" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Se levanta sin usar las manos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="90" y="363" width="219" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Camina hacia atrás]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="90" y="376" width="219" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Camina en punta de pies]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="90" y="389" width="219" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Se para en un solo pie]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="90" y="402" width="219" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Lanza y agarra la pelota]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="90" y="415" width="219" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Camina en línea recta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="90" y="428" width="219" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Tres o más pasos en pie]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="90" y="441" width="219" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Hacer rebotar y agarrar la pelota]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="90" y="454" width="219" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Salta a pies juntillas cuerda a 25cm.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="90" y="467" width="219" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Hace caballitos alternando los pies]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="90" y="480" width="219" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Salta desde 80cm. De altura]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="90" y="493" width="219" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Juega mula golosa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="90" y="506" width="219" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Hace construcción rudimentaria]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="90" y="519" width="219" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Salta alternando pies]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="90" y="532" width="219" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Abre y cierra las manos alternadamente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="90" y="545" width="219" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Marcha sin perder el ritmo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd8e7a1c-c600-4c95-bed7-6cd2b0875b0a" x="90" y="558" width="219" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Salta Cuerda]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="309" y="90" width="68" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato0}.toString().contains("true")?"X":($F{dato144}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="377" y="90" width="82" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato1}.toString().contains("true")?"X":($F{dato1}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="459" y="90" width="60" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato2}.toString().contains("true")?"X":($F{dato2}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="519" y="90" width="53" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato3}.toString().contains("true")?"X":($F{dato3}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="519" y="103" width="53" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato7}.toString().contains("true")?"X":($F{dato7}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="309" y="103" width="68" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato4}.toString().contains("true")?"X":($F{dato4}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="377" y="103" width="82" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato5}.toString().contains("true")?"X":($F{dato5}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="459" y="103" width="60" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato6}.toString().contains("true")?"X":($F{dato6}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="519" y="116" width="53" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato11}.toString().contains("true")?"X":($F{dato11}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="309" y="116" width="68" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato8}.toString().contains("true")?"X":($F{dato8}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="377" y="116" width="82" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato9}.toString().contains("true")?"X":($F{dato9}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="459" y="116" width="60" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato10}.toString().contains("true")?"X":($F{dato10}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="519" y="129" width="53" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato15}.toString().contains("true")?"X":($F{dato15}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="309" y="129" width="68" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato12}.toString().contains("true")?"X":($F{dato12}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="377" y="129" width="82" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato13}.toString().contains("true")?"X":($F{dato13}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="459" y="129" width="60" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato14}.toString().contains("true")?"X":($F{dato14}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="519" y="142" width="53" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato19}.toString().contains("true")?"X":($F{dato19}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="309" y="142" width="68" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato16}.toString().contains("true")?"X":($F{dato16}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="377" y="142" width="82" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato17}.toString().contains("true")?"X":($F{dato17}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="459" y="142" width="60" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato18}.toString().contains("true")?"X":($F{dato18}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="519" y="155" width="53" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato23}.toString().contains("true")?"X":($F{dato23}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="309" y="155" width="68" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato20}.toString().contains("true")?"X":($F{dato20}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="377" y="155" width="82" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato21}.toString().contains("true")?"X":($F{dato21}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="459" y="155" width="60" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato22}.toString().contains("true")?"X":($F{dato22}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="519" y="168" width="53" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato27}.toString().contains("true")?"X":($F{dato27}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="309" y="168" width="68" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato24}.toString().contains("true")?"X":($F{dato24}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="377" y="168" width="82" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato25}.toString().contains("true")?"X":($F{dato25}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="459" y="168" width="60" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato26}.toString().contains("true")?"X":($F{dato26}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="519" y="181" width="53" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato31}.toString().contains("true")?"X":($F{dato31}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="309" y="181" width="68" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato28}.toString().contains("true")?"X":($F{dato28}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="377" y="181" width="82" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato29}.toString().contains("true")?"X":($F{dato29}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="459" y="181" width="60" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato30}.toString().contains("true")?"X":($F{dato30}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="519" y="194" width="53" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato35}.toString().contains("true")?"X":($F{dato35}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="309" y="194" width="68" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato32}.toString().contains("true")?"X":($F{dato32}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="377" y="194" width="82" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato33}.toString().contains("true")?"X":($F{dato33}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="459" y="194" width="60" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato34}.toString().contains("true")?"X":($F{dato34}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="519" y="207" width="53" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato39}.toString().contains("true")?"X":($F{dato39}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="309" y="207" width="68" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato36}.toString().contains("true")?"X":($F{dato36}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="377" y="207" width="82" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato37}.toString().contains("true")?"X":($F{dato37}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="459" y="207" width="60" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato38}.toString().contains("true")?"X":($F{dato38}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="519" y="220" width="53" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato43}.toString().contains("true")?"X":($F{dato43}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="309" y="220" width="68" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato40}.toString().contains("true")?"X":($F{dato40}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="377" y="220" width="82" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato41}.toString().contains("true")?"X":($F{dato41}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="459" y="220" width="60" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato42}.toString().contains("true")?"X":($F{dato42}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="519" y="233" width="53" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato47}.toString().contains("true")?"X":($F{dato47}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="309" y="233" width="68" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato44}.toString().contains("true")?"X":($F{dato44}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="377" y="233" width="82" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato45}.toString().contains("true")?"X":($F{dato45}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="459" y="233" width="60" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato46}.toString().contains("true")?"X":($F{dato46}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="519" y="246" width="53" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato51}.toString().contains("true")?"X":($F{dato51}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="309" y="246" width="68" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato48}.toString().contains("true")?"X":($F{dato48}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="377" y="246" width="82" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato49}.toString().contains("true")?"X":($F{dato49}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="459" y="246" width="60" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato50}.toString().contains("true")?"X":($F{dato50}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="519" y="259" width="53" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato55}.toString().contains("true")?"X":($F{dato55}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="309" y="259" width="68" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato52}.toString().contains("true")?"X":($F{dato52}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="377" y="259" width="82" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato53}.toString().contains("true")?"X":($F{dato53}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="459" y="259" width="60" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato54}.toString().contains("true")?"X":($F{dato54}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="519" y="272" width="53" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato59}.toString().contains("true")?"X":($F{dato59}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="309" y="272" width="68" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato56}.toString().contains("true")?"X":($F{dato56}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="377" y="272" width="82" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato57}.toString().contains("true")?"X":($F{dato57}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="459" y="272" width="60" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato58}.toString().contains("true")?"X":($F{dato58}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="519" y="285" width="53" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato63}.toString().contains("true")?"X":($F{dato63}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="309" y="285" width="68" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato60}.toString().contains("true")?"X":($F{dato60}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="377" y="285" width="82" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato61}.toString().contains("true")?"X":($F{dato61}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="459" y="285" width="60" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato62}.toString().contains("true")?"X":($F{dato62}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="519" y="298" width="53" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato67}.toString().contains("true")?"X":($F{dato67}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="309" y="298" width="68" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato64}.toString().contains("true")?"X":($F{dato64}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="377" y="298" width="82" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato65}.toString().contains("true")?"X":($F{dato65}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="459" y="298" width="60" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato66}.toString().contains("true")?"X":($F{dato66}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="519" y="311" width="53" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato71}.toString().contains("true")?"X":($F{dato71}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="309" y="311" width="68" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato68}.toString().contains("true")?"X":($F{dato68}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="377" y="311" width="82" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato69}.toString().contains("true")?"X":($F{dato69}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="459" y="311" width="60" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato70}.toString().contains("true")?"X":($F{dato70}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="309" y="324" width="68" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato72}.toString().contains("true")?"X":($F{dato72}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="459" y="324" width="60" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato74}.toString().contains("true")?"X":($F{dato74}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="519" y="324" width="53" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato75}.toString().contains("true")?"X":($F{dato75}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="377" y="324" width="82" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato73}.toString().contains("true")?"X":($F{dato73}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="309" y="337" width="68" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato76}.toString().contains("true")?"X":($F{dato76}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="459" y="337" width="60" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato78}.toString().contains("true")?"X":($F{dato78}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="519" y="337" width="53" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato79}.toString().contains("true")?"X":($F{dato79}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="377" y="337" width="82" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato77}.toString().contains("true")?"X":($F{dato77}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="309" y="350" width="68" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato80}.toString().contains("true")?"X":($F{dato80}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="459" y="350" width="60" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato82}.toString().contains("true")?"X":($F{dato82}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="519" y="350" width="53" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato83}.toString().contains("true")?"X":($F{dato83}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="377" y="350" width="82" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato81}.toString().contains("true")?"X":($F{dato81}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="309" y="363" width="68" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato84}.toString().contains("true")?"X":($F{dato84}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="459" y="363" width="60" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato86}.toString().contains("true")?"X":($F{dato86}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="519" y="363" width="53" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato87}.toString().contains("true")?"X":($F{dato87}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="377" y="363" width="82" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato85}.toString().contains("true")?"X":($F{dato85}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="309" y="376" width="68" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato88}.toString().contains("true")?"X":($F{dato88}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="459" y="376" width="60" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato90}.toString().contains("true")?"X":($F{dato90}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="519" y="376" width="53" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato91}.toString().contains("true")?"X":($F{dato91}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="377" y="376" width="82" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato89}.toString().contains("true")?"X":($F{dato89}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="309" y="389" width="68" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato92}.toString().contains("true")?"X":($F{dato92}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="459" y="389" width="60" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato94}.toString().contains("true")?"X":($F{dato94}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="519" y="389" width="53" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato95}.toString().contains("true")?"X":($F{dato95}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="377" y="389" width="82" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato93}.toString().contains("true")?"X":($F{dato93}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="309" y="402" width="68" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato96}.toString().contains("true")?"X":($F{dato96}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="459" y="402" width="60" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato98}.toString().contains("true")?"X":($F{dato98}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="519" y="402" width="53" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato99}.toString().contains("true")?"X":($F{dato99}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="377" y="402" width="82" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato97}.toString().contains("true")?"X":($F{dato97}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="309" y="415" width="68" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato100}.toString().contains("true")?"X":($F{dato100}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="459" y="415" width="60" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato102}.toString().contains("true")?"X":($F{dato102}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="519" y="415" width="53" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato103}.toString().contains("true")?"X":($F{dato103}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="377" y="415" width="82" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato101}.toString().contains("true")?"X":($F{dato101}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="309" y="428" width="68" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato104}.toString().contains("true")?"X":($F{dato104}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="459" y="428" width="60" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato106}.toString().contains("true")?"X":($F{dato106}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="519" y="428" width="53" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato107}.toString().contains("true")?"X":($F{dato107}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="377" y="428" width="82" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato105}.toString().contains("true")?"X":($F{dato105}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="309" y="441" width="68" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato108}.toString().contains("true")?"X":($F{dato108}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="459" y="441" width="60" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato110}.toString().contains("true")?"X":($F{dato110}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="519" y="441" width="53" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato111}.toString().contains("true")?"X":($F{dato111}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="377" y="441" width="82" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato109}.toString().contains("true")?"X":($F{dato109}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="309" y="454" width="68" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato112}.toString().contains("true")?"X":($F{dato112}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="459" y="454" width="60" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato114}.toString().contains("true")?"X":($F{dato114}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="519" y="454" width="53" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato115}.toString().contains("true")?"X":($F{dato115}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="377" y="454" width="82" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato113}.toString().contains("true")?"X":($F{dato113}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="309" y="467" width="68" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato116}.toString().contains("true")?"X":($F{dato116}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="459" y="467" width="60" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato118}.toString().contains("true")?"X":($F{dato118}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="519" y="467" width="53" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato119}.toString().contains("true")?"X":($F{dato119}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="377" y="467" width="82" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato117}.toString().contains("true")?"X":($F{dato117}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="309" y="480" width="68" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato120}.toString().contains("true")?"X":($F{dato120}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="459" y="480" width="60" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato122}.toString().contains("true")?"X":($F{dato122}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="519" y="480" width="53" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato123}.toString().contains("true")?"X":($F{dato123}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="377" y="480" width="82" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato121}.toString().contains("true")?"X":($F{dato121}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="309" y="493" width="68" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato124}.toString().contains("true")?"X":($F{dato124}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="459" y="493" width="60" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato126}.toString().contains("true")?"X":($F{dato126}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="519" y="493" width="53" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato127}.toString().contains("true")?"X":($F{dato127}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="377" y="493" width="82" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato125}.toString().contains("true")?"X":($F{dato125}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="309" y="506" width="68" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato128}.toString().contains("true")?"X":($F{dato128}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="459" y="506" width="60" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato130}.toString().contains("true")?"X":($F{dato130}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="519" y="506" width="53" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato131}.toString().contains("true")?"X":($F{dato131}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="377" y="506" width="82" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato129}.toString().contains("true")?"X":($F{dato129}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="309" y="519" width="68" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato132}.toString().contains("true")?"X":($F{dato132}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="459" y="519" width="60" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato134}.toString().contains("true")?"X":($F{dato134}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="519" y="519" width="53" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato135}.toString().contains("true")?"X":($F{dato135}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="377" y="519" width="82" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato133}.toString().contains("true")?"X":($F{dato133}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="309" y="532" width="68" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato136}.toString().contains("true")?"X":($F{dato136}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="459" y="532" width="60" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato138}.toString().contains("true")?"X":($F{dato138}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="519" y="532" width="53" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato139}.toString().contains("true")?"X":($F{dato139}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="377" y="532" width="82" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato137}.toString().contains("true")?"X":($F{dato137}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="309" y="545" width="68" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato140}.toString().contains("true")?"X":($F{dato140}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="459" y="545" width="60" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato142}.toString().contains("true")?"X":($F{dato142}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="519" y="545" width="53" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato143}.toString().contains("true")?"X":($F{dato143}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="377" y="545" width="82" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato141}.toString().contains("true")?"X":($F{dato141}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="309" y="558" width="68" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato144}.toString().contains("true")?"X":($F{dato144}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="459" y="558" width="60" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato146}.toString().contains("true")?"X":($F{dato146}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="519" y="558" width="53" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato147}.toString().contains("true")?"X":($F{dato147}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b0b4579-5c63-461d-b6db-6735a834391e" positionType="Float" stretchType="RelativeToTallestObject" x="377" y="558" width="82" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato145}.toString().contains("true")?"X":($F{dato145}.toString().contains("X")?"X":"")]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="87" splitType="Stretch">
+			<frame>
+				<reportElement uuid="4c895a70-2257-4783-ae96-5ec6d69570cd" x="0" y="1" width="286" height="86"/>
+				<image scaleImage="FillFrame" onErrorType="Blank">
+					<reportElement uuid="9c3bbc6e-8311-410d-a87e-f822b43f3dd0" positionType="Float" x="41" y="6" width="204" height="66"/>
+					<imageExpression><![CDATA[$F{dato689}]]></imageExpression>
+				</image>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="74" width="280" height="12"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato686}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="4c895a70-2257-4783-ae96-5ec6d69570cd" x="286" y="1" width="286" height="86"/>
+				<image scaleImage="FillFrame" onErrorType="Blank">
+					<reportElement uuid="9c3bbc6e-8311-410d-a87e-f822b43f3dd0" positionType="Float" x="47" y="6" width="204" height="66"/>
+					<imageExpression><![CDATA[$F{dato643}]]></imageExpression>
+				</image>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="6" y="74" width="280" height="12"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font fontName="SansSerif" size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dato644}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</summary>
+</jasperReport>

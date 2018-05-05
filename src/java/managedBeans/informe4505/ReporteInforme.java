@@ -468,9 +468,11 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
                 return;
             }
             carga_4505(user);
-            RequestContext.getCurrentInstance().update("form4505");
             setRenBuscar(true);
+            RequestContext.getCurrentInstance().update("form4505");
+            
         } catch (Exception ex) {
+            ex.printStackTrace();
             imprimirMensaje("Error", ex.getMessage(), FacesMessage.SEVERITY_ERROR);
             return;
         }
@@ -550,12 +552,13 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
         // Generar registro tipo 1. Primer registro del archivo
         valor += "1";//tipo de registro
         valor += "|";
-        valor += "";//código de la EPS o de la Dirección Territorial de Salud 
-        valor += "|";
+        FacAdministradora administradora = administradoraFacade.find(idAdministradora);
+        valor += administradora!=null?administradora.getCodigoAdministradora():"";//código de la EPS o de la Dirección Territorial de Salud 
+        valor += ",";
         valor += sdf.format(fechaInicial);//fecha inicial del período de la información reportada 
-        valor += "|";
+        valor += ",";
         valor += sdf.format(fechaFinal);//fecha final del período de la información reportada 
-        valor += "|";
+        valor += ",";
         valor += post_filtrar.size();//cantidad de registros tipo 2
         
         writer.append(valor);
@@ -563,604 +566,611 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
         
         // Generar registros tipo 2.
         for (Informe4505 r : post_filtrar) {
-            valor = "2" + "|";//tipo de registro
-            valor += r.getConsecutivo_registro()  + "|";
+            valor = "2" + ",";//tipo de registro
+            valor += r.getConsecutivo_registro()  + ",";
 
             if (StringUtils.isNumeric(r.getCodigo_habilitacion_ips_primaria()))
-                valor += r.getCodigo_habilitacion_ips_primaria() + "|";
+                valor += r.getCodigo_habilitacion_ips_primaria() + ",";
             else
-                valor += 99 + "|";
+                valor += 99 + ",";
             
-            valor += r.getTipo_identificacion_usuario().substring(0, Math.min(r.getTipo_identificacion_usuario().length(), 2)) + "|";
+            valor += r.getTipo_identificacion_usuario().substring(0, Math.min(r.getTipo_identificacion_usuario().length(), 2)) + ",";
             
-            valor += r.getNumero_identificacion_usuario().substring(0, Math.min(r.getNumero_identificacion_usuario().length(), 18)) + "|";
+            valor += r.getNumero_identificacion_usuario().substring(0, Math.min(r.getNumero_identificacion_usuario().length(), 18)) + ",";
             
-            valor += r.getPrimer_apellido_usuario().substring(0, Math.min(r.getPrimer_apellido_usuario().length(), 30)) + "|";
+            valor += r.getPrimer_apellido_usuario().substring(0, Math.min(r.getPrimer_apellido_usuario().length(), 30)) + ",";
             
             if (StringUtils.isAnyBlank(r.getSegundo_apellido_usuario()))
-                valor += "NONE" + "|";
+                valor += "NONE" + ",";
             else
-                valor += r.getSegundo_apellido_usuario().substring(0, Math.min(r.getSegundo_apellido_usuario().length(), 30)) + "|";
+                valor += r.getSegundo_apellido_usuario().substring(0, Math.min(r.getSegundo_apellido_usuario().length(), 30)) + ",";
             
-            valor += r.getPrimer_nombre_usuario().substring(0, Math.min(r.getPrimer_nombre_usuario().length(), 30)) + "|";
+            valor += r.getPrimer_nombre_usuario().substring(0, Math.min(r.getPrimer_nombre_usuario().length(), 30)) + ",";
             
             if (StringUtils.isAnyBlank(r.getSegundo_nombre_usuario()))
-                valor += "NONE" + "|";
+                valor += "" + ",";
             else
-                valor += r.getSegundo_nombre_usuario().substring(0, Math.min(r.getSegundo_nombre_usuario().length(), 30)) + "|";
+                valor += r.getSegundo_nombre_usuario().substring(0, Math.min(r.getSegundo_nombre_usuario().length(), 30)) + ",";
             
-            valor += sdf.format(r.getFecha_nacimiento()) + "|";//campo 9 (fecha nacimiento)
+            valor += sdf.format(r.getFecha_nacimiento()) + ",";//campo 9 (fecha nacimiento)
             
-            valor += r.getSexo().substring(0, Math.min(r.getSexo().length(), 1)) + "|";//campo 10 (sexo)
+            valor += r.getSexo().substring(0, Math.min(r.getSexo().length(), 1)) + ",";//campo 10 (sexo)
             
             if (StringUtils.isNumeric(r.getCodigo_pertenencia_etnica()))
-                valor += r.getCodigo_pertenencia_etnica() + "|";
+                valor += r.getCodigo_pertenencia_etnica() + ",";
             else
-                valor += 6 + "|";
+                valor += 6 + ",";
             
             if (StringUtils.isNumeric(r.getCodigo_ocupacion()))
-                valor += r.getCodigo_ocupacion() + "|";
+                valor += r.getCodigo_ocupacion() + ",";
             else
-                valor += "9999" + "|";
+                valor += "9999" + ",";
             
             if (StringUtils.isNumeric(r.getCodigo_nivel_educativo()))
-                valor += r.getCodigo_nivel_educativo() + "|";
+                valor += r.getCodigo_nivel_educativo() + ",";
             else
-                valor += "1" + "|";//No Definido
+                valor += "1" + ",";//No Definido
             
             if (StringUtils.isNumeric(r.getGestacion()))
-                valor += r.getGestacion() + "|";
+                valor += r.getGestacion() + ",";
             else
-                valor += "3" + "|";//Riesgo no evaluado
+                valor += "3" + ",";//Riesgo no evaluado
             
             if (StringUtils.isNumeric(r.getSifilis_gestacional_congenita()))
-                valor += r.getSifilis_gestacional_congenita() + "|";
+                valor += r.getSifilis_gestacional_congenita() + ",";
             else
-                valor += "4" + "|";//Riesgo no evaluado
+                valor += "4" + ",";//Riesgo no evaluado
             
             if (StringUtils.isNumeric(r.getHipertension_gestacional_congenita()))
-                valor += r.getHipertension_gestacional_congenita() + "|";
+                valor += r.getHipertension_gestacional_congenita() + ",";
             else
-                valor += "3" + "|";//Riesgo no evaluado
+                valor += "3" + ",";//Riesgo no evaluado
             
             if (StringUtils.isNumeric(r.getHipotiroidismo_congenito()))
-                valor += r.getHipotiroidismo_congenito() + "|";
+                valor += r.getHipotiroidismo_congenito() + ",";
             else
-                valor += "3" + "|";//Riesgo no evaluado
+                valor += "3" + ",";//Riesgo no evaluado
             
             if (StringUtils.isNumeric(r.getSintomatico_respiratorio()))
-                valor += r.getSintomatico_respiratorio() + "|";
+                valor += r.getSintomatico_respiratorio() + ",";
             else
-                valor += "2" + "|";//Riesgo no evaluado
+                valor += "2" + ",";//Riesgo no evaluado
             
             if (StringUtils.isNumeric(r.getTuberculosis_multidrogoresistente()))
-                valor += r.getTuberculosis_multidrogoresistente() + "|";
+                valor += r.getTuberculosis_multidrogoresistente() + ",";
             else
-                valor += "3" + "|";//Riesgo no evaluado
+                valor += "3" + ",";//Riesgo no evaluado
             
             if (StringUtils.isNumeric(r.getLepra()))
-                valor += r.getLepra() + "|";
+                valor += r.getLepra() + ",";
             else
-                valor += "3" + "|";//Riesgo no evaluado
+                valor += "3" + ",";//Riesgo no evaluado
             
             //campo 20 (Lepra)
-            if (StringUtils.isNumeric(r.getLepra()))
-                valor += r.getLepra() + "|";
+            /*if (StringUtils.isNumeric(r.getLepra()))
+                valor += r.getLepra() + ",";
             else
-                valor += "3" + "|";//Riesgo no evaluado
+                valor += "3" + ",";//Riesgo no evaluado*/
             
             if (StringUtils.isNumeric(r.getObesidad_desutricion_proteico_calorica()))
-                valor += r.getObesidad_desutricion_proteico_calorica() + "|";
+                valor += r.getObesidad_desutricion_proteico_calorica() + ",";
             else
-                valor += "3" + "|";//Riesgo no evaluado
+                valor += "3" + ",";//Riesgo no evaluado
             
             if (StringUtils.isNumeric(r.getMujer_victima_maltrato()))
-                valor += r.getMujer_victima_maltrato() + "|";
+                valor += r.getMujer_victima_maltrato() + ",";
             else
-                valor += "4" + "|";//Riesgo no evaluado
+                valor += "4" + ",";//Riesgo no evaluado
             
             if (StringUtils.isNumeric(r.getVictima_violencia_sexual()))
-                valor += r.getVictima_violencia_sexual() + "|";
+                valor += r.getVictima_violencia_sexual() + ",";
             else
-                valor += "3" + "|";//Riesgo no evaluado
+                valor += "3" + ",";//Riesgo no evaluado
             
             if (StringUtils.isNumeric(r.getInfecciones_transmision_sexual()))
-                valor += r.getInfecciones_transmision_sexual() + "|";
+                valor += r.getInfecciones_transmision_sexual() + ",";
             else
-                valor += "3" + "|";//Riesgo no evaluado
+                valor += "3" + ",";//Riesgo no evaluado
             
             if (StringUtils.isNumeric(r.getEnfermedad_salud_mental()))
-                valor += r.getEnfermedad_salud_mental() + "|";
+                valor += r.getEnfermedad_salud_mental() + ",";
             else
-                valor += "3" + "|";//Riesgo no evaluado
+                valor += "3" + ",";//Riesgo no evaluado
             
             if (StringUtils.isNumeric(r.getCancer_cervix()))
-                valor += r.getCancer_cervix() + "|";
+                valor += r.getCancer_cervix() + ",";
             else
-                valor += "3" + "|";//Riesgo no evaluado
+                valor += "3" + ",";//Riesgo no evaluado
             
             if (StringUtils.isNumeric(r.getCancer_seno()))
-                valor += r.getCancer_seno() + "|";
+                valor += r.getCancer_seno() + ",";
             else
-                valor += "3" + "|";//Riesgo no evaluado
+                valor += "3" + ",";//Riesgo no evaluado
             
             if (StringUtils.isNumeric(r.getFluorosis_dental()))
-                valor += r.getFluorosis_dental() + "|";
+                valor += r.getFluorosis_dental() + ",";
             else
-                valor += "3" + "|";//Riesgo no evaluado
+                valor += "3" + ",";//Riesgo no evaluado
             
             if (null != r.getFecha_peso())
-                valor += sdf.format(r.getFecha_peso()) + "|";//campo 29 (fecha del peso)
+                valor += sdf.format(r.getFecha_peso()) + ",";//campo 29 (fecha del peso)
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
             //campo 30 (Peso en Kilogramos)
             if (StringUtils.isNumeric(r.getPeso_kilogramos()))
-                valor += r.getPeso_kilogramos() + "|";
+                valor += r.getPeso_kilogramos() + ",";
             else
-                valor += "999" + "|";
+                valor += "999" + ",";
             
             if (null != r.getFecha_talla())
-                valor += sdf.format(r.getFecha_talla()) + "|";
+                valor += sdf.format(r.getFecha_talla()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
             if (StringUtils.isNumeric(r.getTalla_metros()))
-                valor += r.getTalla_metros() + "|";
+                valor += r.getTalla_metros() + ",";
             else
-                valor += "999" + "|";
+                valor += "999" + ",";
             
             if (null != r.getFecha_probable_parto())
-                valor += sdf.format(r.getFecha_probable_parto()) + "|";
+                valor += sdf.format(r.getFecha_probable_parto()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
             if (StringUtils.isNumeric(r.getEdad_gestacional_nacer()))
-                valor += r.getEdad_gestacional_nacer() + "|";
+                valor += r.getEdad_gestacional_nacer() + ",";
             else
-                valor += "99" + "|";
+                valor += "99" + ",";
             
-            if (StringUtils.isNumeric(r.getEdad_gestacional_nacer()))
-                valor += r.getEdad_gestacional_nacer() + "|";
+/*            if (StringUtils.isNumeric(r.getEdad_gestacional_nacer()))
+                valor += r.getEdad_gestacional_nacer() + ",";
             else
-                valor += "99" + "|";
+                valor += "99" + ",";*/
             
             //campo 35 (BCG)
             if (StringUtils.isNumeric(r.getBcg()))
-                valor += r.getBcg() + "|";
+                valor += r.getBcg() + ",";
             else
-                valor += "2" + "|";//Sin dato
+                valor += "2" + ",";//Sin dato
             
             if (StringUtils.isNumeric(r.getHepatitis_b_menores_1_año()))
-                valor += r.getHepatitis_b_menores_1_año() + "|";
+                valor += r.getHepatitis_b_menores_1_año() + ",";
             else
-                valor += "4" + "|";//Sin dato
+                valor += "4" + ",";//Sin dato
             
             if (StringUtils.isNumeric(r.getPentavalente()))
-                valor += r.getPentavalente() + "|";
+                valor += r.getPentavalente() + ",";
             else
-                valor += "3" + "|";//Sin dato
+                valor += "3" + ",";//Sin dato
             
             if (StringUtils.isNumeric(r.getPolio()))
-                valor += r.getPolio() + "|";
+                valor += r.getPolio() + ",";
             else
-                valor += "5" + "|";//Sin dato
+                valor += "5" + ",";//Sin dato
             
             if (StringUtils.isNumeric(r.getDpt_menores_5_años()))
-                valor += r.getDpt_menores_5_años() + "|";
+                valor += r.getDpt_menores_5_años() + ",";
             else
-                valor += "5" + "|";//Sin dato
+                valor += "5" + ",";//Sin dato
             
             //campo 40 (Rotavirus)
             if (StringUtils.isNumeric(r.getRotavirus()))
-                valor += r.getRotavirus() + "|";
+                valor += r.getRotavirus() + ",";
             else
-                valor += "2" + "|";//Sin dato
+                valor += "2" + ",";//Sin dato
             
             if (StringUtils.isNumeric(r.getNeumococo()))
-                valor += r.getNeumococo() + "|";
+                valor += r.getNeumococo() + ",";
             else
-                valor += "3" + "|";//Sin dato
+                valor += "3" + ",";//Sin dato
             
             if (StringUtils.isNumeric(r.getInfluenza_niños()))
-                valor += r.getInfluenza_niños() + "|";
+                valor += r.getInfluenza_niños() + ",";
             else
-                valor += "3" + "|";//Sin dato
+                valor += "3" + ",";//Sin dato
             
             if (StringUtils.isNumeric(r.getFiebre_amarilla_niños_1_año()))
-                valor += r.getFiebre_amarilla_niños_1_año() + "|";
+                valor += r.getFiebre_amarilla_niños_1_año() + ",";
             else
-                valor += "1" + "|";//Sin dato
+                valor += "1" + ",";//Sin dato
             
             if (StringUtils.isNumeric(r.getHepatitis_a()))
-                valor += r.getHepatitis_a() + "|";
+                valor += r.getHepatitis_a() + ",";
             else
-                valor += "1" + "|";//Sin dato
+                valor += "1" + ",";//Sin dato
             
             //campo 45 (Triple Viral Niños)
             if (StringUtils.isNumeric(r.getTriple_viral_niños()))
-                valor += r.getTriple_viral_niños() + "|";
+                valor += r.getTriple_viral_niños() + ",";
             else
-                valor += "2" + "|";//Sin dato
+                valor += "2" + ",";//Sin dato
             
             if (StringUtils.isNumeric(r.getVirus_papiloma_humano()))
-                valor += r.getVirus_papiloma_humano() + "|";
+                valor += r.getVirus_papiloma_humano() + ",";
             else
-                valor += "3" + "|";//Sin dato
+                valor += "3" + ",";//Sin dato
             
             if (StringUtils.isNumeric(r.getTd_tt_mujeres_edad_fertil_15_49_años()))
-                valor += r.getTd_tt_mujeres_edad_fertil_15_49_años() + "|";
+                valor += r.getTd_tt_mujeres_edad_fertil_15_49_años() + ",";
             else
-                valor += "5" + "|";//Sin dato
+                valor += "5" + ",";//Sin dato
             
             if (StringUtils.isNumeric(r.getControl_placa_bacteriana()))
-                valor += r.getControl_placa_bacteriana() + "|";
+                valor += r.getControl_placa_bacteriana() + ",";
             else
-                valor += "7" + "|";//Sin dato
+                valor += "7" + ",";//Sin dato
             
             //campo 49 (Fecha atención parto o cesárea)
             if (null != r.getFecha_atencion_parto_cesarea())
-                valor += sdf.format(r.getFecha_atencion_parto_cesarea()) + "|";
+                valor += sdf.format(r.getFecha_atencion_parto_cesarea()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
             //campo 50 (Fecha salida de la atención del parto o cesárea)
             if (null != r.getFecha_salida_atencion_parto_cesarea())
-                valor += sdf.format(r.getFecha_salida_atencion_parto_cesarea()) + "|";
+                valor += sdf.format(r.getFecha_salida_atencion_parto_cesarea()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
             if (null != r.getFecha_consejeria_lactancia_materna())
-                valor += sdf.format(r.getFecha_consejeria_lactancia_materna()) + "|";
+                valor += sdf.format(r.getFecha_consejeria_lactancia_materna()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
             if (null != r.getControl_recien_nacido())
-                valor += sdf.format(r.getControl_recien_nacido()) + "|";
+                valor += sdf.format(r.getControl_recien_nacido()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
             if (null != r.getPlanificacion_familiar_primera_vez())
-                valor += sdf.format(r.getPlanificacion_familiar_primera_vez()) + "|";
+                valor += sdf.format(r.getPlanificacion_familiar_primera_vez()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
-            if (null != r.getSuministro_metodo_anticonceptivo())
-                valor += sdf.format(r.getSuministro_metodo_anticonceptivo()) + "|";
-            else
-                valor += "1800-01-01" + "|";
+            if (null != r.getSuministro_metodo_anticonceptivo()){
+                //System.out.println(r.getSuministro_metodo_anticonceptivo());
+                try {
+                    valor += r.getSuministro_metodo_anticonceptivo() + ",";
+                } catch (Exception e) {
+                    valor += "20" + ",";
+                }
+                
+            }else
+                valor += "20" + ",";
             
             if (null != r.getFecha_suministro_medico_anticonceptivo())
-                valor += sdf.format(r.getFecha_suministro_medico_anticonceptivo()) + "|";
+                valor += sdf.format(r.getFecha_suministro_medico_anticonceptivo()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
             //campo 55 (Fecha Suministro de Método Anticonceptivo)
-            if (null != r.getFecha_suministro_medico_anticonceptivo())
-                valor += sdf.format(r.getFecha_suministro_medico_anticonceptivo()) + "|";
+            /*if (null != r.getFecha_suministro_medico_anticonceptivo())
+                valor += sdf.format(r.getFecha_suministro_medico_anticonceptivo()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";*/
             
             if (null != r.getControl_prenatal_primera_vez())
-                valor += sdf.format(r.getControl_prenatal_primera_vez()) + "|";
+                valor += sdf.format(r.getControl_prenatal_primera_vez()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
             if (StringUtils.isNumeric(r.getControl_prenatal()))
-                valor += r.getControl_prenatal() + "|";
+                valor += r.getControl_prenatal() + ",";
             else
-                valor += "999" + "|";//Sin dato
+                valor += "999" + ",";//Sin dato
             
             if (null != r.getUltimo_control_prenatal())
-                valor += sdf.format(r.getUltimo_control_prenatal()) + "|";
+                valor += sdf.format(r.getUltimo_control_prenatal()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
             if (StringUtils.isNumeric(r.getSuministro_acido_folico_ultimo_control_prenatal()))
-                valor += r.getSuministro_acido_folico_ultimo_control_prenatal() + "|";
+                valor += r.getSuministro_acido_folico_ultimo_control_prenatal() + ",";
             else
-                valor += "5" + "|";//Registro no Evaluado
+                valor += "5" + ",";//Registro no Evaluado
             
             //campo 60 (Suministro de Sulfato Ferroso en el Último Control Prenatal)
             if (StringUtils.isNumeric(r.getSuministro_sulfato_ferroso_ultimo_control_prenatal()))
-                valor += r.getSuministro_sulfato_ferroso_ultimo_control_prenatal() + "|";
+                valor += r.getSuministro_sulfato_ferroso_ultimo_control_prenatal() + ",";
             else
-                valor += "5" + "|";//Registro no Evaluado
+                valor += "5" + ",";//Registro no Evaluado
             
             if (StringUtils.isNumeric(r.getSuministro_carbonato_calcio_ultimo_control_prenatal()))
-                valor += r.getSuministro_carbonato_calcio_ultimo_control_prenatal() + "|";
+                valor += r.getSuministro_carbonato_calcio_ultimo_control_prenatal() + ",";
             else
-                valor += "5" + "|";//Registro no Evaluado
+                valor += "5" + ",";//Registro no Evaluado
             
             if (null != r.getValoracion_agudeza_visual())
-                valor += sdf.format(r.getValoracion_agudeza_visual()) + "|";
+                valor += sdf.format(r.getValoracion_agudeza_visual()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
             if (null != r.getConsulta_oftalmologia())
-                valor += sdf.format(r.getConsulta_oftalmologia()) + "|";
+                valor += sdf.format(r.getConsulta_oftalmologia()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
             if (null != r.getFecha_diagnostico_desnutricion_proteico_calorica())
-                valor += sdf.format(r.getFecha_diagnostico_desnutricion_proteico_calorica()) + "|";
+                valor += sdf.format(r.getFecha_diagnostico_desnutricion_proteico_calorica()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
             if (null != r.getConsulta_mujero_menor_maltratado())
-                valor += sdf.format(r.getConsulta_mujero_menor_maltratado()) + "|";
+                valor += sdf.format(r.getConsulta_mujero_menor_maltratado()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
             if (null != r.getConsulta_victimas_violencia_sexual())
-                valor += sdf.format(r.getConsulta_victimas_violencia_sexual()) + "|";
+                valor += sdf.format(r.getConsulta_victimas_violencia_sexual()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
             if (null != r.getConsulta_nutricion())
-                valor += sdf.format(r.getConsulta_nutricion()) + "|";
+                valor += sdf.format(r.getConsulta_nutricion()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
             if (null != r.getConsulta_psicologica())
-                valor += sdf.format(r.getConsulta_psicologica()) + "|";
+                valor += sdf.format(r.getConsulta_psicologica()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
             if (null != r.getConsulta_crecimiento_desarrollo_primera_vez())
-                valor += sdf.format(r.getConsulta_crecimiento_desarrollo_primera_vez()) + "|";
+                valor += sdf.format(r.getConsulta_crecimiento_desarrollo_primera_vez()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
             //campo 70 (Suministro de Sulfato Ferroso en la Última Consulta del Menor de 10 años)
             if (StringUtils.isNumeric(r.getSuministro_sulfato_ferroso_ultima_consulta_menor_10_años()))
-                valor += r.getSuministro_sulfato_ferroso_ultima_consulta_menor_10_años() + "|";
+                valor += r.getSuministro_sulfato_ferroso_ultima_consulta_menor_10_años() + ",";
             else
-                valor += "5" + "|";//Registro no Evaluado
+                valor += "5" + ",";//Registro no Evaluado
             
             if (StringUtils.isNumeric(r.getSuministro_vitamina_a_ultima_consulta_menor_10_años()))
-                valor += r.getSuministro_vitamina_a_ultima_consulta_menor_10_años() + "|";
+                valor += r.getSuministro_vitamina_a_ultima_consulta_menor_10_años() + ",";
             else
-                valor += "5" + "|";//Registro no Evaluado
+                valor += "5" + ",";//Registro no Evaluado
             
             if (null != r.getConsulta_joven_primera_vez())
-                valor += sdf.format(r.getConsulta_joven_primera_vez()) + "|";
+                valor += sdf.format(r.getConsulta_joven_primera_vez()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
             if (null != r.getConsulta_adulto_primera_vez())
-                valor += sdf.format(r.getConsulta_adulto_primera_vez()) + "|";
+                valor += sdf.format(r.getConsulta_adulto_primera_vez()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
             if (StringUtils.isNumeric(r.getPreservativos_entregados_pacientes_con_its()))
-                valor += r.getPreservativos_entregados_pacientes_con_its() + "|";
+                valor += r.getPreservativos_entregados_pacientes_con_its() + ",";
             else
-                valor += "999" + "|";//Sin dato
+                valor += "999" + ",";//Sin dato
             
             //campo 75 (Asesoría Pre test Elisa para VIH)
             if (null != r.getAsesoria_pre_test_elisa_vih())
-                valor += sdf.format(r.getAsesoria_pre_test_elisa_vih()) + "|";
+                valor += sdf.format(r.getAsesoria_pre_test_elisa_vih()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
             if (null != r.getAsesoria_pos_test_elisa_vih())
-                valor += sdf.format(r.getAsesoria_pos_test_elisa_vih()) + "|";
+                valor += sdf.format(r.getAsesoria_pos_test_elisa_vih()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
             if (StringUtils.isNumeric(r.getPaciente_diagnostico_salud_mental_recibio_atencion_ultimos_6_meses_equipo_interdisciplinario_completo()))
-                valor += r.getPaciente_diagnostico_salud_mental_recibio_atencion_ultimos_6_meses_equipo_interdisciplinario_completo() + "|";
+                valor += r.getPaciente_diagnostico_salud_mental_recibio_atencion_ultimos_6_meses_equipo_interdisciplinario_completo() + ",";
             else
-                valor += "6" + "|";//Sin dato
+                valor += "6" + ",";//Sin dato
             
             if (null != r.getFecha_antigeno_superficie_hepatitis_b_gestantes())
-                valor += sdf.format(r.getFecha_antigeno_superficie_hepatitis_b_gestantes()) + "|";
+                valor += sdf.format(r.getFecha_antigeno_superficie_hepatitis_b_gestantes()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
             if (StringUtils.isNumeric(r.getResultado_antigeno_superficie_hepatitis_b_gestantes()))
-                valor += r.getResultado_antigeno_superficie_hepatitis_b_gestantes() + "|";
+                valor += r.getResultado_antigeno_superficie_hepatitis_b_gestantes() + ",";
             else
-                valor += "2" + "|";//Sin dato
+                valor += "2" + ",";//Sin dato
             
             //campo 80 (Fecha Serología para Sífilis)
             if (null != r.getFecha_serologia_sifilis())
-                valor += sdf.format(r.getFecha_serologia_sifilis()) + "|";
+                valor += sdf.format(r.getFecha_serologia_sifilis()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
             if (StringUtils.isNumeric(r.getResultado_serologia_sifilis()))
-                valor += r.getResultado_serologia_sifilis() + "|";
+                valor += r.getResultado_serologia_sifilis() + ",";
             else
-                valor += "2" + "|";//Sin dato
+                valor += "2" + ",";//Sin dato
             
             if (null != r.getFecha_toma_elisa_vih())
-                valor += sdf.format(r.getFecha_toma_elisa_vih()) + "|";
+                valor += sdf.format(r.getFecha_toma_elisa_vih()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
             if (StringUtils.isNumeric(r.getResultado_elisa_vih()))
-                valor += r.getResultado_elisa_vih() + "|";
+                valor += r.getResultado_elisa_vih() + ",";
             else
-                valor += "3" + "|";//Sin dato
+                valor += "3" + ",";//Sin dato
             
             if (null != r.getFecha_tsh_neonatal())
-                valor += sdf.format(r.getFecha_tsh_neonatal()) + "|";
+                valor += sdf.format(r.getFecha_tsh_neonatal()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
             //campo 85 (Resultado de TSH Neonatal)
             if (StringUtils.isNumeric(r.getResultado_tsh_neonatal()))
-                valor += r.getResultado_tsh_neonatal() + "|";
+                valor += r.getResultado_tsh_neonatal() + ",";
             else
-                valor += "3" + "|";//Sin dato
+                valor += "3" + ",";//Sin dato
             
             if (StringUtils.isNumeric(r.getTamizaje_cancer_cuello_uterino()))
-                valor += r.getTamizaje_cancer_cuello_uterino() + "|";
+                valor += r.getTamizaje_cancer_cuello_uterino() + ",";
             else
-                valor += "8" + "|";//Sin dato
+                valor += "8" + ",";//Sin dato
             
             if (null != r.getCitologia_cervico_uterina())
-                valor += sdf.format(r.getCitologia_cervico_uterina()) + "|";
+                valor += sdf.format(r.getCitologia_cervico_uterina()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
             if (StringUtils.isNumeric(r.getCitologia_cervico_uterina_resultados_bethesda()))
-                valor += r.getCitologia_cervico_uterina_resultados_bethesda() + "|";
+                valor += (r.getCitologia_cervico_uterina_resultados_bethesda().equals("99")?"999":r.getCitologia_cervico_uterina_resultados_bethesda()) + ",";
             else
-                valor += "99" + "|";//Sin dato
+                valor += "999" + ",";//Sin dato
             
             if (StringUtils.isNumeric(r.getCalidad_muestra_citologia_cervicouterina()))
-                valor += r.getCalidad_muestra_citologia_cervicouterina() + "|";
+                valor += (r.getCalidad_muestra_citologia_cervicouterina().equals("99")?"999":r.getCalidad_muestra_citologia_cervicouterina()) + ",";
             else
-                valor += "99" + "|";//Sin dato
+                valor += "999" + ",";//Sin dato
             
             //campo 90 (Código de habilitación IPS donde se toma Citología Cervicouterina)
             if (StringUtils.isNumeric(r.getCodigo_habilitacion_ips_donde_toma_citologia_cervicouterina()))
-                valor += r.getCodigo_habilitacion_ips_donde_toma_citologia_cervicouterina() + "|";
+                valor += (r.getCodigo_habilitacion_ips_donde_toma_citologia_cervicouterina().equals("99")?"999":r.getCodigo_habilitacion_ips_donde_toma_citologia_cervicouterina()) + ",";
             else
-                valor += "99" + "|";//Sin dato
+                valor += "999" + ",";//Sin dato
             
             if (null != r.getFecha_colposcopia())
-                valor += sdf.format(r.getFecha_colposcopia()) + "|";
+                valor += sdf.format(r.getFecha_colposcopia()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
             if (StringUtils.isNumeric(r.getCodigo_habilitacion_ips_donde_toma_colposcopia()))
-                valor += r.getCodigo_habilitacion_ips_donde_toma_colposcopia() + "|";
+                valor += (r.getCodigo_habilitacion_ips_donde_toma_colposcopia().equals("99")?"999":r.getCodigo_habilitacion_ips_donde_toma_colposcopia()) + ",";
             else
-                valor += "99" + "|";//Sin dato
+                valor += "999" + ",";//Sin dato
             
             if (null != r.getFecha_biopsia_cervical())
-                valor += sdf.format(r.getFecha_biopsia_cervical()) + "|";
+                valor += sdf.format(r.getFecha_biopsia_cervical()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
             if (StringUtils.isNumeric(r.getResultado_biopsia_cervical()))
-                valor += r.getResultado_biopsia_cervical() + "|";
+                valor += (r.getResultado_biopsia_cervical().equals("99")?"999":r.getResultado_biopsia_cervical())+ ",";
             else
-                valor += "99" + "|";//Sin dato
+                valor += "999" + ",";//Sin dato
             
             //campo 95 (Código de habilitación IPS donde se toma Biopsia Cervical)
             if (StringUtils.isNumeric(r.getCodigo_habilitacion_ips_donde_toma_biopsia_cervical()))
-                valor += r.getCodigo_habilitacion_ips_donde_toma_biopsia_cervical() + "|";
+                valor += (r.getCodigo_habilitacion_ips_donde_toma_biopsia_cervical().equals("99")?"999":r.getCodigo_habilitacion_ips_donde_toma_biopsia_cervical())+ ",";
             else
-                valor += "99" + "|";//Sin dato
+                valor += "999" + ",";//Sin dato
             
             if (null != r.getFecha_mamografia())
-                valor += sdf.format(r.getFecha_mamografia()) + "|";
+                valor += sdf.format(r.getFecha_mamografia()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
-            if (StringUtils.isNumeric(r.getResultado_mamografia()))
-                valor += r.getResultado_mamografia() + "|";
-            else
-                valor += "99" + "|";//Sin dato
+            if (StringUtils.isNumeric(r.getResultado_mamografia())){
+                valor += (r.getResultado_mamografia().equals("99")?"999":r.getResultado_mamografia())+ ",";
+            }else{
+                valor += "999" + ",";//Sin dato
+            }
             
             if (StringUtils.isNumeric(r.getCodigo_habilitacion_ips_donde_toma_mamografia()))
-                valor += r.getCodigo_habilitacion_ips_donde_toma_mamografia() + "|";
+                valor += (r.getCodigo_habilitacion_ips_donde_toma_mamografia().equals("99")?"999":r.getResultado_mamografia()) + ",";
             else
-                valor += "99" + "|";//Sin dato
+                valor += "999" + ",";//Sin dato
             
             if (null != r.getFecha_toma_biopsia_seno_bacaf())
-                valor += sdf.format(r.getFecha_toma_biopsia_seno_bacaf()) + "|";
+                valor += sdf.format(r.getFecha_toma_biopsia_seno_bacaf()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
             //campo 100 (Fecha Resultado Biopsia Seno por BACAF)
             if (null != r.getFecha_resultado_biopsia_seno_bacaf())
-                valor += sdf.format(r.getFecha_resultado_biopsia_seno_bacaf()) + "|";
+                valor += sdf.format(r.getFecha_resultado_biopsia_seno_bacaf()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
             if (StringUtils.isNumeric(r.getBiopsia_seno_bacaf()))
-                valor += r.getBiopsia_seno_bacaf() + "|";
+                valor += (r.getBiopsia_seno_bacaf().equals("99")?"999":r.getBiopsia_seno_bacaf())+ ",";
             else
-                valor += "99" + "|";//Sin dato
+                valor += "999" + ",";//Sin dato
             
             if (StringUtils.isNumeric(r.getCodigo_habilitacion_ips_donde_toma_biopsia_seno_bacaf()))
-                valor += r.getCodigo_habilitacion_ips_donde_toma_biopsia_seno_bacaf() + "|";
+                valor += (r.getCodigo_habilitacion_ips_donde_toma_biopsia_seno_bacaf().equals("99")?"999":r.getCodigo_habilitacion_ips_donde_toma_biopsia_seno_bacaf())+ ",";
             else
-                valor += "99" + "|";//Sin dato
+                valor += "999" + ",";//Sin dato
             
             if (null != r.getFecha_toma_hemoglobina())
-                valor += sdf.format(r.getFecha_toma_hemoglobina()) + "|";
+                valor += sdf.format(r.getFecha_toma_hemoglobina()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
             if (StringUtils.isNumeric(r.getHemoglobina()))
-                valor += r.getHemoglobina() + "|";
+                valor += r.getHemoglobina() + ",";
             else
-                valor += "9998" + "|";//No aplica
+                valor += "9998" + ",";//No aplica
             
             //campo 105 (Fecha de la Toma de Glicemia Basal)
             if (null != r.getFecha_toma_glicemia_basal())
-                valor += sdf.format(r.getFecha_toma_glicemia_basal()) + "|";
+                valor += sdf.format(r.getFecha_toma_glicemia_basal()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
             if (null != r.getFecha_creatinina())
-                valor += sdf.format(r.getFecha_creatinina()) + "|";
+                valor += sdf.format(r.getFecha_creatinina()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
             if (StringUtils.isNumeric(r.getCreatinina()))
-                valor += r.getCreatinina() + "|";
+                valor += r.getCreatinina() + ",";
             else
-                valor += "999" + "|";//Sin dato
+                valor += "999" + ",";//Sin dato
             
             if (null != r.getFecha_hemoglobina_glicosilada())
-                valor += sdf.format(r.getFecha_hemoglobina_glicosilada()) + "|";
+                valor += sdf.format(r.getFecha_hemoglobina_glicosilada()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
             if (StringUtils.isNumeric(r.getHemoglobina_glicosilada()))
-                valor += r.getHemoglobina_glicosilada() + "|";
+                valor += r.getHemoglobina_glicosilada() + ",";
             else
-                valor += "999" + "|";//Sin dato
+                valor += "999" + ",";//Sin dato
             
             //campo 110 (Fecha Toma de Microalbuminuria)
             if (null != r.getFecha_toma_microalbuminuria())
-                valor += sdf.format(r.getFecha_toma_microalbuminuria()) + "|";
+                valor += sdf.format(r.getFecha_toma_microalbuminuria()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
             if (null != r.getFecha_toma_hdl())
-                valor += sdf.format(r.getFecha_toma_hdl()) + "|";
+                valor += sdf.format(r.getFecha_toma_hdl()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
             if (null != r.getFecha_toma_baciloscopia_diagnostico())
-                valor += sdf.format(r.getFecha_toma_baciloscopia_diagnostico()) + "|";
+                valor += sdf.format(r.getFecha_toma_baciloscopia_diagnostico()) + ",";
             else
-                valor += "1800-01-01" + "|";
+                valor += "1800-01-01" + ",";
             
             if (StringUtils.isNumeric(r.getBaciloscopia_diagnostico()))
-                valor += r.getBaciloscopia_diagnostico() + "|";
+                valor += r.getBaciloscopia_diagnostico() + ",";
             else
-                valor += "3" + "|";//Sin dato
+                valor += "3" + ",";//Sin dato
             
             if (StringUtils.isNumeric(r.getTratamiento_hipotiroidismo_congenito()))
-                valor += r.getTratamiento_hipotiroidismo_congenito() + "|";
+                valor += r.getTratamiento_hipotiroidismo_congenito() + ",";
             else
-                valor += "6" + "|";//Sin dato
+                valor += "6" + ",";//Sin dato
             
             //campo 115
             if (StringUtils.isNumeric(r.getTratamiento_sifilis_gestacional()))
-                valor += r.getTratamiento_sifilis_gestacional() + "|";
+                valor += r.getTratamiento_sifilis_gestacional() + ",";
             else
-                valor += "6" + "|";//Sin dato
+                valor += "6" + ",";//Sin dato
             
             if (StringUtils.isNumeric(r.getTratamiento_sifilis_congenita()))
-                valor += r.getTratamiento_sifilis_congenita() + "|";
+                valor += r.getTratamiento_sifilis_congenita() + ",";
             else
-                valor += "6" + "|";//Sin dato
+                valor += "6" + ",";//Sin dato
             
             if (StringUtils.isNumeric(r.getTratamiento_terminado_lepra()))
-                valor += r.getTratamiento_terminado_lepra() + "|";
+                valor += r.getTratamiento_terminado_lepra() + ",";
             else
-                valor += "7" + "|";//Sin dato
+                valor += "7" + ",";//Sin dato
             
             //campo 118 
             if (null != r.getFecha_terminacion_tratamiento_leishmaniasis())
@@ -1195,13 +1205,33 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
                 Informe4505 u = new Informe4505();
                 u.setTipo_registro("2");
                 u.setConsecutivo_registro(i);
+                List<CfgEmpresa> listaempresa = cfgEmpresaFacade.findAll();
                 u.setCodigo_habilitacion_ips_primaria("99");
+                if(!listaempresa.isEmpty()){
+                    CfgEmpresa empresa = listaempresa.get(0);
+                    if(empresa.getCodigoEmpresa()!=null){
+                        if(!empresa.getCodigoEmpresa().equals("0"))
+                            u.setCodigo_habilitacion_ips_primaria(empresa.getCodigoEmpresa());
+                    }
+                }
+                
+                
                 u.setTipo_identificacion_usuario(r.getTipoIdentificacion().getDescripcion());
                 u.setNumero_identificacion_usuario(r.getIdentificacion());
                 u.setPrimer_apellido_usuario(r.getPrimerApellido());
                 u.setSegundo_apellido_usuario(r.getSegundoApellido());
+                if(r.getSegundoApellido()!=null){
+                    if(r.getSegundoApellido().trim().length()==0){
+                            u.setSegundo_apellido_usuario("NONE");
+                    }
+                }
                 u.setPrimer_nombre_usuario(r.getPrimerNombre());
                 u.setSegundo_nombre_usuario(r.getSegundoNombre());
+                if(r.getSegundoNombre()!=null){
+                    if(r.getSegundoNombre().trim().length()==0){
+                            u.setSegundo_nombre_usuario("NONE");
+                    }
+                }
                 String fecha = r.getFechaNacimiento() + "";
                 u.setFecha_nacimiento(usuario_nacimiento.parse(fecha));
                 if (r.getGenero() == null) {
@@ -1217,22 +1247,44 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
                 if (r.getEtnia() == null) {
                     u.setCodigo_pertenencia_etnica("6");
                 } else {
-                    u.setCodigo_pertenencia_etnica(r.getEtnia().getCodigo());
+                    try {
+                        int codigoEtnia = Integer.parseInt(r.getEtnia().getCodigo());
+                        u.setCodigo_pertenencia_etnica(String.valueOf(codigoEtnia));
+                    } catch (Exception e) {
+                        u.setCodigo_pertenencia_etnica("6");
+                    }
+                    
                 }
 
                 if (r.getOcupacion() == null) {
                     u.setCodigo_ocupacion("9999");
                 } else {
-                    u.setCodigo_ocupacion(r.getOcupacion().getCodigo());
+                    u.setCodigo_ocupacion("9998");//r.getOcupacion().getCodigo());
                 }
                 if (r.getNivel() == null) {
                     u.setCodigo_nivel_educativo("1");
                 } else {
-                    u.setCodigo_nivel_educativo(r.getNivel().getCodigo());
+                    try {
+                        if(r.getNivel().getCodigo().equals("00"))
+                            u.setCodigo_nivel_educativo("1");
+                        else{
+                            int escolaridad = Integer.parseInt(r.getNivel().getCodigo());
+                            u.setCodigo_nivel_educativo(String.valueOf(escolaridad));
+                        }
+                        
+                    } catch (Exception e) {
+                        u.setCodigo_nivel_educativo("13");
+                    }
+                    
                 }
 
                 if (r.getGestacion() == null) {
-                    u.setGestacion("2");
+                    if (r.getGenero().getDescripcion().equals("MASCULINO")) {
+                        u.setGestacion("0");
+                    }else{
+                        u.setGestacion("2");
+                    }
+                    
                 } else {
                     u.setGestacion(r.getGestacion().getCodigo());
                 }
@@ -1242,7 +1294,7 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
                     datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
                 }
                 if (datosFormulario.getDato53().toString().isEmpty()) {
-                    u.setSifilis_gestacional_congenita("4");
+                    u.setSifilis_gestacional_congenita("21");
                 } else {
                     u.setSifilis_gestacional_congenita(datosFormulario.getDato53().toString());
                 }
@@ -1251,19 +1303,30 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
                 if (registroEncontrado != null) {
                     datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
                 }
+                
+                tipoRegistroClinicoActual = tipoRegCliFacade.find(45);
                 if (datosFormulario.getDato76().toString().isEmpty()) {
-                    u.setHipertension_gestacional_congenita("3");
+                    u.setHipertension_gestacional_congenita("21");
                 } else {
                     u.setHipertension_gestacional_congenita(datosFormulario.getDato76().toString());
                 }
-                u.setHipotiroidismo_congenito("3");
+                registroEncontrado = registroFacade.buscarUltimo(r.getIdentificacion(), tipoRegistroClinicoActual.getIdTipoReg());
+                if (registroEncontrado != null) {
+                    datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
+                }
+                if (datosFormulario.getDato79().toString().isEmpty()) {
+                    u.setHipotiroidismo_congenito("21");
+                }else{
+                    u.setHipotiroidismo_congenito(datosFormulario.getDato79().toString());
+                }
+                
                 tipoRegistroClinicoActual = tipoRegCliFacade.find(52);
                 registroEncontrado = registroFacade.buscarUltimo(r.getIdentificacion(), tipoRegistroClinicoActual.getIdTipoReg());
                 if (registroEncontrado != null) {
                     datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
                 }
                 if (datosFormulario.getDato1().toString().isEmpty()) {
-                    u.setSintomatico_respiratorio("2");
+                    u.setSintomatico_respiratorio("3");
                 } else {
                     u.setSintomatico_respiratorio(datosFormulario.getDato1().toString());
                 }
@@ -1273,12 +1336,23 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
                     datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
                 }
                 if (datosFormulario.getDato94().toString().isEmpty()) {
-                    u.setTuberculosis_multidrogoresistente("3");
+                    u.setTuberculosis_multidrogoresistente("21");
                 } else {
                     u.setTuberculosis_multidrogoresistente(datosFormulario.getDato94().toString());
                 }
-                u.setLepra("3");
                 tipoRegistroClinicoActual = tipoRegCliFacade.find(54);
+                
+                registroEncontrado = registroFacade.buscarUltimo(r.getIdentificacion(), tipoRegistroClinicoActual.getIdTipoReg());
+                if (registroEncontrado != null) {
+                    datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
+                }
+                if (datosFormulario.getDato94().toString().isEmpty()) {
+                    u.setLepra("3");
+                }else{
+                    u.setLepra(datosFormulario.getDato325().toString());
+                }
+                
+                
                 registroEncontrado = registroFacade.buscarUltimo(r.getIdentificacion(), tipoRegistroClinicoActual.getIdTipoReg());
                 if (registroEncontrado != null) {
                     datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
@@ -1294,7 +1368,7 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
                     datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
                 }
                 if (datosFormulario.getDato15().toString().isEmpty()) {
-                    u.setMujer_victima_maltrato("4");
+                    u.setMujer_victima_maltrato("21");
                 } else {
                     u.setMujer_victima_maltrato(datosFormulario.getDato15().toString());
                 }
@@ -1304,7 +1378,7 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
                     datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
                 }
                 if (datosFormulario.getDato52().toString().isEmpty()) {
-                    u.setVictima_violencia_sexual("3");
+                    u.setVictima_violencia_sexual("21");
                 } else {
                     u.setVictima_violencia_sexual(datosFormulario.getDato52().toString());
                 }
@@ -1314,7 +1388,7 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
                     datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
                 }
                 if (datosFormulario.getDato108().toString().isEmpty()) {
-                    u.setInfecciones_transmision_sexual("3");
+                    u.setInfecciones_transmision_sexual("21");
                 } else {
                     u.setInfecciones_transmision_sexual(datosFormulario.getDato108().toString());
                 }
@@ -1334,7 +1408,7 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
                     datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
                 }
                 if (datosFormulario.getDato37().toString().isEmpty()) {
-                    u.setCancer_cervix("3");
+                    u.setCancer_cervix("21");
                 } else {
                     u.setCancer_cervix(datosFormulario.getDato37().toString());
                 }
@@ -1344,13 +1418,14 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
                     datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
                 }
                 if (datosFormulario.getDato3().toString().isEmpty()) {
-                    u.setCancer_seno("3");
+                    u.setCancer_seno("21");
                 } else {
                     u.setCancer_seno(datosFormulario.getDato3().toString());
                 }
-                u.setFluorosis_dental("3");
-                u.setFecha_peso(sdf.parse("1800-01-01"));
-                tipoRegistroClinicoActual = tipoRegCliFacade.find(11);
+                u.setFluorosis_dental("21");
+                String fechaPeso =registroFacade.getFechaValor(r.getIdPaciente(),"PESO");
+                u.setFecha_peso(fechaPeso!=null?sdf.parse(fechaPeso):sdf.parse("1800-01-01"));
+                /*tipoRegistroClinicoActual = tipoRegCliFacade.find(11);
                 registroEncontrado = registroFacade.buscarUltimo(r.getIdentificacion(), tipoRegistroClinicoActual.getIdTipoReg());
                 if (registroEncontrado != null) {
                     datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
@@ -1359,27 +1434,57 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
                     u.setPeso_kilogramos("999");
                 } else {
                     u.setPeso_kilogramos(datosFormulario.getDato28().toString());
-                }
-                u.setFecha_talla(sdf.parse("1800-01-01"));
-                tipoRegistroClinicoActual = tipoRegCliFacade.find(11);
+                }*/
+                String kilogramo =registroFacade.getValorXCampo(r.getIdPaciente(),"PESO");
+                u.setPeso_kilogramos(kilogramo==null?"999":kilogramo);
+                String fechaTalla =registroFacade.getFechaValor(r.getIdPaciente(),"TALLA");
+                u.setFecha_talla(fechaTalla!=null?sdf.parse(fechaTalla):sdf.parse("1800-01-01"));
+                /*tipoRegistroClinicoActual = tipoRegCliFacade.find(11);
                 registroEncontrado = registroFacade.buscarUltimo(r.getIdentificacion(), tipoRegistroClinicoActual.getIdTipoReg());
                 if (registroEncontrado != null) {
-                    datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
-                }
-                if (datosFormulario.getDato29().toString().isEmpty()) {
+                    try {
+                        datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
+                        //u.setFecha_talla(sdf.parse(datosFormulario.getValor(0).toString()));
+                    } catch (Exception e) {
+                        u.setFecha_talla(sdf.parse("1845-01-01"));
+                    }
+                    
+                }*/
+                /*if (datosFormulario.getDato29().toString().isEmpty()) {
                     u.setTalla_metros("999");
                 } else {
                     u.setTalla_metros(datosFormulario.getDato29().toString());
-                }
+                }*/
+                String talla =registroFacade.getValorXCampo(r.getIdPaciente(),"TALLA");
+                u.setTalla_metros(talla!=null?talla:"999");
                 tipoRegistroClinicoActual = tipoRegCliFacade.find(45);
                 registroEncontrado = registroFacade.buscarUltimo(r.getIdentificacion(), tipoRegistroClinicoActual.getIdTipoReg());
                 if (registroEncontrado != null) {
-                    datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
+                    //datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
+                    try {
+                        datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
+                    } catch (Exception e) {
+                    }
+                    
                 }
                 if (datosFormulario.getDato8().toString().isEmpty()) {
-                    u.setFecha_probable_parto(sdf.parse("1800-01-01"));
+                    if (r.getGenero() == null) {
+                        u.setFecha_probable_parto(sdf.parse("1845-01-01"));
+                    }else{
+                        if (r.getGenero().getDescripcion().equals("MASCULINO")) {
+                            u.setFecha_probable_parto(sdf.parse("1845-01-01"));
+                        }else{
+                            u.setFecha_probable_parto(sdf.parse("1800-01-01"));
+                        }
+                    }
+                    
                 } else {
-                    u.setFecha_probable_parto(new Date(usuario_nacimiento.parse(datosFormulario.getDato8().toString()).toString()));
+                    try {
+                        u.setFecha_probable_parto(new Date(usuario_nacimiento.parse(datosFormulario.getDato8().toString()).toString()));
+                    } catch (Exception e) {
+                        u.setFecha_probable_parto(sdf.parse("1845-01-01"));
+                    }
+                    
                 }
                 tipoRegistroClinicoActual = tipoRegCliFacade.find(45);
                 registroEncontrado = registroFacade.buscarUltimo(r.getIdentificacion(), tipoRegistroClinicoActual.getIdTipoReg());
@@ -1387,7 +1492,16 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
                     datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
                 }
                 if (datosFormulario.getDato9().toString().isEmpty()) {
-                    u.setEdad_gestacional_nacer("99");
+                    if (r.getGenero() == null) {
+                        u.setEdad_gestacional_nacer("0");
+                    }else{
+                        if (r.getGenero().getDescripcion().equals("MASCULINO")) {
+                            u.setEdad_gestacional_nacer("0");
+                        }else{
+                            u.setEdad_gestacional_nacer("999");
+                        }
+                    }
+                    
                 } else {
                     u.setEdad_gestacional_nacer(datosFormulario.getDato9().toString());
                 }
@@ -1397,7 +1511,7 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
                     datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
                 }
                 if (datosFormulario.getDato172().toString().isEmpty()) {
-                    u.setBcg("2");
+                    u.setBcg("22");
                 } else {
                     u.setBcg(datosFormulario.getDato172().toString());
                 }
@@ -1407,7 +1521,7 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
                     datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
                 }
                 if (datosFormulario.getDato173().toString().isEmpty()) {
-                    u.setHepatitis_b_menores_1_año("4");
+                    u.setHepatitis_b_menores_1_año("22");
                 } else {
                     u.setHepatitis_b_menores_1_año(datosFormulario.getDato173().toString());
                     if (!datosFormulario.getDato174().toString().isEmpty()) {
@@ -1420,15 +1534,15 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
                         }
                     }
                 }
-                u.setPentavalente("3");
-                u.setPolio("5");
+                u.setPentavalente("0");
+                u.setPolio("0");
                 tipoRegistroClinicoActual = tipoRegCliFacade.find(35);
                 registroEncontrado = registroFacade.buscarUltimo(r.getIdentificacion(), tipoRegistroClinicoActual.getIdTipoReg());
                 if (registroEncontrado != null) {
                     datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
                 }
                 if (datosFormulario.getDato177().toString().isEmpty()) {
-                    u.setDpt_menores_5_años("5");
+                    u.setDpt_menores_5_años("22");
                 } else {
                     u.setDpt_menores_5_años(datosFormulario.getDato177().toString());
                     if (!datosFormulario.getDato178().toString().isEmpty()) {
@@ -1450,21 +1564,21 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
                     datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
                 }
                 if (datosFormulario.getDato190().toString().isEmpty()) {
-                    u.setDpt_menores_5_años("2");
+                    u.setDpt_menores_5_años("22");
                 } else {
                     u.setDpt_menores_5_años(datosFormulario.getDato190().toString());
                     if (!datosFormulario.getDato191().toString().isEmpty()) {
                         u.setDpt_menores_5_años(datosFormulario.getDato191().toString());
                     }
                 }
-                u.setRotavirus("2");
+                u.setRotavirus("22");
                 tipoRegistroClinicoActual = tipoRegCliFacade.find(35);
                 registroEncontrado = registroFacade.buscarUltimo(r.getIdentificacion(), tipoRegistroClinicoActual.getIdTipoReg());
                 if (registroEncontrado != null) {
                     datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
                 }
                 if (datosFormulario.getDato192().toString().isEmpty()) {
-                    u.setNeumococo("3");
+                    u.setNeumococo("22");
                 } else {
                     u.setNeumococo(datosFormulario.getDato192().toString());
                     if (!datosFormulario.getDato193().toString().isEmpty()) {
@@ -1480,7 +1594,7 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
                     datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
                 }
                 if (datosFormulario.getDato187().toString().isEmpty()) {
-                    u.setInfluenza_niños("3");
+                    u.setInfluenza_niños("22");
                 } else {
                     u.setInfluenza_niños(datosFormulario.getDato197().toString());
                     if (!datosFormulario.getDato188().toString().isEmpty()) {
@@ -1490,11 +1604,11 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
                         }
                     }
                 }
-                u.setFiebre_amarilla_niños_1_año("1");
-                u.setHepatitis_a("1");
-                u.setTriple_viral_niños("2");
-                u.setVirus_papiloma_humano("3");
-                u.setTd_tt_mujeres_edad_fertil_15_49_años("5");
+                u.setFiebre_amarilla_niños_1_año("22");
+                u.setHepatitis_a("22");
+                u.setTriple_viral_niños("22");
+                u.setVirus_papiloma_humano("22");
+                u.setTd_tt_mujeres_edad_fertil_15_49_años("22");
                 tipoRegistroClinicoActual = tipoRegCliFacade.find(35);
                 registroEncontrado = registroFacade.buscarUltimo(r.getIdentificacion(), tipoRegistroClinicoActual.getIdTipoReg());
                 if (registroEncontrado != null) {
@@ -1511,51 +1625,223 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
                     datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
                 }
                 if (datosFormulario.getDato19().toString().isEmpty()) {
-                    u.setFecha_atencion_parto_cesarea(sdf.parse("1800-01-01"));
+                    //u.setFecha_atencion_parto_cesarea(sdf.parse("1800-01-01"));
+                    try {
+                        datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
+                        if (r.getGenero() == null) {
+                            u.setFecha_atencion_parto_cesarea(sdf.parse("1800-01-01"));
+                        }else{
+                            if (r.getGenero().getDescripcion().equals("MASCULINO")) {
+                                u.setFecha_atencion_parto_cesarea(sdf.parse("1845-01-01"));
+                            }else{
+                               u.setFecha_atencion_parto_cesarea(sdf.parse("1800-01-01"));
+                            }
+                        }
+                        
+                    } catch (Exception e) {
+                        u.setFecha_atencion_parto_cesarea(sdf.parse("1845-01-01"));
+                    }
+                    
                 } else {
                     u.setFecha_atencion_parto_cesarea(new Date(usuario_nacimiento.parse(datosFormulario.getDato19().toString()).toString()));
                 }
-                u.setFecha_salida_atencion_parto_cesarea(sdf.parse("1800-01-01"));
-                u.setFecha_consejeria_lactancia_materna(sdf.parse("1800-01-01"));
-                u.setControl_recien_nacido(sdf.parse("1800-01-01"));
+                if (r.getGenero() == null) {
+                    u.setFecha_salida_atencion_parto_cesarea(sdf.parse("1845-01-01"));
+                }else{
+                    if (r.getGenero().getDescripcion().equals("MASCULINO")) {
+                        u.setFecha_salida_atencion_parto_cesarea(sdf.parse("1845-01-01"));
+                    }else{
+                        u.setFecha_salida_atencion_parto_cesarea(sdf.parse("1800-01-01"));
+                    }
+                }
+                if (r.getGenero() == null) {
+                    u.setFecha_consejeria_lactancia_materna(sdf.parse("1845-01-01"));
+                }else{
+                    if (r.getGenero().getDescripcion().equals("MASCULINO")) {
+                        u.setFecha_salida_atencion_parto_cesarea(sdf.parse("1845-01-01"));
+                    }else{
+                        u.setFecha_salida_atencion_parto_cesarea(sdf.parse("1800-01-01"));
+                    }
+                }
+                if (r.getGenero() == null) {
+                    u.setControl_recien_nacido(sdf.parse("1845-01-01"));
+                }else{
+                    if (r.getGenero().getDescripcion().equals("MASCULINO")) {
+                        u.setControl_recien_nacido(sdf.parse("1845-01-01"));
+                    }else{
+                        u.setControl_recien_nacido(sdf.parse("1800-01-01"));
+                    }
+                }
                 tipoRegistroClinicoActual = tipoRegCliFacade.find(41);
                 registroEncontrado = registroFacade.buscarUltimo(r.getIdentificacion(), tipoRegistroClinicoActual.getIdTipoReg());
                 if (registroEncontrado != null) {
                     datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
                 }
                 if (datosFormulario.getDato0().toString().isEmpty()) {
-                    u.setPlanificacion_familiar_primera_vez(sdf.parse("1800-01-01"));
+                    if (r.getGenero() == null) {
+                        u.setPlanificacion_familiar_primera_vez(sdf.parse("1845-01-01"));
+                    }else{
+                        if (r.getGenero().getDescripcion().equals("MASCULINO")) {
+                            u.setPlanificacion_familiar_primera_vez(sdf.parse("1845-01-01"));
+                        }else{
+                            u.setPlanificacion_familiar_primera_vez(sdf.parse("1800-01-01"));
+                        }
+                    }
+                    
                 } else {
                     u.setPlanificacion_familiar_primera_vez(new Date(usuario_nacimiento.parse(datosFormulario.getDato0().toString()).toString()));
                 }
-                u.setSuministro_metodo_anticonceptivo("15");
-                u.setFecha_suministro_medico_anticonceptivo(sdf.parse("1800-01-01"));
-                u.setControl_prenatal_primera_vez(sdf.parse("1800-01-01"));
-                u.setControl_prenatal("999");
-                u.setUltimo_control_prenatal(sdf.parse("1800-01-01"));
-                u.setSuministro_acido_folico_ultimo_control_prenatal("5");
-                u.setSuministro_sulfato_ferroso_ultimo_control_prenatal("5");
-                u.setSuministro_carbonato_calcio_ultimo_control_prenatal("5");
-                u.setValoracion_agudeza_visual(sdf.parse("1800-01-01"));
-                u.setConsulta_oftalmologia(sdf.parse("1800-01-01"));
+                String anticon =registroFacade.getValorXCampo(r.getIdPaciente(),"ANTICON");
+                String valor="21";
+                if (r.getGenero() == null) {
+                    u.setSuministro_metodo_anticonceptivo("0");
+                }else{
+                    if (r.getGenero().getDescripcion().equals("MASCULINO")) {
+                        if(anticon!=null){
+                            if("COND".contains(anticon.toUpperCase())){
+                            valor="15";
+                            }
+                        }else valor="21";
+                        u.setSuministro_metodo_anticonceptivo(valor);
+                    }else{
+                        
+                        if(anticon!=null){
+                            
+                            try {
+                                if("IMPLANTEN".contains(anticon.toUpperCase())){
+                                    valor="3";
+                                }else if("NO".contains(anticon.toUpperCase())){
+                                    valor="20";
+                                }else if("TRIME".contains(anticon.toUpperCase())){
+                                    valor="9";
+                                }else if("INYECC".contains(anticon.toUpperCase())){
+                                    valor="7";
+                                }else if("NIEG".contains(anticon.toUpperCase())){
+                                    valor="18";
+                                }else if("PASTILLA".contains(anticon.toUpperCase())){
+                                    valor="5";
+                                }else if("JADE".contains(anticon.toUpperCase())){
+                                    valor="3";
+                                }else if("PILD".contains(anticon.toUpperCase())){
+                                    valor="6";
+                                }
+                            } catch (Exception e) {
+                                
+                            }
+                            u.setSuministro_metodo_anticonceptivo(valor);
+                        }else{
+                            u.setSuministro_metodo_anticonceptivo("21");
+                        }
+                    }
+                }
+                
+                String fechaAntico =registroFacade.getFechaValor(r.getIdPaciente(),"ANTICON");
+                u.setFecha_suministro_medico_anticonceptivo(fechaAntico!=null?sdf.parse(fechaAntico):sdf.parse("1800-01-01"));
+                
+                if (r.getGenero() == null) {
+                    u.setControl_prenatal_primera_vez(sdf.parse("1845-01-01"));
+                }else{
+                    if (r.getGenero().getDescripcion().equals("MASCULINO")) {
+                        u.setControl_prenatal_primera_vez(sdf.parse("1845-01-01"));
+                    }else{
+                        u.setControl_prenatal_primera_vez(sdf.parse("1800-01-01"));
+                    }
+                }
+                if (r.getGenero() == null) {
+                    u.setControl_prenatal("0");
+                }else{
+                    if (r.getGenero().getDescripcion().equals("MASCULINO")) {
+                        u.setControl_prenatal("0");
+                    }else{
+                        u.setControl_prenatal("999");
+                    }
+                }
+                if (r.getGenero() == null) {
+                    u.setUltimo_control_prenatal(sdf.parse("1845-01-01"));
+                }else{
+                    if (r.getGenero().getDescripcion().equals("MASCULINO")) {
+                        u.setUltimo_control_prenatal(sdf.parse("1845-01-01"));
+                    }else{
+                        u.setUltimo_control_prenatal(sdf.parse("1800-01-01"));
+                    }
+                }
+                if (r.getGenero() == null) {
+                    u.setSuministro_acido_folico_ultimo_control_prenatal("0");
+                }else{
+                    if (r.getGenero().getDescripcion().equals("MASCULINO")) {
+                        u.setSuministro_acido_folico_ultimo_control_prenatal("0");
+                    }else{
+                        u.setSuministro_acido_folico_ultimo_control_prenatal("21");
+                    }
+                }
+                if (r.getGenero() == null) {
+                    u.setSuministro_sulfato_ferroso_ultimo_control_prenatal("0");
+                }else{
+                    if (r.getGenero().getDescripcion().equals("MASCULINO")) {
+                        u.setSuministro_sulfato_ferroso_ultimo_control_prenatal("0");
+                    }else{
+                        u.setSuministro_sulfato_ferroso_ultimo_control_prenatal("21");
+                    }
+                }
+                
+                if (r.getGenero() == null) {
+                    u.setSuministro_carbonato_calcio_ultimo_control_prenatal("0");
+                }else{
+                    if (r.getGenero().getDescripcion().equals("MASCULINO")) {
+                        u.setSuministro_carbonato_calcio_ultimo_control_prenatal("0");
+                    }else{
+                        u.setSuministro_carbonato_calcio_ultimo_control_prenatal("21");
+                    }
+                }
+                
+                String fechaRegi = registroFacade.getFechaValorHC(r.getIdPaciente(), 89);
+                u.setValoracion_agudeza_visual(fechaRegi!=null?sdf.parse(fechaRegi):sdf.parse("1800-01-01"));
+                fechaRegi = registroFacade.getFechaValorHC(r.getIdPaciente(), 1);
+                u.setConsulta_oftalmologia(fechaRegi!=null?sdf.parse(fechaRegi):sdf.parse("1800-01-01"));
                 u.setFecha_diagnostico_desnutricion_proteico_calorica(sdf.parse("1800-01-01"));
-                u.setConsulta_mujero_menor_maltratado(sdf.parse("1800-01-01"));
+                if (r.getGenero() == null) {
+                    u.setConsulta_mujero_menor_maltratado(sdf.parse("1845-01-01"));
+                }else{
+                    if (r.getGenero().getDescripcion().equals("MASCULINO")) {
+                        u.setConsulta_mujero_menor_maltratado(sdf.parse("1845-01-01"));
+                    }else{
+                        u.setConsulta_mujero_menor_maltratado(sdf.parse("1800-01-01"));
+                    }
+                }
+                
                 u.setConsulta_victimas_violencia_sexual(sdf.parse("1800-01-01"));
-                u.setConsulta_nutricion(sdf.parse("1800-01-01"));
-                u.setConsulta_psicologica(sdf.parse("1800-01-01"));
-                u.setConsulta_crecimiento_desarrollo_primera_vez(sdf.parse("1800-01-01"));
-                u.setSuministro_sulfato_ferroso_ultima_consulta_menor_10_años("5");
-                u.setSuministro_vitamina_a_ultima_consulta_menor_10_años("5");
-                u.setConsulta_joven_primera_vez(sdf.parse("1800-01-01"));
-                u.setConsulta_adulto_primera_vez(sdf.parse("1800-01-01"));
+                fechaRegi = registroFacade.getFechaValorHC(r.getIdPaciente(), 77);
+                u.setConsulta_nutricion(fechaRegi!=null?sdf.parse(fechaRegi):sdf.parse("1800-01-01"));
+                fechaRegi = registroFacade.getFechaValorHC(r.getIdPaciente(), 17);
+                u.setConsulta_psicologica(fechaRegi!=null?sdf.parse(fechaRegi):sdf.parse("1800-01-01"));
+                fechaRegi = registroFacade.getFechaValorHC(r.getIdPaciente(), 88);
+                u.setConsulta_crecimiento_desarrollo_primera_vez(fechaRegi!=null?sdf.parse(fechaRegi):sdf.parse("1800-01-01"));
+                u.setSuministro_sulfato_ferroso_ultima_consulta_menor_10_años("21");
+                u.setSuministro_vitamina_a_ultima_consulta_menor_10_años("21");
+                fechaRegi = registroFacade.getFechaValorHC(r.getIdPaciente(), 49);
+                u.setConsulta_joven_primera_vez(fechaRegi!=null?sdf.parse(fechaRegi):sdf.parse("1800-01-01"));
+                fechaRegi = registroFacade.getFechaValorHC(r.getIdPaciente(), 59);
+                u.setConsulta_adulto_primera_vez(fechaRegi!=null?sdf.parse(fechaRegi):sdf.parse("1800-01-01"));
                 u.setPreservativos_entregados_pacientes_con_its("999");
                 u.setAsesoria_pre_test_elisa_vih(sdf.parse("1800-01-01"));
                 u.setAsesoria_pos_test_elisa_vih(sdf.parse("1800-01-01"));
-                u.setPaciente_diagnostico_salud_mental_recibio_atencion_ultimos_6_meses_equipo_interdisciplinario_completo("6");
+                u.setPaciente_diagnostico_salud_mental_recibio_atencion_ultimos_6_meses_equipo_interdisciplinario_completo("22");
                 u.setFecha_antigeno_superficie_hepatitis_b_gestantes(sdf.parse("1800-01-01"));
-                u.setResultado_antigeno_superficie_hepatitis_b_gestantes("2");
+                u.setResultado_antigeno_superficie_hepatitis_b_gestantes("22");
+                
                 u.setFecha_serologia_sifilis(sdf.parse("1800-01-01"));
-                u.setResultado_serologia_sifilis("2");
+                String serologia =registroFacade.getValorXCampo(r.getIdPaciente(),"SEROLOGI");
+                valor="22";
+                if(serologia!=null){
+                    if("NORMAL".equals(serologia.toUpperCase())){
+                        valor="1";
+                    }else if ("NEGATIV".equals(serologia.toUpperCase())){
+                        valor="1";
+                    }else if ("POSIT".equals(serologia.toUpperCase())){
+                        valor="2";
+                    }
+                }
+                u.setResultado_serologia_sifilis(valor);
                 u.setFecha_toma_elisa_vih(sdf.parse("1800-01-01"));
                 tipoRegistroClinicoActual = tipoRegCliFacade.find(52);
                 registroEncontrado = registroFacade.buscarUltimo(r.getIdentificacion(), tipoRegistroClinicoActual.getIdTipoReg());
@@ -1563,7 +1849,7 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
                     datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
                 }
                 if (datosFormulario.getDato172().toString().isEmpty()) {
-                    u.setResultado_elisa_vih("3");
+                    u.setResultado_elisa_vih("22");
                 } else {
                     u.setResultado_elisa_vih(datosFormulario.getDato172().toString());
                 }
@@ -1574,7 +1860,7 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
                     datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
                 }
                 if (datosFormulario.getDato51().toString().isEmpty()) {
-                    u.setResultado_tsh_neonatal("2");
+                    u.setResultado_tsh_neonatal("22");
                 } else {
                     u.setResultado_tsh_neonatal(datosFormulario.getDato51().toString());
                 }
@@ -1584,40 +1870,189 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
                     datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
                 }
                 if (datosFormulario.getDato18().toString().isEmpty()) {
-                    u.setTamizaje_cancer_cuello_uterino("8");
+                    if (r.getGenero() == null) {
+                        u.setTamizaje_cancer_cuello_uterino("0");
+                   }else{
+                        if (r.getGenero().getDescripcion().equals("MASCULINO")) {
+                            u.setTamizaje_cancer_cuello_uterino("0");
+                        }else{
+                            u.setTamizaje_cancer_cuello_uterino("22");
+                        }
+                        
+                    }
+                    
                 } else {
                     u.setTamizaje_cancer_cuello_uterino(datosFormulario.getDato18().toString());
                 }
-                u.setCitologia_cervico_uterina(sdf.parse("1800-01-01"));
-                u.setCitologia_cervico_uterina_resultados_bethesda("99");
-                u.setCalidad_muestra_citologia_cervicouterina("99");
-                u.setCodigo_habilitacion_ips_donde_toma_citologia_cervicouterina("99");
-                u.setFecha_colposcopia(sdf.parse("1800-01-01"));
-                u.setCodigo_habilitacion_ips_donde_toma_colposcopia("99");
-                u.setFecha_biopsia_cervical(sdf.parse("1800-01-01"));
-                u.setResultado_biopsia_cervical("99");
-                u.setCodigo_habilitacion_ips_donde_toma_biopsia_cervical("99");
-                u.setFecha_mamografia(sdf.parse("1800-01-01"));
+                
+                if (r.getGenero() == null) {
+                    u.setCitologia_cervico_uterina(sdf.parse("1845-01-01"));
+                }else{
+                    if (r.getGenero().getDescripcion().equals("MASCULINO")) {
+                        u.setCitologia_cervico_uterina(sdf.parse("1845-01-01"));
+                    }else{
+                        u.setCitologia_cervico_uterina(sdf.parse("1800-01-01"));
+                    }
+                }
+                
+                if (r.getGenero() == null) {
+                    u.setCitologia_cervico_uterina_resultados_bethesda("0");
+                }else{
+                    if (r.getGenero().getDescripcion().equals("MASCULINO")) {
+                        u.setCitologia_cervico_uterina_resultados_bethesda("0");
+                    }else{
+                        u.setCitologia_cervico_uterina_resultados_bethesda("999");
+                    }
+                }
+                
+                if (r.getGenero() == null) {
+                    u.setCalidad_muestra_citologia_cervicouterina("0");
+                }else{
+                    if (r.getGenero().getDescripcion().equals("MASCULINO")) {
+                        u.setCalidad_muestra_citologia_cervicouterina("0");
+                    }else{
+                        u.setCalidad_muestra_citologia_cervicouterina("999");
+                    }
+                }
+                
+                if (r.getGenero() == null) {
+                    u.setCodigo_habilitacion_ips_donde_toma_citologia_cervicouterina("0");
+                }else{
+                    if (r.getGenero().getDescripcion().equals("MASCULINO")) {
+                        u.setCodigo_habilitacion_ips_donde_toma_citologia_cervicouterina("0");
+                    }else{
+                        u.setCodigo_habilitacion_ips_donde_toma_citologia_cervicouterina("999");
+                    }
+                }
+                
+                
+                if (r.getGenero() == null) {
+                    u.setFecha_colposcopia(sdf.parse("1845-01-01"));
+                }else{
+                    if (r.getGenero().getDescripcion().equals("MASCULINO")) {
+                        u.setFecha_colposcopia(sdf.parse("1845-01-01"));
+                    }else{
+                        u.setFecha_colposcopia(sdf.parse("1800-01-01"));
+                    }
+                }
+                
+                if (r.getGenero() == null) {
+                    u.setCodigo_habilitacion_ips_donde_toma_colposcopia("0");
+                }else{
+                    if (r.getGenero().getDescripcion().equals("MASCULINO")) {
+                        u.setCodigo_habilitacion_ips_donde_toma_colposcopia("0");
+                    }else{
+                        u.setCodigo_habilitacion_ips_donde_toma_colposcopia("999");
+                    }
+                }
+                
+                
+                if (r.getGenero() == null) {
+                    u.setFecha_biopsia_cervical(sdf.parse("1845-01-01"));
+                }else{
+                    if (r.getGenero().getDescripcion().equals("MASCULINO")) {
+                        u.setFecha_biopsia_cervical(sdf.parse("1845-01-01"));
+                    }else{
+                        u.setFecha_biopsia_cervical(sdf.parse("1800-01-01"));
+                    }
+                }
+                
+                if (r.getGenero() == null) {
+                    u.setResultado_biopsia_cervical("0");
+                }else{
+                    if (r.getGenero().getDescripcion().equals("MASCULINO")) {
+                        u.setResultado_biopsia_cervical("0");
+                    }else{
+                        u.setResultado_biopsia_cervical("999");
+                    }
+                }
+                
+                if (r.getGenero() == null) {
+                    u.setCodigo_habilitacion_ips_donde_toma_biopsia_cervical("0");
+                }else{
+                    if (r.getGenero().getDescripcion().equals("MASCULINO")) {
+                        u.setCodigo_habilitacion_ips_donde_toma_biopsia_cervical("0");
+                    }else{
+                        u.setCodigo_habilitacion_ips_donde_toma_biopsia_cervical("999");
+                    }
+                }
+                
+                
+                
+                if (r.getGenero() == null) {
+                    
+                }else{
+                    if (r.getGenero().getDescripcion().equals("MASCULINO")) {
+                        
+                    }else{
+                        
+                    }
+                }
+                
+                String fechaMamogragia =registroFacade.getValorXCampo(r.getIdPaciente(),"FECHA DE TOMA DE MAMOGRAFIA");
+                valor="1800-01-01";
+                
+                if(fechaMamogragia!=null){
+                    if("NO".equals(fechaMamogragia.toUpperCase())){
+                        valor="1800-01-01";
+                    }else{
+                        try {
+                          valor = sdf.format(sdf.parse(valor));
+                        } catch (Exception e) {
+                        }
+                        
+                    }
+                }
+                
+                if (r.getGenero() == null) {
+                    u.setFecha_mamografia(sdf.parse("1845-01-01"));
+                }else{
+                    if (r.getGenero().getDescripcion().equals("MASCULINO")) {
+                        u.setFecha_mamografia(sdf.parse("1845-01-01"));
+                    }else{
+                        try {
+                            u.setFecha_mamografia(sdf.parse(valor));
+                        } catch (Exception e) {
+                        }
+                        
+                    }
+                }
+                
                 tipoRegistroClinicoActual = tipoRegCliFacade.find(59);
                 registroEncontrado = registroFacade.buscarUltimo(r.getIdentificacion(), tipoRegistroClinicoActual.getIdTipoReg());
                 if (registroEncontrado != null) {
                     datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
                 }
                 if (datosFormulario.getDato102().toString().isEmpty()) {
-                    u.setResultado_mamografia("99");
+                    if (r.getGenero() == null) {
+                        u.setResultado_mamografia("0");
+                    }else{
+                        if (r.getGenero().getDescripcion().equals("MASCULINO")) {
+                            u.setResultado_mamografia("0");
+                        }else{
+                            u.setResultado_mamografia("999");
+                        }
+                        
+                    }
+                    
                 } else {
                     u.setResultado_mamografia(datosFormulario.getDato102().toString());
                 }
-                u.setCodigo_habilitacion_ips_donde_toma_mamografia("99");
+                u.setCodigo_habilitacion_ips_donde_toma_mamografia("999");
                 u.setFecha_toma_biopsia_seno_bacaf(sdf.parse("1800-01-01"));
                 u.setFecha_resultado_biopsia_seno_bacaf(sdf.parse("1800-01-01"));
-                u.setBiopsia_seno_bacaf("99");
-                u.setCodigo_habilitacion_ips_donde_toma_biopsia_seno_bacaf("99");
-                u.setFecha_toma_hemoglobina(sdf.parse("1800-01-01"));
-                u.setHemoglobina("9998");
-                u.setFecha_toma_glicemia_basal(sdf.parse("1800-01-01"));
-                u.setFecha_creatinina(sdf.parse("1800-01-01"));
-                u.setCreatinina("999");
+                u.setBiopsia_seno_bacaf("999");
+                u.setCodigo_habilitacion_ips_donde_toma_biopsia_seno_bacaf("999");
+                String fechaHemoglobina =registroFacade.getFechaValor(r.getIdPaciente(),"HEMOGLOBINA");
+                u.setFecha_toma_hemoglobina(fechaHemoglobina!=null?sdf.parse(fechaHemoglobina):sdf.parse("1800-01-01"));
+                String hemoglobina =registroFacade.getValorXCampo(r.getIdPaciente(),"HEMOGLOBINA");
+                u.setHemoglobina(hemoglobina!=null?hemoglobina:"9998");
+                String fechaGlicemia =registroFacade.getFechaValor(r.getIdPaciente(),"GLICEMIA BASAL");
+                u.setFecha_toma_glicemia_basal(fechaGlicemia!=null?sdf.parse(fechaGlicemia):sdf.parse("1800-01-01"));
+                String fechaCreatinina =registroFacade.getFechaValor(r.getIdPaciente(),"CREATINI");
+                u.setFecha_creatinina(fechaCreatinina!=null?sdf.parse(fechaCreatinina):sdf.parse("1800-01-01"));
+                String creatinina =registroFacade.getValorXCampo(r.getIdPaciente(),"CREATINI");
+                u.setCreatinina(creatinina!=null?creatinina:"999");
                 u.setFecha_hemoglobina_glicosilada(sdf.parse("1800-01-01"));
                 u.setHemoglobina_glicosilada("999");
                 tipoRegistroClinicoActual = tipoRegCliFacade.find(54);
@@ -1641,11 +2076,11 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
                     u.setFecha_toma_hdl(new Date(usuario_nacimiento.parse(datosFormulario.getDato199().toString()).toString()));
                 }
                 u.setFecha_toma_baciloscopia_diagnostico(sdf.parse("1800-01-01"));
-                u.setBaciloscopia_diagnostico("3");
-                u.setTratamiento_hipotiroidismo_congenito("6");
-                u.setTratamiento_sifilis_gestacional("6");
-                u.setTratamiento_sifilis_congenita("6");
-                u.setTratamiento_terminado_lepra("7");
+                u.setBaciloscopia_diagnostico("4");
+                u.setTratamiento_hipotiroidismo_congenito("22");
+                u.setTratamiento_sifilis_gestacional("22");
+                u.setTratamiento_sifilis_congenita("22");
+                u.setTratamiento_terminado_lepra("22");
                 u.setFecha_terminacion_tratamiento_leishmaniasis(sdf.parse("1800-01-01"));
                 post_filtrar.add(u);
                 i++;

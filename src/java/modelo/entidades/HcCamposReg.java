@@ -52,6 +52,8 @@ public class HcCamposReg implements Serializable {
     private Integer posicion;
     @Column(name = "nombre_pdf", length = 2147483647)
     private String nombrePdf;
+    @Column(name = "valor_default", length = 50)
+    private String valorDefault;
     @JoinColumn(name = "id_tipo_reg", referencedColumnName = "id_tipo_reg")
     @ManyToOne
     private HcTipoReg idTipoReg;
@@ -111,6 +113,14 @@ public class HcCamposReg implements Serializable {
 
     public void setIdTipoReg(HcTipoReg idTipoReg) {
         this.idTipoReg = idTipoReg;
+    }
+
+    public String getValorDefault() {
+        return valorDefault;
+    }
+
+    public void setValorDefault(String valorDefault) {
+        this.valorDefault = valorDefault;
     }
 
     @XmlTransient

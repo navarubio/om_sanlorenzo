@@ -64,8 +64,12 @@ public class InvBodegaProductosFacade extends AbstractFacade<InvBodegaProductos>
     }
     public List<InvBodegaProductos> getProductosBodegas(int idBodega){
         try {
-            String hql ="SELECT i FROM InvBodegaProductos i where i.idBodega.idBodega=:idBodega";
-            Query query = getEntityManager().createQuery(hql).setParameter("idBodega", idBodega);
+            String hql ="SELECT i FROM InvBodegaProductos i ";
+            if(idBodega!=0)hql +="where i.idBodega.idBodega=:idBodega";
+            hql +=" ORDER BY i.idBodega.idBodega ";
+            Query query = getEntityManager().createQuery(hql);
+            if(idBodega!=0)
+                query.setParameter("idBodega", idBodega);
             return query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();

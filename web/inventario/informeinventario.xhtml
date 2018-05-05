@@ -1,0 +1,760 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"      
+
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Movimientos de inventario</title>
+        <link href="../recursos/css/estilos.css" rel="stylesheet"/>        
+        <link href="../recursos/css/metro-bootstrap.css" rel="stylesheet"/>
+        <link href="../recursos/css/iconFont.css" rel="stylesheet"/>
+        <link href="../recursos/css/bootstrap.min.css" rel="stylesheet"/>        
+        <script type="text/javascript" src="../recursos/js/calendario.js"/>
+    </h:head>
+    <h:body>
+        <h:form id="IdFormMovimientosInventario" >
+            #{informeInventarioMB.init()}
+            <p:growl id="growl" showDetail="true" sticky="false" autoUpdate="true" life="2000"  />
+            <br/>            
+
+            <br/> 
+            <div class="container">
+                <div class="row">
+                    <div style="padding: 5px;">
+                        <p:outputPanel id="opBotones">
+                            <p:commandButton 
+                                title="Nuevo Movimiento" value="&nbsp;"                                        
+                                styleClass="icon-new fg-lightBlue bg-white no-border"                    
+                                actionListener="#{movimientosInventariosMB.nuevo}"
+                                rendered="#{movimientosInventariosMB.renderBotones}"
+                                process="@this"
+                                update="IdFormMovimientosInventario"
+                                style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/> 
+                            &nbsp;
+
+                            <p:commandButton 
+                                title="Buscar Movimientos" value="&nbsp;"                                        
+                                styleClass="icon-search fg-lightBlue bg-white no-border" 
+                                process="@this"
+                                oncomplete="PF('dialogMovimientos').show()"
+                                rendered="#{movimientosInventariosMB.renderBotones}"
+                                style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/> 
+                            &nbsp;
+                            <p:commandButton 
+                                title="Guardar Movimiento" value="&nbsp;"
+                                styleClass="icon-floppy fg-lightBlue bg-white no-border" 
+                                actionListener="#{movimientosInventariosMB.guardar}"
+                                rendered="#{movimientosInventariosMB.renderBotonGuardar}"
+                                update="IdFormMovimientosInventario:opBotones,IdFormMovimientosInventario:opDialog,IdFormMovimientosInventario:opFormulario,IdFormMovimientosInventario:opProductos"
+                                process="@this,IdFormMovimientosInventario:opFormulario,IdFormMovimientosInventario:opProductos"
+                                style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/>                            
+                            &nbsp;
+                            <p:commandButton                     
+                                title="Anular Orden" value="&nbsp;"                                        
+                                styleClass="icon-cancel fg-lightBlue bg-white no-border"                     
+                                actionListener="#{movimientosInventariosMB.eliminar(movimientosInventariosMB.movimiento)}"
+                                rendered="#{movimientosInventariosMB.renderBotonReporte}"
+                                update="IdFormMovimientosInventario:opFormulario,IdFormMovimientosInventario:opProductos,IdFormMovimientosInventario:opBotones"
+                                style="font-size: 20px; width: 20px; height: 20px; left: 20px; "> 
+                                <p:confirm header="Confirmación" message="¿Seguro desea anular  ?" icon="ui-icon-alert" />
+                            </p:commandButton>
+                            &nbsp;                
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+                            <p:commandButton 
+                                title="Imprimir Movimiento" value="&nbsp;"
+                                styleClass="icon-printer fg-lightBlue bg-white no-border" 
+                                process="@this"
+                                ajax="false" 
+                                actionListener="#{movimientosInventariosMB.imprimir}"
+                                onclick="this.form.target = '_blank'"
+                                rendered="#{movimientosInventariosMB.renderBotonReporte}"
+                                style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/>                            
+                            &nbsp;
+                            <p:commandButton 
+                                title="Enviar Documento " value="&nbsp;"                                        
+                                styleClass="icon-mail fg-lightBlue bg-white no-border" 
+                                oncomplete="PF('dialogEmail').show()"
+                                process="@this"
+                                rendered="#{movimientosInventariosMB.renderBotonReporte}"
+                                style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/> 
+                        </p:outputPanel>
+                    </div>
+                </div>
+                <p:panel style="padding: 5px;">
+                    <p:outputPanel id="opFormulario">
+                        <div class="row">
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Tipo de Movimiento" styleClass="campoObligatorio2"/>
+                                <p:selectOneMenu value="#{movimientosInventariosMB.tipoMovimiento}" style="width:190px;">
+                                    <f:selectItem itemValue="0" itemLabel="-- Seleccione Movimiento --" />
+                                    <f:selectItem itemValue="E" itemLabel="Entrada" />
+                                    <f:selectItem itemValue="S" itemLabel="Salida" />
+                                    <f:ajax listener="#{movimientosInventariosMB.validarTipoMovimiento}" event="change" render="IdFormMovimientosInventario:opFormulario" />
+                                </p:selectOneMenu>
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Tipo Proceso" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderProcesos}"/><br />
+                                <p:selectOneMenu id="somTipoProceso" value="#{movimientosInventariosMB.tipoProceso}" rendered="#{movimientosInventariosMB.renderProcesos}">
+                                    <f:selectItem itemLabel="-- Seleccione proceso --" itemValue="0" />
+                                    <f:selectItems value="#{movimientosInventariosMB.listaProcesos}" rendered="#{movimientosInventariosMB.renderProcesos}"/>
+                                    <f:ajax listener="#{movimientosInventariosMB.validarTipoProceso}" event="change" render="IdFormMovimientosInventario:opFormulario IdFormMovimientosInventario:opBotones IdFormMovimientosInventario:opProductos" />
+                                </p:selectOneMenu>
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Número Documento" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderForm}"/>
+                                <p:inputText value="#{movimientosInventariosMB.numeroDocumento}" styleClass="form-control" maxlength="10" rendered="#{movimientosInventariosMB.renderForm}"/>
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Fecha Movimiento" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderForm}"/>
+                                <p:inputText value="#{movimientosInventariosMB.fechaMovimiento}" styleClass="form-control" maxlength="10" readonly="true" rendered="#{movimientosInventariosMB.renderForm}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </p:inputText>
+                            </div>
+                        </div><!--/row-->
+                        <!-- row entrada Traslados -->
+                        <div class="row">
+                            <div class="col-sm-2 col-xs-12">
+                                <p:outputLabel value="Número De Salida" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderEntradaTraslado}"/>
+                                <p:inputText id="txtNroDocumento" value="#{movimientosInventariosMB.nroSalida}"  styleClass="form-control" maxlength="10"  rendered="#{movimientosInventariosMB.renderEntradaTraslado}">
+                                </p:inputText>
+                            </div>
+                            <div class="col-sm-1 col-xs-12">
+                                <br/>
+                                <p:commandButton 
+                                    title       =   "Buscar Número de Salida" value="&nbsp;"                                        
+                                    style       =   "height: 20px;top: 6px;"
+                                    rendered="#{movimientosInventariosMB.renderEntradaTraslado}"
+                                    styleClass  =   "icon-search fg-lightBlue" 
+                                    process="@this,IdFormMovimientosInventario:txtNroDocumento"
+                                    update="IdFormMovimientosInventario:opFormulario,IdFormMovimientosInventario:opProductos,IdFormMovimientosInventario:opBotones"
+                                    actionListener="#{movimientosInventariosMB.buscarCodigo}"
+                                    /> 
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Bodega Origen" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderEntradaTrasladoB}"/>
+                                <p:inputText value="#{movimientosInventariosMB.bodegaOrigen.codigoBodega} #{movimientosInventariosMB.bodegaOrigen.nombre}" styleClass="form-control" readonly="true" rendered="#{movimientosInventariosMB.renderEntradaTrasladoB}"/>
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Bodega Destino" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderEntradaTrasladoB}"/>
+                                <p:inputText value="#{movimientosInventariosMB.bodegaDestino.codigoBodega} #{movimientosInventariosMB.bodegaDestino.nombre}" styleClass="form-control" readonly="true" rendered="#{movimientosInventariosMB.renderEntradaTrasladoB}"/>
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Fecha Solicitud" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderEntradaTrasladoB}"/>
+                                <p:inputText value="#{movimientosInventariosMB.movimiento.fechaMovimiento}" styleClass="form-control" readonly="true" rendered="#{movimientosInventariosMB.renderEntradaTrasladoB}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </p:inputText>
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Lote" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderEntradaTrasladoB}"/><br />
+                                <p:selectOneMenu value="#{movimientosInventariosMB.idLote}" style="width:190px;"  rendered="#{movimientosInventariosMB.renderEntradaTrasladoB}">
+                                        <f:selectItem itemValue="0" itemLabel="-- Seleccione Lote --" />
+                                        <f:selectItems value="#{movimientosInventariosMB.listaLote}" var="lot" itemLabel="#{lot.codigo}" itemValue="#{lot.idLote}"/>
+                                        <p:ajax event="change" listener="#{movimientosInventariosMB.validarProductosBodegaLoteEntrada}" update="IdFormMovimientosInventario:opFormulario IdFormMovimientosInventario:opBotones IdFormMovimientosInventario:opProductos IdFormMovimientosInventario:listaProductos" ></p:ajax>
+                                  </p:selectOneMenu>
+                                
+                            </div>
+                        </div>
+
+                        <!-- /.row entrada Traslados-->
+                        <!-- row entrada saldo inicial -->
+                        <div class="row">
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Bodega" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderEntradaSaldoInicial}"/>
+                                <p:inputText value="#{movimientosInventariosMB.bodegaOrigen.codigoBodega} #{movimientosInventariosMB.bodegaOrigen.nombre}" styleClass="form-control" readonly="true" rendered="#{movimientosInventariosMB.renderEntradaSaldoInicial}"/>
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Lote" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderEntradaSaldoInicial}"/><br />
+                                <p:selectOneMenu value="#{movimientosInventariosMB.idLote}" style="width:190px;"  rendered="#{movimientosInventariosMB.renderEntradaSaldoInicial}">
+                                        <f:selectItem itemValue="0" itemLabel="-- Seleccione Lote --" />
+                                        <f:selectItems value="#{movimientosInventariosMB.listaLote}" var="lot" itemLabel="#{lot.codigo}" itemValue="#{lot.idLote}"/>
+                                        <p:ajax event="change" listener="#{movimientosInventariosMB.validarSaldoInicial}" update="IdFormMovimientosInventario:opFormulario IdFormMovimientosInventario:opBotones IdFormMovimientosInventario:opProductos" ></p:ajax>
+                                  </p:selectOneMenu>
+                                
+                            </div>
+                        </div>
+                        <!-- /.row entrada saldo inicial-->
+                        <!-- row entrada ajuste positivo -->
+                        <div class="row">
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Bodega" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderEntradaAjustePositivo}"/>
+                                <p:inputText value="#{movimientosInventariosMB.bodegaOrigen.codigoBodega} #{movimientosInventariosMB.bodegaOrigen.nombre}" styleClass="form-control" readonly="true" rendered="#{movimientosInventariosMB.renderEntradaAjustePositivo}"/>
+                                
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Lote" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderEntradaAjustePositivo}"/><br />
+                                <p:selectOneMenu value="#{movimientosInventariosMB.idLote}" style="width:190px;"  rendered="#{movimientosInventariosMB.renderEntradaAjustePositivo}">
+                                        <f:selectItem itemValue="0" itemLabel="-- Seleccione Lote --" />
+                                        <f:selectItems value="#{movimientosInventariosMB.listaLote}" var="lot" itemLabel="#{lot.codigo}" itemValue="#{lot.idLote}"/>
+                                        <p:ajax event="change" listener="#{movimientosInventariosMB.validarAjustePositivo}" update="IdFormMovimientosInventario:opFormulario IdFormMovimientosInventario:opBotones IdFormMovimientosInventario:opProductos" ></p:ajax>
+                                  </p:selectOneMenu>
+                                
+                            </div>
+                        </div>
+                        <!-- /.row entrada ajuste positivo-->
+                        <!-- row entrada devolución cliente -->
+                        <p:outputPanel rendered="#{movimientosInventariosMB.renderEntradaDevolucionCompra}">
+                        <div class="row">
+                            <div class="col-sm-2 col-xs-12">
+                                <p:outputLabel value="Número De Salida" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderEntradaDevolucionCompra}"/>
+                                <p:inputText id="txtNroDocumentoDevolucion" value="#{movimientosInventariosMB.nroSalida}"  styleClass="form-control" maxlength="10"  rendered="#{movimientosInventariosMB.renderEntradaDevolucionCompra}">
+                                </p:inputText>
+                            </div>
+                            <div class="col-sm-1 col-xs-12">
+                                <br/>
+                                <p:commandButton 
+                                    title       =   "Buscar Número de Salida" value="&nbsp;"                                        
+                                    style       =   "height: 20px;top: 6px;"
+                                    rendered="#{movimientosInventariosMB.renderEntradaDevolucionCompra}"
+                                    styleClass  =   "icon-search fg-lightBlue" 
+                                    process="@this,IdFormMovimientosInventario:txtNroDocumentoDevolucion"
+                                    update="IdFormMovimientosInventario:opFormulario,IdFormMovimientosInventario:opProductos,IdFormMovimientosInventario:opBotones"
+                                    actionListener="#{movimientosInventariosMB.buscarCodigoDevolucion}"
+                                    /> 
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Bodega Origen" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderEntradaDevolucionCompraB}"/>
+                                <p:inputText value="#{movimientosInventariosMB.bodegaOrigen.codigoBodega} #{movimientosInventariosMB.bodegaOrigen.nombre}" styleClass="form-control" readonly="true" rendered="#{movimientosInventariosMB.renderEntradaDevolucionCompraB}"/>
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Fecha Solicitud" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderEntradaDevolucionCompraB}"/>
+                                <p:inputText value="#{movimientosInventariosMB.movimiento.fechaMovimiento}" styleClass="form-control" readonly="true" rendered="#{movimientosInventariosMB.renderEntradaDevolucionCompraB}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </p:inputText>
+                            </div>
+                        </div></p:outputPanel>
+                        <!-- /.row entrada devolución cliente-->
+                        <!-- row salida traslado-->
+                        <div class="row">
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Bodega Origen" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderSalidaTraslados}"/>
+                                <p:selectOneMenu value="#{movimientosInventariosMB.bodegaOrigen.idBodega}" rendered="#{movimientosInventariosMB.renderSalidaTraslados}" style="width:195px;" disabled="true">
+                                    <f:selectItem itemValue="0" itemLabel="-- Seleccione Bodega --" />
+                                    <f:selectItems value="#{movimientosInventariosMB.listaBodegas}" var="bod" itemLabel="#{bod.codigoBodega} #{bod.nombre} " itemValue="#{bod.idBodega}" />
+                                    <f:ajax listener="#{movimientosInventariosMB.validarBodegaOrigen}" event="change" render="somBodegasDestino" />
+                                </p:selectOneMenu>
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Lote" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderSalidaTraslados}"/><br />
+                                <p:selectOneMenu value="#{movimientosInventariosMB.idLote}" style="width:190px;"  rendered="#{movimientosInventariosMB.renderSalidaTraslados}">
+                                        <f:selectItem itemValue="0" itemLabel="-- Seleccione Lote --" />
+                                        <f:selectItems value="#{movimientosInventariosMB.listaLote}" var="lot" itemLabel="#{lot.codigo}" itemValue="#{lot.idLote}"/>
+                                        <p:ajax event="change" listener="#{movimientosInventariosMB.validarProductosBodegaLote}" update="IdFormMovimientosInventario:opFormulario IdFormMovimientosInventario:opBotones IdFormMovimientosInventario:opProductos IdFormMovimientosInventario:listaProductos" ></p:ajax>
+                                  </p:selectOneMenu>
+                                
+                            </div>
+                            
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Bodega Destino" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderSalidaTraslados}"/>
+                                <p:selectOneMenu id="somBodegasDestino" value="#{movimientosInventariosMB.bodegaDestino.idBodega}" rendered="#{movimientosInventariosMB.renderSalidaTraslados}" style="width:195px;">
+                                    <f:selectItem itemValue="0" itemLabel="-- Seleccione Bodega --" />
+                                    <f:selectItems value="#{movimientosInventariosMB.listaBodegasDestinos}" var="bod" itemLabel="#{bod.codigoBodega} #{bod.nombre} " itemValue="#{bod.idBodega}" />
+                                </p:selectOneMenu>
+                            </div>
+                        </div><!--/row-->
+
+                        <!-- ./row salida traslado-->
+                        <!-- row salida ajuste negativo -->
+                        <div class="row">
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Bodega" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderSalidaTrasladosAjusteNegativo}"/>
+                                <p:inputText value="#{movimientosInventariosMB.bodegaOrigen.codigoBodega} #{movimientosInventariosMB.bodegaOrigen.nombre}" styleClass="form-control" readonly="true" rendered="#{movimientosInventariosMB.renderSalidaTrasladosAjusteNegativo}"/>
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Lote" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderSalidaTrasladosAjusteNegativo}"/><br />
+                                <p:selectOneMenu value="#{movimientosInventariosMB.idLote}" style="width:190px;"  rendered="#{movimientosInventariosMB.renderSalidaTrasladosAjusteNegativo}">
+                                        <f:selectItem itemValue="0" itemLabel="-- Seleccione Lote --" />
+                                        <f:selectItems value="#{movimientosInventariosMB.listaLote}" var="lot" itemLabel="#{lot.codigo}" itemValue="#{lot.idLote}"/>
+                                        <p:ajax event="change" listener="#{movimientosInventariosMB.validarLoteAjusteNegativo}" update="IdFormMovimientosInventario:opFormulario IdFormMovimientosInventario:opBotones IdFormMovimientosInventario:opProductos IdFormMovimientosInventario:listaProductos" ></p:ajax>
+                                  </p:selectOneMenu>
+                                
+                            </div>
+                        </div>
+                        <!-- /.row salida ajuste negativo-->
+                        <!-- row salida devolución compra -->
+                        <div class="row">
+                            
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Número De Salida" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderSalidaTrasladosDevolucionCompra}"/>
+                                <p:inputText id="txtNroSalidaDevolucion" value="#{movimientosInventariosMB.nroSalida}"  styleClass="form-control" maxlength="10"  rendered="#{movimientosInventariosMB.renderSalidaTrasladosDevolucionCompra}">
+                                </p:inputText>
+                            </div>
+                            
+                            <div class="col-sm-2 col-xs-12">
+                                <p:outputLabel value="Orden de Compra" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderSalidaTrasladosDevolucionCompra}"/>
+                                <p:inputText id="txtNroOrdenDevolucion" value="#{movimientosInventariosMB.nroOrden}"  styleClass="form-control" maxlength="10"  rendered="#{movimientosInventariosMB.renderSalidaTrasladosDevolucionCompra}">
+                                </p:inputText>
+                            </div>
+                            <div class="col-sm-1 col-xs-12">
+                                <br/>
+                                <p:commandButton 
+                                    title       =   "Buscar Documento" value="&nbsp;"                                        
+                                    style       =   "height: 20px;top: 6px;"
+                                    rendered="#{movimientosInventariosMB.renderSalidaTrasladosDevolucionCompra}"
+                                    styleClass  =   "icon-search fg-lightBlue" 
+                                    process="@this,IdFormMovimientosInventario:txtNroSalidaDevolucion,IdFormMovimientosInventario:txtNroOrdenDevolucion"
+                                    update="IdFormMovimientosInventario:opFormulario,IdFormMovimientosInventario:opProductos,IdFormMovimientosInventario:opBotones"
+                                    actionListener="#{movimientosInventariosMB.buscarCodigoSalidaDevolucionCompra}"
+                                    /> 
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Bodega Origen" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderSalidaTrasladosDevolucionCompraB}"/>
+                                <p:inputText value="#{movimientosInventariosMB.bodegaOrigen.codigoBodega} #{movimientosInventariosMB.bodegaOrigen.nombre}" styleClass="form-control" readonly="true" rendered="#{movimientosInventariosMB.renderSalidaTrasladosDevolucionCompraB}"/>
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Bodega destino" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderSalidaTrasladosDevolucionCompraB}"/>
+                                <p:inputText value="#{movimientosInventariosMB.bodegaDestino.codigoBodega} #{movimientosInventariosMB.bodegaDestino.nombre}" styleClass="form-control" readonly="true" rendered="#{movimientosInventariosMB.renderSalidaTrasladosDevolucionCompraB}"/>
+                            </div>
+                            <div class="col-sm-2 col-xs-12">
+                                <p:outputLabel value="Fecha Solicitud" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderSalidaTrasladosDevolucionCompraB}"/>
+                                <p:inputText value="#{movimientosInventariosMB.movimiento.fechaMovimiento}" styleClass="form-control" readonly="true" rendered="#{movimientosInventariosMB.renderSalidaTrasladosDevolucionCompraB}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </p:inputText>
+                            </div>
+                             <div class="col-sm-3 col-xs-12">
+                                <p:outputLabel value="Lote" styleClass="campoObligatorio2" rendered="#{movimientosInventariosMB.renderSalidaTrasladosDevolucionCompraB}"/><br />
+                                <p:selectOneMenu disabled="true" value="#{movimientosInventariosMB.idLote}" style="width:190px;"  rendered="#{movimientosInventariosMB.renderSalidaTrasladosDevolucionCompraB}">
+                                        <f:selectItem itemValue="0" itemLabel="-- Seleccione Lote --" />
+                                        <f:selectItems value="#{movimientosInventariosMB.listaLote}" var="lot" itemLabel="#{lot.codigo}" itemValue="#{lot.idLote}"/>
+                                        <p:ajax event="change" listener="#{movimientosInventariosMB.validarLoteAjusteNegativo}" update="IdFormMovimientosInventario:opFormulario IdFormMovimientosInventario:opBotones IdFormMovimientosInventario:opProductos IdFormMovimientosInventario:listaProductos" ></p:ajax>
+                                  </p:selectOneMenu>
+                                
+                            </div>
+                        </div>
+
+                        <!-- /.row salida devolución compra-->
+                    </p:outputPanel>
+                    <!--/productos-->
+                </p:panel>
+                <p:outputPanel id="opProductos">
+                    <!-- entrada-->
+                    <h:panelGroup rendered="#{movimientosInventariosMB.renderTitulo}">
+                        <h3>Productos</h3>
+                    </h:panelGroup>
+                    <!--entrada traslado productos -->
+                    <br />
+                    <h:panelGroup rendered="#{movimientosInventariosMB.renderEntradaTrasladoB}">
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-12">
+                            <p:dataTable id="idDTProductosEntrada"
+                                         value="#{movimientosInventariosMB.listaMovimientosProductos}"
+                                         rows="8"                               
+                                         rendered="#{movimientosInventariosMB.renderEntradaTrasladoB}"
+                                         var="producto"
+                                         paginator="true"
+                                         paginatorPosition="bottom"                                
+                                         emptyMessage="No hay productos "
+                                         editable="true" editMode="cell"
+                                         >
+                                <p:column headerText="Código Producto" filterMatchMode="contains" filterBy="#{producto.idProducto.codigo}">  
+                                    #{producto.idProducto.codigo}
+                                </p:column>                            
+                                <p:column headerText="Nombre Producto"  filterMatchMode="contains" filterBy="#{producto.idProducto.nombre}">  
+                                    #{producto.idProducto.nombre}
+                                </p:column>                            
+                                <p:column headerText="Cantidad"  filterMatchMode="contains">  
+                                    <h:outputText value="#{producto.cantidadSolicitada}" />
+                                </p:column>                            
+                                <p:column headerText="Cantidad Recibida"  filterMatchMode="contains">  
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{producto.cantidadRecibida}" /></f:facet>
+                                        <f:facet name="input"><p:spinner value="#{producto.cantidadRecibida}" min="1"  size="5"/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>                            
+                            </p:dataTable>
+                        </div>
+                    </div><!--/row-->
+                    </h:panelGroup>
+                    <!--entrada traslado productos -->
+                    <!-- entrada saldo inicial -->
+                    <h:panelGroup rendered="#{movimientosInventariosMB.renderEntradaSaldoInicial}">
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-12">
+                            <p:dataTable id="idDTProductosEntradaSaldoInicial"
+                                         value="#{movimientosInventariosMB.listaMovimientosProductos}"
+                                         rows="8"                               
+                                         rendered="#{movimientosInventariosMB.renderEntradaSaldoInicial}"
+                                         var="producto"
+                                         paginator="true"
+                                         paginatorPosition="bottom"                                
+                                         emptyMessage="No hay productos "
+                                         editable="true" editMode="cell"
+                                         >
+                                <p:column headerText="Código Producto" filterMatchMode="contains" filterBy="#{producto.idProducto.codigo}">  
+                                    #{producto.idProducto.codigo}
+                                </p:column>                            
+                                <p:column headerText="Nombre Producto"  filterMatchMode="contains" filterBy="#{producto.idProducto.nombre}">  
+                                    #{producto.idProducto.nombre}
+                                </p:column>                            
+                                <p:column headerText="Existencia Actual"  filterMatchMode="contains">  
+                                    <h:outputText value="#{producto.existencia}" />
+                                </p:column>                            
+                                <p:column headerText="Existencia Inicial"  filterMatchMode="contains">  
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{producto.cantidadSolicitada}" /></f:facet>
+                                        <f:facet name="input"><p:spinner value="#{producto.cantidadSolicitada}" min="1"  size="5"/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>                            
+                            </p:dataTable>
+                        </div>
+                    </div><!--/row-->
+                    </h:panelGroup>
+                    <!-- ./entrada saldo inicial -->
+                    <!-- entrada ajuste positivo -->
+                    <h:panelGroup rendered="#{movimientosInventariosMB.renderEntradaAjustePositivo}">
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-12">
+                            <p:dataTable id="idDTProductosEntradaAjustePositivo"
+                                         value="#{movimientosInventariosMB.listaMovimientosProductos}"
+                                         rows="8"                               
+                                         rendered="#{movimientosInventariosMB.renderEntradaAjustePositivo}"
+                                         var="producto"
+                                         paginator="true"
+                                         paginatorPosition="bottom"                                
+                                         emptyMessage="No hay productos "
+                                         editable="true" editMode="cell"
+                                         >
+                                <p:ajax event="cellEdit" listener="#{movimientosInventariosMB.onCellEditAjustePositivo}" oncomplete="update()" update="@none" process="@this"/>
+                                <p:column headerText="Código Producto" filterMatchMode="contains" filterBy="#{producto.idProducto.codigo}">  
+                                    #{producto.idProducto.codigo}
+                                </p:column>                            
+                                <p:column headerText="Nombre Producto"  filterMatchMode="contains" filterBy="#{producto.idProducto.nombre}">  
+                                    #{producto.idProducto.nombre}
+                                </p:column>                            
+                                <p:column headerText="Existencia"  filterMatchMode="contains">  
+                                    <h:outputText value="#{producto.existencia}" />
+                                </p:column>                            
+                                <p:column headerText="Cantidad"  filterMatchMode="contains">  
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{producto.cantidadSolicitada}" /></f:facet>
+                                        <f:facet name="input"><p:spinner value="#{producto.cantidadSolicitada}" min="1"  size="5"/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>                            
+                                <p:column headerText="Cantidad Movimiento"  filterMatchMode="contains">  
+                                    <h:outputText value="#{producto.total}" />
+                                </p:column>                            
+                            </p:dataTable>
+                        </div>
+                    </div><!--/row-->
+                    </h:panelGroup>
+                    <!-- ./entrada ajuste positivo -->
+                    <h:panelGroup rendered="#{movimientosInventariosMB.renderEntradaDevolucionCompraB}">
+                    <!--entrada devolución cliente -->
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-12">
+                            <p:dataTable id="idDTProductosEntradaDevolucion"
+                                         value="#{movimientosInventariosMB.listaMovimientosProductos}"
+                                         rows="8"                               
+                                         rendered="#{movimientosInventariosMB.renderEntradaDevolucionCompraB}"
+                                         var="producto"
+                                         paginator="true"
+                                         paginatorPosition="bottom"                                
+                                         emptyMessage="No hay productos "
+                                         editable="true" editMode="cell"
+                                         >
+                                <p:column headerText="Código Producto" filterMatchMode="contains" filterBy="#{producto.idProducto.codigo}">  
+                                    #{producto.idProducto.codigo}
+                                </p:column>                            
+                                <p:column headerText="Nombre Producto"  filterMatchMode="contains" filterBy="#{producto.idProducto.nombre}">  
+                                    #{producto.idProducto.nombre}
+                                </p:column>                            
+                                <p:column headerText="Cantidad"  filterMatchMode="contains">  
+                                    <h:outputText value="#{producto.cantidadSolicitada}" />
+                                </p:column>                            
+                                <p:column headerText="Cantidad Recibida"  filterMatchMode="contains">  
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{producto.cantidadRecibida}" /></f:facet>
+                                        <f:facet name="input"><p:spinner value="#{producto.cantidadRecibida}" min="1"  size="5"/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>                            
+                            </p:dataTable>
+                        </div>
+                    </div><!--/row-->
+                    </h:panelGroup>
+                    <!--entrada devolución cliente -->
+                    <h:panelGroup rendered="#{movimientosInventariosMB.renderSalidaTraslados}">
+                    <!-- salida traslado-->
+                    <div class="row">
+                            <p:commandButton 
+                                title="Agregar producto" value="&nbsp;"                                        
+                                styleClass="icon-plus fg-lightBlue bg-white no-border"                    
+                                oncomplete="PF('IdDialogoBuscarProducto').show()"
+                                process="@this"
+                                rendered="#{movimientosInventariosMB.renderSalidaTraslados}"
+                                style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/> 
+                        </div><!--/row-->
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-12 col-xs-12">
+                                <p:dataTable id="idDTProductosSalida"
+                                             value="#{movimientosInventariosMB.listaMovimientosProductos}"
+                                             rows="8"                               
+                                             rendered="#{movimientosInventariosMB.renderSalidaTraslados}"
+                                             var="producto"
+                                             paginator="true"
+                                             paginatorPosition="bottom"                                
+                                             emptyMessage="No hay productos "
+                                             editable="true" editMode="cell"
+                                             >
+                                    <p:ajax event="cellEdit" listener="#{movimientosInventariosMB.onCellEdit}" /> 
+                                    <p:column headerText="Código Producto" filterMatchMode="contains" filterBy="#{producto.idProducto.codigo}">  
+                                        #{producto.idProducto.codigo}
+                                    </p:column>                            
+                                    <p:column headerText="Nombre Producto"  filterMatchMode="contains" filterBy="#{producto.idProducto.nombre}">  
+                                        #{producto.idProducto.nombre}
+                                    </p:column>                            
+                                    <p:column headerText="Existencia"  filterMatchMode="contains">  
+                                        <h:outputText value="#{producto.existencia}" />
+                                    </p:column>                            
+                                    <p:column headerText="Cantidad"  filterMatchMode="contains">  
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{producto.cantidadSolicitada}" /></f:facet>
+                                            <f:facet name="input"><p:spinner value="#{producto.cantidadSolicitada}" min="1"  size="5"/></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>                            
+                                </p:dataTable>
+                            </div>
+                        </div><!--/row-->
+                    </h:panelGroup>
+                    <!-- ./Salida traslado -->
+                    <h:panelGroup rendered="#{movimientosInventariosMB.renderSalidaTrasladosAjusteNegativo}">
+                    <!-- salida ajuste negativo -->
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-12">
+                            <p:dataTable id="idDTProductosEntradaAjusteNegativo"
+                                         value="#{movimientosInventariosMB.listaMovimientosProductos}"
+                                         rows="8"                               
+                                         rendered="#{movimientosInventariosMB.renderSalidaTrasladosAjusteNegativo}"
+                                         var="producto"
+                                         paginator="true"
+                                         paginatorPosition="bottom"                                
+                                         emptyMessage="No hay productos "
+                                         editable="true" editMode="cell"
+                                         >
+                                <p:ajax event="cellEdit" listener="#{movimientosInventariosMB.onCellEditAjusteNegativo}" oncomplete="update()" update="@none" process="@this"/>
+                                <p:column headerText="Código Producto" filterMatchMode="contains" filterBy="#{producto.idProducto.codigo}">  
+                                    #{producto.idProducto.codigo}
+                                </p:column>                            
+                                <p:column headerText="Nombre Producto"  filterMatchMode="contains" filterBy="#{producto.idProducto.nombre}">  
+                                    #{producto.idProducto.nombre}
+                                </p:column>                            
+                                <p:column headerText="Existencia"  filterMatchMode="contains">  
+                                    <h:outputText value="#{producto.existencia}" />
+                                </p:column>                            
+                                <p:column headerText="Cantidad"  filterMatchMode="contains">  
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{producto.cantidadSolicitada}" /></f:facet>
+                                        <f:facet name="input"><p:spinner value="#{producto.cantidadSolicitada}" min="1"  size="5"/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>                            
+                                <p:column headerText="Cantidad Movimiento"  filterMatchMode="contains">  
+                                    <h:outputText value="#{producto.total}" />
+                                </p:column>                            
+                            </p:dataTable>
+                        </div>
+                    </div><!--/row-->
+                    </h:panelGroup>
+                    <!-- ./salida ajuste negativo -->
+                    <!--salida Devolución compra -->
+                    <h:panelGroup rendered="#{movimientosInventariosMB.renderSalidaTrasladosDevolucionCompraB}">
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-12">
+                            <p:dataTable id="idDTProductosSalidaDevolucion"
+                                         value="#{movimientosInventariosMB.listaMovimientosProductos}"
+                                         rows="8"                               
+                                         rendered="#{movimientosInventariosMB.renderSalidaTrasladosDevolucionCompraB}"
+                                         var="producto"
+                                         paginator="true"
+                                         paginatorPosition="bottom"                                
+                                         emptyMessage="No hay productos "
+                                         editable="true" editMode="cell"
+                                         >
+                                <p:column headerText="Código Producto" filterMatchMode="contains" filterBy="#{producto.idProducto.codigo}">  
+                                    #{producto.idProducto.codigo}
+                                </p:column>                            
+                                <p:column headerText="Nombre Producto"  filterMatchMode="contains" filterBy="#{producto.idProducto.nombre}">  
+                                    #{producto.idProducto.nombre}
+                                </p:column>                            
+                                <p:column headerText="Cantidad Recibida"  filterMatchMode="contains">  
+                                    <h:outputText value="#{producto.cantidadRecibida}" />
+                                </p:column>                            
+                                <p:column headerText="Cantidad Devolver"  filterMatchMode="contains">  
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{producto.cantidadDevolver}" /></f:facet>
+                                        <f:facet name="input"><p:spinner value="#{producto.cantidadDevolver}" min="1"  size="5"/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>                            
+                            </p:dataTable>
+                        </div>
+                    </div><!--/row-->
+                    </h:panelGroup>
+                    <!--entrada traslado productos -->
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-5 col-xs-12">
+                            <p:outputLabel value="Observaciones"  rendered="#{movimientosInventariosMB.renderTitulo}"/>
+                            <p:inputTextarea styleClass="form-control" rows="6" cols="16" placeholder="Observaciones de la entrada" value="#{movimientosInventariosMB.observaciones}" rendered="#{movimientosInventariosMB.renderTitulo}"/>
+
+                        </div>
+                    </div>
+                </p:outputPanel>
+                <!--Orden de compra-->
+                <p:outputPanel id="listaProductos">
+                    <p:dialog id="IdDialogoBuscarProducto" header="BUSCAR PRODUCTOS" widgetVar="IdDialogoBuscarProducto" resizable="false" modal="true">  
+                        <table>
+                            <tr>
+                                <td>
+                                    <p:dataTable 
+                                        id="IdTablaProductos" 
+                                        var="prod" 
+                                        widgetVar="wvTablaProductos"
+                                        value="#{movimientosInventariosMB.listaProductosBodegas}"
+                                        rowKey="#{prod.idBodegaProducto}"  
+                                        selection="#{movimientosInventariosMB.bodegaProducto}" 
+                                        paginator="true"
+                                        style="width: 600px; height: 300px;"
+                                        rows="10"                                    
+                                        paginatorPosition="bottom"                                
+                                        emptyMessage="No hay productos con existencia en la bodega"
+                                        scrollable="true" 
+                                        currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                        paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"                                    
+                                        pageLinks="5"                                   
+                                        selectionMode="single"
+
+                                        resizableColumns="true">                                   
+                                        <p:column headerText="Código Producto" filterBy="#{prod.idProducto.codigo}" filterMatchMode="contains">  
+                                            #{prod.idProducto.codigo}  
+                                        </p:column>                            
+                                        <p:column headerText="Nombre Producto" filterBy="#{prod.idProducto.nombre}" filterMatchMode="contains">  
+                                            #{prod.idProducto.nombre}  
+                                        </p:column>                 
+                                        <p:column headerText="Nombre Génerico" filterBy="#{prod.idProducto.nombreGenerico}" filterMatchMode="contains">  
+                                            #{prod.idProducto.nombreGenerico}  
+                                        </p:column>                            
+                                        <p:column headerText="Existencia" filterBy="#{prod.existencia}" filterMatchMode="contains">  
+                                            #{prod.existencia}
+                                        </p:column>                            
+                                    </p:dataTable>  
+                                </td>    
+                            </tr>
+                            <tr>
+                                <td>
+                                    <br/>
+                                    <p:commandButton 
+                                        value="Cargar seleccionado"                                
+                                        process="@this,IdTablaProductos"
+                                        oncomplete="PF('IdDialogoBuscarProducto').hide()"
+                                        update="IdFormMovimientosInventario:opProductos"
+                                        actionListener="#{movimientosInventariosMB.agregarProducto}"/>
+                                </td>    
+                            </tr>
+                        </table>
+                    </p:dialog>
+                    <!--dialog email-->
+                    <p:outputPanel id="opDialog">
+                        <p:dialog id="IdDialogoEmail" header="Enviar Orden" widgetVar="dialogEmail" resizable="false" modal="true" width="300px;">  
+                            <p:panel>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <p:outputLabel value="E-mail" />
+                                            <p:inputText styleClass="form-control" placeholder="email a enviar" value="#{movimientosInventariosMB.email}" type="email"/>
+
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <p:outputLabel value="Asunto" />
+                                            <p:inputText styleClass="form-control" placeholder="Asunto correo" value="#{movimientosInventariosMB.asunto}"/>
+
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <p:outputLabel value="Mensaje" />
+                                            <p:inputTextarea styleClass="form-control" rows="6" cols="16" placeholder="Mensaje" value="#{movimientosInventariosMB.mensaje}"/>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <p:commandButton value="Enviar" styleClass="btn btn-primary" actionListener="#{movimientosInventariosMB.enviarEmail}" process="@this,IdDialogoEmail" update="IdFormMovimientosInventario:opDialog"/>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <p:ajaxStatus style="display:block;margin-bottom:2em;height:24px;">
+                                                <f:facet name="default">
+                                                    <h:outputText value="" />
+                                                </f:facet>
+                                                <f:facet name="start">
+                                                    <h:outputText value="Enviando..." />
+                                                </f:facet>
+                                                <f:facet name="complete">
+                                                    <h:outputText value="" />
+                                                </f:facet>
+                                            </p:ajaxStatus>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </p:panel>
+
+                        </p:dialog>
+                        <!--Orden de compra-->
+                        <p:dialog id="IdDialogoMovimientos" header="BUSCAR MOVIMIENTOS" widgetVar="dialogMovimientos" resizable="false" modal="true">  
+                            <table>
+                                <tr>
+                                    <td>
+                                        <p:dataTable 
+                                            id="IdTablaMovimientos" 
+                                            var="mov" 
+                                            widgetVar="wvTablaMovimientos"
+                                            value="#{movimientosInventariosMB.listaMovimientos}"
+                                            rowKey="#{mov.idMovimiento}"  
+                                            selection="#{movimientosInventariosMB.movimiento}" 
+                                            paginator="true"
+                                            style="width: 600px; height: 300px;"
+                                            rows="10"                                    
+                                            paginatorPosition="bottom"                                
+                                            emptyMessage="No hay movimientos"
+                                            scrollable="true" 
+                                            currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                            paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"                                    
+                                            pageLinks="5"                                   
+                                            selectionMode="single"
+
+                                            resizableColumns="true">                                   
+                                            <p:column headerText="Número Documento" filterBy="#{mov.numeroDocumento}" filterMatchMode="contains">  
+                                                #{mov.numeroDocumento}  
+                                            </p:column>                            
+                                            <p:column headerText="Fecha" filterBy="#{mov.fechaMovimiento}" filterMatchMode="contains">  
+                                                <p:outputLabel value="#{mov.fechaMovimiento}">
+                                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                                </p:outputLabel>
+                                            </p:column>                            
+                                            <p:column headerText="Estado" filterBy="#{mov.estado}" filterMatchMode="contains">  
+                                                #{mov.estado}
+                                            </p:column>                            
+                                            <p:column headerText="Tipo Movimiento" filterMatchMode="contains">  
+                                                #{mov.tipoMovimiento}
+                                            </p:column>                            
+                                        </p:dataTable>  
+                                    </td>    
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <br/>
+                                        <p:commandButton 
+                                            value="Cargar seleccionado"                                
+                                            process="@this,IdTablaMovimientos"
+                                            update="IdFormMovimientosInventario:opFormulario,IdFormMovimientosInventario:opBotones,IdFormMovimientosInventario:opProductos,IdFormMovimientosInventario:opDialog"
+                                            oncomplete="PF('dialogMovimientos').hide()"
+                                            actionListener="#{movimientosInventariosMB.buscar}"/>
+                                    </td>    
+                                </tr>
+                            </table>
+                        </p:dialog>
+                    </p:outputPanel>
+                </p:outputPanel>
+            </div>
+        </h:form>   
+    </h:body>
+</html>
+

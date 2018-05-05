@@ -1,0 +1,1179 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">  
+    <h:head>
+        <title>Usuarios</title>
+        <link href="../recursos/css/estilos.css" rel="stylesheet"/>        
+        <link href="../recursos/css/metro-bootstrap.css" rel="stylesheet"/>
+        <link href="../recursos/css/iconFont.css" rel="stylesheet"/>
+        <link href="../recursos/css/bootstrap.min.css" rel="stylesheet"/>        
+        <script type="text/javascript" src="../recursos/js/calendario.js"></script> 
+        <script type="text/javascript">
+            $(document).keypress(
+                    function (event) {
+                        if (event.which == '13') {
+                            event.preventDefault();
+                        }
+
+
+                    });
+        </script>
+    </h:head>
+    <h:body>
+        #{historiasMB.inicializar()}
+        <h:form id="IdFormEscala">  
+            <p:growl id="IdMensajeUsuarios" showDetail="true" sticky="false" autoUpdate="true" life="2000"/>
+            <table style="margin-left: auto; margin-right: auto;" >
+
+                <tr><td colspan="2"><h3>ESCALA ABREVIADA DE DESARROLLO</h3></td></tr>                                
+            </table>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-1"  >
+                    </div>
+                    <div class="col-md-1"  >
+                        <h5>EDAD</h5>
+                    </div>
+                    <div class="col-md-5"  >
+                        <h5>DESCRIPCION</h5>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                        <h5>MOT GROUP</h5>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                        <h5>MOT F ADAP.</h5>
+                    </div>
+                    <div class="col-md-1"  style="text-align: center;">
+                        <h5>AUD LEN</h5>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                        <h5>PER SOC</h5>
+                    </div>
+                    
+                </div>
+                <hr />
+                <!--div row <1-->
+                <div class="row">
+                    <div class="col-md-1"  >
+                        <p:selectBooleanCheckbox value="#{historiasMB.item0}" >
+                            <p:ajax listener="#{historiasMB.validar(0)}" update="IdFormEscala"/>
+                        </p:selectBooleanCheckbox>
+                    </div>
+                    <div class="col-md-1"  >
+                        <label style="font-size: 14px;text-align: center;"> &#60; 1 </label>
+                    </div>
+                    <div class="col-md-5"  >
+                        <label style="font-size: 14px;text-align: left;"> Patea (Vigorosamente) </label>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                        <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato0}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato1}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato2}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato3}"  />
+                    </div>
+                    
+                </div>
+                
+                <!--div row 1 a 3-->
+                <div class="row">
+                    <div class="col-md-1"  >
+                        <p:selectBooleanCheckbox value="#{historiasMB.item1}" >
+                            <p:ajax listener="#{historiasMB.validar(1)}" update="IdFormEscala"/>
+                        </p:selectBooleanCheckbox>
+                    </div>
+                    <div class="col-md-1"  >
+                        <label style="font-size: 14px;text-align: center;"> 1 a 3 </label>
+                    </div>
+                    <div class="col-md-5"  >
+                        <label style="font-size: 14px;text-align: left;">Levanta la cabeza en prona </label>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato4}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato5}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato6}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato7}" />
+                    </div>
+                    
+                </div>
+                
+                <!--div row 1 a 3-->
+                <div class="row">
+                    <div class="col-md-1"  >
+                        <p:selectBooleanCheckbox value="#{historiasMB.item2}" >
+                            <p:ajax listener="#{historiasMB.validar(2)}" update="IdFormEscala"/>
+                        </p:selectBooleanCheckbox>
+                    </div>
+                    <div class="col-md-1"  >
+                        <label style="font-size: 14px;text-align: center;"> 1 a 3 </label>
+                    </div>
+                    <div class="col-md-5"  >
+                        <label style="font-size: 14px;text-align: left;"> Levanta cabeza y pecho en prona </label>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato8}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato9}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato10}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato11}" />
+                    </div>
+                    
+                </div>
+                
+                
+                <!--div row 1 a 3-->
+                <div class="row">
+                    <div class="col-md-1"  >
+                        <p:selectBooleanCheckbox value="#{historiasMB.item3}" >
+                            <p:ajax listener="#{historiasMB.validar(3)}" update="IdFormEscala"/>
+                        </p:selectBooleanCheckbox>
+                    </div>
+                    <div class="col-md-1"  >
+                        <label style="font-size: 14px;text-align: center;"> 1 a 3 </label>
+                    </div>
+                    <div class="col-md-5"  >
+                        <label style="font-size: 14px;text-align: left;"> Sostiene cabeza al levantarlo de los brazos</label>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato12}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato13}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato14}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato15}" />
+                    </div>
+                    
+                </div>
+
+                                <!--div row 4 a 6-->
+                <div class="row">
+                    <div class="col-md-1"  >
+                        <p:selectBooleanCheckbox value="#{historiasMB.item4}" >
+                            <p:ajax listener="#{historiasMB.validar(4)}" update="IdFormEscala"/>
+                        </p:selectBooleanCheckbox>
+                    </div>
+                    <div class="col-md-1"  >
+                        <label style="font-size: 14px;text-align: center;"> 4 a 6 </label>
+                    </div>
+                    <div class="col-md-5"  >
+                        <label style="font-size: 14px;text-align: left;"> Control de cabeza sentado</label>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato16}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato17}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato18}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato19}" />
+                    </div>
+                    
+                </div>
+
+                                <!--div row 4 a 6-->
+                <div class="row">
+                    <div class="col-md-1"  >
+                        <p:selectBooleanCheckbox value="#{historiasMB.item5}" >
+                            <p:ajax listener="#{historiasMB.validar(5)}" update="IdFormEscala"/>
+                        </p:selectBooleanCheckbox>
+                    </div>
+                    <div class="col-md-1"  >
+                        <label style="font-size: 14px;text-align: center;"> 4 a 6 </label>
+                    </div>
+                    <div class="col-md-5"  >
+                        <label style="font-size: 14px;text-align: left;"> Se voltea de un lado a otro</label>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato20}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato21}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato22}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato23}" />
+                    </div>
+                    
+                </div>  
+                                
+                 
+                <!--div row 4 a 6-->
+                <div class="row">
+                    <div class="col-md-1"  >
+                        <p:selectBooleanCheckbox value="#{historiasMB.item6}" >
+                            <p:ajax listener="#{historiasMB.validar(6)}" update="IdFormEscala"/>
+                        </p:selectBooleanCheckbox>
+                    </div>
+                    <div class="col-md-1"  >
+                        <label style="font-size: 14px;text-align: center;"> 4 a 6 </label>
+                    </div>
+                    <div class="col-md-5"  >
+                        <label style="font-size: 14px;text-align: left;"> Intenta sentarse solo</label>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato24}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato25}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato26}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato27}" />
+                    </div>
+                    
+                </div>
+                
+                
+                <!--div row 7 a 9-->
+                <div class="row">
+                    <div class="col-md-1"  >
+                        <p:selectBooleanCheckbox value="#{historiasMB.item7}" >
+                            <p:ajax listener="#{historiasMB.validar(7)}" update="IdFormEscala"/>
+                        </p:selectBooleanCheckbox>
+                    </div>
+                    <div class="col-md-1"  >
+                        <label style="font-size: 14px;text-align: center;"> 7 a 9 </label>
+                    </div>
+                    <div class="col-md-5"  >
+                        <label style="font-size: 14px;text-align: left;"> Se sostiene sentado con ayuda</label>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato28}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato29}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato30}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato31}" />
+                    </div>
+                    
+                </div>
+                <!--div row 7 a 9-->
+                <div class="row">
+                    <div class="col-md-1"  >
+                        <p:selectBooleanCheckbox value="#{historiasMB.item8}" >
+                            <p:ajax listener="#{historiasMB.validar(8)}" update="IdFormEscala"/>
+                        </p:selectBooleanCheckbox>
+                    </div>
+                    <div class="col-md-1"  >
+                        <label style="font-size: 14px;text-align: center;"> 7 a 9 </label>
+                    </div>
+                    <div class="col-md-5"  >
+                        <label style="font-size: 14px;text-align: left;">Se arrastra en posición prona</label>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato32}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato33}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato34}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato35}" />
+                    </div>
+                    
+                </div>
+                
+                
+                                <!--div row 7 a 9-->
+                <div class="row">
+                    <div class="col-md-1"  >
+                        <p:selectBooleanCheckbox value="#{historiasMB.item9}" >
+                            <p:ajax listener="#{historiasMB.validar(9)}" update="IdFormEscala"/>
+                        </p:selectBooleanCheckbox>
+                    </div>
+                    <div class="col-md-1"  >
+                        <label style="font-size: 14px;text-align: center;"> 7 a 9 </label>
+                    </div>
+                    <div class="col-md-5"  >
+                        <label style="font-size: 14px;text-align: left;">Se sienta por sí solo</label>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato36}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato37}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato38}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato39}" />
+                    </div>
+                    
+                </div>
+
+                               
+                <!--div row 7 a 9-->
+                <div class="row">
+                    <div class="col-md-1"  >
+                        <p:selectBooleanCheckbox value="#{historiasMB.item10}" >
+                            <p:ajax listener="#{historiasMB.validar(10)}" update="IdFormEscala"/>
+                        </p:selectBooleanCheckbox>
+                    </div>
+                    <div class="col-md-1"  >
+                        <label style="font-size: 14px;text-align: center;"> 10 a 12 </label>
+                    </div>
+                    <div class="col-md-5"  >
+                        <label style="font-size: 14px;text-align: left;">Gatea (Bien)</label>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato40}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato41}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato42}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato43}" />
+                    </div>
+                    
+                </div>
+                
+                <!--div row 7 a 9-->
+                <div class="row">
+                    <div class="col-md-1"  >
+                        <p:selectBooleanCheckbox value="#{historiasMB.item11}" >
+                            <p:ajax listener="#{historiasMB.validar(11)}" update="IdFormEscala"/>
+                        </p:selectBooleanCheckbox>
+                    </div>
+                    <div class="col-md-1"  >
+                        <label style="font-size: 14px;text-align: center;"> 10 a 12 </label>
+                    </div>
+                    <div class="col-md-5"  >
+                        <label style="font-size: 14px;text-align: left;">Se agarra y se sostiene de pie</label>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato44}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato45}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato46}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato47}" />
+                    </div>
+                    
+                </div>
+                
+                <!--div row 7 a 9-->
+                <div class="row">
+                    <div class="col-md-1"  >
+                        <p:selectBooleanCheckbox value="#{historiasMB.item12}" >
+                            <p:ajax listener="#{historiasMB.validar(12)}" update="IdFormEscala"/>
+                        </p:selectBooleanCheckbox>
+                    </div>
+                    <div class="col-md-1"  >
+                        <label style="font-size: 14px;text-align: center;"> 10 a 12 </label>
+                    </div>
+                    <div class="col-md-5"  >
+                        <label style="font-size: 14px;text-align: left;">Se para solo</label>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato48}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato49}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato50}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato51}" />
+                    </div>
+                    
+                </div>
+                
+                <!--div row 13 a 18-->
+                <div class="row">
+                    <div class="col-md-1"  >
+                        <p:selectBooleanCheckbox value="#{historiasMB.item13}" >
+                            <p:ajax listener="#{historiasMB.validar(13)}" update="IdFormEscala"/>
+                        </p:selectBooleanCheckbox>
+                    </div>
+                    <div class="col-md-1"  >
+                        <label style="font-size: 14px;text-align: center;"> 13 a 18 </label>
+                    </div>
+                    <div class="col-md-5"  >
+                        <label style="font-size: 14px;text-align: left;">Da pasitos solo</label>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato52}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato53}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato54}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato55}" />
+                    </div>
+                    
+                </div>
+                
+                <!--div row 13 a 18-->
+                <div class="row">
+                    <div class="col-md-1"  >
+                        <p:selectBooleanCheckbox value="#{historiasMB.item14}" >
+                            <p:ajax listener="#{historiasMB.validar(14)}" update="IdFormEscala"/>
+                        </p:selectBooleanCheckbox>
+                    </div>
+                    <div class="col-md-1"  >
+                        <label style="font-size: 14px;text-align: center;"> 13 a 18 </label>
+                    </div>
+                    <div class="col-md-5"  >
+                        <label style="font-size: 14px;text-align: left;">Camina solo bien</label>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato56}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato57}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato58}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato59}" />
+                    </div>
+                    
+                </div>
+                
+                <!--div row 13 a 18-->
+                <div class="row">
+                    <div class="col-md-1"  >
+                        <p:selectBooleanCheckbox value="#{historiasMB.item15}" >
+                            <p:ajax listener="#{historiasMB.validar(15)}" update="IdFormEscala"/>
+                        </p:selectBooleanCheckbox>
+                    </div>
+                    <div class="col-md-1"  >
+                        <label style="font-size: 14px;text-align: center;"> 13 a 18 </label>
+                    </div>
+                    <div class="col-md-5"  >
+                        <label style="font-size: 14px;text-align: left;">Corre</label>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato60}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato61}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato62}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato63}" />
+                    </div>
+                    
+                </div>
+                
+                                
+                <!--div row 19 a 24-->
+                <div class="row">
+                    <div class="col-md-1"  >
+                        <p:selectBooleanCheckbox value="#{historiasMB.item16}" >
+                            <p:ajax listener="#{historiasMB.validar(16)}" update="IdFormEscala"/>
+                        </p:selectBooleanCheckbox>
+                    </div>
+                    <div class="col-md-1"  >
+                        <label style="font-size: 14px;text-align: center;"> 19 a 24 </label>
+                    </div>
+                    <div class="col-md-5"  >
+                        <label style="font-size: 14px;text-align: left;">Patea la pelota</label>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato64}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato65}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato66}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato67}" />
+                    </div>
+                    
+                </div>
+                
+                <!--div row 19 a 24-->
+                <div class="row">
+                    <div class="col-md-1"  >
+                        <p:selectBooleanCheckbox value="#{historiasMB.item17}" >
+                            <p:ajax listener="#{historiasMB.validar(17)}" update="IdFormEscala"/>
+                        </p:selectBooleanCheckbox>
+                    </div>
+                    <div class="col-md-1"  >
+                        <label style="font-size: 14px;text-align: center;"> 19 a 24 </label>
+                    </div>
+                    <div class="col-md-5"  >
+                        <label style="font-size: 14px;text-align: left;">Lanza la pelota con las manos</label>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato68}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato69}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato70}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato71}" />
+                    </div>
+                    
+                </div>
+                
+                <!--div row 19 a 24-->
+                <div class="row">
+                    <div class="col-md-1"  >
+                        <p:selectBooleanCheckbox value="#{historiasMB.item18}" >
+                            <p:ajax listener="#{historiasMB.validar(18)}" update="IdFormEscala"/>
+                        </p:selectBooleanCheckbox>
+                    </div>
+                    <div class="col-md-1"  >
+                        <label style="font-size: 14px;text-align: center;"> 19 a 24 </label>
+                    </div>
+                    <div class="col-md-5"  >
+                        <label style="font-size: 14px;text-align: left;">Salta con los dos pies</label>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato72}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato73}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato74}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato75}" />
+                    </div>
+                    
+                </div>
+                
+                <!--div row 25 a 36-->
+                <div class="row">
+                    <div class="col-md-1"  >
+                        <p:selectBooleanCheckbox value="#{historiasMB.item19}" >
+                            <p:ajax listener="#{historiasMB.validar(19)}" update="IdFormEscala"/>
+                        </p:selectBooleanCheckbox>
+                    </div>
+                    <div class="col-md-1"  >
+                        <label style="font-size: 14px;text-align: center;"> 25 a 36 </label>
+                    </div>
+                    <div class="col-md-5"  >
+                        <label style="font-size: 14px;text-align: left;">Se empina en ambos pies</label>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato76}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato77}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato78}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato79}" />
+                    </div>
+                    
+                </div>
+                
+                <!--div row 25 a 36-->
+                <div class="row">
+                    <div class="col-md-1"  >
+                        <p:selectBooleanCheckbox value="#{historiasMB.item20}" >
+                            <p:ajax listener="#{historiasMB.validar(20)}" update="IdFormEscala"/>
+                        </p:selectBooleanCheckbox>
+                    </div>
+                    <div class="col-md-1"  >
+                        <label style="font-size: 14px;text-align: center;"> 25 a 36 </label>
+                    </div>
+                    <div class="col-md-5"  >
+                        <label style="font-size: 14px;text-align: left;">Se levanta sin usar las manos</label>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato80}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato81}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato82}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato83}" />
+                    </div>
+                    
+                </div>
+                <!--div row 25 a 36-->
+                <div class="row">
+                    <div class="col-md-1"  >
+                        <p:selectBooleanCheckbox value="#{historiasMB.item21}" >
+                            <p:ajax listener="#{historiasMB.validar(21)}" update="IdFormEscala"/>
+                        </p:selectBooleanCheckbox>
+                    </div>
+                    <div class="col-md-1"  >
+                        <label style="font-size: 14px;text-align: center;"> 25 a 36 </label>
+                    </div>
+                    <div class="col-md-5"  >
+                        <label style="font-size: 14px;text-align: left;">Camina hacia atrás</label>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato84}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato85}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato86}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato87}" />
+                    </div>
+                    
+                </div>
+                <!--div row 37 a 48-->
+                <div class="row">
+                    <div class="col-md-1"  >
+                        <p:selectBooleanCheckbox value="#{historiasMB.item22}" >
+                            <p:ajax listener="#{historiasMB.validar(22)}" update="IdFormEscala"/>
+                        </p:selectBooleanCheckbox>
+                    </div>
+                    <div class="col-md-1"  >
+                        <label style="font-size: 14px;text-align: center;"> 37 a 48 </label>
+                    </div>
+                    <div class="col-md-5"  >
+                        <label style="font-size: 14px;text-align: left;">Camina en punta de pies</label>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato88}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato89}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato90}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato91}" />
+                    </div>
+                    
+                </div>
+                
+                <!--div row 37 a 48-->
+                <div class="row">
+                    <div class="col-md-1"  >
+                        <p:selectBooleanCheckbox value="#{historiasMB.item23}" >
+                            <p:ajax listener="#{historiasMB.validar(23)}" update="IdFormEscala"/>
+                        </p:selectBooleanCheckbox>
+                    </div>
+                    <div class="col-md-1"  >
+                        <label style="font-size: 14px;text-align: center;"> 37 a 48 </label>
+                    </div>
+                    <div class="col-md-5"  >
+                        <label style="font-size: 14px;text-align: left;">Se para en un solo pie</label>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato92}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato93}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato94}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato95}" />
+                    </div>
+                    
+                </div>
+                
+                <!--div row 37 a 48-->
+                <div class="row">
+                    <div class="col-md-1"  >
+                        <p:selectBooleanCheckbox value="#{historiasMB.item24}" >
+                            <p:ajax listener="#{historiasMB.validar(24)}" update="IdFormEscala"/>
+                        </p:selectBooleanCheckbox>
+                    </div>
+                    <div class="col-md-1"  >
+                        <label style="font-size: 14px;text-align: center;"> 37 a 48 </label>
+                    </div>
+                    <div class="col-md-5"  >
+                        <label style="font-size: 14px;text-align: left;">Lanza y agarra la pelota</label>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato96}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato97}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato98}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato99}" />
+                    </div>
+                    
+                </div>
+                
+                <!--div row 49 a 60-->
+                <div class="row">
+                    <div class="col-md-1"  >
+                        <p:selectBooleanCheckbox value="#{historiasMB.item25}" >
+                            <p:ajax listener="#{historiasMB.validar(25)}" update="IdFormEscala"/>
+                        </p:selectBooleanCheckbox>
+                    </div>
+                    <div class="col-md-1"  >
+                        <label style="font-size: 14px;text-align: center;"> 49 a 60 </label>
+                    </div>
+                    <div class="col-md-5"  >
+                        <label style="font-size: 14px;text-align: left;">Camina en línea recta</label>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato100}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato101}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato102}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato103}" />
+                    </div>
+                    
+                </div>
+                
+                <!--div row 49 a 60-->
+                <div class="row">
+                    <div class="col-md-1"  >
+                        <p:selectBooleanCheckbox value="#{historiasMB.item26}" >
+                            <p:ajax listener="#{historiasMB.validar(26)}" update="IdFormEscala"/>
+                        </p:selectBooleanCheckbox>
+                    </div>
+                    <div class="col-md-1"  >
+                        <label style="font-size: 14px;text-align: center;"> 49 a 60 </label>
+                    </div>
+                    <div class="col-md-5"  >
+                        <label style="font-size: 14px;text-align: left;">Tres o más pasos en pie</label>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato104}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato105}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato106}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato107}" />
+                    </div>
+                    
+                </div>
+                
+                <!--div row 49 a 60-->
+                <div class="row">
+                    <div class="col-md-1"  >
+                        <p:selectBooleanCheckbox value="#{historiasMB.item27}" >
+                            <p:ajax listener="#{historiasMB.validar(27)}" update="IdFormEscala"/>
+                        </p:selectBooleanCheckbox>
+                    </div>
+                    <div class="col-md-1"  >
+                        <label style="font-size: 14px;text-align: center;"> 49 a 60 </label>
+                    </div>
+                    <div class="col-md-5"  >
+                        <label style="font-size: 14px;text-align: left;">Hace rebotar y agarra la pelota</label>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato108}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato109}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato110}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato111}" />
+                    </div>
+                    
+                </div>
+                
+                <!--div row 61 a 72-->
+                <div class="row">
+                    <div class="col-md-1"  >
+                        <p:selectBooleanCheckbox value="#{historiasMB.item28}" >
+                            <p:ajax listener="#{historiasMB.validar(28)}" update="IdFormEscala"/>
+                        </p:selectBooleanCheckbox>
+                    </div>
+                    <div class="col-md-1"  >
+                        <label style="font-size: 14px;text-align: center;"> 61 a 72 </label>
+                    </div>
+                    <div class="col-md-5"  >
+                        <label style="font-size: 14px;text-align: left;">Salta a pien juntillas cuerda a 25cm</label>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato112}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato113}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato114}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato115}" />
+                    </div>
+                    
+                </div>
+                
+                <!--div row 61 a 72-->
+                <div class="row">
+                    <div class="col-md-1"  >
+                        <p:selectBooleanCheckbox value="#{historiasMB.item29}" >
+                            <p:ajax listener="#{historiasMB.validar(29)}" update="IdFormEscala"/>
+                        </p:selectBooleanCheckbox>
+                    </div>
+                    <div class="col-md-1"  >
+                        <label style="font-size: 14px;text-align: center;"> 61 a 72 </label>
+                    </div>
+                    <div class="col-md-5"  >
+                        <label style="font-size: 14px;text-align: left;">Hace caballitos alternando los pies</label>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato116}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato117}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato118}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato119}" />
+                    </div>
+                    
+                </div>
+                
+                <!--div row 61 a 72-->
+                <div class="row">
+                    <div class="col-md-1"  >
+                        <p:selectBooleanCheckbox value="#{historiasMB.item30}" >
+                            <p:ajax listener="#{historiasMB.validar(30)}" update="IdFormEscala"/>
+                        </p:selectBooleanCheckbox>
+                    </div>
+                    <div class="col-md-1"  >
+                        <label style="font-size: 14px;text-align: center;"> 61 a 72 </label>
+                    </div>
+                    <div class="col-md-5"  >
+                        <label style="font-size: 14px;text-align: left;">Salta desde 80cm. De altura </label>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato120}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato121}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato122}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato123}" />
+                    </div>
+                    
+                </div>
+                
+                <!--div row 73 a 84-->
+                <div class="row">
+                    <div class="col-md-1"  >
+                        <p:selectBooleanCheckbox value="#{historiasMB.item31}" >
+                            <p:ajax listener="#{historiasMB.validar(31)}" update="IdFormEscala"/>
+                        </p:selectBooleanCheckbox>
+                    </div>
+                    <div class="col-md-1"  >
+                        <label style="font-size: 14px;text-align: center;"> 73 a 84 </label>
+                    </div>
+                    <div class="col-md-5"  >
+                        <label style="font-size: 14px;text-align: left;">Juega mula golosa </label>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato124}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato125}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato126}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato127}" />
+                    </div>
+                    
+                </div>
+                
+                <!--div row 73 a 84-->
+                <div class="row">
+                    <div class="col-md-1"  >
+                        <p:selectBooleanCheckbox value="#{historiasMB.item32}" >
+                            <p:ajax listener="#{historiasMB.validar(32)}" update="IdFormEscala"/>
+                        </p:selectBooleanCheckbox>
+                    </div>
+                    <div class="col-md-1"  >
+                        <label style="font-size: 14px;text-align: center;"> 73 a 84 </label>
+                    </div>
+                    <div class="col-md-5"  >
+                        <label style="font-size: 14px;text-align: left;">Hace construcción rudimentaria </label>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato128}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato129}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato130}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato131}" />
+                    </div>
+                    
+                </div>
+                
+                <!--div row 73 a 84-->
+                <div class="row">
+                    <div class="col-md-1"  >
+                        <p:selectBooleanCheckbox value="#{historiasMB.item33}" >
+                            <p:ajax listener="#{historiasMB.validar(33)}" update="IdFormEscala"/>
+                        </p:selectBooleanCheckbox>
+                    </div>
+                    <div class="col-md-1"  >
+                        <label style="font-size: 14px;text-align: center;"> 73 a 84 </label>
+                    </div>
+                    <div class="col-md-5"  >
+                        <label style="font-size: 14px;text-align: left;">Salta alternando pies </label>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato132}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato133}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato134}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato135}" />
+                    </div>
+                    
+                </div>
+                
+                <!--div row 85 a 93-->
+                <div class="row">
+                    <div class="col-md-1"  >
+                        <p:selectBooleanCheckbox value="#{historiasMB.item34}" >
+                            <p:ajax listener="#{historiasMB.validar(34)}" update="IdFormEscala"/>
+                        </p:selectBooleanCheckbox>
+                    </div>
+                    <div class="col-md-1"  >
+                        <label style="font-size: 14px;text-align: center;"> 85 a 93 </label>
+                    </div>
+                    <div class="col-md-5"  >
+                        <label style="font-size: 14px;text-align: left;">Abre y cierra las manos alternadamente </label>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato136}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato137}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato138}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato139}" />
+                    </div>
+                    
+                </div>
+                
+                
+                <!--div row 85 a 93-->
+                <div class="row">
+                    <div class="col-md-1"  >
+                        <p:selectBooleanCheckbox value="#{historiasMB.item35}" >
+                            <p:ajax listener="#{historiasMB.validar(35)}" update="IdFormEscala"/>
+                        </p:selectBooleanCheckbox>
+                    </div>
+                    <div class="col-md-1"  >
+                        <label style="font-size: 14px;text-align: center;"> 85 a 93 </label>
+                    </div>
+                    <div class="col-md-5"  >
+                        <label style="font-size: 14px;text-align: left;">Marcha sin perder el ritmo </label>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato140}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato141}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato142}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato143}" />
+                    </div>
+                    
+                </div>
+                
+                <!--div row 85 a 93-->
+                <div class="row">
+                    <div class="col-md-1"  >
+                        <p:selectBooleanCheckbox value="#{historiasMB.item36}" >
+                            <p:ajax listener="#{historiasMB.validar(36)}" update="IdFormEscala"/>
+                        </p:selectBooleanCheckbox>
+                    </div>
+                    <div class="col-md-1"  >
+                        <label style="font-size: 14px;text-align: center;"> 85 a 93 </label>
+                    </div>
+                    <div class="col-md-5"  >
+                        <label style="font-size: 14px;text-align: left;">Salta Cuerda </label>
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato144}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato145}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;" >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato146}" />
+                    </div>
+                    <div class="col-md-1" style="text-align: center;"  >
+                       <p:selectBooleanCheckbox value="#{historiasMB.datosFormulario.dato147}" />
+                    </div>
+                    
+                </div>
+            </div>
+            <table style="margin-left: auto; margin-right: auto;" >
+                <tr><td>&nbsp;</td></tr>
+                <tr>
+                    <td colspan="2">
+                        <p:outputLabel value="FECHA-HORA REGISTRO"/><p:calendar navigator="true" locale="es" value="#{historiasMB.fechaReg}" pattern="dd/MM/yyyy HH:mm:ss" size="23" mask="true" />
+                    </td>
+                </tr>
+                
+                <tr><td>&nbsp;</td></tr>
+                <tr>
+                    <td><p:outputLabel value="MEDICO"/></td>
+                    <td><p:outputLabel value="ESPECIALIDAD"/></td>
+                </tr>
+                <tr>
+                    <td>
+                        <p:selectOneMenu style="width: 315px;" value="#{historiasMB.idPrestador}" filter="true" filterMatchMode="contains">                            
+                            <p:ajax event="change" listener="#{historiasMB.cambiaMedico}" update="IdEspecialidad"/>
+                            <f:selectItem itemLabel="" itemValue=""/>
+                            <f:selectItems value="#{historiasMB.listaPrestadores}" var="p" itemLabel="#{p.primerNombre} #{p.segundoNombre} #{p.primerApellido} #{p.segundoApellido}" itemValue="#{p.idUsuario}"/>
+                        </p:selectOneMenu>
+                    </td>
+                    <td><p:inputText id="IdEspecialidad" readonly="true" styleClass="width1" value="#{historiasMB.especialidadPrestador}"/></td>
+                </tr>                
+                <tr><td>&nbsp;</td></tr>
+                <tr>
+                    <td colspan="2">
+                        <p:commandButton icon="ui-icon-disk" value="Guardar Nuevo Registro" 
+                                         actionListener="#{historiasMB.guardarRegistro}" disabled="#{historiasMB.modificandoRegCli}" 
+                                         update="@form"/>
+                        <p:commandButton icon="ui-icon-arrowthickstop-1-s" value="Actualizar Registro"
+                                         actionListener="#{historiasMB.actualizarRegistro}" disabled="#{!historiasMB.modificandoRegCli}"
+                                         rendered="#{loginMB.superUsuario}" update="@form"/>
+                        <p:commandButton icon="ui-icon-document" value="Limpiar Formulario" 
+                                         actionListener="#{historiasMB.btnLimpiarFormulario}" update="@form"/>
+                    </td>
+                </tr>
+            </table>
+            <p:dialog id="IdTextosDlgPredefinidos" header="TEXTOS PREDEFINIDOS" width="645" widgetVar="dlgTextosPredefinidos" resizable="false" closable="true" modal="true">                                
+                <p:panelGrid styleClass="panelGridSinBordes" id="IdPanelTextosPredefinidos">
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel   styleClass="labelFormulario" style="width: 60px;" value="Categoría: "/>
+                            <p:selectOneMenu styleClass="campoFormulario" style="width: 220px;" value="#{historiasMB.idMaestroTextoPredef}" >
+                                <f:ajax event="change" listener="#{historiasMB.cambiaMaestro}" render="IdComboTextosPredefinidos IdEditorTextoPredefinido IdNombrePredefinido"/> 
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItems value="#{historiasMB.listaMaestrosTxtPredefinidos}" var="maestro" itemValue="#{maestro.idMaestro}" itemLabel="#{maestro.nombre}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel   styleClass="labelFormulario" style="width: 60px;" value="Predefinidos: "/>
+                            <p:selectOneMenu styleClass="campoFormulario" style="width: 220px;" id="IdComboTextosPredefinidos" value="#{historiasMB.idTextoPredef}" >
+                                <f:ajax 
+                                    event="change"
+                                    listener="#{historiasMB.cambiaTextoPredefinido}"                                               
+                                    render="IdEditorTextoPredefinido IdNombrePredefinido"/>                                 
+                                <f:selectItems value="#{historiasMB.listaTxtPredefinidos}" var="texto" itemValue="#{texto.idTxtPredefinido}" itemLabel="#{texto.nombre}"/>
+                            </p:selectOneMenu>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel styleClass="labelFormulario" value="Nombre: " style="width: 60px;"/>
+                            <p:inputText   styleClass="campoFormulario" id="IdNombrePredefinido" size="39" value="#{historiasMB.nombreTextoPredefinido}"/>                                                    
+                            <p:commandButton icon="ui-icon-circle-arrow-s" title="Usar seleccionado"   actionListener="#{historiasMB.usarTextoPredefinido}"/>
+                            <p:commandButton icon="ui-icon-disk"          title="Guardar/Actualizar"  actionListener="#{historiasMB.guardarTextoPredefinido}" />            
+                            <p:commandButton icon="ui-icon-trash"         title="Eliminar predefinido" id="IdBtnEliminarPredefinido"/>                                        
+                            <p:overlayPanel for="IdBtnEliminarPredefinido" widgetVar="opEliminarPredefinido">
+                                <p:outputLabel   styleClass="labelFormulario" value="¿Confirma la eliminación?  "/>
+                                <p:commandButton value="Si" title="Crear nueva categoría" actionListener="#{historiasMB.eliminarPredefinido}" oncomplete="PF('opEliminarPredefinido').hide();"/>                        
+                            </p:overlayPanel> 
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:editor id="IdEditorTextoPredefinido" value="#{historiasMB.detalleTextoPredef}" width="600" controls="bold italic underline font size bullets numbering alignleft center alignright justify undo redo"/>
+                        </p:column>
+                    </p:row>
+
+                </p:panelGrid>             
+            </p:dialog>
+        </h:form>        
+    </h:body>
+</html>

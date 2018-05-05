@@ -28,6 +28,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import modelo.entidades.CfgClasificaciones;
 import modelo.entidades.CfgPacientes;
+import modelo.entidades.InvBodegaProductos;
 import modelo.entidades.InvBodegas;
 import modelo.entidades.InvCategorias;
 import modelo.entidades.InvLotes;
@@ -36,6 +37,7 @@ import modelo.entidades.InvProveedores;
 import modelo.fachadas.CfgClasificacionesFacade;
 import modelo.fachadas.CfgPacientesFacade;
 import modelo.fachadas.DBConnector;
+import modelo.fachadas.InvBodegaProductosFacade;
 import modelo.fachadas.InvBodegasFacade;
 import modelo.fachadas.InvCategoriasFacade;
 import modelo.fachadas.InvLotesFacade;
@@ -69,6 +71,8 @@ public class ReporteMovimientoInventarioMB extends MetodosGenerales implements j
     private CfgPacientesFacade pacienteFacade;
     @EJB
     private CfgClasificacionesFacade clasificacionesFacade;
+    @EJB
+    private InvBodegaProductosFacade invBodegaProductosFacade;
     /* Variables de uso en beans*/
     private List<InvBodegas> listaBodegas;
     private List<InvCategorias> listaCategorias;
@@ -79,6 +83,7 @@ public class ReporteMovimientoInventarioMB extends MetodosGenerales implements j
     private List<InvProveedores> listaProveedores;
     private List<CfgClasificaciones> listaTipoIdentificacion;
     private List<RepInventarioCsv> listaReporteCsv;//
+    private List<InvBodegaProductos> listaBodegaProductos;//
     private String tipoMovimiento;
     private String tipoProceso;
     private Date fechaDesde;
@@ -95,9 +100,11 @@ public class ReporteMovimientoInventarioMB extends MetodosGenerales implements j
     private String operador;
     private double cantidadOperador;
     private int tipoReporte;
-
+    private boolean renderForm;
     @PostConstruct()
     public void init() {
+        renderForm = true;
+        tipoReporte = 0;
         if (listaCategorias == null) {
             listaCategorias = categoriaFachada.getActivos();
         }
@@ -141,6 +148,10 @@ public class ReporteMovimientoInventarioMB extends MetodosGenerales implements j
         limpiarListasCsv();
         if (tipoReporte == 3) {
             cargarProveedores();
+            renderForm = true;
+        }else if(tipoReporte == 6){
+            listaBodegaProductos = new ArrayList<>();
+            renderForm = false;
         }
 
     }
@@ -440,6 +451,13 @@ public class ReporteMovimientoInventarioMB extends MetodosGenerales implements j
         }
     }
 
+    
+    public void vistaPreviaInventario(){
+        int idBodega=0;
+        if(bodega!=null) idBodega = bodega.getIdBodega();
+        listaBodegaProductos = invBodegaProductosFacade.getProductosBodegas(idBodega);
+        
+    }
     /**
      *
      */
@@ -1079,6 +1097,22 @@ public class ReporteMovimientoInventarioMB extends MetodosGenerales implements j
 
     public void setTipoReporte(int tipoReporte) {
         this.tipoReporte = tipoReporte;
+    }
+
+    public boolean isRenderForm() {
+        return renderForm;
+    }
+
+    public void setRenderForm(boolean renderForm) {
+        this.renderForm = renderForm;
+    }
+
+    public List<InvBodegaProductos> getListaBodegaProductos() {
+        return listaBodegaProductos;
+    }
+
+    public void setListaBodegaProductos(List<InvBodegaProductos> listaBodegaProductos) {
+        this.listaBodegaProductos = listaBodegaProductos;
     }
 
 }
