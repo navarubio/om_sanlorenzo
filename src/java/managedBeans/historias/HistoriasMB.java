@@ -49,6 +49,7 @@ import modelo.entidades.CfgClasificaciones;
 import modelo.entidades.CfgDiagnostico;
 import modelo.entidades.CfgEmpresa;
 import modelo.entidades.CfgFamiliar;
+import modelo.entidades.CfgHistoriaCamposPredefinidos;
 import modelo.entidades.CfgMaestrosTxtPredefinidos;
 import modelo.entidades.CfgMedicamento;
 import modelo.entidades.CfgPacientes;
@@ -70,6 +71,7 @@ import modelo.fachadas.CfgDiagnosticoFacade;
 import modelo.fachadas.CfgDiagnosticoPrincipalFacade;
 import modelo.fachadas.CfgEmpresaFacade;
 import modelo.fachadas.CfgFamiliarFacade;
+import modelo.fachadas.CfgHistoriaCamposPredefinidosFacade;
 import modelo.fachadas.CfgMaestrosTxtPredefinidosFacade;
 import modelo.fachadas.CfgMedicamentoFacade;
 import modelo.fachadas.CfgPacientesFacade;
@@ -169,10 +171,12 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     FacConsumoMedicamentoFacade facConsumoMedicamentoFacade;
     @EJB
     PyPprogramaItems ProgramaFacadeItem;
-    
+    @EJB
+    CfgHistoriaCamposPredefinidosFacade cfgHistoriaCamposPredefinidosFacade;
     //---------------------------------------------------
     //-----------------ENTIDADES ------------------------
     //---------------------------------------------------
+    private List<CfgHistoriaCamposPredefinidos> listaCamposPredefinidos;
     public List<PyPProgramaItem> listaServiciosPrograma;
     private HcTipoReg tipoRegistroClinicoActual;
     private List<CfgPacientes> listaPacientes;
@@ -2570,6 +2574,16 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
              }
              //
          }
+         
+         //cargamos campos predefinidos
+         try {
+            listaCamposPredefinidos = cfgHistoriaCamposPredefinidosFacade.getCamposDefinidosXHistoriaClinica(tipoRegistroClinicoActual.getIdTipoReg());
+            for(CfgHistoriaCamposPredefinidos campos:listaCamposPredefinidos){
+                datosFormulario.setValor(campos.getIdCampo().getPosicion(), campos.getValor());
+            }
+            
+        } catch (Exception e) {
+        }
     }
     public void validardatoTalla05() {
         try {

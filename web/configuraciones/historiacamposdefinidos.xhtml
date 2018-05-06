@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:pe="http://primefaces.org/ui/extensions">  
+    <h:head>        
+        <title>Historia Clinicas Campos Predefinidos</title>
+        <link href="../recursos/css/estilos.css" rel="stylesheet"/>        
+        <link href="../recursos/css/metro-bootstrap.css" rel="stylesheet"/>
+        <link href="../recursos/css/iconFont.css" rel="stylesheet"/>
+        <script type="text/javascript" src="../recursos/js/calendario.js"></script>          
+        <script type="text/javascript">
+            function valida(e) {
+                tecla = (document.all) ? e.keyCode : e.which;
+
+                //Tecla de retroceso para borrar, siempre la permite
+                if (tecla == 8) {
+                    return true;
+                }
+
+                // Patron de entrada, en este caso solo acepta numeros
+                patron = /[0-9]/;
+                tecla_final = String.fromCharCode(tecla);
+                return patron.test(tecla_final);
+            }
+            $(document).keypress(
+                    function (event) {
+                        if (event.which == '13') {
+                            event.preventDefault();
+                        }
+                    });
+        </script>
+
+    </h:head>
+    <h:body>             
+        #{historiaCamposDefinidosMB.init()}
+        <h:form id="IdFormPrincipal">              
+            
+            <p:growl id="IdCamposPredefinidos"  showDetail="true" sticky="false" autoUpdate="true" life="2000"  />            
+            <!--===================================================================================-->
+            <br/>
+            <div>
+
+                <p:commandButton 
+                    title="Limpiar Formulario" value="&nbsp;"                                        
+                    styleClass="icon-new fg-lightBlue bg-white no-border"
+                    update="IdFormPrincipal"
+                    process="@this"
+                    actionListener="#{historiaCamposDefinidosMB.nuevo}"
+                    style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/> 
+                &nbsp;
+                <p:commandButton 
+                    title="Buscar" value="&nbsp;"                                        
+                    styleClass="icon-search fg-lightBlue bg-white no-border" 
+                    process="@this" 
+                    oncomplete="PF('dialogoBuscarCampos').show()"
+                    style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/> 
+                &nbsp;
+                <p:commandButton                     
+                    title="Eliminar Campo" value="&nbsp;"                                        
+                    styleClass="icon-cancel fg-lightBlue bg-white no-border" 
+                    process="@this"
+                    rendered="false"
+                    actionListener="#{historiaCamposDefinidosMB.eliminar}"
+                    update="IdFormPrincipal IdDialogoBuscarCampo"
+                    style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/> 
+                &nbsp;
+                <p:commandButton 
+                    title="Guardar/Actualizar Campos" value="&nbsp;"
+                    actionListener="#{historiaCamposDefinidosMB.guardar}"
+                    styleClass="icon-floppy fg-lightBlue bg-white no-border" 
+                    style="font-size: 20px; width: 20px; height: 20px; left: 20px; "/>                            
+                &nbsp;
+            </div>
+            <br/>            
+            <p:outputPanel id="opFormulario">
+                <table style="margin-left: auto; margin-right: auto; border: 2px;">                        
+                    <tr>                            
+                        <td >
+                            <p:outputLabel styleClass="campoObligatorio" value="Historia Clinica" />
+                        </td>
+                        <td >
+                            <p:outputLabel styleClass="campoObligatorio" value="Campo " />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:selectOneMenu filterMatchMode="contains" filter="true" id="historia" styleClass="campoFormulario" style="width: 350px;" value="#{historiaCamposDefinidosMB.idHcTipoReg}">                                    
+                                <f:selectItem itemValue="0" itemLabel="Seleccion Historia Clínica" />
+                                <f:selectItems value="#{historiaCamposDefinidosMB.listaHistoriasClinicas}" var="hc" itemLabel="#{hc.nombre}" itemValue="#{hc.idTipoReg}"/>
+                                <p:ajax listener="#{historiaCamposDefinidosMB.cargarCampos}" process="@this" event="change" update="camposHistoria" />
+                            </p:selectOneMenu> 
+                        </td>
+                        <td>
+                            <p:selectOneMenu filterMatchMode="contains" filter="true" id="camposHistoria" styleClass="campoFormulario" style="width: 350px;" value="#{historiaCamposDefinidosMB.idCampo}">                                    
+                                <f:selectItem itemValue="0" itemLabel="Seleccion un campo de  Historia Clínica" />
+                                <f:selectItems value="#{historiaCamposDefinidosMB.listaCamposHistorias}" var="campo" itemLabel="#{campo.nombre}" itemValue="#{campo.idCampo}" />
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                         <td >
+                            <p:outputLabel styleClass="campoObligatorio" value="Valor Predefinido " />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p:inputTextarea value="#{historiaCamposDefinidosMB.valor}" style="width: 633px;"/>
+                        </td>
+                    </tr>
+                </table>
+            </p:outputPanel>
+             <p:dialog id="IdDialogoBuscarCampo" header="Buscar Campos" widgetVar="dialogoBuscarCampos" resizable="false" modal="true">  
+                <p:ajax update="idTablaCampos"/>
+                <table>
+                    <tr>
+                        <td>
+                            <p:dataTable 
+                                id="idTablaCampos" 
+                                var="campo" 
+                                widgetVar="wvTablaCampos"
+                                value="#{historiaCamposDefinidosMB.listaCampos}" 
+                                rowKey="#{campo.id}"  
+                                selection="#{historiaCamposDefinidosMB.cfgHistoriaCamposPredefinidos}" 
+                                paginator="true"
+                                style="width: 600px; height: 300px;"
+                                rows="10"                                    
+                                paginatorPosition="bottom"                                
+                                emptyMessage="No hay campos"
+                                scrollable="true" 
+                                currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"                                
+                                pageLinks="5"
+                                lazy="true"
+                                selectionMode="single"
+                                resizableColumns="true">                                                               
+                                <p:column headerText="Historia Clinica" filterBy="#{campo.idCampo.idTipoReg.nombre}  " >  
+                                    #{campo.idCampo.idTipoReg.nombre}  
+                                </p:column>
+                                <p:column headerText="Campo"  filterBy="#{campo.idCampo.nombre}">
+                                    #{campo.idCampo.nombre}  
+                                </p:column>
+                                <p:column headerText="Valor" filterBy="#{campo.valor}">
+                                    #{campo.valor}
+                                </p:column>
+                            </p:dataTable>  
+                        </td>    
+                    </tr>
+                    <tr>
+                        <td>
+                            <br/>
+                            <p:commandButton 
+                                value="Cargar seleccionado"
+                                actionListener="#{historiaCamposDefinidosMB.cargar}"/>
+                        </td>    
+                    </tr>
+                </table>
+            </p:dialog> 
+        </h:form> 
+        
+        
+    </h:body>
+</html>
