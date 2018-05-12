@@ -1,4 +1,4 @@
-x<?xml version='1.0' encoding='UTF-8' ?>
+<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -20,6 +20,7 @@ x<?xml version='1.0' encoding='UTF-8' ?>
     <h:body>
         <br/>
         <p:growl autoUpdate="true" showDetail="true"/>
+        
         <p:fieldset legend="Informe 4505">
             <h:form id="formReporte">
                 <table>
@@ -62,7 +63,10 @@ x<?xml version='1.0' encoding='UTF-8' ?>
                                 </p:selectOneMenu>
                             </td>
                             <td>
-                                <p:commandButton id="idButtonReporte" actionListener="#{reporteInforme.generarReporte}" value="Cargar Datos" ajax="false" >
+                                <p:commandButton
+                                    onclick="PF('statusDialog').show()"
+                                    onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide();"
+                                    id="form4505" actionListener="#{reporteInforme.generarReporte}" value="Cargar Datos" update="form4505" ajax="false" >
                                     <f:attribute name="logo_empresa" value="#{loginMB.rutaCarpetaImagenes}#{loginMB.empresaActual.logo.urlImagen}" />
                                 </p:commandButton>
                             </td>
@@ -91,6 +95,9 @@ x<?xml version='1.0' encoding='UTF-8' ?>
                     selectionMode="single"
                     >
                     <p:ajax event="cellEdit" listener="#{reporteInforme.onCellEdit}"/>
+                    <p:column width="60px" headerText="Tipo Registro"  >
+                        <h:outputText value="#{resolucion.tipo_registro}"/>
+                    </p:column>
                     <p:column width="130px" headerText="Consecutivo"  >
                         <h:outputText value="#{resolucion.consecutivo_registro}"/>
                     </p:column>
@@ -483,6 +490,10 @@ x<?xml version='1.0' encoding='UTF-8' ?>
                     <p:column width="130px" headerText="F. Creatinina"  >
                         <h:outputText value="#{resolucion.fecha_creatinina}">
                             <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="130px" headerText="Creatinina"  >
+                        <h:outputText value="#{resolucion.creatinina}">
                         </h:outputText>
                     </p:column>
                     <p:column width="130px" headerText="F. Hemoglobina Glicosilada"  >
@@ -2044,6 +2055,11 @@ x<?xml version='1.0' encoding='UTF-8' ?>
                 <f:attribute name="logo_empresa" value="#{loginMB.rutaCarpetaImagenes}#{loginMB.empresaActual.logo.urlImagen}" />
             </p:commandButton>
         </h:form>
+        
+         <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+            <p:graphicImage url="/recursos/Produccion/loading.gif" width="32" height="32"/>
+        </p:dialog>
     </h:body>
 </html>
 
