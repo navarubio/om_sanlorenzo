@@ -580,17 +580,41 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
             
             valor += r.getPrimer_apellido_usuario().substring(0, Math.min(r.getPrimer_apellido_usuario().length(), 30)) + ",";
             
+            
             if (StringUtils.isAnyBlank(r.getSegundo_apellido_usuario()))
                 valor += "NONE" + ",";
             else
                 valor += r.getSegundo_apellido_usuario().substring(0, Math.min(r.getSegundo_apellido_usuario().length(), 30)) + ",";
             
+            try {
+                if(r.getSegundo_apellido_usuario()==null) valor += "NONE" + ",";
+                else if(r.getSegundo_apellido_usuario().trim().length()==0) {
+                    valor += "NONE" + ",";
+                }
+            } catch (Exception e) {
+                valor += "NONE" + ",";
+            }
+            
+            
+            
             valor += r.getPrimer_nombre_usuario().substring(0, Math.min(r.getPrimer_nombre_usuario().length(), 30)) + ",";
             
             if (StringUtils.isAnyBlank(r.getSegundo_nombre_usuario()))
-                valor += "" + ",";
+                valor += "NONE" + ",";
             else
                 valor += r.getSegundo_nombre_usuario().substring(0, Math.min(r.getSegundo_nombre_usuario().length(), 30)) + ",";
+           
+            
+            try {
+                if(r.getSegundo_nombre_usuario()==null) valor += "NONE" + ",";
+                else if(r.getSegundo_nombre_usuario().trim().length()==0) {
+                    valor += "NONE" + ",";
+                }
+            } catch (Exception e) {
+                valor += "NONE" + ",";
+                
+            }
+            
             
             valor += sdf.format(r.getFecha_nacimiento()) + ",";//campo 9 (fecha nacimiento)
             
@@ -1224,14 +1248,18 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
                     if(r.getSegundoApellido().trim().length()==0){
                             u.setSegundo_apellido_usuario("NONE");
                     }
-                }
+                }else{
+					u.setSegundo_apellido_usuario("NONE");
+				}
                 u.setPrimer_nombre_usuario(r.getPrimerNombre());
                 u.setSegundo_nombre_usuario(r.getSegundoNombre());
                 if(r.getSegundoNombre()!=null){
                     if(r.getSegundoNombre().trim().length()==0){
                             u.setSegundo_nombre_usuario("NONE");
                     }
-                }
+                }else{
+					u.setSegundo_nombre_usuario("NONE");
+				}
                 String fecha = r.getFechaNacimiento() + "";
                 u.setFecha_nacimiento(usuario_nacimiento.parse(fecha));
                 if (r.getGenero() == null) {
