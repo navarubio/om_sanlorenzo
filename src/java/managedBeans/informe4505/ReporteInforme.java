@@ -572,7 +572,7 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
             if (StringUtils.isNumeric(r.getCodigo_habilitacion_ips_primaria()))
                 valor += r.getCodigo_habilitacion_ips_primaria() + ",";
             else
-                valor += 99 + ",";
+                valor += 999 + ",";
             
             valor += r.getTipo_identificacion_usuario().substring(0, Math.min(r.getTipo_identificacion_usuario().length(), 2)) + ",";
             
@@ -1222,15 +1222,15 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
         HcTipoReg tipoRegistroClinicoActual;
         DatosFormularioHistoria datosFormulario = new DatosFormularioHistoria();
         int i = 1;
-        System.out.println(new Date());
+        //System.out.println(new Date());
         for (CfgPacientes r : user) {
-            System.out.println("Procesando " + i + " de " + user.size());
+           // System.out.println("Procesando " + i + " de " + user.size());
             try {
                 Informe4505 u = new Informe4505();
                 u.setTipo_registro("2");
                 u.setConsecutivo_registro(i);
                 List<CfgEmpresa> listaempresa = cfgEmpresaFacade.findAll();
-                u.setCodigo_habilitacion_ips_primaria("99");
+                u.setCodigo_habilitacion_ips_primaria("999");
                 if(!listaempresa.isEmpty()){
                     CfgEmpresa empresa = listaempresa.get(0);
                     if(empresa.getCodigoEmpresa()!=null){
@@ -1289,19 +1289,19 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
                 } else {
                     u.setCodigo_ocupacion("9998");//r.getOcupacion().getCodigo());
                 }
-                if (r.getNivel() == null) {
+                if (r.getEscolaridad() == null) {
                     u.setCodigo_nivel_educativo("1");
                 } else {
                     try {
-                        if(r.getNivel().getCodigo().equals("00"))
+                        if(r.getEscolaridad().getCodigo().equals("00"))
                             u.setCodigo_nivel_educativo("1");
                         else{
-                            int escolaridad = Integer.parseInt(r.getNivel().getCodigo());
+                            int escolaridad = Integer.parseInt(r.getEscolaridad().getCodigo());
                             u.setCodigo_nivel_educativo(String.valueOf(escolaridad));
                         }
                         
                     } catch (Exception e) {
-                        u.setCodigo_nivel_educativo("13");
+                        u.setCodigo_nivel_educativo("1");
                     }
                     
                 }
@@ -1314,18 +1314,26 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
                     }
                     
                 } else {
-                    u.setGestacion(r.getGestacion().getCodigo());
+					if (r.getGenero().getDescripcion().equals("MASCULINO")) {
+						u.setGestacion("0");
+					}else{
+						u.setGestacion(r.getGestacion().getCodigo());
+					}
                 }
                 tipoRegistroClinicoActual = tipoRegCliFacade.find(45);
                 registroEncontrado = registroFacade.buscarUltimo(r.getIdentificacion(), tipoRegistroClinicoActual.getIdTipoReg());
                 if (registroEncontrado != null) {
                     datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
                 }
-                if (datosFormulario.getDato53().toString().isEmpty()) {
-                    u.setSifilis_gestacional_congenita("21");
-                } else {
-                    u.setSifilis_gestacional_congenita(datosFormulario.getDato53().toString());
-                }
+				if (r.getGenero().getDescripcion().equals("MASCULINO")) {
+					u.setSifilis_gestacional_congenita("0");
+				}else{
+					if (datosFormulario.getDato53().toString().isEmpty()) {
+						u.setSifilis_gestacional_congenita("21");
+					} else {
+						u.setSifilis_gestacional_congenita(datosFormulario.getDato53().toString());
+					}
+				}
                 tipoRegistroClinicoActual = tipoRegCliFacade.find(52);
                 registroEncontrado = registroFacade.buscarUltimo(r.getIdentificacion(), tipoRegistroClinicoActual.getIdTipoReg());
                 if (registroEncontrado != null) {
@@ -1396,7 +1404,7 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
                     datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
                 }
                 if (datosFormulario.getDato15().toString().isEmpty()) {
-                    u.setMujer_victima_maltrato("21");
+                    u.setMujer_victima_maltrato("3");
                 } else {
                     u.setMujer_victima_maltrato(datosFormulario.getDato15().toString());
                 }
@@ -1406,7 +1414,7 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
                     datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
                 }
                 if (datosFormulario.getDato52().toString().isEmpty()) {
-                    u.setVictima_violencia_sexual("21");
+                    u.setVictima_violencia_sexual("2");
                 } else {
                     u.setVictima_violencia_sexual(datosFormulario.getDato52().toString());
                 }
@@ -1416,7 +1424,7 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
                     datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
                 }
                 if (datosFormulario.getDato108().toString().isEmpty()) {
-                    u.setInfecciones_transmision_sexual("21");
+                    u.setInfecciones_transmision_sexual("2");
                 } else {
                     u.setInfecciones_transmision_sexual(datosFormulario.getDato108().toString());
                 }
@@ -1435,21 +1443,29 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
                 if (registroEncontrado != null) {
                     datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
                 }
-                if (datosFormulario.getDato37().toString().isEmpty()) {
-                    u.setCancer_cervix("21");
-                } else {
-                    u.setCancer_cervix(datosFormulario.getDato37().toString());
-                }
+				if (r.getGenero().getDescripcion().equals("MASCULINO")) {
+					u.setCancer_cervix("2");
+				}else{
+					if (datosFormulario.getDato37().toString().isEmpty()) {
+						u.setCancer_cervix("21");
+					} else {
+						u.setCancer_cervix(datosFormulario.getDato37().toString());
+					}
+				}
                 tipoRegistroClinicoActual = tipoRegCliFacade.find(73);
                 registroEncontrado = registroFacade.buscarUltimo(r.getIdentificacion(), tipoRegistroClinicoActual.getIdTipoReg());
                 if (registroEncontrado != null) {
                     datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
                 }
-                if (datosFormulario.getDato3().toString().isEmpty()) {
+				if (r.getGenero().getDescripcion().equals("MASCULINO")) {
+					u.setCancer_seno("2");
+				}else{
+					if (datosFormulario.getDato3().toString().isEmpty()) {
                     u.setCancer_seno("21");
                 } else {
                     u.setCancer_seno(datosFormulario.getDato3().toString());
                 }
+				}
                 u.setFluorosis_dental("21");
                 String fechaPeso =registroFacade.getFechaValor(r.getIdPaciente(),"PESO");
                 u.setFecha_peso(fechaPeso!=null?sdf.parse(fechaPeso):sdf.parse("1800-01-01"));
@@ -1497,7 +1513,7 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
                 }
                 if (datosFormulario.getDato8().toString().isEmpty()) {
                     if (r.getGenero() == null) {
-                        u.setFecha_probable_parto(sdf.parse("1845-01-01"));
+						u.setFecha_probable_parto(sdf.parse("1845-01-01"));
                     }else{
                         if (r.getGenero().getDescripcion().equals("MASCULINO")) {
                             u.setFecha_probable_parto(sdf.parse("1845-01-01"));
@@ -1643,7 +1659,7 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
                     datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
                 }
                 if (datosFormulario.getDato106().toString().isEmpty()) {
-                    u.setControl_placa_bacteriana("7");
+                    u.setControl_placa_bacteriana("22");
                 } else {
                     u.setControl_placa_bacteriana(datosFormulario.getDato106().toString());
                 }
@@ -1667,7 +1683,12 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
                         }
                         
                     } catch (Exception e) {
-                        u.setFecha_atencion_parto_cesarea(sdf.parse("1845-01-01"));
+						if (r.getGenero().getDescripcion().equals("MASCULINO")) {
+                                u.setFecha_atencion_parto_cesarea(sdf.parse("1845-01-01"));
+                            }else{
+                               u.setFecha_atencion_parto_cesarea(sdf.parse("1800-01-01"));
+                            }
+                        //u.setFecha_atencion_parto_cesarea(sdf.parse("1800-01-01"));
                     }
                     
                 } else {
@@ -1686,11 +1707,12 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
                     u.setFecha_consejeria_lactancia_materna(sdf.parse("1845-01-01"));
                 }else{
                     if (r.getGenero().getDescripcion().equals("MASCULINO")) {
-                        u.setFecha_salida_atencion_parto_cesarea(sdf.parse("1845-01-01"));
+                        u.setFecha_consejeria_lactancia_materna(sdf.parse("1845-01-01"));
                     }else{
-                        u.setFecha_salida_atencion_parto_cesarea(sdf.parse("1800-01-01"));
+                        u.setFecha_consejeria_lactancia_materna(sdf.parse("1800-01-01"));
                     }
                 }
+				
                 if (r.getGenero() == null) {
                     u.setControl_recien_nacido(sdf.parse("1845-01-01"));
                 }else{
