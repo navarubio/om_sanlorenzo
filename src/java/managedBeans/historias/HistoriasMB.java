@@ -45,6 +45,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.xml.transform.TransformerException;
 import managedBeans.seguridad.AplicacionGeneralMB;
 import managedBeans.seguridad.LoginMB;
+import modelo.entidades.CfgCamposArchivosPaciente;
 import modelo.entidades.CfgClasificaciones;
 import modelo.entidades.CfgDiagnostico;
 import modelo.entidades.CfgEmpresa;
@@ -103,6 +104,7 @@ import net.sf.jmimemagic.MagicParseException;
 import org.apache.batik.transcoder.TranscoderException;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.StreamedContent;
@@ -193,6 +195,8 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     private CfgClasificaciones clasificacionBuscada;
     private CfgDiagnostico diagnosticoBuscado;
     private FacServicio servicioBuscado;
+    private List<CfgHistoriaCamposPredefinidos> listaTextos;
+            
     //---------------------------------------------------
     //-----------------VARIABLES ------------------------
     //---------------------------------------------------        
@@ -454,6 +458,10 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     private boolean item34;
     private boolean item35;
     private boolean item36;
+    
+    //Valores predefinidos
+    HcCamposReg campoSeleccionado;
+    private CfgHistoriaCamposPredefinidos textoSeleccionado;
     public HistoriasMB() {
         aplicacionGeneralMB = FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{aplicacionGeneralMB}", AplicacionGeneralMB.class);
         listaValoresDefecto = new ArrayList();
@@ -463,8 +471,32 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         listaValoresDefecto2 = new ArrayList();
         listaValoresDefecto2.add(new SelectItem("Normal", "Normal"));
         listaValoresDefecto2.add(new SelectItem("Anormal", "Anormal"));
+        
+        listaTextos = new ArrayList();
+        campoSeleccionado = new HcCamposReg();
     }
 
+    public void cargarTextoPredefindoPorPosicionCampoDetalle(int posicion){
+        try {
+            campoSeleccionado =  camposRegFacade.buscarPorTipoRegistroYPosicion(tipoRegistroClinicoActual.getIdTipoReg(), posicion);
+            listaTextos = cfgHistoriaCamposPredefinidosFacade.getCamposDefinidosXCampo(campoSeleccionado.getIdCampo());
+            RequestContext.getCurrentInstance().update("optexto");
+            RequestContext.getCurrentInstance().execute("PF('dlgTexto').show();");
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void onRowSelect(SelectEvent event) {
+        textoSeleccionado = (CfgHistoriaCamposPredefinidos)event.getObject();
+        datosFormulario.setValor(campoSeleccionado.getPosicion(), textoSeleccionado.getValor());
+        System.out.println(datosFormulario.getValor(2));
+        System.out.println(textoSeleccionado.getValor());
+        RequestContext.getCurrentInstance().execute("PF('dlgTexto').hide();");
+        RequestContext.getCurrentInstance().update("optexto");
+        
+        
+    }
     public void cargarMunicipios() {
         listaMunicipios = new ArrayList<>();
         try {
@@ -2579,7 +2611,8 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
          try {
             listaCamposPredefinidos = cfgHistoriaCamposPredefinidosFacade.getCamposDefinidosXHistoriaClinica(tipoRegistroClinicoActual.getIdTipoReg());
             for(CfgHistoriaCamposPredefinidos campos:listaCamposPredefinidos){
-                datosFormulario.setValor(campos.getIdCampo().getPosicion(), campos.getValor());
+                if(campos.isDefaultValor())
+                    datosFormulario.setValor(campos.getIdCampo().getPosicion(), campos.getValor());
             }
             
         } catch (Exception e) {
@@ -10358,6 +10391,30 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
 
     public void setItem36(boolean item36) {
         this.item36 = item36;
+    }
+
+    public List<CfgHistoriaCamposPredefinidos> getListaTextos() {
+        return listaTextos;
+    }
+
+    public void setListaTextos(List<CfgHistoriaCamposPredefinidos> listaTextos) {
+        this.listaTextos = listaTextos;
+    }
+
+    public HcCamposReg getCampoSeleccionado() {
+        return campoSeleccionado;
+    }
+
+    public void setCampoSeleccionado(HcCamposReg campoSeleccionado) {
+        this.campoSeleccionado = campoSeleccionado;
+    }
+
+    public CfgHistoriaCamposPredefinidos getTextoSeleccionado() {
+        return textoSeleccionado;
+    }
+
+    public void setTextoSeleccionado(CfgHistoriaCamposPredefinidos textoSeleccionado) {
+        this.textoSeleccionado = textoSeleccionado;
     }
      
      

@@ -26,4 +26,25 @@ public class CfgHistoriaCamposPredefinidosFacade  extends AbstractFacade<CfgHist
         Query query = getEntityManager().createQuery(hql).setParameter("idTipoReg", idHistoriaClinica);
         return query.getResultList();
     }
+    public List<CfgHistoriaCamposPredefinidos> getCamposDefinidosXHistoriaClinicaXCampo(int idHistoriaClinica, int idCampo){
+        String hql = "SELECT c FROM CfgHistoriaCamposPredefinidos c WHERE c.idCampo.idTipoReg.idTipoReg=:idTipoReg and c.idCampo.idCampo=:idCampo";
+        Query query = getEntityManager().createQuery(hql).setParameter("idTipoReg", idHistoriaClinica).setParameter("idCampo",idCampo);
+        return query.getResultList();
+    }
+    
+    public List<CfgHistoriaCamposPredefinidos> getCamposDefinidosXCampo(int idCampo){
+        String hql = "SELECT c FROM CfgHistoriaCamposPredefinidos c WHERE c.idCampo.idCampo=:idCampo";
+        Query query = getEntityManager().createQuery(hql).setParameter("idCampo",idCampo);
+        return query.getResultList();
+    }
+    
+    public void setNoneDefault(int idCampo){
+        try {
+            String query  ="UPDATE CfgHistoriaCamposPredefinidos set defaultValor=:valor WHERE c.idCampo.idCampo=:idCampo";
+            Query q = getEntityManager().createQuery(query).setParameter("valor",false).setParameter("idCampo", idCampo);
+            q.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

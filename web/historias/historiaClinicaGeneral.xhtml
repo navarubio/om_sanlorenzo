@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core">  
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">  
     <h:head>
         <title>Usuarios</title>
         <link href="../recursos/css/estilos.css" rel="stylesheet"/>        
@@ -24,11 +25,26 @@
     <h:body>
         #{historiasMB.inicializar()}
         <h:form id="IdFormRegistroClinico">  
+            <p:outputPanel id="optexto">
+                <ui:include src="textoPredefinidos.xhtml" />
+        
             <p:growl id="IdMensajeUsuarios"  showDetail="true" sticky="false" autoUpdate="true" life="2000"/>
             <table style="margin-left: auto; margin-right: auto;" >
                 <tr><td colspan="2"><h2>HISTORIA CLINICA GENERAL</h2></td></tr>                                
                 <tr>
-                    <td colspan="2"><p:outputLabel value="MOTIVO CONSULTA"/></td>                                        
+                    <td colspan="2"><p:outputLabel value="MOTIVO CONSULTA"/>
+                    <p:commandButton
+                            styleClass="icon-folder fg-lightBlue bg-white no-border"
+                            title="Texto Predefinidos"
+                            value=""
+                            actionListener="#{historiasMB.cargarTextoPredefindoPorPosicionCampoDetalle(2)}"
+                            id="btntxtPre"
+                            style="font-size: 12px; width: 15px; height: 15px; left: 20px; "
+                            >
+                        </p:commandButton>
+                        <p:tooltip id="toolTipFade" for="btntxtPre" value="Cargar Textos predeterminados" />
+                    </td>                                        
+                                                       
                 </tr>
                 <tr>
                     <td colspan="2">
@@ -328,6 +344,7 @@
                     </td>
                 </tr>
             </table>
+            </p:outputPanel>
             <p:dialog id="IdTextosDlgPredefinidos" header="TEXTOS PREDEFINIDOS" width="645" widgetVar="dlgTextosPredefinidos" resizable="false" closable="true" modal="true">                                
                 <p:panelGrid styleClass="panelGridSinBordes" id="IdPanelTextosPredefinidos">
                     <p:row>

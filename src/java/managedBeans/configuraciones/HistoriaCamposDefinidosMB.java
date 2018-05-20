@@ -40,12 +40,15 @@ public class HistoriaCamposDefinidosMB extends MetodosGenerales implements java.
     private List<HcTipoReg> listaHistoriasClinicas;
     private List<HcCamposReg> listaCamposHistorias;
     private List<CfgHistoriaCamposPredefinidos> listaCampos;
+    private List<CfgHistoriaCamposPredefinidos> listaValores;
     private CfgHistoriaCamposPredefinidos cfgHistoriaCamposPredefinidos;
     
     private int id;
     private int idHcTipoReg;
     private int idCampo;
     private String valor;
+    private boolean renderAgregar;
+    private CfgHistoriaCamposPredefinidos campoSeleccionado;
     public HistoriaCamposDefinidosMB() {
     }
     
@@ -59,8 +62,52 @@ public class HistoriaCamposDefinidosMB extends MetodosGenerales implements java.
        idCampo=0;
        valor="";
        id=0;
+       listaValores = new ArrayList<>();
+       renderAgregar = false;
+    }
+    
+    public void cargarCamposHistorias(){
+        if(idCampo!=0){
+            listaValores = cfgHistoriaCamposPredefinidosFacade.getCamposDefinidosXHistoriaClinicaXCampo(idHcTipoReg, idCampo);
+            renderAgregar = true;
+        }else{
+            renderAgregar = false;
+        }
+        
     }
 
+    public void setDefault(CfgHistoriaCamposPredefinidos predefinido){
+        try {
+            //cfgHistoriaCamposPredefinidosFacade.setNoneDefault(predefinido.getIdCampo().getIdCampo());
+            for(CfgHistoriaCamposPredefinidos campo : listaValores){
+                campo.setDefaultValor(false);
+                cfgHistoriaCamposPredefinidosFacade.edit(campo);
+            }
+            predefinido.setDefaultValor(true);
+            cfgHistoriaCamposPredefinidosFacade.edit(predefinido);
+            RequestContext.getCurrentInstance().update("IdFormPrincipal");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void editar(CfgHistoriaCamposPredefinidos campo){
+        id=  campo.getId();
+        campoSeleccionado = campo;
+        idCampo = campo.getIdCampo().getIdCampo();
+        valor = campo.getValor();
+        RequestContext.getCurrentInstance().update("frmNuevoValor");
+        RequestContext.getCurrentInstance().update("IdValorNuevo");
+        RequestContext.getCurrentInstance().execute("PF('dialogoNuevoValor').show()");
+        RequestContext.getCurrentInstance().update("frmNuevoValor");
+    }
+    public void eliminar(CfgHistoriaCamposPredefinidos campo){
+        try {
+            cfgHistoriaCamposPredefinidosFacade.remove(campo);
+            listaValores = cfgHistoriaCamposPredefinidosFacade.getCamposDefinidosXHistoriaClinicaXCampo(idHcTipoReg, idCampo);
+            RequestContext.getCurrentInstance().update("IdFormPrincipal");
+        } catch (Exception e) {
+        }
+    }
     public void nuevo(){
         idHcTipoReg = 0;
         listaCamposHistorias.clear();
@@ -70,6 +117,8 @@ public class HistoriaCamposDefinidosMB extends MetodosGenerales implements java.
         valor="";
         id=0;
         listaCampos= cfgHistoriaCamposPredefinidosFacade.findAll();
+        renderAgregar =false;
+        listaValores= new ArrayList<>();
         RequestContext.getCurrentInstance().update("IdFormPrincipal");
     }
     
@@ -90,16 +139,18 @@ public class HistoriaCamposDefinidosMB extends MetodosGenerales implements java.
             try {
             if(id==0){
                 cfgHistoriaCamposPredefinidos = new CfgHistoriaCamposPredefinidos();
+                cfgHistoriaCamposPredefinidos.setDefaultValor(false);
                 cfgHistoriaCamposPredefinidos.setIdCampo(new HcCamposReg(idCampo));
                 cfgHistoriaCamposPredefinidos.setValor(valor);
                 cfgHistoriaCamposPredefinidosFacade.create(cfgHistoriaCamposPredefinidos);
             }else{
-                cfgHistoriaCamposPredefinidos.setIdCampo(new HcCamposReg(idCampo));
-                cfgHistoriaCamposPredefinidos.setValor(valor);
-                cfgHistoriaCamposPredefinidosFacade.edit(cfgHistoriaCamposPredefinidos);
+                campoSeleccionado.setValor(valor);
+                //cfgHistoriaCamposPredefinidos.setIdCampo(new HcCamposReg(idCampo));
+                //cfgHistoriaCamposPredefinidos.setValor(valor);
+                cfgHistoriaCamposPredefinidosFacade.edit(campoSeleccionado);
             }
                 imprimirMensaje("Guardado", "Guardado Correctamente", FacesMessage.SEVERITY_INFO);
-                nuevo();
+                //nuevo();
                 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -125,8 +176,27 @@ public class HistoriaCamposDefinidosMB extends MetodosGenerales implements java.
         nuevo();
     }
     public void cargarCampos(){
-        if(idHcTipoReg!=0)listaCamposHistorias = hcCamposRegFacade.buscarPorTipoRegistro(idHcTipoReg);
-        else listaCamposHistorias.clear();
+        if(idHcTipoReg!=0){
+            listaCamposHistorias = hcCamposRegFacade.buscarPorTipoRegistro(idHcTipoReg);
+        }else {
+            renderAgregar = false;
+            listaCamposHistorias.clear();
+        }
+    }
+    
+    public void cancelarValor(){
+        valor="";
+        RequestContext.getCurrentInstance().update("frmNuevoValor");
+    }
+    
+    public void guardarValor(){
+        
+        guardar();
+        valor="";
+        listaValores = cfgHistoriaCamposPredefinidosFacade.getCamposDefinidosXHistoriaClinicaXCampo(idHcTipoReg, idCampo);
+        RequestContext.getCurrentInstance().update("IdFormPrincipal");
+        RequestContext.getCurrentInstance().update("frmNuevoValor");
+        RequestContext.getCurrentInstance().execute("PF('dialogoNuevoValor').hide()");
     }
     public List<HcTipoReg> getListaHistoriasClinicas() {
         return listaHistoriasClinicas;
@@ -199,10 +269,22 @@ public class HistoriaCamposDefinidosMB extends MetodosGenerales implements java.
     public void setId(int id) {
         this.id = id;
     }
-    
-    
-    
-    
+
+    public List<CfgHistoriaCamposPredefinidos> getListaValores() {
+        return listaValores;
+    }
+
+    public void setListaValores(List<CfgHistoriaCamposPredefinidos> listaValores) {
+        this.listaValores = listaValores;
+    }
+
+    public boolean isRenderAgregar() {
+        return renderAgregar;
+    }
+
+    public void setRenderAgregar(boolean renderAgregar) {
+        this.renderAgregar = renderAgregar;
+    }
     
     
     

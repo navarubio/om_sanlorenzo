@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+         <p:dialog header="Seleccionar Texto Predefinido"  dynamic="true" widgetVar="dlgTexto" modal="true" resizable="false" closable="true" style="width: 80%">
+             <p:dataTable id="eventsDT" 
+                          var="texto"
+                          value="#{historiasMB.listaTextos}" 
+                          selectionMode="single"
+                          selection="#{historiasMB.textoSeleccionado}" 
+                          rowKey="#{texto.id}"
+                          >
+                 <p:ajax event="rowSelect"  listener="#{historiasMB.onRowSelect}" process="@form" oncomplete="PF('dlgTexto').hide()"/>
+                <p:column headerText="Texto">
+                    <h:outputText value="#{texto.valor}" />
+                </p:column>
+            </p:dataTable>
+        </p:dialog>
+    </h:body>
+</html>
+

@@ -35,7 +35,8 @@ public class CfgHistoriaCamposPredefinidos implements java.io.Serializable{
     private HcCamposReg idCampo;
     @Column(name = "valor", length = 2147483647)
     private String valor;
-
+    @Column(name = "default_valor")
+    private boolean defaultValor;
     public CfgHistoriaCamposPredefinidos(){
         idCampo = new HcCamposReg(0);
         
@@ -69,6 +70,15 @@ public class CfgHistoriaCamposPredefinidos implements java.io.Serializable{
     public void setValor(String valor) {
         this.valor = valor;
     }
+
+    public boolean isDefaultValor() {
+        return defaultValor;
+    }
+
+    public void setDefaultValor(boolean defaultValor) {
+        this.defaultValor = defaultValor;
+    }
+    
     
     @Override
     public boolean equals(Object object) {
