@@ -638,6 +638,15 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato9(valorDefecto1);
                     
                     
+                }else if(tipoRegistroClinicoActual.getIdTipoReg()==55){
+                    datosFormulario.setDato1491(valorDefecto1);
+                    datosFormulario.setDato1492(valorDefecto1);
+                    datosFormulario.setDato1493(valorDefecto1);
+                    datosFormulario.setDato1490(valorDefecto1);
+                    datosFormulario.setDato1494(valorDefecto1);
+                    
+                    
+                    
                 }
 
                 
@@ -778,6 +787,19 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato79(valorDefecto2);
                     datosFormulario.setDato80(valorDefecto2);
                     datosFormulario.setDato81(valorDefecto2);
+                }else if(tipoRegistroClinicoActual.getIdTipoReg()==55){
+                    datosFormulario.setDato1495(valorDefecto2);
+                    datosFormulario.setDato1496(valorDefecto2);
+                    datosFormulario.setDato1497(valorDefecto2);
+                    datosFormulario.setDato1498(valorDefecto2);
+                    datosFormulario.setDato1499(valorDefecto2);
+                    datosFormulario.setDato1500(valorDefecto2);
+                    datosFormulario.setDato1501(valorDefecto2);
+                    datosFormulario.setDato1502(valorDefecto2);
+                    datosFormulario.setDato1503(valorDefecto2);
+                    datosFormulario.setDato1504(valorDefecto2);
+                    datosFormulario.setDato1505(valorDefecto2);
+                    
                 }
 
                 break;
@@ -994,6 +1016,17 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato61(valorDefecto3);
                     datosFormulario.setDato62(valorDefecto3);
                     datosFormulario.setDato63(valorDefecto3);
+                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 55) {
+                    datosFormulario.setDato35(valorDefecto3);
+                    datosFormulario.setDato1517(valorDefecto3);
+                    datosFormulario.setDato1483(valorDefecto3);
+                    datosFormulario.setDato1484(valorDefecto3);
+                    datosFormulario.setDato1485(valorDefecto3);
+                    datosFormulario.setDato1486(valorDefecto3);
+                    datosFormulario.setDato1487(valorDefecto3);
+                    datosFormulario.setDato1488(valorDefecto3);
+                    datosFormulario.setDato1489(valorDefecto3);
+                   
                 }
                 
                 break;
@@ -3725,9 +3758,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     
     public void calcularIMCHisOdontologia() {
         try {
-            float peso = Float.parseFloat(datosFormulario.getDato1472().toString());
-            float talla = Float.parseFloat(datosFormulario.getDato1473().toString());
-            datosFormulario.setDato1474(calcularIMC(peso, talla));
+            float peso = Float.parseFloat(datosFormulario.getDato1507().toString());
+            float talla = Float.parseFloat(datosFormulario.getDato1508().toString());
+            datosFormulario.setDato1509(calcularIMC(peso, talla));
 
         } catch (Exception e) {
             System.out.println("" + e.getMessage());
@@ -6714,6 +6747,14 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 calculo_imc_perimetro();
                 calculo_imc();
             }
+            
+            if(tipoRegistroClinicoActual.getIdTipoReg() == 55){
+                try {
+                    getJsonOdontograma();
+                } catch (Exception e) {
+                }
+                
+            }
             if (tipoRegistroClinicoActual.getIdTipoReg() == 19) {
                 registroEncontrado = registroFacade.buscarUltimo(pacienteSeleccionado.getIdPaciente(), 54);
                 if (registroEncontrado != null) {
@@ -7068,10 +7109,14 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         nuevoRegistro.setFechaSis(fechaSis);
         nuevoRegistro.setIdPaciente(pacienteSeleccionado);
         if (tipoRegistroClinicoActual.getIdTipoReg() == 55) {
-            guardarOdontograma();
-            guardarEvolucion();
-            guardarOleary1();
-            guardarOleary2();
+            try {
+                guardarOdontograma();
+                guardarEvolucion();
+                guardarOleary1();
+                guardarOleary2();
+            } catch (Exception e) {
+            }
+            
         }
         if (validarNoVacio(turnoCita)) {
             List<CitCitas> listaCitas = turnosFacade.find(Integer.parseInt(turnoCita)).getCitCitasList();
