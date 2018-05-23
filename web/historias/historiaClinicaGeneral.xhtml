@@ -24,10 +24,10 @@
     </h:head>
     <h:body>
         #{historiasMB.inicializar()}
+        
+                <ui:include src="textoPredefinidos.xhtml" />
         <h:form id="IdFormRegistroClinico">  
             <p:outputPanel id="optexto">
-                <ui:include src="textoPredefinidos.xhtml" />
-        
             <p:growl id="IdMensajeUsuarios"  showDetail="true" sticky="false" autoUpdate="true" life="2000"/>
             <table style="margin-left: auto; margin-right: auto;" >
                 <tr><td colspan="2"><h2>HISTORIA CLINICA GENERAL</h2></td></tr>                                
@@ -35,14 +35,15 @@
                     <td colspan="2"><p:outputLabel value="MOTIVO CONSULTA"/>
                     <p:commandButton
                             styleClass="icon-folder fg-lightBlue bg-white no-border"
-                            title="Texto Predefinidos"
+                            title="Cargar Textos predeterminados"
                             value=""
-                            actionListener="#{historiasMB.cargarTextoPredefindoPorPosicionCampoDetalle(2)}"
-                            id="btntxtPre"
+                            actionListener="#{historiasMB.cargarTextoPredefindoPorPosicionCampoDetalle(2,'IdFormRegistroClinico')}"
+                            process="@this"
+                            immediate="true"
                             style="font-size: 12px; width: 15px; height: 15px; left: 20px; "
                             >
                         </p:commandButton>
-                        <p:tooltip id="toolTipFade" for="btntxtPre" value="Cargar Textos predeterminados" />
+                        
                     </td>                                        
                                                        
                 </tr>
@@ -56,7 +57,19 @@
                     </td>                    
                 </tr>
                 <tr>
-                    <td colspan="2"><p:outputLabel value="ENFERMEDAD ACTUAL"/></td>
+                    <td colspan="2"><p:outputLabel value="ENFERMEDAD ACTUAL"/>
+                    <p:commandButton
+                            styleClass="icon-folder fg-lightBlue bg-white no-border"
+                            title="Cargar Textos predeterminados"
+                            value=""
+                            actionListener="#{historiasMB.cargarTextoPredefindoPorPosicionCampoDetalle(3,'IdFormRegistroClinico')}"
+                            process="@this"
+                            immediate="true"
+                            style="font-size: 12px; width: 15px; height: 15px; left: 20px; "
+                            >
+                        </p:commandButton>
+                        
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="2"><p:inputTextarea styleClass="width2" value="#{historiasMB.datosFormulario.dato3}"/></td>

@@ -1,0 +1,1 @@
+ALTER TABLE cfg_historia_campos_predefinidos add column default_valor boolean;

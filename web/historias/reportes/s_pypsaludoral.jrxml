@@ -102,14 +102,6 @@
 				</frame>
 				<frame>
 					<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="90" y="23" width="344" height="13"/>
-					<textField isStretchWithOverflow="true">
-						<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="344" height="13"/>
-						<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
-							<font fontName="SansSerif" size="10" isBold="true"/>
-							<paragraph leftIndent="5"/>
-						</textElement>
-						<textFieldExpression><![CDATA[$F{dato701}]]></textFieldExpression>
-					</textField>
 				</frame>
 				<frame>
 					<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="90" y="36" width="344" height="10"/>

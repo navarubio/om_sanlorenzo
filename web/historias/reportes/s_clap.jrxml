@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="s_clap" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="65e48e29-e78f-443a-b32a-bc26c9e78938">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="1761"/>
+	<property name="ireport.y" value="0"/>
 	<field name="dato0" class="java.lang.Object">
 		<fieldDescription><![CDATA[dato0]]></fieldDescription>
 	</field>
@@ -594,14 +594,6 @@
 				</frame>
 				<frame>
 					<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="90" y="23" width="344" height="13"/>
-					<textField isStretchWithOverflow="true">
-						<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="344" height="13"/>
-						<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
-							<font fontName="SansSerif" size="10" isBold="true"/>
-							<paragraph leftIndent="5"/>
-						</textElement>
-						<textFieldExpression><![CDATA[$F{dato701}]]></textFieldExpression>
-					</textField>
 				</frame>
 				<frame>
 					<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="90" y="36" width="344" height="10"/>

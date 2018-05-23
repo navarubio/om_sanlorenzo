@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core">  
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">  
     <h:head>
         <title>Usuarios</title>
         <link href="../recursos/css/estilos.css" rel="stylesheet"/>        
@@ -23,6 +24,7 @@
     </h:head>
     <h:body>
         #{historiasMB.inicializar()}
+        <ui:include src="textoPredefinidos.xhtml" />
         <h:form id="IdFormRegistroClinico">  
             <p:growl id="IdMensajeUsuarios" showDetail="true" sticky="false" autoUpdate="true" life="2000"/>
             <table style="margin-left: auto; margin-right: auto;" >
@@ -152,7 +154,19 @@
 
 
                 <tr>
-                    <td><h2><p:outputLabel value="MOTIVO CONSULTA"/></h2></td>                                        
+                    <td><h2><p:outputLabel value="MOTIVO CONSULTA"/>
+                            
+<p:commandButton
+                            styleClass="icon-folder fg-lightBlue bg-white no-border"
+                            title="Cargar Textos predeterminados"
+                            value=""
+                            actionListener="#{historiasMB.cargarTextoPredefindoPorPosicionCampoDetalle(3,'IdFormRegistroClinico')}"
+                            process="@this"
+                            immediate="true"
+                            style="font-size: 12px; width: 15px; height: 15px; left: 20px; "
+                            >
+                        </p:commandButton>
+                        </h2></td>                                        
                 </tr>
                 <tr>
                     <td colspan="2">
@@ -172,7 +186,18 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><h2><p:outputLabel value="ENFERMEDAD ACTUAL"/></h2></td>                                        
+                    <td><h2><p:outputLabel value="ENFERMEDAD ACTUAL"/>
+                            <p:commandButton
+                            styleClass="icon-folder fg-lightBlue bg-white no-border"
+                            title="Cargar Textos predeterminados"
+                            value=""
+                            actionListener="#{historiasMB.cargarTextoPredefindoPorPosicionCampoDetalle(4,'IdFormRegistroClinico')}"
+                            process="@this"
+                            immediate="true"
+                            style="font-size: 12px; width: 15px; height: 15px; left: 20px; "
+                            >
+                        </p:commandButton>
+                        </h2></td>                                        
                 </tr>
                 <tr>
                     <td colspan="2">
@@ -865,7 +890,18 @@
 
                 <!--Fin de examen mental-->
                 <tr>
-                    <td colspan="2"> <h2> INTERVENCIÓN DE MEDICINA FAMILIAR </h2> </td>
+                    <td colspan="2"> <h2> INTERVENCIÓN DE MEDICINA FAMILIAR 
+                            <p:commandButton
+                            styleClass="icon-folder fg-lightBlue bg-white no-border"
+                            title="Cargar Textos predeterminados"
+                            value=""
+                            actionListener="#{historiasMB.cargarTextoPredefindoPorPosicionCampoDetalle(110,'IdFormRegistroClinico')}"
+                            process="@this"
+                            immediate="true"
+                            style="font-size: 12px; width: 15px; height: 15px; left: 20px; "
+                            >
+                        </p:commandButton>
+                        </h2> </td>
                 </tr>
                 <tr>
                     <td colspan="2">
@@ -952,6 +988,16 @@
                     <td colspan="2">
                         <h2>
                             RECOMENDACIONES
+                            <p:commandButton
+                            styleClass="icon-folder fg-lightBlue bg-white no-border"
+                            title="Cargar Textos predeterminados"
+                            value=""
+                            actionListener="#{historiasMB.cargarTextoPredefindoPorPosicionCampoDetalle(116,'IdFormRegistroClinico')}"
+                            process="@this"
+                            immediate="true"
+                            style="font-size: 12px; width: 15px; height: 15px; left: 20px; "
+                            >
+                        </p:commandButton>
                         </h2>
 
                     </td>
@@ -976,6 +1022,16 @@
                     <td colspan="2">
                         <h2>
                             TRATAMIENTO
+                            <p:commandButton
+                            styleClass="icon-folder fg-lightBlue bg-white no-border"
+                            title="Cargar Textos predeterminados"
+                            value=""
+                            actionListener="#{historiasMB.cargarTextoPredefindoPorPosicionCampoDetalle(117,'IdFormRegistroClinico')}"
+                            process="@this"
+                            immediate="true"
+                            style="font-size: 12px; width: 15px; height: 15px; left: 20px; "
+                            >
+                        </p:commandButton>
                         </h2>
 
                     </td>

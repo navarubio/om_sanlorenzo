@@ -461,6 +461,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     
     //Valores predefinidos
     HcCamposReg campoSeleccionado;
+    private String nombreFormulario;
     private CfgHistoriaCamposPredefinidos textoSeleccionado;
     public HistoriasMB() {
         aplicacionGeneralMB = FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{aplicacionGeneralMB}", AplicacionGeneralMB.class);
@@ -476,24 +477,29 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         campoSeleccionado = new HcCamposReg();
     }
 
-    public void cargarTextoPredefindoPorPosicionCampoDetalle(int posicion){
+    public void cargarTextoPredefindoPorPosicionCampoDetalle(int posicion,String formulario){
         try {
+            this.nombreFormulario = formulario;
             campoSeleccionado =  camposRegFacade.buscarPorTipoRegistroYPosicion(tipoRegistroClinicoActual.getIdTipoReg(), posicion);
             listaTextos = cfgHistoriaCamposPredefinidosFacade.getCamposDefinidosXCampo(campoSeleccionado.getIdCampo());
+            RequestContext.getCurrentInstance().update("dialogTexto");
             RequestContext.getCurrentInstance().update("optexto");
+            RequestContext.getCurrentInstance().update(nombreFormulario);
             RequestContext.getCurrentInstance().execute("PF('dlgTexto').show();");
             
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public void onRowSelect(SelectEvent event) {
+    public void cargarTexto(){
+        RequestContext.getCurrentInstance().execute("PF('dlgTexto').hide();");
+    }
+    public void textoPredefinidoSeleccionado(SelectEvent event) {
         textoSeleccionado = (CfgHistoriaCamposPredefinidos)event.getObject();
         datosFormulario.setValor(campoSeleccionado.getPosicion(), textoSeleccionado.getValor());
-        System.out.println(datosFormulario.getValor(2));
-        System.out.println(textoSeleccionado.getValor());
+        RequestContext.getCurrentInstance().update(nombreFormulario);
         RequestContext.getCurrentInstance().execute("PF('dlgTexto').hide();");
-        RequestContext.getCurrentInstance().update("optexto");
+        
         
         
     }
@@ -2539,6 +2545,10 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     }
 
     private void valoresPorDefecto() {
+        datosFormulario = new DatosFormularioHistoria();
+        for(int i=0;i<=745;i++){
+            datosFormulario.setValor(i, "");
+        }
         if (tipoRegistroClinicoActual != null) {//validacion particular para asignar valores por defecto             
             if (tipoRegistroClinicoActual.getIdTipoReg() == 71) {
                loadGraphic();
@@ -2600,19 +2610,25 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             clasificacion_fisica();
         }
          if (tipoRegistroClinicoActual != null){//Cargamos los campos por default si no posee historia
+             try{
              for(HcCamposReg hc: tipoRegistroClinicoActual.getHcCamposRegList()){
                  if(hc.getValorDefault()!=null)
                     datosFormulario.setValor(hc.getPosicion(), hc.getValorDefault());
+             }
+             }catch(Exception e){
+                 
              }
              //
          }
          
          //cargamos campos predefinidos
          try {
+             listaCamposPredefinidos = new ArrayList<>();
             listaCamposPredefinidos = cfgHistoriaCamposPredefinidosFacade.getCamposDefinidosXHistoriaClinica(tipoRegistroClinicoActual.getIdTipoReg());
             for(CfgHistoriaCamposPredefinidos campos:listaCamposPredefinidos){
-                if(campos.isDefaultValor())
+                if(campos.isDefaultValor()){
                     datosFormulario.setValor(campos.getIdCampo().getPosicion(), campos.getValor());
+                }
             }
             
         } catch (Exception e) {
@@ -5320,6 +5336,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         }
 
         datosFormulario = new DatosFormularioHistoria();
+        for(int i=0;i<=745;i++){
+            datosFormulario.setValor(i, "");
+        }
         listaEstructuraFamiliar.clear();
         listaEstructuraFamiliarFiltro.clear();
         listaMedicamentos.clear();
@@ -10416,6 +10435,14 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     public void setTextoSeleccionado(CfgHistoriaCamposPredefinidos textoSeleccionado) {
         this.textoSeleccionado = textoSeleccionado;
     }
+
+    public String getNombreFormulario() {
+        return nombreFormulario;
+    }
+
+    public void setNombreFormulario(String nombreFormulario) {
+        this.nombreFormulario = nombreFormulario;
+    }
      
-     
+   
 }

@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="s_valoraciondecrecimientoninas0a5" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="043e1104-03f5-4d8d-9d53-252350687cfb">
 	<property name="ireport.zoom" value="0.75"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="787"/>
+	<property name="ireport.y" value="0"/>
 	<subDataset name="itemPeso" uuid="40434851-8913-4f7f-aa88-b4148a5ecfd3">
 		<field name="valor" class="java.math.BigDecimal"/>
 		<field name="valorX" class="java.lang.Integer"/>
@@ -105,14 +105,6 @@
 				</frame>
 				<frame>
 					<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="90" y="23" width="344" height="13"/>
-					<textField isStretchWithOverflow="true">
-						<reportElement uuid="a520721a-4d21-4583-941d-c71961057013" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="344" height="13"/>
-						<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
-							<font fontName="SansSerif" size="10" isBold="true"/>
-							<paragraph leftIndent="5"/>
-						</textElement>
-						<textFieldExpression><![CDATA[$F{dato701}]]></textFieldExpression>
-					</textField>
 				</frame>
 				<frame>
 					<reportElement uuid="80c48727-2be9-4b8f-ae92-9fbe6a16dbdf" positionType="Float" x="90" y="36" width="344" height="10"/>

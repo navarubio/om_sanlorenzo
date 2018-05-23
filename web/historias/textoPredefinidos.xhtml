@@ -7,7 +7,7 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-         <p:dialog header="Seleccionar Texto Predefinido"  dynamic="true" widgetVar="dlgTexto" modal="true" resizable="false" closable="true" style="width: 80%">
+        <p:dialog  header="Seleccionar Texto Predefinido" dynamic="true" id="dialogTexto"  widgetVar="dlgTexto"  resizable="false" closable="true" style="width: 80%">
              <p:dataTable id="eventsDT" 
                           var="texto"
                           value="#{historiasMB.listaTextos}" 
@@ -15,7 +15,8 @@
                           selection="#{historiasMB.textoSeleccionado}" 
                           rowKey="#{texto.id}"
                           >
-                 <p:ajax event="rowSelect"  listener="#{historiasMB.onRowSelect}" process="@form" oncomplete="PF('dlgTexto').hide()"/>
+                 <p:ajax event="rowSelect" immediate="true" 
+                         listener="#{historiasMB.textoPredefinidoSeleccionado}" oncomplete="PF('dlgTexto').hide()" />
                 <p:column headerText="Texto">
                     <h:outputText value="#{texto.valor}" />
                 </p:column>
