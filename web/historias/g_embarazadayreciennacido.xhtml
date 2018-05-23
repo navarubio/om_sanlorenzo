@@ -99,32 +99,32 @@
                     <td><p:outputLabel value="Cesáreas" /></td>
                 </tr>
                 <tr>
-                    <td><p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato10}" maxlength="15" placeholder="15 caracteres máximo"/></td>
-                    <td><p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato11}" maxlength="15" placeholder="15 caracteres máximo"/></td>             
+                    <td><p:inputText id="dato10" styleClass="width1" value="#{historiasMB.datosFormulario.dato10}" maxlength="15" placeholder="15 caracteres máximo"/></td>
+                    <td><p:inputText id="dato11" styleClass="width1" value="#{historiasMB.datosFormulario.dato11}" maxlength="15" placeholder="15 caracteres máximo"/></td>             
                 </tr>
                 <tr>
                     <td><p:outputLabel value="Abortos" /></td>
                     <td><p:outputLabel value="(&gt;3 ESPONTANEOS) HIJOS NACIDOS MUERTOS" /></td>
                 </tr>
                 <tr>
-                    <td><p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato12}" maxlength="15" placeholder="15 caracteres máximo"/></td>
-                    <td><p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato13}" maxlength="15" placeholder="15 caracteres máximo"/></td>             
+                    <td><p:inputText id="dato12" styleClass="width1" value="#{historiasMB.datosFormulario.dato12}" maxlength="15" placeholder="15 caracteres máximo"/></td>
+                    <td><p:inputText id="dato13" styleClass="width1" value="#{historiasMB.datosFormulario.dato13}" maxlength="15" placeholder="15 caracteres máximo"/></td>             
                 </tr>
                 <tr>
                     <td><p:outputLabel value="Muertes Neonatales" /></td>
                     <td><p:outputLabel value="HIJOS &lt; 2500G" /></td>
                 </tr>
                 <tr>
-                    <td><p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato14}" maxlength="15" placeholder="15 caracteres máximo"/></td>
-                    <td><p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato15}" maxlength="15" placeholder="15 caracteres máximo"/></td>             
+                    <td><p:inputText id="dato14" styleClass="width1" value="#{historiasMB.datosFormulario.dato14}" maxlength="15" placeholder="15 caracteres máximo"/></td>
+                    <td><p:inputText id="dato15" styleClass="width1" value="#{historiasMB.datosFormulario.dato15}" maxlength="15" placeholder="15 caracteres máximo"/></td>             
                 </tr>
                 <tr>
                     <td><p:outputLabel value="Y/O &gt; 4000G" /></td>
                     <td><p:outputLabel value="HIJOS MAL FORMADOS" /></td>
                 </tr>
                 <tr>
-                    <td><p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato16}" maxlength="15" placeholder="15 caracteres máximo"/></td>
-                    <td><p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato17}" maxlength="15" placeholder="15 caracteres máximo"/></td>             
+                    <td><p:inputText id="dato16" styleClass="width1" value="#{historiasMB.datosFormulario.dato16}" maxlength="15" placeholder="15 caracteres máximo"/></td>
+                    <td><p:inputText id="dato17" styleClass="width1" value="#{historiasMB.datosFormulario.dato17}" maxlength="15" placeholder="15 caracteres máximo"/></td>             
                 </tr>
                 <tr>
                     <td><p:outputLabel value="Internación por hipertension/preeclamsuia/eclampsia en el último embarazo" /></td>
@@ -149,18 +149,28 @@
                     <td><p:outputLabel value="Otro antecedente importante" /></td>
                 </tr>
                 <tr>
-                    <td><p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato20}" maxlength="70" placeholder="70 caracteres máximo"/></td>
-                    <td><p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato21}" maxlength="70" placeholder="70 caracteres máximo"/></td>             
+                    <td><p:inputText id="dato20" styleClass="width1" value="#{historiasMB.datosFormulario.dato20}" maxlength="70" placeholder="70 caracteres máximo"/></td>
+                    <td><p:inputText id="dato21" styleClass="width1" value="#{historiasMB.datosFormulario.dato21}" maxlength="70" placeholder="70 caracteres máximo"/></td>             
                 </tr>
                 <tr>
                     <td><p:outputLabel value="Evaluar" /></td>
                     <td><p:outputLabel value="Clasificar" /></td>
                 </tr>
                 <tr>
-                    <td><p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato22}" maxlength="25" placeholder="25 caracteres máximo"/></td>
-                    <td><p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato23}" maxlength="25" placeholder="25 caracteres máximo"/></td>             
+                    <td><p:inputText id="dato22" styleClass="width1" value="#{historiasMB.datosFormulario.dato22}" maxlength="25" placeholder="25 caracteres máximo"/></td>
+                    <td><p:inputText id="dato23" styleClass="width1" value="#{historiasMB.datosFormulario.dato23}" maxlength="25" placeholder="25 caracteres máximo"/></td>             
                 </tr>
-
+                <tr>
+                        <td colspan="2">
+                            <p:selectOneMenu  value="#{historiasMB.valorDefecto1}" styleClass="campoFormulario">
+                                <f:selectItems value="#{historiasMB.listaValoresDefecto}"/>
+                            </p:selectOneMenu>  
+                            &nbsp;
+                            <p:commandButton value="Valor por Defecto" actionListener="#{historiasMB.cambiarValorDefecto(1)}" 
+                                             update="dato10 dato11 dato12 dato13 dato14 dato15 dato16 dato17 dato20 dato21 dato22 dato23">
+                            </p:commandButton>
+                        </td>
+                    </tr>
 
 
 

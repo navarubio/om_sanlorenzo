@@ -587,7 +587,59 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 }
                 else if(tipoRegistroClinicoActual.getIdTipoReg()==89){
                     datosFormulario.setDato0(valorDefecto1);
+                }else if(tipoRegistroClinicoActual.getIdTipoReg()==13){
+                    datosFormulario.setDato5(valorDefecto1);
+                }else if(tipoRegistroClinicoActual.getIdTipoReg()==17){
+                    datosFormulario.setDato6(valorDefecto1);
+                    datosFormulario.setDato7(valorDefecto1);
+                    datosFormulario.setDato8(valorDefecto1);
+                    datosFormulario.setDato9(valorDefecto1);
+                    datosFormulario.setDato10(valorDefecto1);
+                    datosFormulario.setDato11(valorDefecto1);
+                    datosFormulario.setDato12(valorDefecto1);
+                    datosFormulario.setDato13(valorDefecto1);
+                    
+                }else if(tipoRegistroClinicoActual.getIdTipoReg()==18){
+                    datosFormulario.setDato11(valorDefecto1);
+                    datosFormulario.setDato12(valorDefecto1);
+                    datosFormulario.setDato13(valorDefecto1);
+                    datosFormulario.setDato14(valorDefecto1);
+                    datosFormulario.setDato15(valorDefecto1);
+                    datosFormulario.setDato16(valorDefecto1);
+                    datosFormulario.setDato17(valorDefecto1);
+                    datosFormulario.setDato18(valorDefecto1);
+                    datosFormulario.setDato19(valorDefecto1);
+                    datosFormulario.setDato20(valorDefecto1);
+                    datosFormulario.setDato21(valorDefecto1);
+                    datosFormulario.setDato22(valorDefecto1);
+                    datosFormulario.setDato23(valorDefecto1);
+                    datosFormulario.setDato24(valorDefecto1);
+                }else if(tipoRegistroClinicoActual.getIdTipoReg()==45){
+                    datosFormulario.setDato10(valorDefecto1);
+                    datosFormulario.setDato11(valorDefecto1);
+                    datosFormulario.setDato12(valorDefecto1);
+                    datosFormulario.setDato13(valorDefecto1);
+                    datosFormulario.setDato14(valorDefecto1);
+                    datosFormulario.setDato15(valorDefecto1);
+                    datosFormulario.setDato16(valorDefecto1);
+                    datosFormulario.setDato17(valorDefecto1);
+                    datosFormulario.setDato20(valorDefecto1);
+                    datosFormulario.setDato21(valorDefecto1);
+                    datosFormulario.setDato22(valorDefecto1);
+                    datosFormulario.setDato23(valorDefecto1);
+                    
+                }else if(tipoRegistroClinicoActual.getIdTipoReg()==47){
+                    datosFormulario.setDato3(valorDefecto1);
+                    datosFormulario.setDato4(valorDefecto1);
+                    datosFormulario.setDato5(valorDefecto1);
+                    datosFormulario.setDato6(valorDefecto1);
+                    datosFormulario.setDato7(valorDefecto1);
+                    datosFormulario.setDato8(valorDefecto1);
+                    datosFormulario.setDato9(valorDefecto1);
+                    
+                    
                 }
+
                 
                 
 
@@ -678,6 +730,54 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato17(valorDefecto2);
                     datosFormulario.setDato201(valorDefecto2);
                     datosFormulario.setDato202(valorDefecto2);
+                }else if(tipoRegistroClinicoActual.getIdTipoReg()==13){
+                    datosFormulario.setDato6(valorDefecto2);
+                    datosFormulario.setDato7(valorDefecto2);
+                    datosFormulario.setDato8(valorDefecto2);
+                    datosFormulario.setDato9(valorDefecto2);
+                    datosFormulario.setDato10(valorDefecto2);
+                }else if(tipoRegistroClinicoActual.getIdTipoReg()==17){
+                    datosFormulario.setDato14(valorDefecto2);
+                    datosFormulario.setDato15(valorDefecto2);
+                    datosFormulario.setDato16(valorDefecto2);
+                    
+                }else if(tipoRegistroClinicoActual.getIdTipoReg()==18){
+                    datosFormulario.setDato25(valorDefecto2);
+                    datosFormulario.setDato26(valorDefecto2);
+                    datosFormulario.setDato27(valorDefecto2);
+                    datosFormulario.setDato28(valorDefecto2);
+                    datosFormulario.setDato29(valorDefecto2);
+                    datosFormulario.setDato30(valorDefecto2);
+                    datosFormulario.setDato31(valorDefecto2);
+                    datosFormulario.setDato32(valorDefecto2);
+                    datosFormulario.setDato33(valorDefecto2);
+                    datosFormulario.setDato34(valorDefecto2);
+                    datosFormulario.setDato35(valorDefecto2);
+                    datosFormulario.setDato36(valorDefecto2);
+                    datosFormulario.setDato37(valorDefecto2);
+                    datosFormulario.setDato38(valorDefecto2);
+                    datosFormulario.setDato39(valorDefecto2);
+                    datosFormulario.setDato40(valorDefecto2);
+                    datosFormulario.setDato41(valorDefecto2);
+                }else if(tipoRegistroClinicoActual.getIdTipoReg()==47){
+                    datosFormulario.setDato64(valorDefecto2);
+                    datosFormulario.setDato65(valorDefecto2);
+                    datosFormulario.setDato66(valorDefecto2);
+                    datosFormulario.setDato67(valorDefecto2);
+                    datosFormulario.setDato68(valorDefecto2);
+                    datosFormulario.setDato69(valorDefecto2);
+                    datosFormulario.setDato70(valorDefecto2);
+                    datosFormulario.setDato71(valorDefecto2);
+                    datosFormulario.setDato72(valorDefecto2);
+                    datosFormulario.setDato73(valorDefecto2);
+                    datosFormulario.setDato74(valorDefecto2);
+                    datosFormulario.setDato75(valorDefecto2);
+                    datosFormulario.setDato76(valorDefecto2);
+                    datosFormulario.setDato77(valorDefecto2);
+                    datosFormulario.setDato78(valorDefecto2);
+                    datosFormulario.setDato79(valorDefecto2);
+                    datosFormulario.setDato80(valorDefecto2);
+                    datosFormulario.setDato81(valorDefecto2);
                 }
 
                 break;
@@ -857,6 +957,43 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato18(valorDefecto3);
                     datosFormulario.setDato19(valorDefecto3);
                     
+                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 13) {
+                    datosFormulario.setDato11(valorDefecto3);
+                    datosFormulario.setDato12(valorDefecto3);
+                    datosFormulario.setDato13(valorDefecto3);
+                    datosFormulario.setDato14(valorDefecto3);
+                    datosFormulario.setDato15(valorDefecto3);
+                    datosFormulario.setDato16(valorDefecto3);
+                    datosFormulario.setDato17(valorDefecto3);
+                    datosFormulario.setDato18(valorDefecto3);
+                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 17) {
+                    datosFormulario.setDato17(valorDefecto3);
+                    datosFormulario.setDato18(valorDefecto3);
+                    datosFormulario.setDato19(valorDefecto3);
+                    datosFormulario.setDato20(valorDefecto3);
+                    
+                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 18) {
+                    datosFormulario.setDato43(valorDefecto3);
+                    datosFormulario.setDato44(valorDefecto3);
+                    datosFormulario.setDato45(valorDefecto3);
+                    datosFormulario.setDato46(valorDefecto3);
+                    datosFormulario.setDato47(valorDefecto3);
+                    datosFormulario.setDato48(valorDefecto3);
+                    datosFormulario.setDato49(valorDefecto3);
+                    datosFormulario.setDato50(valorDefecto3);
+                    datosFormulario.setDato51(valorDefecto3);
+                    datosFormulario.setDato52(valorDefecto3);
+                    datosFormulario.setDato53(valorDefecto3);
+                    datosFormulario.setDato54(valorDefecto3);
+                    datosFormulario.setDato55(valorDefecto3);
+                    datosFormulario.setDato56(valorDefecto3);
+                    datosFormulario.setDato57(valorDefecto3);
+                    datosFormulario.setDato58(valorDefecto3);
+                    datosFormulario.setDato59(valorDefecto3);
+                    datosFormulario.setDato60(valorDefecto3);
+                    datosFormulario.setDato61(valorDefecto3);
+                    datosFormulario.setDato62(valorDefecto3);
+                    datosFormulario.setDato63(valorDefecto3);
                 }
                 
                 break;
@@ -1037,6 +1174,33 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato38(valorDefecto4);
                     datosFormulario.setDato39(valorDefecto4);
                     datosFormulario.setDato40(valorDefecto4);
+                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 13) {
+                    datosFormulario.setDato19(valorDefecto4);
+                    datosFormulario.setDato20(valorDefecto4);
+                    datosFormulario.setDato21(valorDefecto4);
+                    datosFormulario.setDato23(valorDefecto4);
+                    datosFormulario.setDato24(valorDefecto4);
+                    datosFormulario.setDato25(valorDefecto4);
+                    datosFormulario.setDato26(valorDefecto4);
+                    datosFormulario.setDato27(valorDefecto4);
+                    datosFormulario.setDato28(valorDefecto4);
+                    datosFormulario.setDato29(valorDefecto4);
+                    datosFormulario.setDato30(valorDefecto4);
+                    datosFormulario.setDato31(valorDefecto4);
+                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 17) {
+                    datosFormulario.setDato21(valorDefecto4);
+                    datosFormulario.setDato22(valorDefecto4);
+                    datosFormulario.setDato23(valorDefecto4);
+                    datosFormulario.setDato24(valorDefecto4);
+                    
+                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 18) {
+                    datosFormulario.setDato64(valorDefecto4);
+                    datosFormulario.setDato65(valorDefecto4);
+                    datosFormulario.setDato66(valorDefecto4);
+                    datosFormulario.setDato67(valorDefecto4);
+                    datosFormulario.setDato68(valorDefecto4);
+                    datosFormulario.setDato69(valorDefecto4);
+                    
                 }
                 break;
             case 5:
@@ -1188,6 +1352,44 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato49(valorDefecto5);
                     datosFormulario.setDato50(valorDefecto5);
                     datosFormulario.setDato51(valorDefecto5);
+                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 13) {
+                    datosFormulario.setDato32(valorDefecto5);
+                    datosFormulario.setDato33(valorDefecto5);
+                    datosFormulario.setDato34(valorDefecto5);
+                    datosFormulario.setDato35(valorDefecto5);
+                    datosFormulario.setDato36(valorDefecto5);
+                    datosFormulario.setDato37(valorDefecto5);
+                    datosFormulario.setDato38(valorDefecto5);
+                    
+                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 17) {
+                    datosFormulario.setDato25(valorDefecto5);
+                    datosFormulario.setDato26(valorDefecto5);
+                    datosFormulario.setDato27(valorDefecto5);
+                    datosFormulario.setDato28(valorDefecto5);
+                    datosFormulario.setDato29(valorDefecto5);
+                    
+                    
+                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 17) {
+                    datosFormulario.setDato71(valorDefecto5);
+                    datosFormulario.setDato72(valorDefecto5);
+                    datosFormulario.setDato73(valorDefecto5);
+                    datosFormulario.setDato74(valorDefecto5);
+                    datosFormulario.setDato75(valorDefecto5);
+                    datosFormulario.setDato76(valorDefecto5);
+                    datosFormulario.setDato77(valorDefecto5);
+                    datosFormulario.setDato78(valorDefecto5);
+                    datosFormulario.setDato79(valorDefecto5);
+                    datosFormulario.setDato80(valorDefecto5);
+                    datosFormulario.setDato81(valorDefecto5);
+                    datosFormulario.setDato82(valorDefecto5);
+                    datosFormulario.setDato83(valorDefecto5);
+                    datosFormulario.setDato84(valorDefecto5);
+                    datosFormulario.setDato85(valorDefecto5);
+                    datosFormulario.setDato86(valorDefecto5);
+                    datosFormulario.setDato87(valorDefecto5);
+                    
+                    
+                    
                 }
                 break;
             case 6:
@@ -1360,6 +1562,28 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato59(valorDefecto6);
                     datosFormulario.setDato60(valorDefecto6);
                     datosFormulario.setDato212(valorDefecto6);
+                    
+                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 13) {
+                    datosFormulario.setDato39(valorDefecto6);
+                    datosFormulario.setDato40(valorDefecto6);
+                    datosFormulario.setDato41(valorDefecto6);
+                    datosFormulario.setDato42(valorDefecto6);
+                    datosFormulario.setDato43(valorDefecto6);
+                    datosFormulario.setDato44(valorDefecto6);
+                    datosFormulario.setDato45(valorDefecto6);
+                    datosFormulario.setDato46(valorDefecto6);
+                    datosFormulario.setDato47(valorDefecto6);
+                    datosFormulario.setDato48(valorDefecto6);
+                    
+                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 17) {
+                    datosFormulario.setDato30(valorDefecto6);
+                    datosFormulario.setDato31(valorDefecto6);
+                    datosFormulario.setDato32(valorDefecto6);
+                    datosFormulario.setDato33(valorDefecto6);
+                    datosFormulario.setDato34(valorDefecto6);
+                    datosFormulario.setDato35(valorDefecto6);
+                    datosFormulario.setDato36(valorDefecto6);
+                    
                     
                 }
 
@@ -1558,6 +1782,24 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato70(valorDefecto7);
                     datosFormulario.setDato71(valorDefecto7);
                     
+                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 17) {
+                    datosFormulario.setDato41(valorDefecto7);
+                    datosFormulario.setDato42(valorDefecto7);
+                    datosFormulario.setDato43(valorDefecto7);
+                    datosFormulario.setDato44(valorDefecto7);
+                    datosFormulario.setDato45(valorDefecto7);
+                    datosFormulario.setDato46(valorDefecto7);
+                    datosFormulario.setDato47(valorDefecto7);
+                    datosFormulario.setDato48(valorDefecto7);
+                    datosFormulario.setDato49(valorDefecto7);
+                    datosFormulario.setDato50(valorDefecto7);
+                    datosFormulario.setDato51(valorDefecto7);
+                    datosFormulario.setDato52(valorDefecto7);
+                    datosFormulario.setDato53(valorDefecto7);
+                    datosFormulario.setDato54(valorDefecto7);
+                    datosFormulario.setDato55(valorDefecto7);
+                    datosFormulario.setDato56(valorDefecto7);
+                    datosFormulario.setDato57(valorDefecto7);
                 }
                 break;
             case 8:
