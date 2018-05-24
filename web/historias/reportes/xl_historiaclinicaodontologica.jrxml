@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="xl_historiaclinicaodontologica" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a75afb29-aeef-4d06-a33d-602277585311">
-	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="2948"/>
+	<property name="ireport.y" value="144"/>
 	<field name="dato0" class="java.lang.Object">
 		<fieldDescription><![CDATA[dato0]]></fieldDescription>
 	</field>
@@ -4368,6 +4368,37 @@
 	<field name="dato1454" class="java.lang.Object">
 		<fieldDescription><![CDATA[dato1454]]></fieldDescription>
 	</field>
+	<field name="dato1490" class="java.lang.Object"/>
+	<field name="dato1491" class="java.lang.Object"/>
+	<field name="dato1492" class="java.lang.Object"/>
+	<field name="dato1493" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato1720]]></fieldDescription>
+	</field>
+	<field name="dato1494" class="java.lang.Object">
+		<fieldDescription><![CDATA[dato1720]]></fieldDescription>
+	</field>
+	<field name="dato1495" class="java.lang.Object"/>
+	<field name="dato1496" class="java.lang.Object"/>
+	<field name="dato1497" class="java.lang.Object"/>
+	<field name="dato1498" class="java.lang.Object"/>
+	<field name="dato1499" class="java.lang.Object"/>
+	<field name="dato1500" class="java.lang.Object"/>
+	<field name="dato1501" class="java.lang.Object"/>
+	<field name="dato1502" class="java.lang.Object"/>
+	<field name="dato1503" class="java.lang.Object"/>
+	<field name="dato1504" class="java.lang.Object"/>
+	<field name="dato1505" class="java.lang.Object"/>
+	<field name="dato1506" class="java.lang.Object"/>
+	<field name="dato1507" class="java.lang.Object"/>
+	<field name="dato1508" class="java.lang.Object"/>
+	<field name="dato1509" class="java.lang.Object"/>
+	<field name="dato1510" class="java.lang.Object"/>
+	<field name="dato1511" class="java.lang.Object"/>
+	<field name="dato1512" class="java.lang.Object"/>
+	<field name="dato1513" class="java.lang.Object"/>
+	<field name="dato1514" class="java.lang.Object"/>
+	<field name="dato1515" class="java.lang.Object"/>
+	<field name="dato1516" class="java.lang.Object"/>
 	<field name="dato1700" class="java.lang.Object">
 		<fieldDescription><![CDATA[dato1700]]></fieldDescription>
 	</field>
@@ -4452,37 +4483,6 @@
 	<field name="dato1727" class="java.lang.Object">
 		<fieldDescription><![CDATA[dato1727]]></fieldDescription>
 	</field>
-	<field name="dato1490" class="java.lang.Object"/>
-	<field name="dato1491" class="java.lang.Object"/>
-	<field name="dato1492" class="java.lang.Object"/>
-	<field name="dato1493" class="java.lang.Object">
-		<fieldDescription><![CDATA[dato1720]]></fieldDescription>
-	</field>
-	<field name="dato1494" class="java.lang.Object">
-		<fieldDescription><![CDATA[dato1720]]></fieldDescription>
-	</field>
-	<field name="dato1495" class="java.lang.Object"/>
-	<field name="dato1496" class="java.lang.Object"/>
-	<field name="dato1497" class="java.lang.Object"/>
-	<field name="dato1498" class="java.lang.Object"/>
-	<field name="dato1499" class="java.lang.Object"/>
-	<field name="dato1500" class="java.lang.Object"/>
-	<field name="dato1501" class="java.lang.Object"/>
-	<field name="dato1502" class="java.lang.Object"/>
-	<field name="dato1503" class="java.lang.Object"/>
-	<field name="dato1504" class="java.lang.Object"/>
-	<field name="dato1505" class="java.lang.Object"/>
-	<field name="dato1506" class="java.lang.Object"/>
-	<field name="dato1507" class="java.lang.Object"/>
-	<field name="dato1508" class="java.lang.Object"/>
-	<field name="dato1509" class="java.lang.Object"/>
-	<field name="dato1510" class="java.lang.Object"/>
-	<field name="dato1511" class="java.lang.Object"/>
-	<field name="dato1512" class="java.lang.Object"/>
-	<field name="dato1513" class="java.lang.Object"/>
-	<field name="dato1514" class="java.lang.Object"/>
-	<field name="dato1515" class="java.lang.Object"/>
-	<field name="dato1516" class="java.lang.Object"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -4985,38 +4985,6 @@
 					</textElement>
 					<text><![CDATA[ANTECEDENTES FAMILIARES]]></text>
 				</staticText>
-			</frame>
-			<frame>
-				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="188" width="572" height="12" isPrintWhenDetailOverflows="true"/>
-				<box>
-					<leftPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textField>
-					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="286" height="12"/>
-					<box leftPadding="3">
-						<topPen lineWidth="0.5"/>
-						<leftPen lineWidth="0.5"/>
-						<bottomPen lineWidth="0.5"/>
-						<rightPen lineWidth="0.5"/>
-					</box>
-					<textElement verticalAlignment="Middle" markup="html">
-						<font size="9"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{dato1490}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="286" y="0" width="286" height="12"/>
-					<box leftPadding="3">
-						<topPen lineWidth="0.5"/>
-						<bottomPen lineWidth="0.5"/>
-						<rightPen lineWidth="0.5"/>
-					</box>
-					<textElement verticalAlignment="Middle" markup="html">
-						<font size="9"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{dato1491}]]></textFieldExpression>
-				</textField>
 			</frame>
 			<frame>
 				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="372" width="572" height="12" isPrintWhenDetailOverflows="true"/>
@@ -6392,6 +6360,44 @@
 				</textField>
 			</frame>
 			<textField>
+				<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="286" y="188" width="286" height="12"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato1491}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="188" width="286" height="12"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato1490}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="286" y="200" width="286" height="12"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato1491}]]></textFieldExpression>
+			</textField>
+			<textField>
 				<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="200" width="286" height="12"/>
 				<box leftPadding="3">
 					<topPen lineWidth="0.5"/>
@@ -6417,53 +6423,20 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{dato1494}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="286" y="200" width="286" height="12"/>
-				<box leftPadding="3">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement verticalAlignment="Middle" markup="html">
-					<font size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato1491}]]></textFieldExpression>
-			</textField>
-			<frame>
-				<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="224" width="572" height="12" isPrintWhenDetailOverflows="true"/>
+			<staticText>
+				<reportElement uuid="c4a9d40c-6222-4a68-bda2-352d503adaad" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="224" width="572" height="12" backcolor="#CCCCCC"/>
 				<box>
-					<leftPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.0"/>
-				</box>
-				<staticText>
-					<reportElement uuid="c4a9d40c-6222-4a68-bda2-352d503adaad" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="572" height="12" backcolor="#CCCCCC"/>
-					<box>
-						<topPen lineWidth="0.5"/>
-						<leftPen lineWidth="0.5"/>
-						<bottomPen lineWidth="0.5"/>
-						<rightPen lineWidth="0.5"/>
-					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
-						<font size="9" isBold="true"/>
-						<paragraph leftIndent="5"/>
-					</textElement>
-					<text><![CDATA[ANTECEDENTES PERSONALES]]></text>
-				</staticText>
-			</frame>
-			<textField>
-				<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="236" width="286" height="12"/>
-				<box leftPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement verticalAlignment="Middle" markup="html">
-					<font size="9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{dato1495}]]></textFieldExpression>
-			</textField>
+				<text><![CDATA[ANTECEDENTES PERSONALES]]></text>
+			</staticText>
 			<textField>
 				<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="286" y="236" width="286" height="12"/>
 				<box leftPadding="3">
@@ -6478,7 +6451,7 @@
 				<textFieldExpression><![CDATA[$F{dato1496}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="248" width="286" height="12"/>
+				<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="236" width="286" height="12"/>
 				<box leftPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -6488,46 +6461,7 @@
 				<textElement verticalAlignment="Middle" markup="html">
 					<font size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{dato1497}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="260" width="286" height="12"/>
-				<box leftPadding="3">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement verticalAlignment="Middle" markup="html">
-					<font size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato1499}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="272" width="286" height="12"/>
-				<box leftPadding="3">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement verticalAlignment="Middle" markup="html">
-					<font size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato1501}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="284" width="286" height="12"/>
-				<box leftPadding="3">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement verticalAlignment="Middle" markup="html">
-					<font size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato1503}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{dato1495}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="286" y="248" width="286" height="12"/>
@@ -6543,6 +6477,19 @@
 				<textFieldExpression><![CDATA[$F{dato1498}]]></textFieldExpression>
 			</textField>
 			<textField>
+				<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="248" width="286" height="12"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato1497}]]></textFieldExpression>
+			</textField>
+			<textField>
 				<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="286" y="260" width="286" height="12"/>
 				<box leftPadding="3">
 					<topPen lineWidth="0.5"/>
@@ -6554,6 +6501,19 @@
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{dato1500}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="260" width="286" height="12"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato1499}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="286" y="272" width="286" height="12"/>
@@ -6569,6 +6529,19 @@
 				<textFieldExpression><![CDATA[$F{dato1502}]]></textFieldExpression>
 			</textField>
 			<textField>
+				<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="272" width="286" height="12"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato1501}]]></textFieldExpression>
+			</textField>
+			<textField>
 				<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="286" y="284" width="286" height="12"/>
 				<box leftPadding="3">
 					<topPen lineWidth="0.5"/>
@@ -6580,6 +6553,19 @@
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{dato1504}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="284" width="286" height="12"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato1503}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="296" width="572" height="12"/>
@@ -6609,6 +6595,19 @@
 				<text><![CDATA[EXAMEN MEDICO]]></text>
 			</staticText>
 			<textField>
+				<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="286" y="320" width="286" height="12"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato1507}]]></textFieldExpression>
+			</textField>
+			<textField>
 				<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="320" width="286" height="12"/>
 				<box leftPadding="3">
 					<topPen lineWidth="0.5"/>
@@ -6620,6 +6619,19 @@
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{dato1506}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="286" y="332" width="286" height="12"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dato1509}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="332" width="286" height="12"/>
@@ -6646,32 +6658,6 @@
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{dato1510}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="286" y="320" width="286" height="12"/>
-				<box leftPadding="3">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement verticalAlignment="Middle" markup="html">
-					<font size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato1507}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="286" y="332" width="286" height="12"/>
-				<box leftPadding="3">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement verticalAlignment="Middle" markup="html">
-					<font size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dato1509}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="286" y="344" width="286" height="12"/>
@@ -6798,8 +6784,10 @@
 					<imageExpression><![CDATA[$F{dato96}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="8" y="25" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="8" y="25" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato97}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato97}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="43" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -6849,8 +6837,10 @@
 					<imageExpression><![CDATA[$F{dato104}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="43" y="25" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="43" y="25" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato105}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato105}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="78" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -6900,8 +6890,10 @@
 					<imageExpression><![CDATA[$F{dato112}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="78" y="25" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="78" y="25" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato113}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato113}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="113" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -6951,8 +6943,10 @@
 					<imageExpression><![CDATA[$F{dato120}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="113" y="25" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="113" y="25" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato121}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato121}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="148" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -7002,8 +6996,10 @@
 					<imageExpression><![CDATA[$F{dato128}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="148" y="25" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="148" y="25" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato129}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato129}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="183" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -7053,8 +7049,10 @@
 					<imageExpression><![CDATA[$F{dato136}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="183" y="25" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="183" y="25" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato137}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato137}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="218" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -7104,8 +7102,10 @@
 					<imageExpression><![CDATA[$F{dato144}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="218" y="25" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="218" y="25" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato145}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato145}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="253" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -7155,8 +7155,10 @@
 					<imageExpression><![CDATA[$F{dato152}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="253" y="25" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="253" y="25" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato153}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato153}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="288" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -7206,8 +7208,10 @@
 					<imageExpression><![CDATA[$F{dato160}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="288" y="25" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="288" y="25" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato161}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato161}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="323" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -7257,8 +7261,10 @@
 					<imageExpression><![CDATA[$F{dato168}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="323" y="25" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="323" y="25" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato169}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato169}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="358" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -7308,8 +7314,10 @@
 					<imageExpression><![CDATA[$F{dato176}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="358" y="25" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="358" y="25" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato177}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato177}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="393" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -7359,8 +7367,10 @@
 					<imageExpression><![CDATA[$F{dato184}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="393" y="25" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="393" y="25" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato185}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato185}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="428" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -7410,8 +7420,10 @@
 					<imageExpression><![CDATA[$F{dato192}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="428" y="25" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="428" y="25" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato193}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato193}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="463" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -7461,8 +7473,10 @@
 					<imageExpression><![CDATA[$F{dato200}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="463" y="25" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="463" y="25" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato201}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato201}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="498" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -7512,8 +7526,10 @@
 					<imageExpression><![CDATA[$F{dato208}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="498" y="25" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="498" y="25" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato209}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato209}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="533" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -7563,8 +7579,10 @@
 					<imageExpression><![CDATA[$F{dato216}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="533" y="25" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="533" y="25" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato217}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato217}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="113" y="63" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -7614,8 +7632,10 @@
 					<imageExpression><![CDATA[$F{dato352}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="113" y="75" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="113" y="75" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato353}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato353}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="148" y="63" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -7665,8 +7685,10 @@
 					<imageExpression><![CDATA[$F{dato360}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="148" y="75" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="148" y="75" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato361}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato361}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="183" y="63" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -7716,8 +7738,10 @@
 					<imageExpression><![CDATA[$F{dato368}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="183" y="75" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="183" y="75" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato369}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato369}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="218" y="63" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -7767,8 +7791,10 @@
 					<imageExpression><![CDATA[$F{dato376}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="218" y="75" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="218" y="75" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato377}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato377}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="253" y="63" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -7818,8 +7844,10 @@
 					<imageExpression><![CDATA[$F{dato384}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="253" y="75" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="253" y="75" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato385}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato385}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="294" y="63" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -7869,8 +7897,10 @@
 					<imageExpression><![CDATA[$F{dato392}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="294" y="75" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="294" y="75" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato393}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato393}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="329" y="63" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -7920,8 +7950,10 @@
 					<imageExpression><![CDATA[$F{dato400}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="328" y="75" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="328" y="75" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato401}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato401}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="364" y="63" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -7971,8 +8003,10 @@
 					<imageExpression><![CDATA[$F{dato408}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="364" y="75" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="364" y="75" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato409}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato409}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="399" y="63" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -8022,8 +8056,10 @@
 					<imageExpression><![CDATA[$F{dato416}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="399" y="75" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="399" y="75" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato417}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato417}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="434" y="63" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -8073,8 +8109,10 @@
 					<imageExpression><![CDATA[$F{dato424}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="434" y="75" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="434" y="75" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato425}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato425}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<line>
 					<reportElement uuid="beb3806f-c808-495b-be12-9f1c446c3398" x="7" y="112" width="560" height="1"/>
@@ -8168,8 +8206,10 @@
 					<imageExpression><![CDATA[$F{dato432}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="113" y="137" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="113" y="137" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato433}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato433}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="148" y="125" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -8219,8 +8259,10 @@
 					<imageExpression><![CDATA[$F{dato440}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="148" y="137" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="148" y="137" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato441}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato441}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="183" y="125" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -8270,8 +8312,10 @@
 					<imageExpression><![CDATA[$F{dato448}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="183" y="137" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="183" y="137" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato449}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato449}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="218" y="125" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -8321,8 +8365,10 @@
 					<imageExpression><![CDATA[$F{dato456}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="218" y="137" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="218" y="137" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato457}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato457}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="253" y="125" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -8372,8 +8418,10 @@
 					<imageExpression><![CDATA[$F{dato464}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="253" y="137" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="253" y="137" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato465}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato465}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="294" y="125" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -8423,8 +8471,10 @@
 					<imageExpression><![CDATA[$F{dato472}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="294" y="137" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="294" y="137" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato473}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato473}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="329" y="125" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -8474,8 +8524,10 @@
 					<imageExpression><![CDATA[$F{dato480}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="329" y="137" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="329" y="137" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato481}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato481}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="364" y="125" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -8525,8 +8577,10 @@
 					<imageExpression><![CDATA[$F{dato488}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="364" y="137" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="364" y="137" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato489}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato489}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="399" y="125" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -8576,8 +8630,10 @@
 					<imageExpression><![CDATA[$F{dato496}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="399" y="137" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="399" y="137" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato497}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato497}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="434" y="125" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -8627,8 +8683,10 @@
 					<imageExpression><![CDATA[$F{dato504}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="434" y="137" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="434" y="137" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato505}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato505}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="8" y="170" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -8678,8 +8736,10 @@
 					<imageExpression><![CDATA[$F{dato224}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="8" y="182" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="8" y="182" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato225}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato225}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="43" y="170" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -8729,8 +8789,10 @@
 					<imageExpression><![CDATA[$F{dato232}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="43" y="182" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="43" y="182" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato233}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato233}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="78" y="170" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -8780,8 +8842,10 @@
 					<imageExpression><![CDATA[$F{dato240}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="78" y="182" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="78" y="182" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato241}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato241}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="113" y="170" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -8831,8 +8895,10 @@
 					<imageExpression><![CDATA[$F{dato248}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="113" y="182" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="113" y="182" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato249}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato249}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="148" y="170" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -8882,8 +8948,10 @@
 					<imageExpression><![CDATA[$F{dato256}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="148" y="182" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="148" y="182" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato257}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato257}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="183" y="170" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -8933,8 +9001,10 @@
 					<imageExpression><![CDATA[$F{dato264}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="183" y="182" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="183" y="182" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato265}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato265}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="218" y="170" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -8984,8 +9054,10 @@
 					<imageExpression><![CDATA[$F{dato272}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="218" y="182" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="218" y="182" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato273}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato273}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="253" y="170" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -9035,8 +9107,10 @@
 					<imageExpression><![CDATA[$F{dato280}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="253" y="182" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="253" y="182" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato281}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato281}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="288" y="170" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -9086,8 +9160,10 @@
 					<imageExpression><![CDATA[$F{dato288}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="288" y="182" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="288" y="182" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato289}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato289}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="323" y="170" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -9137,8 +9213,10 @@
 					<imageExpression><![CDATA[$F{dato296}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="323" y="182" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="323" y="182" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato297}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato297}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="358" y="170" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -9188,8 +9266,10 @@
 					<imageExpression><![CDATA[$F{dato304}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="358" y="182" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="358" y="182" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato305}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato305}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="393" y="170" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -9239,8 +9319,10 @@
 					<imageExpression><![CDATA[$F{dato312}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="393" y="182" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="393" y="182" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato313}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato313}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="428" y="170" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -9290,8 +9372,10 @@
 					<imageExpression><![CDATA[$F{dato320}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="428" y="182" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="428" y="182" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato321}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato321}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="463" y="170" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -9341,8 +9425,10 @@
 					<imageExpression><![CDATA[$F{dato328}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="463" y="182" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="463" y="182" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato329}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato329}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="498" y="170" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -9392,8 +9478,10 @@
 					<imageExpression><![CDATA[$F{dato336}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="498" y="182" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="498" y="182" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato337}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato337}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="533" y="170" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -9443,8 +9531,10 @@
 					<imageExpression><![CDATA[$F{dato344}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="533" y="182" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="533" y="182" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato345}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato345}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<frame>
 					<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="221" width="572" height="12" isPrintWhenDetailOverflows="true"/>
@@ -9854,8 +9944,10 @@
 					<imageExpression><![CDATA[$F{dato526}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="3" y="26" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="3" y="26" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato527}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato527}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="39" y="14" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -9887,8 +9979,10 @@
 					<imageExpression><![CDATA[$F{dato531}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="39" y="26" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="39" y="26" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato532}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato532}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="75" y="14" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -9920,8 +10014,10 @@
 					<imageExpression><![CDATA[$F{dato536}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="75" y="26" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="75" y="26" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato537}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato537}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="111" y="14" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -9953,8 +10049,10 @@
 					<imageExpression><![CDATA[$F{dato536}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="111" y="26" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="111" y="26" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato537}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato537}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="147" y="14" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -9986,8 +10084,10 @@
 					<imageExpression><![CDATA[$F{dato546}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="147" y="26" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="147" y="26" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato547}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato547}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="183" y="14" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -10019,8 +10119,10 @@
 					<imageExpression><![CDATA[$F{dato551}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="183" y="26" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="183" y="26" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato552}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato552}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="219" y="14" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -10052,8 +10154,10 @@
 					<imageExpression><![CDATA[$F{dato556}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="219" y="26" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="219" y="26" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato557}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato557}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="255" y="14" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -10085,8 +10189,10 @@
 					<imageExpression><![CDATA[$F{dato561}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="255" y="26" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="255" y="26" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato562}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato562}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="291" y="14" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -10118,8 +10224,10 @@
 					<imageExpression><![CDATA[$F{dato566}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="291" y="26" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="291" y="26" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato567}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato567}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="327" y="14" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -10151,8 +10259,10 @@
 					<imageExpression><![CDATA[$F{dato571}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="327" y="26" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="327" y="26" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato572}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato572}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="363" y="14" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -10184,8 +10294,10 @@
 					<imageExpression><![CDATA[$F{dato576}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="363" y="26" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="363" y="26" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato577}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato577}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="399" y="14" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -10217,8 +10329,10 @@
 					<imageExpression><![CDATA[$F{dato576}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="399" y="26" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="399" y="26" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato577}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato577}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="435" y="14" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -10250,8 +10364,10 @@
 					<imageExpression><![CDATA[$F{dato586}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="435" y="26" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="435" y="26" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato587}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato587}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="471" y="14" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -10283,8 +10399,10 @@
 					<imageExpression><![CDATA[$F{dato591}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="471" y="26" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="471" y="26" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato592}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato592}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="507" y="14" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -10316,8 +10434,10 @@
 					<imageExpression><![CDATA[$F{dato596}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="507" y="26" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="507" y="26" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato597}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato597}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="543" y="14" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -10349,8 +10469,10 @@
 					<imageExpression><![CDATA[$F{dato601}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="543" y="26" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="543" y="26" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato602}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato602}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="3" y="78" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -10382,8 +10504,10 @@
 					<imageExpression><![CDATA[$F{dato606}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="3" y="53" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="3" y="53" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato607}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato607}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="39" y="78" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -10415,8 +10539,10 @@
 					<imageExpression><![CDATA[$F{dato611}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="39" y="53" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="39" y="53" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato612}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato612}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="75" y="78" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -10448,8 +10574,10 @@
 					<imageExpression><![CDATA[$F{dato616}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="75" y="53" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="75" y="53" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato617}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato617}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="111" y="78" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -10481,8 +10609,10 @@
 					<imageExpression><![CDATA[$F{dato621}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="111" y="53" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="111" y="53" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato622}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato622}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="147" y="78" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -10514,8 +10644,10 @@
 					<imageExpression><![CDATA[$F{dato626}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="147" y="53" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="147" y="53" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato627}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato627}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="183" y="78" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -10547,8 +10679,10 @@
 					<imageExpression><![CDATA[$F{dato631}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="183" y="53" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="183" y="53" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato632}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato632}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="219" y="78" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -10580,8 +10714,10 @@
 					<imageExpression><![CDATA[$F{dato636}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="219" y="53" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="219" y="53" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato637}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato637}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="255" y="78" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -10613,8 +10749,10 @@
 					<imageExpression><![CDATA[$F{dato641}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="255" y="53" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="255" y="53" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato642}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato642}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="291" y="78" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -10646,8 +10784,10 @@
 					<imageExpression><![CDATA[$F{dato646}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="291" y="53" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="291" y="53" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato647}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato647}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="327" y="78" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -10679,8 +10819,10 @@
 					<imageExpression><![CDATA[$F{dato651}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="327" y="53" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="327" y="53" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato652}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato652}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="363" y="78" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -10712,8 +10854,10 @@
 					<imageExpression><![CDATA[$F{dato656}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="363" y="53" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="363" y="53" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato657}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato657}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="399" y="78" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -10745,8 +10889,10 @@
 					<imageExpression><![CDATA[$F{dato661}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="399" y="53" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="399" y="53" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato662}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato662}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="435" y="78" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -10778,8 +10924,10 @@
 					<imageExpression><![CDATA[$F{dato666}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="435" y="53" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="435" y="53" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato667}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato667}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="471" y="78" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -10811,8 +10959,10 @@
 					<imageExpression><![CDATA[$F{dato671}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="471" y="53" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="471" y="53" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato672}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato672}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="507" y="78" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -10844,8 +10994,10 @@
 					<imageExpression><![CDATA[$F{dato676}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="507" y="53" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="507" y="53" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato677}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato677}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="542" y="78" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -10877,8 +11029,10 @@
 					<imageExpression><![CDATA[$F{dato681}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="542" y="53" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="542" y="53" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato682}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato682}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="111" y="90" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -11101,8 +11255,10 @@
 					<imageExpression><![CDATA[$F{dato690}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="3" y="24" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="3" y="24" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato691}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato691}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="39" y="12" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -11134,8 +11290,10 @@
 					<imageExpression><![CDATA[$F{dato695}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="39" y="24" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="39" y="24" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato696}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato696}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="76" y="12" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -11167,8 +11325,10 @@
 					<imageExpression><![CDATA[$F{dato700}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="76" y="24" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="76" y="24" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato701}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato701}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="112" y="12" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -11200,8 +11360,10 @@
 					<imageExpression><![CDATA[$F{dato705}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="112" y="24" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="112" y="24" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato706}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato706}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="148" y="12" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -11236,7 +11398,7 @@
 					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="148" y="24" width="25" height="25">
 						<printWhenExpression><![CDATA[!$F{dato711}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato711}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="183" y="12" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -11268,8 +11430,10 @@
 					<imageExpression><![CDATA[$F{dato715}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="183" y="24" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="183" y="24" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato716}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato716}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="220" y="12" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -11301,8 +11465,10 @@
 					<imageExpression><![CDATA[$F{dato720}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="220" y="24" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="220" y="24" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato721}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato721}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="255" y="12" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -11334,8 +11500,10 @@
 					<imageExpression><![CDATA[$F{dato725}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="255" y="24" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="255" y="24" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato726}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato726}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="291" y="12" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -11367,8 +11535,10 @@
 					<imageExpression><![CDATA[$F{dato730}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="291" y="24" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="291" y="24" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato731}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato731}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="327" y="12" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -11400,8 +11570,10 @@
 					<imageExpression><![CDATA[$F{dato735}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="327" y="24" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="327" y="24" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato736}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato736}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="363" y="12" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -11433,8 +11605,10 @@
 					<imageExpression><![CDATA[$F{dato740}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="363" y="24" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="363" y="24" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato741}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato741}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="400" y="12" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -11466,8 +11640,10 @@
 					<imageExpression><![CDATA[$F{dato745}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="400" y="24" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="400" y="24" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato746}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato746}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="435" y="12" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -11499,8 +11675,10 @@
 					<imageExpression><![CDATA[$F{dato750}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="435" y="24" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="435" y="24" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato751}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato751}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="471" y="12" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -11532,8 +11710,10 @@
 					<imageExpression><![CDATA[$F{dato755}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="471" y="24" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="471" y="24" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato756}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato756}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="508" y="12" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -11565,8 +11745,10 @@
 					<imageExpression><![CDATA[$F{dato760}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="508" y="24" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="508" y="24" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato761}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato761}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="542" y="12" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -11598,8 +11780,10 @@
 					<imageExpression><![CDATA[$F{dato765}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="542" y="24" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="542" y="24" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato766}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato766}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="3" y="78" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -11631,8 +11815,10 @@
 					<imageExpression><![CDATA[$F{dato770}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="3" y="53" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="3" y="53" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato771}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato771}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="39" y="78" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -11664,8 +11850,10 @@
 					<imageExpression><![CDATA[$F{dato775}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="39" y="53" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="39" y="53" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato776}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato776}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="75" y="78" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -11697,8 +11885,10 @@
 					<imageExpression><![CDATA[$F{dato780}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="76" y="53" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="76" y="53" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato781}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato781}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="111" y="78" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -11730,8 +11920,10 @@
 					<imageExpression><![CDATA[$F{dato785}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="112" y="53" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="112" y="53" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato786}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato786}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="148" y="78" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -11763,8 +11955,10 @@
 					<imageExpression><![CDATA[$F{dato790}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="148" y="53" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="148" y="53" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato791}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato791}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="183" y="78" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -11796,8 +11990,10 @@
 					<imageExpression><![CDATA[$F{dato795}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="183" y="53" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="183" y="53" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato796}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato796}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="220" y="78" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -11829,8 +12025,10 @@
 					<imageExpression><![CDATA[$F{dato800}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="220" y="53" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="220" y="53" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato801}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato801}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="255" y="78" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -11862,8 +12060,10 @@
 					<imageExpression><![CDATA[$F{dato805}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="255" y="53" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="255" y="53" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato806}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato806}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="291" y="78" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -11895,8 +12095,10 @@
 					<imageExpression><![CDATA[$F{dato810}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="291" y="53" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="291" y="53" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato811}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato811}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="327" y="78" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -11928,8 +12130,10 @@
 					<imageExpression><![CDATA[$F{dato815}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="327" y="53" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="327" y="53" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato816}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato816}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="363" y="78" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -11961,8 +12165,10 @@
 					<imageExpression><![CDATA[$F{dato820}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="363" y="53" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="363" y="53" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato821}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato821}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="400" y="78" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -11994,8 +12200,10 @@
 					<imageExpression><![CDATA[$F{dato825}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="400" y="53" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="400" y="53" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato826}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato826}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="435" y="78" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -12027,8 +12235,10 @@
 					<imageExpression><![CDATA[$F{dato830}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="435" y="53" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="435" y="53" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato831}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato831}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="471" y="78" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -12060,8 +12270,10 @@
 					<imageExpression><![CDATA[$F{dato835}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="471" y="53" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="471" y="53" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato836}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato836}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="507" y="78" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -12093,8 +12305,10 @@
 					<imageExpression><![CDATA[$F{dato840}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="508" y="53" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="508" y="53" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato841}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato841}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="543" y="78" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -12126,8 +12340,10 @@
 					<imageExpression><![CDATA[$F{dato845}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="543" y="53" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="7b90bc6c-432f-446e-9bfc-f290356ec9cc" x="543" y="53" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato846}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato846}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="111" y="90" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -12703,8 +12919,10 @@
 					<imageExpression><![CDATA[$F{dato884}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="8" y="25" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="8" y="25" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato885}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato885}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="43" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -12754,8 +12972,10 @@
 					<imageExpression><![CDATA[$F{dato892}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="43" y="25" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="43" y="25" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato893}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato893}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="78" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -12805,8 +13025,10 @@
 					<imageExpression><![CDATA[$F{dato900}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="78" y="25" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="78" y="25" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato901}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato901}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="113" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -12856,8 +13078,10 @@
 					<imageExpression><![CDATA[$F{dato908}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="113" y="25" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="113" y="25" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato909}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato909}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="148" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -12907,8 +13131,10 @@
 					<imageExpression><![CDATA[$F{dato916}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="148" y="25" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="148" y="25" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato917}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato917}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="183" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -12958,8 +13184,10 @@
 					<imageExpression><![CDATA[$F{dato924}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="183" y="25" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="183" y="25" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato925}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato925}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="218" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13009,8 +13237,10 @@
 					<imageExpression><![CDATA[$F{dato932}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="218" y="25" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="218" y="25" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato933}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato933}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="253" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13060,8 +13290,10 @@
 					<imageExpression><![CDATA[$F{dato940}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="253" y="25" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="253" y="25" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato941}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato941}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="288" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13111,8 +13343,10 @@
 					<imageExpression><![CDATA[$F{dato948}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="288" y="25" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="288" y="25" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato949}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato949}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="323" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13162,8 +13396,10 @@
 					<imageExpression><![CDATA[$F{dato956}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="323" y="25" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="323" y="25" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato957}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato957}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="358" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13213,8 +13449,10 @@
 					<imageExpression><![CDATA[$F{dato964}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="358" y="25" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="358" y="25" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato965}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato965}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="393" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13264,8 +13502,10 @@
 					<imageExpression><![CDATA[$F{dato972}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="393" y="25" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="393" y="25" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato973}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato973}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="428" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13315,8 +13555,10 @@
 					<imageExpression><![CDATA[$F{dato980}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="428" y="25" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="428" y="25" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato981}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato981}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="463" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13366,8 +13608,10 @@
 					<imageExpression><![CDATA[$F{dato988}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="463" y="25" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="463" y="25" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato989}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato989}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="498" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13417,8 +13661,10 @@
 					<imageExpression><![CDATA[$F{dato996}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="498" y="25" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="498" y="25" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato997}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato997}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="535" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13468,8 +13714,10 @@
 					<imageExpression><![CDATA[$F{dato1004}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="535" y="25" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="535" y="25" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato1005}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato1005}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="113" y="62" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13519,8 +13767,10 @@
 					<imageExpression><![CDATA[$F{dato1140}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="113" y="74" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="113" y="74" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato1141}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato1141}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="148" y="62" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13570,8 +13820,10 @@
 					<imageExpression><![CDATA[$F{dato1148}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="148" y="74" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="148" y="74" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato1149}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato1149}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="183" y="62" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13621,8 +13873,10 @@
 					<imageExpression><![CDATA[$F{dato1156}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="183" y="74" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="183" y="74" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato1157}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato1157}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="219" y="62" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13672,8 +13926,10 @@
 					<imageExpression><![CDATA[$F{dato1164}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="219" y="74" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="219" y="74" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato1165}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato1165}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="253" y="62" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13723,8 +13979,10 @@
 					<imageExpression><![CDATA[$F{dato1172}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="253" y="74" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="253" y="74" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato1173}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato1173}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="294" y="62" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13774,8 +14032,10 @@
 					<imageExpression><![CDATA[$F{dato1180}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="294" y="74" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="294" y="74" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato1181}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato1181}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="329" y="62" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13825,8 +14085,10 @@
 					<imageExpression><![CDATA[$F{dato1188}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="329" y="74" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="329" y="74" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato1189}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato1189}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="364" y="62" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13876,8 +14138,10 @@
 					<imageExpression><![CDATA[$F{dato1196}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="364" y="74" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="364" y="74" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato1197}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato1197}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="399" y="62" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13927,8 +14191,10 @@
 					<imageExpression><![CDATA[$F{dato1204}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="399" y="74" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="399" y="74" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato1205}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato1205}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="433" y="62" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13978,8 +14244,10 @@
 					<imageExpression><![CDATA[$F{dato1212}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="433" y="74" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="433" y="74" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato1213}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato1213}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<line>
 					<reportElement uuid="beb3806f-c808-495b-be12-9f1c446c3398" x="6" y="111" width="560" height="1"/>
@@ -14073,8 +14341,10 @@
 					<imageExpression><![CDATA[$F{dato1220}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="113" y="136" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="113" y="136" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato1221}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato1221}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="148" y="124" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -14124,8 +14394,10 @@
 					<imageExpression><![CDATA[$F{dato1228}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="148" y="136" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="148" y="136" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato1229}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato1229}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="183" y="124" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -14175,8 +14447,10 @@
 					<imageExpression><![CDATA[$F{dato1236}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="183" y="136" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="183" y="136" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato1237}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato1237}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="218" y="124" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -14226,8 +14500,10 @@
 					<imageExpression><![CDATA[$F{dato1244}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="218" y="136" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="218" y="136" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato1245}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato1245}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="253" y="124" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -14277,8 +14553,10 @@
 					<imageExpression><![CDATA[$F{dato1252}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="253" y="136" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="253" y="136" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato1253}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato1253}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="294" y="124" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -14328,8 +14606,10 @@
 					<imageExpression><![CDATA[$F{dato1260}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="294" y="136" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="294" y="136" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato1261}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato1261}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="329" y="124" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -14379,8 +14659,10 @@
 					<imageExpression><![CDATA[$F{dato1268}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="329" y="136" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="329" y="136" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato1269}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato1269}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="364" y="124" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -14430,8 +14712,10 @@
 					<imageExpression><![CDATA[$F{dato1276}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="364" y="136" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="364" y="136" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato1277}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato1277}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="399" y="124" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -14481,8 +14765,10 @@
 					<imageExpression><![CDATA[$F{dato1284}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="399" y="136" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="399" y="136" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato1285}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato1285}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="434" y="124" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -14532,8 +14818,10 @@
 					<imageExpression><![CDATA[$F{dato1292}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="434" y="136" width="25" height="25"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="434" y="136" width="25" height="25">
+						<printWhenExpression><![CDATA[!$F{dato1293}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato1293}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="8" y="167" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -14583,8 +14871,10 @@
 					<imageExpression><![CDATA[$F{dato1012}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="8" y="179" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="8" y="179" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato1013}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato1013}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="43" y="167" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -14634,8 +14924,10 @@
 					<imageExpression><![CDATA[$F{dato1020}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="43" y="179" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="43" y="179" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato1021}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato1021}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="78" y="167" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -14685,8 +14977,10 @@
 					<imageExpression><![CDATA[$F{dato1028}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="78" y="179" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="78" y="179" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato1029}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato1029}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="113" y="167" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -14736,8 +15030,10 @@
 					<imageExpression><![CDATA[$F{dato1036}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="113" y="179" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="113" y="179" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato1037}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato1037}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="148" y="167" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -14787,8 +15083,10 @@
 					<imageExpression><![CDATA[$F{dato1044}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="148" y="179" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="148" y="179" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato1045}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato1045}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="183" y="167" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -14838,8 +15136,10 @@
 					<imageExpression><![CDATA[$F{dato1052}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="183" y="179" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="183" y="179" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato1053}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato1053}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="219" y="167" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -14889,8 +15189,10 @@
 					<imageExpression><![CDATA[$F{dato1060}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="219" y="179" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="219" y="179" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato1061}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato1061}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="253" y="167" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -14940,8 +15242,10 @@
 					<imageExpression><![CDATA[$F{dato1068}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="253" y="179" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="253" y="179" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato1069}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato1069}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="288" y="167" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -14991,8 +15295,10 @@
 					<imageExpression><![CDATA[$F{dato1076}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="288" y="179" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="288" y="179" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato1077}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato1077}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="323" y="167" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -15042,8 +15348,10 @@
 					<imageExpression><![CDATA[$F{dato1084}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="323" y="179" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="323" y="179" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato1085}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato1085}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="357" y="167" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -15093,8 +15401,10 @@
 					<imageExpression><![CDATA[$F{dato1092}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="357" y="179" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="357" y="179" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato1093}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato1093}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="393" y="167" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -15144,8 +15454,10 @@
 					<imageExpression><![CDATA[$F{dato1100}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="393" y="179" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="393" y="179" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato1101}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato1101}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="428" y="167" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -15195,8 +15507,10 @@
 					<imageExpression><![CDATA[$F{dato1108}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="428" y="179" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="428" y="179" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato1109}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato1109}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="463" y="167" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -15246,8 +15560,10 @@
 					<imageExpression><![CDATA[$F{dato1116}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="463" y="179" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="463" y="179" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato1117}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato1117}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="498" y="167" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -15297,8 +15613,10 @@
 					<imageExpression><![CDATA[$F{dato1124}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="498" y="179" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="498" y="179" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato1125}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato1125}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="535" y="167" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -15348,8 +15666,10 @@
 					<imageExpression><![CDATA[$F{dato1132}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="535" y="179" width="31" height="31"/>
-					<imageExpression><![CDATA["diente.png"]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="535" y="179" width="31" height="31">
+						<printWhenExpression><![CDATA[!$F{dato1133}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$F{dato1133}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 			</frame>
 		</band>
