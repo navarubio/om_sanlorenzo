@@ -1382,7 +1382,7 @@ public class ReporteInforme extends MetodosGenerales implements Serializable {
                 if (registroEncontrado != null) {
                     datosFormulario = datosForm(registroEncontrado, sdfDateHour, datosFormulario);
                 }
-                if (datosFormulario.getDato94().toString().isEmpty()) {
+                if (datosFormulario.getDato325().toString().isEmpty()) {
                     u.setLepra("3");
                 }else{
                     u.setLepra(datosFormulario.getDato325().toString());
