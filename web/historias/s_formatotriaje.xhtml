@@ -40,7 +40,7 @@
                             styleClass="icon-folder fg-lightBlue bg-white no-border"
                             title="Cargar Textos predeterminados"
                             value=""
-                            actionListener="#{historiasMB.cargarTextoPredefindoPorPosicionCampoDetalle(0,'IdFormRegistroClinico')}"
+                            actionListener="#{historiasMB.cargarTextoPredefindoPorPosicionCampoDetalle(0,'IdFormRegistroClinico:dato0')}"
                             process="@this"
                             immediate="true"
                             style="font-size: 12px; width: 15px; height: 15px; left: 20px; "
@@ -50,7 +50,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <p:inputTextarea styleClass="width2" value="#{historiasMB.datosFormulario.dato0}" counter="display" maxlength="140" counterTemplate="{0} caracteres restantes." autoResize="false"/>
+                            <p:inputTextarea id="dato0" styleClass="width2" value="#{historiasMB.datosFormulario.dato0}" counter="display" maxlength="140" counterTemplate="{0} caracteres restantes." autoResize="false"/>
                             <br/>
                             <h:outputText id="display" />
                         </td>                   
@@ -62,7 +62,7 @@
                             styleClass="icon-folder fg-lightBlue bg-white no-border"
                             title="Cargar Textos predeterminados"
                             value=""
-                            actionListener="#{historiasMB.cargarTextoPredefindoPorPosicionCampoDetalle(1,'IdFormRegistroClinico')}"
+                            actionListener="#{historiasMB.cargarTextoPredefindoPorPosicionCampoDetalle(1,'IdFormRegistroClinico:dato1')}"
                             process="@this"
                             immediate="true"
                             style="font-size: 12px; width: 15px; height: 15px; left: 20px; "
@@ -72,7 +72,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <p:inputTextarea styleClass="width2" value="#{historiasMB.datosFormulario.dato1}" counter="display1" maxlength="140" counterTemplate="{0} caracteres restantes." autoResize="false"/>
+                            <p:inputTextarea id="dato1" styleClass="width2" value="#{historiasMB.datosFormulario.dato1}" counter="display1" maxlength="140" counterTemplate="{0} caracteres restantes." autoResize="false"/>
                             <br/>
                             <h:outputText id="display1" />
                         </td>                   
@@ -301,7 +301,7 @@
                             styleClass="icon-folder fg-lightBlue bg-white no-border"
                             title="Cargar Textos predeterminados"
                             value=""
-                            actionListener="#{historiasMB.cargarTextoPredefindoPorPosicionCampoDetalle(29,'IdFormRegistroClinico')}"
+                            actionListener="#{historiasMB.cargarTextoPredefindoPorPosicionCampoDetalle(29,'IdFormRegistroClinico:dato29')}"
                             process="@this"
                             immediate="true"
                             style="font-size: 12px; width: 15px; height: 15px; left: 20px; "
@@ -311,7 +311,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <p:inputTextarea styleClass="width2" value="#{historiasMB.datosFormulario.dato29}" counter="display3" maxlength="140" counterTemplate="{0} caracteres restantes." autoResize="false"/>
+                            <p:inputTextarea id="dato29" styleClass="width2" value="#{historiasMB.datosFormulario.dato29}" counter="display3" maxlength="140" counterTemplate="{0} caracteres restantes." autoResize="false"/>
                             <br/>
                             <h:outputText id="display3" />
                         </td>                   

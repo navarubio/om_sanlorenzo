@@ -54,7 +54,7 @@
                             styleClass="icon-folder fg-lightBlue bg-white no-border"
                             title="Cargar Textos predeterminados"
                             value=""
-                            actionListener="#{historiasMB.cargarTextoPredefindoPorPosicionCampoDetalle(2,'IdFormRegistroClinico')}"
+                            actionListener="#{historiasMB.cargarTextoPredefindoPorPosicionCampoDetalle(2,'IdFormRegistroClinico:dato2')}"
                             process="@this"
                             immediate="true"
                             style="font-size: 12px; width: 15px; height: 15px; left: 20px; "
@@ -63,7 +63,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2"><p:inputTextarea styleClass="width2" value="#{historiasMB.datosFormulario.dato2}" autoResize="false" />
+                    <td colspan="2"><p:inputTextarea id="dato2" styleClass="width2" value="#{historiasMB.datosFormulario.dato2}" autoResize="false" />
                     
                     </td>
                 </tr>
@@ -74,7 +74,7 @@
                             styleClass="icon-folder fg-lightBlue bg-white no-border"
                             title="Cargar Textos predeterminados"
                             value=""
-                            actionListener="#{historiasMB.cargarTextoPredefindoPorPosicionCampoDetalle(3,'IdFormRegistroClinico')}"
+                            actionListener="#{historiasMB.cargarTextoPredefindoPorPosicionCampoDetalle(3,'IdFormRegistroClinico:dato3')}"
                             process="@this"
                             immediate="true"
                             style="font-size: 12px; width: 15px; height: 15px; left: 20px; "
@@ -83,7 +83,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2"><p:inputTextarea styleClass="width2" value="#{historiasMB.datosFormulario.dato3}" autoResize="false" />
+                    <td colspan="2"><p:inputTextarea id="dato3" styleClass="width2" value="#{historiasMB.datosFormulario.dato3}" autoResize="false" />
                     </td>
                 </tr>
                 <tr>

@@ -37,7 +37,7 @@
                             styleClass="icon-folder fg-lightBlue bg-white no-border"
                             title="Cargar Textos predeterminados"
                             value=""
-                            actionListener="#{historiasMB.cargarTextoPredefindoPorPosicionCampoDetalle(2,'IdFormRegistroClinico')}"
+                            actionListener="#{historiasMB.cargarTextoPredefindoPorPosicionCampoDetalle(2,'IdFormRegistroClinico:IdFocus')}"
                             process="@this"
                             immediate="true"
                             style="font-size: 12px; width: 15px; height: 15px; left: 20px; "
@@ -62,7 +62,7 @@
                             styleClass="icon-folder fg-lightBlue bg-white no-border"
                             title="Cargar Textos predeterminados"
                             value=""
-                            actionListener="#{historiasMB.cargarTextoPredefindoPorPosicionCampoDetalle(3,'IdFormRegistroClinico')}"
+                            actionListener="#{historiasMB.cargarTextoPredefindoPorPosicionCampoDetalle(3,'IdFormRegistroClinico:dato3')}"
                             process="@this"
                             immediate="true"
                             style="font-size: 12px; width: 15px; height: 15px; left: 20px; "
@@ -72,7 +72,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2"><p:inputTextarea styleClass="width2" value="#{historiasMB.datosFormulario.dato3}"/></td>
+                    <td colspan="2"><p:inputTextarea id="dato3" styleClass="width2" value="#{historiasMB.datosFormulario.dato3}"/></td>
                 </tr>
                 <tr>
                     <td colspan="2"><h2>ANTECEDENTES</h2></td>

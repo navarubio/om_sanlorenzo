@@ -162,7 +162,7 @@
                             styleClass="icon-folder fg-lightBlue bg-white no-border"
                             title="Cargar Textos predeterminados"
                             value=""
-                            actionListener="#{historiasMB.cargarTextoPredefindoPorPosicionCampoDetalle(3,'IdFormRegistroClinico')}"
+                            actionListener="#{historiasMB.cargarTextoPredefindoPorPosicionCampoDetalle(3,'IdFormRegistroClinico:dato3')}"
                             process="@this"
                             immediate="true"
                             style="font-size: 12px; width: 15px; height: 15px; left: 20px; "
@@ -173,7 +173,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <p:inputTextarea  styleClass="width2"  value="#{historiasMB.datosFormulario.dato3}"/>
+                            <p:inputTextarea id="dato3"  styleClass="width2"  value="#{historiasMB.datosFormulario.dato3}"/>
 
                         </td>                    
                     </tr>
@@ -184,7 +184,7 @@
                             styleClass="icon-folder fg-lightBlue bg-white no-border"
                             title="Cargar Textos predeterminados"
                             value=""
-                            actionListener="#{historiasMB.cargarTextoPredefindoPorPosicionCampoDetalle(4,'IdFormRegistroClinico')}"
+                            actionListener="#{historiasMB.cargarTextoPredefindoPorPosicionCampoDetalle(4,'IdFormRegistroClinico:dato4')}"
                             process="@this"
                             immediate="true"
                             style="font-size: 12px; width: 15px; height: 15px; left: 20px; "
@@ -193,7 +193,7 @@
                             </h2></td>
                     </tr>
                     <tr>
-                        <td colspan="2"><p:inputTextarea styleClass="width2" value="#{historiasMB.datosFormulario.dato4}"/></td>
+                        <td colspan="2"><p:inputTextarea id="dato4" styleClass="width2" value="#{historiasMB.datosFormulario.dato4}"/></td>
                     </tr>
                     <tr>
                         <td colspan="2"><h2><p:outputLabel value="REVISIÓN POR SISTEMA"/></h2></td>
