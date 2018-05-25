@@ -6784,10 +6784,8 @@
 					<imageExpression><![CDATA[$F{dato96}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
-					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="8" y="25" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato97}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
-					</reportElement>
-					<imageExpression><![CDATA[$F{dato97}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="8" y="25" width="31" height="31"/>
+					<imageExpression><![CDATA[$F{dato90}]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="43" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>

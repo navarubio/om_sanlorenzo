@@ -4839,7 +4839,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
          * no poseer valor en dicho campo, simplemente se realiza etiqueta +
          * valor del campo.
          */
+        int contador = -1;
         for (HcDetalle campoDeRegistroEncontrado : listaCamposDeRegistroEncontrado) { //recorre la lista de datos encontrados
+            ++contador;
             if (campoDeRegistroEncontrado.getHcCamposReg().getTabla() != null && campoDeRegistroEncontrado.getHcCamposReg().getTabla().length() >= 5) {//ES CATEGORIA (realizar busqueda)
                 switch (campoDeRegistroEncontrado.getHcCamposReg().getTabla()) {
                     case "cfg_clasificaciones":
@@ -4874,7 +4876,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                         break;
                 }
             } else {//NO ES CATEGORIA (sacar valor)
-                datosReporte.setValor(campoDeRegistroEncontrado.getHcCamposReg().getPosicion(), "<b>" + campoDeRegistroEncontrado.getHcCamposReg().getNombrePdf() + " </b>" + campoDeRegistroEncontrado.getValor());
+                if (!esCampoGraficaOdontologia(datosReporte, listaCamposDeRegistroEncontrado, contador)) {
+                    datosReporte.setValor(campoDeRegistroEncontrado.getHcCamposReg().getPosicion(), "<b>" + campoDeRegistroEncontrado.getHcCamposReg().getNombrePdf() + " </b>" + campoDeRegistroEncontrado.getValor().toUpperCase());
+                }
             }
         }
 
@@ -9871,18 +9875,18 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 }
                 try {
                     HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-                    String url = request.getRequestURL().toString().replaceAll("(?i)/OM.*$", "/om/recursos/img/dienteNormal.svg");
+                    String url = request.getRequestURL().toString().replaceAll("(?i)/OM.*$", "/om_sanlorenzo/recursos/img/dienteNormal.svg");
                     SVGHelper.buildToothJpegFile(String.format("%1$sdato%2$d.svg", basePath, posicion), url, valores.toArray(new String[8]));
                     datosReporte.setValor(detalles.get(contador).getHcCamposReg().getPosicion(), String.format("%1$sdato%2$d.jpg", basePath, posicion));
                 } catch (TranscoderException ex) {
                     Logger.getLogger(HistoriasMB.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-                    throw new RuntimeException("Error construyendo imagen SVG-odontograma para campo: dato" + contador, ex);
+                    //throw new RuntimeException("Error construyendo imagen SVG-odontograma para campo: dato" + contador, ex);
                 } catch (IOException ex) {
                     Logger.getLogger(HistoriasMB.class.getName()).log(Level.SEVERE, null, ex);
-                    throw new RuntimeException("Error construyendo imagen SVG-odontograma para campo: dato" + contador, ex);
+                    //throw new RuntimeException("Error construyendo imagen SVG-odontograma para campo: dato" + contador, ex);
                 } catch (TransformerException ex) {
                     Logger.getLogger(HistoriasMB.class.getName()).log(Level.SEVERE, null, ex);
-                    throw new RuntimeException("Error construyendo imagen SVG-odontograma para campo: dato" + contador, ex);
+                    //throw new RuntimeException("Error construyendo imagen SVG-odontograma para campo: dato" + contador, ex);
                 }
             }
             retorno = true;
@@ -9898,18 +9902,18 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 }
                 try {
                     HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-                    String url = request.getRequestURL().toString().replaceAll("(?i)/OM.*$", "/om/recursos/img/oleary.svg");
+                    String url = request.getRequestURL().toString().replaceAll("(?i)/OM.*$", "/om_sanlorenzo/recursos/img/oleary.svg");
                     SVGHelper.buildOlearyJpegFile(String.format("%1$sdato%2$d.svg", basePath, posicion), url, valores.toArray(new String[5]));
                     datosReporte.setValor(detalles.get(contador).getHcCamposReg().getPosicion(), String.format("%1$sdato%2$d.jpg", basePath, posicion));
                 } catch (TranscoderException ex) {
                     Logger.getLogger(HistoriasMB.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-                    throw new RuntimeException("Error construyendo imagen SVG-oleary para campo: dato" + contador, ex);
+                    //throw new RuntimeException("Error construyendo imagen SVG-oleary para campo: dato" + contador, ex);
                 } catch (IOException ex) {
                     Logger.getLogger(HistoriasMB.class.getName()).log(Level.SEVERE, null, ex);
-                    throw new RuntimeException("Error construyendo imagen SVG-oleary para campo: dato" + contador, ex);
+                    //throw new RuntimeException("Error construyendo imagen SVG-oleary para campo: dato" + contador, ex);
                 } catch (TransformerException ex) {
                     Logger.getLogger(HistoriasMB.class.getName()).log(Level.SEVERE, null, ex);
-                    throw new RuntimeException("Error construyendo imagen SVG-oleary para campo: dato" + contador, ex);
+                    //throw new RuntimeException("Error construyendo imagen SVG-oleary para campo: dato" + contador, ex);
                 }
             }
             retorno = true;
