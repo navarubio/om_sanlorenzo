@@ -66,7 +66,8 @@ public class HcItems implements Serializable {
 //    private String viaAdmin;
     @Column(name = "posologia", length = 100)
     private String posologia;
-
+    @Column(name="id_sede", columnDefinition = "1")
+    private Integer idSede=1;
     public HcItems() {
     }
 
@@ -122,6 +123,15 @@ public class HcItems implements Serializable {
         this.idRegistro = idRegistro;
     }
 
+    public Integer getIdSede() {
+        return idSede;
+    }
+
+    public void setIdSede(Integer idSede) {
+        this.idSede = idSede;
+    }
+
+    
     @Override
     public int hashCode() {
         int hash = 0;
