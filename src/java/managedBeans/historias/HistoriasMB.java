@@ -24,6 +24,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -196,11 +198,10 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     private CfgDiagnostico diagnosticoBuscado;
     private FacServicio servicioBuscado;
     private List<CfgHistoriaCamposPredefinidos> listaTextos;
-            
+
     //---------------------------------------------------
     //-----------------VARIABLES ------------------------
     //---------------------------------------------------        
-
     private String filtroAutorizacion = "";
     private Date filtroFechaInicial = null;//new Date();
     private Date filtroFechaFinal = null;//new Date();
@@ -398,28 +399,26 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     private String valorDefecto20;
     private List<SelectItem> listaValoresDefecto;
     private List<SelectItem> listaValoresDefecto2;
-    
-    
-     private LineChartModel lineModel1 = new LineChartModel();
-     private LineChartModel lineModel2 = new LineChartModel();
-     private LineChartModel lineModel3 = new LineChartModel();
-     private LineChartModel lineModel4 = new LineChartModel();
-    
-     LineChartSeries seriesLinealTalla = new LineChartSeries();
-     LineChartSeries seriesLinealPeso= new LineChartSeries();
-     LineChartSeries seriesLinealIMC= new LineChartSeries();
-     LineChartSeries seriesLinealCefalico= new LineChartSeries();
-     List<HcDetalle> listaTalla = new ArrayList<>();
-     List<HcDetalle> listaPeso = new ArrayList<>();
-     List<HcDetalle> listaIMC = new ArrayList<>();
-     List<HcDetalle> listaCefalico = new ArrayList<>();
+
+    private LineChartModel lineModel1 = new LineChartModel();
+    private LineChartModel lineModel2 = new LineChartModel();
+    private LineChartModel lineModel3 = new LineChartModel();
+    private LineChartModel lineModel4 = new LineChartModel();
+
+    LineChartSeries seriesLinealTalla = new LineChartSeries();
+    LineChartSeries seriesLinealPeso = new LineChartSeries();
+    LineChartSeries seriesLinealIMC = new LineChartSeries();
+    LineChartSeries seriesLinealCefalico = new LineChartSeries();
+    List<HcDetalle> listaTalla = new ArrayList<>();
+    List<HcDetalle> listaPeso = new ArrayList<>();
+    List<HcDetalle> listaIMC = new ArrayList<>();
+    List<HcDetalle> listaCefalico = new ArrayList<>();
     //---------------------------------------------------
     //----------------- FUNCIONES INICIALES -----------------------
     //---------------------------------------------------
 
-    private String semaforo="../recursos/img/semaforo3.png";
-    
-    
+    private String semaforo = "../recursos/img/semaforo3.png";
+
     ///items
     private boolean item0;
     private boolean item1;
@@ -458,51 +457,53 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     private boolean item34;
     private boolean item35;
     private boolean item36;
-    
+
     //Valores predefinidos
     HcCamposReg campoSeleccionado;
     private String nombreFormulario;
     private CfgHistoriaCamposPredefinidos textoSeleccionado;
+
     public HistoriasMB() {
         aplicacionGeneralMB = FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{aplicacionGeneralMB}", AplicacionGeneralMB.class);
         listaValoresDefecto = new ArrayList();
         listaValoresDefecto.add(new SelectItem("No Refiere", "No Refiere"));
         listaValoresDefecto.add(new SelectItem("Normal", "Normal"));
-        
+
         listaValoresDefecto2 = new ArrayList();
         listaValoresDefecto2.add(new SelectItem("Normal", "Normal"));
         listaValoresDefecto2.add(new SelectItem("Anormal", "Anormal"));
-        
+
         listaTextos = new ArrayList();
         campoSeleccionado = new HcCamposReg();
     }
 
-    public void cargarTextoPredefindoPorPosicionCampoDetalle(int posicion,String formulario){
+    public void cargarTextoPredefindoPorPosicionCampoDetalle(int posicion, String formulario) {
         try {
             this.nombreFormulario = formulario;
-            campoSeleccionado =  camposRegFacade.buscarPorTipoRegistroYPosicion(tipoRegistroClinicoActual.getIdTipoReg(), posicion);
+            campoSeleccionado = camposRegFacade.buscarPorTipoRegistroYPosicion(tipoRegistroClinicoActual.getIdTipoReg(), posicion);
             listaTextos = cfgHistoriaCamposPredefinidosFacade.getCamposDefinidosXCampo(campoSeleccionado.getIdCampo());
             RequestContext.getCurrentInstance().update("dialogTexto");
             RequestContext.getCurrentInstance().update("optexto");
             RequestContext.getCurrentInstance().update(nombreFormulario);
             RequestContext.getCurrentInstance().execute("PF('dlgTexto').show();");
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public void cargarTexto(){
+
+    public void cargarTexto() {
         RequestContext.getCurrentInstance().execute("PF('dlgTexto').hide();");
     }
+
     public void textoPredefinidoSeleccionado(SelectEvent event) {
-        textoSeleccionado = (CfgHistoriaCamposPredefinidos)event.getObject();
+        textoSeleccionado = (CfgHistoriaCamposPredefinidos) event.getObject();
         datosFormulario.setValor(campoSeleccionado.getPosicion(), textoSeleccionado.getValor());
         RequestContext.getCurrentInstance().update(nombreFormulario);
         RequestContext.getCurrentInstance().execute("PF('dlgTexto').hide();");
-        
-        
-        
+
     }
+
     public void cargarMunicipios() {
         listaMunicipios = new ArrayList<>();
         try {
@@ -566,7 +567,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato2(valorDefecto1);
                     datosFormulario.setDato3(valorDefecto1);
                     datosFormulario.setDato4(valorDefecto1);
-                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 11 ) {
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 11) {
                     datosFormulario.setDato0(valorDefecto1);
                     datosFormulario.setDato1(valorDefecto1);
                 } else if (tipoRegistroClinicoActual.getIdTipoReg() == 12) {
@@ -574,22 +575,21 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 } else if (tipoRegistroClinicoActual.getIdTipoReg() == 35) {
                     datosFormulario.setDato4(valorDefecto1);
                     datosFormulario.setDato5(valorDefecto1);
-                } else if(tipoRegistroClinicoActual.getIdTipoReg()==83){
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 83) {
                     datosFormulario.setDato0(valorDefecto1);
-                }else if(tipoRegistroClinicoActual.getIdTipoReg()==84){
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 84) {
                     datosFormulario.setDato2(valorDefecto1);
-                }else if(tipoRegistroClinicoActual.getIdTipoReg()==85){
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 85) {
                     datosFormulario.setDato4(valorDefecto1);
-                }else if(tipoRegistroClinicoActual.getIdTipoReg()==88){
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 88) {
                     datosFormulario.setDato0(valorDefecto1);
-                }else if(tipoRegistroClinicoActual.getIdTipoReg()==59){
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 59) {
                     datosFormulario.setDato114(valorDefecto1);
-                }
-                else if(tipoRegistroClinicoActual.getIdTipoReg()==89){
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 89) {
                     datosFormulario.setDato0(valorDefecto1);
-                }else if(tipoRegistroClinicoActual.getIdTipoReg()==13){
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 13) {
                     datosFormulario.setDato5(valorDefecto1);
-                }else if(tipoRegistroClinicoActual.getIdTipoReg()==17){
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 17) {
                     datosFormulario.setDato6(valorDefecto1);
                     datosFormulario.setDato7(valorDefecto1);
                     datosFormulario.setDato8(valorDefecto1);
@@ -598,8 +598,8 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato11(valorDefecto1);
                     datosFormulario.setDato12(valorDefecto1);
                     datosFormulario.setDato13(valorDefecto1);
-                    
-                }else if(tipoRegistroClinicoActual.getIdTipoReg()==18){
+
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 18) {
                     datosFormulario.setDato11(valorDefecto1);
                     datosFormulario.setDato12(valorDefecto1);
                     datosFormulario.setDato13(valorDefecto1);
@@ -614,7 +614,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato22(valorDefecto1);
                     datosFormulario.setDato23(valorDefecto1);
                     datosFormulario.setDato24(valorDefecto1);
-                }else if(tipoRegistroClinicoActual.getIdTipoReg()==45){
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 45) {
                     datosFormulario.setDato10(valorDefecto1);
                     datosFormulario.setDato11(valorDefecto1);
                     datosFormulario.setDato12(valorDefecto1);
@@ -627,8 +627,8 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato21(valorDefecto1);
                     datosFormulario.setDato22(valorDefecto1);
                     datosFormulario.setDato23(valorDefecto1);
-                    
-                }else if(tipoRegistroClinicoActual.getIdTipoReg()==47){
+
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 47) {
                     datosFormulario.setDato3(valorDefecto1);
                     datosFormulario.setDato4(valorDefecto1);
                     datosFormulario.setDato5(valorDefecto1);
@@ -636,21 +636,15 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato7(valorDefecto1);
                     datosFormulario.setDato8(valorDefecto1);
                     datosFormulario.setDato9(valorDefecto1);
-                    
-                    
-                }else if(tipoRegistroClinicoActual.getIdTipoReg()==55){
+
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 55) {
                     datosFormulario.setDato1491(valorDefecto1);
                     datosFormulario.setDato1492(valorDefecto1);
                     datosFormulario.setDato1493(valorDefecto1);
                     datosFormulario.setDato1490(valorDefecto1);
                     datosFormulario.setDato1494(valorDefecto1);
-                    
-                    
-                    
-                }
 
-                
-                
+                }
 
                 break;
             case 2:
@@ -703,9 +697,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato19(valorDefecto2);
                     datosFormulario.setDato20(valorDefecto2);
                     datosFormulario.setDato21(valorDefecto2);
-                }else if(tipoRegistroClinicoActual.getIdTipoReg()==83){
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 83) {
                     datosFormulario.setDato1(valorDefecto2);
-                }else if(tipoRegistroClinicoActual.getIdTipoReg()==84){
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 84) {
                     datosFormulario.setDato3(valorDefecto2);
                     datosFormulario.setDato4(valorDefecto2);
                     datosFormulario.setDato5(valorDefecto2);
@@ -713,13 +707,13 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato7(valorDefecto2);
                     datosFormulario.setDato194(valorDefecto2);
                     datosFormulario.setDato195(valorDefecto2);
-                }else if(tipoRegistroClinicoActual.getIdTipoReg()==85){
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 85) {
                     datosFormulario.setDato5(valorDefecto2);
-                }else if(tipoRegistroClinicoActual.getIdTipoReg()==88){
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 88) {
                     datosFormulario.setDato1(valorDefecto2);
-                }else if(tipoRegistroClinicoActual.getIdTipoReg()==59){
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 59) {
                     datosFormulario.setDato115(valorDefecto2);
-                }else if(tipoRegistroClinicoActual.getIdTipoReg()==89){
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 89) {
                     datosFormulario.setDato1(valorDefecto2);
                     datosFormulario.setDato2(valorDefecto2);
                     datosFormulario.setDato3(valorDefecto2);
@@ -739,18 +733,18 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato17(valorDefecto2);
                     datosFormulario.setDato201(valorDefecto2);
                     datosFormulario.setDato202(valorDefecto2);
-                }else if(tipoRegistroClinicoActual.getIdTipoReg()==13){
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 13) {
                     datosFormulario.setDato6(valorDefecto2);
                     datosFormulario.setDato7(valorDefecto2);
                     datosFormulario.setDato8(valorDefecto2);
                     datosFormulario.setDato9(valorDefecto2);
                     datosFormulario.setDato10(valorDefecto2);
-                }else if(tipoRegistroClinicoActual.getIdTipoReg()==17){
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 17) {
                     datosFormulario.setDato14(valorDefecto2);
                     datosFormulario.setDato15(valorDefecto2);
                     datosFormulario.setDato16(valorDefecto2);
-                    
-                }else if(tipoRegistroClinicoActual.getIdTipoReg()==18){
+
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 18) {
                     datosFormulario.setDato25(valorDefecto2);
                     datosFormulario.setDato26(valorDefecto2);
                     datosFormulario.setDato27(valorDefecto2);
@@ -768,7 +762,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato39(valorDefecto2);
                     datosFormulario.setDato40(valorDefecto2);
                     datosFormulario.setDato41(valorDefecto2);
-                }else if(tipoRegistroClinicoActual.getIdTipoReg()==47){
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 47) {
                     datosFormulario.setDato64(valorDefecto2);
                     datosFormulario.setDato65(valorDefecto2);
                     datosFormulario.setDato66(valorDefecto2);
@@ -787,7 +781,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato79(valorDefecto2);
                     datosFormulario.setDato80(valorDefecto2);
                     datosFormulario.setDato81(valorDefecto2);
-                }else if(tipoRegistroClinicoActual.getIdTipoReg()==55){
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 55) {
                     datosFormulario.setDato1495(valorDefecto2);
                     datosFormulario.setDato1496(valorDefecto2);
                     datosFormulario.setDato1497(valorDefecto2);
@@ -799,7 +793,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato1503(valorDefecto2);
                     datosFormulario.setDato1504(valorDefecto2);
                     datosFormulario.setDato1505(valorDefecto2);
-                    
+
                 }
 
                 break;
@@ -868,7 +862,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato53(valorDefecto3);
                     datosFormulario.setDato54(valorDefecto3);
                     datosFormulario.setDato57(valorDefecto3);
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 83) {
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 83) {
                     datosFormulario.setDato2(valorDefecto3);
                     datosFormulario.setDato3(valorDefecto3);
                     datosFormulario.setDato4(valorDefecto3);
@@ -901,7 +895,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato32(valorDefecto3);
                     datosFormulario.setDato33(valorDefecto3);
                     datosFormulario.setDato34(valorDefecto3);
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 84) {
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 84) {
                     datosFormulario.setDato8(valorDefecto3);
                     datosFormulario.setDato9(valorDefecto3);
                     datosFormulario.setDato10(valorDefecto3);
@@ -914,8 +908,8 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato17(valorDefecto3);
                     datosFormulario.setDato196(valorDefecto3);
                     datosFormulario.setDato197(valorDefecto3);
-                    
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 85) {
+
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 85) {
                     datosFormulario.setDato6(valorDefecto3);
                     datosFormulario.setDato7(valorDefecto3);
                     datosFormulario.setDato8(valorDefecto3);
@@ -924,9 +918,8 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato151(valorDefecto3);
                     datosFormulario.setDato152(valorDefecto3);
                     datosFormulario.setDato153(valorDefecto3);
-                    
-                    
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 88) {
+
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 88) {
                     datosFormulario.setDato2(valorDefecto3);
                     datosFormulario.setDato3(valorDefecto3);
                     datosFormulario.setDato4(valorDefecto3);
@@ -940,9 +933,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato12(valorDefecto3);
                     datosFormulario.setDato13(valorDefecto3);
                     datosFormulario.setDato14(valorDefecto3);
-                    
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 89) {
-                    
+
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 89) {
+
                     datosFormulario.setDato18(valorDefecto3);
                     datosFormulario.setDato19(valorDefecto3);
                     datosFormulario.setDato16(valorDefecto3);
@@ -963,8 +956,8 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato207(valorDefecto3);
                     datosFormulario.setDato208(valorDefecto3);
                     datosFormulario.setDato209(valorDefecto3);
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 59) {
-                    
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 59) {
+
                     datosFormulario.setDato119(valorDefecto3);
                     datosFormulario.setDato20(valorDefecto3);
                     datosFormulario.setDato117(valorDefecto3);
@@ -978,8 +971,8 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato17(valorDefecto3);
                     datosFormulario.setDato18(valorDefecto3);
                     datosFormulario.setDato19(valorDefecto3);
-                    
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 13) {
+
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 13) {
                     datosFormulario.setDato11(valorDefecto3);
                     datosFormulario.setDato12(valorDefecto3);
                     datosFormulario.setDato13(valorDefecto3);
@@ -988,13 +981,13 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato16(valorDefecto3);
                     datosFormulario.setDato17(valorDefecto3);
                     datosFormulario.setDato18(valorDefecto3);
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 17) {
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 17) {
                     datosFormulario.setDato17(valorDefecto3);
                     datosFormulario.setDato18(valorDefecto3);
                     datosFormulario.setDato19(valorDefecto3);
                     datosFormulario.setDato20(valorDefecto3);
-                    
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 18) {
+
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 18) {
                     datosFormulario.setDato43(valorDefecto3);
                     datosFormulario.setDato44(valorDefecto3);
                     datosFormulario.setDato45(valorDefecto3);
@@ -1016,7 +1009,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato61(valorDefecto3);
                     datosFormulario.setDato62(valorDefecto3);
                     datosFormulario.setDato63(valorDefecto3);
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 55) {
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 55) {
                     datosFormulario.setDato35(valorDefecto3);
                     datosFormulario.setDato1517(valorDefecto3);
                     datosFormulario.setDato1483(valorDefecto3);
@@ -1026,9 +1019,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato1487(valorDefecto3);
                     datosFormulario.setDato1488(valorDefecto3);
                     datosFormulario.setDato1489(valorDefecto3);
-                   
+
                 }
-                
+
                 break;
             case 4:
                 if (tipoRegistroClinicoActual.getIdTipoReg() == 78 || tipoRegistroClinicoActual.getIdTipoReg() == 79) {
@@ -1095,7 +1088,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato81(valorDefecto4);
                     datosFormulario.setDato83(valorDefecto4);
                     datosFormulario.setDato89(valorDefecto4);
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 83) {
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 83) {
                     datosFormulario.setDato35(valorDefecto4);
                     datosFormulario.setDato36(valorDefecto4);
                     datosFormulario.setDato37(valorDefecto4);
@@ -1125,8 +1118,8 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato61(valorDefecto4);
                     datosFormulario.setDato62(valorDefecto4);
                     datosFormulario.setDato63(valorDefecto4);
-                    
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 84) {
+
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 84) {
                     datosFormulario.setDato18(valorDefecto4);
                     datosFormulario.setDato19(valorDefecto4);
                     datosFormulario.setDato20(valorDefecto4);
@@ -1136,9 +1129,8 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato24(valorDefecto4);
                     datosFormulario.setDato25(valorDefecto4);
                     datosFormulario.setDato26(valorDefecto4);
-                    
-                 
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 85) {
+
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 85) {
                     datosFormulario.setDato154(valorDefecto4);
                     datosFormulario.setDato155(valorDefecto4);
                     datosFormulario.setDato156(valorDefecto4);
@@ -1159,8 +1151,8 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato24(valorDefecto4);
                     datosFormulario.setDato25(valorDefecto4);
                     datosFormulario.setDato26(valorDefecto4);
-                 
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 88) {
+
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 88) {
                     datosFormulario.setDato15(valorDefecto4);
                     datosFormulario.setDato16(valorDefecto4);
                     datosFormulario.setDato17(valorDefecto4);
@@ -1168,9 +1160,8 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato19(valorDefecto4);
                     datosFormulario.setDato20(valorDefecto4);
                     datosFormulario.setDato21(valorDefecto4);
-                    
-                 
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 59) {
+
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 59) {
                     datosFormulario.setDato120(valorDefecto4);
                     datosFormulario.setDato121(valorDefecto4);
                     datosFormulario.setDato122(valorDefecto4);
@@ -1193,7 +1184,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato139(valorDefecto4);
                     datosFormulario.setDato140(valorDefecto4);
                     datosFormulario.setDato141(valorDefecto4);
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 89) {
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 89) {
                     datosFormulario.setDato210(valorDefecto4);
                     datosFormulario.setDato29(valorDefecto4);
                     datosFormulario.setDato30(valorDefecto4);
@@ -1207,7 +1198,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato38(valorDefecto4);
                     datosFormulario.setDato39(valorDefecto4);
                     datosFormulario.setDato40(valorDefecto4);
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 13) {
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 13) {
                     datosFormulario.setDato19(valorDefecto4);
                     datosFormulario.setDato20(valorDefecto4);
                     datosFormulario.setDato21(valorDefecto4);
@@ -1220,20 +1211,20 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato29(valorDefecto4);
                     datosFormulario.setDato30(valorDefecto4);
                     datosFormulario.setDato31(valorDefecto4);
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 17) {
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 17) {
                     datosFormulario.setDato21(valorDefecto4);
                     datosFormulario.setDato22(valorDefecto4);
                     datosFormulario.setDato23(valorDefecto4);
                     datosFormulario.setDato24(valorDefecto4);
-                    
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 18) {
+
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 18) {
                     datosFormulario.setDato64(valorDefecto4);
                     datosFormulario.setDato65(valorDefecto4);
                     datosFormulario.setDato66(valorDefecto4);
                     datosFormulario.setDato67(valorDefecto4);
                     datosFormulario.setDato68(valorDefecto4);
                     datosFormulario.setDato69(valorDefecto4);
-                    
+
                 }
                 break;
             case 5:
@@ -1267,7 +1258,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato66(valorDefecto5);
                     datosFormulario.setDato67(valorDefecto5);
                     datosFormulario.setDato68(valorDefecto5);
-                    
+
                 } else if (tipoRegistroClinicoActual.getIdTipoReg() == 23) {
                     datosFormulario.setDato21(valorDefecto5);
                     datosFormulario.setDato22(valorDefecto5);
@@ -1311,7 +1302,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato115(valorDefecto5);
                     datosFormulario.setDato116(valorDefecto5);
                     datosFormulario.setDato117(valorDefecto5);
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 83) {
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 83) {
                     datosFormulario.setDato64(valorDefecto5);
                     datosFormulario.setDato65(valorDefecto5);
                     datosFormulario.setDato66(valorDefecto5);
@@ -1329,7 +1320,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato78(valorDefecto5);
                     datosFormulario.setDato79(valorDefecto5);
                     datosFormulario.setDato80(valorDefecto5);
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 84) {
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 84) {
                     datosFormulario.setDato27(valorDefecto5);
                     datosFormulario.setDato28(valorDefecto5);
                     datosFormulario.setDato29(valorDefecto5);
@@ -1351,7 +1342,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato45(valorDefecto5);
                     datosFormulario.setDato46(valorDefecto5);
                     datosFormulario.setDato47(valorDefecto5);
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 85) {
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 85) {
                     datosFormulario.setDato40(valorDefecto5);
                     datosFormulario.setDato41(valorDefecto5);
                     datosFormulario.setDato42(valorDefecto5);
@@ -1359,21 +1350,21 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato44(valorDefecto5);
                     datosFormulario.setDato45(valorDefecto5);
                     datosFormulario.setDato46(valorDefecto5);
-                    
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 88) {
+
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 88) {
                     datosFormulario.setDato21(valorDefecto5);
                     datosFormulario.setDato22(valorDefecto5);
                     datosFormulario.setDato23(valorDefecto5);
                     datosFormulario.setDato24(valorDefecto5);
                     datosFormulario.setDato25(valorDefecto5);
                     datosFormulario.setDato26(valorDefecto5);
-                    
+
                 } else if (tipoRegistroClinicoActual.getIdTipoReg() == 59) {
                     datosFormulario.setDato142(valorDefecto5);
                     datosFormulario.setDato143(valorDefecto5);
                     datosFormulario.setDato144(valorDefecto5);
                     datosFormulario.setDato145(valorDefecto5);
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 89) {
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 89) {
                     datosFormulario.setDato41(valorDefecto5);
                     datosFormulario.setDato42(valorDefecto5);
                     datosFormulario.setDato43(valorDefecto5);
@@ -1385,7 +1376,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato49(valorDefecto5);
                     datosFormulario.setDato50(valorDefecto5);
                     datosFormulario.setDato51(valorDefecto5);
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 13) {
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 13) {
                     datosFormulario.setDato32(valorDefecto5);
                     datosFormulario.setDato33(valorDefecto5);
                     datosFormulario.setDato34(valorDefecto5);
@@ -1393,16 +1384,15 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato36(valorDefecto5);
                     datosFormulario.setDato37(valorDefecto5);
                     datosFormulario.setDato38(valorDefecto5);
-                    
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 17) {
+
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 17) {
                     datosFormulario.setDato25(valorDefecto5);
                     datosFormulario.setDato26(valorDefecto5);
                     datosFormulario.setDato27(valorDefecto5);
                     datosFormulario.setDato28(valorDefecto5);
                     datosFormulario.setDato29(valorDefecto5);
-                    
-                    
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 17) {
+
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 17) {
                     datosFormulario.setDato71(valorDefecto5);
                     datosFormulario.setDato72(valorDefecto5);
                     datosFormulario.setDato73(valorDefecto5);
@@ -1420,9 +1410,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato85(valorDefecto5);
                     datosFormulario.setDato86(valorDefecto5);
                     datosFormulario.setDato87(valorDefecto5);
-                    
-                    
-                    
+
                 }
                 break;
             case 6:
@@ -1515,7 +1503,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato158(valorDefecto6);
                     datosFormulario.setDato159(valorDefecto6);
                     datosFormulario.setDato160(valorDefecto6);
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 84) {
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 84) {
                     datosFormulario.setDato53(valorDefecto6);
                     datosFormulario.setDato54(valorDefecto6);
                     datosFormulario.setDato55(valorDefecto6);
@@ -1544,7 +1532,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato78(valorDefecto6);
                     datosFormulario.setDato79(valorDefecto6);
                     datosFormulario.setDato80(valorDefecto6);
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 85) {
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 85) {
                     datosFormulario.setDato49(valorDefecto6);
                     datosFormulario.setDato50(valorDefecto6);
                     datosFormulario.setDato51(valorDefecto6);
@@ -1566,8 +1554,8 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato67(valorDefecto6);
                     datosFormulario.setDato68(valorDefecto6);
                     datosFormulario.setDato69(valorDefecto6);
-                    
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 88) {
+
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 88) {
                     datosFormulario.setDato27(valorDefecto6);
                     datosFormulario.setDato28(valorDefecto6);
                     datosFormulario.setDato29(valorDefecto6);
@@ -1577,14 +1565,14 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato33(valorDefecto6);
                     datosFormulario.setDato34(valorDefecto6);
                     datosFormulario.setDato35(valorDefecto6);
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 59) {
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 59) {
                     datosFormulario.setDato146(valorDefecto6);
                     datosFormulario.setDato147(valorDefecto6);
                     datosFormulario.setDato148(valorDefecto6);
                     datosFormulario.setDato150(valorDefecto6);
                     datosFormulario.setDato151(valorDefecto6);
-                    
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 89) {
+
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 89) {
                     datosFormulario.setDato52(valorDefecto6);
                     datosFormulario.setDato53(valorDefecto6);
                     datosFormulario.setDato54(valorDefecto6);
@@ -1595,8 +1583,8 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato59(valorDefecto6);
                     datosFormulario.setDato60(valorDefecto6);
                     datosFormulario.setDato212(valorDefecto6);
-                    
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 13) {
+
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 13) {
                     datosFormulario.setDato39(valorDefecto6);
                     datosFormulario.setDato40(valorDefecto6);
                     datosFormulario.setDato41(valorDefecto6);
@@ -1607,8 +1595,8 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato46(valorDefecto6);
                     datosFormulario.setDato47(valorDefecto6);
                     datosFormulario.setDato48(valorDefecto6);
-                    
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 17) {
+
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 17) {
                     datosFormulario.setDato30(valorDefecto6);
                     datosFormulario.setDato31(valorDefecto6);
                     datosFormulario.setDato32(valorDefecto6);
@@ -1616,8 +1604,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato34(valorDefecto6);
                     datosFormulario.setDato35(valorDefecto6);
                     datosFormulario.setDato36(valorDefecto6);
-                    
-                    
+
                 }
 
                 break;
@@ -1726,7 +1713,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 } else if (tipoRegistroClinicoActual.getIdTipoReg() == 35) {
                     datosFormulario.setDato138(valorDefecto7);
                     datosFormulario.setDato139(valorDefecto7);
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 83) {
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 83) {
                     datosFormulario.setDato161(valorDefecto7);
                     datosFormulario.setDato162(valorDefecto7);
                     datosFormulario.setDato163(valorDefecto7);
@@ -1737,8 +1724,8 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato168(valorDefecto7);
                     datosFormulario.setDato169(valorDefecto7);
                     datosFormulario.setDato170(valorDefecto7);
-                    
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 84) {
+
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 84) {
                     datosFormulario.setDato81(valorDefecto7);
                     datosFormulario.setDato82(valorDefecto7);
                     datosFormulario.setDato83(valorDefecto7);
@@ -1749,8 +1736,8 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato88(valorDefecto7);
                     datosFormulario.setDato89(valorDefecto7);
                     datosFormulario.setDato90(valorDefecto7);
-                    
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 85) {
+
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 85) {
                     datosFormulario.setDato123(valorDefecto7);
                     datosFormulario.setDato124(valorDefecto7);
                     datosFormulario.setDato125(valorDefecto7);
@@ -1769,7 +1756,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato138(valorDefecto7);
                     datosFormulario.setDato139(valorDefecto7);
                     datosFormulario.setDato158(valorDefecto7);
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 88) {
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 88) {
                     datosFormulario.setDato80(valorDefecto7);
                     datosFormulario.setDato81(valorDefecto7);
                     datosFormulario.setDato82(valorDefecto7);
@@ -1790,7 +1777,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato97(valorDefecto7);
                     datosFormulario.setDato98(valorDefecto7);
                     datosFormulario.setDato99(valorDefecto7);
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 59) {
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 59) {
                     datosFormulario.setDato159(valorDefecto7);
                     datosFormulario.setDato160(valorDefecto7);
                     datosFormulario.setDato161(valorDefecto7);
@@ -1801,7 +1788,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato166(valorDefecto7);
                     datosFormulario.setDato167(valorDefecto7);
                     datosFormulario.setDato168(valorDefecto7);
-                    
+
                 } else if (tipoRegistroClinicoActual.getIdTipoReg() == 89) {
                     datosFormulario.setDato61(valorDefecto7);
                     datosFormulario.setDato62(valorDefecto7);
@@ -1814,8 +1801,8 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato69(valorDefecto7);
                     datosFormulario.setDato70(valorDefecto7);
                     datosFormulario.setDato71(valorDefecto7);
-                    
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 17) {
+
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 17) {
                     datosFormulario.setDato41(valorDefecto7);
                     datosFormulario.setDato42(valorDefecto7);
                     datosFormulario.setDato43(valorDefecto7);
@@ -1902,7 +1889,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato146(valorDefecto8);
                     datosFormulario.setDato147(valorDefecto8);
                     datosFormulario.setDato162(valorDefecto8);
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 83) {
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 83) {
                     datosFormulario.setDato171(valorDefecto8);
                     datosFormulario.setDato172(valorDefecto8);
                     datosFormulario.setDato173(valorDefecto8);
@@ -1921,7 +1908,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato186(valorDefecto8);
                     datosFormulario.setDato187(valorDefecto8);
                     datosFormulario.setDato188(valorDefecto8);
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 84) {
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 84) {
                     datosFormulario.setDato91(valorDefecto8);
                     datosFormulario.setDato92(valorDefecto8);
                     datosFormulario.setDato93(valorDefecto8);
@@ -1940,13 +1927,13 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato106(valorDefecto8);
                     datosFormulario.setDato107(valorDefecto8);
                     datosFormulario.setDato108(valorDefecto8);
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 88) {
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 88) {
                     datosFormulario.setDato100(valorDefecto8);
                     datosFormulario.setDato101(valorDefecto8);
                     datosFormulario.setDato102(valorDefecto8);
                     datosFormulario.setDato103(valorDefecto8);
                     datosFormulario.setDato104(valorDefecto8);
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 59) {
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 59) {
                     datosFormulario.setDato169(valorDefecto8);
                     datosFormulario.setDato170(valorDefecto8);
                     datosFormulario.setDato171(valorDefecto8);
@@ -1965,9 +1952,8 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato184(valorDefecto8);
                     datosFormulario.setDato185(valorDefecto8);
                     datosFormulario.setDato186(valorDefecto8);
-                
-                    
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 89) {
+
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 89) {
                     datosFormulario.setDato72(valorDefecto8);
                     datosFormulario.setDato73(valorDefecto8);
                     datosFormulario.setDato74(valorDefecto8);
@@ -1980,9 +1966,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato81(valorDefecto8);
                     datosFormulario.setDato82(valorDefecto8);
                     datosFormulario.setDato83(valorDefecto8);
-                    
+
                     datosFormulario.setDato213(valorDefecto8);
-                } 
+                }
                 break;
             case 9:
                 if (tipoRegistroClinicoActual.getIdTipoReg() == 20) {
@@ -2053,7 +2039,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato168(valorDefecto9);
                     datosFormulario.setDato169(valorDefecto9);
                     datosFormulario.setDato170(valorDefecto9);
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 83) {
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 83) {
                     datosFormulario.setDato189(valorDefecto9);
                     datosFormulario.setDato190(valorDefecto9);
                     datosFormulario.setDato191(valorDefecto9);
@@ -2065,7 +2051,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato197(valorDefecto9);
                     datosFormulario.setDato198(valorDefecto9);
                     datosFormulario.setDato199(valorDefecto9);
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 88) {
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 88) {
                     datosFormulario.setDato105(valorDefecto9);
                     datosFormulario.setDato106(valorDefecto9);
                     datosFormulario.setDato107(valorDefecto9);
@@ -2098,7 +2084,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato135(valorDefecto9);
                     datosFormulario.setDato136(valorDefecto9);
                     datosFormulario.setDato137(valorDefecto9);
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 59) {
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 59) {
                     datosFormulario.setDato187(valorDefecto9);
                     datosFormulario.setDato188(valorDefecto9);
                     datosFormulario.setDato189(valorDefecto9);
@@ -2141,7 +2127,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato93(valorDefecto10);
                     datosFormulario.setDato94(valorDefecto10);
                     datosFormulario.setDato95(valorDefecto10);
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 21) {
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 21) {
                     datosFormulario.setDato69(valorDefecto10);
                     datosFormulario.setDato70(valorDefecto10);
                     datosFormulario.setDato71(valorDefecto10);
@@ -2162,10 +2148,8 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato86(valorDefecto10);
                     datosFormulario.setDato87(valorDefecto10);
                     datosFormulario.setDato88(valorDefecto10);
-                    
-                    
-                }
-                else if (tipoRegistroClinicoActual.getIdTipoReg() == 23) {
+
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 23) {
                     datosFormulario.setDato82(valorDefecto10);
                     datosFormulario.setDato81(valorDefecto10);
                     datosFormulario.setDato82(valorDefecto10);
@@ -2203,7 +2187,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato198(valorDefecto10);
                     datosFormulario.setDato199(valorDefecto10);
                     datosFormulario.setDato200(valorDefecto10);
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 88) {
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 88) {
                     datosFormulario.setDato138(valorDefecto10);
                     datosFormulario.setDato139(valorDefecto10);
                     datosFormulario.setDato140(valorDefecto10);
@@ -2214,7 +2198,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato145(valorDefecto10);
                     datosFormulario.setDato146(valorDefecto10);
                     datosFormulario.setDato147(valorDefecto10);
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 59) {
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 59) {
                     datosFormulario.setDato54(valorDefecto10);
                     datosFormulario.setDato55(valorDefecto10);
                     datosFormulario.setDato56(valorDefecto10);
@@ -2222,8 +2206,8 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato58(valorDefecto10);
                     datosFormulario.setDato259(valorDefecto10);
                     datosFormulario.setDato260(valorDefecto10);
-                    
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 89) {
+
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 89) {
                     datosFormulario.setDato125(valorDefecto10);
                     datosFormulario.setDato126(valorDefecto10);
                     datosFormulario.setDato127(valorDefecto10);
@@ -2233,7 +2217,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato131(valorDefecto10);
                     datosFormulario.setDato132(valorDefecto10);
                     datosFormulario.setDato133(valorDefecto10);
-                    
+
                 }
                 break;
             case 11:
@@ -2302,7 +2286,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato215(valorDefecto11);
                     datosFormulario.setDato216(valorDefecto11);
                     datosFormulario.setDato217(valorDefecto11);
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 88) {
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 88) {
                     datosFormulario.setDato148(valorDefecto11);
                     datosFormulario.setDato149(valorDefecto11);
                     datosFormulario.setDato150(valorDefecto11);
@@ -2321,7 +2305,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato163(valorDefecto11);
                     datosFormulario.setDato164(valorDefecto11);
                     datosFormulario.setDato165(valorDefecto11);
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 59) {
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 59) {
                     datosFormulario.setDato236(valorDefecto11);
                     datosFormulario.setDato237(valorDefecto11);
                     datosFormulario.setDato238(valorDefecto11);
@@ -2333,8 +2317,8 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato244(valorDefecto11);
                     datosFormulario.setDato245(valorDefecto11);
                     datosFormulario.setDato246(valorDefecto11);
-                    
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 89) {
+
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 89) {
                     datosFormulario.setDato134(valorDefecto11);
                     datosFormulario.setDato135(valorDefecto11);
                     datosFormulario.setDato136(valorDefecto11);
@@ -2342,7 +2326,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato138(valorDefecto11);
                     datosFormulario.setDato139(valorDefecto11);
                     datosFormulario.setDato140(valorDefecto11);
-                    
+
                 }
                 break;
             case 12:
@@ -2374,7 +2358,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato222(valorDefecto12);
                     datosFormulario.setDato223(valorDefecto12);
                     datosFormulario.setDato229(valorDefecto12);
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 88) {
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 88) {
                     datosFormulario.setDato167(valorDefecto12);
                     datosFormulario.setDato168(valorDefecto12);
                     datosFormulario.setDato169(valorDefecto12);
@@ -2391,7 +2375,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato180(valorDefecto12);
                     datosFormulario.setDato181(valorDefecto12);
                     datosFormulario.setDato182(valorDefecto12);
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 89) {
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 89) {
                     datosFormulario.setDato98(valorDefecto12);
                     datosFormulario.setDato99(valorDefecto12);
                     datosFormulario.setDato100(valorDefecto12);
@@ -2414,7 +2398,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato117(valorDefecto12);
                     datosFormulario.setDato118(valorDefecto12);
                 }
-                
+
                 break;
             case 13:
                 if (tipoRegistroClinicoActual.getIdTipoReg() == 20) {
@@ -2441,7 +2425,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato233(valorDefecto13);
                     datosFormulario.setDato234(valorDefecto13);
                     datosFormulario.setDato235(valorDefecto13);
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 88) {
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 88) {
                     datosFormulario.setDato183(valorDefecto13);
                     datosFormulario.setDato184(valorDefecto13);
                     datosFormulario.setDato185(valorDefecto13);
@@ -2462,7 +2446,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato200(valorDefecto13);
                     datosFormulario.setDato201(valorDefecto13);
                     datosFormulario.setDato202(valorDefecto13);
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 89) {
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 89) {
                     datosFormulario.setDato141(valorDefecto13);
                     datosFormulario.setDato142(valorDefecto13);
                     datosFormulario.setDato143(valorDefecto13);
@@ -2491,7 +2475,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato224(valorDefecto13);
                     datosFormulario.setDato225(valorDefecto13);
                 }
-                
+
                 break;
             case 14:
                 if (tipoRegistroClinicoActual.getIdTipoReg() == 20) {
@@ -2523,7 +2507,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato152(valorDefecto14);
                     datosFormulario.setDato153(valorDefecto14);
 
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 88) {
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 88) {
                     datosFormulario.setDato203(valorDefecto14);
                     datosFormulario.setDato204(valorDefecto14);
                     datosFormulario.setDato205(valorDefecto14);
@@ -2538,7 +2522,6 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato214(valorDefecto14);
                     datosFormulario.setDato215(valorDefecto14);
                     datosFormulario.setDato216(valorDefecto14);
-                    
 
                 } else if (tipoRegistroClinicoActual.getIdTipoReg() == 89) {
                     datosFormulario.setDato166(valorDefecto14);
@@ -2551,7 +2534,6 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato173(valorDefecto14);
                     datosFormulario.setDato174(valorDefecto14);
                     datosFormulario.setDato175(valorDefecto14);
-                    
 
                 }
                 break;
@@ -2569,7 +2551,8 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato161(valorDefecto15);
                     datosFormulario.setDato162(valorDefecto15);
                     datosFormulario.setDato163(valorDefecto15);
-                } if (tipoRegistroClinicoActual.getIdTipoReg() == 88) {
+                }
+                if (tipoRegistroClinicoActual.getIdTipoReg() == 88) {
                     datosFormulario.setDato220(valorDefecto15);
                 } else if (tipoRegistroClinicoActual.getIdTipoReg() == 89) {
                     datosFormulario.setDato176(valorDefecto15);
@@ -2594,7 +2577,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             case 16:
                 if (tipoRegistroClinicoActual.getIdTipoReg() == 12) {
                     datosFormulario.setDato164(valorDefecto16);
-                }else if (tipoRegistroClinicoActual.getIdTipoReg() == 89) {
+                } else if (tipoRegistroClinicoActual.getIdTipoReg() == 89) {
                     datosFormulario.setDato37(valorDefecto16);
                     datosFormulario.setDato38(valorDefecto16);
                     datosFormulario.setDato39(valorDefecto16);
@@ -2607,7 +2590,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato165(valorDefecto17);
                 }
                 break;
-            
+
         }
     }
 
@@ -2821,15 +2804,15 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
 
     private void valoresPorDefecto() {
         datosFormulario = new DatosFormularioHistoria();
-        for(int i=0;i<=745;i++){
+        for (int i = 0; i <= 745; i++) {
             datosFormulario.setValor(i, "");
         }
         if (tipoRegistroClinicoActual != null) {//validacion particular para asignar valores por defecto             
             if (tipoRegistroClinicoActual.getIdTipoReg() == 71) {
-               loadGraphic();
-            }else if(tipoRegistroClinicoActual.getIdTipoReg()==70 || tipoRegistroClinicoActual.getIdTipoReg()==69){
-             loadGraphicValoracion0_18();   
-            }else if (tipoRegistroClinicoActual.getIdTipoReg() == 8) {//SOLICITUD DE AUTORIZACION DE SERVICIOS
+                loadGraphic();
+            } else if (tipoRegistroClinicoActual.getIdTipoReg() == 70 || tipoRegistroClinicoActual.getIdTipoReg() == 69) {
+                loadGraphicValoracion0_18();
+            } else if (tipoRegistroClinicoActual.getIdTipoReg() == 8) {//SOLICITUD DE AUTORIZACION DE SERVICIOS
                 datosFormulario.setDato4("Prioritaria");//prioridad de la atencion                
                 datosFormulario.setDato0(pacienteSeleccionado.getIdAdministradora().getRazonSocial());//pagador 
                 datosFormulario.setDato1(pacienteSeleccionado.getIdAdministradora().getCodigoAdministradora());//codigo
@@ -2864,7 +2847,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 // refContrRefDefaultParams("No Refiere"); Referencia y contrareferencia
                 cargarMunicipiosDefault();
             }
-            
+
         }
         //Para que no reemplace los cambpos de historias con valores por defecto
         if (tipoRegistroClinicoActual != null
@@ -2884,37 +2867,41 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             calculo_imc_peso();
             clasificacion_fisica();
         }
-         if (tipoRegistroClinicoActual != null){//Cargamos los campos por default si no posee historia
-             try{
-             for(HcCamposReg hc: tipoRegistroClinicoActual.getHcCamposRegList()){
-                 if(hc.getValorDefault()!=null)
-                    datosFormulario.setValor(hc.getPosicion(), hc.getValorDefault());
-             }
-             }catch(Exception e){
-                 
-             }
-             //
-         }
-         
-         //cargamos campos predefinidos
-         try {
-             listaCamposPredefinidos = new ArrayList<>();
+        if (tipoRegistroClinicoActual != null) {//Cargamos los campos por default si no posee historia
+            try {
+                for (HcCamposReg hc : tipoRegistroClinicoActual.getHcCamposRegList()) {
+                    if (hc.getValorDefault() != null) {
+                        datosFormulario.setValor(hc.getPosicion(), hc.getValorDefault());
+                    }
+                }
+            } catch (Exception e) {
+
+            }
+            //
+        }
+
+        //cargamos campos predefinidos
+        try {
+            listaCamposPredefinidos = new ArrayList<>();
             listaCamposPredefinidos = cfgHistoriaCamposPredefinidosFacade.getCamposDefinidosXHistoriaClinica(tipoRegistroClinicoActual.getIdTipoReg());
-            for(CfgHistoriaCamposPredefinidos campos:listaCamposPredefinidos){
-                if(campos.isDefaultValor()){
+            for (CfgHistoriaCamposPredefinidos campos : listaCamposPredefinidos) {
+                if (campos.isDefaultValor()) {
                     datosFormulario.setValor(campos.getIdCampo().getPosicion(), campos.getValor());
                 }
             }
-            
+
         } catch (Exception e) {
         }
     }
+
     public void validardatoTalla05() {
         try {
             List<Integer> listaEdad = getYear(pacienteSeleccionado.getFechaNacimiento());
 
             if (!listaEdad.isEmpty()) {
-                if(listaTalla.isEmpty())seriesLinealTalla = new LineChartSeries();
+                if (listaTalla.isEmpty()) {
+                    seriesLinealTalla = new LineChartSeries();
+                }
                 seriesLinealTalla.set(listaEdad.get(1), Long.valueOf(datosFormulario.getDato1().toString()));
                 HcDetalle hc = new HcDetalle();
                 hc.setValorX(Long.valueOf(listaEdad.get(1)));
@@ -2947,7 +2934,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
 
             //cargamos imc
             //cargamos imc
-            if(listaPeso.size()==1) seriesLinealIMC=new LineChartSeries();
+            if (listaPeso.size() == 1) {
+                seriesLinealIMC = new LineChartSeries();
+            }
             if (!listaTalla.isEmpty() && !listaPeso.isEmpty()) {
                 model = new LineChartModel();
                 for (int i = 0; i < listaTalla.size(); i++) {
@@ -2990,7 +2979,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         try {
             List<Integer> listaEdad = getYear(pacienteSeleccionado.getFechaNacimiento());
             if (!listaEdad.isEmpty()) {
-                if(listaPeso.isEmpty())seriesLinealPeso = new LineChartSeries();
+                if (listaPeso.isEmpty()) {
+                    seriesLinealPeso = new LineChartSeries();
+                }
                 seriesLinealPeso.set(listaEdad.get(1), Long.valueOf(datosFormulario.getDato0().toString()));
                 HcDetalle hc = new HcDetalle();
                 hc.setValorX(Long.valueOf(listaEdad.get(1)));
@@ -3030,7 +3021,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             List<Integer> listaEdad = getYear(pacienteSeleccionado.getFechaNacimiento());
 
             if (!listaEdad.isEmpty()) {
-                if(listaCefalico.isEmpty())seriesLinealCefalico = new LineChartSeries();
+                if (listaCefalico.isEmpty()) {
+                    seriesLinealCefalico = new LineChartSeries();
+                }
                 seriesLinealCefalico.set(listaEdad.get(1), Long.valueOf(datosFormulario.getDato2().toString()));
                 HcDetalle hc = new HcDetalle();
                 hc.setValorX(Long.valueOf(listaEdad.get(0)));
@@ -3066,10 +3059,10 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         } catch (Exception e) {
         }
     }
-    
-    public void validardatoPeso(){
+
+    public void validardatoPeso() {
         List<Integer> listaEdad = getYear(pacienteSeleccionado.getFechaNacimiento());
-        if(!listaEdad.isEmpty()){
+        if (!listaEdad.isEmpty()) {
             seriesLinealPeso.set(listaEdad.get(0), Long.valueOf(datosFormulario.getDato2().toString()));
             HcDetalle hc = new HcDetalle();
             hc.setValorX(Long.valueOf(listaEdad.get(0)));
@@ -3077,11 +3070,14 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             listaPeso.add(hc);
         }
     }
-    public void validardatoTalla(){
+
+    public void validardatoTalla() {
         List<Integer> listaEdad = getYear(pacienteSeleccionado.getFechaNacimiento());
-        
-        if(!listaEdad.isEmpty()){
-            if(listaTalla.isEmpty())seriesLinealTalla = new LineChartSeries();
+
+        if (!listaEdad.isEmpty()) {
+            if (listaTalla.isEmpty()) {
+                seriesLinealTalla = new LineChartSeries();
+            }
             seriesLinealTalla.set(listaEdad.get(0), Long.valueOf(datosFormulario.getDato3().toString()));
             HcDetalle hc = new HcDetalle();
             hc.setValorX(Long.valueOf(listaEdad.get(0)));
@@ -3091,50 +3087,51 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         LineChartModel model = new LineChartModel();
         model.addSeries(seriesLinealTalla);
         lineModel1 = model;
-        if(tipoRegistroClinicoActual.getIdTipoReg()==70){
-                lineModel1.setTitle("Talla para la edad Niños de 5 a 18 años");
-            }else{
-                lineModel1.setTitle("Talla para la edad Niñas de 5 a 18 años");
+        if (tipoRegistroClinicoActual.getIdTipoReg() == 70) {
+            lineModel1.setTitle("Talla para la edad Niños de 5 a 18 años");
+        } else {
+            lineModel1.setTitle("Talla para la edad Niñas de 5 a 18 años");
+        }
+        lineModel1.setLegendPosition("e");
+        lineModel1.setShowPointLabels(true);
+
+        lineModel1.setLegendPlacement(LegendPlacement.OUTSIDE);
+        Axis xAxis = lineModel1.getAxis(AxisType.X);
+        xAxis.setMin(5);
+        xAxis.setMax(18);
+        xAxis.setTickInterval("1");
+        xAxis.setLabel("Edad en Años");
+
+        Axis yAxis = lineModel1.getAxis(AxisType.Y);
+        yAxis.setLabel("Talla (cm)");
+        yAxis.setMin(90);
+        yAxis.setMax(200);
+        yAxis.setTickInterval("10");
+        //#4F4B4A
+
+        lineModel1.setSeriesColors("D9300B");
+        if (listaPeso.size() == 1) {
+            seriesLinealTalla = new LineChartSeries();
+        }
+        //cargamos imc
+        if (!listaTalla.isEmpty() && !listaPeso.isEmpty()) {
+            model = new LineChartModel();
+            for (int i = 0; i < listaTalla.size(); i++) {
+                float pesoC = Long.valueOf(listaPeso.get(i).getValor());
+                float tallaC = Long.valueOf(listaTalla.get(i).getValor());
+                float metros = tallaC / 100;
+                float imcCalculado = pesoC / (metros * metros);
+                seriesLinealIMC.set(listaTalla.get(i).getValorX(), imcCalculado);
             }
-            lineModel1.setLegendPosition("e");
-            lineModel1.setShowPointLabels(true);
 
-            lineModel1.setLegendPlacement(LegendPlacement.OUTSIDE);
-            Axis xAxis = lineModel1.getAxis(AxisType.X);
-            xAxis.setMin(5);
-            xAxis.setMax(18);
-            xAxis.setTickInterval("1");
-            xAxis.setLabel("Edad en Años");
+            model.addSeries(seriesLinealIMC);
+            lineModel2 = model;
+            if (tipoRegistroClinicoActual.getIdTipoReg() == 70) {
+                lineModel2.setTitle("IMC para la edad Niños de 5 a 18 años");
+            } else {
+                lineModel2.setTitle("IMC para la edad Niñas de 5 a 18 años");
+            }
 
-            Axis yAxis = lineModel1.getAxis(AxisType.Y);
-            yAxis.setLabel("Talla (cm)");
-            yAxis.setMin(90);
-            yAxis.setMax(200);
-            yAxis.setTickInterval("10");
-            //#4F4B4A
-
-            lineModel1.setSeriesColors("D9300B");
-            if(listaPeso.size()==1)seriesLinealTalla =new LineChartSeries();
-            //cargamos imc
-            if(!listaTalla.isEmpty() && !listaPeso.isEmpty()){
-                model = new LineChartModel();
-                for (int i = 0; i < listaTalla.size(); i++) {
-                    float pesoC = Long.valueOf(listaPeso.get(i).getValor());
-                    float tallaC = Long.valueOf(listaTalla.get(i).getValor());
-                    float metros = tallaC / 100;
-                    float imcCalculado = pesoC / (metros * metros);
-                    seriesLinealIMC.set(listaTalla.get(i).getValorX(), imcCalculado);
-                }
-
-                model.addSeries(seriesLinealIMC);
-                lineModel2 = model;
-                if(tipoRegistroClinicoActual.getIdTipoReg()==70){
-                    lineModel2.setTitle("IMC para la edad Niños de 5 a 18 años");
-                }else{
-                    lineModel2.setTitle("IMC para la edad Niñas de 5 a 18 años");
-                }
-                    
-            
             lineModel2.setLegendPosition("e");
             lineModel2.setShowPointLabels(true);
             //lineModel3.getAxes().put(AxisType.X, new CategoryAxis("Meses"));
@@ -3153,9 +3150,10 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             yAxis.setMax(36);
 
             lineModel2.setSeriesColors("D9300B");
-            }
-            RequestContext.getCurrentInstance().update(":IdFormRegistroClinico:tallaModel");
+        }
+        RequestContext.getCurrentInstance().update(":IdFormRegistroClinico:tallaModel");
     }
+
     private void loadGraphicValoracion0_18() {
         try {
             List<Long> listaPesoC = new ArrayList();
@@ -3168,16 +3166,16 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 seriesLinealTalla.set(hc.getValorX(), Long.valueOf(hc.getValor()));
                 //listaTalla.add(Long.valueOf(hc.getValor()));
             }
-            
-            if(listaTalla.isEmpty()){
-                seriesLinealTalla.set(0,0);
+
+            if (listaTalla.isEmpty()) {
+                seriesLinealTalla.set(0, 0);
             }
 
             model.addSeries(seriesLinealTalla);
             lineModel1 = model;
-            if(tipoRegistroClinicoActual.getIdTipoReg()==70){
+            if (tipoRegistroClinicoActual.getIdTipoReg() == 70) {
                 lineModel1.setTitle("Talla para la edad Niños de 5 a 18 años");
-            }else{
+            } else {
                 lineModel1.setTitle("Talla para la edad Niñas de 5 a 18 años");
             }
             lineModel1.setLegendPosition("e");
@@ -3201,7 +3199,6 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
 
             //cargamos peso
             listaPeso = detalleFacade.getValoresGraficasAnnio(pacienteSeleccionado.getIdPaciente(), 2, tipoRegistroClinicoActual.getIdTipoReg());
-           
 
             //IMC
             model = new LineChartModel();
@@ -3215,18 +3212,17 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 seriesLinealIMC.set(listaTalla.get(i).getValorX(), imcCalculado);
             }
 
-            if(listaTalla.isEmpty()){
-                seriesLinealIMC.set(0,0);
+            if (listaTalla.isEmpty()) {
+                seriesLinealIMC.set(0, 0);
             }
             model.addSeries(seriesLinealIMC);
             lineModel2 = model;
-            if(tipoRegistroClinicoActual.getIdTipoReg()==70){
+            if (tipoRegistroClinicoActual.getIdTipoReg() == 70) {
                 lineModel2.setTitle("IMC para la edad Niños de 5 a 18 años");
-            }else{
+            } else {
                 lineModel2.setTitle("IMC para la edad Niñas de 5 a 18 años");
             }
-                    
-            
+
             lineModel2.setLegendPosition("e");
             lineModel2.setShowPointLabels(true);
             //lineModel3.getAxes().put(AxisType.X, new CategoryAxis("Meses"));
@@ -3249,163 +3245,158 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             e.printStackTrace();
         }
     }
-    private void loadGraphic(){
-         try{
-                    //Cargamos peso
-                    LineChartModel model = new LineChartModel();
-                    seriesLinealPeso = new LineChartSeries();
-                    
-                    seriesLinealPeso.setLabel("Peso (kg)");
-                    listaPeso = detalleFacade.getValoresGraficas(pacienteSeleccionado.getIdPaciente(), 0, tipoRegistroClinicoActual.getIdTipoReg());
-                    for(HcDetalle hc:listaPeso){
-                        seriesLinealPeso.set(hc.getValorX(), Long.valueOf(hc.getValor()));
-                        //listaPeso.add(Long.valueOf(hc.getValor()));
-                    }
-                    
-                    if(listaPeso.isEmpty()){
-                        seriesLinealPeso.set(-1,-1);
-                    }       
-                    model.addSeries(seriesLinealPeso);
-                    lineModel1 = model;
-                    lineModel1.setTitle("Peso para la edad Niñas de 0 a 2 años");
-                    lineModel1.setLegendPosition("e");
-                    lineModel1.setShowPointLabels(true);
-                    
-                     lineModel1.setLegendPlacement(LegendPlacement.OUTSIDE);
-                     Axis xAxis = lineModel1.getAxis(AxisType.X);
-                     xAxis.setMin(0);
-                     xAxis.setMax(24);
-                     xAxis.setTickInterval("1");
-                     xAxis.setLabel("Meses");
-                     
-                     Axis yAxis = lineModel1.getAxis(AxisType.Y);
-                     yAxis.setLabel("Peso (kg)");
-                     yAxis.setMin(0);
-                     yAxis.setMax(18);
-                     yAxis.setTickInterval("1");
-                    //#4F4B4A
-                    
-                    
-                    lineModel1.setSeriesColors("D9300B");
-                    
-                    /////FIN PESO
-                    //Cargamos talla
-                    model = new LineChartModel();
-                    seriesLinealTalla = new LineChartSeries();
-                    seriesLinealTalla.setLabel("Talla (cm)");
-                    listaTalla = detalleFacade.getValoresGraficas(pacienteSeleccionado.getIdPaciente(), 1, tipoRegistroClinicoActual.getIdTipoReg());
-                    for(HcDetalle hc:listaTalla){
-                        seriesLinealTalla.set(hc.getValorX(), Long.valueOf(hc.getValor()));
-                    }
-                    
-                    if(listaTalla.isEmpty()){
-                        seriesLinealTalla.set(-1,-1);
-                    }
-                    model.addSeries(seriesLinealTalla);
-                    lineModel2 = model;
-                    lineModel2.setTitle("Talla para la edad Niñas de 0 a 2 años");
-                    lineModel2.setLegendPosition("e");
-                    lineModel2.setLegendPlacement(LegendPlacement.OUTSIDE);
-                    lineModel2.setShowPointLabels(true);
-                    //lineModel2.getAxes().put(AxisType.X);
-                    
-                     xAxis = lineModel2.getAxis(AxisType.X);
-                     xAxis.setMin(0);
-                     xAxis.setMax(24);
-                     xAxis.setTickInterval("1");
-                     xAxis.setLabel("Meses");
-                     
-                    /*,,,,,4F4B4A,*/
-                    yAxis = lineModel2.getAxis(AxisType.Y);
-                    yAxis.setTickInterval("5");
-                    yAxis.setLabel("Talla (cm)");
-                    yAxis.setMin(40);
-                    yAxis.setMax(95);
-                    
-                    lineModel2.setSeriesColors("D9300B");
 
-                    //Cargamos imc
-                    
-                    //valores defecto
-                     
-                    
-                    model = new LineChartModel();
-                    seriesLinealIMC = new LineChartSeries();
-                    seriesLinealIMC.setLabel("IMC (kg/m2)");
-                    for(int i=0;i<listaPeso.size();i++){
-                        float pesoC= Long.valueOf(listaPeso.get(i).getValor());
-                        float tallaC= Long.valueOf(listaTalla.get(i).getValor());
-                        float metros = tallaC / 100;
-                        float imcCalculado = pesoC / (metros * metros);
-                        seriesLinealIMC.set(listaPeso.get(i).getValorX(), imcCalculado);
-                    }
-                    if(listaPeso.isEmpty() || listaTalla.isEmpty()){
-                        seriesLinealIMC.set(-1,-1);
-                    }
-                    model.addSeries(seriesLinealIMC);
-                    lineModel3 = model;
-                    lineModel3.setTitle("IMC para la edad Niñas de 0 a 2 años");
-                    lineModel3.setLegendPosition("e");
-                    lineModel3.setShowPointLabels(true);
-                    //lineModel3.getAxes().put(AxisType.X, new CategoryAxis("Meses"));
-                    lineModel3.setLegendPlacement(LegendPlacement.OUTSIDE);
-                    
-                     xAxis = lineModel3.getAxis(AxisType.X);
-                     xAxis.setMin(0);
-                     xAxis.setMax(24);
-                     xAxis.setTickInterval("1");
-                     xAxis.setLabel("Meses");
-                    
-                    yAxis = lineModel3.getAxis(AxisType.Y);
-                    yAxis.setLabel("IMC (kg/m2)");
-                    yAxis.setTickInterval("1");
-                    yAxis.setMin(9);
-                    yAxis.setMax(22);
+    private void loadGraphic() {
+        try {
+            //Cargamos peso
+            LineChartModel model = new LineChartModel();
+            seriesLinealPeso = new LineChartSeries();
 
-                    
-                    lineModel3.setSeriesColors("D9300B");
-                    //lineModel3.getAxes().put(AxisType.Y2, y2Axis);
-                    //Cargamos perimetro cefalico
-                    
-                    
-                    model = new LineChartModel();
-                    seriesLinealCefalico = new LineChartSeries();
-                    seriesLinealCefalico.setLabel("Perímetro Cefálico (cm)");
-                    listaCefalico = detalleFacade.getValoresGraficas(pacienteSeleccionado.getIdPaciente(), 2, tipoRegistroClinicoActual.getIdTipoReg());
-                    for(HcDetalle hc:listaCefalico){
-                        seriesLinealCefalico.set(hc.getValorX(), Long.valueOf(hc.getValor()));
-                    }
-                    if(listaCefalico.isEmpty()){
-                        seriesLinealCefalico.set(-1,-1);
-                    }
-                    model.addSeries(seriesLinealCefalico);
-                    lineModel4 = model;
-                    lineModel4.setTitle("Perímetro Cefálico para la edad Niñas de 0 a 2 años");
-                    lineModel4.setLegendPosition("e");
-                    lineModel4.setShowPointLabels(true);
-                    lineModel4.setLegendPlacement(LegendPlacement.OUTSIDE);
-                    //lineModel4.getAxes().put(AxisType.X, new CategoryAxis("Meses"));
-                    
-                    xAxis = lineModel4.getAxis(AxisType.X);
-                     xAxis.setMin(0);
-                     xAxis.setMax(24);
-                     xAxis.setTickInterval("1");
-                     xAxis.setLabel("Meses");
-                    
-                    yAxis = lineModel4.getAxis(AxisType.Y);
-                    yAxis.setLabel("Perímetro Cefálico (cm)");
-                    yAxis.setTickInterval("2");
-                    yAxis.setMin(30);
-                    yAxis.setMax(56);
-                    
-                    
-                    //lineModel4.getAxes().put(AxisType.Y2, y2Axis);
-                    lineModel4.setSeriesColors("D9300B");
-                    
-                }catch(Exception ex){
-                    
-                }
+            seriesLinealPeso.setLabel("Peso (kg)");
+            listaPeso = detalleFacade.getValoresGraficas(pacienteSeleccionado.getIdPaciente(), 0, tipoRegistroClinicoActual.getIdTipoReg());
+            for (HcDetalle hc : listaPeso) {
+                seriesLinealPeso.set(hc.getValorX(), Long.valueOf(hc.getValor()));
+                //listaPeso.add(Long.valueOf(hc.getValor()));
+            }
+
+            if (listaPeso.isEmpty()) {
+                seriesLinealPeso.set(-1, -1);
+            }
+            model.addSeries(seriesLinealPeso);
+            lineModel1 = model;
+            lineModel1.setTitle("Peso para la edad Niñas de 0 a 2 años");
+            lineModel1.setLegendPosition("e");
+            lineModel1.setShowPointLabels(true);
+
+            lineModel1.setLegendPlacement(LegendPlacement.OUTSIDE);
+            Axis xAxis = lineModel1.getAxis(AxisType.X);
+            xAxis.setMin(0);
+            xAxis.setMax(24);
+            xAxis.setTickInterval("1");
+            xAxis.setLabel("Meses");
+
+            Axis yAxis = lineModel1.getAxis(AxisType.Y);
+            yAxis.setLabel("Peso (kg)");
+            yAxis.setMin(0);
+            yAxis.setMax(18);
+            yAxis.setTickInterval("1");
+            //#4F4B4A
+
+            lineModel1.setSeriesColors("D9300B");
+
+            /////FIN PESO
+            //Cargamos talla
+            model = new LineChartModel();
+            seriesLinealTalla = new LineChartSeries();
+            seriesLinealTalla.setLabel("Talla (cm)");
+            listaTalla = detalleFacade.getValoresGraficas(pacienteSeleccionado.getIdPaciente(), 1, tipoRegistroClinicoActual.getIdTipoReg());
+            for (HcDetalle hc : listaTalla) {
+                seriesLinealTalla.set(hc.getValorX(), Long.valueOf(hc.getValor()));
+            }
+
+            if (listaTalla.isEmpty()) {
+                seriesLinealTalla.set(-1, -1);
+            }
+            model.addSeries(seriesLinealTalla);
+            lineModel2 = model;
+            lineModel2.setTitle("Talla para la edad Niñas de 0 a 2 años");
+            lineModel2.setLegendPosition("e");
+            lineModel2.setLegendPlacement(LegendPlacement.OUTSIDE);
+            lineModel2.setShowPointLabels(true);
+            //lineModel2.getAxes().put(AxisType.X);
+
+            xAxis = lineModel2.getAxis(AxisType.X);
+            xAxis.setMin(0);
+            xAxis.setMax(24);
+            xAxis.setTickInterval("1");
+            xAxis.setLabel("Meses");
+
+            /*,,,,,4F4B4A,*/
+            yAxis = lineModel2.getAxis(AxisType.Y);
+            yAxis.setTickInterval("5");
+            yAxis.setLabel("Talla (cm)");
+            yAxis.setMin(40);
+            yAxis.setMax(95);
+
+            lineModel2.setSeriesColors("D9300B");
+
+            //Cargamos imc
+            //valores defecto
+            model = new LineChartModel();
+            seriesLinealIMC = new LineChartSeries();
+            seriesLinealIMC.setLabel("IMC (kg/m2)");
+            for (int i = 0; i < listaPeso.size(); i++) {
+                float pesoC = Long.valueOf(listaPeso.get(i).getValor());
+                float tallaC = Long.valueOf(listaTalla.get(i).getValor());
+                float metros = tallaC / 100;
+                float imcCalculado = pesoC / (metros * metros);
+                seriesLinealIMC.set(listaPeso.get(i).getValorX(), imcCalculado);
+            }
+            if (listaPeso.isEmpty() || listaTalla.isEmpty()) {
+                seriesLinealIMC.set(-1, -1);
+            }
+            model.addSeries(seriesLinealIMC);
+            lineModel3 = model;
+            lineModel3.setTitle("IMC para la edad Niñas de 0 a 2 años");
+            lineModel3.setLegendPosition("e");
+            lineModel3.setShowPointLabels(true);
+            //lineModel3.getAxes().put(AxisType.X, new CategoryAxis("Meses"));
+            lineModel3.setLegendPlacement(LegendPlacement.OUTSIDE);
+
+            xAxis = lineModel3.getAxis(AxisType.X);
+            xAxis.setMin(0);
+            xAxis.setMax(24);
+            xAxis.setTickInterval("1");
+            xAxis.setLabel("Meses");
+
+            yAxis = lineModel3.getAxis(AxisType.Y);
+            yAxis.setLabel("IMC (kg/m2)");
+            yAxis.setTickInterval("1");
+            yAxis.setMin(9);
+            yAxis.setMax(22);
+
+            lineModel3.setSeriesColors("D9300B");
+            //lineModel3.getAxes().put(AxisType.Y2, y2Axis);
+            //Cargamos perimetro cefalico
+
+            model = new LineChartModel();
+            seriesLinealCefalico = new LineChartSeries();
+            seriesLinealCefalico.setLabel("Perímetro Cefálico (cm)");
+            listaCefalico = detalleFacade.getValoresGraficas(pacienteSeleccionado.getIdPaciente(), 2, tipoRegistroClinicoActual.getIdTipoReg());
+            for (HcDetalle hc : listaCefalico) {
+                seriesLinealCefalico.set(hc.getValorX(), Long.valueOf(hc.getValor()));
+            }
+            if (listaCefalico.isEmpty()) {
+                seriesLinealCefalico.set(-1, -1);
+            }
+            model.addSeries(seriesLinealCefalico);
+            lineModel4 = model;
+            lineModel4.setTitle("Perímetro Cefálico para la edad Niñas de 0 a 2 años");
+            lineModel4.setLegendPosition("e");
+            lineModel4.setShowPointLabels(true);
+            lineModel4.setLegendPlacement(LegendPlacement.OUTSIDE);
+            //lineModel4.getAxes().put(AxisType.X, new CategoryAxis("Meses"));
+
+            xAxis = lineModel4.getAxis(AxisType.X);
+            xAxis.setMin(0);
+            xAxis.setMax(24);
+            xAxis.setTickInterval("1");
+            xAxis.setLabel("Meses");
+
+            yAxis = lineModel4.getAxis(AxisType.Y);
+            yAxis.setLabel("Perímetro Cefálico (cm)");
+            yAxis.setTickInterval("2");
+            yAxis.setMin(30);
+            yAxis.setMax(56);
+
+            //lineModel4.getAxes().put(AxisType.Y2, y2Axis);
+            lineModel4.setSeriesColors("D9300B");
+
+        } catch (Exception ex) {
+
+        }
     }
+
     public void cargarDialogoAgregarFamiliar() {
 
         nombreFamiliar = "";
@@ -3755,7 +3746,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             System.out.println("" + e.getMessage());
         }
     }
-    
+
     public void calcularIMCHisOdontologia() {
         try {
             float peso = Float.parseFloat(datosFormulario.getDato1507().toString());
@@ -3766,7 +3757,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             System.out.println("" + e.getMessage());
         }
     }
-    
+
     public void calcularIMCCrecimientoDesarrollo() {
         try {
             float peso = Float.parseFloat(datosFormulario.getDato106().toString());
@@ -3777,7 +3768,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             System.out.println("" + e.getMessage());
         }
     }
-    
+
     public void calcularIMCHistoriaPrevencionCronicas() {
         try {
             float peso = Float.parseFloat(datosFormulario.getDato134().toString());
@@ -3788,7 +3779,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             //System.out.println("" + e.getMessage());
         }
     }
-    
+
     public void calcularIMCAIEPIMenor2Meses() {
         try {
             float peso = Float.parseFloat(datosFormulario.getDato55().toString());
@@ -3799,7 +3790,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             //System.out.println("" + e.getMessage());
         }
     }
-    
+
     public void calcularIMCAHCPlanificacionFamiliar() {
         try {
             float peso = Float.parseFloat(datosFormulario.getDato81().toString());
@@ -3810,7 +3801,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             //System.out.println("" + e.getMessage());
         }
     }
-    
+
     public void calcularIMCConceptoMedico() {
         try {
             float peso = Float.parseFloat(datosFormulario.getDato12().toString());
@@ -3865,6 +3856,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             System.out.println("" + e.getMessage());
         }
     }
+
     public void calcularIMCPyPAdultoMayor() {
         try {
             float peso = Float.parseFloat(datosFormulario.getDato51().toString());
@@ -4443,10 +4435,10 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             datosReporte.setValor(221, "<b>RESPONSABLE: </b> " + obtenerCadenaNoNula(pacienteSeleccionado.getResponsable()));
             //64
             datosReporte.setValor(222, "<b>TELEFONO: </b> " + obtenerCadenaNoNula(pacienteSeleccionado.getTelefonoResponsable()));
-        }else{
+        } else {
             datosReporte.setValor(221, "<b>RESPONSABLE: </b> ");
             //64
-            datosReporte.setValor(222, "<b>TELEFONO: </b> " );  
+            datosReporte.setValor(222, "<b>TELEFONO: </b> ");
         }
 
         //65
@@ -4465,7 +4457,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
 
         //67
         if (pacienteSeleccionado.getMunicipio() != null) {
-            datosReporte.setValor(225, "<b>MUNICIPIO: </b>" + pacienteSeleccionado.getMunicipio().getDescripcion() );//TELEFONO EMPRESA                
+            datosReporte.setValor(225, "<b>MUNICIPIO: </b>" + pacienteSeleccionado.getMunicipio().getDescripcion());//TELEFONO EMPRESA                
         } else {
             datosReporte.setValor(225, "<b>MUNICIPIO: </b>");//TELEFONO EMPRESA                
         }
@@ -4565,8 +4557,8 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         //datos acudiente
         if (pacienteSeleccionado.getAcompanante() != null) {
             datosReporte.setValor(250, "<b>NOMBRE :</b>" + pacienteSeleccionado.getAcompanante()); // NOMBRE DEL ACUDIENTE, si es correcto; del acudiente
-        }else{
-            datosReporte.setValor(250, "<b>NOMBRE :</b>" ); // NOMBRE DEL ACUDIENTE, si es correcto; del acudiente
+        } else {
+            datosReporte.setValor(250, "<b>NOMBRE :</b>"); // NOMBRE DEL ACUDIENTE, si es correcto; del acudiente
         }
         if (pacienteSeleccionado.getDireccion() != null) {
             datosReporte.setValor(251, "<b>DIRECCION :</b>" + pacienteSeleccionado.getDireccion()); //DIRECCION DEL PACIENTE
@@ -4584,7 +4576,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         datosReporte.setValor(261, "<b>VIC. DE MALTRATO :</b>" + victimaMaltratoStr);
 
         //datos informacion general de referencia-contrareferencia
-        if(regEncontrado.getIdTipoReg().getIdTipoReg()!=84){
+        if (regEncontrado.getIdTipoReg().getIdTipoReg() != 84) {
             datosReporte.setValor(190, "<b>INSTITUCION :</b>" + loginMB.getEmpresaActual().getRazonSocial());
             datosReporte.setValor(191, "<b>E.S.E.IO :</b>" + loginMB.getEmpresaActual().getCodMunicipio().getDescripcion());
             datosReporte.setValor(192, "<b>ESPECIALIDAD :</b>" + regEncontrado.getIdMedico().getEspecialidad().getDescripcion());
@@ -4718,7 +4710,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
 
         listaRegistrosParaPdf = new ArrayList<>();
         DatosFormularioHistoria datosReporte = new DatosFormularioHistoria();
-        List<HcDetalle> listaCamposDeRegistroEncontrado = regEncontrado.getHcDetalleList();//busca todos los datos
+        List<HcDetalle> listaCamposDeRegistroEncontrado = detalleFacade.buscarDetallesPorRegistro(regEncontrado.getIdRegistro());//busca todos los datos
         /**
          * Se cargan todos los títulos que se mostraran en el reporte de
          * "hc_campos_reg"
@@ -4905,11 +4897,11 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         List<HcDetalle> listaCamposDeRegistroEncontrado = regEncontrado.getHcDetalleList();//busca todos los datos
         List<Long> listaPeso = new ArrayList();
         List<Long> listaTalla = new ArrayList();
-        if(regEncontrado.getIdTipoReg().getIdTipoReg()==71){
+        if (regEncontrado.getIdTipoReg().getIdTipoReg() == 71) {
             //peso
-            List<HcDetalle> lista1 =  detalleFacade.getValoresGraficas(pacienteSeleccionado.getIdPaciente(),0,regEncontrado.getIdTipoReg().getIdTipoReg());
+            List<HcDetalle> lista1 = detalleFacade.getValoresGraficas(pacienteSeleccionado.getIdPaciente(), 0, regEncontrado.getIdTipoReg().getIdTipoReg());
             List<DatosGrafica> listaGrafica = new ArrayList();
-            for(HcDetalle hc:lista1){
+            for (HcDetalle hc : lista1) {
                 listaPeso.add(Long.valueOf(hc.getValor()));
                 DatosGrafica dg = new DatosGrafica();
                 dg.setValor(Double.valueOf(hc.getValor()));
@@ -4918,9 +4910,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             }
             datosReporte.setListaDatosPesos(listaGrafica);
             //talla
-            lista1 =  detalleFacade.getValoresGraficas(pacienteSeleccionado.getIdPaciente(),1,regEncontrado.getIdTipoReg().getIdTipoReg());
+            lista1 = detalleFacade.getValoresGraficas(pacienteSeleccionado.getIdPaciente(), 1, regEncontrado.getIdTipoReg().getIdTipoReg());
             listaGrafica = new ArrayList();
-            for(HcDetalle hc:lista1){
+            for (HcDetalle hc : lista1) {
                 DatosGrafica dg = new DatosGrafica();
                 dg.setValor(Double.valueOf(hc.getValor()));
                 dg.setValorX(hc.getValorX().doubleValue());
@@ -4928,7 +4920,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 listaTalla.add(Long.valueOf(hc.getValor()));
             }
             datosReporte.setListaDatosTalla(listaGrafica);
-            
+
             //IMC
             listaGrafica = new ArrayList();
             for (int i = 0; i < lista1.size(); i++) {
@@ -4940,27 +4932,26 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 dg.setValor(Double.valueOf(imcCalculado));
                 dg.setValorX(lista1.get(i).getValorX().doubleValue());
                 listaGrafica.add(dg);
-            }	
-            
+            }
+
             datosReporte.setListaDatosIMC(listaGrafica);
-            
+
             //pc
-            lista1 =  detalleFacade.getValoresGraficas(pacienteSeleccionado.getIdPaciente(),2,regEncontrado.getIdTipoReg().getIdTipoReg());
+            lista1 = detalleFacade.getValoresGraficas(pacienteSeleccionado.getIdPaciente(), 2, regEncontrado.getIdTipoReg().getIdTipoReg());
             listaGrafica = new ArrayList();
-            for(HcDetalle hc:lista1){
+            for (HcDetalle hc : lista1) {
                 DatosGrafica dg = new DatosGrafica();
                 dg.setValor(Double.valueOf(hc.getValor()));
                 dg.setValorX(hc.getValorX().doubleValue());
                 listaGrafica.add(dg);
             }
             datosReporte.setListaDatosPC(listaGrafica);
-            
-            
-        }else if(regEncontrado.getIdTipoReg().getIdTipoReg()==70 || regEncontrado.getIdTipoReg().getIdTipoReg()==69){
+
+        } else if (regEncontrado.getIdTipoReg().getIdTipoReg() == 70 || regEncontrado.getIdTipoReg().getIdTipoReg() == 69) {
             //peso
-            List<HcDetalle> lista1 =  detalleFacade.getValoresGraficasAnnio(pacienteSeleccionado.getIdPaciente(),2,regEncontrado.getIdTipoReg().getIdTipoReg());
+            List<HcDetalle> lista1 = detalleFacade.getValoresGraficasAnnio(pacienteSeleccionado.getIdPaciente(), 2, regEncontrado.getIdTipoReg().getIdTipoReg());
             List<DatosGrafica> listaGrafica = new ArrayList();
-            for(HcDetalle hc:lista1){
+            for (HcDetalle hc : lista1) {
                 listaPeso.add(Long.valueOf(hc.getValor()));
                 DatosGrafica dg = new DatosGrafica();
                 dg.setValor(Double.valueOf(hc.getValor()));
@@ -4969,9 +4960,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             }
             datosReporte.setListaDatosPesos(listaGrafica);
             //talla
-            lista1 =  detalleFacade.getValoresGraficasAnnio(pacienteSeleccionado.getIdPaciente(),3,regEncontrado.getIdTipoReg().getIdTipoReg());
+            lista1 = detalleFacade.getValoresGraficasAnnio(pacienteSeleccionado.getIdPaciente(), 3, regEncontrado.getIdTipoReg().getIdTipoReg());
             listaGrafica = new ArrayList();
-            for(HcDetalle hc:lista1){
+            for (HcDetalle hc : lista1) {
                 DatosGrafica dg = new DatosGrafica();
                 dg.setValor(Double.valueOf(hc.getValor()));
                 dg.setValorX(hc.getValorX().doubleValue());
@@ -4979,7 +4970,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 listaTalla.add(Long.valueOf(hc.getValor()));
             }
             datosReporte.setListaDatosTalla(listaGrafica);
-            
+
             //IMC
             listaGrafica = new ArrayList();
             for (int i = 0; i < lista1.size(); i++) {
@@ -4991,11 +4982,11 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 dg.setValor(Double.valueOf(imcCalculado));
                 dg.setValorX(lista1.get(i).getValorX().doubleValue());
                 listaGrafica.add(dg);
-            }	
-            
+            }
+
             datosReporte.setListaDatosIMC(listaGrafica);
         }
-        
+
         /**
          * Se cargan todos los títulos que se mostraran en el reporte de
          * "hc_campos_reg"
@@ -5139,7 +5130,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         //DATOS DEL ACUDIENTE (ACOMPAÑANTE).
         if (pacienteSeleccionado.getAcompanante() != null) {
             datosReporte.setValor(645, "<b>NOMBRE :</b>" + pacienteSeleccionado.getAcompanante()); // NOMBRE DEL ACUDIENTE (ACOMPAÑANTE).
-        }else{
+        } else {
             datosReporte.setValor(645, "<b>NOMBRE :</b>" + ""); // NOMBRE DEL ACUDIENTE (ACOMPAÑANTE).
         }
         //ENFOQUE DIFERENCIAL  
@@ -5209,12 +5200,11 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         datosReporte.setValor(704, "<b>E.S.E.IO :</b>" + loginMB.getEmpresaActual().getCodMunicipio().getDescripcion());
         datosReporte.setValor(705, "<b>ESPECIALIDAD :</b>" + regEncontrado.getIdMedico().getEspecialidad().getDescripcion());
         datosReporte.setValor(706, "<b>NIVEL :</b>" + loginMB.getEmpresaActual().getNivel());
-        
-        
+
         if (regEncontrado.getIdTipoReg().getIdTipoReg() == 71) {//Datos para valoració 0 a 5 anios
             datosReporte.setValor(99, regEncontrado.getIdRegistro());
         }
-        
+
         //datos de clasificaciones historia RCV y nutricion 707 - 729
         if (regEncontrado.getIdTipoReg().getIdTipoReg() == 54 || regEncontrado.getIdTipoReg().getIdTipoReg() == 77) {
             tipoRegistroClinicoActual = regEncontrado.getIdTipoReg();
@@ -5506,7 +5496,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         System.out.println("....................................");
 
         List<JasperPrint> list = new ArrayList<JasperPrint>();
-        
+
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String urlImagenes = request.getRequestURL().toString();
         urlImagenes = urlImagenes.substring(0, urlImagenes.indexOf("historias.xhtml")) + "img/";
@@ -5544,7 +5534,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             exporter.exportReport();
             FacesContext.getCurrentInstance().responseComplete();
         } catch (Exception ex) {
-            System.out.println("ERRR "+ex.getLocalizedMessage());
+            System.out.println("ERRR " + ex.getLocalizedMessage());
             ex.printStackTrace();
             System.out.println("Error generando reporte " + ex.getMessage());
         }
@@ -5615,7 +5605,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         }
 
         datosFormulario = new DatosFormularioHistoria();
-        for(int i=0;i<=745;i++){
+        for (int i = 0; i <= 745; i++) {
             datosFormulario.setValor(i, "");
         }
         listaEstructuraFamiliar.clear();
@@ -5639,7 +5629,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         limpiarFormulario();
         valoresPorDefecto();
         cargarUltimoRegistro();
-        
+
     }
 
     public void manageFile(FileUploadEvent event) {
@@ -5801,7 +5791,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 for (HcDetalle detalle : listaDetalles) {
                     HcCamposReg campo = camposRegFacade.find(detalle.getHcDetallePK().getIdCampo());
                     if (campo != null) {
-                        
+
                         if (campo.getTabla() != null && campo.getTabla().length() != 0) {//tiene tabala o tipo de dato
                             switch (campo.getTabla()) {
                                 case "date":
@@ -5817,10 +5807,10 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                                     break;
                             }
                         } else {//simplemente es texto
-                            try{
-                            datosFormulario.setValor(campo.getPosicion(), detalle.getValor());
-                            }catch(Exception e){
-                                
+                            try {
+                                datosFormulario.setValor(campo.getPosicion(), detalle.getValor());
+                            } catch (Exception e) {
+
                             }
                         }//System.out.println("Se coloco en datosFormulario." + campo.getPosicion() + " el valor de " + detalle.getValor());
                     } else {
@@ -6745,19 +6735,19 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     }
                 }
             }
-            if(tipoRegistroClinicoActual.getIdTipoReg()!=90){
+            if (tipoRegistroClinicoActual.getIdTipoReg() != 90) {
                 clasificacion_fisica();
                 calculo_imc_peso();
                 calculo_imc_perimetro();
                 calculo_imc();
             }
-            
-            if(tipoRegistroClinicoActual.getIdTipoReg() == 55){
+
+            if (tipoRegistroClinicoActual.getIdTipoReg() == 55) {
                 try {
                     getJsonOdontograma();
                 } catch (Exception e) {
                 }
-                
+
             }
             if (tipoRegistroClinicoActual.getIdTipoReg() == 19) {
                 registroEncontrado = registroFacade.buscarUltimo(pacienteSeleccionado.getIdPaciente(), 54);
@@ -7059,9 +7049,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     }
 
     public void guardarRegistro() {//guardar un nuevo registro clinico        
-        
+
         System.out.println(datosFormulario.getDato0());
-        
+
         System.out.println("Iniciando el guardado del registro");
 
         HcRegistro nuevoRegistro = new HcRegistro();
@@ -7120,7 +7110,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 guardarOleary2();
             } catch (Exception e) {
             }
-            
+
         }
         if (validarNoVacio(turnoCita)) {
             List<CitCitas> listaCitas = turnosFacade.find(Integer.parseInt(turnoCita)).getCitCitasList();
@@ -7300,7 +7290,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         turnoCita = "";
         tipoRegistroClinico = "";
         //Cargamos grafica
-        if(tipoRegistroClinicoActual.getIdTipoReg()==70 || tipoRegistroClinicoActual.getIdTipoReg()==69){
+        if (tipoRegistroClinicoActual.getIdTipoReg() == 70 || tipoRegistroClinicoActual.getIdTipoReg() == 69) {
             loadGraphicValoracion0_18();
         }
         RequestContext.getCurrentInstance().update("IdFormRegistroClinico");
@@ -7419,8 +7409,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     }
 
     public void clasificacion_fisica() {
-        if(tipoRegistroClinicoActual!=null && tipoRegistroClinicoActual.getIdTipoReg()!=90)
+        if (tipoRegistroClinicoActual != null && tipoRegistroClinicoActual.getIdTipoReg() != 90) {
             datosFormulario.setDato15(horas);
+        }
         datosFormulario.setDato258(minutos);
         if (horas > 0) {
             clasificacion_f = "-";
@@ -7619,13 +7610,13 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             if (!cargandoDesdeTab) {
                 RequestContext.getCurrentInstance().execute("PF('dlgSeleccionarPaciente').hide();");
             }
-            
+
             //cargamos item semaforo
             try {
-                semaforo = ProgramaFacadeItem.validarSemaforo(calcularEdadInt(pacienteSeleccionado.getFechaNacimiento()), calcularEdadMes(pacienteSeleccionado.getFechaNacimiento()),pacienteSeleccionado.getGenero().getObservacion(),  pacienteSeleccionado.getIdAdministradora().getIdAdministradora(), pacienteSeleccionado.getIdPaciente());
+                semaforo = ProgramaFacadeItem.validarSemaforo(calcularEdadInt(pacienteSeleccionado.getFechaNacimiento()), calcularEdadMes(pacienteSeleccionado.getFechaNacimiento()), pacienteSeleccionado.getGenero().getObservacion(), pacienteSeleccionado.getIdAdministradora().getIdAdministradora(), pacienteSeleccionado.getIdPaciente());
             } catch (Exception e) {
             }
-            
+
         } else {
             hayPacienteSeleccionado = false;
             imprimirMensaje("Error", "Se debe seleccionar un paciente de la tabla", FacesMessage.SEVERITY_ERROR);
@@ -9872,6 +9863,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 for (int i = contador; i < contador + 8; i++) {
                     HcDetalle detalle = detalles.get(i);
                     valores.add(detalle.getValor());
+                    System.out.println(String.format("%1$s-%2$s", detalle.getHcCamposReg().getNombre(), detalle.getValor()));
                 }
                 try {
                     HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
@@ -10118,39 +10110,39 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     public void setListaValoresDefecto2(List<SelectItem> listaValoresDefecto2) {
         this.listaValoresDefecto2 = listaValoresDefecto2;
     }
-    
+
     /**
      * Método para obtener la diferencia en día entre dos fechas.
      *
-     * @param fecha_inicial fecha_final 
+     * @param fecha_inicial fecha_final
      * @return
      */
-    
-    public int diferenciaEndias(){
-        int dias=0;
+    public int diferenciaEndias() {
+        int dias = 0;
         try {
-             Date fechaInicial = sdfFechaString.parse(datosFormulario.getDato1().toString());
-             Date fechaFinal = sdfFechaString.parse(datosFormulario.getDato2().toString()); 
+            Date fechaInicial = sdfFechaString.parse(datosFormulario.getDato1().toString());
+            Date fechaFinal = sdfFechaString.parse(datosFormulario.getDato2().toString());
             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-             Calendar cal1 = new GregorianCalendar();
-             Calendar cal2 = new GregorianCalendar();
-             
-             cal1.setTime(fechaInicial);
-             cal2.setTime(fechaFinal);
-             dias = daysBetween(cal1.getTime(),cal2.getTime());
-             datosFormulario.setDato3(dias);
+            Calendar cal1 = new GregorianCalendar();
+            Calendar cal2 = new GregorianCalendar();
+
+            cal1.setTime(fechaInicial);
+            cal2.setTime(fechaFinal);
+            dias = daysBetween(cal1.getTime(), cal2.getTime());
+            datosFormulario.setDato3(dias);
         } catch (ParseException e) {
         }
         return dias;
     }
 
-    /***
+    /**
+     * *
      * Método para establecer valor por default escala abreviada
+     *
      * @param item
      */
-    
-    public void validar(int item){
-        switch(item){
+    public void validar(int item) {
+        switch (item) {
             case 0:
                 datosFormulario.setValor(0, item0);
                 datosFormulario.setValor(1, item0);
@@ -10170,226 +10162,225 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 datosFormulario.setValor(11, item2);
                 break;
             case 3:
-                datosFormulario.setValor(12,item3);
-                datosFormulario.setValor(13,item3);
-                datosFormulario.setValor(14,item3);
-                datosFormulario.setValor(15,item3);
+                datosFormulario.setValor(12, item3);
+                datosFormulario.setValor(13, item3);
+                datosFormulario.setValor(14, item3);
+                datosFormulario.setValor(15, item3);
                 break;
             case 4:
-                datosFormulario.setValor(16,item4);
-                datosFormulario.setValor(17,item4);
-                datosFormulario.setValor(18,item4);
-                datosFormulario.setValor(19,item4);
+                datosFormulario.setValor(16, item4);
+                datosFormulario.setValor(17, item4);
+                datosFormulario.setValor(18, item4);
+                datosFormulario.setValor(19, item4);
                 break;
             case 5:
-                datosFormulario.setValor(20,item5);
-                datosFormulario.setValor(21,item5);
-                datosFormulario.setValor(22,item5);
-                datosFormulario.setValor(23,item5);
+                datosFormulario.setValor(20, item5);
+                datosFormulario.setValor(21, item5);
+                datosFormulario.setValor(22, item5);
+                datosFormulario.setValor(23, item5);
                 break;
             case 6:
                 datosFormulario.setValor(24, item6);
-                datosFormulario.setValor(25,item6);
-                datosFormulario.setValor(26,item6);
-                datosFormulario.setValor(27,item6);
+                datosFormulario.setValor(25, item6);
+                datosFormulario.setValor(26, item6);
+                datosFormulario.setValor(27, item6);
                 break;
             case 7:
-                datosFormulario.setValor(28,item7);
-                datosFormulario.setValor(29,item7);
-                datosFormulario.setValor(30,item7);
-                datosFormulario.setValor(31,item7);
+                datosFormulario.setValor(28, item7);
+                datosFormulario.setValor(29, item7);
+                datosFormulario.setValor(30, item7);
+                datosFormulario.setValor(31, item7);
                 break;
             case 8:
-                datosFormulario.setValor(32,item8);
-                datosFormulario.setValor(33,item8);
-                datosFormulario.setValor(34,item8);
-                datosFormulario.setValor(35,item8);
+                datosFormulario.setValor(32, item8);
+                datosFormulario.setValor(33, item8);
+                datosFormulario.setValor(34, item8);
+                datosFormulario.setValor(35, item8);
                 break;
             case 9:
-                datosFormulario.setValor(36,item9);
-                datosFormulario.setValor(37,item9);
-                datosFormulario.setValor(38,item9);
-                datosFormulario.setValor(39,item9);
-                break;  
+                datosFormulario.setValor(36, item9);
+                datosFormulario.setValor(37, item9);
+                datosFormulario.setValor(38, item9);
+                datosFormulario.setValor(39, item9);
+                break;
             case 10:
-                datosFormulario.setValor(40,item10);
-                datosFormulario.setValor(41,item10);
-                datosFormulario.setValor(42,item10);
-                datosFormulario.setValor(43,item10);
-                break;  
+                datosFormulario.setValor(40, item10);
+                datosFormulario.setValor(41, item10);
+                datosFormulario.setValor(42, item10);
+                datosFormulario.setValor(43, item10);
+                break;
             case 11:
-                datosFormulario.setValor(44,item11);
-                datosFormulario.setValor(45,item11);
-                datosFormulario.setValor(46,item11);
-                datosFormulario.setValor(47,item11);
-                break;  
+                datosFormulario.setValor(44, item11);
+                datosFormulario.setValor(45, item11);
+                datosFormulario.setValor(46, item11);
+                datosFormulario.setValor(47, item11);
+                break;
             case 12:
-                datosFormulario.setValor(48,item12);
-                datosFormulario.setValor(49,item12);
-                datosFormulario.setValor(50,item12);
-                datosFormulario.setValor(51,item12);
-                break;  
+                datosFormulario.setValor(48, item12);
+                datosFormulario.setValor(49, item12);
+                datosFormulario.setValor(50, item12);
+                datosFormulario.setValor(51, item12);
+                break;
             case 13:
-                datosFormulario.setValor(52,item13);
-                datosFormulario.setValor(53,item13);
-                datosFormulario.setValor(54,item13);
-                datosFormulario.setValor(55,item13);
-                break;  
+                datosFormulario.setValor(52, item13);
+                datosFormulario.setValor(53, item13);
+                datosFormulario.setValor(54, item13);
+                datosFormulario.setValor(55, item13);
+                break;
             case 14:
-                datosFormulario.setValor(56,item14);
-                datosFormulario.setValor(57,item14);
-                datosFormulario.setValor(58,item14);
-                datosFormulario.setValor(59,item14);
-                break;  
+                datosFormulario.setValor(56, item14);
+                datosFormulario.setValor(57, item14);
+                datosFormulario.setValor(58, item14);
+                datosFormulario.setValor(59, item14);
+                break;
             case 15:
-                datosFormulario.setValor(60,item15);
-                datosFormulario.setValor(61,item15);
-                datosFormulario.setValor(62,item15);
-                datosFormulario.setValor(63,item15);
-                break;  
+                datosFormulario.setValor(60, item15);
+                datosFormulario.setValor(61, item15);
+                datosFormulario.setValor(62, item15);
+                datosFormulario.setValor(63, item15);
+                break;
             case 16:
-                datosFormulario.setValor(64,item16);
-                datosFormulario.setValor(65,item16);
-                datosFormulario.setValor(66,item16);
-                datosFormulario.setValor(67,item16);
-                break;  
+                datosFormulario.setValor(64, item16);
+                datosFormulario.setValor(65, item16);
+                datosFormulario.setValor(66, item16);
+                datosFormulario.setValor(67, item16);
+                break;
             case 17:
-                datosFormulario.setValor(68,item17);
-                datosFormulario.setValor(69,item17);
-                datosFormulario.setValor(70,item17);
-                datosFormulario.setValor(71,item17);
-                break;  
+                datosFormulario.setValor(68, item17);
+                datosFormulario.setValor(69, item17);
+                datosFormulario.setValor(70, item17);
+                datosFormulario.setValor(71, item17);
+                break;
             case 18:
-                datosFormulario.setValor(72,item18);
-                datosFormulario.setValor(73,item18);
-                datosFormulario.setValor(74,item18);
-                datosFormulario.setValor(75,item18);
-                break;  
+                datosFormulario.setValor(72, item18);
+                datosFormulario.setValor(73, item18);
+                datosFormulario.setValor(74, item18);
+                datosFormulario.setValor(75, item18);
+                break;
             case 19:
-                datosFormulario.setValor(76,item19);
-                datosFormulario.setValor(77,item19);
-                datosFormulario.setValor(78,item19);
-                datosFormulario.setValor(79,item19);
-                break;  
+                datosFormulario.setValor(76, item19);
+                datosFormulario.setValor(77, item19);
+                datosFormulario.setValor(78, item19);
+                datosFormulario.setValor(79, item19);
+                break;
             case 20:
-                datosFormulario.setValor(80,item20);
-                datosFormulario.setValor(81,item20);
-                datosFormulario.setValor(82,item20);
-                datosFormulario.setValor(83,item20);
-                break;  
+                datosFormulario.setValor(80, item20);
+                datosFormulario.setValor(81, item20);
+                datosFormulario.setValor(82, item20);
+                datosFormulario.setValor(83, item20);
+                break;
             case 21:
-                datosFormulario.setValor(84,item21);
-                datosFormulario.setValor(85,item21);
-                datosFormulario.setValor(86,item21);
-                datosFormulario.setValor(87,item21);
-                break;  
+                datosFormulario.setValor(84, item21);
+                datosFormulario.setValor(85, item21);
+                datosFormulario.setValor(86, item21);
+                datosFormulario.setValor(87, item21);
+                break;
             case 22:
-                datosFormulario.setValor(88,item22);
-                datosFormulario.setValor(89,item22);
-                datosFormulario.setValor(90,item22);
-                datosFormulario.setValor(91,item22);
-                break;  
+                datosFormulario.setValor(88, item22);
+                datosFormulario.setValor(89, item22);
+                datosFormulario.setValor(90, item22);
+                datosFormulario.setValor(91, item22);
+                break;
             case 23:
-                datosFormulario.setValor(92,item23);
-                datosFormulario.setValor(93,item23);
-                datosFormulario.setValor(94,item23);
-                datosFormulario.setValor(95,item23);
-                break;  
+                datosFormulario.setValor(92, item23);
+                datosFormulario.setValor(93, item23);
+                datosFormulario.setValor(94, item23);
+                datosFormulario.setValor(95, item23);
+                break;
             case 24:
-                datosFormulario.setValor(96,item24);
-                datosFormulario.setValor(97,item24);
-                datosFormulario.setValor(98,item24);
-                datosFormulario.setValor(99,item24);
-                break;  
+                datosFormulario.setValor(96, item24);
+                datosFormulario.setValor(97, item24);
+                datosFormulario.setValor(98, item24);
+                datosFormulario.setValor(99, item24);
+                break;
             case 25:
-                datosFormulario.setValor(100,item25);
-                datosFormulario.setValor(101,item25);
-                datosFormulario.setValor(102,item25);
-                datosFormulario.setValor(103,item25);
-                break;  
+                datosFormulario.setValor(100, item25);
+                datosFormulario.setValor(101, item25);
+                datosFormulario.setValor(102, item25);
+                datosFormulario.setValor(103, item25);
+                break;
             case 26:
-                datosFormulario.setValor(104,item26);
-                datosFormulario.setValor(105,item26);
-                datosFormulario.setValor(106,item26);
-                datosFormulario.setValor(107,item26);
-                break;  
+                datosFormulario.setValor(104, item26);
+                datosFormulario.setValor(105, item26);
+                datosFormulario.setValor(106, item26);
+                datosFormulario.setValor(107, item26);
+                break;
             case 27:
-                datosFormulario.setValor(108,item27);
-                datosFormulario.setValor(109,item27);
-                datosFormulario.setValor(110,item27);
-                datosFormulario.setValor(111,item27);
-                break;  
+                datosFormulario.setValor(108, item27);
+                datosFormulario.setValor(109, item27);
+                datosFormulario.setValor(110, item27);
+                datosFormulario.setValor(111, item27);
+                break;
             case 28:
-                datosFormulario.setValor(112,item28);
-                datosFormulario.setValor(113,item28);
-                datosFormulario.setValor(114,item28);
-                datosFormulario.setValor(115,item28);
-                break;  
+                datosFormulario.setValor(112, item28);
+                datosFormulario.setValor(113, item28);
+                datosFormulario.setValor(114, item28);
+                datosFormulario.setValor(115, item28);
+                break;
             case 29:
-                datosFormulario.setValor(116,item29);
-                datosFormulario.setValor(117,item29);
-                datosFormulario.setValor(118,item29);
-                datosFormulario.setValor(119,item29);
-                break;  
+                datosFormulario.setValor(116, item29);
+                datosFormulario.setValor(117, item29);
+                datosFormulario.setValor(118, item29);
+                datosFormulario.setValor(119, item29);
+                break;
             case 30:
-                datosFormulario.setValor(120,item30);
-                datosFormulario.setValor(121,item30);
-                datosFormulario.setValor(122,item30);
-                datosFormulario.setValor(123,item30);
-                break;  
+                datosFormulario.setValor(120, item30);
+                datosFormulario.setValor(121, item30);
+                datosFormulario.setValor(122, item30);
+                datosFormulario.setValor(123, item30);
+                break;
             case 31:
-                datosFormulario.setValor(124,item31);
-                datosFormulario.setValor(125,item31);
-                datosFormulario.setValor(126,item31);
-                datosFormulario.setValor(127,item31);
-                break;  
+                datosFormulario.setValor(124, item31);
+                datosFormulario.setValor(125, item31);
+                datosFormulario.setValor(126, item31);
+                datosFormulario.setValor(127, item31);
+                break;
             case 32:
-                datosFormulario.setValor(128,item32);
-                datosFormulario.setValor(129,item32);
-                datosFormulario.setValor(130,item32);
-                datosFormulario.setValor(131,item32);
-                break;  
+                datosFormulario.setValor(128, item32);
+                datosFormulario.setValor(129, item32);
+                datosFormulario.setValor(130, item32);
+                datosFormulario.setValor(131, item32);
+                break;
             case 33:
-                datosFormulario.setValor(132,item33);
-                datosFormulario.setValor(133,item33);
-                datosFormulario.setValor(134,item33);
-                datosFormulario.setValor(135,item33);
-                break;  
+                datosFormulario.setValor(132, item33);
+                datosFormulario.setValor(133, item33);
+                datosFormulario.setValor(134, item33);
+                datosFormulario.setValor(135, item33);
+                break;
             case 34:
-                datosFormulario.setValor(136,item34);
-                datosFormulario.setValor(137,item34);
-                datosFormulario.setValor(138,item34);
-                datosFormulario.setValor(139,item34);
-                break;  
+                datosFormulario.setValor(136, item34);
+                datosFormulario.setValor(137, item34);
+                datosFormulario.setValor(138, item34);
+                datosFormulario.setValor(139, item34);
+                break;
             case 35:
-                datosFormulario.setValor(140,item35);
-                datosFormulario.setValor(141,item35);
-                datosFormulario.setValor(142,item35);
-                datosFormulario.setValor(143,item35);
-                break;  
+                datosFormulario.setValor(140, item35);
+                datosFormulario.setValor(141, item35);
+                datosFormulario.setValor(142, item35);
+                datosFormulario.setValor(143, item35);
+                break;
             case 36:
-                datosFormulario.setValor(144,item36);
-                datosFormulario.setValor(145,item36);
-                datosFormulario.setValor(146,item36);
-                datosFormulario.setValor(147,item36);
-                break;  
+                datosFormulario.setValor(144, item36);
+                datosFormulario.setValor(145, item36);
+                datosFormulario.setValor(146, item36);
+                datosFormulario.setValor(147, item36);
+                break;
             default:
                 break;
         }
     }
-     public void buscarPrograma() {
+
+    public void buscarPrograma() {
 //        listaServiciosPrograma = ProgramaFacadeItem.buscar_programas();
         listaServiciosPrograma = ProgramaFacadeItem.buscar_programas_val(calcularEdadInt(pacienteSeleccionado.getFechaNacimiento()), calcularEdadMes(pacienteSeleccionado.getFechaNacimiento()), pacienteSeleccionado.getGenero().getObservacion(), pacienteSeleccionado.getIdAdministradora().getIdAdministradora());
         if (listaServiciosPrograma.isEmpty()) {
             listaServiciosPrograma = ProgramaFacadeItem.buscar_programas_val_(calcularEdadInt(pacienteSeleccionado.getFechaNacimiento()), calcularEdadMes(pacienteSeleccionado.getFechaNacimiento()), pacienteSeleccionado.getGenero().getObservacion(), pacienteSeleccionado.getIdAdministradora().getIdAdministradora());
         }
-        
+
         RequestContext.getCurrentInstance().execute("PF('wvTablaServiciosManual').clearFilters(); PF('wvTablaServiciosManual').getPaginator().setPage(0);");
         RequestContext.getCurrentInstance().execute("PF('dialogoBuscarManualesTarifarios').show()");
         RequestContext.getCurrentInstance().update("cargar");
     }
-     
-     
 
     public List<PyPProgramaItem> getListaServiciosPrograma() {
         return listaServiciosPrograma;
@@ -10734,6 +10725,5 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     public void setNombreFormulario(String nombreFormulario) {
         this.nombreFormulario = nombreFormulario;
     }
-     
-   
+
 }
