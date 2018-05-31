@@ -22,7 +22,9 @@ public class HcDetallePK implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_campo", nullable = false)
     private int idCampo;
-
+    @Basic(optional = false)
+    @Column(name = "id_sede", nullable = false, columnDefinition = "1")
+    private int idSede=1;
     public HcDetallePK() {
     }
 
@@ -47,6 +49,15 @@ public class HcDetallePK implements Serializable {
         this.idCampo = idCampo;
     }
 
+    public int getIdSede() {
+        return idSede;
+    }
+
+    public void setIdSede(int idSede) {
+        this.idSede = idSede;
+    }
+
+     
     @Override
     public int hashCode() {
         int hash = 0;

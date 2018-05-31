@@ -70,7 +70,8 @@ public class HcRegistro implements Serializable {
     private List<HcDetalle> hcDetalleList;
     @OneToMany(mappedBy = "idRegistro")
     private List<HcItems> hcItemsList;
-
+    @Column(name="id_sede", columnDefinition = "1")
+    private Integer idSede=1;
     public HcRegistro() {
     }
 
@@ -141,6 +142,16 @@ public class HcRegistro implements Serializable {
     public void setIdPaciente(CfgPacientes idPaciente) {
         this.idPaciente = idPaciente;
     }
+
+    public Integer getIdSede() {
+        return idSede;
+    }
+
+    public void setIdSede(Integer idSede) {
+        this.idSede = idSede;
+    }
+    
+    
 
     @XmlTransient
     public List<HcDetalle> getHcDetalleList() {

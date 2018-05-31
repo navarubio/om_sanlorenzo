@@ -58,7 +58,8 @@ public class HcRepExamenes implements Serializable {
     @Size(max = 2147483647)
     @Column(name = "resultado")
     private String resultado;
-
+    @Column(name="id_sede", columnDefinition = "1")
+    private Integer idSede=1;
     public HcRepExamenes() {
     }
 
@@ -112,6 +113,14 @@ public class HcRepExamenes implements Serializable {
 
     public void setIdRegistro(HcRegistro idRegistro) {
         this.idRegistro = idRegistro;
+    }
+
+    public Integer getIdSede() {
+        return idSede;
+    }
+
+    public void setIdSede(Integer idSede) {
+        this.idSede = idSede;
     }
     
     
