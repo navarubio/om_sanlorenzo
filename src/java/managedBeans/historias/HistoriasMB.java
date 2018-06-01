@@ -9867,7 +9867,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 }
                 try {
                     HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-                    String url = request.getRequestURL().toString().replaceAll("(?i)/OM.*$", "/om_sanlorenzo/recursos/img/dienteNormal.svg");
+                    String url = request.getRequestURL().toString().replaceAll("(?i)/OM.*$", "/OM/recursos/img/dienteNormal.svg");
                     SVGHelper.buildToothJpegFile(String.format("%1$sdato%2$d.svg", basePath, posicion), url, valores.toArray(new String[8]));
                     datosReporte.setValor(detalles.get(contador).getHcCamposReg().getPosicion(), String.format("%1$sdato%2$d.jpg", basePath, posicion));
                 } catch (TranscoderException ex) {
@@ -9894,7 +9894,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 }
                 try {
                     HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-                    String url = request.getRequestURL().toString().replaceAll("(?i)/OM.*$", "/om_sanlorenzo/recursos/img/oleary.svg");
+                    String url = request.getRequestURL().toString().replaceAll("(?i)/OM.*$", "/OM/recursos/img/oleary.svg");
                     SVGHelper.buildOlearyJpegFile(String.format("%1$sdato%2$d.svg", basePath, posicion), url, valores.toArray(new String[5]));
                     datosReporte.setValor(detalles.get(contador).getHcCamposReg().getPosicion(), String.format("%1$sdato%2$d.jpg", basePath, posicion));
                 } catch (TranscoderException ex) {

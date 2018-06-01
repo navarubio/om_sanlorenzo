@@ -94,7 +94,7 @@ public class HcDetalleFacade extends AbstractFacade<HcDetalle> {
    public List<HcDetalle> buscarDetallesPorRegistro(int idRegistro) {
         try {
             return getEntityManager().createNativeQuery(
-                    " select hc_detalle.id_registro, hc_detalle.id_campo, hc_detalle.valor from hc_detalle "
+                    " select hc_detalle.id_registro, hc_detalle.id_campo,hc_detalle.id_sede, hc_detalle.valor from hc_detalle "
                     + " inner join hc_campos_reg "
                     + " on hc_detalle.id_campo = hc_campos_reg.id_campo "
                     + " where hc_detalle.id_registro = " + idRegistro + " "
