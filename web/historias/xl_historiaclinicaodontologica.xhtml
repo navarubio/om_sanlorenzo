@@ -38,14 +38,14 @@
                     </tr>
                     <tr>
                         <td>
-                            <p:selectOneMenu styleClass="campoFormulario"   value="#{historiasMB.datosFormulario.dato4}">
+                            <p:selectOneMenu styleClass="campoFormulario"  editable="false" disabled="true" value="#{historiasMB.pacienteSeleccionado.zona.descripcion}">
                                 <f:selectItem itemLabel="" itemValue=""/>
                                 <f:selectItem itemLabel="URBANA" itemValue="URBANA" />
                                 <f:selectItem itemLabel="RURAL" itemValue="RURAL" />
                             </p:selectOneMenu>
                         </td>
                         <td>
-                            <p:calendar navigator="true" locale="es" value="#{historiasMB.datosFormulario.dato5}" pattern="dd/MM/yyyy" mask="true">
+                            <p:calendar navigator="true" locale="es" readonly="true" readonlyInput="true" value="#{historiasMB.datosFormulario.dato5}" pattern="dd/MM/yyyy" mask="true">
                                 <f:convertDateTime pattern="dd/MM/yyyy"/>
                             </p:calendar>
                         </td>
@@ -56,10 +56,10 @@
                     </tr>
                     <tr>
                         <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato2}" />
+                            <p:inputText  styleClass="width1" readonly="true" value="#{historiasMB.pacienteSeleccionado.direccion}" />
                         </td>
                         <td>
-                            <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato3}" />
+                            <p:inputText  styleClass="width1" readonly="true" value="#{historiasMB.pacienteSeleccionado.telefonoResidencia}" />
                         </td>
                     </tr>
                     <tr>
@@ -82,7 +82,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <p:selectOneMenu styleClass="width1" value="#{historiasMB.datosFormulario.dato8}" filter="true" filterMatchMode="contains">
+                            <p:selectOneMenu styleClass="width1" editable="false" disabled="true" value="#{historiasMB.pacienteSeleccionado.regimen.id}" filter="true" filterMatchMode="contains">
                                 <f:selectItem itemLabel="" itemValue=""/>
                                 <f:selectItems value="#{aplicacionGeneralMB.listaRegimen}" />
                             </p:selectOneMenu>  

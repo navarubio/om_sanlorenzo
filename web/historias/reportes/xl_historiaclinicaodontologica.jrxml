@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="xl_historiaclinicaodontologica" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a75afb29-aeef-4d06-a33d-602277585311">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="697"/>
+	<property name="ireport.y" value="116"/>
 	<field name="dato0" class="java.lang.Object">
 		<fieldDescription><![CDATA[dato0]]></fieldDescription>
 	</field>
@@ -6395,7 +6395,7 @@
 				<textElement verticalAlignment="Middle" markup="html">
 					<font size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{dato1491}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{dato1493}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="200" width="286" height="12"/>
@@ -6408,7 +6408,7 @@
 				<textElement verticalAlignment="Middle" markup="html">
 					<font size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{dato1492}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{dato1493}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement uuid="991b3e84-e017-4e4f-92e4-d8ef18fa1405" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="212" width="572" height="12"/>
@@ -6718,7 +6718,7 @@
 						<font size="9" isBold="true"/>
 						<paragraph leftIndent="5"/>
 					</textElement>
-					<text><![CDATA[IV. ODONTOGRAMA]]></text>
+					<text><![CDATA[IV. ODONTOGRAMA.]]></text>
 				</staticText>
 			</frame>
 			<frame>
@@ -7631,9 +7631,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="113" y="75" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato353}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato218}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato353}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato218}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="148" y="63" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -7684,9 +7684,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="148" y="75" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato361}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato226}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato361}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato226}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="183" y="63" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -7737,9 +7737,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="183" y="75" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato369}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato234}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato369}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato234}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="218" y="63" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -7790,9 +7790,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="218" y="75" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato377}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato242}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato377}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato242}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="253" y="63" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -7843,9 +7843,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="253" y="75" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato385}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato250}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato385}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato250}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="294" y="63" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -7896,9 +7896,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="294" y="75" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato393}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato258}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato393}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato258}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="329" y="63" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -7949,9 +7949,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="328" y="75" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato401}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato266}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato401}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato266}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="364" y="63" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -8002,9 +8002,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="364" y="75" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato409}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato274}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato409}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato274}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="399" y="63" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -8055,9 +8055,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="399" y="75" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato417}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato282}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato417}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato282}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="434" y="63" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -8108,9 +8108,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="434" y="75" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato425}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato290}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato425}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato290}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<line>
 					<reportElement uuid="beb3806f-c808-495b-be12-9f1c446c3398" x="7" y="112" width="560" height="1"/>
@@ -8205,9 +8205,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="113" y="137" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato433}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato298}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato433}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato298}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="148" y="125" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -8258,9 +8258,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="148" y="137" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato441}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato306}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato441}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato306}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="183" y="125" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -8311,9 +8311,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="183" y="137" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato449}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato314}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato449}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato314}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="218" y="125" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -8364,9 +8364,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="218" y="137" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato457}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato322}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato457}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato322}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="253" y="125" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -8417,9 +8417,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="253" y="137" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato465}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato330}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato465}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato330}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="294" y="125" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -8470,9 +8470,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="294" y="137" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato473}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato338}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato473}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato338}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="329" y="125" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -8523,9 +8523,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="329" y="137" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato481}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato346}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato481}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato346}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="364" y="125" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -8576,9 +8576,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="364" y="137" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato489}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato354}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato489}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato354}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="399" y="125" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -8629,9 +8629,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="399" y="137" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato497}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato370}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato497}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato370}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="434" y="125" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -8682,9 +8682,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="434" y="137" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato505}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato378}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato505}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato378}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="8" y="170" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -8735,9 +8735,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="8" y="182" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato225}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato378}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato225}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato378}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="43" y="170" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -8788,9 +8788,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="43" y="182" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato233}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato386}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato233}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato386}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="78" y="170" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -8841,9 +8841,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="78" y="182" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato241}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato394}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato241}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato394}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="113" y="170" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -8894,9 +8894,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="113" y="182" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato249}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato402}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato249}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato402}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="148" y="170" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -8947,9 +8947,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="148" y="182" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato257}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato410}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato257}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato410}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="183" y="170" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -9000,9 +9000,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="183" y="182" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato265}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato418}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato265}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato418}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="218" y="170" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -9053,9 +9053,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="218" y="182" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato273}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato426}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato273}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato426}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="253" y="170" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -9106,9 +9106,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="253" y="182" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato281}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato434}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato281}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato434}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="288" y="170" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -9159,9 +9159,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="288" y="182" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato289}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato442}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato289}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato442}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="323" y="170" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -9212,9 +9212,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="323" y="182" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato297}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato450}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato297}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato450}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="358" y="170" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -9265,9 +9265,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="358" y="182" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato305}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato458}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato305}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato458}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="393" y="170" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -9318,9 +9318,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="393" y="182" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato313}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato466}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato313}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato466}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="428" y="170" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -9371,9 +9371,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="428" y="182" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato321}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato474}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato321}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato474}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="463" y="170" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -9424,9 +9424,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="463" y="182" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato329}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato482}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato329}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato482}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="498" y="170" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -9477,9 +9477,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="498" y="182" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato337}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato490}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato337}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato490}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="533" y="170" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -9530,9 +9530,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="533" y="182" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato345}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato498}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato345}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato498}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<frame>
 					<reportElement uuid="fd3eea2f-b576-48d5-a6ad-7a16dd55b4f2" positionType="Float" x="0" y="221" width="572" height="12" isPrintWhenDetailOverflows="true"/>
@@ -12918,9 +12918,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="8" y="25" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato885}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato878}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato885}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato878}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="43" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -12971,9 +12971,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="43" y="25" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato893}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato886}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato893}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato886}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="78" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13024,9 +13024,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="78" y="25" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato901}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato894}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato901}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato894}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="113" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13077,9 +13077,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="113" y="25" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato909}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato902}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato909}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato902}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="148" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13130,9 +13130,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="148" y="25" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato917}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato910}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato917}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato910}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="183" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13183,9 +13183,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="183" y="25" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato925}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato918}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato925}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato918}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="218" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13236,9 +13236,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="218" y="25" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato933}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato926}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato933}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato926}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="253" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13289,9 +13289,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="253" y="25" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato941}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato934}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato941}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato934}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="288" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13342,9 +13342,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="288" y="25" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato949}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato942}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato949}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato942}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="323" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13395,9 +13395,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="323" y="25" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato957}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato950}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato957}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato950}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="358" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13448,9 +13448,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="358" y="25" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato965}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato958}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato965}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato958}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="393" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13501,9 +13501,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="393" y="25" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato973}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato966}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato973}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato966}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="428" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13554,9 +13554,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="428" y="25" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato981}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato974}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato981}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato974}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="463" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13607,9 +13607,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="463" y="25" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato989}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato982}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato989}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato982}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="498" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13660,9 +13660,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="498" y="25" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato997}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato990}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato997}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato990}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="535" y="13" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13713,9 +13713,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="535" y="25" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato1005}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato998}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato1005}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato998}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="113" y="62" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13766,9 +13766,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="113" y="74" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato1141}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato1006}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato1141}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato1006}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="148" y="62" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13819,9 +13819,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="148" y="74" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato1149}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato1014}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato1149}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato1014}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="183" y="62" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13872,9 +13872,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="183" y="74" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato1157}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato1022}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato1157}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato1022}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="219" y="62" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13925,9 +13925,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="219" y="74" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato1165}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato1030}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato1165}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato1030}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="253" y="62" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -13978,9 +13978,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="253" y="74" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato1173}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato1038}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato1173}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato1038}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="294" y="62" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -14031,9 +14031,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="294" y="74" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato1181}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato1046}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato1181}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato1046}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="329" y="62" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -14084,9 +14084,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="329" y="74" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato1189}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato1054}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato1189}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato1054}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="364" y="62" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -14137,9 +14137,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="364" y="74" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato1197}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato1062}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato1197}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato1062}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="399" y="62" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -14190,9 +14190,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="399" y="74" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato1205}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato1070}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato1205}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato1070}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="433" y="62" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -14243,9 +14243,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="433" y="74" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato1213}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato1078}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato1213}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato1078}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<line>
 					<reportElement uuid="beb3806f-c808-495b-be12-9f1c446c3398" x="6" y="111" width="560" height="1"/>
@@ -14340,9 +14340,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="113" y="136" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato1221}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato1086}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato1221}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato1086}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="148" y="124" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -14393,9 +14393,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="148" y="136" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato1229}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato1094}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato1229}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato1094}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="183" y="124" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -14446,9 +14446,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="183" y="136" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato1237}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato1102}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato1237}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato1102}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="218" y="124" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -14499,9 +14499,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="218" y="136" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato1245}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato1110}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato1245}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato1110}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="253" y="124" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -14552,9 +14552,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="253" y="136" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato1253}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato1118}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato1253}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato1118}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="294" y="124" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -14605,9 +14605,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="294" y="136" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato1261}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato1126}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato1261}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato1126}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="329" y="124" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -14658,9 +14658,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="329" y="136" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato1269}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato1134}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato1269}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato1134}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="364" y="124" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -14711,9 +14711,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="364" y="136" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato1277}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato1142}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato1277}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato1142}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="399" y="124" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -14764,9 +14764,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="399" y="136" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato1285}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato1150}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato1285}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato1150}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="434" y="124" width="25" height="12" isPrintWhenDetailOverflows="true"/>
@@ -14817,9 +14817,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="434" y="136" width="25" height="25">
-						<printWhenExpression><![CDATA[!$F{dato1293}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato1158}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato1293}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato1158}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="8" y="167" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -14870,9 +14870,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="8" y="179" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato1013}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato1166}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato1013}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato1166}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="43" y="167" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -14923,9 +14923,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="43" y="179" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato1021}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato1174}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato1021}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato1174}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="78" y="167" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -14976,9 +14976,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="78" y="179" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato1029}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato1182}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato1029}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato1182}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="113" y="167" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -15029,9 +15029,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="113" y="179" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato1037}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato1190}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato1037}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato1190}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="148" y="167" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -15082,9 +15082,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="148" y="179" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato1045}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato1198}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato1045}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato1198}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="183" y="167" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -15135,9 +15135,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="183" y="179" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato1053}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato1206}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato1053}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato1206}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="219" y="167" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -15188,9 +15188,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="219" y="179" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato1061}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato1214}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato1061}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato1214}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="253" y="167" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -15241,9 +15241,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="253" y="179" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato1069}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato1222}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato1069}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato1222}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="288" y="167" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -15294,9 +15294,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="288" y="179" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato1077}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato1230}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato1077}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato1230}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="323" y="167" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -15347,9 +15347,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="323" y="179" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato1085}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato1238}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato1085}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato1238}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="357" y="167" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -15400,9 +15400,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="357" y="179" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato1093}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato1246}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato1093}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato1246}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="393" y="167" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -15453,9 +15453,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="393" y="179" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato1101}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato1254}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato1101}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato1254}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="428" y="167" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -15506,9 +15506,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="428" y="179" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato1109}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato1262}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato1109}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato1262}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="463" y="167" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -15559,9 +15559,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="463" y="179" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato1117}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato1270}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato1117}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato1270}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="498" y="167" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -15612,9 +15612,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="498" y="179" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato1125}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato1278}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato1125}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato1278}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="362a85b6-d6ce-4943-b33c-900f2392c015" positionType="Float" stretchType="RelativeToTallestObject" x="535" y="167" width="31" height="12" isPrintWhenDetailOverflows="true"/>
@@ -15665,9 +15665,9 @@
 				</image>
 				<image scaleImage="FillFrame" onErrorType="Icon">
 					<reportElement uuid="675b15f2-4c68-473f-9c68-384680623ff0" x="535" y="179" width="31" height="31">
-						<printWhenExpression><![CDATA[!$F{dato1133}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
+						<printWhenExpression><![CDATA[!$F{dato1286}.equals("<b>&nbsp; </b>")]]></printWhenExpression>
 					</reportElement>
-					<imageExpression><![CDATA[$F{dato1133}.replace("<b>&nbsp; </b>","")]]></imageExpression>
+					<imageExpression><![CDATA[$F{dato1286}.replace("<b>&nbsp; </b>","")]]></imageExpression>
 				</image>
 			</frame>
 		</band>

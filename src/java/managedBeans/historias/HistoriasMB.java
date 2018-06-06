@@ -5629,9 +5629,13 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         limpiarFormulario();
         valoresPorDefecto();
         cargarUltimoRegistro();
-
+        if(null !=tipoRegistroClinicoActual && tipoRegistroClinicoActual.getIdTipoReg() == 55)
+            cargarValoresDefectoOdontologia();
     }
 
+    private void cargarValoresDefectoOdontologia(){
+        datosFormulario.setValor(5, new Date());
+    }
     public void manageFile(FileUploadEvent event) {
         if (!"".equals(descriparchivo)) {
 
@@ -9863,7 +9867,8 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 for (int i = contador; i < contador + 8; i++) {
                     HcDetalle detalle = detalles.get(i);
                     valores.add(detalle.getValor());
-                    System.out.println(String.format("%1$s-%2$s", detalle.getHcCamposReg().getNombre(), detalle.getValor()));
+                    System.out.println(String.format("%1$s-%2$s", detalle.getHcCamposReg().getNombre(), detalle.getValor(), posicion));
+                    
                 }
                 try {
                     HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
