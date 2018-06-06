@@ -1,0 +1,14 @@
+alter table public.hc_registro add column id_sede numeric default 1;
+ALTER TABLE hc_detalle DROP CONSTRAINT hc_detalle_pkey ;
+ALTER TABLE hc_detalle DROP CONSTRAINT hc_detalle_id_registro_fkey;
+ALTER TABLE hc_rep_examenes DROP CONSTRAINT  hc_rep_examenes_id_registro_fkey;
+ALTER TABLE hc_items DROP CONSTRAINT  hc_items_id_registro_fkey;
+ALTER TABLE hc_registro DROP CONSTRAINT hc_registro_pkey;
+alter table public.hc_detalle add column id_sede numeric default 1;
+alter table public.hc_items add column id_sede numeric default 1;
+alter table public.hc_rep_examenes add column id_sede numeric default 1;
+ALTER TABLE hc_registro ADD PRIMARY KEY (id_registro,id_Sede);
+ALTER TABLE hc_detalle ADD CONSTRAINT hc_detalle_id_registro_fkey FOREIGN KEY (id_registro,id_sede) REFERENCES hc_registro (id_registro,id_sede) MATCH SIMPLE  ON UPDATE NO ACTION ON DELETE NO ACTION; 
+ALTER TABLE hc_detalle ADD PRIMARY KEY (id_registro,id_Campo,id_Sede);
+ALTER TABLE hc_items ADD CONSTRAINT hc_items_id_registro_fkey FOREIGN KEY (id_registro,id_sede) REFERENCES hc_registro (id_registro,id_sede) MATCH SIMPLE  ON UPDATE NO ACTION ON DELETE NO ACTION; 
+ALTER TABLE hc_rep_examenes ADD CONSTRAINT hc_rep_examenes_id_registro_fkey FOREIGN KEY (id_registro,id_sede) REFERENCES hc_registro (id_registro,id_sede) MATCH SIMPLE  ON UPDATE NO ACTION ON DELETE NO ACTION; 

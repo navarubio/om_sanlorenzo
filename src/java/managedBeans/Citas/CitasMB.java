@@ -239,11 +239,12 @@ public class CitasMB extends MetodosGenerales implements Serializable {
                     setPacienteSeleccionado(pacienteSeleccionado);
                     setHayPacienteSeleccionado(true);
                     RequestContext.getCurrentInstance().update("cargar");
-//                    buscarPrograma();
+                    //buscarPrograma();
                     //descomentar cuando los servicios dependen del genero, edad, zona y administradora del paciente
                     //loadServicios(null);
                     try {
                         semaforo = ProgramaFacadeItem.validarSemaforo(calcularEdadInt(pacienteSeleccionado.getFechaNacimiento()), calcularEdadMes(pacienteSeleccionado.getFechaNacimiento()),pacienteSeleccionado.getGenero().getObservacion(),  pacienteSeleccionado.getIdAdministradora().getIdAdministradora(), pacienteSeleccionado.getIdPaciente());
+                        CargarServicios();
                     } catch (Exception e) {
                     }
                     
