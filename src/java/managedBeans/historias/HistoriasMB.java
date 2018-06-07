@@ -5634,8 +5634,11 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     }
 
     private void cargarValoresDefectoOdontologia(){
-        datosFormulario.setValor(5, new Date());
-        System.out.println(datosFormulario.getDato5());
+       Calendar calendar = Calendar.getInstance();
+       calendar.setTime(new Date());
+       calendar.add(Calendar.DAY_OF_YEAR, 0);
+        datosFormulario.setValor(5, calendar.getTime());
+        
     }
     public void manageFile(FileUploadEvent event) {
         if (!"".equals(descriparchivo)) {
@@ -7169,7 +7172,15 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                             case "date2":
                                 try {
                                     Date f = sdfFechaString.parse(datosFormulario.getValor(i).toString());
-                                    nuevoDetalle.setValor(sdfDate.format(f));
+                                    if(tipoRegistroClinicoActual.getIdTipoReg() == 55){
+                                        Calendar calendar = Calendar.getInstance();
+                                        calendar.setTime(f);
+                                        calendar.add(Calendar.DAY_OF_YEAR, 1);
+                                        nuevoDetalle.setValor(sdfDate.format(calendar.getTime()));
+                                    }else{
+                                        nuevoDetalle.setValor(sdfDate.format(f));
+                                    }
+                                    
                                 } catch (ParseException ex) {
                                     nuevoDetalle.setValor("Error: " + datosFormulario.getValor(i).toString());
                                 }
