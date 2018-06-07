@@ -5635,6 +5635,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
 
     private void cargarValoresDefectoOdontologia(){
         datosFormulario.setValor(5, new Date());
+        System.out.println(datosFormulario.getDato5());
     }
     public void manageFile(FileUploadEvent event) {
         if (!"".equals(descriparchivo)) {
