@@ -4834,6 +4834,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         int contador = -1;
         for (HcDetalle campoDeRegistroEncontrado : listaCamposDeRegistroEncontrado) { //recorre la lista de datos encontrados
             ++contador;
+            
             if (campoDeRegistroEncontrado.getHcCamposReg().getTabla() != null && campoDeRegistroEncontrado.getHcCamposReg().getTabla().length() >= 5) {//ES CATEGORIA (realizar busqueda)
                 switch (campoDeRegistroEncontrado.getHcCamposReg().getTabla()) {
                     case "cfg_clasificaciones":
@@ -5636,7 +5637,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     private void cargarValoresDefectoOdontologia(){
        Calendar calendar = Calendar.getInstance();
        calendar.setTime(new Date());
-       calendar.add(Calendar.DAY_OF_YEAR, 0);
+       calendar.add(Calendar.DAY_OF_YEAR, -1);
         datosFormulario.setValor(5, calendar.getTime());
         
     }
