@@ -1223,11 +1223,11 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <p:selectOneMenu  value="#{historiasMB.valorDefecto17}" styleClass="campoFormulario">
+                        <p:selectOneMenu rendered="false" value="#{historiasMB.valorDefecto17}" styleClass="campoFormulario">
                             <f:selectItems value="#{historiasMB.listaValoresDefecto}"/>
                         </p:selectOneMenu>  
                         &nbsp;
-                        <p:commandButton value="Valor por Defecto" actionListener="#{historiasMB.cambiarValorDefecto(17)}" 
+                        <p:commandButton rendered="false" value="Valor por Defecto" actionListener="#{historiasMB.cambiarValorDefecto(17)}" 
                                          update="dato165">
                         </p:commandButton>
                     </td>

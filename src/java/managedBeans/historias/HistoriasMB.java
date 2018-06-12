@@ -4348,7 +4348,12 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         //----------------------------------------------------------------------
         List<HcCamposReg> listaCamposPorTipoDeRegistro = camposRegFacade.buscarPorTipoRegistro(regEncontrado.getIdTipoReg().getIdTipoReg());
         for (HcCamposReg campoPorTipoRegistro : listaCamposPorTipoDeRegistro) {
-            datosReporte.setValor(campoPorTipoRegistro.getPosicion(), "<b>" + campoPorTipoRegistro.getNombrePdf() + " </b>");
+            try {
+                datosReporte.setValor(campoPorTipoRegistro.getPosicion(), "<b>" + campoPorTipoRegistro.getNombrePdf() + " </b>");
+            } catch (Exception e) {
+            }
+            
+            
         }
         //nota!!!!!! algunos de los siguientes campos tambien incluirlos en la tabla hc_campos_reg(para que se coloquen titulos en el ciclo anterior)        
         //----------------------------------------------------------------------

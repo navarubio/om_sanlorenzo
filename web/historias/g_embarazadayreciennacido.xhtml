@@ -32,7 +32,18 @@
                 <tr><td colspan="2"><h2>DATOS DE LA MADRE</h2></td></tr>
                 <div>
                     <tr>
-                        <td colspan="2"><p:outputLabel value="Motivo de la consulta" /></td>
+                        <td colspan="2"><p:outputLabel value="Motivo de la consulta" />
+                             <p:commandButton
+                            styleClass="icon-folder fg-lightBlue bg-white no-border"
+                            title="Cargar Textos predeterminados"
+                            value=""
+                            actionListener="#{historiasMB.cargarTextoPredefindoPorPosicionCampoDetalle(0,'IdFormRegistroClinico:IdFocus')}"
+                            process="@this"
+                            immediate="true"
+                            style="font-size: 12px; width: 15px; height: 15px; left: 20px; "
+                            >
+                        </p:commandButton>
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="2"><p:inputTextarea styleClass="width2" value="#{historiasMB.datosFormulario.dato0}" counter="display1" maxlength="140" counterTemplate="{0} caracteres restantes." autoResize="false"/>

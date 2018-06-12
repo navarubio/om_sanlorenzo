@@ -31,7 +31,20 @@
                 <tr><td colspan="2"><h2>CRECIMIENTO Y DESARROLLO</h2></td></tr>                                
                 <div>
                     <tr>
-                        <td colspan="2"><h2><p:outputLabel value="MOTIVO CONSULTA"/></h2></td>                                        
+                        <td colspan="2"><h2><p:outputLabel value="MOTIVO CONSULTA"/>
+                                 <p:commandButton
+                            styleClass="icon-folder fg-lightBlue bg-white no-border"
+                            title="Cargar Textos predeterminados"
+                            value=""
+                            actionListener="#{historiasMB.cargarTextoPredefindoPorPosicionCampoDetalle(0,'IdFormRegistroClinico:IdFocus')}"
+                            process="@this"
+                            immediate="true"
+                            style="font-size: 12px; width: 15px; height: 15px; left: 20px; "
+                            >
+                        </p:commandButton>
+                            </h2>
+                            
+                        </td>                                        
                     </tr>
                     <tr>
                         <td colspan="2">
@@ -53,7 +66,20 @@
                 </tr>
                 <div>
                     <tr>
-                        <td colspan="2"><h2><p:outputLabel value="ENFERMEDAD ACTUAL"/></h2></td>
+                        <td colspan="2"><h2><p:outputLabel value="ENFERMEDAD ACTUAL"/>
+                                <p:commandButton
+                            styleClass="icon-folder fg-lightBlue bg-white no-border"
+                            title="Cargar Textos predeterminados"
+                            value=""
+                            actionListener="#{historiasMB.cargarTextoPredefindoPorPosicionCampoDetalle(1,'IdFormRegistroClinico:IdFocus')}"
+                            process="@this"
+                            immediate="true"
+                            style="font-size: 12px; width: 15px; height: 15px; left: 20px; "
+                            >
+                        </p:commandButton>
+                            </h2>
+                             
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="2"><p:inputTextarea id="dato1" styleClass="width2" value="#{historiasMB.datosFormulario.dato1}"/></td>
