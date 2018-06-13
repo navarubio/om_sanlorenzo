@@ -28,9 +28,10 @@ public class HcDetallePK implements Serializable {
     public HcDetallePK() {
     }
 
-    public HcDetallePK(int idRegistro, int idCampo) {
+    public HcDetallePK(int idRegistro, int idCampo, int idSede) {
         this.idRegistro = idRegistro;
         this.idCampo = idCampo;
+        this.idSede = idSede;
     }
 
     public int getIdRegistro() {

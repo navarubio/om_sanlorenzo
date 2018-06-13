@@ -302,4 +302,22 @@ public class HcRegistroFacade extends AbstractFacade<HcRegistro> {
         }
         return null;
     }
+     
+    public void establecerSedeRegistro(int idRegistro, int idSede){
+        try {
+            String sql  ="UPDATE hc_registro set id_sede=? where id_registro= ?";
+            Query query = getEntityManager().createNativeQuery(sql).setParameter(1, idSede).setParameter(2, idRegistro);
+            query.executeUpdate();
+            sql  ="UPDATE hc_detalle set id_sede=? where id_registro= ?";
+            query = getEntityManager().createNativeQuery(sql).setParameter(1, idSede).setParameter(2, idRegistro);
+            query.executeUpdate();
+            sql  ="UPDATE hc_items set id_sede=? where id_registro= ?";
+            query = getEntityManager().createNativeQuery(sql).setParameter(1, idSede).setParameter(2, idRegistro);
+            query.executeUpdate();
+            sql  ="UPDATE hc_rep_examenes set id_sede=? where id_registro= ?";
+            query = getEntityManager().createNativeQuery(sql).setParameter(1, idSede).setParameter(2, idRegistro);
+            query.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
 }

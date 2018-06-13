@@ -40,9 +40,11 @@ import modelo.entidades.CfgFamiliar;
 import modelo.entidades.CfgMaestrosTxtPredefinidos;
 import modelo.entidades.CfgMedicamento;
 import modelo.entidades.CfgPacientes;
+import modelo.entidades.CfgSede;
 import modelo.entidades.CfgTxtPredefinidos;
 import modelo.entidades.CfgUsuarios;
 import modelo.entidades.CitCitas;
+import modelo.entidades.CitTurnos;
 import modelo.entidades.FacServicio;
 import modelo.entidades.HcCamposReg;
 import modelo.entidades.HcDetalle;
@@ -2245,7 +2247,7 @@ public class HistoriasPyP extends MetodosGenerales implements Serializable {
             if (datosFormulario.getValor(i) != null && datosFormulario.getValor(i).toString().length() != 0) {
                 campoResgistro = camposRegFacade.buscarPorTipoRegistroYPosicion(tipoRegistroClinicoActual.getIdTipoReg(), i);
                 if (campoResgistro != null) {
-                    nuevoDetalle = new HcDetalle(registroEncontrado.getIdRegistro(), campoResgistro.getIdCampo());
+                    nuevoDetalle = new HcDetalle(registroEncontrado.getIdRegistro(), campoResgistro.getIdCampo(),registroEncontrado.getIdSede());
                     if (campoResgistro.getTabla() == null || campoResgistro.getTabla().length() == 0) {
                         nuevoDetalle.setValor(datosFormulario.getValor(i).toString());
                     } else {
@@ -2358,7 +2360,7 @@ public class HistoriasPyP extends MetodosGenerales implements Serializable {
     }
 
     public void guardarRegistro() {//guardar un nuevo registro clinico
-
+        int idSede = 1;
         System.out.println("Iniciando el guardado del registro");
 
         HcRegistro nuevoRegistro = new HcRegistro();
@@ -2399,6 +2401,17 @@ public class HistoriasPyP extends MetodosGenerales implements Serializable {
                 citasFacade.edit(citaAtendida);
             }
         }
+        
+        //obtenemos el turno para asociar el consultorio con la sede
+        if(!turnoCita.equals("")){
+            CitTurnos citTurnos = turnosFacade.find(Integer.parseInt(turnoCita));
+            if(citTurnos != null) {
+                CfgSede sede =  citTurnos.getIdConsultorio().getIdSede();
+                if(sede != null)
+                    idSede = sede.getIdSede();
+            }
+            nuevoRegistro.setIdSede(idSede);
+        }
         registroFacade.create(nuevoRegistro);
 
         /**
@@ -2415,7 +2428,7 @@ public class HistoriasPyP extends MetodosGenerales implements Serializable {
             if (datosFormulario.getValor(i) != null && datosFormulario.getValor(i).toString().length() != 0) {
                 campoResgistro = camposRegFacade.buscarPorTipoRegistroYPosicion(tipoRegistroClinicoActual.getIdTipoReg(), i);
                 if (campoResgistro != null) {
-                    nuevoDetalle = new HcDetalle(nuevoRegistro.getIdRegistro(), campoResgistro.getIdCampo());
+                    nuevoDetalle = new HcDetalle(nuevoRegistro.getIdRegistro(), campoResgistro.getIdCampo(),idSede);
                     if (campoResgistro.getTabla() == null || campoResgistro.getTabla().length() == 0) {
                         nuevoDetalle.setValor(datosFormulario.getValor(i).toString());
                     } else {
@@ -2478,7 +2491,7 @@ public class HistoriasPyP extends MetodosGenerales implements Serializable {
                     break;
                 }
             }
-            nuevoDetalle = new HcDetalle(nuevoRegistro.getIdRegistro(), 182);//numero de solicitud
+            nuevoDetalle = new HcDetalle(nuevoRegistro.getIdRegistro(), 182, idSede);//numero de solicitud
             nuevoDetalle.setValor(String.valueOf(tipoRegistroClinicoActual.getConsecutivo()));
             listaDetalle.add(nuevoDetalle);
         }

@@ -45,8 +45,7 @@ public class HcDetalle implements Serializable {
     @JoinColumn(name = "id_campo", referencedColumnName = "id_campo", nullable = false, insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private HcCamposReg hcCamposReg;
-
-    //Uso exclusivo para sincronizacion de datos
+       //Uso exclusivo para sincronizacion de datos
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_sincronizador", nullable = false)
@@ -62,8 +61,8 @@ public class HcDetalle implements Serializable {
         this.hcDetallePK = hcDetallePK;
     }
 
-    public HcDetalle(int idRegistro, int idCampo) {
-        this.hcDetallePK = new HcDetallePK(idRegistro, idCampo);
+    public HcDetalle(int idRegistro, int idCampo, int idSede) {
+        this.hcDetallePK = new HcDetallePK(idRegistro, idCampo, idSede);
     }
 
     public HcDetallePK getHcDetallePK() {

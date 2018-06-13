@@ -56,9 +56,11 @@ import modelo.entidades.CfgHistoriaCamposPredefinidos;
 import modelo.entidades.CfgMaestrosTxtPredefinidos;
 import modelo.entidades.CfgMedicamento;
 import modelo.entidades.CfgPacientes;
+import modelo.entidades.CfgSede;
 import modelo.entidades.CfgTxtPredefinidos;
 import modelo.entidades.CfgUsuarios;
 import modelo.entidades.CitCitas;
+import modelo.entidades.CitTurnos;
 import modelo.entidades.FacConsumoMedicamento;
 import modelo.entidades.FacServicio;
 import modelo.entidades.HcArchivos;
@@ -6889,7 +6891,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             campoResgistro = camposRegFacade.buscarPorTipoRegistroYPosicion(tipoRegistroClinicoActual.getIdTipoReg(), i);
             if (campoResgistro != null) {
 //                    if ((datosFormulario.getValor(i).toString().length() != 0 && campoResgistro.getTabla().contains("date")) || !campoResgistro.getTabla().contains("date")) {
-                nuevoDetalle = new HcDetalle(registroEncontrado.getIdRegistro(), campoResgistro.getIdCampo());
+                nuevoDetalle = new HcDetalle(registroEncontrado.getIdRegistro(), campoResgistro.getIdCampo(), registroEncontrado.getIdSede());
                 if (campoResgistro.getTabla() == null || campoResgistro.getTabla().length() == 0) {
                     nuevoDetalle.setValor(datosFormulario.getValor(i).toString());
                 } else {
@@ -7063,7 +7065,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     }
 
     public void guardarRegistro() {//guardar un nuevo registro clinico        
-
+        int idSede = 1;
         System.out.println(datosFormulario.getDato0());
 
         System.out.println("Iniciando el guardado del registro");
@@ -7139,7 +7141,19 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             if (citaAtendida != null) {
                 citaAtendida.setAtendida(true);
                 citasFacade.edit(citaAtendida);
+                
             }
+        }
+        
+        //obtenemos el turno para asociar el consultorio con la sede
+        if(!turnoCita.equals("")){
+            CitTurnos citTurnos = turnosFacade.find(Integer.parseInt(turnoCita));
+            if(citTurnos != null) {
+                CfgSede sede =  citTurnos.getIdConsultorio().getIdSede();
+                if(sede != null)
+                    idSede = sede.getIdSede();
+            }
+            nuevoRegistro.setIdSede(idSede);
         }
         registroFacade.create(nuevoRegistro);
 
@@ -7158,7 +7172,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             if (datosFormulario.getValor(i) != null && datosFormulario.getValor(i).toString().length() != 0) {
                 campoResgistro = camposRegFacade.buscarPorTipoRegistroYPosicion(tipoRegistroClinicoActual.getIdTipoReg(), i);
                 if (campoResgistro != null) {
-                    nuevoDetalle = new HcDetalle(nuevoRegistro.getIdRegistro(), campoResgistro.getIdCampo());
+                    nuevoDetalle = new HcDetalle(nuevoRegistro.getIdRegistro(), campoResgistro.getIdCampo(), idSede);
                     if (campoResgistro.getTabla() == null || campoResgistro.getTabla().length() == 0) {
                         nuevoDetalle.setValor(datosFormulario.getValor(i).toString());
                     } else {
@@ -7196,6 +7210,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                                 break;
                         }
                     }
+                    
                     listaDetalle.add(nuevoDetalle);
                 } else {
                     System.out.println("No encontro en tabla hc_campos_registro el valor: id_tipo_reg=" + tipoRegistroClinicoActual.getIdTipoReg() + " posicion " + i);
@@ -7208,6 +7223,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 System.out.println(new Date(rep.getColumna3()) + " ");
                 HcRepExamenes r = new HcRepExamenes();
                 r.setIdRegistro(nuevoRegistro);
+                r.setIdSede(idSede);
                 r.setFecha(new Date(rep.getColumna3()));
                 r.setNombreParaclinico(Integer.parseInt(rep.getColumna2()));
                 r.setPosicion(Integer.parseInt(rep.getColumna1()));
@@ -7222,6 +7238,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 HcItems nuevoMedicamento = new HcItems();
                 nuevoMedicamento.setIdRegistro(nuevoRegistro);
                 nuevoMedicamento.setIdTabla(item.getColumna1());
+                nuevoMedicamento.setIdSede(idSede);
                 nuevoMedicamento.setTabla("cfg_medicamento");
 //                nuevoMedicamento.setDescripcion(item.getDescripcion());
 //                nuevoMedicamento.setConcentracion(item.getConcentracion());
@@ -7278,7 +7295,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     break;
                 }
             }
-            nuevoDetalle = new HcDetalle(nuevoRegistro.getIdRegistro(), 182);//numero de solicitud
+            nuevoDetalle = new HcDetalle(nuevoRegistro.getIdRegistro(), 182, idSede);//numero de solicitud
             nuevoDetalle.setValor(String.valueOf(tipoRegistroClinicoActual.getConsecutivo()));
             listaDetalle.add(nuevoDetalle);
         }
@@ -7294,6 +7311,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 nuevoServicio.setIdRegistro(nuevoRegistro);
                 nuevoServicio.setIdTabla(item.getColumna1());
                 nuevoServicio.setTabla("fac_servicio");
+                
 //                nuevoMedicamento.setDescripcion(item.getDescripcion());
 //                nuevoMedicamento.setConcentracion(item.getConcentracion());
                 nuevoServicio.setObservacion(item.getColumna5());
@@ -7315,6 +7333,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         if (tipoRegistroClinicoActual.getIdTipoReg() == 70 || tipoRegistroClinicoActual.getIdTipoReg() == 69) {
             loadGraphicValoracion0_18();
         }
+        
+        //seteamos la sede en las tablas
+        registroFacade.establecerSedeRegistro(nuevoRegistro.getIdRegistro(), loginMB.getCentroDeAtencionactual().getIdSede());        
         RequestContext.getCurrentInstance().update("IdFormRegistroClinico");
         RequestContext.getCurrentInstance().update("IdFormHistorias");
     }
