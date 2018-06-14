@@ -571,6 +571,7 @@ public class CitasMB extends MetodosGenerales implements Serializable {
             motivoConsultas = 0;
             idServicio = 0;
         }
+        listaMedicamentosPrograma = new ArrayList<>();
         //setIdPrestador(0);
         //idPaciente = 0;
 

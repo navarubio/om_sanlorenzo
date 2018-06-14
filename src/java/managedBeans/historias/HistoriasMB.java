@@ -2810,7 +2810,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             datosFormulario.setValor(i, "");
         }
         if (tipoRegistroClinicoActual != null) {//validacion particular para asignar valores por defecto             
-            if (tipoRegistroClinicoActual.getIdTipoReg() == 71) {
+            if (tipoRegistroClinicoActual.getIdTipoReg() == 71 || tipoRegistroClinicoActual.getIdTipoReg() == 91) {
                 loadGraphic();
             } else if (tipoRegistroClinicoActual.getIdTipoReg() == 70 || tipoRegistroClinicoActual.getIdTipoReg() == 69) {
                 loadGraphicValoracion0_18();
@@ -2932,7 +2932,16 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             yAxis.setMin(40);
             yAxis.setMax(95);
 
-            lineModel2.setSeriesColors("D9300B");
+            if(null != pacienteSeleccionado && null != pacienteSeleccionado.getGenero()){
+                if(pacienteSeleccionado.getGenero().getObservacion().equals("F")){
+                    lineModel2.setSeriesColors("D9300B");
+                }else{
+                    lineModel2.setSeriesColors("5cb0c2");
+                }
+                
+            }else{
+                lineModel2.setSeriesColors("D9300B");
+            }
 
             //cargamos imc
             //cargamos imc
@@ -2970,7 +2979,16 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 yAxis.setMin(9);
                 yAxis.setMax(22);
 
+            if(null != pacienteSeleccionado && null != pacienteSeleccionado.getGenero()){
+                if(pacienteSeleccionado.getGenero().getObservacion().equals("F")){
+                    lineModel3.setSeriesColors("D9300B");
+                }else{
+                    lineModel3.setSeriesColors("5cb0c2");
+                }
+                
+            }else{
                 lineModel3.setSeriesColors("D9300B");
+            }
             }
             RequestContext.getCurrentInstance().update(":IdFormRegistroClinico:tallaModel");
         } catch (Exception e) {
@@ -3012,7 +3030,16 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             yAxis.setTickInterval("1");
             //#4F4B4A
 
-            lineModel1.setSeriesColors("D9300B");
+           if(null != pacienteSeleccionado && null != pacienteSeleccionado.getGenero()){
+                if(pacienteSeleccionado.getGenero().getObservacion().equals("F")){
+                    lineModel1.setSeriesColors("D9300B");
+                }else{
+                    lineModel1.setSeriesColors("5cb0c2");
+                }
+                
+            }else{
+                lineModel1.setSeriesColors("D9300B");
+            }
             RequestContext.getCurrentInstance().update(":IdFormRegistroClinico:tallaModel");
         } catch (Exception e) {
         }
@@ -3056,7 +3083,16 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             yAxis.setMax(56);
 
             //lineModel4.getAxes().put(AxisType.Y2, y2Axis);
-            lineModel4.setSeriesColors("D9300B");
+           if(null != pacienteSeleccionado && null != pacienteSeleccionado.getGenero()){
+                if(pacienteSeleccionado.getGenero().getObservacion().equals("F")){
+                    lineModel4.setSeriesColors("D9300B");
+                }else{
+                    lineModel4.setSeriesColors("5cb0c2");
+                }
+                
+            }else{
+                lineModel4.setSeriesColors("D9300B");
+            }
             RequestContext.getCurrentInstance().update(":IdFormRegistroClinico:tallaModel");
         } catch (Exception e) {
         }
@@ -3250,6 +3286,8 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
 
     private void loadGraphic() {
         try {
+            
+            System.out.println("Load data");
             //Cargamos peso
             LineChartModel model = new LineChartModel();
             seriesLinealPeso = new LineChartSeries();
@@ -3266,7 +3304,11 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             }
             model.addSeries(seriesLinealPeso);
             lineModel1 = model;
-            lineModel1.setTitle("Peso para la edad Niñas de 0 a 2 años");
+            if(tipoRegistroClinicoActual.getIdTipoReg() == 71){
+                lineModel1.setTitle("Peso para la edad Niñas de 0 a 2 años");
+            }else{
+                lineModel1.setTitle("Peso para la edad Niños de 0 a 5 años");
+            }
             lineModel1.setLegendPosition("e");
             lineModel1.setShowPointLabels(true);
 
@@ -3284,7 +3326,16 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             yAxis.setTickInterval("1");
             //#4F4B4A
 
-            lineModel1.setSeriesColors("D9300B");
+            if(null != pacienteSeleccionado && null != pacienteSeleccionado.getGenero()){
+                if(pacienteSeleccionado.getGenero().getObservacion().equals("F")){
+                    lineModel1.setSeriesColors("D9300B");
+                }else{
+                    lineModel1.setSeriesColors("5cb0c2");
+                }
+                
+            }else{
+                lineModel1.setSeriesColors("D9300B");
+            }
 
             /////FIN PESO
             //Cargamos talla
@@ -3301,7 +3352,11 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             }
             model.addSeries(seriesLinealTalla);
             lineModel2 = model;
-            lineModel2.setTitle("Talla para la edad Niñas de 0 a 2 años");
+            if(tipoRegistroClinicoActual.getIdTipoReg() == 71){
+                lineModel2.setTitle("Talla para la edad Niñas de 0 a 2 años");
+            }else{
+                lineModel2.setTitle("Talla para la edad Niños de 0 a 2 años");
+            }
             lineModel2.setLegendPosition("e");
             lineModel2.setLegendPlacement(LegendPlacement.OUTSIDE);
             lineModel2.setShowPointLabels(true);
@@ -3320,7 +3375,16 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             yAxis.setMin(40);
             yAxis.setMax(95);
 
-            lineModel2.setSeriesColors("D9300B");
+            if(null != pacienteSeleccionado && null != pacienteSeleccionado.getGenero()){
+                if(pacienteSeleccionado.getGenero().getObservacion().equals("F")){
+                    lineModel2.setSeriesColors("D9300B");
+                }else{
+                    lineModel2.setSeriesColors("5cb0c2");
+                }
+                
+            }else{
+                lineModel2.setSeriesColors("D9300B");
+            }
 
             //Cargamos imc
             //valores defecto
@@ -3339,7 +3403,11 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             }
             model.addSeries(seriesLinealIMC);
             lineModel3 = model;
-            lineModel3.setTitle("IMC para la edad Niñas de 0 a 2 años");
+            if(tipoRegistroClinicoActual.getIdTipoReg() == 71){
+                lineModel3.setTitle("IMC para la edad Niñas de 0 a 2 años");
+            }else{
+                lineModel3.setTitle("IMC para la edad Niños de 0 a 5 años");
+            }
             lineModel3.setLegendPosition("e");
             lineModel3.setShowPointLabels(true);
             //lineModel3.getAxes().put(AxisType.X, new CategoryAxis("Meses"));
@@ -3357,7 +3425,16 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             yAxis.setMin(9);
             yAxis.setMax(22);
 
-            lineModel3.setSeriesColors("D9300B");
+            if(null != pacienteSeleccionado && null != pacienteSeleccionado.getGenero()){
+                if(pacienteSeleccionado.getGenero().getObservacion().equals("F")){
+                    lineModel3.setSeriesColors("D9300B");
+                }else{
+                    lineModel3.setSeriesColors("5cb0c2");
+                }
+                
+            }else{
+                lineModel3.setSeriesColors("D9300B");
+            }
             //lineModel3.getAxes().put(AxisType.Y2, y2Axis);
             //Cargamos perimetro cefalico
 
@@ -3373,7 +3450,11 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             }
             model.addSeries(seriesLinealCefalico);
             lineModel4 = model;
-            lineModel4.setTitle("Perímetro Cefálico para la edad Niñas de 0 a 2 años");
+            if(tipoRegistroClinicoActual.getIdTipoReg() == 71){
+                lineModel4.setTitle("Perímetro Cefálico para la edad Niñas de 0 a 2 años");
+            }else{
+                lineModel4.setTitle("Perímetro Cefálico para la edad Niños de 0 a 5 años");
+            }
             lineModel4.setLegendPosition("e");
             lineModel4.setShowPointLabels(true);
             lineModel4.setLegendPlacement(LegendPlacement.OUTSIDE);
@@ -3392,7 +3473,16 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             yAxis.setMax(56);
 
             //lineModel4.getAxes().put(AxisType.Y2, y2Axis);
-            lineModel4.setSeriesColors("D9300B");
+            if(null != pacienteSeleccionado && null != pacienteSeleccionado.getGenero()){
+                if(pacienteSeleccionado.getGenero().getObservacion().equals("F")){
+                    lineModel4.setSeriesColors("D9300B");
+                }else{
+                    lineModel4.setSeriesColors("5cb0c2");
+                }
+                
+            }else{
+                lineModel4.setSeriesColors("D9300B");
+            }
 
         } catch (Exception ex) {
 
