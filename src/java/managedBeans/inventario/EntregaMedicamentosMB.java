@@ -23,9 +23,11 @@ import javax.faces.view.ViewScoped;
 import managedBeans.historias.DatosFormularioHistoria;
 import managedBeans.seguridad.LoginMB;
 import modelo.entidades.CfgClasificaciones;
+import modelo.entidades.CfgMedicamento;
 import modelo.entidades.CfgPacientes;
 import modelo.entidades.HcCamposReg;
 import modelo.entidades.HcDetalle;
+import modelo.entidades.HcItems;
 import modelo.entidades.HcRegistro;
 import modelo.entidades.InvBodegaProductos;
 import modelo.entidades.InvBodegas;
@@ -37,8 +39,10 @@ import modelo.entidades.InvMovimientoProductos;
 import modelo.entidades.InvMovimientos;
 import modelo.entidades.InvProductos;
 import modelo.fachadas.CfgClasificacionesFacade;
+import modelo.fachadas.CfgMedicamentoFacade;
 import modelo.fachadas.CfgPacientesFacade;
 import modelo.fachadas.HcCamposRegFacade;
+import modelo.fachadas.HcItemsFacade;
 import modelo.fachadas.HcRegistroFacade;
 import modelo.fachadas.InvBodegaProductosFacade;
 import modelo.fachadas.InvBodegasFacade;
@@ -69,6 +73,8 @@ public class EntregaMedicamentosMB extends MetodosGenerales implements java.io.S
     @EJB
     private HcCamposRegFacade camposRegFacade;
     @EJB
+    private HcItemsFacade hcitemFacade;
+    @EJB
     private InvProductosFacade productoFacade;
     @EJB
     private InvBodegasFacade  bodegaFacade;
@@ -82,7 +88,8 @@ public class EntregaMedicamentosMB extends MetodosGenerales implements java.io.S
     private InvBodegaProductosFacade bodegaProductosFacade;
     @EJB
     private InvLotesFacade loteFachada;
-    
+    @EJB
+    private CfgMedicamentoFacade medicamentoFacade;
     private InvEntregaMedicamentos entregaMedicamentos;
     private InvMovimientos movimiento;
     private InvConsecutivos consecutivo;
@@ -315,7 +322,7 @@ public class EntregaMedicamentosMB extends MetodosGenerales implements java.io.S
             
             //Buscamos si existe una historia clinica tipo receta medicamento pendiente de entrega
             //44 receta médica
-            registro = registroFacade.historiaXFormulaMedicaPaciente(paciente.getIdPaciente(), 44);
+            registro = registroFacade.historiaXFormulaMedicaPaciente(paciente.getIdPaciente(), 19);
             InvEntregaMedicamentosDetalle detalleMedicamento = new InvEntregaMedicamentosDetalle();
             if(registro!=null){
                 renderForm = true;
@@ -369,102 +376,31 @@ public class EntregaMedicamentosMB extends MetodosGenerales implements java.io.S
                 }
                 
                 //seteamos los valores en su posicion
-                    //Medicamento 1
-                    if(!datosFormulario.getDato2().equals("")){
-                        
-                        int indexo = datosFormulario.getDato2().toString().indexOf("(");
-                        int indexp = datosFormulario.getDato2().toString().lastIndexOf(")");
-                        int indexLot = datosFormulario.getDato2().toString().indexOf(":");
-                        String codigoLote = datosFormulario.getDato2().toString().substring(indexLot+1,datosFormulario.getDato2().toString().length());
-                        InvLotes lote = loteFachada.getLoteXCodigo(codigoLote);
-                        
-                        Integer idProducto =Integer.parseInt(datosFormulario.getDato2().toString().substring(indexo+1, indexp));
-                        InvProductos p = productoFacade.find(idProducto);
-                        detalleMedicamento = new InvEntregaMedicamentosDetalle();
-                        detalleMedicamento.setIdProducto(p!=null?p:new InvProductos());
-                        detalleMedicamento.setCantidadRecetada(Double.parseDouble(datosFormulario.getDato3().toString()));
-                        detalleMedicamento.setCantidadRecibida(detalleMedicamento.getCantidadRecetada());
-                        detalleMedicamento.setObservaciones(datosFormulario.getDato4().toString());
-                        detalleMedicamento.setIdEntrega(entregaMedicamentos);
-                        detalleMedicamento.setIdLote(lote);
-                        listaProductos.add(detalleMedicamento);
+                List<HcItems> listaMedicamentos = hcitemFacade.findByIdRegistro(registro);
+                for(HcItems item: listaMedicamentos){
+                    CfgMedicamento medicamento = medicamentoFacade.find(item.getIdTabla());
+                    InvProductos p = medicamento.getIdProducto();
+                    if(null != p){
+                        int idLote = loteFachada.idLote(p.getIdProducto());
+                       // if(idLote != 0 ){
+                            detalleMedicamento = new InvEntregaMedicamentosDetalle();
+                            detalleMedicamento.setIdProducto(p);
+                            detalleMedicamento.setCantidadRecetada(Double.parseDouble(datosFormulario.getDato3().toString()));
+                            detalleMedicamento.setCantidadRecibida(detalleMedicamento.getCantidadRecetada());
+                            detalleMedicamento.setObservaciones(datosFormulario.getDato4().toString());
+                            detalleMedicamento.setIdEntrega(entregaMedicamentos);
+                            detalleMedicamento.setIdLote(loteFachada.find(idLote));
+                            listaProductos.add(detalleMedicamento);
+                        //}else{
+                          //  imprimirMensaje("Error al obtener Lote del producto", medicamento.getNombreGenerico(), FacesMessage.SEVERITY_ERROR);
+                        //break;
+                        //}
+                    }else{
+                        imprimirMensaje("Error al obtener producto", medicamento.getNombreGenerico(), FacesMessage.SEVERITY_ERROR);
+                        break;
                     }
-                    //Medicamento 2
-                    if(!datosFormulario.getDato5().equals("")&&!datosFormulario.getDato6().equals("")){
-                        detalleMedicamento = new InvEntregaMedicamentosDetalle();
-                        int indexo = datosFormulario.getDato2().toString().indexOf("(");
-                        int indexp = datosFormulario.getDato2().toString().lastIndexOf(")");
-                        int indexLot = datosFormulario.getDato2().toString().indexOf(":");
-                        String codigoLote = datosFormulario.getDato2().toString().substring(indexLot+1,datosFormulario.getDato2().toString().length());
-                        InvLotes lote = loteFachada.getLoteXCodigo(codigoLote);
-                        Integer idProducto =Integer.parseInt(datosFormulario.getDato2().toString().substring(indexo+1, indexp));
-                        InvProductos p = productoFacade.find(idProducto);
-                        detalleMedicamento = new InvEntregaMedicamentosDetalle();
-                        detalleMedicamento.setIdProducto(p!=null?p:new InvProductos());
-                        detalleMedicamento.setCantidadRecetada(Double.parseDouble(datosFormulario.getDato6().toString()));
-                        detalleMedicamento.setCantidadRecibida(detalleMedicamento.getCantidadRecetada());
-                        detalleMedicamento.setObservaciones(datosFormulario.getDato7().toString());
-                        detalleMedicamento.setIdEntrega(entregaMedicamentos);
-                        detalleMedicamento.setIdLote(lote);
-                                
-                        listaProductos.add(detalleMedicamento);
-                    }
-                    //Medicamento 3
-                    if(!datosFormulario.getDato8().equals("")){
-                        detalleMedicamento = new InvEntregaMedicamentosDetalle();
-                        int indexo = datosFormulario.getDato2().toString().indexOf("(");
-                        int indexp = datosFormulario.getDato2().toString().lastIndexOf(")");
-                        int indexLot = datosFormulario.getDato2().toString().indexOf(":");
-                        String codigoLote = datosFormulario.getDato2().toString().substring(indexLot+1,datosFormulario.getDato2().toString().length());
-                        InvLotes lote = loteFachada.getLoteXCodigo(codigoLote);
-                        Integer idProducto =Integer.parseInt(datosFormulario.getDato2().toString().substring(indexo+1, indexp));
-                        InvProductos p = productoFacade.find(idProducto);
-                        detalleMedicamento.setIdProducto(p!=null?p:new InvProductos());
-                        detalleMedicamento = new InvEntregaMedicamentosDetalle();
-                        detalleMedicamento.setIdProducto(p!=null?p:new InvProductos());
-                        detalleMedicamento.setCantidadRecetada(Double.parseDouble(datosFormulario.getDato9().toString()));
-                        detalleMedicamento.setCantidadRecibida(detalleMedicamento.getCantidadRecetada());
-                        detalleMedicamento.setObservaciones(datosFormulario.getDato10().toString());
-                        detalleMedicamento.setIdEntrega(entregaMedicamentos);
-                        detalleMedicamento.setIdLote(lote);
-                                
-                        listaProductos.add(detalleMedicamento);
-                    }
-                    //Medicamento 4
-                    if(!datosFormulario.getDato11().equals("")){
-                        detalleMedicamento = new InvEntregaMedicamentosDetalle();
-                        int indexo = datosFormulario.getDato2().toString().indexOf("(");
-                        int indexp = datosFormulario.getDato2().toString().lastIndexOf(")");
-                        int indexLot = datosFormulario.getDato2().toString().indexOf(":");
-                        String codigoLote = datosFormulario.getDato2().toString().substring(indexLot+1,datosFormulario.getDato2().toString().length());
-                        InvLotes lote = loteFachada.getLoteXCodigo(codigoLote);
-                        Integer idProducto =Integer.parseInt(datosFormulario.getDato2().toString().substring(indexo+1, indexp));
-                        InvProductos p = productoFacade.find(idProducto);
-                        detalleMedicamento.setIdProducto(p!=null?p:new InvProductos());
-                        detalleMedicamento.setCantidadRecetada(Double.parseDouble(datosFormulario.getDato12().toString()));
-                        detalleMedicamento.setObservaciones(datosFormulario.getDato13().toString());
-                        detalleMedicamento.setIdEntrega(entregaMedicamentos);
-                        detalleMedicamento.setIdLote(lote);
-                        listaProductos.add(detalleMedicamento);
-                    }
-                    //Medicamento 5
-                    if(!datosFormulario.getDato14().equals("")){
-                        detalleMedicamento = new InvEntregaMedicamentosDetalle();
-                        int indexo = datosFormulario.getDato2().toString().indexOf("(");
-                        int indexp = datosFormulario.getDato2().toString().lastIndexOf(")");
-                        int indexLot = datosFormulario.getDato2().toString().indexOf(":");
-                        String codigoLote = datosFormulario.getDato2().toString().substring(indexLot+1,datosFormulario.getDato2().toString().length());
-                        InvLotes lote = loteFachada.getLoteXCodigo(codigoLote);
-                        Integer idProducto =Integer.parseInt(datosFormulario.getDato2().toString().substring(indexo+1, indexp));
-                        InvProductos p = productoFacade.find(idProducto);
-                        detalleMedicamento.setIdProducto(p!=null?p:new InvProductos());
-                        detalleMedicamento.setCantidadRecetada(Double.parseDouble(datosFormulario.getDato15().toString()));
-                        detalleMedicamento.setCantidadRecibida(detalleMedicamento.getCantidadRecetada());
-                        detalleMedicamento.setObservaciones(datosFormulario.getDato16().toString());
-                        detalleMedicamento.setIdEntrega(entregaMedicamentos);
-                        detalleMedicamento.setIdLote(lote);
-                        listaProductos.add(detalleMedicamento);
-                    }
+                }
+                   
                     
             }else{//si hay historico en entrega de movimiento
                 //buscamos registros que esten pendientes

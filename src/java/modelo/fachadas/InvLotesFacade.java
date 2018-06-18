@@ -44,5 +44,18 @@ public class InvLotesFacade extends AbstractFacade<InvLotes> {
         
         return lista.size() > 0 ? lista.get(0) : null;
     }
-	    
+
+    public int idLote(int idProducto){
+        int idLote = 0;
+        try {
+            String sql  ="select min(i.id_lote) from inv_bodega_productos  b " +
+                        "inner join inv_lotes i on i.id_lote =b.id_lote " +
+                        "where id_producto  =? and fecha_vencimiento>=CURRENT_DATE";
+            Query query  = getEntityManager().createNativeQuery(sql).setParameter(1, idProducto);
+            idLote = Integer.parseInt(query.getSingleResult().toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return idLote;
+    }
 }
