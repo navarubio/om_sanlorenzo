@@ -75,6 +75,17 @@ public class InvBodegasFacade extends AbstractFacade<InvBodegas> {
             return null;
         }
     }
+	
+	public InvBodegas bodegaPorSede(int idSede){
+        try {
+            String hql = "SELECT i FROM InvBodegas i WHERE i.idSede.idSede=:idSede";
+            Query query = getEntityManager().createQuery(hql).setParameter("idSede", idSede);
+            return (InvBodegas)query.getSingleResult();
+        } catch (Exception e) {
+            System.out.println("Bodega "+idSede+" invalido");
+            return null;
+        }
+    }
     
     /**
      * Método para consultar medicamentos según el texto enviado por parámetro.

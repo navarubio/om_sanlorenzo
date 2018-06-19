@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -59,6 +60,8 @@ public class InvEntregaMedicamentosDetalle implements Serializable {
     @ManyToOne
     private InvLotes idLote;
 
+    @Transient
+    private int existencia;
     public InvEntregaMedicamentosDetalle() {
     }
 
@@ -120,6 +123,15 @@ public class InvEntregaMedicamentosDetalle implements Serializable {
     public void setIdLote(InvLotes idLote) {
         this.idLote = idLote;
     }
+
+    public int getExistencia() {
+        return existencia;
+    }
+
+    public void setExistencia(int existencia) {
+        this.existencia = existencia;
+    }
+    
 
     @Override
     public int hashCode() {

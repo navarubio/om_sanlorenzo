@@ -378,14 +378,14 @@ public class EntregaMedicamentosMB extends MetodosGenerales implements java.io.S
                 //seteamos los valores en su posicion
                 List<HcItems> listaMedicamentos = hcitemFacade.findByIdRegistro(registro);
                 for(HcItems item: listaMedicamentos){
-                    CfgMedicamento medicamento = medicamentoFacade.find(item.getIdTabla());
+                    CfgMedicamento medicamento = medicamentoFacade.find(Integer.parseInt(item.getIdTabla()));
                     InvProductos p = medicamento.getIdProducto();
                     if(null != p){
                         int idLote = loteFachada.idLote(p.getIdProducto());
                        // if(idLote != 0 ){
                             detalleMedicamento = new InvEntregaMedicamentosDetalle();
                             detalleMedicamento.setIdProducto(p);
-                            detalleMedicamento.setCantidadRecetada(Double.parseDouble(datosFormulario.getDato3().toString()));
+                            detalleMedicamento.setCantidadRecetada(item.getCantidad().doubleValue());
                             detalleMedicamento.setCantidadRecibida(detalleMedicamento.getCantidadRecetada());
                             detalleMedicamento.setObservaciones(datosFormulario.getDato4().toString());
                             detalleMedicamento.setIdEntrega(entregaMedicamentos);
