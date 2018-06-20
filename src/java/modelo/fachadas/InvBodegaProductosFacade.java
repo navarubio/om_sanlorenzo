@@ -27,8 +27,10 @@ public class InvBodegaProductosFacade extends AbstractFacade<InvBodegaProductos>
         try {
             String hql = "SELECT i FROM InvBodegaProductos i where i.idBodega.idBodega=:idBodega and i.idProducto.idProducto=:idProducto and i.idLote.idLote=:idLote";
             Query query = getEntityManager().createQuery(hql).setParameter("idBodega", idBodega).setParameter("idProducto", idProducto).setParameter("idLote",idLote);
-            return (InvBodegaProductos)query.getSingleResult();
+            List<InvBodegaProductos> lista = query.getResultList();
+            return lista.size() > 0 ? lista.get(0) : null;
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
     }
@@ -109,6 +111,20 @@ public class InvBodegaProductosFacade extends AbstractFacade<InvBodegaProductos>
             System.out.println("error: "+e.getMessage());
             return null;
         }
+    }
+    
+    public Double totalExistenciaProducto(int productoId, int idSede){
+        Double existencia =0d;
+        try {
+            String sql  = "select sum(existencia) from inv_bodega_productos i inner join inv_bodegas b on b.id_bodega =i.id_bodega where i.id_producto=? and b.id_sede=?";
+            Query query  =getEntityManager().createNativeQuery(sql).setParameter(1, productoId).setParameter(2, idSede);
+            existencia = (Double)query.getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return existencia;
+        
     }
 
 }

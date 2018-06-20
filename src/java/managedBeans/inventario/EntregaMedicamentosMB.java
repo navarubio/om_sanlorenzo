@@ -106,7 +106,7 @@ public class EntregaMedicamentosMB extends MetodosGenerales implements java.io.S
     private String centroAtencion;
     private String observaciones;
     private int tipoIdentificacion;
-    
+    private int idSede;
     private boolean renderBoton;
     private boolean renderForm;
     private List<CfgClasificaciones> listaTipoIdentificacion;
@@ -120,6 +120,7 @@ public class EntregaMedicamentosMB extends MetodosGenerales implements java.io.S
    
     @PostConstruct
     public void init(){
+        idSede= 0;
         fecha = new Date();
         this.paciente = new CfgPacientes();
         this.consecutivo = consecutivoFacade.getConsecutivoTipo(TipoInventarioEnum.M.toString());
@@ -128,6 +129,7 @@ public class EntregaMedicamentosMB extends MetodosGenerales implements java.io.S
         this.listaTipoIdentificacion = tipoIdentificacionFacade.buscarPorMaestro(ClasificacionesEnum.TipoIdentificacion.toString());
         this.listaProductos = new ArrayList<>();
         this.datosFormulario = new DatosFormularioHistoria();
+        System.out.println(loginMB.getUsuarioActual().getIdUsuario());
         this.bodega = bodegaFacade.bodegaUsuarioReponsable(loginMB.getUsuarioActual().getIdUsuario());
         if(bodega!=null){
             centroAtencion = bodega.getIdSede().getNombreSede();
@@ -197,6 +199,10 @@ public class EntregaMedicamentosMB extends MetodosGenerales implements java.io.S
                         movimientoProducto.setCantidadRecibida(detalle.getCantidadRecibida());
                         //Validar existencia
                         InvBodegaProductos bodegaProductos = bodegaProductosFacade.getBodegaProductoLote(bodega.getIdBodega(), detalle.getIdProducto().getIdProducto(),(detalle.getIdLote()!=null?detalle.getIdLote().getIdLote():0));
+                        System.out.println(bodega.getIdBodega());
+                        System.out.println(detalle.getIdProducto().getIdProducto());
+                        System.out.println(detalle.getIdLote()!=null?detalle.getIdLote().getIdLote():0);
+                        System.out.println("********"+bodegaProductos);
                         if(bodegaProductos!=null){
                             movimientoProducto.setExistencia(bodegaProductos.getExistencia());
                             //descontamos existencia
@@ -381,7 +387,7 @@ public class EntregaMedicamentosMB extends MetodosGenerales implements java.io.S
                     CfgMedicamento medicamento = medicamentoFacade.find(Integer.parseInt(item.getIdTabla()));
                     InvProductos p = medicamento.getIdProducto();
                     if(null != p){
-                        int idLote = loteFachada.idLote(p.getIdProducto());
+                            int idLote = loteFachada.idLote(p.getIdProducto());
                        // if(idLote != 0 ){
                             detalleMedicamento = new InvEntregaMedicamentosDetalle();
                             detalleMedicamento.setIdProducto(p);
@@ -389,7 +395,8 @@ public class EntregaMedicamentosMB extends MetodosGenerales implements java.io.S
                             detalleMedicamento.setCantidadRecibida(detalleMedicamento.getCantidadRecetada());
                             detalleMedicamento.setObservaciones(datosFormulario.getDato4().toString());
                             detalleMedicamento.setIdEntrega(entregaMedicamentos);
-                            detalleMedicamento.setIdLote(loteFachada.find(idLote));
+                            detalleMedicamento.setExistencia(bodegaProductosFacade.totalExistenciaProducto(p.getIdProducto(), item.getIdSede()));
+                            detalleMedicamento.setIdLote(idLote!=0 ? loteFachada.find(idLote) : null);
                             listaProductos.add(detalleMedicamento);
                         //}else{
                           //  imprimirMensaje("Error al obtener Lote del producto", medicamento.getNombreGenerico(), FacesMessage.SEVERITY_ERROR);

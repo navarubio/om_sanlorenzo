@@ -1,0 +1,1 @@
+ALTER TABLE inv_entrega_medicamentos_detalle add column id_lote int;

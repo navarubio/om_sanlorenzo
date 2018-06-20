@@ -61,7 +61,7 @@ public class InvEntregaMedicamentosDetalle implements Serializable {
     private InvLotes idLote;
 
     @Transient
-    private int existencia;
+    private Double existencia;
     public InvEntregaMedicamentosDetalle() {
     }
 
@@ -124,11 +124,11 @@ public class InvEntregaMedicamentosDetalle implements Serializable {
         this.idLote = idLote;
     }
 
-    public int getExistencia() {
+    public Double getExistencia() {
         return existencia;
     }
 
-    public void setExistencia(int existencia) {
+    public void setExistencia(Double existencia) {
         this.existencia = existencia;
     }
     
