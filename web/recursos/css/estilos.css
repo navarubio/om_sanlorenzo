@@ -253,3 +253,9 @@ h3{
     text-overflow:ellipsis; 
     white-space: nowrap;
 }
+
+/*** Combinación con boostrap **/
+.estiloh2{
+    color:#0050ef;
+    font-weight: bold;
+}

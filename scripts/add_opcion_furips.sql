@@ -1,0 +1,1 @@
+insert into cfg_opciones_menu (select nextval('cfg_opciones_menu_seq')+1,56,'Furips','', 'facturacion/furips.xhtml')
