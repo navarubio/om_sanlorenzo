@@ -195,6 +195,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     private List<CfgTxtPredefinidos> listaTxtPredefinidos;
     private List<CfgUsuarios> listaPrestadores;
     private List<CfgUsuarios> listaOdontologos;
+    private List<CfgDiagnostico> listaDiagnosticos;
     private CfgTxtPredefinidos txtPredefinidoActual = null;
     private CfgClasificaciones clasificacionBuscada;
     private CfgDiagnostico diagnosticoBuscado;
@@ -2777,6 +2778,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         //listaPacientesFiltro.addAll(listaPacientes);
         listaTipoRegistroClinico = tipoRegCliFacade.buscarTiposRegstroActivos();
         listaPrestadores = usuariosFacade.buscarUsuariosParaHistorias();
+        listaDiagnosticos = diagnosticoFacade.findAll();
         listaOdontologos = new ArrayList<>();
         for (CfgUsuarios usuario : listaPrestadores) {
             if (usuario.getEspecialidad() != null) {
@@ -2848,6 +2850,8 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             } else if (tipoRegistroClinicoActual.getIdTipoReg() == 21) {
                 // refContrRefDefaultParams("No Refiere"); Referencia y contrareferencia
                 cargarMunicipiosDefault();
+            } else if (tipoRegistroClinicoActual.getIdTipoReg() == 92) {
+                urgenciasOdontologiaDefaultParams("No Refiere");
             }
 
         }
@@ -2932,14 +2936,14 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             yAxis.setMin(40);
             yAxis.setMax(95);
 
-            if(null != pacienteSeleccionado && null != pacienteSeleccionado.getGenero()){
-                if(pacienteSeleccionado.getGenero().getObservacion().equals("F")){
+            if (null != pacienteSeleccionado && null != pacienteSeleccionado.getGenero()) {
+                if (pacienteSeleccionado.getGenero().getObservacion().equals("F")) {
                     lineModel2.setSeriesColors("D9300B");
-                }else{
+                } else {
                     lineModel2.setSeriesColors("5cb0c2");
                 }
-                
-            }else{
+
+            } else {
                 lineModel2.setSeriesColors("D9300B");
             }
 
@@ -2979,16 +2983,16 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 yAxis.setMin(9);
                 yAxis.setMax(22);
 
-            if(null != pacienteSeleccionado && null != pacienteSeleccionado.getGenero()){
-                if(pacienteSeleccionado.getGenero().getObservacion().equals("F")){
+                if (null != pacienteSeleccionado && null != pacienteSeleccionado.getGenero()) {
+                    if (pacienteSeleccionado.getGenero().getObservacion().equals("F")) {
+                        lineModel3.setSeriesColors("D9300B");
+                    } else {
+                        lineModel3.setSeriesColors("5cb0c2");
+                    }
+
+                } else {
                     lineModel3.setSeriesColors("D9300B");
-                }else{
-                    lineModel3.setSeriesColors("5cb0c2");
                 }
-                
-            }else{
-                lineModel3.setSeriesColors("D9300B");
-            }
             }
             RequestContext.getCurrentInstance().update(":IdFormRegistroClinico:tallaModel");
         } catch (Exception e) {
@@ -3030,14 +3034,14 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             yAxis.setTickInterval("1");
             //#4F4B4A
 
-           if(null != pacienteSeleccionado && null != pacienteSeleccionado.getGenero()){
-                if(pacienteSeleccionado.getGenero().getObservacion().equals("F")){
+            if (null != pacienteSeleccionado && null != pacienteSeleccionado.getGenero()) {
+                if (pacienteSeleccionado.getGenero().getObservacion().equals("F")) {
                     lineModel1.setSeriesColors("D9300B");
-                }else{
+                } else {
                     lineModel1.setSeriesColors("5cb0c2");
                 }
-                
-            }else{
+
+            } else {
                 lineModel1.setSeriesColors("D9300B");
             }
             RequestContext.getCurrentInstance().update(":IdFormRegistroClinico:tallaModel");
@@ -3083,14 +3087,14 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             yAxis.setMax(56);
 
             //lineModel4.getAxes().put(AxisType.Y2, y2Axis);
-           if(null != pacienteSeleccionado && null != pacienteSeleccionado.getGenero()){
-                if(pacienteSeleccionado.getGenero().getObservacion().equals("F")){
+            if (null != pacienteSeleccionado && null != pacienteSeleccionado.getGenero()) {
+                if (pacienteSeleccionado.getGenero().getObservacion().equals("F")) {
                     lineModel4.setSeriesColors("D9300B");
-                }else{
+                } else {
                     lineModel4.setSeriesColors("5cb0c2");
                 }
-                
-            }else{
+
+            } else {
                 lineModel4.setSeriesColors("D9300B");
             }
             RequestContext.getCurrentInstance().update(":IdFormRegistroClinico:tallaModel");
@@ -3286,7 +3290,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
 
     private void loadGraphic() {
         try {
-            
+
             System.out.println("Load data");
             //Cargamos peso
             LineChartModel model = new LineChartModel();
@@ -3304,9 +3308,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             }
             model.addSeries(seriesLinealPeso);
             lineModel1 = model;
-            if(tipoRegistroClinicoActual.getIdTipoReg() == 71){
+            if (tipoRegistroClinicoActual.getIdTipoReg() == 71) {
                 lineModel1.setTitle("Peso para la edad Niñas de 0 a 2 años");
-            }else{
+            } else {
                 lineModel1.setTitle("Peso para la edad Niños de 0 a 5 años");
             }
             lineModel1.setLegendPosition("e");
@@ -3326,14 +3330,14 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             yAxis.setTickInterval("1");
             //#4F4B4A
 
-            if(null != pacienteSeleccionado && null != pacienteSeleccionado.getGenero()){
-                if(pacienteSeleccionado.getGenero().getObservacion().equals("F")){
+            if (null != pacienteSeleccionado && null != pacienteSeleccionado.getGenero()) {
+                if (pacienteSeleccionado.getGenero().getObservacion().equals("F")) {
                     lineModel1.setSeriesColors("D9300B");
-                }else{
+                } else {
                     lineModel1.setSeriesColors("5cb0c2");
                 }
-                
-            }else{
+
+            } else {
                 lineModel1.setSeriesColors("D9300B");
             }
 
@@ -3352,9 +3356,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             }
             model.addSeries(seriesLinealTalla);
             lineModel2 = model;
-            if(tipoRegistroClinicoActual.getIdTipoReg() == 71){
+            if (tipoRegistroClinicoActual.getIdTipoReg() == 71) {
                 lineModel2.setTitle("Talla para la edad Niñas de 0 a 2 años");
-            }else{
+            } else {
                 lineModel2.setTitle("Talla para la edad Niños de 0 a 2 años");
             }
             lineModel2.setLegendPosition("e");
@@ -3375,14 +3379,14 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             yAxis.setMin(40);
             yAxis.setMax(95);
 
-            if(null != pacienteSeleccionado && null != pacienteSeleccionado.getGenero()){
-                if(pacienteSeleccionado.getGenero().getObservacion().equals("F")){
+            if (null != pacienteSeleccionado && null != pacienteSeleccionado.getGenero()) {
+                if (pacienteSeleccionado.getGenero().getObservacion().equals("F")) {
                     lineModel2.setSeriesColors("D9300B");
-                }else{
+                } else {
                     lineModel2.setSeriesColors("5cb0c2");
                 }
-                
-            }else{
+
+            } else {
                 lineModel2.setSeriesColors("D9300B");
             }
 
@@ -3403,9 +3407,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             }
             model.addSeries(seriesLinealIMC);
             lineModel3 = model;
-            if(tipoRegistroClinicoActual.getIdTipoReg() == 71){
+            if (tipoRegistroClinicoActual.getIdTipoReg() == 71) {
                 lineModel3.setTitle("IMC para la edad Niñas de 0 a 2 años");
-            }else{
+            } else {
                 lineModel3.setTitle("IMC para la edad Niños de 0 a 5 años");
             }
             lineModel3.setLegendPosition("e");
@@ -3425,14 +3429,14 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             yAxis.setMin(9);
             yAxis.setMax(22);
 
-            if(null != pacienteSeleccionado && null != pacienteSeleccionado.getGenero()){
-                if(pacienteSeleccionado.getGenero().getObservacion().equals("F")){
+            if (null != pacienteSeleccionado && null != pacienteSeleccionado.getGenero()) {
+                if (pacienteSeleccionado.getGenero().getObservacion().equals("F")) {
                     lineModel3.setSeriesColors("D9300B");
-                }else{
+                } else {
                     lineModel3.setSeriesColors("5cb0c2");
                 }
-                
-            }else{
+
+            } else {
                 lineModel3.setSeriesColors("D9300B");
             }
             //lineModel3.getAxes().put(AxisType.Y2, y2Axis);
@@ -3450,9 +3454,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             }
             model.addSeries(seriesLinealCefalico);
             lineModel4 = model;
-            if(tipoRegistroClinicoActual.getIdTipoReg() == 71){
+            if (tipoRegistroClinicoActual.getIdTipoReg() == 71) {
                 lineModel4.setTitle("Perímetro Cefálico para la edad Niñas de 0 a 2 años");
-            }else{
+            } else {
                 lineModel4.setTitle("Perímetro Cefálico para la edad Niños de 0 a 5 años");
             }
             lineModel4.setLegendPosition("e");
@@ -3473,14 +3477,14 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             yAxis.setMax(56);
 
             //lineModel4.getAxes().put(AxisType.Y2, y2Axis);
-            if(null != pacienteSeleccionado && null != pacienteSeleccionado.getGenero()){
-                if(pacienteSeleccionado.getGenero().getObservacion().equals("F")){
+            if (null != pacienteSeleccionado && null != pacienteSeleccionado.getGenero()) {
+                if (pacienteSeleccionado.getGenero().getObservacion().equals("F")) {
                     lineModel4.setSeriesColors("D9300B");
-                }else{
+                } else {
                     lineModel4.setSeriesColors("5cb0c2");
                 }
-                
-            }else{
+
+            } else {
                 lineModel4.setSeriesColors("D9300B");
             }
 
@@ -4165,6 +4169,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             idPrestador = "";
             especialidadPrestador = "";
         }
+        System.out.println("Prestador: " + idPrestador);
         fechaReg = registroEncontrado.getFechaReg();
         fechaSis = registroEncontrado.getFechaSis();
 
@@ -4237,7 +4242,11 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         datosReporte.setValor(48, "<b>CELULAR: </b>" + obtenerCadenaNoNula(pacienteSeleccionado.getSegundoApellido()));//
         datosReporte.setValor(49, "<b>CORREO: </b>" + obtenerCadenaNoNula(pacienteSeleccionado.getEmail()));//
         datosReporte.setValor(50, "<b>FOLIO: </b>" + regEncontrado.getFolio());//folio
-        datosReporte.setValor(51, "<b>HISTORIA No: </b>" + regEncontrado.getIdPaciente().getIdentificacion());//numero de historia
+        if (regEncontrado.getIdTipoReg().getIdTipoReg() == 92) {
+            datosReporte.setValor(51, regEncontrado.getIdPaciente().getIdentificacion());//numero de historia
+        } else {
+            datosReporte.setValor(51, "<b>HISTORIA No: </b>" + regEncontrado.getIdPaciente().getIdentificacion());//numero de historia
+        }
         datosReporte.setValor(53, "<b>NOMBRE: </b>" + pacienteSeleccionado.nombreCompleto());//NOMBRES PACIENTE        
 
         datosReporte.setValor(54, "<b>FECHA ATENCION: </b> " + sdfDateHour.format(regEncontrado.getFechaReg()));
@@ -4381,8 +4390,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         //----------------------------------------------------------------------
         //CARGO DATOS QUE SE LLENARON EN EL REGISTRO (hc_detalle)---------------
         //----------------------------------------------------------------------
+        System.out.println("AAAA");
         for (HcDetalle campoDeRegistroEncontrado : listaCamposDeRegistroEncontrado) {
-            if (campoDeRegistroEncontrado.getHcCamposReg().getTabla() != null && campoDeRegistroEncontrado.getHcCamposReg().getTabla().length() >= 5) {//ES CATEGORIA (realizar busqueda), y considerar que la tabla minimo debe tener 5 caracts...
+            if (campoDeRegistroEncontrado.getHcCamposReg().getTabla() != null && campoDeRegistroEncontrado.getHcCamposReg().getTabla().length() >= 4) {//ES CATEGORIA (realizar busqueda), y considerar que la tabla minimo debe tener 5 caracts...
                 switch (campoDeRegistroEncontrado.getHcCamposReg().getTabla()) {
                     case "cfg_clasificaciones":
                         clasificacionBuscada = clasificacionesFacade.find(Integer.parseInt(campoDeRegistroEncontrado.getValor()));
@@ -4412,13 +4422,304 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     case "date":
                     case "date2": //new arcarrero, para permitir guardar fechas de solo días (sin horas).
                     case "html":
-                        datosReporte.setValor(campoDeRegistroEncontrado.getHcCamposReg().getPosicion(), "<b>" + campoDeRegistroEncontrado.getHcCamposReg().getNombrePdf() + " </b>" + campoDeRegistroEncontrado.getValor());
+                        if ((campoDeRegistroEncontrado.getHcCamposReg().getPosicion() == 9 || campoDeRegistroEncontrado.getHcCamposReg().getPosicion() == 10) && regEncontrado.getIdTipoReg().getIdTipoReg() == 92) {
+                            System.out.println("Date1");
+                            try {
+                                datosReporte.setValor(campoDeRegistroEncontrado.getHcCamposReg().getPosicion(), sdfDateHour.parse(campoDeRegistroEncontrado.getValor()));
+                            } catch (ParseException ex) {
+                                Logger.getLogger(HistoriasMB.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        } else {
+                            System.out.println("Date2");
+                            datosReporte.setValor(campoDeRegistroEncontrado.getHcCamposReg().getPosicion(), "<b>" + campoDeRegistroEncontrado.getHcCamposReg().getNombrePdf() + " </b>" + campoDeRegistroEncontrado.getValor());
+                        }
+
                         break;
                 }
             } else {//NO ES CATEGORIA (sacar valor)
                 datosReporte.setValor(campoDeRegistroEncontrado.getHcCamposReg().getPosicion(), "<b>" + campoDeRegistroEncontrado.getHcCamposReg().getNombrePdf() + " </b>" + campoDeRegistroEncontrado.getValor());
             }
         }
+        //datosReporte.setListaDatosAdicionales(listadoDatosAdicionales);//CUANDO SE USE SUBRREPORTES USAR ESTA LINEA
+        listaRegistrosParaPdf.add(datosReporte);
+    }
+
+    private void cargarFuenteDatosOdontologiaUrgencia(HcRegistro regEncontrado) {
+        listaRegistrosParaPdf = new ArrayList<>();
+        DatosFormularioHistoria datosReporte = new DatosFormularioHistoria();
+        List<HcDetalle> listaCamposDeRegistroEncontrado = regEncontrado.getHcDetalleList();
+        //----------------------------------------------------------------------
+        //CARGO TITULOS TODOS LOS CAMPOS (hc_campos_registro)-------------------
+        //----------------------------------------------------------------------
+        //List<HcCamposReg> listaCamposPorTipoDeRegistro = camposRegFacade.buscarPorTipoRegistro(regEncontrado.getIdTipoReg().getIdTipoReg());
+        /*for (HcCamposReg campoPorTipoRegistro : listaCamposPorTipoDeRegistro) {
+            datosReporte.setValor(campoPorTipoRegistro.getPosicion(), "<b>" + campoPorTipoRegistro.getNombrePdf() + " </b>");
+        }*/
+        //nota!!!!!! algunos de los siguientes campos tambien incluirlos en la tabla hc_campos_reg(para que se coloquen titulos en el ciclo anterior)        
+        //----------------------------------------------------------------------
+        //CARGO DATOS DESDE (hc_registro)(cfg_empresa) -------------------------
+        //----------------------------------------------------------------------
+        /*datosReporte.setValor(44, "<b>PRIMER NOMBRE: </b>" + obtenerCadenaNoNula(pacienteSeleccionado.getPrimerNombre()));//
+        datosReporte.setValor(45, "<b>SEGUNDO NOMBRE: </b>" + obtenerCadenaNoNula(pacienteSeleccionado.getSegundoNombre()));//
+        datosReporte.setValor(46, "<b>PRIMER APELLIDO: </b>" + obtenerCadenaNoNula(pacienteSeleccionado.getPrimerApellido()));//
+        datosReporte.setValor(47, "<b>SEGUNDO APELLIDO: </b>" + obtenerCadenaNoNula(pacienteSeleccionado.getSegundoApellido()));//
+        datosReporte.setValor(48, "<b>CELULAR: </b>" + obtenerCadenaNoNula(pacienteSeleccionado.getSegundoApellido()));//
+        datosReporte.setValor(49, "<b>CORREO: </b>" + obtenerCadenaNoNula(pacienteSeleccionado.getEmail()));//
+        datosReporte.setValor(50, "<b>FOLIO: </b>" + regEncontrado.getFolio());//folio
+        if(regEncontrado.getIdTipoReg().getIdTipoReg() == 92){
+            datosReporte.setValor(51, regEncontrado.getIdPaciente().getIdentificacion());//numero de historia
+        }else{
+            datosReporte.setValor(51, "<b>HISTORIA No: </b>" + regEncontrado.getIdPaciente().getIdentificacion());//numero de historia
+        }
+        datosReporte.setValor(53, "<b>NOMBRE: </b>" + pacienteSeleccionado.nombreCompleto());//NOMBRES PACIENTE        
+
+        datosReporte.setValor(54, "<b>FECHA ATENCION: </b> " + sdfDateHour.format(regEncontrado.getFechaReg()));
+        datosReporte.setValor(88, "<b>FECHA: </b> " + sdfDate.format(regEncontrado.getFechaReg()) + "<b> HORA: </b> " + sdfHour.format(regEncontrado.getFechaReg()));
+        if (pacienteSeleccionado.getIdAdministradora() != null) {
+            datosReporte.setValor(55, "<b>ENTIDAD: </b> " + pacienteSeleccionado.getIdAdministradora().getRazonSocial());
+        } else {
+            datosReporte.setValor(55, "<b>ENTIDAD: </b> ");
+        }
+        if (pacienteSeleccionado.getFechaNacimiento() != null) {
+            datosReporte.setValor(56, "<b>EDAD: </b> " + calcularEdad(pacienteSeleccionado.getFechaNacimiento()));
+            datosReporte.setValor(200, "<b>FECHA NACIMIENTO: </b>" + sdfDate.format(pacienteSeleccionado.getFechaNacimiento()));
+        } else {
+            datosReporte.setValor(56, "<b>EDAD: </b> ");
+            datosReporte.setValor(200, "<b>FECHA NACIMIENTO: </b>");
+        }
+        if (pacienteSeleccionado.getGenero() != null) {
+            datosReporte.setValor(57, "<b>SEXO: </b> " + pacienteSeleccionado.getGenero().getDescripcion());
+        } else {
+            datosReporte.setValor(57, "<b>SEXO: </b> ");
+        }
+        if (pacienteSeleccionado.getOcupacion() != null) {
+            datosReporte.setValor(58, "<b>OCUPACION: </b> " + pacienteSeleccionado.getOcupacion().getDescripcion());
+        } else {
+            datosReporte.setValor(58, "<b>OCUPACION: </b> ");
+        }
+        datosReporte.setValor(59, "<b>DIRECCION: </b> " + obtenerCadenaNoNula(pacienteSeleccionado.getDireccion()));
+        datosReporte.setValor(60, "<b>TELEFONO: </b> " + obtenerCadenaNoNula(pacienteSeleccionado.getTelefonoResidencia()));
+
+        if (pacienteSeleccionado.getTipoIdentificacion() != null) {
+            datosReporte.setValor(69, pacienteSeleccionado.getTipoIdentificacion().getDescripcion() + " " + pacienteSeleccionado.getIdentificacion());
+            datosReporte.setValor(61, "<b>IDENTIFICACION: </b> " + pacienteSeleccionado.getTipoIdentificacion().getDescripcion() + " " + pacienteSeleccionado.getIdentificacion());
+        } else {
+            datosReporte.setValor(69, pacienteSeleccionado.getIdentificacion());
+            datosReporte.setValor(61, "<b>IDENTIFICACION: </b> " + pacienteSeleccionado.getIdentificacion());
+        }
+        if (pacienteSeleccionado.getRegimen() != null) {
+            datosReporte.setValor(62, "<b>TIPO AFILIACION: </b> " + pacienteSeleccionado.getRegimen().getDescripcion());
+            datosReporte.setValor(42, "<b>COBERTURA EN SALUD: </b>" + pacienteSeleccionado.getRegimen().getDescripcion());
+        } else {
+            datosReporte.setValor(62, "<b>TIPO AFILIACION: </b> ");
+            datosReporte.setValor(42, "<b>COBERTURA EN SALUD: </b>");
+        }
+        datosReporte.setValor(63, "<b>RESPONSABLE: </b> " + obtenerCadenaNoNula(pacienteSeleccionado.getResponsable()));
+        datosReporte.setValor(64, "<b>TELEFONO: </b> " + obtenerCadenaNoNula(pacienteSeleccionado.getTelefonoResponsable()));
+        if (pacienteSeleccionado.getEstadoCivil() != null) {
+            datosReporte.setValor(65, "<b>ESTADO CIVIL: </b> " + pacienteSeleccionado.getEstadoCivil().getDescripcion());
+        } else {
+            datosReporte.setValor(65, "<b>ESTADO CIVIL: </b> ");
+        }
+        if (pacienteSeleccionado.getDepartamento() != null) {
+            datosReporte.setValor(66, "<b>DEPARTAMENTO: </b>" + pacienteSeleccionado.getDepartamento().getDescripcion() + " " + pacienteSeleccionado.getDepartamento().getCodigo());
+        } else {
+            datosReporte.setValor(66, "<b>DEPARTAMENTO: </b>");
+        }
+        if (pacienteSeleccionado.getMunicipio() != null) {
+            datosReporte.setValor(67, "<b>MUNICIPIO: </b>" + pacienteSeleccionado.getMunicipio().getDescripcion() + " " + pacienteSeleccionado.getMunicipio().getCodigo());//TELEFONO EMPRESA                
+        } else {
+            datosReporte.setValor(67, "<b>MUNICIPIO: </b>");//TELEFONO EMPRESA                
+        }
+        if (pacienteSeleccionado.getFirma() != null) {//firma paciente
+            datosReporte.setValor(68, loginMB.getRutaCarpetaImagenes() + pacienteSeleccionado.getFirma().getUrlImagen());//FIRMA MEDICO
+        } else {
+            datosReporte.setValor(68, null);
+        }
+        datosReporte.setValor(69, pacienteSeleccionado.nombreCompleto() + "<br/>" + datosReporte.getValor(69));//NOMBRE EN FIRMA PACIENTE        
+
+        //empresa
+        if (loginMB.getEmpresaActual().getLogo() != null) {
+            datosReporte.setValor(70, loginMB.getRutaCarpetaImagenes() + loginMB.getEmpresaActual().getLogo().getUrlImagen());//IMAGEN LOGO
+        } else {
+            datosReporte.setValor(70, null);//IMAGEN LOGO
+        }
+//        System.out.println("Imagen logo empres -> " + loginMB.getRutaCarpetaImagenes() + loginMB.getEmpresaActual().getLogo().getUrlImagen());
+        System.out.println("Datos encontrados ... " + listaCamposDeRegistroEncontrado.size());
+
+        if (regEncontrado.getIdMedico() != null) {
+            datosReporte.setValor(71, regEncontrado.getIdMedico().nombreCompleto());//NOMBRE MEDICO
+            datosReporte.setValor(86, regEncontrado.getIdMedico().getTelefonoResidencia());//TELEFONO MEDICO
+            datosReporte.setValor(87, regEncontrado.getIdMedico().getTelefonoOficina());//CELULAR MEDICO
+            datosReporte.setValor(84, regEncontrado.getIdMedico().nombreCompleto());//PARA FIRMA NOMBRE MEDICO
+            if (regEncontrado.getIdMedico().getEspecialidad() != null) {
+                datosReporte.setValor(72, regEncontrado.getIdMedico().getEspecialidad().getDescripcion());//ESPECIALIDAD MEDICO
+                datosReporte.setValor(84, datosReporte.getValor(84) + " <br/> " + regEncontrado.getIdMedico().getEspecialidad().getDescripcion());//PARA FIRMA  NOMBRE MEDICO
+            }
+            datosReporte.setValor(73, obtenerCadenaNoNula(regEncontrado.getIdMedico().getRegistroProfesional()));//REGISTRO PROFESIONAL MEDICO
+            datosReporte.setValor(84, datosReporte.getValor(84) + " <br/> Reg. prof. " + regEncontrado.getIdMedico().getRegistroProfesional());//NOMBRE MEDICO
+
+            if (regEncontrado.getIdMedico().getFirma() != null) {
+                datosReporte.setValor(74, loginMB.getRutaCarpetaImagenes() + regEncontrado.getIdMedico().getFirma().getUrlImagen());//FIRMA MEDICO            
+            } else {
+                datosReporte.setValor(74, null);//FIRMA MEDICO
+            }
+        }
+        datosReporte.setValor(75, "<b>Dirección: </b> " + empresa.getDireccion() + "      " + empresa.getWebsite() + "      <b>Teléfono: </b> " + empresa.getTelefono1());//DIR TEL EMPRESA        
+        datosReporte.setValor(76, "<b>NOMBRE: </b>" + empresa.getRazonSocial());//NOMBRE EMPRESA                
+        datosReporte.setValor(77, "<b>CODIGO: </b>" + empresa.getCodigoEmpresa());//CODIGO EMPRESA                
+        datosReporte.setValor(78, "<b>DIRECCION: </b>" + empresa.getDireccion());//DIRECCION EMPRESA                
+        datosReporte.setValor(79, "<b>TELEFONO: </b>" + empresa.getTelefono1());//TELEFONO EMPRESA                
+        datosReporte.setValor(80, "<b>DEPARTAMENTO: </b>" + empresa.getCodDepartamento().getCodigo() + " " + empresa.getCodDepartamento().getDescripcion());//TELEFONO EMPRESA                
+        datosReporte.setValor(81, "<b>MUNICIPIO: </b>" + empresa.getCodMunicipio().getCodigo() + " " + empresa.getCodMunicipio().getDescripcion());//TELEFONO EMPRESA                
+        datosReporte.setValor(82, "<b>" + empresa.getTipoDoc().getDescripcion() + ": </b>  " + empresa.getNumIdentificacion());//NIT        
+        datosReporte.setValor(83, empresa.getWebsite());//sitio web       
+
+        datosReporte.setValor(100, empresa.getNomRepLegal());//CONSTANSA PORTILLA BENAVIDES
+        datosReporte.setValor(98, empresa.getTipoDoc().getDescripcion() + ":" + empresa.getNumIdentificacion() + " " + empresa.getObservaciones());//OPTOMETRA U.L SALLE-BOGOTA        
+        datosReporte.setValor(97, empresa.getRazonSocial());//
+        datosReporte.setValor(99, "CONSULTORIO " + empresa.getDireccion() + " " + empresa.getCodMunicipio().getDescripcion() + "  TELEFONO: " + empresa.getTelefono1());//CONSULTRIO
+        //datosReporte.setValor(85, "<b>ASEGURADORA RESPONSABLE DE LA ATENCION, NUMERO DE POLIZA SI ES SOAT Y VIGENCIA: </b> ");
+
+        //datos fijos ... datos acudiente 
+        //El siguiente dato getAcompañantee() en realidad trae el dato Nombre del acudiente
+        datosReporte.setValor(101, "<b>NOMBRE :</b>" + pacienteSeleccionado.getAcompanante()); // NOMBRE DEL ACUDIENTE, si es correcto; del acudiente
+        datosReporte.setValor(102, "<b>DIRECCION :</b>" + pacienteSeleccionado.getDireccion()); //DIRECCION DEL PACIENTE
+
+        //y enfoque diferencial        
+        datosReporte.setValor(103, "<b>NIVEL EDUCATIVO :</b>" + escolaridad);
+        datosReporte.setValor(104, "<b>DISCAPACIDAD :</b>" + discapacidad);
+        datosReporte.setValor(105, "<b>GESTACIÓN :</b>" + gestacion);
+        datosReporte.setValor(106, "<b>OCUPACIÓN :</b>" + ocupacion);
+        datosReporte.setValor(107, "<b>RELIGIÓN :</b>" + religion);
+        datosReporte.setValor(108, "<b>ETNIA :</b>" + etnia);
+        datosReporte.setValor(109, "<b>VIC. DE CONFLICTO ARMADO :</b>" + victimaConflictoStr);
+        datosReporte.setValor(110, "<b>POBLACIÓN LBGT :</b>" + poblacionLBGTStr);
+        datosReporte.setValor(111, "<b>DESPLAZADO :</b>" + desplazadoStr);
+        datosReporte.setValor(112, "<b>VIC. DE MALTRATO :</b>" + victimaMaltratoStr);
+
+        //Paciente
+        datosReporte.setValor(113, "<b>CARNET: </b>" + pacienteSeleccionado.getCarnet());
+
+//        <td><p:outputLabel value="Nivel educativo" /></td>
+//        <td><p:outputLabel value="Discapacidad" /></td>
+//        <td><p:outputLabel value="Gestación" /></td>
+//        <td><p:outputLabel value="Ocupación" /></td>
+//        <td><p:outputLabel value="Religión" /></td>
+//        <td><p:outputLabel value="Etnia" /></td>
+//        <p:outputLabel value="Víctima de conflicto armado" />
+//        <p:outputLabel value="Población LBGT" />
+//        <p:outputLabel value="Desplazado" />
+//        <p:outputLabel value="Víctima de maltrato" />
+        //----------------------------------------------------------------------
+        //CARGO DATOS QUE SE LLENARON EN EL REGISTRO (hc_detalle)---------------
+        //----------------------------------------------------------------------*/
+        System.out.println("AAAA");
+        for (HcDetalle campoDeRegistroEncontrado : listaCamposDeRegistroEncontrado) {
+            if (campoDeRegistroEncontrado.getHcCamposReg().getTabla() != null && campoDeRegistroEncontrado.getHcCamposReg().getTabla().length() >= 4) {//ES CATEGORIA (realizar busqueda)
+                datosReporte.setValor(campoDeRegistroEncontrado.getHcCamposReg().getPosicion(), "<b>" + campoDeRegistroEncontrado.getHcCamposReg().getNombrePdf() + " </b>");
+                switch (campoDeRegistroEncontrado.getHcCamposReg().getTabla()) {
+                    case "cfg_clasificaciones":
+                        clasificacionBuscada = clasificacionesFacade.find(Integer.parseInt(campoDeRegistroEncontrado.getValor()));
+                        if (clasificacionBuscada != null) {
+                            datosReporte.setValor(campoDeRegistroEncontrado.getHcCamposReg().getPosicion() + campoDeRegistroEncontrado.getHcCamposReg().getIdTipoReg().getCantCampos(), clasificacionBuscada.getDescripcion());
+                        }
+                        break;
+                    case "cfg_clasificaciones_2"://el mismo anterior pero imprimiendo tambien el codigo de la clasificacion
+                        clasificacionBuscada = clasificacionesFacade.find(Integer.parseInt(campoDeRegistroEncontrado.getValor()));
+                        if (clasificacionBuscada != null) {
+                            datosReporte.setValor(campoDeRegistroEncontrado.getHcCamposReg().getPosicion() + campoDeRegistroEncontrado.getHcCamposReg().getIdTipoReg().getCantCampos(), clasificacionBuscada.getCodigo() + " - " + clasificacionBuscada.getDescripcion());
+                        }
+                        break;
+                    case "fac_servicio":
+                        servicioBuscado = servicioFacade.find(Integer.parseInt(campoDeRegistroEncontrado.getValor()));
+                        if (servicioBuscado != null) {
+                            System.out.println("SERVICIO");
+                            datosReporte.setValor(campoDeRegistroEncontrado.getHcCamposReg().getPosicion() + campoDeRegistroEncontrado.getHcCamposReg().getIdTipoReg().getCantCampos(), servicioBuscado.getNombreServicio());
+                        } else {
+                            System.out.println("SIN SERVICIO");
+                        }
+                        break;
+                    case "boolean":
+                        if (campoDeRegistroEncontrado.getValor().compareTo("true") == 0) {
+                            datosReporte.setValor(campoDeRegistroEncontrado.getHcCamposReg().getPosicion() + campoDeRegistroEncontrado.getHcCamposReg().getIdTipoReg().getCantCampos(), "SI");
+                        } else {
+                            datosReporte.setValor(campoDeRegistroEncontrado.getHcCamposReg().getPosicion() + campoDeRegistroEncontrado.getHcCamposReg().getIdTipoReg().getCantCampos(), "NO");
+                        }
+                        break;
+                    case "cfg_diagnostico":
+                        CfgDiagnostico diagnostico = diagnosticoFacade.find(campoDeRegistroEncontrado.getValor());
+                        if (diagnostico != null) {
+                            datosReporte.setValor(campoDeRegistroEncontrado.getHcCamposReg().getPosicion() + campoDeRegistroEncontrado.getHcCamposReg().getIdTipoReg().getCantCampos(), diagnostico.getCodigoDiagnostico() + " - " + diagnostico.getNombreDiagnostico());
+                        }
+                        break;
+                    case "date":
+                    case "date2": //new arcarrero, para permitir guardar fechas de solo días (sin horas).
+                    case "html":
+                        if ((campoDeRegistroEncontrado.getHcCamposReg().getPosicion() == 9 || campoDeRegistroEncontrado.getHcCamposReg().getPosicion() == 10) && regEncontrado.getIdTipoReg().getIdTipoReg() == 92) {
+                            try {
+                                datosReporte.setValor(campoDeRegistroEncontrado.getHcCamposReg().getPosicion() + campoDeRegistroEncontrado.getHcCamposReg().getIdTipoReg().getCantCampos(), sdfDateHour.parse(campoDeRegistroEncontrado.getValor()));
+                            } catch (ParseException ex) {
+                                Logger.getLogger(HistoriasMB.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        } else {
+                            datosReporte.setValor(campoDeRegistroEncontrado.getHcCamposReg().getPosicion() + campoDeRegistroEncontrado.getHcCamposReg().getIdTipoReg().getCantCampos(), campoDeRegistroEncontrado.getValor());
+                        }
+
+                        break;
+                    default:
+                        datosReporte.setValor(campoDeRegistroEncontrado.getHcCamposReg().getPosicion() + campoDeRegistroEncontrado.getHcCamposReg().getIdTipoReg().getCantCampos(), campoDeRegistroEncontrado.getValor());
+                        break;
+                }
+            } else {
+                datosReporte.setValor(campoDeRegistroEncontrado.getHcCamposReg().getPosicion(), "<b>" + campoDeRegistroEncontrado.getHcCamposReg().getNombrePdf() + " </b>");
+                datosReporte.setValor(campoDeRegistroEncontrado.getHcCamposReg().getPosicion() + campoDeRegistroEncontrado.getHcCamposReg().getIdTipoReg().getCantCampos(), campoDeRegistroEncontrado.getValor());
+            }
+        }
+        //datosReporte.setValor(29, "<b>FECHA Y HORA DE INGRESO: </b> " + sdfDateHour.format(datosReporte.getDato29()));
+        //datosReporte.setValor(30, "<b>FECHA Y HORA DE EGRESO: </b> " + sdfDateHour.format(datosReporte.getDato30()));
+        //datosReporte.setValor(31, "<b>SERVICIO: </b> " + datosReporte.getDato31());
+        //datosReporte.setValor(38, "<b>CAMA: </b> " + datosReporte.getDato38());
+        datosReporte.setValor(40, regEncontrado.getIdPaciente().getIdentificacion());
+        datosReporte.setValor(41, regEncontrado.getIdPaciente().getNombreCompleto());
+        datosReporte.setValor(42, regEncontrado.getIdPaciente().getGenero().getDescripcion());
+        String edad = calcularEdad(regEncontrado.getIdPaciente().getFechaNacimiento());
+        datosReporte.setValor(43, edad);
+        datosReporte.setValor(44, empresa.getRazonSocial());
+        datosReporte.setValor(45, regEncontrado.getIdMedico().nombreCompleto());
+        datosReporte.setValor(46, regEncontrado.getIdMedico().getRegistroProfesional());
+        datosReporte.setValor(47, regEncontrado.getIdMedico().getIdentificacion());
+        datosReporte.setValor(48, "FECHA");
+        datosReporte.setValor(49, "<b>HISTORIA No.: </b>");
+        datosReporte.setValor(50, "EMPRESA:");
+
+        datosReporte.setValor(51, "<b>NOMBRES Y APELLIDOS: </b>");
+        datosReporte.setValor(52, "<b>SEXO: </b>");
+        datosReporte.setValor(53, "<b>EDAD: </b>");
+        datosReporte.setValor(54, "EPICRISIS\nSECCIÓN DE URGENCIAS\nHISTORIA RESUMIDA");
+        datosReporte.setValor(55, "A. MOTIVO DE CONSULTA");
+        datosReporte.setValor(56, "B. EXAMEN FISICO");
+        datosReporte.setValor(57, "C. DIAGNOSTICO DEFINITIVO");
+        datosReporte.setValor(58, "D. CONDUCTA A SEGUIR");
+        datosReporte.setValor(59, "E. TRATAMIENTO");
+        datosReporte.setValor(60, "<b>Nombre del Médico: </b>");
+        datosReporte.setValor(61, "<b>Registro No.: </b>");
+        datosReporte.setValor(62, "<b>Cédula No.: </b>");
+        if (loginMB.getEmpresaActual().getLogo() != null) {
+            datosReporte.setValor(63, loginMB.getRutaCarpetaImagenes() + loginMB.getEmpresaActual().getLogo().getUrlImagen());//IMAGEN LOGO
+        } else {
+            datosReporte.setValor(63, null);//IMAGEN LOGO
+        }
+        System.out.println(datosReporte.getDato63());
+        datosReporte.setValor(64, "HORA");
+        datosReporte.setValor(65, "DIA");
+        datosReporte.setValor(66, "MES");
+        datosReporte.setValor(67, "AÑO");
+        datosReporte.setValor(68, "<b>" + empresa.getTipoDoc().getDescripcion() + ": </b>  " + empresa.getNumIdentificacion());
+        datosReporte.setValor(69, "<b>FECHA: </b> " + sdfDateHour.format(regEncontrado.getFechaReg()));
+        datosReporte.setValor(70, "CONSULTORIO " + empresa.getDireccion() + " " + empresa.getCodMunicipio().getDescripcion() + "  TELEFONO: " + empresa.getTelefono1());
+        datosReporte.setValor(71, "<b>FOLIO: </b>" + regEncontrado.getFolio());
+        
         //datosReporte.setListaDatosAdicionales(listadoDatosAdicionales);//CUANDO SE USE SUBRREPORTES USAR ESTA LINEA
         listaRegistrosParaPdf.add(datosReporte);
     }
@@ -4444,8 +4745,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 datosReporte.setValor(campoPorTipoRegistro.getPosicion(), "<b>" + campoPorTipoRegistro.getNombrePdf() + " </b>");
             } catch (Exception e) {
             }
-            
-            
+
         }
         //nota!!!!!! algunos de los siguientes campos tambien incluirlos en la tabla hc_campos_reg(para que se coloquen titulos en el ciclo anterior)        
         //----------------------------------------------------------------------
@@ -4931,7 +5231,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         int contador = -1;
         for (HcDetalle campoDeRegistroEncontrado : listaCamposDeRegistroEncontrado) { //recorre la lista de datos encontrados
             ++contador;
-            
+
             if (campoDeRegistroEncontrado.getHcCamposReg().getTabla() != null && campoDeRegistroEncontrado.getHcCamposReg().getTabla().length() >= 5) {//ES CATEGORIA (realizar busqueda)
                 switch (campoDeRegistroEncontrado.getHcCamposReg().getTabla()) {
                     case "cfg_clasificaciones":
@@ -5572,6 +5872,8 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             cargarFuenteDatosReportesExtraGrandes(regEncontrado);
         } else if (regEncontrado.getIdTipoReg().getUrlPagina().startsWith("g_")) { //si es de los nuevos reportes con mas de 40 campos
             cargarFuenteDatosReportesGrandes(regEncontrado);
+        } else if (regEncontrado.getIdTipoReg().getIdTipoReg() == 92) {
+            cargarFuenteDatosOdontologiaUrgencia(regEncontrado);
         } else {
             cargarFuenteDatos(regEncontrado);
         }
@@ -5713,7 +6015,6 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         listaServicios.clear();
         listaServiciosFiltro.clear();
         listaServiciosOrdenMedica.clear();
-
     }
 
     public void btnLimpiarFormulario() {//no se carga ultimo registro
@@ -5727,17 +6028,19 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         limpiarFormulario();
         valoresPorDefecto();
         cargarUltimoRegistro();
-        if(null !=tipoRegistroClinicoActual && tipoRegistroClinicoActual.getIdTipoReg() == 55)
+        if (null != tipoRegistroClinicoActual && tipoRegistroClinicoActual.getIdTipoReg() == 55) {
             cargarValoresDefectoOdontologia();
+        }
     }
 
-    private void cargarValoresDefectoOdontologia(){
-       Calendar calendar = Calendar.getInstance();
-       calendar.setTime(new Date());
-       calendar.add(Calendar.DAY_OF_YEAR, -1);
+    private void cargarValoresDefectoOdontologia() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.add(Calendar.DAY_OF_YEAR, -1);
         datosFormulario.setValor(5, calendar.getTime());
-        
+
     }
+
     public void manageFile(FileUploadEvent event) {
         if (!"".equals(descriparchivo)) {
 
@@ -5893,6 +6196,10 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                         modificandoRegCli = false;
                     }
                 }
+                //Cargar el medico
+                idPrestador = String.valueOf(registroEncontrado.getIdMedico().getIdUsuario());
+                cambiaMedico();
+
                 List<HcDetalle> listaDetalles = registroEncontrado.getHcDetalleList();
                 for (HcDetalle detalle : listaDetalles) {
                     HcCamposReg campo = camposRegFacade.find(detalle.getHcDetallePK().getIdCampo());
@@ -5909,11 +6216,13 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                                     }
                                     break;
                                 default://es una categoria
+                                    System.out.println("VAL: " + detalle.getValor() + " POS: " + campo.getPosicion());
                                     datosFormulario.setValor(campo.getPosicion(), detalle.getValor());
                                     break;
                             }
                         } else {//simplemente es texto
                             try {
+                                System.out.println("TEXTO: " + detalle.getValor() + " POS: " + campo.getPosicion() + " ID: ");
                                 datosFormulario.setValor(campo.getPosicion(), detalle.getValor());
                             } catch (Exception e) {
 
@@ -5971,6 +6280,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                         pad_ce = Integer.parseInt(datosFormulario.getDato255().toString());
                     }
                 }
+                System.out.println("Doctor: " + registroEncontrado.getIdMedico().getIdUsuario().toString());
                 System.out.println("Tipo registro " + registroEncontrado.getIdTipoReg().getIdTipoReg());
                 if (registroEncontrado.getIdTipoReg().getIdTipoReg() == 54) {
                     if (hours > 23) {
@@ -6841,7 +7151,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     }
                 }
             }
-            if (tipoRegistroClinicoActual.getIdTipoReg() != 90) {
+            if (tipoRegistroClinicoActual.getIdTipoReg() != 90 && tipoRegistroClinicoActual.getIdTipoReg() != 92) {
                 clasificacion_fisica();
                 calculo_imc_peso();
                 calculo_imc_perimetro();
@@ -6897,7 +7207,8 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             }
         }
         //RequestContext.getCurrentInstance().update("IdFormHistorias");
-
+        loadServiciosOrden();
+        listaDiagnosticos = diagnosticoFacade.findAll();
     }
 
     private void mostrarFormularioRegistroClinico() {//permite visualizar un formulario dependiendo de la seleccion en el combo 'tipo de registro clinico'
@@ -7231,17 +7542,17 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
             if (citaAtendida != null) {
                 citaAtendida.setAtendida(true);
                 citasFacade.edit(citaAtendida);
-                
             }
         }
-        
+
         //obtenemos el turno para asociar el consultorio con la sede
-        if(!turnoCita.equals("")){
+        if (!turnoCita.equals("")) {
             CitTurnos citTurnos = turnosFacade.find(Integer.parseInt(turnoCita));
-            if(citTurnos != null) {
-                CfgSede sede =  citTurnos.getIdConsultorio().getIdSede();
-                if(sede != null)
+            if (citTurnos != null) {
+                CfgSede sede = citTurnos.getIdConsultorio().getIdSede();
+                if (sede != null) {
                     idSede = sede.getIdSede();
+                }
             }
             nuevoRegistro.setIdSede(idSede);
         }
@@ -7261,6 +7572,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         for (int i = 0; i < tipoRegistroClinicoActual.getCantCampos(); i++) {
             if (datosFormulario.getValor(i) != null && datosFormulario.getValor(i).toString().length() != 0) {
                 campoResgistro = camposRegFacade.buscarPorTipoRegistroYPosicion(tipoRegistroClinicoActual.getIdTipoReg(), i);
+                System.out.println("CAMPO: " + campoResgistro);
                 if (campoResgistro != null) {
                     nuevoDetalle = new HcDetalle(nuevoRegistro.getIdRegistro(), campoResgistro.getIdCampo(), idSede);
                     if (campoResgistro.getTabla() == null || campoResgistro.getTabla().length() == 0) {
@@ -7282,15 +7594,15 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                             case "date2":
                                 try {
                                     Date f = sdfFechaString.parse(datosFormulario.getValor(i).toString());
-                                    if(tipoRegistroClinicoActual.getIdTipoReg() == 55){
+                                    if (tipoRegistroClinicoActual.getIdTipoReg() == 55) {
                                         Calendar calendar = Calendar.getInstance();
                                         calendar.setTime(f);
                                         calendar.add(Calendar.DAY_OF_YEAR, 1);
                                         nuevoDetalle.setValor(sdfDate.format(calendar.getTime()));
-                                    }else{
+                                    } else {
                                         nuevoDetalle.setValor(sdfDate.format(f));
                                     }
-                                    
+
                                 } catch (ParseException ex) {
                                     nuevoDetalle.setValor("Error: " + datosFormulario.getValor(i).toString());
                                 }
@@ -7300,7 +7612,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                                 break;
                         }
                     }
-                    
+
                     listaDetalle.add(nuevoDetalle);
                 } else {
                     System.out.println("No encontro en tabla hc_campos_registro el valor: id_tipo_reg=" + tipoRegistroClinicoActual.getIdTipoReg() + " posicion " + i);
@@ -7401,7 +7713,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                 nuevoServicio.setIdRegistro(nuevoRegistro);
                 nuevoServicio.setIdTabla(item.getColumna1());
                 nuevoServicio.setTabla("fac_servicio");
-                
+
 //                nuevoMedicamento.setDescripcion(item.getDescripcion());
 //                nuevoMedicamento.setConcentracion(item.getConcentracion());
                 nuevoServicio.setObservacion(item.getColumna5());
@@ -7423,9 +7735,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         if (tipoRegistroClinicoActual.getIdTipoReg() == 70 || tipoRegistroClinicoActual.getIdTipoReg() == 69) {
             loadGraphicValoracion0_18();
         }
-        
+
         //seteamos la sede en las tablas
-        registroFacade.establecerSedeRegistro(nuevoRegistro.getIdRegistro(), loginMB.getCentroDeAtencionactual().getIdSede());        
+        registroFacade.establecerSedeRegistro(nuevoRegistro.getIdRegistro(), loginMB.getCentroDeAtencionactual().getIdSede());
         RequestContext.getCurrentInstance().update("IdFormRegistroClinico");
         RequestContext.getCurrentInstance().update("IdFormHistorias");
     }
@@ -8130,6 +8442,21 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         datosFormulario.setDato162(_val);
         datosFormulario.setDato163(_val);
         datosFormulario.setDato165(_val);
+    }
+
+    public void urgenciasOdontologiaDefaultParams(String _val) {
+        //Motivo
+        datosFormulario.setDato9("");
+        datosFormulario.setDato10("");
+        datosFormulario.setDato11("");
+        datosFormulario.setDato12(_val);
+        datosFormulario.setDato13("");
+        datosFormulario.setDato14("");
+        datosFormulario.setDato15("");
+        datosFormulario.setDato16(_val);
+        datosFormulario.setDato17(_val);
+        datosFormulario.setDato18(_val);
+        datosFormulario.setDato19(_val);
     }
 
     public void urgenciasDefaultParams(String _val) {
@@ -9997,7 +10324,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     HcDetalle detalle = detalles.get(i);
                     valores.add(detalle.getValor());
                     System.out.println(String.format("%1$s-%2$s", detalle.getHcCamposReg().getNombre(), detalle.getValor(), posicion));
-                    
+
                 }
                 try {
                     HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
@@ -10860,4 +11187,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         this.nombreFormulario = nombreFormulario;
     }
 
+    public List<CfgDiagnostico> getListaDiagnosticos() {
+        return listaDiagnosticos;
+    }
 }

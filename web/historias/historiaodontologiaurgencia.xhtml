@@ -1,0 +1,191 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">  
+    <h:head>
+        <title>Usuarios</title>
+        <link href="../recursos/css/estilos.css" rel="stylesheet"/>        
+        <link href="../recursos/css/metro-bootstrap.css" rel="stylesheet"/>
+        <link href="../recursos/css/iconFont.css" rel="stylesheet"/>
+        <script type="text/javascript" src="../recursos/js/calendario.js"></script> 
+        <script type="text/javascript" src="../recursos/js/svg.min.js"></script> 
+        <script type="text/javascript" src="../recursos/js/odontograma.js"></script> 
+        <script type="text/javascript" src="../recursos/js/oleary.js"></script> 
+        <script type="text/javascript">
+            $(document).keypress(
+                    function (event) {
+                        if (event.which == '13') {
+                            event.preventDefault();
+                        }
+                    })
+
+        </script>
+    </h:head>
+    <h:body>
+        <h:form id="IdFormRegistroClinico">  
+            <p:growl id="IdMensajeUsuarios"  showDetail="true" sticky="false" autoUpdate="true" life="5000"/>
+            <table style="margin-left: auto; margin-right: auto;">
+
+                <tr><td colspan="2"><h2>HISTORIA CLÍNICA ODONTOLÓGICA - EMERGENCIA</h2></td></tr>
+                <tr><td colspan="2"><h2>DATOS DE INGRESO</h2></td></tr>    
+                <div>
+                    <tr>
+                        <td><p:outputLabel value="FECHA DE INGRESO:"/></td>
+                        <td><p:outputLabel value="FECHA DE EGRESO:"/></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:calendar navigator="true" locale="es" value="#{historiasMB.datosFormulario.dato9}" 
+                                        pattern="dd/MM/yyyy HH:mm" styleClass="width2" size="23" mask="true">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+                            </p:calendar>
+                        </td>
+                        <td>
+                            <p:calendar navigator="true" locale="es" value="#{historiasMB.datosFormulario.dato10}" 
+                                        pattern="dd/MM/yyyy HH:mm" styleClass="width2" size="23" mask="true">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+                            </p:calendar>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><p:outputLabel value="SERVICIO"/></td>
+                        <td><p:outputLabel value="CAMA"/></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:selectOneMenu styleClass="width100p" value="#{historiasMB.datosFormulario.dato11}" filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItems value="#{historiasMB.listaServiciosOrdenMedica}" 
+                                               var="s" 
+                                               itemLabel="#{s.nombreServicio}" 
+                                               itemValue="#{s.idServicio}"/>
+                            </p:selectOneMenu>
+                        </td>
+                        <td>
+                            <p:inputText styleClass="width1" value="#{historiasMB.datosFormulario.dato18}"/>
+                        </td>
+                    </tr>
+                </div>
+                <tr><td colspan="2"><h2>ANAMNESIS</h2></td></tr> 
+                <!--ANAMNESIS-->
+                <div>
+                    <tr>
+                        <td colspan="2"><p:outputLabel value="MOTIVO DE CONSULTA"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p:inputTextarea styleClass="width100p" 
+                                             value="#{historiasMB.datosFormulario.dato12}" 
+                                             rows="10"
+                                             autoResize="false"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><p:outputLabel value="EXAMEN FISICO"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p:inputTextarea styleClass="width100p" 
+                                             value="#{historiasMB.datosFormulario.dato19}" 
+                                             rows="10"
+                                             autoResize="false"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><p:outputLabel value="DIAGNOSTICO"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p:selectOneMenu styleClass="width100p" value="#{historiasMB.datosFormulario.dato13}" filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItems value="#{historiasMB.listaDiagnosticos}" 
+                                               var="d" 
+                                               itemLabel="#{d.codigoDiagnostico} - #{d.nombreDiagnostico}" 
+                                               itemValue="#{d.codigoDiagnostico}"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p:selectOneMenu styleClass="width100p" value="#{historiasMB.datosFormulario.dato14}" filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItems value="#{historiasMB.listaDiagnosticos}" 
+                                               var="d" 
+                                               itemLabel="#{d.codigoDiagnostico} - #{d.nombreDiagnostico}" 
+                                               itemValue="#{d.codigoDiagnostico}"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p:selectOneMenu styleClass="width100p" value="#{historiasMB.datosFormulario.dato15}" filter="true" filterMatchMode="contains">                            
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItems value="#{historiasMB.listaDiagnosticos}" 
+                                               var="d" 
+                                               itemLabel="#{d.codigoDiagnostico} - #{d.nombreDiagnostico}" 
+                                               itemValue="#{d.codigoDiagnostico}"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><p:outputLabel value="CONDUCTA A SEGUIR"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p:inputTextarea styleClass="width100p" 
+                                             value="#{historiasMB.datosFormulario.dato16}"
+                                             rows="10"
+                                             autoResize="false"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><p:outputLabel value="TRATAMIENTO"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p:inputTextarea styleClass="width100p" 
+                                             value="#{historiasMB.datosFormulario.dato17}"
+                                             rows="10"
+                                             autoResize="false"/>
+                        </td>
+                    </tr>
+                </div>
+                <div>
+                    <tr>
+                        <td><p:outputLabel value="MEDICO"/></td>
+                        <td><p:outputLabel value="ESPECIALIDAD"/></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:selectOneMenu   value="#{historiasMB.idPrestador}" filter="true" filterMatchMode="contains">                            
+                                <p:ajax event="change" listener="#{historiasMB.cambiaMedico}" update="IdEspecialidad"/>
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItems value="#{historiasMB.listaOdontologos}" 
+                                               var="p" 
+                                               itemLabel="#{p.primerNombre} #{p.segundoNombre} #{p.primerApellido} #{p.segundoApellido}" 
+                                               itemValue="#{p.idUsuario}"/>
+                            </p:selectOneMenu>
+                        </td>
+                        <td>
+                            <p:inputText id="IdEspecialidad" readonly="true" styleClass="width1" value="#{historiasMB.especialidadPrestador}"/>
+                        </td>
+                    </tr> 
+                </div>
+                <div>
+                    <tr>
+                        <td colspan="2">
+                            <p:commandButton icon="ui-icon-disk" value="Guardar Nuevo Registro" actionListener="#{historiasMB.guardarRegistro}" disabled="#{historiasMB.modificandoRegCli}" update="IdFormRegistroClinico" process="@form" onstart="setDataGraphics()"/>
+                            <p:commandButton icon="ui-icon-arrowthickstop-1-s" value="Actualizar Registro" actionListener="#{historiasMB.actualizarRegistro}" disabled="#{!historiasMB.modificandoRegCli}" rendered="#{loginMB.superUsuario}" process="@form" onstart="setDataGraphics()"/>
+                            <p:commandButton icon="ui-icon-document" value="Limpiar Formulario" actionListener="#{historiasMB.btnLimpiarFormulario}" update="IdFormRegistroClinico"/>
+                        </td>
+                    </tr>
+                </div>
+            </table>
+        </h:form>        
+    </h:body>
+</html>

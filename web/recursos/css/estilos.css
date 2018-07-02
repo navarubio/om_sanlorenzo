@@ -172,12 +172,17 @@ h3{
 }
 
 /*DIMENSIONES USADAD EN CAMPOS DE FORMULARIOS DE HISTORIAS CLINICAS*/
-.width1{ width: 315px; }
-.width2{ width: 644px; }
-.width3{ width: 206px; }
-.width4{ width: 558px; }
-.width5{ width: 200px; }
+.width1{ width: 315px !important; }
+.width2{ width: 644px !important; }
+.width3{ width: 206px !important; }
+.width4{ width: 558px !important; }
+.width5{ width: 200px !important; }
+.width100p{ width: 100% !important; }
 .btnSizeForm{ width: 22px; height: 22px;}/*boton del tamaño de los componentes del formulario*/
+
+.ui-selectonemenu-item{
+    width: 558px !important;
+}
 
 /*COLORES PARA LAS AGENDAS crearAgendaPrestador.xhtml-------------------------*/
 .no_disponible .fc-event-inner {
