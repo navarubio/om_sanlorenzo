@@ -2,20 +2,19 @@
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
   <persistence-unit name="OPENMEDICALPU" transaction-type="JTA">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <jta-data-source>online</jta-data-source>
+    <jta-data-source>jdbc/appmedical</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <shared-cache-mode>NONE</shared-cache-mode>
-    <properties> 
+    <properties>
       <property name="eclipselink.canonicalmodel.subpackage" value="update"/>
     </properties>
   </persistence-unit>
- 
   <persistence-unit name="OPENMEDICALPUREMOTO" transaction-type="JTA">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <jta-data-source>online_remoto</jta-data-source>
+    <jta-data-source>jdbc/appmedical</jta-data-source> 
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <shared-cache-mode>NONE</shared-cache-mode>
-    <properties> 
+    <properties>
       <property name="eclipselink.canonicalmodel.subpackage" value="update"/>
     </properties>
   </persistence-unit>
