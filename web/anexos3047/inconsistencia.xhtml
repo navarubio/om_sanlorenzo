@@ -24,9 +24,9 @@
     <h:body>
         <h:form id="IdFormRegistroClinico">  
             <p:growl id="IdMensajeRefContra"  showDetail="true" sticky="false" autoUpdate="true" life="2000"/>
-            
-            
- 
+
+
+
             <table style="margin-left: auto; margin-right: auto;" >
                 <tr><td colspan="2"><h2>INFORME DE POSIBLES INCONSISTENCIAS EN LA BASE DE DATOS DE LA ENTIDAD RESPONSABLE DEL PAGO</h2></td></tr>                                
 
@@ -53,7 +53,7 @@
 
                     </td>                                        
                 </tr>
-                
+
                 <tr><td colspan="2"><h2>INFORMACION DEL PAGADOR</h2></td></tr>                                
 
                 <td>
@@ -62,6 +62,7 @@
                     <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="CODIGO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
                     <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.idAdministradora.codigoAdministradora} #{historiasMB.empresa.telefono2}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
                 </td>                                        
+
 
                 <tr><td colspan="2"><h2>TIPO DE INCONSISTENCIA</h2></td></tr>   
 
@@ -114,44 +115,92 @@
 
                     </td>                                        
                 </tr>
-
-
                 <tr><td colspan="2"><h2>INFORMACION DE LA POSIBLE INCONSISTENCIA</h2></td></tr>   
+                <tr>
+                    <td><p:outputLabel value="VARIABLE PRESUNTAMENTE INCORRECTA" styleClass="labelFormularioBold" style="font-weight: bold;"/></td>    
+                    <td><p:outputLabel value="DATOS SEGUN DOCUMENTO DE IDENTIFICACION (fisico)" styleClass="labelFormularioBold" style="font-weight: bold;"/></td>                                        
+                </tr>
+                <tr>
+                    <td>
+                        <p:selectBooleanCheckbox id= "papell" value="#{historiasMB.primerapellido}">
+                            <p:ajax update="papellido" />
+                        </p:selectBooleanCheckbox>
+                        <p:outputLabel for="papell" value="   PRIMER APELLIDO" style="font-weight: bold;"/>
+                    </td>
+                    <td>
+                        <p:inputText  id="papellido" styleClass="width1" value="#{historiasMB.datosFormulario.dato3}"   />
+                    </td>                  
+                </tr>    
+                <tr>
+                    <td>
+                        <p:selectBooleanCheckbox id= "sapell" value="#{historiasMB.primerapellido}">
+                            <p:ajax update="sapellido" />
+                        </p:selectBooleanCheckbox>
+                        <p:outputLabel for="sapell" value="    SEGUNDO APELLIDO" />
+                    </td>
+                    <td>
+                        <p:inputText  id="sapellido" styleClass="width1" value="#{historiasMB.datosFormulario.dato4}"   />
+                    </td>                  
+                </tr>    
+                <tr>
+                    <td>
+                        <p:selectBooleanCheckbox id= "pnomb" value="#{historiasMB.primerapellido}">
+                            <p:ajax update="pnombre" />
+                        </p:selectBooleanCheckbox>
+                        <p:outputLabel for="pnomb" value="    PRIMER NOMBRE" />
+                    </td>
+                    <td>
+                        <p:inputText  id="pnombre" styleClass="width1" value="#{historiasMB.datosFormulario.dato4}"   />
+                    </td>                  
+                </tr>  
+                <tr>
+                    <td>
+                        <p:selectBooleanCheckbox id= "snomb" value="#{historiasMB.primerapellido}">
+                            <p:ajax update="snombre" />
+                        </p:selectBooleanCheckbox>
+                        <p:outputLabel for="snomb" value="    SEGUNDO NOMBRE" />
+                    </td>
+                    <td>
+                        <p:inputText  id="snombre" styleClass="width1" value="#{historiasMB.datosFormulario.dato4}"   />
+                    </td>                  
+                </tr>  
 
                 <tr>
-                    <td><p:outputLabel value="TIPO DE REMISION"/></td>    
-                    <td><p:outputLabel value="DEPARTAMENTO"/></td>                                        
-                </tr>
-                <tr>
+                    <td>
+                        <p:selectBooleanCheckbox id= "tdocu" value="#{historiasMB.primerapellido}">
+                            <p:ajax update="snombre" />
+                        </p:selectBooleanCheckbox>
+                        <p:outputLabel for="tdocu" value="    TIPO DOCUMENTO IDENTIFICACION" />
+                    </td>
                     <td >
-                        <p:focus for="IdFocus1" />
-                        <p:selectOneMenu id="IdFocus1" style="width: 315px;" value="#{historiasMB.datosFormulario.dato0}" filter="true" filterMatchMode="contains">
-                            <f:selectItems value="#{aplicacionGeneralMB.listaAmbito}"/>
-                        </p:selectOneMenu>                        
-                    </td>                    
-                    <td >
-                        <p:selectOneMenu styleClass="campoFormulario" style="width: 315px;" value="#{historiasMB.datosFormulario.dato1}" filter="true" filterMatchMode="contains">
-                            <f:ajax 
-                                event="change"
-                                listener="#{historiasMB.cargarMunicipios}"                                                
-                                render="IdMunicipios"/> 
-                            <f:selectItem itemLabel="" itemValue=""/>
-                            <f:selectItems value="#{aplicacionGeneralMB.listaDepartamentos}" />
+                        <p:focus for="IdFocus2" />
+                        <p:selectOneMenu id="IdFocus2" style="width: 315px;" value="#{historiasMB.datosFormulario.dato0}" filter="true" filterMatchMode="contains">
+                            <f:selectItems value="#{aplicacionGeneralMB.listaTipoIdentificacion}"/>
                         </p:selectOneMenu>                        
                     </td>                    
                 </tr>
                 <tr>
-                    <td><p:outputLabel value="MUNICIPIO"/></td>                                        
-                    <td><p:outputLabel value="CORREGIMIENTO"/></td>                                        
-                </tr>
+                    <td>
+                        <p:selectBooleanCheckbox id= "numerodoc" value="#{historiasMB.primerapellido}">
+                            <p:ajax update="ndocument" />
+                        </p:selectBooleanCheckbox>
+                        <p:outputLabel for="numerodoc" value="    NUMERO DOCUMENTO IDENTIFICACION" />
+                    </td>
+                    <td>
+                        <p:inputText  id="ndocument" styleClass="width1" value="#{historiasMB.datosFormulario.dato4}"   />
+                    </td>                  
+                </tr>  
                 <tr>
+                    <td>
+                        <p:selectBooleanCheckbox id= "fnac" value="#{historiasMB.primerapellido}">
+                            <p:ajax update="fechanacimiento" />
+                        </p:selectBooleanCheckbox>
+                        <p:outputLabel for="fnac" value="    FECHA DE NACIMIENTO" />
+                    </td>
                     <td >
-                        <p:selectOneMenu   styleClass="campoFormulario" id="IdMunicipios" style="width: 315px;" value="#{historiasMB.datosFormulario.dato2}" filter="true" filterMatchMode="contains">
-                            <f:selectItems value="#{historiasMB.listaMunicipios}" />
-                        </p:selectOneMenu>
-                    </td>                    
-                    <td >
-                        <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato3}"  />
+                        <p:calendar id="fechanacimiento" navigator="true" locale="es" value="#{historiasMB.datosFormulario.dato6}" pattern="dd/MM/yyyy" mask="true" size="23" style="width: 200px;">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </p:calendar>                   
                     </td>                    
                 </tr>
 
@@ -191,76 +240,6 @@
                         <br/>
                     </td>
                 </tr>
-                <tr>
-                    <td colspan="2"><p:outputLabel value="INSTITUCION REFERENTE" /></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato7}"  /></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><p:outputLabel value="INSTITUCION A LA CUAL REMITE" /></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato8}"  /></td>                    
-                </tr>
-                <tr>
-                    <td colspan="2"><p:outputLabel value="SERVICIO AL CUAL SE REMITE" /></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato9}"  /></td>                    
-                </tr>
-                <tr>
-                    <td colspan="2"><p:outputLabel value="CLASIFICACION DEL EVENTO" /></td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <p:selectOneMenu   styleClass="campoFormulario" style="width: 315px;" value="#{historiasMB.datosFormulario.dato10}" filter="true" filterMatchMode="contains">
-                            <f:selectItems value="#{aplicacionGeneralMB.listaClasificacionEvento}" />
-                        </p:selectOneMenu>
-                    </td>                    
-                </tr>                               
-                <tr>
-                    <td colspan="2"><p:outputLabel value="ESPECIFIQUE" /></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato11}"  /></td>
-                </tr>   
-                <tr>
-                    <td colspan="2"><p:outputLabel value="ASEGURADORA RESPONSABLE DE LA ATENCION, NUMERO DE POLIZA SI ES SOAT Y VIGENCIA" /></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato18}"  /></td>
-                </tr>   
-                <tr>
-                    <td colspan="2"><p:outputLabel value="MOTIVO DE LA REMISION" /></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><p:inputTextarea  styleClass="width2" value="#{historiasMB.datosFormulario.dato12}"  /></td>                    
-                </tr>
-                <tr>
-                    <td colspan="2"><p:outputLabel value="RESUMEN HISTORIA CLINICA, ANTECEDENTES PERSONALES" /></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><p:inputTextarea  styleClass="width2" value="#{historiasMB.datosFormulario.dato13}"  /></td>                    
-                </tr>
-                <tr>
-                    <td colspan="2"><p:outputLabel value="PROCEDIMIENTOS REALIZADOS Y TRATAMIENTO SUMINISTRADO" /></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><p:inputTextarea  styleClass="width2" value="#{historiasMB.datosFormulario.dato14}"  /></td>                    
-                </tr>
-                <tr>
-                    <td colspan="2"><p:outputLabel value="RESULTADOS DE EXAMENES DE LABORATORIO Y AYUDAS DIAGNOSTICAS REALIZADAS" /></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><p:inputTextarea  styleClass="width2" value="#{historiasMB.datosFormulario.dato15}"  /></td>                    
-                </tr>
-                <tr>
-                    <td colspan="2"><p:outputLabel value="DIAGNOSTICOS PRESUNTIVOS" /></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><p:autoComplete size="125" value="#{historiasMB.datosFormulario.dato16}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/></td>
-                </tr>                
                 <tr>
                     <td colspan="2"><p:outputLabel value="OBSERVACIONES" /></td>
                 </tr>

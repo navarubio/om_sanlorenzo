@@ -384,6 +384,8 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     Date fecha;
     List<FilaDataTable> lista_reportes = new ArrayList<>();
     boolean ver_ginecostetricos = false;
+    boolean primerapellido = false;
+
     private AplicacionGeneralMB aplicacionGeneralMB;
 
     private List<FacServicio> listaServiciosOrdenMedica = new ArrayList<FacServicio>();
@@ -11221,5 +11223,14 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     public List<CfgDiagnostico> getListaDiagnosticos() {
         return listaDiagnosticos;
     }
+
+    public boolean isPrimerapellido() {
+        return primerapellido;
+    }
+
+    public void setPrimerapellido(boolean primerapellido) {
+        this.primerapellido = primerapellido;
+    }
+    
     
 }
