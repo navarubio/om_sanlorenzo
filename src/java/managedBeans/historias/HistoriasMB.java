@@ -70,6 +70,7 @@ import modelo.entidades.HcItems;
 import modelo.entidades.HcRegistro;
 import modelo.entidades.HcRepExamenes;
 import modelo.entidades.HcTipoReg;
+import modelo.entidades.HcAnexos3047;
 import modelo.entidades.PyPProgramaItem;
 import modelo.fachadas.CfgClasificacionesFacade;
 import modelo.fachadas.CfgDiagnosticoFacade;
@@ -185,6 +186,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     private List<CfgHistoriaCamposPredefinidos> listaCamposPredefinidos;
     public List<PyPProgramaItem> listaServiciosPrograma;
     private HcTipoReg tipoRegistroClinicoActual;
+    private HcAnexos3047 tipoanexoActual;
     private List<CfgPacientes> listaPacientes;
     //private List<CfgPacientes> listaPacientes;
     private List<CfgPacientes> listaPacientesFiltro;
@@ -219,6 +221,8 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     private String nombreTextoPredefinido = "";
     private String urlFoto = "../recursos/img/img_usuario.png";
     private String tipoRegistroClinico = "";//tipo de registro clinico usado para cargar el fomulario correspondiente
+    private String tipoAnexo3047 = "";//tipo de anexo 3047 usado para cargar el fomulario correspondiente
+    
     private String[] regCliSelHistorial;//registros clinicos seleccionados para el historial
     private String urlPagina = "";
     private String nombreTipoRegistroClinico = "";
@@ -6025,6 +6029,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
 
     public void cambiaTipoRegistroClinico() {//cambia el combo 'tipo de registro clinico'
         modificandoRegCli = false;
+        
         limpiarFormulario();
         valoresPorDefecto();
         cargarUltimoRegistro();
@@ -7214,6 +7219,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     private void mostrarFormularioRegistroClinico() {//permite visualizar un formulario dependiendo de la seleccion en el combo 'tipo de registro clinico'
         if (tipoRegistroClinico != null && tipoRegistroClinico.length() != 0) {
             tipoRegistroClinicoActual = tipoRegCliFacade.find(Integer.parseInt(tipoRegistroClinico));
+            
             urlPagina = tipoRegistroClinicoActual.getUrlPagina();
             nombreTipoRegistroClinico = tipoRegistroClinicoActual.getNombre();
         } else {
@@ -8809,6 +8815,14 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         this.tipoRegistroClinico = tipoRegistroClinico;
     }
 
+    public String getTipoAnexo3047() {
+        return tipoAnexo3047;
+    }
+
+    public void setTipoAnexo3047(String tipoAnexo3047) {
+        this.tipoAnexo3047 = tipoAnexo3047;
+    }
+    
     public boolean isHayPacienteSeleccionado() {
         return hayPacienteSeleccionado;
     }
@@ -9973,6 +9987,16 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     public void setTipoRegistroClinicoActual(HcTipoReg tipoRegistroClinicoActual) {
         this.tipoRegistroClinicoActual = tipoRegistroClinicoActual;
     }
+
+    public HcAnexos3047 getTipoanexoActual() {
+        return tipoanexoActual;
+    }
+
+    public void setTipoanexoActual(HcAnexos3047 tipoanexoActual) {
+        this.tipoanexoActual = tipoanexoActual;
+    }
+    
+    
 
     public CfgPacientes getPacienteTmp() {
         return pacienteTmp;
@@ -11190,4 +11214,5 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     public List<CfgDiagnostico> getListaDiagnosticos() {
         return listaDiagnosticos;
     }
+    
 }

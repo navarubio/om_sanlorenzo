@@ -32,6 +32,7 @@ import java.util.Calendar;
 import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.ValueChangeEvent;
@@ -46,6 +47,7 @@ import modelo.entidades.CfgUsuarios;
 import modelo.entidades.FacAdministradora;
 import modelo.entidades.FacPaquete;
 import modelo.entidades.FacServicio;
+import modelo.entidades.HcAnexos3047;
 import modelo.fachadas.CfgConfiguracionesFacade;
 import modelo.fachadas.CfgCopiasSeguridadFacade;
 import modelo.fachadas.CfgInsumoFacade;
@@ -57,6 +59,7 @@ import modelo.fachadas.CfgUsuariosFacade;
 import modelo.fachadas.FacAdministradoraFacade;
 import modelo.fachadas.FacPaqueteFacade;
 import modelo.fachadas.FacServicioFacade;
+import modelo.fachadas.HcAnexos3047Facade;
 
 /**
  *
@@ -93,6 +96,8 @@ public class AplicacionGeneralMB {
     CfgConfiguracionesFacade configuracionesFacade;
     @EJB
     CfgCopiasSeguridadFacade copiasSeguridadFacade;
+    @EJB
+    HcAnexos3047Facade anexos3047Facade;
 
     //---------------------------------------------------
     //-----------------ENTIDADES ------------------------
@@ -135,6 +140,7 @@ public class AplicacionGeneralMB {
     private List<SelectItem> listaTipoFacturacion;
     private List<SelectItem> listaDiagnosticosUrgencias;
     private List<HcTipoReg> listaTipoRegistroClinico;
+    private List<HcAnexos3047> listaAnexos3047;
 
     private List<FacServicio> listaServicios;
     private List<CfgInsumo> listaInsumos;
@@ -184,6 +190,11 @@ public class AplicacionGeneralMB {
             System.out.println("Error:" + e.getMessage());
         }
     }
+//    @PostConstruct
+//    public void init(){
+//        listaAnexos3047= anexos3047Facade.buscarAnexos3047Activos();
+//    }
+            
 
     public AplicacionGeneralMB() {
         timer.start();
@@ -384,6 +395,8 @@ public class AplicacionGeneralMB {
             cargarClasificacion(ClasificacionesEnum.Gestacion);
             cargarClasificacion(ClasificacionesEnum.Discapacidad);
             cargarClasificacion(ClasificacionesEnum.DiagnosticosUrgencias);
+            cargarClasificacion(ClasificacionesEnum.Anexos3047);
+            
         }
     }
 
@@ -497,6 +510,9 @@ public class AplicacionGeneralMB {
                 break;
             case TipoRegistroClinico:
                 listaTipoRegistroClinico = tipoRegCliFacade.buscarTiposRegstroActivos();
+                break;
+            case Anexos3047:
+                listaAnexos3047 = anexos3047Facade.buscarAnexos3047Activos();
                 break;
             case TipoAfiliado:
                 listaTipoAfiliado = cargarClasificacion(maestro.toString());
@@ -1344,4 +1360,13 @@ public class AplicacionGeneralMB {
         this.timer = timer;
     }
 
+    public List<HcAnexos3047> getListaAnexos3047() {
+        return listaAnexos3047;
+    }
+
+    public void setListaAnexos3047(List<HcAnexos3047> listaAnexos3047) {
+        this.listaAnexos3047 = listaAnexos3047;
+    }
+
+    
 }

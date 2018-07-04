@@ -5,7 +5,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
-        <title>Anexo 1</title>
+        <title>Anexos 3047</title>
         <link href="../recursos/css/estilos.css" rel="stylesheet"/>
         <link href="../recursos/css/metro-bootstrap.css" rel="stylesheet"/>
         <link href="../recursos/css/iconFont.css" rel="stylesheet"/>
@@ -123,23 +123,23 @@
                                         <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.generoPaciente}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>
                                         <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="Edad: " rendered="#{historiasMB.hayPacienteSeleccionado}"/>
                                         <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.edadPaciente}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                                        <p:outputLabel styleClass="labelFormularioBold" value="Administradora: " style="width: 80px;" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                                        <p:outputLabel styleClass="labelFormulario"     value="#{historiasMB.administradoraPaciente}" style="margin-left: 10px;" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                                        <!--p:outputLabel styleClass="labelFormularioBold" value="Administradora: " style="width: 80px;" rendered=".{historiasMB.hayPacienteSeleccionado}"/>
+                                        <p:outputLabel styleClass="labelFormulario"     value=".{historiasMB.administradoraPaciente}" style="margin-left: 10px;" rendered=".{historiasMB.hayPacienteSeleccionado}"/-->
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <p:outputLabel styleClass="labelFormularioBold" value="Tipos de registro: " rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                                        <p:selectOneMenu styleClass="campoFormulario" filter="true" filterMatchMode="contains" style="width: 270px;" value="#{historiasMB.tipoRegistroClinico}" rendered="#{historiasMB.hayPacienteSeleccionado}">
+                                        <p:outputLabel styleClass="labelFormularioBold" value="Seleccione el Anexo: " rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                                        <p:selectOneMenu styleClass="campoFormulario" filter="true" filterMatchMode="contains" style="width: 270px;" value="#{historiasMB.tipoAnexo3047}" rendered="#{historiasMB.hayPacienteSeleccionado}">
                                             <f:ajax
                                                 event="change"
                                                 listener="#{historiasMB.cambiaTipoRegistroClinico}"
                                                 render="IdPanelRegistroClinico"/>
                                             <f:selectItem itemLabel="" itemValue=""/>
-                                            <f:selectItems value="#{aplicacionGeneralMB.listaTipoRegistroClinico}" var="tipoRegistro" itemValue="#{tipoRegistro.idTipoReg}" itemLabel="#{tipoRegistro.nombre}"/>
+                                            <f:selectItems value="#{aplicacionGeneralMB.listaAnexos3047}" var="tipoAnexo" itemValue="#{tipoAnexo.idAnexos3047}" itemLabel="#{tipoAnexo.nombre}"/>
                                         </p:selectOneMenu>
-                                        <p:outputLabel styleClass="labelFormularioBold" value="Turno cita: " rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                                        <p:outputLabel styleClass="labelFormulario"     value="#{historiasMB.turnoCita}" style="margin-left: 10px;" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                                        <!--p:outputLabel styleClass="labelFormularioBold" value="Turno cita: " rendered=".{historiasMB.hayPacienteSeleccionado}"/>
+                                        <p:outputLabel styleClass="labelFormulario"     value=".{historiasMB.turnoCita}" style="margin-left: 10px;" rendered=".{historiasMB.hayPacienteSeleccionado}"/-->
                                     </td>
                                 </tr>
                             </table>
@@ -151,7 +151,7 @@
                 </table>
             </p:panel>
             <p:panel id="IdPanelRegistroClinico" style="position: absolute; width: 99%; height: calc(100% - 120px); margin: 0px; padding: 0px; left: 2px;">
-                <iframe  src="#{historiasMB.urlPagina}"
+                <iframe  src="inconsistencia.xhtml"
                          style="position: absolute; width: 100%; height: 100%; border: none; left: 0px; top: 0px;">
                 </iframe>
             </p:panel>

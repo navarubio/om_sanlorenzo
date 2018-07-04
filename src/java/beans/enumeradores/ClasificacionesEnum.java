@@ -76,6 +76,7 @@ public enum ClasificacionesEnum {
     Paquetes,
     Servicios,
     Sedes, //                           sedes que tiene la empresa
+    Anexos3047, //                      Anexos 3047
     NOVALUE;
 
     public static ClasificacionesEnum convert(String str) {
