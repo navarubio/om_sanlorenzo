@@ -62,6 +62,7 @@ public enum ClasificacionesEnum {
     Religion,
     Gestacion,
     Presentacion,//Presentación de un producto
+    Inconsistencia,
     //-----------------------------------------------------
     //no contenidas en cfg_clasificaciones (son tablas independientes)
     //-----------------------------------------------------

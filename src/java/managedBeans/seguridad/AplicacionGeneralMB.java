@@ -125,6 +125,7 @@ public class AplicacionGeneralMB {
     private List<SelectItem> listaFinalidadConsulta;
     private List<SelectItem> listaFinalidadProcedimiento;
     private List<SelectItem> listaAmbito;
+    private List<SelectItem> listaInconsistencia;
     private List<SelectItem> listaAmbitoFactura;
     private List<SelectItem> listaActoQuirurgico;
     private List<SelectItem> listaPersonalAtiende;
@@ -396,6 +397,8 @@ public class AplicacionGeneralMB {
             cargarClasificacion(ClasificacionesEnum.Discapacidad);
             cargarClasificacion(ClasificacionesEnum.DiagnosticosUrgencias);
             cargarClasificacion(ClasificacionesEnum.Anexos3047);
+            cargarClasificacion(ClasificacionesEnum.Inconsistencia);
+            
             
         }
     }
@@ -439,6 +442,9 @@ public class AplicacionGeneralMB {
                 break;
             case Etnia:
                 listaEtnia = cargarClasificacion(maestro.toString());
+                break;
+            case Inconsistencia:
+                listaInconsistencia = cargarClasificacion(maestro.toString());
                 break;
             case Escolaridad:
                 listaEscolaridad = cargarClasificacion(maestro.toString());
@@ -833,6 +839,16 @@ public class AplicacionGeneralMB {
     public void setListaTipoRegistroClinico(List<HcTipoReg> listaTipoRegistroClinico) {
         this.listaTipoRegistroClinico = listaTipoRegistroClinico;
     }
+
+    public List<SelectItem> getListaInconsistencia() {
+        return listaInconsistencia;
+    }
+
+    public void setListaInconsistencia(List<SelectItem> listaInconsistencia) {
+        this.listaInconsistencia = listaInconsistencia;
+    }
+    
+    
 
 //    public List<SelectItem> getListaFinalidad() {
 //        return listaFinalidad;
