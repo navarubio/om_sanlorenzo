@@ -39,5 +39,16 @@ public class HcAnexos3047Facade extends AbstractFacade<HcAnexos3047> {
             return null;
         }
     }
+    
+    public HcAnexos3047 getAnexos3047Nombre(String nombre){
+        try {
+            String hql ="SELECT h FROM HcAnexos3047 h WHERE h.nombre=:nombre";
+            List<HcAnexos3047> lista = getEntityManager().createQuery(hql).setParameter("nombre", nombre).getResultList();
+            return lista.size() > 0 ? lista.get(0) : null;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
 
 }

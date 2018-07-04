@@ -40,6 +40,7 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import javax.inject.Inject;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -87,6 +88,7 @@ import modelo.fachadas.CitCitasFacade;
 import modelo.fachadas.CitTurnosFacade;
 import modelo.fachadas.FacConsumoMedicamentoFacade;
 import modelo.fachadas.FacServicioFacade;
+import modelo.fachadas.HcAnexos3047Facade;
 import modelo.fachadas.HcArchivosFacade;
 import modelo.fachadas.HcCamposRegFacade;
 import modelo.fachadas.HcDetalleFacade;
@@ -180,6 +182,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     PyPprogramaItems ProgramaFacadeItem;
     @EJB
     CfgHistoriaCamposPredefinidosFacade cfgHistoriaCamposPredefinidosFacade;
+    @EJB
+    HcAnexos3047Facade anexos3047Facade;
+
     //---------------------------------------------------
     //-----------------ENTIDADES ------------------------
     //---------------------------------------------------
@@ -469,6 +474,8 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     HcCamposReg campoSeleccionado;
     private String nombreFormulario;
     private CfgHistoriaCamposPredefinidos textoSeleccionado;
+    @Inject
+    private AplicacionGeneralMB aplicaciongeneral;
 
     public HistoriasMB() {
         aplicacionGeneralMB = FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{aplicacionGeneralMB}", AplicacionGeneralMB.class);
@@ -6028,8 +6035,8 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     }
 
     public void cambiaTipoRegistroClinico() {//cambia el combo 'tipo de registro clinico'
-        modificandoRegCli = false;
-        
+        modificandoRegCli = false;       
+ //       tipoanexoActual= anexos3047Facade.getAnexos3047Nombre(tipoAnexo3047);
         limpiarFormulario();
         valoresPorDefecto();
         cargarUltimoRegistro();

@@ -191,11 +191,7 @@ public class AplicacionGeneralMB {
             System.out.println("Error:" + e.getMessage());
         }
     }
-//    @PostConstruct
-//    public void init(){
-//        listaAnexos3047= anexos3047Facade.buscarAnexos3047Activos();
-//    }
-            
+           
 
     public AplicacionGeneralMB() {
         timer.start();

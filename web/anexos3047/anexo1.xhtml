@@ -136,7 +136,7 @@
                                                 listener="#{historiasMB.cambiaTipoRegistroClinico}"
                                                 render="IdPanelRegistroClinico"/>
                                             <f:selectItem itemLabel="" itemValue=""/>
-                                            <f:selectItems value="#{aplicacionGeneralMB.listaAnexos3047}" var="tipoAnexo" itemValue="#{tipoAnexo.idAnexos3047}" itemLabel="#{tipoAnexo.nombre}"/>
+                                            <f:selectItems value="#{aplicacionGeneralMB.listaAnexos3047}" var="tipoAnexo" itemValue="#{tipoAnexo.urlPagina}" itemLabel="#{tipoAnexo.codanexo} #{tipoAnexo.nombre}"/>
                                         </p:selectOneMenu>
                                         <!--p:outputLabel styleClass="labelFormularioBold" value="Turno cita: " rendered=".{historiasMB.hayPacienteSeleccionado}"/>
                                         <p:outputLabel styleClass="labelFormulario"     value=".{historiasMB.turnoCita}" style="margin-left: 10px;" rendered=".{historiasMB.hayPacienteSeleccionado}"/-->
@@ -151,7 +151,7 @@
                 </table>
             </p:panel>
             <p:panel id="IdPanelRegistroClinico" style="position: absolute; width: 99%; height: calc(100% - 120px); margin: 0px; padding: 0px; left: 2px;">
-                <iframe  src="inconsistencia.xhtml"
+                <iframe  src="#{historiasMB.tipoAnexo3047}"
                          style="position: absolute; width: 100%; height: 100%; border: none; left: 0px; top: 0px;">
                 </iframe>
             </p:panel>
