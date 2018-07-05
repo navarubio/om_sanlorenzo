@@ -241,6 +241,13 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     private int posListaTxtPredef = 0;//determinar la posicion en la estructura 'estructuraCampos' al usar un texto predefinido
     private String idPrestador = "";
     private String especialidadPrestador = "";
+    
+    private int tipomovimiento=0;
+    private String clasificaciontriaje="";
+    private String prestadorremitente="";
+    private String codigoprestadorremitente="";
+    private String pacienteremitido=""; 
+
     private DatosFormularioHistoria datosFormulario = new DatosFormularioHistoria();//valores de cada uno de los campos de cualquier registro clinico
     private DatosFormularioHistoria datosFormulario_nutricion = new DatosFormularioHistoria();//valores de cada uno de los campos de cualquier registro clinico
     private DatosFormularioHistoria datosFormulario_formmedicamentos = new DatosFormularioHistoria();//valores de cada uno de los campos de cualquier registro clinico
@@ -385,6 +392,14 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     List<FilaDataTable> lista_reportes = new ArrayList<>();
     boolean ver_ginecostetricos = false;
     boolean primerapellido = false;
+    boolean segundoapellido = false;
+    boolean primernombre = false;
+    boolean segundonombre = false;
+    boolean tipodocumentoidentifica = false;
+    boolean numerodocumento = false;
+    boolean fechanacimiento = false;
+    boolean accidentetransito=false;
+    
 
     private AplicacionGeneralMB aplicacionGeneralMB;
 
@@ -476,8 +491,8 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     HcCamposReg campoSeleccionado;
     private String nombreFormulario;
     private CfgHistoriaCamposPredefinidos textoSeleccionado;
-    @Inject
-    private AplicacionGeneralMB aplicaciongeneral;
+
+
 
     public HistoriasMB() {
         aplicacionGeneralMB = FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{aplicacionGeneralMB}", AplicacionGeneralMB.class);
@@ -980,7 +995,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
                     datosFormulario.setDato118(valorDefecto3);
                     datosFormulario.setDato116(valorDefecto3);
                     datosFormulario.setDato3(valorDefecto3);
-                    datosFormulario.setDato4(valorDefecto3);
+                    datosFormulario.setDato4(valorDefecto3); 
                     datosFormulario.setDato5(valorDefecto3);
                     datosFormulario.setDato9(valorDefecto3);
                     datosFormulario.setDato16(valorDefecto3);
@@ -10875,6 +10890,17 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
         RequestContext.getCurrentInstance().execute("PF('dialogoBuscarManualesTarifarios').show()");
         RequestContext.getCurrentInstance().update("cargar");
     }
+    
+    public void selecciontipomovimiento() {
+        if (pacienteremitido.equals("SI")) {
+            tipomovimiento = 1;
+        } else if (pacienteremitido.equals("NO")) {
+            tipomovimiento = 2;
+        } else {
+            tipomovimiento = 0;
+        }
+    }
+
 
     public List<PyPProgramaItem> getListaServiciosPrograma() {
         return listaServiciosPrograma;
@@ -11231,6 +11257,104 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     public void setPrimerapellido(boolean primerapellido) {
         this.primerapellido = primerapellido;
     }
+
+    public boolean isSegundoapellido() {
+        return segundoapellido;
+    }
+
+    public void setSegundoapellido(boolean segundoapellido) {
+        this.segundoapellido = segundoapellido;
+    }
+
+    public boolean isPrimernombre() {
+        return primernombre;
+    }
+
+    public void setPrimernombre(boolean primernombre) {
+        this.primernombre = primernombre;
+    }
+
+    public boolean isSegundonombre() {
+        return segundonombre;
+    }
+
+    public void setSegundonombre(boolean segundonombre) {
+        this.segundonombre = segundonombre;
+    }
+
+    public boolean isTipodocumentoidentifica() {
+        return tipodocumentoidentifica;
+    }
+
+    public void setTipodocumentoidentifica(boolean tipodocumentoidentifica) {
+        this.tipodocumentoidentifica = tipodocumentoidentifica;
+    }
+
+    public boolean isNumerodocumento() {
+        return numerodocumento;
+    }
+
+    public void setNumerodocumento(boolean numerodocumento) {
+        this.numerodocumento = numerodocumento;
+    }
+
+    public boolean isFechanacimiento() {
+        return fechanacimiento;
+    }
+
+    public void setFechanacimiento(boolean fechanacimiento) {
+        this.fechanacimiento = fechanacimiento;
+    }
+
+    public String getClasificaciontriaje() {
+        return clasificaciontriaje;
+    }
+
+    public void setClasificaciontriaje(String clasificaciontriaje) {
+        this.clasificaciontriaje = clasificaciontriaje;
+    }
+
+    public boolean isAccidentetransito() {
+        return accidentetransito;
+    }
+
+    public void setAccidentetransito(boolean accidentetransito) {
+        this.accidentetransito = accidentetransito;
+    }
+
+    public String isPacienteremitido() {
+        return pacienteremitido;
+    }
+
+    public void setPacienteremitido(String pacienteremitido) {
+        this.pacienteremitido = pacienteremitido;
+    }
+
+    public String getPrestadorremitente() {
+        return prestadorremitente;
+    }
+
+    public void setPrestadorremitente(String prestadorremitente) {
+        this.prestadorremitente = prestadorremitente;
+    }
+
+    public String getCodigoprestadorremitente() {
+        return codigoprestadorremitente;
+    }
+
+    public void setCodigoprestadorremitente(String codigoprestadorremitente) {
+        this.codigoprestadorremitente = codigoprestadorremitente;
+    }
+
+    public int getTipomovimiento() {
+        return tipomovimiento;
+    }
+
+    public void setTipomovimiento(int tipomovimiento) {
+        this.tipomovimiento = tipomovimiento;
+    }
+    
+    
     
     
 }

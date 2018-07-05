@@ -62,7 +62,8 @@ public enum ClasificacionesEnum {
     Religion,
     Gestacion,
     Presentacion,//Presentación de un producto
-    Inconsistencia,
+    Inconsistencia, //Inconsistencia en Datos manejados por Anexos 3047
+    OrigenAtencion, //Origen de Atención manejado por Formulario Anexo 2 Atencion de Urgencias 
     //-----------------------------------------------------
     //no contenidas en cfg_clasificaciones (son tablas independientes)
     //-----------------------------------------------------

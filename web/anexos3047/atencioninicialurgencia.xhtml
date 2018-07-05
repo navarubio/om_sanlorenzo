@@ -24,11 +24,11 @@
     <h:body>
         <h:form id="IdFormRegistroClinico">  
             <p:growl id="IdMensajeRefContra"  showDetail="true" sticky="false" autoUpdate="true" life="2000"/>
-            
-            
- 
+
+
+
             <table style="margin-left: auto; margin-right: auto;" >
-                <tr><td colspan="2"><h2>INFORME ATENCION ESPECIAL DE URGENCIAS</h2></td></tr>                                
+                <tr><td colspan="2"><h2>INFORME DE ATENCION INICIAL DE URGENCIAS</h2></td></tr>                                
 
                 <tr><td colspan="2"><h2>INFORMACION DEL PRESTADOR</h2></td></tr>                                
 
@@ -53,7 +53,7 @@
 
                     </td>                                        
                 </tr>
-                
+
                 <tr><td colspan="2"><h2>INFORMACION DEL PAGADOR</h2></td></tr>                                
 
                 <td>
@@ -63,18 +63,7 @@
                     <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.idAdministradora.codigoAdministradora} #{historiasMB.empresa.telefono2}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
                 </td>                                        
 
-                <tr><td colspan="2"><h2>TIPO DE INCONSISTENCIA</h2></td></tr>   
-
-                <tr>
-                    <td >
-                        <p:focus for="IdFocus" />
-                        <p:selectOneMenu id="IdFocus" style="width: 315px;" value="#{historiasMB.datosFormulario.dato0}" filter="true" filterMatchMode="contains">
-                            <f:selectItems value="#{aplicacionGeneralMB.listaInconsistencia}"/>
-                        </p:selectOneMenu>                        
-                    </td>                    
-                </tr>
-
-                <tr><td colspan="2"><h2>DATOS DEL USUARIO</h2></td></tr>   
+                <tr><td colspan="2"><h2>DATOS DEL PACIENTE</h2></td></tr>   
 
                 <tr>
                     <td>
@@ -115,158 +104,194 @@
                     </td>                                        
                 </tr>
 
-
-                <tr><td colspan="2"><h2>INFORMACION DE LA POSIBLE INCONSISTENCIA</h2></td></tr>   
-
+                <tr><td colspan="2"><h2>INFORMACION DE LA ATENCION</h2></td></tr>   
                 <tr>
-                    <td><p:outputLabel value="TIPO DE REMISION"/></td>    
-                    <td><p:outputLabel value="DEPARTAMENTO"/></td>                                        
-                </tr>
-                <tr>
-                    <td >
-                        <p:focus for="IdFocus1" />
-                        <p:selectOneMenu id="IdFocus1" style="width: 315px;" value="#{historiasMB.datosFormulario.dato0}" filter="true" filterMatchMode="contains">
-                            <f:selectItems value="#{aplicacionGeneralMB.listaAmbito}"/>
-                        </p:selectOneMenu>                        
-                    </td>                    
-                    <td >
-                        <p:selectOneMenu styleClass="campoFormulario" style="width: 315px;" value="#{historiasMB.datosFormulario.dato1}" filter="true" filterMatchMode="contains">
-                            <f:ajax 
-                                event="change"
-                                listener="#{historiasMB.cargarMunicipios}"                                                
-                                render="IdMunicipios"/> 
-                            <f:selectItem itemLabel="" itemValue=""/>
-                            <f:selectItems value="#{aplicacionGeneralMB.listaDepartamentos}" />
-                        </p:selectOneMenu>                        
-                    </td>                    
-                </tr>
-                <tr>
-                    <td><p:outputLabel value="MUNICIPIO"/></td>                                        
-                    <td><p:outputLabel value="CORREGIMIENTO"/></td>                                        
-                </tr>
-                <tr>
-                    <td >
-                        <p:selectOneMenu   styleClass="campoFormulario" id="IdMunicipios" style="width: 315px;" value="#{historiasMB.datosFormulario.dato2}" filter="true" filterMatchMode="contains">
-                            <f:selectItems value="#{historiasMB.listaMunicipios}" />
-                        </p:selectOneMenu>
-                    </td>                    
-                    <td >
-                        <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato3}"  />
-                    </td>                    
-                </tr>
-
-                <tr>
-                    <td colspan="2">
-                        <br/>
-                        <table>
-                            <tr>
-                                <td>
-                                    <p:outputLabel value="FECHA Y HORA DE LLEGADA"/>
-                                </td>
-                                <td>
-                                    <p:calendar navigator="true" locale="es" value="#{historiasMB.datosFormulario.dato4}" pattern="dd/MM/yyyy HH:mm:ss" mask="true" size="23" style="width: 200px;">
-                                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
-                                    </p:calendar>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p:outputLabel value="FECHA Y HORA DE ATENCION DEL PACIENTE"/>
-                                </td>                                
-                                <td>
-                                    <p:calendar navigator="true" locale="es" value="#{historiasMB.datosFormulario.dato5}" pattern="dd/MM/yyyy HH:mm:ss" mask="true" size="23" style="width: 200px;">
-                                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
-                                    </p:calendar>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><p:outputLabel value="FECHA Y HORA REMISION"/></td>                            
-                                <td>
-                                    <p:calendar navigator="true" locale="es" value="#{historiasMB.datosFormulario.dato6}" pattern="dd/MM/yyyy HH:mm:ss" mask="true" size="23" style="width: 200px;">
-                                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
-                                    </p:calendar>
-                                </td>
-                            </tr>       
-                        </table>
-                        <br/>
+                    <td>
+                        <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="ORIGEN DE LA ATENCION:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2"><p:outputLabel value="INSTITUCION REFERENTE" /></td>
+                    <td colspan="2">
+                        <p:panel id="atencion">
+                            <table>
+                                <td >
+                                    <p:focus for="IdFocus" />
+                                    <p:selectOneMenu id="IdFocus" style="width: 315px;" value="#{historiasMB.datosFormulario.dato0}" filter="true" filterMatchMode="contains">
+                                        <f:selectItem itemLabel="" itemValue=""/>
+                                        <f:selectItems value="#{aplicacionGeneralMB.listaOrigenAtencion}"/>
+                                    </p:selectOneMenu>                        
+                                </td>   
+
+                                <td>
+                                    <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="CLASIFICACION TRIAJE" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+
+                                    <p:selectOneMenu styleClass="campoFormulario"   value="#{historiasMB.clasificaciontriaje}">
+                                        <f:selectItem itemLabel="" itemValue=""/>
+                                        <f:selectItem itemLabel="1-ROJO" itemValue="1-ROJO" />
+                                        <f:selectItem itemLabel="2-AMARILLO" itemValue="2-AMARILLO" />
+                                        <f:selectItem itemLabel="3-VERDE" itemValue="3-VERDE" />
+                                    </p:selectOneMenu>
+                                </td>
+                                <tr>
+                                    <td >
+                                        <p:selectBooleanCheckbox id= "accident" value="#{historiasMB.primerapellido}" />
+                                        <p:outputLabel for="accident" value="   Accidente de Tránsito" style="font-weight: bold;"/>
+                                    </td>
+                                </tr>
+                                <tr><td>&nbsp;</td></tr>
+                                <tr>
+                                    <td>
+                                        <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="INGRESO A URGENCIAS" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                                    </td>
+                                </tr>
+                                <tr><td>&nbsp;</td></tr>
+                                <tr>
+                                    <td>
+                                        <p:outputLabel value="FECHA-HORA"/>
+                                    </td>
+                                    <td>
+                                        <p:outputLabel value="PACIENTE VIENE REMITIDO"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p:calendar navigator="true" locale="es" value="#{historiasMB.fechaReg}" pattern="dd/MM/yyyy HH:mm:ss" mask="true" size="23" style="width: 200px;" />
+                                    </td>
+                                    <td>                                        
+                                        <h:panelGrid columns="1" style="margin-bottom:10px" cellpadding="5">
+                                            <p:selectOneRadio id="console" value="#{historiasMb.pacienteremitido}" >
+                                                <f:selectItem itemLabel="SI" itemValue="SI"/>
+                                                <f:selectItem itemLabel="NO" itemValue="NO"/>
+                                                <p:ajax event="valueChange" 
+                                                        listener="#{historiasMB.selecciontipomovimiento()}"
+                                                        update="remate" 
+                                                        process="@this" > 
+                                                </p:ajax>    
+                                            </p:selectOneRadio>                                        
+                                        </h:panelGrid>                             
+                                    </td>
+                                </tr>
+                            </table> 
+                        </p:panel>
+                    </td>
                 </tr>
-                <tr>
-                    <td colspan="2"><p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato7}"  /></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><p:outputLabel value="INSTITUCION A LA CUAL REMITE" /></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato8}"  /></td>                    
-                </tr>
-                <tr>
-                    <td colspan="2"><p:outputLabel value="SERVICIO AL CUAL SE REMITE" /></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato9}"  /></td>                    
-                </tr>
-                <tr>
-                    <td colspan="2"><p:outputLabel value="CLASIFICACION DEL EVENTO" /></td>
-                </tr>
+
                 <tr>
                     <td colspan="2">
-                        <p:selectOneMenu   styleClass="campoFormulario" style="width: 315px;" value="#{historiasMB.datosFormulario.dato10}" filter="true" filterMatchMode="contains">
-                            <f:selectItems value="#{aplicacionGeneralMB.listaClasificacionEvento}" />
-                        </p:selectOneMenu>
-                    </td>                    
-                </tr>                               
-                <tr>
-                    <td colspan="2"><p:outputLabel value="ESPECIFIQUE" /></td>
+                        <p:panel id="remitido" >
+                            <p:panelGrid columns="1" id="remate" rendered=" #{historiasMB.tipomovimiento== 1 ? true:false}">
+                                <table>
+
+                                    <tr>
+                                        <td>
+                                            <h:panelGroup id="contenedorLabel" rendered="#{historiasMB.pacienteremitido}" >
+                                                <p:outputLabel value="Nombre del Prestador de Servicio de Salud que remite" for="prestadorremite" styleClass="text-ouput" />
+                                                <p:inputText value="#{historiasMB.prestadorremitente}" id="prestadorremite" />
+                                                <p:outputLabel value="" id="codigoprestadorremite" /> 
+                                                <p:inputText  id="codigoprestadorremite" styleClass="width1" value="#{historiasMB.codigoprestadorremitente}" rendered="#{historiasMB.pacienteremitido}"  />
+                                            </h:panelGroup>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h:panelGroup id="contenedorComponent" >
+                                                <p:outputLabel value="DEPARTAMENTO"/>     
+                                            </h:panelGroup>
+                                        </td>
+                                        <td>
+                                            <h:panelGroup id="contenedorComponent" >
+                                                <p:outputLabel value="MUNICIPIO"/>     
+                                            </h:panelGroup>
+                                        </td>
+                                    </tr>
+                                    <tr>     
+                                        <td >
+                                            <p:selectOneMenu styleClass="campoFormulario" style="width: 315px;" value="#{historiasMB.datosFormulario.dato1}" filter="true" filterMatchMode="contains">
+                                                <f:ajax 
+                                                    event="change"
+                                                    listener="#{historiasMB.cargarMunicipios}"                                                
+                                                    render="remitido"/> 
+                                                <f:selectItem itemLabel="" itemValue=""/>
+                                                <f:selectItems value="#{aplicacionGeneralMB.listaDepartamentos}" />
+                                            </p:selectOneMenu>                         
+                                        </td>                    
+                                        <td >
+                                            <p:selectOneMenu   styleClass="campoFormulario" id="IdMunicipios" style="width: 315px;" value="#{historiasMB.datosFormulario.dato2}" filter="true" filterMatchMode="contains">
+                                                <f:selectItems value="#{historiasMB.listaMunicipios}" />
+                                            </p:selectOneMenu>
+                                        </td>                    
+                                    </tr>
+                                </table>
+                            </p:panelGrid>
+                        </p:panel>
+                    </td>
                 </tr>
+                <tr><td>&nbsp;</td></tr>
                 <tr>
-                    <td colspan="2"><p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato11}"  /></td>
-                </tr>   
-                <tr>
-                    <td colspan="2"><p:outputLabel value="ASEGURADORA RESPONSABLE DE LA ATENCION, NUMERO DE POLIZA SI ES SOAT Y VIGENCIA" /></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><p:inputText  styleClass="width2" value="#{historiasMB.datosFormulario.dato18}"  /></td>
-                </tr>   
-                <tr>
-                    <td colspan="2"><p:outputLabel value="MOTIVO DE LA REMISION" /></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><p:inputTextarea  styleClass="width2" value="#{historiasMB.datosFormulario.dato12}"  /></td>                    
-                </tr>
-                <tr>
-                    <td colspan="2"><p:outputLabel value="RESUMEN HISTORIA CLINICA, ANTECEDENTES PERSONALES" /></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><p:inputTextarea  styleClass="width2" value="#{historiasMB.datosFormulario.dato13}"  /></td>                    
-                </tr>
-                <tr>
-                    <td colspan="2"><p:outputLabel value="PROCEDIMIENTOS REALIZADOS Y TRATAMIENTO SUMINISTRADO" /></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><p:inputTextarea  styleClass="width2" value="#{historiasMB.datosFormulario.dato14}"  /></td>                    
-                </tr>
-                <tr>
-                    <td colspan="2"><p:outputLabel value="RESULTADOS DE EXAMENES DE LABORATORIO Y AYUDAS DIAGNOSTICAS REALIZADAS" /></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><p:inputTextarea  styleClass="width2" value="#{historiasMB.datosFormulario.dato15}"  /></td>                    
-                </tr>
-                <tr>
-                    <td colspan="2"><p:outputLabel value="DIAGNOSTICOS PRESUNTIVOS" /></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><p:autoComplete size="125" value="#{historiasMB.datosFormulario.dato16}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/></td>
-                </tr>                
-                <tr>
-                    <td colspan="2"><p:outputLabel value="OBSERVACIONES" /></td>
+                    <td colspan="2"><p:outputLabel value="MOTIVO DE CONSULTA" /></td>
                 </tr>
                 <tr>
                     <td colspan="2"><p:inputTextarea  styleClass="width2" value="#{historiasMB.datosFormulario.dato17}"  /></td>                    
                 </tr>
+                <tr><td>&nbsp;</td></tr>
+                <tr>
+                    <td><p:outputLabel value="IMPRESION DIAGNOSTICA:" /></td>
+                    <td><p:outputLabel value="CODIGO CIE10" /></td>
+                    <td><p:outputLabel value="DESCRIPCION" /></td>
+                </tr>
+                <tr>
+                    <td>
+                        <p:outputLabel value="Diagnóstico Principal:" />
+                    </td>
+                    <td>
+                        <p:outputLabel value="CIE items:" />
+                    </td>
+                    <td>
+                        <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato4}" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p:outputLabel value="Diagnóstico relacionado 1:" />
+                    </td>
+                    <td>
+                        <p:outputLabel value="CIE items:" />
+                    </td>
+                    <td>
+                        <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato4}"   />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p:outputLabel value="Diagnóstico relacionado 2:" />
+                    </td>
+                    <td>
+                        <p:outputLabel value="CIE items:" />
+                    </td>
+                    <td>
+                        <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato4}"   />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p:outputLabel value="Diagnóstico relacionado 3" />
+                    </td>
+                    <td>
+                        <p:outputLabel value="CIE items:" />
+                    </td>
+                    <td>
+                        <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato4}"  />
+                    </td>
+                </tr>
+
+                <tr><td>&nbsp;</td></tr>
+
+                <tr>
+                    <td colspan="2">
+                        <p:outputLabel value="Destino del Paciente"/>
+                    </td>
+                </tr>
+
                 <tr><td>&nbsp;</td></tr>
                 <tr>
                     <td colspan="2">
@@ -274,21 +299,29 @@
                         <p:calendar navigator="true" locale="es" value="#{historiasMB.fechaReg}" pattern="dd/MM/yyyy HH:mm:ss" mask="true" size="23" style="width: 200px;" />
                     </td>
                 </tr>
+                <tr><td colspan="2"><h2>INFORMACION DE LA PERSONA QUE REPORTA</h2></td></tr> 
                 <tr><td>&nbsp;</td></tr>
                 <tr>
-                    <td><p:outputLabel value="MEDICO"/></td>
-                    <td><p:outputLabel value="ESPECIALIDAD"/></td>
+                    <td><p:outputLabel value="NOMBRE DE QUIEN REPORTA"/></td>
                 </tr>
                 <tr>
                     <td>
                         <p:selectOneMenu style="width: 315px;" value="#{historiasMB.idPrestador}" filter="true" filterMatchMode="contains">                            
-                            <p:ajax event="change" listener="#{historiasMB.cambiaMedico}" update="IdEspecialidad"/>
+                            <p:ajax event="change" listener="#{historiasMB.cambiaMedico}" update="IdEspecialidad,telef"/>
                             <f:selectItem itemLabel="" itemValue=""/>
                             <f:selectItems value="#{historiasMB.listaPrestadores}" var="p" itemLabel="#{p.primerNombre} #{p.segundoNombre} #{p.primerApellido} #{p.segundoApellido}" itemValue="#{p.idUsuario}"/>
                         </p:selectOneMenu>
                     </td>
+                </tr>
+                <tr><td><p:outputLabel value="CARGO"/></td></tr>
+                <tr>
                     <td><p:inputText id="IdEspecialidad" readonly="true" styleClass="width1" value="#{historiasMB.especialidadPrestador}"/></td>
-                </tr>                
+                </tr>
+                <tr><td><p:outputLabel value="TELEFONO"/></td></tr>
+                <tr>
+                    <td><p:inputText id="telef" readonly="true" styleClass="width1" value="#{historiasMB.especialidadPrestador}"/></td>
+                </tr>
+
                 <tr><td>&nbsp;</td></tr>
                 <tr>
                     <td colspan="2">

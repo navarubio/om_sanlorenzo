@@ -126,6 +126,7 @@ public class AplicacionGeneralMB {
     private List<SelectItem> listaFinalidadProcedimiento;
     private List<SelectItem> listaAmbito;
     private List<SelectItem> listaInconsistencia;
+    private List<SelectItem> listaOrigenAtencion;
     private List<SelectItem> listaAmbitoFactura;
     private List<SelectItem> listaActoQuirurgico;
     private List<SelectItem> listaPersonalAtiende;
@@ -394,6 +395,7 @@ public class AplicacionGeneralMB {
             cargarClasificacion(ClasificacionesEnum.DiagnosticosUrgencias);
             cargarClasificacion(ClasificacionesEnum.Anexos3047);
             cargarClasificacion(ClasificacionesEnum.Inconsistencia);
+            cargarClasificacion(ClasificacionesEnum.OrigenAtencion);
             
             
         }
@@ -441,6 +443,9 @@ public class AplicacionGeneralMB {
                 break;
             case Inconsistencia:
                 listaInconsistencia = cargarClasificacion(maestro.toString());
+                break;
+            case OrigenAtencion:
+                listaOrigenAtencion = cargarClasificacion(maestro.toString());
                 break;
             case Escolaridad:
                 listaEscolaridad = cargarClasificacion(maestro.toString());
@@ -680,6 +685,8 @@ public class AplicacionGeneralMB {
         //eliminar todas las sessiones activas (se usa cuando se realiza una restauracion de la copia de seguridad)
         sesionesActuales = new ArrayList<>();
     }
+    
+    
 
     //---------------------------------------------------
     //-----------------FUNCIONES GET Y SET --------------
@@ -1380,5 +1387,14 @@ public class AplicacionGeneralMB {
         this.listaAnexos3047 = listaAnexos3047;
     }
 
+    public List<SelectItem> getListaOrigenAtencion() {
+        return listaOrigenAtencion;
+    }
+
+    public void setListaOrigenAtencion(List<SelectItem> listaOrigenAtencion) {
+        this.listaOrigenAtencion = listaOrigenAtencion;
+    }
+
+    
     
 }

@@ -116,130 +116,103 @@
                     </td>                                        
                 </tr>
                 <tr><td colspan="2"><h2>INFORMACION DE LA POSIBLE INCONSISTENCIA</h2></td></tr>   
-                <tr>
-                    <td><p:outputLabel value="VARIABLE PRESUNTAMENTE INCORRECTA" styleClass="labelFormularioBold" style="font-weight: bold;"/></td>    
-                    <td><p:outputLabel value="DATOS SEGUN DOCUMENTO DE IDENTIFICACION (fisico)" styleClass="labelFormularioBold" style="font-weight: bold;"/></td>                                        
-                </tr>
-                <tr>
-                    <td>
-                        <p:selectBooleanCheckbox id= "papell" value="#{historiasMB.primerapellido}">
-                            <p:ajax update="papellido" />
-                        </p:selectBooleanCheckbox>
-                        <p:outputLabel for="papell" value="   PRIMER APELLIDO" style="font-weight: bold;"/>
-                    </td>
-                    <td>
-                        <p:inputText  id="papellido" styleClass="width1" value="#{historiasMB.datosFormulario.dato3}"   />
-                    </td>                  
-                </tr>    
-                <tr>
-                    <td>
-                        <p:selectBooleanCheckbox id= "sapell" value="#{historiasMB.primerapellido}">
-                            <p:ajax update="sapellido" />
-                        </p:selectBooleanCheckbox>
-                        <p:outputLabel for="sapell" value="    SEGUNDO APELLIDO" />
-                    </td>
-                    <td>
-                        <p:inputText  id="sapellido" styleClass="width1" value="#{historiasMB.datosFormulario.dato4}"   />
-                    </td>                  
-                </tr>    
-                <tr>
-                    <td>
-                        <p:selectBooleanCheckbox id= "pnomb" value="#{historiasMB.primerapellido}">
-                            <p:ajax update="pnombre" />
-                        </p:selectBooleanCheckbox>
-                        <p:outputLabel for="pnomb" value="    PRIMER NOMBRE" />
-                    </td>
-                    <td>
-                        <p:inputText  id="pnombre" styleClass="width1" value="#{historiasMB.datosFormulario.dato4}"   />
-                    </td>                  
-                </tr>  
-                <tr>
-                    <td>
-                        <p:selectBooleanCheckbox id= "snomb" value="#{historiasMB.primerapellido}">
-                            <p:ajax update="snombre" />
-                        </p:selectBooleanCheckbox>
-                        <p:outputLabel for="snomb" value="    SEGUNDO NOMBRE" />
-                    </td>
-                    <td>
-                        <p:inputText  id="snombre" styleClass="width1" value="#{historiasMB.datosFormulario.dato4}"   />
-                    </td>                  
-                </tr>  
-
-                <tr>
-                    <td>
-                        <p:selectBooleanCheckbox id= "tdocu" value="#{historiasMB.primerapellido}">
-                            <p:ajax update="snombre" />
-                        </p:selectBooleanCheckbox>
-                        <p:outputLabel for="tdocu" value="    TIPO DOCUMENTO IDENTIFICACION" />
-                    </td>
-                    <td >
-                        <p:focus for="IdFocus2" />
-                        <p:selectOneMenu id="IdFocus2" style="width: 315px;" value="#{historiasMB.datosFormulario.dato0}" filter="true" filterMatchMode="contains">
-                            <f:selectItems value="#{aplicacionGeneralMB.listaTipoIdentificacion}"/>
-                        </p:selectOneMenu>                        
-                    </td>                    
-                </tr>
-                <tr>
-                    <td>
-                        <p:selectBooleanCheckbox id= "numerodoc" value="#{historiasMB.primerapellido}">
-                            <p:ajax update="ndocument" />
-                        </p:selectBooleanCheckbox>
-                        <p:outputLabel for="numerodoc" value="    NUMERO DOCUMENTO IDENTIFICACION" />
-                    </td>
-                    <td>
-                        <p:inputText  id="ndocument" styleClass="width1" value="#{historiasMB.datosFormulario.dato4}"   />
-                    </td>                  
-                </tr>  
-                <tr>
-                    <td>
-                        <p:selectBooleanCheckbox id= "fnac" value="#{historiasMB.primerapellido}">
-                            <p:ajax update="fechanacimiento" />
-                        </p:selectBooleanCheckbox>
-                        <p:outputLabel for="fnac" value="    FECHA DE NACIMIENTO" />
-                    </td>
-                    <td >
-                        <p:calendar id="fechanacimiento" navigator="true" locale="es" value="#{historiasMB.datosFormulario.dato6}" pattern="dd/MM/yyyy" mask="true" size="23" style="width: 200px;">
-                            <f:convertDateTime pattern="dd/MM/yyyy"/>
-                        </p:calendar>                   
-                    </td>                    
-                </tr>
 
                 <tr>
                     <td colspan="2">
-                        <br/>
-                        <table>
-                            <tr>
-                                <td>
-                                    <p:outputLabel value="FECHA Y HORA DE LLEGADA"/>
-                                </td>
-                                <td>
-                                    <p:calendar navigator="true" locale="es" value="#{historiasMB.datosFormulario.dato4}" pattern="dd/MM/yyyy HH:mm:ss" mask="true" size="23" style="width: 200px;">
-                                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
-                                    </p:calendar>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p:outputLabel value="FECHA Y HORA DE ATENCION DEL PACIENTE"/>
-                                </td>                                
-                                <td>
-                                    <p:calendar navigator="true" locale="es" value="#{historiasMB.datosFormulario.dato5}" pattern="dd/MM/yyyy HH:mm:ss" mask="true" size="23" style="width: 200px;">
-                                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
-                                    </p:calendar>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><p:outputLabel value="FECHA Y HORA REMISION"/></td>                            
-                                <td>
-                                    <p:calendar navigator="true" locale="es" value="#{historiasMB.datosFormulario.dato6}" pattern="dd/MM/yyyy HH:mm:ss" mask="true" size="23" style="width: 200px;">
-                                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
-                                    </p:calendar>
-                                </td>
-                            </tr>       
-                        </table>
-                        <br/>
+                        <p:panel id="variacion">
+                            <table>
+                                <tr>
+                                    <td><p:outputLabel value="VARIABLE INCORRECTA" styleClass="labelFormularioBold" style="font-weight: bold;"/></td>    
+                                    <td><p:outputLabel value="DATOS SEGUN DOCUMENTO DE IDENTIFICACION (fisico)" styleClass="labelFormularioBold" style="font-weight: bold;"/></td>                                        
+                                </tr>
+                                <tr>
+                                    <td style="background-color: #eaecfe;">
+                                        <p:selectBooleanCheckbox id= "papell" value="#{historiasMB.primerapellido}">
+                                            <p:ajax update="variacion" />
+                                        </p:selectBooleanCheckbox>
+                                        <p:outputLabel for="papell" value="   PRIMER APELLIDO" style="font-weight: bold;"/>
+                                    </td>
+                                    <td>
+                                        <p:inputText  id="papellido" styleClass="width1" value="#{historiasMB.datosFormulario.dato3}"  rendered="#{historiasMB.primerapellido}" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="background-color: #eaecfe;">
+                                        <p:selectBooleanCheckbox id= "sapell" value="#{historiasMB.segundoapellido}">
+                                            <p:ajax update="variacion" />
+                                        </p:selectBooleanCheckbox>
+                                        <p:outputLabel for="sapell" value="    SEGUNDO APELLIDO" />
+                                    </td>
+                                    <td>
+                                        <p:inputText  id="sapellido" styleClass="width1" value="#{historiasMB.datosFormulario.dato4}" rendered="#{historiasMB.segundoapellido}"  />
+                                    </td>                  
+                                </tr>    
+                                <tr>
+                                    <td style="background-color: #eaecfe;">
+                                        <p:selectBooleanCheckbox id= "pnomb" value="#{historiasMB.primernombre}">
+                                            <p:ajax update="variacion" />
+                                        </p:selectBooleanCheckbox>
+                                        <p:outputLabel for="pnomb" value="    PRIMER NOMBRE" />
+                                    </td>
+                                    <td>
+                                        <p:inputText  id="pnombre" styleClass="width1" value="#{historiasMB.datosFormulario.dato4}" rendered="#{historiasMB.primernombre}"  />
+                                    </td>                  
+                                </tr>  
+                                <tr>
+                                    <td style="background-color: #eaecfe;">
+                                        <p:selectBooleanCheckbox id= "snomb" value="#{historiasMB.segundonombre}">
+                                            <p:ajax update="variacion" />
+                                        </p:selectBooleanCheckbox>
+                                        <p:outputLabel for="snomb" value="    SEGUNDO NOMBRE" />
+                                    </td>
+                                    <td>
+                                        <p:inputText  id="snombre" styleClass="width1" value="#{historiasMB.datosFormulario.dato4}" rendered="#{historiasMB.segundonombre}"  />
+                                    </td>                  
+                                </tr>  
+
+                                <tr>
+                                    <td style="background-color: #eaecfe;">
+                                        <p:selectBooleanCheckbox id= "tdocu" value="#{historiasMB.tipodocumentoidentifica}">
+                                            <p:ajax update="variacion" />
+                                        </p:selectBooleanCheckbox>
+                                        <p:outputLabel for="tdocu" value="    TIPO DOCUMENTO IDENTIFICACION" />
+                                    </td>
+                                    <td >
+                                        <p:focus for="IdFocus2" />
+                                        <p:selectOneMenu id="IdFocus2" style="width: 315px;" value="#{historiasMB.datosFormulario.dato0}" filter="true" filterMatchMode="contains" rendered="#{historiasMB.tipodocumentoidentifica}">
+                                            <f:selectItems value="#{aplicacionGeneralMB.listaTipoIdentificacion}"/>
+                                        </p:selectOneMenu>                        
+                                    </td>                    
+                                </tr>
+                                <tr>
+                                    <td style="background-color: #eaecfe;">
+                                        <p:selectBooleanCheckbox id= "numerodoc" value="#{historiasMB.numerodocumento}">
+                                            <p:ajax update="variacion" />
+                                        </p:selectBooleanCheckbox>
+                                        <p:outputLabel for="numerodoc" value="    NUMERO DOCUMENTO IDENTIFICACION" />
+                                    </td>
+                                    <td>
+                                        <p:inputText  id="ndocument" styleClass="width1" value="#{historiasMB.datosFormulario.dato4}"  rendered="#{historiasMB.numerodocumento}"  />
+                                    </td>                  
+                                </tr>  
+                                <tr>
+                                    <td style="background-color: #eaecfe;">
+                                        <p:selectBooleanCheckbox id= "fnac" value="#{historiasMB.fechanacimiento}">
+                                            <p:ajax update="variacion" />
+                                        </p:selectBooleanCheckbox>
+                                        <p:outputLabel for="fnac" value="    FECHA DE NACIMIENTO" />
+                                    </td>
+                                    <td>
+                                        <p:calendar id="fechanacimiento" navigator="true" locale="es" value="#{historiasMB.datosFormulario.dato6}" pattern="dd/MM/yyyy" mask="true" size="23" style="width: 200px;" rendered="#{historiasMB.fechanacimiento}">
+                                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                        </p:calendar>                   
+                                    </td>                    
+                                </tr>
+                            </table>
+                        </p:panel>
                     </td>
                 </tr>
+                <tr><td>&nbsp;</td></tr>
                 <tr>
                     <td colspan="2"><p:outputLabel value="OBSERVACIONES" /></td>
                 </tr>
@@ -253,21 +226,29 @@
                         <p:calendar navigator="true" locale="es" value="#{historiasMB.fechaReg}" pattern="dd/MM/yyyy HH:mm:ss" mask="true" size="23" style="width: 200px;" />
                     </td>
                 </tr>
+                <tr><td colspan="2"><h2>INFORMACION DE LA PERSONA QUE REPORTA</h2></td></tr> 
                 <tr><td>&nbsp;</td></tr>
                 <tr>
-                    <td><p:outputLabel value="MEDICO"/></td>
-                    <td><p:outputLabel value="ESPECIALIDAD"/></td>
+                    <td><p:outputLabel value="NOMBRE DE QUIEN REPORTA"/></td>
                 </tr>
                 <tr>
                     <td>
                         <p:selectOneMenu style="width: 315px;" value="#{historiasMB.idPrestador}" filter="true" filterMatchMode="contains">                            
-                            <p:ajax event="change" listener="#{historiasMB.cambiaMedico}" update="IdEspecialidad"/>
+                            <p:ajax event="change" listener="#{historiasMB.cambiaMedico}" update="IdEspecialidad,telef"/>
                             <f:selectItem itemLabel="" itemValue=""/>
                             <f:selectItems value="#{historiasMB.listaPrestadores}" var="p" itemLabel="#{p.primerNombre} #{p.segundoNombre} #{p.primerApellido} #{p.segundoApellido}" itemValue="#{p.idUsuario}"/>
                         </p:selectOneMenu>
                     </td>
+                </tr>
+                <tr><td><p:outputLabel value="CARGO"/></td></tr>
+                <tr>
                     <td><p:inputText id="IdEspecialidad" readonly="true" styleClass="width1" value="#{historiasMB.especialidadPrestador}"/></td>
-                </tr>                
+                </tr>
+                <tr><td><p:outputLabel value="TELEFONO"/></td></tr>
+                <tr>
+                    <td><p:inputText id="telef" readonly="true" styleClass="width1" value="#{historiasMB.especialidadPrestador}"/></td>
+                </tr>
+
                 <tr><td>&nbsp;</td></tr>
                 <tr>
                     <td colspan="2">

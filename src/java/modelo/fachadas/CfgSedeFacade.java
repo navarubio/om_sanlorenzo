@@ -35,18 +35,6 @@ public class CfgSedeFacade extends AbstractFacade<CfgSede> {
         }
     }
     
-//    public List<CfgSede> sedesAll() {
-//        String consulta;
-//        List<CfgSede> lista = null;
-//        try {
-//            consulta = "SELECT u FROM cfg_sede u order by u.id_sede ASC";
-//            Query query = em.createQuery(consulta);
-//            lista = query.getResultList();
-//        } catch (Exception e) {
-//            throw e;
-//        }
-//        return lista;
-//    }
 
     public CfgSede getSede(String codigo, String nombre) {
         EntityManager emT = this.getEntityManager();
