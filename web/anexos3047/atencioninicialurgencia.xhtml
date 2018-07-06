@@ -196,7 +196,7 @@
                 <tr><td colspan="2"><h2>INFORMACION DE LA ATENCION</h2></td></tr>   
                 <tr>
                     <td colspan="2">
-                        <p:panel id="atencion" styleClass="width2" >
+                        <p:panel id="atencion" styleClass="width6" >
                             <table>
                                 <tr>
                                     <td>
@@ -270,7 +270,7 @@
 
                 <tr>
                     <td colspan="2">
-                        <p:panel id="remitido" styleClass="width2"   >
+                        <p:panel id="remitido" styleClass="width6"    >
                             <table> 
                                 <tr>
                                     <td>
@@ -314,12 +314,15 @@
                         </p:panel>
                     </td>
                 </tr>
-                <tr>
-                    <td colspan="2"><p:outputLabel value="MOTIVO DE CONSULTA" /></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><p:inputTextarea  styleClass="width2" value="#{historiasMB.datosFormulario.dato17}"  /></td>                    
-                </tr>
+                
+                <table>
+                    <tr>
+                        <td colspan="2"><p:outputLabel value="MOTIVO DE CONSULTA" /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><p:inputTextarea  styleClass="width2" value="#{historiasMB.datosFormulario.dato17}"  /></td>                    
+                    </tr>
+                </table>
                 <tr><td>&nbsp;</td></tr>
                 <td colspan="2"> 
                     <table>
@@ -387,9 +390,10 @@
                                 </p:selectOneMenu>  
                             </td>                        
                         </tr>
+                        <tr><td>&nbsp;</td></tr>
                         <tr>
                             <td>
-                                <p:outputLabel value="FECHA-HORA REGISTRO"/>
+                                <p:outputLabel value="FECHA-HORA REGISTRO" styleClass="labelFormularioBold" style="font-weight: bold;"/>
                             </td>
                             <td>
                                 <p:calendar navigator="true" locale="es" value="#{historiasMB.fechaReg}" pattern="dd/MM/yyyy HH:mm:ss" mask="true" size="23" style="width: 200px;" />
@@ -400,7 +404,7 @@
                 </td>
 
 
-
+                <table>
                 <tr><td>&nbsp;</td></tr>
                 <tr><td colspan="2"><h2>INFORMACION DE LA PERSONA QUE REPORTA</h2></td></tr> 
                 <tr><td>&nbsp;</td></tr>
@@ -438,6 +442,7 @@
                                          actionListener="#{historiasMB.btnLimpiarFormulario}" update="@form"/>
                     </td>
                 </tr>
+                </table>
             </table>            
             <p:dialog id="IdTextosDlgPredefinidos" header="TEXTOS PREDEFINIDOS" width="645" widgetVar="dlgTextosPredefinidos" resizable="false" closable="true" modal="true">                                
                 <p:panelGrid styleClass="panelGridSinBordes" id="IdPanelTextosPredefinidos">
