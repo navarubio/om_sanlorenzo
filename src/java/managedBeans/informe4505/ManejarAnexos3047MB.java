@@ -8,6 +8,7 @@ package managedBeans.informe4505;
 import beans.utilidades.MetodosGenerales;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -43,6 +44,11 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     private String tiposerviciosolicita="";
     private String prioridadservicio="";
     private String ubicacionpaciente="";
+    private boolean coutam=false;
+    private boolean copago=false;
+    private boolean coutar=false;
+    private boolean coutaotro=false;
+    private Date fechaReg;
     
     private DatosFormularioHistoria datosFormulario = new DatosFormularioHistoria();//valores de cada uno de los campos de cualquier registro clinico
     
@@ -148,6 +154,46 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
 
     public void setUbicacionpaciente(String ubicacionpaciente) {
         this.ubicacionpaciente = ubicacionpaciente;
+    }
+
+    public boolean isCoutam() {
+        return coutam;
+    }
+
+    public void setCoutam(boolean coutam) {
+        this.coutam = coutam;
+    }
+
+    public boolean isCopago() {
+        return copago;
+    }
+
+    public void setCopago(boolean copago) {
+        this.copago = copago;
+    }
+
+    public boolean isCoutar() {
+        return coutar;
+    }
+
+    public void setCoutar(boolean coutar) {
+        this.coutar = coutar;
+    }
+
+    public boolean isCoutaotro() {
+        return coutaotro;
+    }
+
+    public void setCoutaotro(boolean coutaotro) {
+        this.coutaotro = coutaotro;
+    }
+
+    public Date getFechaReg() {
+        return fechaReg;
+    }
+
+    public void setFechaReg(Date fechaReg) {
+        this.fechaReg = fechaReg;
     }
     
     
