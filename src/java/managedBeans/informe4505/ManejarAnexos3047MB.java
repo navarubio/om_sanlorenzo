@@ -41,6 +41,8 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     private List<SelectItem> listaMunicipios;
     private String departamento = "";
     private String tiposerviciosolicita="";
+    private String prioridadservicio="";
+    private String ubicacionpaciente="";
     
     private DatosFormularioHistoria datosFormulario = new DatosFormularioHistoria();//valores de cada uno de los campos de cualquier registro clinico
     
@@ -131,6 +133,23 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     public void setTiposerviciosolicita(String tiposerviciosolicita) {
         this.tiposerviciosolicita = tiposerviciosolicita;
     }
+
+    public String getPrioridadservicio() {
+        return prioridadservicio;
+    }
+
+    public void setPrioridadservicio(String prioridadservicio) {
+        this.prioridadservicio = prioridadservicio;
+    }
+
+    public String getUbicacionpaciente() {
+        return ubicacionpaciente;
+    }
+
+    public void setUbicacionpaciente(String ubicacionpaciente) {
+        this.ubicacionpaciente = ubicacionpaciente;
+    }
+    
     
     
 }
