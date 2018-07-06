@@ -40,6 +40,7 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     private boolean prestadorremitente=false;
     private List<SelectItem> listaMunicipios;
     private String departamento = "";
+    private String tiposerviciosolicita="";
     
     private DatosFormularioHistoria datosFormulario = new DatosFormularioHistoria();//valores de cada uno de los campos de cualquier registro clinico
     
@@ -121,6 +122,14 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
 
     public void setListaMunicipios(List<SelectItem> listaMunicipios) {
         this.listaMunicipios = listaMunicipios;
+    }
+
+    public String getTiposerviciosolicita() {
+        return tiposerviciosolicita;
+    }
+
+    public void setTiposerviciosolicita(String tiposerviciosolicita) {
+        this.tiposerviciosolicita = tiposerviciosolicita;
     }
     
     
