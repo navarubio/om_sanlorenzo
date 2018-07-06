@@ -28,239 +28,327 @@
 
 
             <table style="margin-left: auto; margin-right: auto;" >
-                <tr><td colspan="2"><h2>INFORME DE POSIBLES INCONSISTENCIAS EN LA BASE DE DATOS DE LA ENTIDAD RESPONSABLE DEL PAGO</h2></td></tr>                                
-
-                <tr><td colspan="2"><h2>INFORMACION DEL PRESTADOR</h2></td></tr>                                
-
-                <td>
-                    <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="NOMBRE:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                    <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.empresa.razonSocial}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                    <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="NIT:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                    <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.empresa.numIdentificacion}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                    <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="CODIGO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                    <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.empresa.codEmpresa}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                </td>
                 <tr>
-                    <td>
-                        <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="DIRECCION:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                        <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.empresa.direccion}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
-                        <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="TELEFONO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                        <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.empresa.telefono1} #{historiasMB.empresa.telefono2}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
-                        <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="DEPARTAMENTO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                        <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.empresa.codDepartamento.descripcion} #{historiasMB.empresa.codDepartamento.codigo} "  rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
-                        <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="MUNICIPIO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                        <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.empresa.codMunicipio.descripcion} #{historiasMB.empresa.codMunicipio.codigo}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
+                    <table>
+                        <tr><td colspan="2"><h2>INFORME DE POSIBLES INCONSISTENCIAS EN LA BASE DE DATOS DE LA ENTIDAD RESPONSABLE DEL PAGO</h2></td></tr>                                
 
-                    </td>                                        
-                </tr>
+                        <tr><td colspan="2"><h2>INFORMACION DEL PRESTADOR</h2></td></tr>   
+                        <tr>
+                            <td  style="background-color: #eaecfe;">
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="NOMBRE:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>
+                            <td style="background-color: #eaecfe;">    
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="NIT:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>
+                            <td style="background-color: #eaecfe;">
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="CODIGO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>
+                            <td style="background-color: #eaecfe;">
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="TELEFONO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>
 
-                <tr><td colspan="2"><h2>INFORMACION DEL PAGADOR</h2></td></tr>                                
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:inputText readonly="true" styleClass="width1"    style="font-weight: bold;" value="#{historiasMB.empresa.razonSocial}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>
+                            <td>
+                                <p:inputText readonly="true" styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.empresa.numIdentificacion}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>
+                            <td>
+                                <p:inputText readonly="true" styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.empresa.codEmpresa}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>
+                            <td>
+                                <p:inputText readonly="true" styleClass="labelFormulario" style="font-weight: bold;" value="#{historiasMB.empresa.telefono1} #{historiasMB.empresa.telefono2}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
+                            </td>                            
+                        </tr>
+                        <tr>
+                            <td style="background-color: #eaecfe;">
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="DIRECCION:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>
 
-                <td>
-                    <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="ENTIDAD A LA QUE SE LE INFORMA:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                    <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.idAdministradora.razonSocial}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
-                    <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="CODIGO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                    <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.idAdministradora.codigoAdministradora} #{historiasMB.empresa.telefono2}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
-                </td>                                        
+                            <td style="background-color: #eaecfe;">
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="DEPARTAMENTO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>
+                            <td style="background-color: #eaecfe;">
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="MUNICIPIO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>    
+                        </tr>
+                        <tr> 
+                            <td>
+                                <p:inputText readonly="true" styleClass="width1"    style="font-weight: bold;" value="#{historiasMB.empresa.direccion}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
+                            </td>
+                            <td>
+                                <p:inputText readonly="true" styleClass="labelFormulario" style="font-weight: bold;" value="#{historiasMB.empresa.codDepartamento.descripcion} #{historiasMB.empresa.codDepartamento.codigo} "  rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
+                            </td>
+                            <td>
+                                <p:inputText readonly="true" styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.empresa.codMunicipio.descripcion} #{historiasMB.empresa.codMunicipio.codigo}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>                  
+                            </td> 
+                        </tr>
 
+                        <tr><td colspan="2"><h2>INFORMACION DEL PAGADOR</h2></td></tr>                                
 
-                <tr><td colspan="2"><h2>TIPO DE INCONSISTENCIA</h2></td></tr>   
+                        <tr>
+                            <td style="background-color: #eaecfe;" >
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="ENTIDAD A LA QUE SE LE INFORMA:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>
+                            <td style="background-color: #eaecfe;">
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="CODIGO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td> 
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:inputText readonly="true" styleClass="width1"    style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.idAdministradora.razonSocial}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
+                            </td>
+                            <td>
+                                <p:inputText readonly="true"  styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.idAdministradora.codigoAdministradora} #{historiasMB.empresa.telefono2}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
+                            </td>
 
-                <tr>
-                    <td >
-                        <p:focus for="IdFocus" />
-                        <p:selectOneMenu id="IdFocus" style="width: 315px;" value="#{historiasMB.datosFormulario.dato0}" filter="true" filterMatchMode="contains">
-                            <f:selectItems value="#{aplicacionGeneralMB.listaInconsistencia}"/>
-                        </p:selectOneMenu>                        
-                    </td>                    
-                </tr>
+                        </tr>
 
-                <tr><td colspan="2"><h2>DATOS DEL USUARIO</h2></td></tr>   
+                        <tr><td colspan="2"><h2>TIPO DE INCONSISTENCIA</h2></td></tr>   
 
-                <tr>
-                    <td>
-                        <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="PRIMER APELLIDO" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                        <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.primerApellido}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>     
-                        <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="SEGUNDO APELLIDO" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                        <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.segundoApellido}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>   
-                        <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="PRIMER NOMBRE" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                        <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.primerNombre}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>     
-                        <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="SEGUNDO NOMBRE" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                        <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.segundoNombre}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>     
-                    </td>                                        
-                </tr>
-                <tr>
-                    <td>
-                        <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="DOCUMENTO IDENTIFICACION:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                        <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.tipoIdentificacion.descripcion}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>     
-                        <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="NUMERO DOCUMENTO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                        <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.identificacion}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>     
-                        <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="FECHA DE NACIMIENTO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                        <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.fechaNacimiento}"  rendered="#{historiasMB.hayPacienteSeleccionado}">
-                            <f:convertDateTime parent="yyyy-mm-dd"/>
-                        </p:outputLabel>
-                    </td>                                        
-                </tr>
+                        <tr>
+                            <td >
+                                <p:focus for="IdFocus" />
+                                <p:selectOneMenu id="IdFocus" style="width: 315px;" value="#{historiasMB.datosFormulario.dato0}" filter="true" filterMatchMode="contains">
+                                    <f:selectItems value="#{aplicacionGeneralMB.listaInconsistencia}"/>
+                                </p:selectOneMenu>                        
+                            </td>                    
+                        </tr>
+                        
+                        <tr><td colspan="2"><h2>DATOS DEL USUARIO</h2></td></tr>    
+                        <tr>
+                            <td style="background-color: #eaecfe;">
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="PRIMER APELLIDO" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>
+                            <td style="background-color: #eaecfe;">
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="SEGUNDO APELLIDO" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>
+                            <td style="background-color: #eaecfe;">
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="PRIMER NOMBRE" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>
+                            <td style="background-color: #eaecfe;">
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="SEGUNDO NOMBRE" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>                                        
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:inputText readonly="true" styleClass="width1"      style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.primerApellido}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>     
+                            </td>
+                            <td>
+                                <p:inputText readonly="true" styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.segundoApellido}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>   
+                            </td>
+                            <td>
+                                <p:inputText readonly="true" styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.primerNombre}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>     
+                            </td>
+                            <td>
+                                <p:inputText readonly="true" styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.segundoNombre}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>     
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="background-color: #eaecfe;">
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="DOCUMENTO IDENTIFICACION:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>
+                            <td style="background-color: #eaecfe;">
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="NUMERO DOCUMENTO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>
+                            <td style="background-color: #eaecfe;">
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="FECHA DE NACIMIENTO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
+                            </td>
+                            <td style="background-color: #eaecfe;">
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="TELEFONO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>                                        
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:inputText readonly="true" styleClass="width1"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.tipoIdentificacion.descripcion}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>     
+                            </td>
+                            <td>
+                                <p:inputText readonly="true" styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.identificacion}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>     
+                            </td>
+                            <td>
+                                <p:inputText readonly="true" styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.fechaNacimiento}"  rendered="#{historiasMB.hayPacienteSeleccionado}">
+                                    <f:convertDateTime parent="yyyy-mm-dd"/>
+                                </p:inputText>
+                            </td>                                        
+                            <td>
+                                <p:inputText readonly="true" styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.telefonoResidencia}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
+                            </td>                                                                    
+                        </tr>
+                        <tr>
+                            <td style="background-color: #eaecfe;">
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="DIRECCION DE HABITACION:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>
+                            <td style="background-color: #eaecfe;">
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="DEPARTAMENTO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
+                            </td>
+                            <td style="background-color: #eaecfe;">
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="MUNICIPIO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:inputText readonly="true" styleClass="width1"      style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.direccion}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>     
+                            </td>
+                            <td>
+                                <p:inputText readonly="true" styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.departamento.descripcion} #{historiasMB.pacienteSeleccionado.departamento.codigo} "  rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
+                            </td>
+                            <td>
+                                <p:inputText readonly="true" styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.municipio.descripcion} #{historiasMB.pacienteSeleccionado.municipio.codigo}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
+                            </td>
+                        </tr>
+                             
+                        <tr><td colspan="2"><h2>INFORMACION DE LA POSIBLE INCONSISTENCIA</h2></td></tr>   
 
-                <tr>
-                    <td>
-                        <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="DIRECCION DE HABITACION:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                        <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.direccion}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>     
-                        <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="DEPARTAMENTO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                        <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.departamento.descripcion} #{historiasMB.pacienteSeleccionado.departamento.codigo} "  rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
-                        <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="MUNICIPIO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                        <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.municipio.descripcion} #{historiasMB.pacienteSeleccionado.municipio.codigo}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
-                        <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="TELEFONO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                        <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.telefonoResidencia}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
+                        <tr>
+                            <td colspan="2">
+                                <p:panel id="variacion">
+                                    <table>
+                                        <tr>
+                                            <td><p:outputLabel value="VARIABLE INCORRECTA" styleClass="labelFormularioBold" style="font-weight: bold;"/></td>    
+                                            <td><p:outputLabel value="DATOS SEGUN DOCUMENTO DE IDENTIFICACION (fisico)" styleClass="labelFormularioBold" style="font-weight: bold;"/></td>                                        
+                                        </tr>
+                                        <tr>
+                                            <td style="background-color: #eaecfe;">
+                                                <p:selectBooleanCheckbox id= "papell" value="#{historiasMB.primerapellido}">
+                                                    <p:ajax update="variacion" />
+                                                </p:selectBooleanCheckbox>
+                                                <p:outputLabel for="papell" value="   PRIMER APELLIDO" style="font-weight: bold;"/>
+                                            </td>
+                                            <td>
+                                                <p:inputText  id="papellido" styleClass="width1" value="#{historiasMB.datosFormulario.dato3}"  rendered="#{historiasMB.primerapellido}" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="background-color: #eaecfe;">
+                                                <p:selectBooleanCheckbox id= "sapell" value="#{historiasMB.segundoapellido}">
+                                                    <p:ajax update="variacion" />
+                                                </p:selectBooleanCheckbox>
+                                                <p:outputLabel for="sapell" value="    SEGUNDO APELLIDO" />
+                                            </td>
+                                            <td>
+                                                <p:inputText  id="sapellido" styleClass="width1" value="#{historiasMB.datosFormulario.dato4}" rendered="#{historiasMB.segundoapellido}"  />
+                                            </td>                  
+                                        </tr>    
+                                        <tr>
+                                            <td style="background-color: #eaecfe;">
+                                                <p:selectBooleanCheckbox id= "pnomb" value="#{historiasMB.primernombre}">
+                                                    <p:ajax update="variacion" />
+                                                </p:selectBooleanCheckbox>
+                                                <p:outputLabel for="pnomb" value="    PRIMER NOMBRE" />
+                                            </td>
+                                            <td>
+                                                <p:inputText  id="pnombre" styleClass="width1" value="#{historiasMB.datosFormulario.dato4}" rendered="#{historiasMB.primernombre}"  />
+                                            </td>                  
+                                        </tr>  
+                                        <tr>
+                                            <td style="background-color: #eaecfe;">
+                                                <p:selectBooleanCheckbox id= "snomb" value="#{historiasMB.segundonombre}">
+                                                    <p:ajax update="variacion" />
+                                                </p:selectBooleanCheckbox>
+                                                <p:outputLabel for="snomb" value="    SEGUNDO NOMBRE" />
+                                            </td>
+                                            <td>
+                                                <p:inputText  id="snombre" styleClass="width1" value="#{historiasMB.datosFormulario.dato4}" rendered="#{historiasMB.segundonombre}"  />
+                                            </td>                  
+                                        </tr>  
 
-                    </td>                                        
-                </tr>
-                <tr><td colspan="2"><h2>INFORMACION DE LA POSIBLE INCONSISTENCIA</h2></td></tr>   
+                                        <tr>
+                                            <td style="background-color: #eaecfe;">
+                                                <p:selectBooleanCheckbox id= "tdocu" value="#{historiasMB.tipodocumentoidentifica}">
+                                                    <p:ajax update="variacion" />
+                                                </p:selectBooleanCheckbox>
+                                                <p:outputLabel for="tdocu" value="    TIPO DOCUMENTO IDENTIFICACION" />
+                                            </td>
+                                            <td >
+                                                <p:focus for="IdFocus2" />
+                                                <p:selectOneMenu id="IdFocus2" style="width: 315px;" value="#{historiasMB.datosFormulario.dato0}" filter="true" filterMatchMode="contains" rendered="#{historiasMB.tipodocumentoidentifica}">
+                                                    <f:selectItems value="#{aplicacionGeneralMB.listaTipoIdentificacion}"/>
+                                                </p:selectOneMenu>                        
+                                            </td>                    
+                                        </tr>
+                                        <tr>
+                                            <td style="background-color: #eaecfe;">
+                                                <p:selectBooleanCheckbox id= "numerodoc" value="#{historiasMB.numerodocumento}">
+                                                    <p:ajax update="variacion" />
+                                                </p:selectBooleanCheckbox>
+                                                <p:outputLabel for="numerodoc" value="    NUMERO DOCUMENTO IDENTIFICACION" />
+                                            </td>
+                                            <td>
+                                                <p:inputText  id="ndocument" styleClass="width1" value="#{historiasMB.datosFormulario.dato4}"  rendered="#{historiasMB.numerodocumento}"  />
+                                            </td>                  
+                                        </tr>  
+                                        <tr>
+                                            <td style="background-color: #eaecfe;">
+                                                <p:selectBooleanCheckbox id= "fnac" value="#{historiasMB.fechanacimiento}">
+                                                    <p:ajax update="variacion" />
+                                                </p:selectBooleanCheckbox>
+                                                <p:outputLabel for="fnac" value="    FECHA DE NACIMIENTO" />
+                                            </td>
+                                            <td>
+                                                <p:calendar id="fechanacimiento" navigator="true" locale="es" value="#{historiasMB.datosFormulario.dato6}" pattern="dd/MM/yyyy" mask="true" size="23" style="width: 200px;" rendered="#{historiasMB.fechanacimiento}">
+                                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                                </p:calendar>                   
+                                            </td>                    
+                                        </tr>
+                                    </table>
+                                </p:panel>
+                            </td>
+                        </tr>
+                        <tr><td>&nbsp;</td></tr>
+                        <tr>
+                            <td colspan="2"><p:outputLabel value="OBSERVACIONES" /></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><p:inputTextarea  styleClass="width2" value="#{historiasMB.datosFormulario.dato17}"  /></td>                    
+                        </tr>
+                        <tr><td>&nbsp;</td></tr>
+                        <tr>
+                            <td colspan="2">
+                                <p:outputLabel value="FECHA-HORA REGISTRO"/>
+                                <p:calendar navigator="true" locale="es" value="#{historiasMB.fechaReg}" pattern="dd/MM/yyyy HH:mm:ss" mask="true" size="23" style="width: 200px;" />
+                            </td>
+                        </tr>
+                    
+                
+                        <tr><td colspan="2"><h2>INFORMACION DE LA PERSONA QUE REPORTA</h2></td></tr> 
+                        <tr><td>&nbsp;</td></tr>
+                        <tr>
+                            <td><p:outputLabel value="NOMBRE DE QUIEN REPORTA"/></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:selectOneMenu style="width: 315px;" value="#{historiasMB.idPrestador}" filter="true" filterMatchMode="contains">                            
+                                    <p:ajax event="change" listener="#{historiasMB.cambiaMedico}" update="IdEspecialidad,telef"/>
+                                    <f:selectItem itemLabel="" itemValue=""/>
+                                    <f:selectItems value="#{historiasMB.listaPrestadores}" var="p" itemLabel="#{p.primerNombre} #{p.segundoNombre} #{p.primerApellido} #{p.segundoApellido}" itemValue="#{p.idUsuario}"/>
+                                </p:selectOneMenu>
+                            </td>
+                        </tr>
+                        <tr><td><p:outputLabel value="CARGO"/></td></tr>
+                        <tr>
+                            <td><p:inputText id="IdEspecialidad" readonly="true" styleClass="width1" value="#{historiasMB.especialidadPrestador}"/></td>
+                        </tr>
+                        <tr><td><p:outputLabel value="TELEFONO"/></td></tr>
+                        <tr>
+                            <td><p:inputText id="telef" readonly="true" styleClass="width1" value="#{historiasMB.especialidadPrestador}"/></td>
+                        </tr>
 
-                <tr>
-                    <td colspan="2">
-                        <p:panel id="variacion">
-                            <table>
-                                <tr>
-                                    <td><p:outputLabel value="VARIABLE INCORRECTA" styleClass="labelFormularioBold" style="font-weight: bold;"/></td>    
-                                    <td><p:outputLabel value="DATOS SEGUN DOCUMENTO DE IDENTIFICACION (fisico)" styleClass="labelFormularioBold" style="font-weight: bold;"/></td>                                        
-                                </tr>
-                                <tr>
-                                    <td style="background-color: #eaecfe;">
-                                        <p:selectBooleanCheckbox id= "papell" value="#{historiasMB.primerapellido}">
-                                            <p:ajax update="variacion" />
-                                        </p:selectBooleanCheckbox>
-                                        <p:outputLabel for="papell" value="   PRIMER APELLIDO" style="font-weight: bold;"/>
-                                    </td>
-                                    <td>
-                                        <p:inputText  id="papellido" styleClass="width1" value="#{historiasMB.datosFormulario.dato3}"  rendered="#{historiasMB.primerapellido}" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="background-color: #eaecfe;">
-                                        <p:selectBooleanCheckbox id= "sapell" value="#{historiasMB.segundoapellido}">
-                                            <p:ajax update="variacion" />
-                                        </p:selectBooleanCheckbox>
-                                        <p:outputLabel for="sapell" value="    SEGUNDO APELLIDO" />
-                                    </td>
-                                    <td>
-                                        <p:inputText  id="sapellido" styleClass="width1" value="#{historiasMB.datosFormulario.dato4}" rendered="#{historiasMB.segundoapellido}"  />
-                                    </td>                  
-                                </tr>    
-                                <tr>
-                                    <td style="background-color: #eaecfe;">
-                                        <p:selectBooleanCheckbox id= "pnomb" value="#{historiasMB.primernombre}">
-                                            <p:ajax update="variacion" />
-                                        </p:selectBooleanCheckbox>
-                                        <p:outputLabel for="pnomb" value="    PRIMER NOMBRE" />
-                                    </td>
-                                    <td>
-                                        <p:inputText  id="pnombre" styleClass="width1" value="#{historiasMB.datosFormulario.dato4}" rendered="#{historiasMB.primernombre}"  />
-                                    </td>                  
-                                </tr>  
-                                <tr>
-                                    <td style="background-color: #eaecfe;">
-                                        <p:selectBooleanCheckbox id= "snomb" value="#{historiasMB.segundonombre}">
-                                            <p:ajax update="variacion" />
-                                        </p:selectBooleanCheckbox>
-                                        <p:outputLabel for="snomb" value="    SEGUNDO NOMBRE" />
-                                    </td>
-                                    <td>
-                                        <p:inputText  id="snombre" styleClass="width1" value="#{historiasMB.datosFormulario.dato4}" rendered="#{historiasMB.segundonombre}"  />
-                                    </td>                  
-                                </tr>  
-
-                                <tr>
-                                    <td style="background-color: #eaecfe;">
-                                        <p:selectBooleanCheckbox id= "tdocu" value="#{historiasMB.tipodocumentoidentifica}">
-                                            <p:ajax update="variacion" />
-                                        </p:selectBooleanCheckbox>
-                                        <p:outputLabel for="tdocu" value="    TIPO DOCUMENTO IDENTIFICACION" />
-                                    </td>
-                                    <td >
-                                        <p:focus for="IdFocus2" />
-                                        <p:selectOneMenu id="IdFocus2" style="width: 315px;" value="#{historiasMB.datosFormulario.dato0}" filter="true" filterMatchMode="contains" rendered="#{historiasMB.tipodocumentoidentifica}">
-                                            <f:selectItems value="#{aplicacionGeneralMB.listaTipoIdentificacion}"/>
-                                        </p:selectOneMenu>                        
-                                    </td>                    
-                                </tr>
-                                <tr>
-                                    <td style="background-color: #eaecfe;">
-                                        <p:selectBooleanCheckbox id= "numerodoc" value="#{historiasMB.numerodocumento}">
-                                            <p:ajax update="variacion" />
-                                        </p:selectBooleanCheckbox>
-                                        <p:outputLabel for="numerodoc" value="    NUMERO DOCUMENTO IDENTIFICACION" />
-                                    </td>
-                                    <td>
-                                        <p:inputText  id="ndocument" styleClass="width1" value="#{historiasMB.datosFormulario.dato4}"  rendered="#{historiasMB.numerodocumento}"  />
-                                    </td>                  
-                                </tr>  
-                                <tr>
-                                    <td style="background-color: #eaecfe;">
-                                        <p:selectBooleanCheckbox id= "fnac" value="#{historiasMB.fechanacimiento}">
-                                            <p:ajax update="variacion" />
-                                        </p:selectBooleanCheckbox>
-                                        <p:outputLabel for="fnac" value="    FECHA DE NACIMIENTO" />
-                                    </td>
-                                    <td>
-                                        <p:calendar id="fechanacimiento" navigator="true" locale="es" value="#{historiasMB.datosFormulario.dato6}" pattern="dd/MM/yyyy" mask="true" size="23" style="width: 200px;" rendered="#{historiasMB.fechanacimiento}">
-                                            <f:convertDateTime pattern="dd/MM/yyyy"/>
-                                        </p:calendar>                   
-                                    </td>                    
-                                </tr>
-                            </table>
-                        </p:panel>
-                    </td>
-                </tr>
-                <tr><td>&nbsp;</td></tr>
-                <tr>
-                    <td colspan="2"><p:outputLabel value="OBSERVACIONES" /></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><p:inputTextarea  styleClass="width2" value="#{historiasMB.datosFormulario.dato17}"  /></td>                    
-                </tr>
-                <tr><td>&nbsp;</td></tr>
-                <tr>
-                    <td colspan="2">
-                        <p:outputLabel value="FECHA-HORA REGISTRO"/>
-                        <p:calendar navigator="true" locale="es" value="#{historiasMB.fechaReg}" pattern="dd/MM/yyyy HH:mm:ss" mask="true" size="23" style="width: 200px;" />
-                    </td>
-                </tr>
-                <tr><td colspan="2"><h2>INFORMACION DE LA PERSONA QUE REPORTA</h2></td></tr> 
-                <tr><td>&nbsp;</td></tr>
-                <tr>
-                    <td><p:outputLabel value="NOMBRE DE QUIEN REPORTA"/></td>
-                </tr>
-                <tr>
-                    <td>
-                        <p:selectOneMenu style="width: 315px;" value="#{historiasMB.idPrestador}" filter="true" filterMatchMode="contains">                            
-                            <p:ajax event="change" listener="#{historiasMB.cambiaMedico}" update="IdEspecialidad,telef"/>
-                            <f:selectItem itemLabel="" itemValue=""/>
-                            <f:selectItems value="#{historiasMB.listaPrestadores}" var="p" itemLabel="#{p.primerNombre} #{p.segundoNombre} #{p.primerApellido} #{p.segundoApellido}" itemValue="#{p.idUsuario}"/>
-                        </p:selectOneMenu>
-                    </td>
-                </tr>
-                <tr><td><p:outputLabel value="CARGO"/></td></tr>
-                <tr>
-                    <td><p:inputText id="IdEspecialidad" readonly="true" styleClass="width1" value="#{historiasMB.especialidadPrestador}"/></td>
-                </tr>
-                <tr><td><p:outputLabel value="TELEFONO"/></td></tr>
-                <tr>
-                    <td><p:inputText id="telef" readonly="true" styleClass="width1" value="#{historiasMB.especialidadPrestador}"/></td>
-                </tr>
-
-                <tr><td>&nbsp;</td></tr>
-                <tr>
-                    <td colspan="2">
-                        <p:commandButton icon="ui-icon-disk" value="Guardar Nuevo Registro" 
-                                         actionListener="#{historiasMB.guardarRegistro}" 
-                                         disabled="#{historiasMB.modificandoRegCli}" update="@form"/>
-                        <p:commandButton icon="ui-icon-arrowthickstop-1-s" value="Actualizar Registro" 
-                                         actionListener="#{historiasMB.actualizarRegistro}" disabled="#{!historiasMB.modificandoRegCli}" 
-                                         rendered="#{loginMB.superUsuario}" update="@form"/>
-                        <p:commandButton icon="ui-icon-document" value="Limpiar Formulario" 
-                                         actionListener="#{historiasMB.btnLimpiarFormulario}" update="@form"/>
-                    </td>
+                        <tr><td>&nbsp;</td></tr>
+                        <tr>
+                            <td colspan="2">
+                                <p:commandButton icon="ui-icon-disk" value="Guardar Nuevo Registro" 
+                                                 actionListener="#{historiasMB.guardarRegistro}" 
+                                                 disabled="#{historiasMB.modificandoRegCli}" update="@form"/>
+                                <p:commandButton icon="ui-icon-arrowthickstop-1-s" value="Actualizar Registro" 
+                                                 actionListener="#{historiasMB.actualizarRegistro}" disabled="#{!historiasMB.modificandoRegCli}" 
+                                                 rendered="#{loginMB.superUsuario}" update="@form"/>
+                                <p:commandButton icon="ui-icon-document" value="Limpiar Formulario" 
+                                                 actionListener="#{historiasMB.btnLimpiarFormulario}" update="@form"/>
+                            </td>
+                        </tr>
+                    </table>
                 </tr>
             </table>            
             <p:dialog id="IdTextosDlgPredefinidos" header="TEXTOS PREDEFINIDOS" width="645" widgetVar="dlgTextosPredefinidos" resizable="false" closable="true" modal="true">                                

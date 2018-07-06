@@ -127,6 +127,7 @@ public class AplicacionGeneralMB {
     private List<SelectItem> listaAmbito;
     private List<SelectItem> listaInconsistencia;
     private List<SelectItem> listaOrigenAtencion;
+    private List<SelectItem> listaDestinoPaciente;
     private List<SelectItem> listaAmbitoFactura;
     private List<SelectItem> listaActoQuirurgico;
     private List<SelectItem> listaPersonalAtiende;
@@ -396,6 +397,8 @@ public class AplicacionGeneralMB {
             cargarClasificacion(ClasificacionesEnum.Anexos3047);
             cargarClasificacion(ClasificacionesEnum.Inconsistencia);
             cargarClasificacion(ClasificacionesEnum.OrigenAtencion);
+            cargarClasificacion(ClasificacionesEnum.DestinoPaciente);
+            
             
             
         }
@@ -447,6 +450,10 @@ public class AplicacionGeneralMB {
             case OrigenAtencion:
                 listaOrigenAtencion = cargarClasificacion(maestro.toString());
                 break;
+            case DestinoPaciente:
+                listaDestinoPaciente = cargarClasificacion(maestro.toString());
+                break;
+
             case Escolaridad:
                 listaEscolaridad = cargarClasificacion(maestro.toString());
                 break;
@@ -1395,6 +1402,11 @@ public class AplicacionGeneralMB {
         this.listaOrigenAtencion = listaOrigenAtencion;
     }
 
-    
-    
+    public List<SelectItem> getListaDestinoPaciente() {
+        return listaDestinoPaciente;
+    }
+
+    public void setListaDestinoPaciente(List<SelectItem> listaDestinoPaciente) {
+        this.listaDestinoPaciente = listaDestinoPaciente;
+    }
 }

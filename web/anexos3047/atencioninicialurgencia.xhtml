@@ -28,92 +28,182 @@
 
 
             <table style="margin-left: auto; margin-right: auto;" >
-                <tr><td colspan="2"><h2>INFORME DE ATENCION INICIAL DE URGENCIAS</h2></td></tr>                                
 
-                <tr><td colspan="2"><h2>INFORMACION DEL PRESTADOR</h2></td></tr>                                
 
-                <td>
-                    <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="NOMBRE:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                    <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.empresa.razonSocial}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                    <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="NIT:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                    <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.empresa.numIdentificacion}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                    <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="CODIGO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                    <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.empresa.codEmpresa}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                </td>
-                <tr>
-                    <td>
-                        <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="DIRECCION:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                        <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.empresa.direccion}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
-                        <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="TELEFONO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                        <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.empresa.telefono1} #{historiasMB.empresa.telefono2}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
-                        <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="DEPARTAMENTO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                        <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.empresa.codDepartamento.descripcion} #{historiasMB.empresa.codDepartamento.codigo} "  rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
-                        <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="MUNICIPIO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                        <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.empresa.codMunicipio.descripcion} #{historiasMB.empresa.codMunicipio.codigo}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
-
-                    </td>                                        
-                </tr>
-
-                <tr><td colspan="2"><h2>INFORMACION DEL PAGADOR</h2></td></tr>                                
-
-                <td>
-                    <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="ENTIDAD A LA QUE SE LE INFORMA:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                    <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.idAdministradora.razonSocial}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
-                    <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="CODIGO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                    <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.idAdministradora.codigoAdministradora} #{historiasMB.empresa.telefono2}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
-                </td>                                        
-
-                <tr><td colspan="2"><h2>DATOS DEL PACIENTE</h2></td></tr>   
 
                 <tr>
-                    <td>
-                        <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="PRIMER APELLIDO" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                        <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.primerApellido}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>     
-                        <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="SEGUNDO APELLIDO" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                        <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.segundoApellido}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>   
-                        <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="PRIMER NOMBRE" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                        <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.primerNombre}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>     
-                        <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="SEGUNDO NOMBRE" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                        <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.segundoNombre}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>     
-                    </td>                                        
-                </tr>
-                <tr>
-                    <td>
-                        <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="DOCUMENTO IDENTIFICACION:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                        <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.tipoIdentificacion.descripcion}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>     
-                        <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="NUMERO DOCUMENTO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                        <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.identificacion}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>     
-                        <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="FECHA DE NACIMIENTO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                        <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.fechaNacimiento}"  rendered="#{historiasMB.hayPacienteSeleccionado}">
-                            <f:convertDateTime parent="yyyy-mm-dd"/>
-                        </p:outputLabel>
-                    </td>                                        
-                </tr>
+                    <table>
+                        <tr><td colspan="2"><h2>INFORME DE ATENCION INICIAL DE URGENCIAS</h2></td></tr>                                
 
-                <tr>
-                    <td>
-                        <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="DIRECCION DE HABITACION:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                        <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.direccion}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>     
-                        <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="DEPARTAMENTO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                        <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.departamento.descripcion} #{historiasMB.pacienteSeleccionado.departamento.codigo} "  rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
-                        <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="MUNICIPIO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                        <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.municipio.descripcion} #{historiasMB.pacienteSeleccionado.municipio.codigo}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
-                        <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="TELEFONO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                        <p:outputLabel styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.telefonoResidencia}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
+                        <tr><td colspan="2"><h2>INFORMACION DEL PRESTADOR</h2></td></tr>   
+                        <tr>
+                            <td  style="background-color: #eaecfe;">
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="NOMBRE:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>
+                            <td style="background-color: #eaecfe;">    
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="NIT:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>
+                            <td style="background-color: #eaecfe;">
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="CODIGO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>
+                            <td style="background-color: #eaecfe;">
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="TELEFONO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>
 
-                    </td>                                        
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:inputText readonly="true" styleClass="width1"    style="font-weight: bold;" value="#{historiasMB.empresa.razonSocial}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>
+                            <td>
+                                <p:inputText readonly="true" styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.empresa.numIdentificacion}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>
+                            <td>
+                                <p:inputText readonly="true" styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.empresa.codEmpresa}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>
+                            <td>
+                                <p:inputText readonly="true" styleClass="labelFormulario" style="font-weight: bold;" value="#{historiasMB.empresa.telefono1} #{historiasMB.empresa.telefono2}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
+                            </td>                            
+                        </tr>
+                        <tr>
+                            <td style="background-color: #eaecfe;">
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="DIRECCION:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>
+
+                            <td style="background-color: #eaecfe;">
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="DEPARTAMENTO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>
+                            <td style="background-color: #eaecfe;">
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="MUNICIPIO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>    
+                        </tr>
+                        <tr> 
+                            <td>
+                                <p:inputText readonly="true" styleClass="width1"    style="font-weight: bold;" value="#{historiasMB.empresa.direccion}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
+                            </td>
+                            <td>
+                                <p:inputText readonly="true" styleClass="labelFormulario" style="font-weight: bold;" value="#{historiasMB.empresa.codDepartamento.descripcion} #{historiasMB.empresa.codDepartamento.codigo} "  rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
+                            </td>
+                            <td>
+                                <p:inputText readonly="true" styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.empresa.codMunicipio.descripcion} #{historiasMB.empresa.codMunicipio.codigo}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>                  
+                            </td> 
+                        </tr>
+
+                        <tr><td colspan="2"><h2>INFORMACION DEL PAGADOR</h2></td></tr>                                
+
+                        <tr>
+                            <td style="background-color: #eaecfe;" >
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="ENTIDAD A LA QUE SE LE INFORMA:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>
+                            <td style="background-color: #eaecfe;">
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="CODIGO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td> 
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:inputText readonly="true" styleClass="width1"    style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.idAdministradora.razonSocial}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
+                            </td>
+                            <td>
+                                <p:inputText readonly="true"  styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.idAdministradora.codigoAdministradora} #{historiasMB.empresa.telefono2}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
+                            </td>
+
+                        </tr>
+
+                        <tr><td colspan="2"><h2>DATOS DEL PACIENTE</h2></td></tr>   
+
+                        <tr>
+                            <td style="background-color: #eaecfe;">
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="PRIMER APELLIDO" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>
+                            <td style="background-color: #eaecfe;">
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="SEGUNDO APELLIDO" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>
+                            <td style="background-color: #eaecfe;">
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="PRIMER NOMBRE" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>
+                            <td style="background-color: #eaecfe;">
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="SEGUNDO NOMBRE" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>                                        
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:inputText readonly="true" styleClass="width1"      style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.primerApellido}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>     
+                            </td>
+                            <td>
+                                <p:inputText readonly="true" styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.segundoApellido}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>   
+                            </td>
+                            <td>
+                                <p:inputText readonly="true" styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.primerNombre}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>     
+                            </td>
+                            <td>
+                                <p:inputText readonly="true" styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.segundoNombre}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>     
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="background-color: #eaecfe;">
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="DOCUMENTO IDENTIFICACION:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>
+                            <td style="background-color: #eaecfe;">
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="NUMERO DOCUMENTO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>
+                            <td style="background-color: #eaecfe;">
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="FECHA DE NACIMIENTO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
+                            </td>
+                            <td style="background-color: #eaecfe;">
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="TELEFONO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>                                        
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:inputText readonly="true" styleClass="width1"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.tipoIdentificacion.descripcion}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>     
+                            </td>
+                            <td>
+                                <p:inputText readonly="true" styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.identificacion}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>     
+                            </td>
+                            <td>
+                                <p:inputText readonly="true" styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.fechaNacimiento}"  rendered="#{historiasMB.hayPacienteSeleccionado}">
+                                    <f:convertDateTime parent="yyyy-mm-dd"/>
+                                </p:inputText>
+                            </td>                                        
+                            <td>
+                                <p:inputText readonly="true" styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.telefonoResidencia}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
+                            </td>                                                                    
+                        </tr>
+                        <tr>
+                            <td style="background-color: #eaecfe;">
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="DIRECCION DE HABITACION:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>
+                            <td style="background-color: #eaecfe;">
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="DEPARTAMENTO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
+                            </td>
+                            <td style="background-color: #eaecfe;">
+                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="MUNICIPIO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:inputText readonly="true" styleClass="width1"      style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.direccion}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>     
+                            </td>
+                            <td>
+                                <p:inputText readonly="true" styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.departamento.descripcion} #{historiasMB.pacienteSeleccionado.departamento.codigo} "  rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
+                            </td>
+                            <td>
+                                <p:inputText readonly="true" styleClass="labelFormulario"     style="font-weight: bold;" value="#{historiasMB.pacienteSeleccionado.municipio.descripcion} #{historiasMB.pacienteSeleccionado.municipio.codigo}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
+                            </td>
+                        </tr>
+                    </table>
                 </tr>
-
                 <tr><td colspan="2"><h2>INFORMACION DE LA ATENCION</h2></td></tr>   
                 <tr>
-                    <td>
-                        <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="ORIGEN DE LA ATENCION:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                    </td>
-                </tr>
-                <tr>
                     <td colspan="2">
-                        <p:panel id="atencion">
+                        <p:panel id="atencion" styleClass="width2" >
                             <table>
+                                <tr>
+                                    <td>
+                                        <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="ORIGEN DE LA ATENCION:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                                    </td>
+                                </tr>
+
                                 <td >
                                     <p:focus for="IdFocus" />
                                     <p:selectOneMenu id="IdFocus" style="width: 315px;" value="#{historiasMB.datosFormulario.dato0}" filter="true" filterMatchMode="contains">
@@ -180,7 +270,7 @@
 
                 <tr>
                     <td colspan="2">
-                        <p:panel id="remitido"  >
+                        <p:panel id="remitido" styleClass="width2"   >
                             <table> 
                                 <tr>
                                     <td>
@@ -224,7 +314,6 @@
                         </p:panel>
                     </td>
                 </tr>
-                <tr><td>&nbsp;</td></tr>
                 <tr>
                     <td colspan="2"><p:outputLabel value="MOTIVO DE CONSULTA" /></td>
                 </tr>
@@ -285,24 +374,34 @@
                                 <p:inputText  styleClass="width1" value="#{historiasMB.datosFormulario.dato4}"  />
                             </td>
                         </tr>
+                        <tr><td>&nbsp;</td></tr>
+                        <tr>
+                            <td>
+                                <p:outputLabel value="DESTINO DEL PACIENTE" styleClass="labelFormularioBold" style="font-weight: bold;"/>
+                            </td>
+                            <td>
+                                <p:focus for="IdFocus3" />
+                                <p:selectOneMenu id="IdFocus3" style="width: 315px;" value="#{historiasMB.datosFormulario.dato25}" filter="true" filterMatchMode="contains">
+                                    <f:selectItem itemLabel="" itemValue=""/>
+                                    <f:selectItems value="#{aplicacionGeneralMB.listaDestinoPaciente}"/>
+                                </p:selectOneMenu>  
+                            </td>                        
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:outputLabel value="FECHA-HORA REGISTRO"/>
+                            </td>
+                            <td>
+                                <p:calendar navigator="true" locale="es" value="#{historiasMB.fechaReg}" pattern="dd/MM/yyyy HH:mm:ss" mask="true" size="23" style="width: 200px;" />
+                            </td>
+                        </tr>
+
                     </table>
                 </td>
 
-                <tr><td>&nbsp;</td></tr>
 
-                <tr>
-                    <td colspan="2">
-                        <p:outputLabel value="Destino del Paciente"/>
-                    </td>
-                </tr>
 
                 <tr><td>&nbsp;</td></tr>
-                <tr>
-                    <td colspan="2">
-                        <p:outputLabel value="FECHA-HORA REGISTRO"/>
-                        <p:calendar navigator="true" locale="es" value="#{historiasMB.fechaReg}" pattern="dd/MM/yyyy HH:mm:ss" mask="true" size="23" style="width: 200px;" />
-                    </td>
-                </tr>
                 <tr><td colspan="2"><h2>INFORMACION DE LA PERSONA QUE REPORTA</h2></td></tr> 
                 <tr><td>&nbsp;</td></tr>
                 <tr>
