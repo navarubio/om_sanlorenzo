@@ -372,33 +372,31 @@
                         <tr><td>&nbsp;</td></tr>
                     </table>
                 </tr>
-                <tr><td>&nbsp;</td></tr>
                 <tr><td colspan="2"><h2>PAGOS COMPARTIDOS</h2></td></tr> 
-                <table>
-                    <tr>
-                        <td colspan="2">
-                            <p:outputLabel value="Porcentaje del Valor de los Servicios de esta Autorización a pagar por la entidad responsable del pago:" styleClass="labelFormularioBold" style="font-weight: bold;"/>
-                        </td>
-                        <td>
-                            <p:inputText  style="width: 95px;" value="#{manejarAnexos3047.datosFormulario.dato385}" />
-                        </td>
-                    </tr>    
-                </table>
-                <table>
-                    <tr>
-                        <td colspan="2">
-                            <p:outputLabel value="Reclamo de tiquete, bono o vale de pago:" styleClass="labelFormularioBold" style="font-weight: bold;"/>
-                        </td>
-                        <td>
-                            <p:selectBooleanCheckbox id= "bono" value="#{manejarAnexos3047MB.datosFormulario.dato302}" />
-                        </td>
-                    </tr>
-                </table>    
-                <tr><td>&nbsp;</td></tr>    
+
                 <tr> 
                     <td colspan="2">
                         <p:panel id="variacion" style="width:900px" >
-
+                            <table>
+                                <tr>
+                                    <td colspan="2">
+                                        <p:outputLabel value="Porcentaje del Valor de los Servicios de esta Autorización a pagar por la entidad responsable del pago:" styleClass="labelFormularioBold" style="font-weight: bold;"/>
+                                    </td>
+                                    <td>
+                                        <p:inputText  style="width: 95px;" value="#{manejarAnexos3047.datosFormulario.dato385}" />
+                                    </td>
+                                </tr>    
+                            </table>
+                            <table>
+                                <tr>
+                                    <td colspan="2">
+                                        <p:outputLabel value="Reclamo de tiquete, bono o vale de pago:" styleClass="labelFormularioBold" style="font-weight: bold;"/>
+                                    </td>
+                                    <td>
+                                        <p:selectBooleanCheckbox id= "bono" value="#{manejarAnexos3047MB.datosFormulario.dato302}" />
+                                    </td>
+                                </tr>
+                            </table>    
                             <table>
                                 <tr>
                                     <td style="width: 206px"><p:outputLabel value="CONCEPTO" styleClass="labelFormularioBold" style="font-weight: bold;"/></td>    
@@ -480,62 +478,51 @@
                     </td>
                 </tr>
                 <!--//////////////-->
-                <td colspan="2"> 
-                    <table>
-                        <tr>
-                            <td><p:outputLabel value="IMPRESION DIAGNOSTICA:" styleClass="labelFormularioBold" style="font-weight: bold;" /></td>
-                            <td><p:outputLabel value="CODIGO CIE 10" styleClass="labelFormularioBold" style="font-weight: bold;" /></td>
-                            <td><p:outputLabel value="DESCRIPCION" styleClass="labelFormularioBold" style="font-weight: bold;" /></td>
-                        </tr>
-                        <tr><td>&nbsp;</td></tr>
-                        <tr>
-                            <td  style="background-color: #eaecfe;" >
-                                <p:outputLabel value="Diagnóstico Principal:" />
-                            </td>
-                            <td>
-                                <p:autoComplete id="dato114" size="60" value="#{manejarAnexos3047.datosFormulario.dato114}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/>
-                            </td>
-                            <td>
-                                <p:inputText  styleClass="width1" value="#{manejarAnexos3047.datosFormulario.dato4}" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td  style="background-color: #eaecfe;">
-                                <p:outputLabel value="Diagnóstico relacionado 1:" />
-                            </td>
-                            <td>
-                                <p:autoComplete id="dato115" size="60" value="#{manejarAnexos3047.datosFormulario.dato115}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/>
-                            </td>
-                            <td>
-                                <p:inputText  styleClass="width1" value="#{manejarAnexos3047.datosFormulario.dato4}" size="50"  />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td  style="background-color: #eaecfe;">
-                                <p:outputLabel value="Diagnóstico relacionado 2:" />
-                            </td>
-                            <td>
-                                <p:autoComplete id="dato116" size="60" value="#{manejarAnexos3047.datosFormulario.dato116}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/>                 
-                            </td>
-                            <td>
-                                <p:inputText  styleClass="width1" value="#{manejarAnexos3047.datosFormulario.dato4}"   />
-                            </td>
-                        </tr>
-                        <tr><td>&nbsp;</td></tr>
-                        <tr>
-                            <td>
-                                <p:outputLabel value="FECHA-HORA REGISTRO" styleClass="labelFormularioBold" style="font-weight: bold;"/>
-                            </td>
-                            <td>
-                                <p:calendar navigator="true" locale="es" value="#{historiasMB.fechaReg}" pattern="dd/MM/yyyy HH:mm:ss" mask="true" size="23" style="width: 200px;" />
-                            </td>
-                        </tr>
 
-                    </table>
-                </td>
                 <table>
                     <tr><td>&nbsp;</td></tr>
-                    <tr><td colspan="2"><h2>INFORMACION DE LA PERSONA QUE SOLICITA</h2></td></tr> 
+                    <tr><td colspan="2"><h2>INFORMACION DE LA PERSONA DE LA ENTIDAD RESPONSABLE DEL PAGO QUE AUTORIZA</h2></td></tr> 
+                    <tr><td>&nbsp;</td></tr>
+                    <tr>
+                        <td><p:outputLabel value="NOMBRE DE QUIEN AUTORIZA"/></td>
+                    </tr>
+                    <tr>
+                        <td><p:inputText styleClass="width1" value="#{manejarAnexos3047MB.datosFormulario.dato1007}"/></td>
+                    </tr>
+                    <tr><td><p:outputLabel value="CARGO"/></td></tr>
+                    <tr>
+                        <td><p:inputText id="cargo" styleClass="width1" value="#{manejarAnexos3047MB.datosFormulario.dato1000}"/></td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td style="width: 95px;" ><p:outputLabel value="TELEFONO"/></td>
+                        <td style="width: 95px;"><p:outputLabel value="Indicativo"/></td>
+                        <td style="width: 95px;"><p:outputLabel value="Número"/></td>
+                        <td style="width: 95px;"><p:outputLabel value="Extensión"/></td>
+                    </tr>
+                    <tr>
+                        <td><p:inputText  style="width: 95px;"  value="#{manejarAnexos3047MB.datosFormulario.dato1001}"/></td>
+                        <td><p:inputText  style="width: 95px;"  value="#{manejarAnexos3047MB.datosFormulario.dato1002}"/></td>
+                        <td><p:inputText  style="width: 95px;" value="#{manejarAnexos3047MB.datosFormulario.dato1003}"/></td>                        
+                    </tr>
+                    <tr>
+                        <td><p:outputLabel value="CELULAR"/></td>
+                    </tr>
+                    <tr>
+                        <td><p:outputLabel value="Indicativo"/></td>
+                        <td><p:outputLabel value="Número"/></td>
+                        <td><p:outputLabel value="Extensión"/></td>
+                    </tr>
+                    <tr>
+                        <td><p:inputText   style="width: 95px;" value="#{manejarAnexos3047MB.datosFormulario.dato1004}"/></td>
+                        <td><p:inputText   style="width: 95px;" value="#{manejarAnexos3047MB.datosFormulario.dato1005}"/></td>
+                        <td><p:inputText   style="width: 95px;" value="#{manejarAnexos3047MB.datosFormulario.dato1006}"/></td>                        
+                    </tr>
+                </table>
+                <table>
+                    <tr><td>&nbsp;</td></tr>
+                    <tr><td colspan="2"><h2>INFORMACION DE LA PERSONA DE LA IPS RECEPTORA QUE ACEPTA RECIBIR AL PACIENTE</h2></td></tr> 
                     <tr><td>&nbsp;</td></tr>
                     <tr>
                         <td><p:outputLabel value="NOMBRE DEL QUE SOLICITA"/></td>
@@ -557,22 +544,23 @@
                     <tr>
                         <td><p:inputText id="telef" readonly="true" styleClass="width1" value="#{historiasMB.especialidadPrestador}"/></td>
                     </tr>
-
-                    <tr><td>&nbsp;</td></tr>
-                    <tr>
-                        <td colspan="2">
-                            <p:commandButton icon="ui-icon-disk" value="Guardar Nuevo Registro" 
-                                             actionListener="#{historiasMB.guardarRegistro}" 
-                                             disabled="#{historiasMB.modificandoRegCli}" update="@form"/>
-                            <p:commandButton icon="ui-icon-arrowthickstop-1-s" value="Actualizar Registro" 
-                                             actionListener="#{historiasMB.actualizarRegistro}" disabled="#{!historiasMB.modificandoRegCli}" 
-                                             rendered="#{loginMB.superUsuario}" update="@form"/>
-                            <p:commandButton icon="ui-icon-document" value="Limpiar Formulario" 
-                                             actionListener="#{historiasMB.btnLimpiarFormulario}" update="@form"/>
-                        </td>
-                    </tr>
                 </table>
-            </table>            
+
+
+                <tr><td>&nbsp;</td></tr>
+                <tr>
+                    <td colspan="2">
+                        <p:commandButton icon="ui-icon-disk" value="Guardar Nuevo Registro" 
+                                         actionListener="#{historiasMB.guardarRegistro}" 
+                                         disabled="#{historiasMB.modificandoRegCli}" update="@form"/>
+                        <p:commandButton icon="ui-icon-arrowthickstop-1-s" value="Actualizar Registro" 
+                                         actionListener="#{historiasMB.actualizarRegistro}" disabled="#{!historiasMB.modificandoRegCli}" 
+                                         rendered="#{loginMB.superUsuario}" update="@form"/>
+                        <p:commandButton icon="ui-icon-document" value="Limpiar Formulario" 
+                                         actionListener="#{historiasMB.btnLimpiarFormulario}" update="@form"/>
+                    </td>
+                </tr>
+            </table>
             <p:dialog id="IdTextosDlgPredefinidos" header="TEXTOS PREDEFINIDOS" width="645" widgetVar="dlgTextosPredefinidos" resizable="false" closable="true" modal="true">                                
                 <p:panelGrid styleClass="panelGridSinBordes" id="IdPanelTextosPredefinidos">
                     <p:row>
