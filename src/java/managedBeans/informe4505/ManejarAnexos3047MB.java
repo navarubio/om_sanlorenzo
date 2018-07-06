@@ -5,352 +5,123 @@
  */
 package managedBeans.informe4505;
 
-import beans.utilidades.LazyAgendaModel;
 import beans.utilidades.MetodosGenerales;
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Objects;
-import javax.annotation.PostConstruct;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import managedBeans.seguridad.LoginMB;
-import modelo.entidades.CfgUsuarios;
-import modelo.entidades.CitAutorizaciones;
-import modelo.entidades.CitAutorizacionesServicios;
-import modelo.entidades.CitCitas;
-import modelo.entidades.CitTurnos;
-import modelo.fachadas.CitAutorizacionesFacade;
-import modelo.fachadas.CitAutorizacionesServiciosFacade;
-import modelo.fachadas.CitCitasFacade;
-import modelo.fachadas.CitTurnosFacade;
-import org.primefaces.context.RequestContext;
-import org.primefaces.event.SelectEvent;
-import org.primefaces.model.DefaultScheduleEvent;
-import org.primefaces.model.ScheduleEvent;
+import javax.faces.model.SelectItem;
+import managedBeans.historias.DatosFormularioHistoria;
+import modelo.entidades.CfgClasificaciones;
+import modelo.fachadas.CfgClasificacionesFacade;
+import modelo.fachadas.CfgDiagnosticoPrincipalFacade;
 
 /**
  *
- * @author mario
+ * @author sismacontab
  */
 @ManagedBean(name = "manejarAnexos3047MB")
 @SessionScoped
 public class ManejarAnexos3047MB extends MetodosGenerales implements Serializable {
 
     /**
-     * Creates a new instance of AgendaPrestadorMB
+     * Manejar Informacion de Formularios Anexos 3047
      */
-    private int sede;
-    private LazyAgendaModel evenModel;
-    private ScheduleEvent event = new DefaultScheduleEvent();
-    private String nombreCompleto;
-    private boolean rend = false;
-    private boolean haySesionPrestador;
-    private boolean rendBtnHistoriClinica = false;
-    private boolean rendBtnAtendida = false;
-    private boolean rendAgenda;
-    private String idTurno;
-    private String minTime;
-    private String maxTime;
-
-    private CfgUsuarios prestadorActual;
-    private CitCitas citCita;
-    private CitTurnos citTurnos;
+        
     @EJB
-    CitCitasFacade citasFacade;
-
+    CfgClasificacionesFacade clasificacionesFacade;
     @EJB
-    CitTurnosFacade turnosfacade;
-
-    @EJB
-    CitAutorizacionesFacade autorizacionesFacade;
-
-    @EJB
-    CitAutorizacionesServiciosFacade autorizacionesServiciosFacade;
-
-    @ManagedProperty(value = "#{loginMB}")
-    private LoginMB loginMB;
-
-    //@ManagedProperty(value = "#{historiasMB}")
-    //private HistoriasMB historiasMB;
+    CfgDiagnosticoPrincipalFacade diagnosticoFacade;
+    
+    private String pacienteremitido=""; 
+    private int tipomovimiento=0;
+    private boolean prestadorremitente=false;
+    private List<SelectItem> listaMunicipios;
+    private String departamento = "";
+    
+    private DatosFormularioHistoria datosFormulario = new DatosFormularioHistoria();//valores de cada uno de los campos de cualquier registro clinico
+    
     public ManejarAnexos3047MB() {
     }
 
-    @PostConstruct
-    private void inicialize() {
-        setRendAgenda(false);
-        if (getLoginMB().getUsuarioActual().getTipoUsuario().getCodigo().compareTo("2") == 0) {
-            setPrestadorActual(getLoginMB().getUsuarioActual());
-            sede = getLoginMB().getCentroDeAtencionactual().getIdSede();
-            setHaySesionPrestador(true);
+    public void selecciontipomovimiento() {
+        if (pacienteremitido.equals("SI")) {
+            tipomovimiento = 1;
+            prestadorremitente=true;
+        } else if (pacienteremitido.equals("NO")) {
+            tipomovimiento = 0;
+            prestadorremitente=false;
+            datosFormulario.setDato1(null);
+            listaMunicipios=null;
         } else {
-            setPrestadorActual(null);
-            setHaySesionPrestador(false);
-            imprimirMensaje("Error", "No eres prestador para ver el contenido", FacesMessage.SEVERITY_ERROR);
+            tipomovimiento = 0;
+            prestadorremitente=false;
         }
-        if (prestadorActual != null) {
-            obtenerNombreCompleto();
-//            loadEvents();
-
-        } else {
-            evenModel = null;
-        }
-    }
-
-    public void loadEvents() {
-        Object[] horas = turnosfacade.MinDateMaxDate(prestadorActual.getIdUsuario(), sede);
-        if (horas[0] != null) {
-            setMinTime(establerLimitesAgenda((Date) horas[0]));
-            Date aux = (Date) horas[1];
-            if (aux.getMinutes() > 0) {
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(aux);
-                calendar.add(Calendar.HOUR_OF_DAY, 1);
-                aux = calendar.getTime();
-            }
-            setMaxTime(establerLimitesAgenda(aux));
-            evenModel = new LazyAgendaModel(prestadorActual.getIdUsuario(), sede, turnosfacade, citasFacade, "agendaMedico");
-            setRendAgenda(true);
-        } else {
-            evenModel = null;
-            setRendAgenda(false);
-            if (actualizarDesdeHistorias) {
-                imprimirMensaje("Informacion", "No tiene agenda para esta sede", FacesMessage.SEVERITY_WARN);
-            }
-        }
-    }
-
-    private String establerLimitesAgenda(Date date) {
-        SimpleDateFormat format = new SimpleDateFormat("ha");
-        return format.format(date);
-    }
-
-    private String obtenerNombreCompleto() {
-        setNombreCompleto("");
-        if (prestadorActual.getPrimerNombre() != null) {
-            setNombreCompleto(getNombreCompleto() + prestadorActual.getPrimerNombre());
-        }
-        if (prestadorActual.getSegundoNombre() != null) {
-            setNombreCompleto(getNombreCompleto() + " " + prestadorActual.getSegundoNombre());
-        }
-        if (prestadorActual.getPrimerApellido() != null) {
-            setNombreCompleto(getNombreCompleto() + " " + prestadorActual.getPrimerApellido());
-        }
-        if (prestadorActual.getSegundoApellido() != null) {
-            setNombreCompleto(getNombreCompleto() + " " + prestadorActual.getSegundoApellido());
-        }
-        return getNombreCompleto();
-    }
-
-    public void onEventSelect(SelectEvent selectEvent) {
-        event = (ScheduleEvent) selectEvent.getObject();
-        if (event.getTitle() != null) {
-            String[] vector = event.getTitle().split(" - ");
-            idTurno = vector[0];
-            seleccionarCita(Long.parseLong(idTurno));
-            if (citCita != null) {
-                RequestContext.getCurrentInstance().execute("PF('eventDialog').show()");
-            }
-        }
-    }
-
-    private void seleccionarCita(long id) {
-        CitCitas cita = citasFacade.findCitasByTurno(id);
-        setCitCita(cita);
-        if (cita != null) {
-            rend = true;
-            if (cita.getAtendida()) {
-                setRendBtnHistoriClinica(true);
-                setRendBtnAtendida(false);
-            } else if (cita.getIdTurno().getEstado().equals("en_espera")||cita.getIdTurno().getEstado().equals("asignado")) {
-                setRendBtnAtendida(true);
-                setRendBtnHistoriClinica(true);
-            } else {
-                setRendBtnHistoriClinica(false);
-                setRendBtnAtendida(false);
-            }
-        } else {
-            rend = false;
-            setRendBtnHistoriClinica(false);
-            setRendBtnAtendida(false);
-        }
-        RequestContext.getCurrentInstance().update("formAgendaPrestador:pdialog");
 
     }
-
-    public void openHistoriaClinica() {
-        RequestContext.getCurrentInstance().execute("window.parent.cargarTab('Historias Clinicas','historias/historias.xhtml','idCita;" + citCita.getIdCita().toString() + "')");
-    }
-
-    boolean actualizarDesdeHistorias;
-
-    public void actualizarAutorizaciones(CitCitas cita) {
-        actualizarDesdeHistorias = true;
-        //si el servicio requiere autorizacion y la administradora es diferente a particular
-        if (cita.getIdServicio().getAutorizacion() && !cita.getIdAdministradora().getCodigoAdministradora().equals("1")) {
-            if (cita.getIdAutorizacion() == null) {
-                //si se muestra este mensaje problemas en recepcion, ya que hay se hace el control definitivo antes de pasar al consultorio
-                cita.setAtendida(false);
-                citasFacade.edit(cita);
-                imprimirMensaje("Error", "la cita requiere autorizacion", FacesMessage.SEVERITY_ERROR);
-                return;
-            }
-            CitAutorizaciones autorizaciones = cita.getIdAutorizacion();
-            int aux = 0;
-            int cantidadServiciosAutorizacion = autorizaciones.getCitAutorizacionesServiciosList().size();
-            for (CitAutorizacionesServicios autorizacionServicio : autorizaciones.getCitAutorizacionesServiciosList()) {
-                if (autorizacionServicio.getFacServicio() == cita.getIdServicio()) {
-                    autorizacionServicio.setSesionesRealizadas(autorizacionServicio.getSesionesRealizadas() + 1);
-                    autorizacionesServiciosFacade.edit(autorizacionServicio);
-                }
-                if (Objects.equals(autorizacionServicio.getSesionesAutorizadas(), autorizacionServicio.getSesionesRealizadas())) {
-                    aux++;
+    
+    public void cargarMunicipios() {
+        listaMunicipios = new ArrayList<>();
+        try {
+            if (datosFormulario != null) {
+                departamento = datosFormulario.getDato1().toString();
+                if (departamento != null && departamento.length() != 0 && esNumero(departamento)) {
+                    List<CfgClasificaciones> listaM = clasificacionesFacade.buscarMunicipioPorDepartamento(clasificacionesFacade.find(Integer.parseInt(departamento)).getCodigo());
+                    for (CfgClasificaciones mun : listaM) {
+                        listaMunicipios.add(new SelectItem(mun.getId(), mun.getDescripcion()));
+                    }
+                } else {
+                    List<CfgClasificaciones> listaM = clasificacionesFacade.buscarMunicipioPorDepartamento(clasificacionesFacade.find(Integer.parseInt(departamento)).getCodigo());
+                    for (CfgClasificaciones mun : listaM) {
+                        listaMunicipios.add(new SelectItem(mun.getId(), mun.getDescripcion()));
+                    }
                 }
             }
-            if (aux == cantidadServiciosAutorizacion) {
-                autorizaciones.setCerrada(true);
-                autorizacionesFacade.edit(autorizaciones);
-            }
+        } catch (Exception e) {
         }
-        citasFacade.edit(cita);
-        CitTurnos ct = cita.getIdTurno();
-        ct.setEstado("atendido");
-        turnosfacade.edit(ct);
-        loadEvents();
-
-        RequestContext.getCurrentInstance().update("formAgendaPrestador:agenda");
-        actualizarDesdeHistorias = false;
-//            RequestContext.getCurrentInstance().execute("PF('eventDialog').hide()");
-//            imprimirMensaje("Correcto", "Cita " + citCita.getIdCita() + " Atendida", FacesMessage.SEVERITY_INFO);
+    }
+    
+    public String getPacienteremitido() {
+        return pacienteremitido;
     }
 
-//-----------------------------------------------------------------------------------------------------
-//---------------------------------------GETTERS AND SETTERS-------------------------------------------
-//-----------------------------------------------------------------------------------------------------        
-    public LazyAgendaModel getEvenModel() {
-        return evenModel;
+    public void setPacienteremitido(String pacienteremitido) {
+        this.pacienteremitido = pacienteremitido;
     }
 
-    public void setEvenModel(LazyAgendaModel evenModel) {
-        this.evenModel = evenModel;
+    public int getTipomovimiento() {
+        return tipomovimiento;
     }
 
-    public ScheduleEvent getEvent() {
-        return event;
+    public void setTipomovimiento(int tipomovimiento) {
+        this.tipomovimiento = tipomovimiento;
     }
 
-    public void setEvent(ScheduleEvent event) {
-        this.event = event;
+    public boolean isPrestadorremitente() {
+        return prestadorremitente;
     }
 
-    public CfgUsuarios getPrestadorActual() {
-        return prestadorActual;
+    public void setPrestadorremitente(boolean prestadorremitente) {
+        this.prestadorremitente = prestadorremitente;
     }
 
-    public void setPrestadorActual(CfgUsuarios prestadorActual) {
-        this.prestadorActual = prestadorActual;
+    public DatosFormularioHistoria getDatosFormulario() {
+        return datosFormulario;
     }
 
-    public String getNombreCompleto() {
-        return nombreCompleto;
+    public void setDatosFormulario(DatosFormularioHistoria datosFormulario) {
+        this.datosFormulario = datosFormulario;
     }
 
-    public void setNombreCompleto(String nombreCompleto) {
-        this.nombreCompleto = nombreCompleto;
+    public List<SelectItem> getListaMunicipios() {
+        return listaMunicipios;
     }
 
-    public LoginMB getLoginMB() {
-        return loginMB;
+    public void setListaMunicipios(List<SelectItem> listaMunicipios) {
+        this.listaMunicipios = listaMunicipios;
     }
-
-    public void setLoginMB(LoginMB loginMB) {
-        this.loginMB = loginMB;
-    }
-
-    public boolean isRend() {
-        return rend;
-    }
-
-    public void setRend(boolean rend) {
-        this.rend = rend;
-    }
-
-    public CitCitas getCitCita() {
-        return citCita;
-    }
-
-    public void setCitCita(CitCitas citCita) {
-        this.citCita = citCita;
-    }
-
-    public CitTurnos getCitTurnos() {
-        return citTurnos;
-    }
-
-    public void setCitTurnos(CitTurnos citTurnos) {
-        this.citTurnos = citTurnos;
-    }
-
-    public boolean isHaySesionPrestador() {
-        return haySesionPrestador;
-    }
-
-    public void setHaySesionPrestador(boolean haySesionPrestador) {
-        this.haySesionPrestador = haySesionPrestador;
-    }
-
-    //public HistoriasMB getHistoriasMB() {
-    //    return historiasMB;
-    //}
-    //public void setHistoriasMB(HistoriasMB historiasMB) {
-    //    this.historiasMB = historiasMB;
-    //}
-    public boolean isRendBtnAtendida() {
-        return rendBtnAtendida;
-    }
-
-    public void setRendBtnAtendida(boolean rendBtnAtendida) {
-        this.rendBtnAtendida = rendBtnAtendida;
-    }
-
-    public String getMinTime() {
-        return minTime;
-    }
-
-    public void setMinTime(String minTime) {
-        this.minTime = minTime;
-    }
-
-    public String getMaxTime() {
-        return maxTime;
-    }
-
-    public void setMaxTime(String maxTime) {
-        this.maxTime = maxTime;
-    }
-
-    public boolean isRendAgenda() {
-        return rendAgenda;
-    }
-
-    public void setRendAgenda(boolean rendAgenda) {
-        this.rendAgenda = rendAgenda;
-    }
-
-    public boolean isRendBtnHistoriClinica() {
-        return rendBtnHistoriClinica;
-    }
-
-    public void setRendBtnHistoriClinica(boolean rendBtnHistoriClinica) {
-        this.rendBtnHistoriClinica = rendBtnHistoriClinica;
-    }
-
-    public String getIdTurno() {
-        return idTurno;
-    }
-
+    
+    
 }
