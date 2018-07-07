@@ -5,7 +5,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">  
     <h:head>
-        <title>Estandar de Referencia</title>
+        <title>Estandar de Contrarreferencia</title>
         <link href="../recursos/css/estilos.css" rel="stylesheet"/>        
         <link href="../recursos/css/metro-bootstrap.css" rel="stylesheet"/>
         <link href="../recursos/css/iconFont.css" rel="stylesheet"/> 
@@ -28,9 +28,9 @@
             <table style="margin-left: auto; margin-right: auto;" >
                 <tr>
                     <table>
-                        <tr><td colspan="2"><h2>FORMATO ESTANDARIZADO DE REFERENCIA DE PACIENTES</h2></td></tr>                                
+                        <tr><td colspan="2"><h2>FORMATO ESTANDARIZADO DE CONTRARREFERENCIA DE PACIENTES</h2></td></tr>                                
 
-                        <tr><td colspan="2"><h2>INFORMACION DEL PRESTADOR</h2></td></tr>   
+                        <tr><td colspan="2"><h2>INFORMACION DEL PRESTADOR QUE RESPONDE</h2></td></tr>   
                         <tr>
                             <td  style="background-color: #eaecfe;">
                                 <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="NOMBRE:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
@@ -259,7 +259,7 @@
                         </tr>
                     </table>
                 </tr>
-                <tr><td colspan="2"><h2>PROFESIONAL QUE SOLICITA LA REFERENCIA Y SERVICIO AL CUAL SE REMITE</h2></td></tr>   
+                <tr><td colspan="2"><h2>PROFESIONAL QUE CONTRARREFIERE</h2></td></tr>   
                 <tr>
                     <td colspan="2">
                         <p:panel id="atencion" styleClass="width2" >
@@ -309,17 +309,7 @@
                                 <tr>
                                     <tr><td>&nbsp;</td></tr> 
                                     <td>
-                                        <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="SERVICIO QUE SOLICITA LA REFERENCIA" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <p:inputText styleClass="width1"      style="font-weight: bold;" value="#{manejarAnexos3047MB.datosFormulario.dato230}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>     
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="SERVICIO PARA EL CUAL SE SOLICITA LA REFERENCIA" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                                        <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="SERVICIO QUE CONTRARREFIERE" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -335,15 +325,15 @@
                 <tr><td colspan="2"><h2>INFORMACION CLINICA RELEVANTE</h2></td></tr>
                 <table>
                     <tr>
-                        <td colspan="2" style="width: 206px;"><p:outputLabel value="Diligencie en el orden indicado el resumen de anamnesis y 
-                                                                             examen físico, fechas y resultados de examenes auxiliares de 
-                                                                             diagnostico, resumen de la evolución , diagnostico, complicaciones,
-                                                                             tratamientos aplicados y motivo de Remisión. Al finalizar, 
-                                                                             el profesional tratante debe firmar la solicitud de referencia 
-                                                                             y anotar su registro profesional. " /></td>
+                        <td colspan="2" style="width: 206px;"><p:outputLabel value="Diligencie en el orden indicado: Fecha de inicio de atención (anotar el día, mes y año en el cual 
+                                                                             se inició la atención del paciente remitido). Fecha de alta o finalización (anotar el día, mes y año en el 
+                                                                             cual se dio de alta o finalizó la atención del paciente remitido). 
+                                                                             Resumen de la evolución, fecha y resultados de exámenes de apoyo diagnóstico realizados,
+                                                                             complicaciones, tratamiento empleados, pronóstico, recomendaciones,
+                                                                             firma y registro del profesional responsable." /></td>
                     </tr>
                     <tr>
-                        <td colspan="2"><p:inputTextarea  styleClass="width2" value="#{historiasMB.datosFormulario.dato17}"  /></td>                    
+                        <td colspan="2"><p:inputTextarea  rows="6" styleClass="width2" value="#{historiasMB.datosFormulario.dato17}"  /></td>                    
                     </tr>
 
                     <tr><td>&nbsp;</td></tr>
