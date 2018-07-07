@@ -482,21 +482,22 @@
                 <table>
                     <tr><td>&nbsp;</td></tr>
                     <tr><td colspan="2"><h2>INFORMACION DE LA PERSONA DE LA ENTIDAD RESPONSABLE DEL PAGO QUE AUTORIZA</h2></td></tr> 
-                    <tr><td>&nbsp;</td></tr>
                     <tr>
-                        <td><p:outputLabel value="NOMBRE DE QUIEN AUTORIZA"/></td>
+                        <td><p:outputLabel value="NOMBRE DE QUIEN AUTORIZA" styleClass="labelFormularioBold" style="font-weight: bold;"/></td>
                     </tr>
                     <tr>
                         <td><p:inputText styleClass="width1" value="#{manejarAnexos3047MB.datosFormulario.dato1007}"/></td>
                     </tr>
-                    <tr><td><p:outputLabel value="CARGO"/></td></tr>
+                    <tr><td><p:outputLabel value="CARGO" styleClass="labelFormularioBold" style="font-weight: bold;"/></td></tr>
                     <tr>
                         <td><p:inputText id="cargo" styleClass="width1" value="#{manejarAnexos3047MB.datosFormulario.dato1000}"/></td>
                     </tr>
                 </table>
                 <table>
                     <tr>
-                        <td style="width: 95px;" ><p:outputLabel value="TELEFONO"/></td>
+                        <td style="width: 95px;" ><p:outputLabel value="TELEFONO" styleClass="labelFormularioBold" style="font-weight: bold;"/></td>
+                    </tr>
+                    <tr>
                         <td style="width: 95px;"><p:outputLabel value="Indicativo"/></td>
                         <td style="width: 95px;"><p:outputLabel value="Número"/></td>
                         <td style="width: 95px;"><p:outputLabel value="Extensión"/></td>
@@ -507,7 +508,7 @@
                         <td><p:inputText  style="width: 95px;" value="#{manejarAnexos3047MB.datosFormulario.dato1003}"/></td>                        
                     </tr>
                     <tr>
-                        <td><p:outputLabel value="CELULAR"/></td>
+                        <td><p:outputLabel value="CELULAR" styleClass="labelFormularioBold" style="font-weight: bold;"/></td>
                     </tr>
                     <tr>
                         <td><p:outputLabel value="Indicativo"/></td>
@@ -523,9 +524,8 @@
                 <table>
                     <tr><td>&nbsp;</td></tr>
                     <tr><td colspan="2"><h2>INFORMACION DE LA PERSONA DE LA IPS RECEPTORA QUE ACEPTA RECIBIR AL PACIENTE</h2></td></tr> 
-                    <tr><td>&nbsp;</td></tr>
                     <tr>
-                        <td><p:outputLabel value="NOMBRE DEL QUE SOLICITA"/></td>
+                        <td><p:outputLabel value="NOMBRE DE QUIEN ACEPTA LA REMISION" styleClass="labelFormularioBold" style="font-weight: bold;"/></td>
                     </tr>
                     <tr>
                         <td>
@@ -544,10 +544,11 @@
                     <tr>
                         <td><p:inputText id="telef" readonly="true" styleClass="width1" value="#{historiasMB.especialidadPrestador}"/></td>
                     </tr>
+                    <tr><td>&nbsp;</td></tr>
+                    <tr><td>&nbsp;</td></tr>
+
                 </table>
 
-
-                <tr><td>&nbsp;</td></tr>
                 <tr>
                     <td colspan="2">
                         <p:commandButton icon="ui-icon-disk" value="Guardar Nuevo Registro" 
