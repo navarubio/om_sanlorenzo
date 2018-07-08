@@ -6,6 +6,7 @@
 package modelo.entidades;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -84,6 +85,8 @@ import javax.xml.bind.annotation.XmlTransient;
     ,
     @NamedQuery(name = "CfgUsuarios.findByMostrarEnHistorias", query = "SELECT c FROM CfgUsuarios c WHERE c.mostrarEnHistorias = :mostrarEnHistorias")})
 public class CfgUsuarios implements Serializable {
+    @OneToMany(mappedBy = "idUsuario")
+    private Collection<Hc3047Anexo1> hc3047Anexo1Collection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -744,6 +747,15 @@ public class CfgUsuarios implements Serializable {
     @Override
     public String toString() {
         return "modelo.entidades.CfgUsuarios[ idUsuario=" + idUsuario + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Hc3047Anexo1> getHc3047Anexo1Collection() {
+        return hc3047Anexo1Collection;
+    }
+
+    public void setHc3047Anexo1Collection(Collection<Hc3047Anexo1> hc3047Anexo1Collection) {
+        this.hc3047Anexo1Collection = hc3047Anexo1Collection;
     }
 
 }

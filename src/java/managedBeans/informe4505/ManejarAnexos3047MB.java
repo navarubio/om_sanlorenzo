@@ -14,10 +14,13 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.model.SelectItem;
+import javax.inject.Inject;
 import managedBeans.historias.DatosFormularioHistoria;
 import modelo.entidades.CfgClasificaciones;
+import modelo.entidades.Hc3047Anexo1;
 import modelo.fachadas.CfgClasificacionesFacade;
 import modelo.fachadas.CfgDiagnosticoPrincipalFacade;
+import modelo.fachadas.Hc3047Anexo1Facade;
 
 /**
  *
@@ -35,6 +38,8 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     CfgClasificacionesFacade clasificacionesFacade;
     @EJB
     CfgDiagnosticoPrincipalFacade diagnosticoFacade;
+    @EJB
+    Hc3047Anexo1Facade hc3047Anexo1Facade;
     
     private String pacienteremitido=""; 
     private int tipomovimiento=0;
@@ -49,6 +54,8 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     private boolean coutar=false;
     private boolean coutaotro=false;
     private Date fechaReg;
+    private  Hc3047Anexo1 nuevoAnexo1 = new Hc3047Anexo1();
+    
     
     private DatosFormularioHistoria datosFormulario = new DatosFormularioHistoria();//valores de cada uno de los campos de cualquier registro clinico
     
@@ -68,6 +75,7 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
             tipomovimiento = 0;
             prestadorremitente=false;
         }
+        
 
     }
     
@@ -90,6 +98,18 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
             }
         } catch (Exception e) {
         }
+    }
+    
+    public void guardarAnexo1() {//guardar un nuevo registro clinico        
+        int idSede = 1;
+        System.out.println(datosFormulario.getDato0());
+
+        System.out.println("Iniciando el guardado del registro");
+        
+        
+        hc3047Anexo1Facade.create(nuevoAnexo1);
+        
+
     }
     
     public String getPacienteremitido() {
@@ -194,6 +214,14 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
 
     public void setFechaReg(Date fechaReg) {
         this.fechaReg = fechaReg;
+    }
+
+    public Hc3047Anexo1 getNuevoAnexo1() {
+        return nuevoAnexo1;
+    }
+
+    public void setNuevoAnexo1(Hc3047Anexo1 nuevoAnexo1) {
+        this.nuevoAnexo1 = nuevoAnexo1;
     }
     
     

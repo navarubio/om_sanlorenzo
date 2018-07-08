@@ -115,7 +115,7 @@
                         <tr>
                             <td >
                                 <p:focus for="IdFocus" />
-                                <p:selectOneMenu id="IdFocus" style="width: 315px;" value="#{historiasMB.datosFormulario.dato0}" filter="true" filterMatchMode="contains">
+                                <p:selectOneMenu id="IdFocus" style="width: 315px;" value="#{historiasMB.datosFormulario.dato50}" filter="true" filterMatchMode="contains">
                                     <f:selectItems value="#{aplicacionGeneralMB.listaInconsistencia}"/>
                                 </p:selectOneMenu>                        
                             </td>                    
@@ -222,7 +222,7 @@
                                         <p:outputLabel for="papell" value="   PRIMER APELLIDO" style="font-weight: bold;"/>
                                     </td>
                                     <td>
-                                        <p:inputText  id="papellido" styleClass="width1" value="#{historiasMB.datosFormulario.dato3}"  rendered="#{historiasMB.primerapellido}" />
+                                        <p:inputText  id="papellido" styleClass="width1" value="#{manejarAnexos3047MB.nuevoAnexo1.primerapellido}"  rendered="#{historiasMB.primerapellido}" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -232,8 +232,8 @@
                                         </p:selectBooleanCheckbox>
                                         <p:outputLabel for="sapell" value="    SEGUNDO APELLIDO" />
                                     </td>
-                                    <td>
-                                        <p:inputText  id="sapellido" styleClass="width1" value="#{historiasMB.datosFormulario.dato4}" rendered="#{historiasMB.segundoapellido}"  />
+                                    <td> 
+                                        <p:inputText  id="sapellido" styleClass="width1" value="#{manejarAnexos3047MB.nuevoAnexo1.segundoapellido}" rendered="#{historiasMB.segundoapellido}"  />
                                     </td>                  
                                 </tr>    
                                 <tr>
@@ -244,7 +244,7 @@
                                         <p:outputLabel for="pnomb" value="    PRIMER NOMBRE" />
                                     </td>
                                     <td>
-                                        <p:inputText  id="pnombre" styleClass="width1" value="#{historiasMB.datosFormulario.dato4}" rendered="#{historiasMB.primernombre}"  />
+                                        <p:inputText  id="pnombre" styleClass="width1" value="#{manejarAnexos3047MB.nuevoAnexo1.primernombre}" rendered="#{historiasMB.primernombre}"  />
                                     </td>                  
                                 </tr>  
                                 <tr>
@@ -255,7 +255,7 @@
                                         <p:outputLabel for="snomb" value="    SEGUNDO NOMBRE" />
                                     </td>
                                     <td>
-                                        <p:inputText  id="snombre" styleClass="width1" value="#{historiasMB.datosFormulario.dato4}" rendered="#{historiasMB.segundonombre}"  />
+                                        <p:inputText  id="snombre" styleClass="width1" value="#{manejarAnexos3047MB.nuevoAnexo1.segundonombre}" rendered="#{historiasMB.segundonombre}"  />
                                     </td>                  
                                 </tr>  
 
@@ -281,7 +281,7 @@
                                         <p:outputLabel for="numerodoc" value="    NUMERO DOCUMENTO IDENTIFICACION" />
                                     </td>
                                     <td>
-                                        <p:inputText  id="ndocument" styleClass="width1" value="#{historiasMB.datosFormulario.dato4}"  rendered="#{historiasMB.numerodocumento}"  />
+                                        <p:inputText  id="ndocument" styleClass="width1" value="#{manejarAnexos3047MB.nuevoAnexo1.numeroidentificacion}"  rendered="#{historiasMB.numerodocumento}"  />
                                     </td>                  
                                 </tr>  
                                 <tr>
@@ -292,7 +292,7 @@
                                         <p:outputLabel for="fnac" value="    FECHA DE NACIMIENTO" />
                                     </td>
                                     <td>
-                                        <p:calendar id="fechanacimiento" navigator="true" locale="es" value="#{historiasMB.datosFormulario.dato6}" pattern="dd/MM/yyyy" mask="true" size="23" style="width: 200px;" rendered="#{historiasMB.fechanacimiento}">
+                                        <p:calendar id="fechanacimiento" navigator="true" locale="es" value="#{manejarAnexos3047MB.nuevoAnexo1.fechanacimiento}" pattern="dd/MM/yyyy" mask="true" size="23" style="width: 200px;" rendered="#{historiasMB.fechanacimiento}">
                                             <f:convertDateTime pattern="dd/MM/yyyy"/>
                                         </p:calendar>                   
                                     </td>                    
@@ -308,13 +308,13 @@
                             <td colspan="2"><p:outputLabel value="OBSERVACIONES" /></td>
                         </tr>
                         <tr>
-                            <td colspan="2"><p:inputTextarea  styleClass="width2" value="#{historiasMB.datosFormulario.dato17}"  /></td>                    
+                            <td colspan="2"><p:inputTextarea  styleClass="width2" value="#{manejarAnexos3047MB.nuevoAnexo1.observaciones}"  /></td>                    
                         </tr>
                         <tr><td>&nbsp;</td></tr>
                         <tr>
                             <td colspan="2">
                                 <p:outputLabel value="FECHA-HORA REGISTRO"/>
-                                <p:calendar navigator="true" locale="es" value="#{historiasMB.fechaReg}" pattern="dd/MM/yyyy HH:mm:ss" mask="true" size="23" style="width: 200px;" />
+                                <p:calendar navigator="true" locale="es" value="#{manejarAnexos3047MB.nuevoAnexo1.fechadocumento}" pattern="dd/MM/yyyy HH:mm:ss" mask="true" size="23" style="width: 200px;" />
                             </td>
                         </tr>
 
@@ -339,14 +339,14 @@
                         </tr>
                         <tr><td><p:outputLabel value="TELEFONO"/></td></tr>
                         <tr>
-                            <td><p:inputText id="telef" readonly="true" styleClass="width1" value="#{historiasMB.especialidadPrestador}"/></td>
+                            <td><p:inputText id="telef" readonly="true" styleClass="width1" value="#{historiasMB.idPrestador}"/></td>
                         </tr>
 
                         <tr><td>&nbsp;</td></tr>
                         <tr>
                             <td colspan="2">
                                 <p:commandButton icon="ui-icon-disk" value="Guardar Nuevo Registro" 
-                                                 actionListener="#{historiasMB.guardarRegistro}" 
+                                                 actionListener="#{manejarAnexos3047MB.guardarAnexo1()}" 
                                                  disabled="#{historiasMB.modificandoRegCli}" update="@form"/>
                                 <p:commandButton icon="ui-icon-arrowthickstop-1-s" value="Actualizar Registro" 
                                                  actionListener="#{historiasMB.actualizarRegistro}" disabled="#{!historiasMB.modificandoRegCli}" 

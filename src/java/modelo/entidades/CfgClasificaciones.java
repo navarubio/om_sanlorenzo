@@ -6,6 +6,7 @@
 package modelo.entidades;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -19,6 +20,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -40,6 +42,10 @@ import javax.xml.bind.annotation.XmlTransient;
     ,
     @NamedQuery(name = "CfgClasificaciones.findByObservacion", query = "SELECT c FROM CfgClasificaciones c WHERE c.observacion = :observacion")})
 public class CfgClasificaciones implements Serializable {
+    @OneToMany(mappedBy = "tipoinconsistencia")
+    private Collection<Hc3047Anexo1> hc3047Anexo1Collection;
+    @OneToMany(mappedBy = "tipoIdentificacion")
+    private Collection<Hc3047Anexo1> hc3047Anexo1Collection1;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -811,6 +817,24 @@ public class CfgClasificaciones implements Serializable {
     @Override
     public String toString() {
         return "modelo.entidades.CfgClasificaciones[ id=" + id + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Hc3047Anexo1> getHc3047Anexo1Collection() {
+        return hc3047Anexo1Collection;
+    }
+
+    public void setHc3047Anexo1Collection(Collection<Hc3047Anexo1> hc3047Anexo1Collection) {
+        this.hc3047Anexo1Collection = hc3047Anexo1Collection;
+    }
+
+    @XmlTransient
+    public Collection<Hc3047Anexo1> getHc3047Anexo1Collection1() {
+        return hc3047Anexo1Collection1;
+    }
+
+    public void setHc3047Anexo1Collection1(Collection<Hc3047Anexo1> hc3047Anexo1Collection1) {
+        this.hc3047Anexo1Collection1 = hc3047Anexo1Collection1;
     }
 
 }

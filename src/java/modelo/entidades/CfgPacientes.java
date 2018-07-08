@@ -6,6 +6,7 @@
 package modelo.entidades;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -111,6 +112,8 @@ import javax.xml.bind.annotation.XmlTransient;
     ,
     @NamedQuery(name = "CfgPacientes.findByObservaciones", query = "SELECT c FROM CfgPacientes c WHERE c.observaciones = :observaciones")})
 public class CfgPacientes implements Serializable {
+    @OneToMany(mappedBy = "idPaciente")
+    private Collection<Hc3047Anexo1> hc3047Anexo1Collection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -984,6 +987,15 @@ public class CfgPacientes implements Serializable {
 
     public void setParentesco_a(CfgClasificaciones parentesco_a) {
         this.parentesco_a = parentesco_a;
+    }
+
+    @XmlTransient
+    public Collection<Hc3047Anexo1> getHc3047Anexo1Collection() {
+        return hc3047Anexo1Collection;
+    }
+
+    public void setHc3047Anexo1Collection(Collection<Hc3047Anexo1> hc3047Anexo1Collection) {
+        this.hc3047Anexo1Collection = hc3047Anexo1Collection;
     }
 
 }
