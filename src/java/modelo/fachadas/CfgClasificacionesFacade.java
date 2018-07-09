@@ -71,7 +71,7 @@ public class CfgClasificacionesFacade extends AbstractFacade<CfgClasificaciones>
         }
         return null;
     }
-    
+        
     public List<Object> listaClasificaciones() {
         try {
             String hql = "SELECT DISTINCT c.maestro FROM CfgClasificaciones c ORDER BY c.maestro ASC";

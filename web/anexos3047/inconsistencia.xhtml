@@ -115,8 +115,9 @@
                         <tr>
                             <td >
                                 <p:focus for="IdFocus" />
-                                <p:selectOneMenu id="IdFocus" style="width: 315px;" value="#{historiasMB.datosFormulario.dato50}" filter="true" filterMatchMode="contains">
-                                    <f:selectItems value="#{aplicacionGeneralMB.listaInconsistencia}"/>
+                                <p:selectOneMenu id="IdFocus" style="width: 315px;" value="#{manejarAnexos3047MB.nuevoAnexo1.tipoinconsistencia}" filter="true" filterMatchMode="contains" converter="omnifaces.SelectItemsConverter">
+                                    <f:selectItems value="#{aplicacionGeneralMB.listaInconsistencia}" 
+                                                   var="inconsistenciaItem" itemLabel="#{inconsistenciaItem.descripcion}"/>
                                 </p:selectOneMenu>                        
                             </td>                    
                         </tr>
@@ -268,8 +269,9 @@
                                     </td>
                                     <td >
                                         <p:focus for="IdFocus2" />
-                                        <p:selectOneMenu id="IdFocus2" style="width: 315px;" value="#{historiasMB.datosFormulario.dato0}" filter="true" filterMatchMode="contains" rendered="#{historiasMB.tipodocumentoidentifica}">
-                                            <f:selectItems value="#{aplicacionGeneralMB.listaTipoIdentificacion}"/>
+                                        <p:selectOneMenu id="IdFocus2" style="width: 315px;" value="#{manejarAnexos3047MB.nuevoAnexo1.tipoIdentificacion}" filter="true" filterMatchMode="contains" rendered="#{historiasMB.tipodocumentoidentifica}" converter="omnifaces.SelectItemsConverter">
+                                            <f:selectItems value="#{manejarAnexos3047MB.listaTipoidentificacion}"
+                                                           var="tipoidentificacionItem" itemLabel="#{tipoidentificacionItem.descripcion} #{tipoidentificacionItem.observacion}"/>
                                         </p:selectOneMenu>                        
                                     </td>                    
                                 </tr>

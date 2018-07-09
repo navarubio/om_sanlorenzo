@@ -125,7 +125,7 @@ public class AplicacionGeneralMB {
     private List<SelectItem> listaFinalidadConsulta;
     private List<SelectItem> listaFinalidadProcedimiento;
     private List<SelectItem> listaAmbito;
-    private List<SelectItem> listaInconsistencia;
+    private List<CfgClasificaciones> listaInconsistencia;
     private List<SelectItem> listaOrigenAtencion;
     private List<SelectItem> listaDestinoPaciente;
     private List<SelectItem> listaAmbitoFactura;
@@ -445,7 +445,7 @@ public class AplicacionGeneralMB {
                 listaEtnia = cargarClasificacion(maestro.toString());
                 break;
             case Inconsistencia:
-                listaInconsistencia = cargarClasificacion(maestro.toString());
+                listaInconsistencia = cargarClasificacionMaster(maestro.toString());
                 break;
             case OrigenAtencion:
                 listaOrigenAtencion = cargarClasificacion(maestro.toString());
@@ -600,6 +600,11 @@ public class AplicacionGeneralMB {
         for (CfgClasificaciones clasificacion : listaClasificaciones) {
             listaRetorno.add(new SelectItem(clasificacion.getId(), clasificacion.getCodigo() + " - " + clasificacion.getDescripcion()));
         }
+        return listaRetorno;
+    }
+    private List<CfgClasificaciones> cargarClasificacionMaster(String maestro) {
+        List<CfgClasificaciones> listaRetorno = new ArrayList<>();
+        listaRetorno = clasificacionesFacade.buscarPorMaestro(maestro);
         return listaRetorno;
     }
 
@@ -850,11 +855,11 @@ public class AplicacionGeneralMB {
         this.listaTipoRegistroClinico = listaTipoRegistroClinico;
     }
 
-    public List<SelectItem> getListaInconsistencia() {
+    public List<CfgClasificaciones> getListaInconsistencia() {
         return listaInconsistencia;
     }
 
-    public void setListaInconsistencia(List<SelectItem> listaInconsistencia) {
+    public void setListaInconsistencia(List<CfgClasificaciones> listaInconsistencia) {
         this.listaInconsistencia = listaInconsistencia;
     }
     

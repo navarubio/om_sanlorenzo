@@ -6053,7 +6053,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
 
     public void cambiaTipoRegistroClinico() {//cambia el combo 'tipo de registro clinico'
         modificandoRegCli = false;       
- //       tipoanexoActual= anexos3047Facade.getAnexos3047Nombre(tipoAnexo3047);
+//        tipoanexoActual= anexos3047Facade.getAnexos3047Nombre(tipoAnexo3047);
         limpiarFormulario();
         valoresPorDefecto();
         cargarUltimoRegistro();

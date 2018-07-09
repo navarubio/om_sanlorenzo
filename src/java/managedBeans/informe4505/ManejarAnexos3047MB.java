@@ -8,14 +8,17 @@ package managedBeans.informe4505;
 import beans.utilidades.MetodosGenerales;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import managedBeans.historias.DatosFormularioHistoria;
+import managedBeans.historias.HistoriasMB;
 import modelo.entidades.CfgClasificaciones;
 import modelo.entidades.Hc3047Anexo1;
 import modelo.fachadas.CfgClasificacionesFacade;
@@ -49,18 +52,30 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     private String tiposerviciosolicita="";
     private String prioridadservicio="";
     private String ubicacionpaciente="";
+    private String numeroInforme="";
     private boolean coutam=false;
     private boolean copago=false;
     private boolean coutar=false;
     private boolean coutaotro=false;
-    private Date fechaReg;
-    private  Hc3047Anexo1 nuevoAnexo1 = new Hc3047Anexo1();
+    private Date fechaReg=new Date();
+    private Hc3047Anexo1 nuevoAnexo1 = new Hc3047Anexo1();
+    private HistoriasMB historiasMB=new HistoriasMB();
+    private List<CfgClasificaciones> listaInconsistencias = null;
+    private List<CfgClasificaciones> listaTipoidentificacion = null;
     
     
     private DatosFormularioHistoria datosFormulario = new DatosFormularioHistoria();//valores de cada uno de los campos de cualquier registro clinico
     
     public ManejarAnexos3047MB() {
     }
+    
+    @PostConstruct
+    public void init(){
+        listaInconsistencias= clasificacionesFacade.buscarPorMaestro("Inconsistencia");
+        listaTipoidentificacion = clasificacionesFacade.buscarPorMaestro("TipoIdentificacion");
+        generarNumeroInforem();
+    }
+        
 
     public void selecciontipomovimiento() {
         if (pacienteremitido.equals("SI")) {
@@ -75,9 +90,24 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
             tipomovimiento = 0;
             prestadorremitente=false;
         }
-        
-
     }
+    
+    public void generarNumeroInforem(){
+        //fechacomprobante=comprobanteivaef.getFecha();
+        int mes;
+        int anio;
+        String Mesinforme;
+        mes=0;
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(fechaReg);
+        anio = cal.get(Calendar.YEAR);
+        mes = cal.get(Calendar.MONTH)+1;
+        String year= Integer.toString(anio);
+        String month= String.format("%02d",mes);
+        Mesinforme=month;        
+        String tipoanex = historiasMB.getTipoAnexo3047();
+        numeroInforme=year + month + historiasMB.getTipoAnexo3047();
+    }    
     
     public void cargarMunicipios() {
         listaMunicipios = new ArrayList<>();
@@ -106,7 +136,10 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
 
         System.out.println("Iniciando el guardado del registro");
         
+        nuevoAnexo1.setNumeroinforme(numeroInforme);
+        nuevoAnexo1.setIdPaciente(historiasMB.getPacienteSeleccionado());
         
+//        nuevoAnexo1.setIdUsuario(historiasMB.getUsuarios);
         hc3047Anexo1Facade.create(nuevoAnexo1);
         
 
@@ -223,7 +256,22 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     public void setNuevoAnexo1(Hc3047Anexo1 nuevoAnexo1) {
         this.nuevoAnexo1 = nuevoAnexo1;
     }
-    
+
+    public List<CfgClasificaciones> getListaInconsistencias() {
+        return listaInconsistencias;
+    }
+
+    public void setListaInconsistencias(List<CfgClasificaciones> listaInconsistencias) {
+        this.listaInconsistencias = listaInconsistencias;
+    }
+
+    public List<CfgClasificaciones> getListaTipoidentificacion() {
+        return listaTipoidentificacion;
+    }
+
+    public void setListaTipoidentificacion(List<CfgClasificaciones> listaTipoidentificacion) {
+        this.listaTipoidentificacion = listaTipoidentificacion;
+    }
     
     
 }
