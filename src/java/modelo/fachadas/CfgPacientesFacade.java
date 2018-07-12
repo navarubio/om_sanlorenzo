@@ -122,6 +122,16 @@ public class CfgPacientesFacade extends AbstractFacade<CfgPacientes> {
         return null;
     }
     
+    public CfgPacientes buscarPaciente (int idpaciente) {
+        try {
+            String hql = "SELECT c FROM CfgPacientes c where c.idPaciente = ?1 ";
+            return (CfgPacientes) getEntityManager().createQuery(hql).setParameter(1, idpaciente).getResultList();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+    
     public int numeroCedulas(String identificacion) {
         try {
             Query q = getEntityManager().createQuery("SELECT COUNT(p) FROM CfgPacientes  p where p.identificacion = ?1");

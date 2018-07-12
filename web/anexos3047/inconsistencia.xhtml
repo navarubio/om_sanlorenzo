@@ -328,20 +328,20 @@
                         </tr>
                         <tr>
                             <td>
-                                <p:selectOneMenu style="width: 315px;" value="#{historiasMB.idPrestador}" filter="true" filterMatchMode="contains">                            
-                                    <p:ajax event="change" listener="#{historiasMB.cambiaMedico}" update="IdEspecialidad,telef"/>
+                                <p:selectOneMenu style="width: 315px;" value="#{manejarAnexos3047MB.nuevoAnexo1.idUsuario}" filter="true" filterMatchMode="contains" converter="omnifaces.SelectItemsConverter">                            
+                                    <p:ajax event="change" update="IdEspecialidad,telef"/>
                                     <f:selectItem itemLabel="" itemValue=""/>
-                                    <f:selectItems value="#{historiasMB.listaPrestadores}" var="p" itemLabel="#{p.primerNombre} #{p.segundoNombre} #{p.primerApellido} #{p.segundoApellido}" itemValue="#{p.idUsuario}"/>
+                                    <f:selectItems value="#{manejarAnexos3047MB.listaUsuarios}" var="p" itemLabel="#{p.primerNombre} #{p.segundoNombre} #{p.primerApellido} #{p.segundoApellido}" />
                                 </p:selectOneMenu>
                             </td>
                         </tr>
                         <tr><td><p:outputLabel value="CARGO"/></td></tr>
                         <tr>
-                            <td><p:inputText id="IdEspecialidad" readonly="true" styleClass="width1" value="#{historiasMB.especialidadPrestador}"/></td>
+                            <td><p:inputText id="IdEspecialidad" readonly="true" styleClass="width1" value="#{manejarAnexos3047MB.nuevoAnexo1.idUsuario.especialidad.descripcion}"/></td>
                         </tr>
                         <tr><td><p:outputLabel value="TELEFONO"/></td></tr>
                         <tr>
-                            <td><p:inputText id="telef" readonly="true" styleClass="width1" value="#{historiasMB.idPrestador}"/></td>
+                            <td><p:inputText id="telef" readonly="true" styleClass="width1" value="#{manejarAnexos3047MB.nuevoAnexo1.idUsuario.telefonoOficina}"/></td>
                         </tr>
 
                         <tr><td>&nbsp;</td></tr>
@@ -349,7 +349,7 @@
                             <td colspan="2">
                                 <p:commandButton icon="ui-icon-disk" value="Guardar Nuevo Registro" 
                                                  actionListener="#{manejarAnexos3047MB.guardarAnexo1()}" 
-                                                 disabled="#{historiasMB.modificandoRegCli}" update="@form"/>
+                                                 disabled="#{historiasMB.modificandoRegCli}" update="@form ,IdMensajeRefContra"/>
                                 <p:commandButton icon="ui-icon-arrowthickstop-1-s" value="Actualizar Registro" 
                                                  actionListener="#{historiasMB.actualizarRegistro}" disabled="#{!historiasMB.modificandoRegCli}" 
                                                  rendered="#{loginMB.superUsuario}" update="@form"/>

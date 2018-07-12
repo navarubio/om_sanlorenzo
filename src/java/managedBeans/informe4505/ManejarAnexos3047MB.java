@@ -13,16 +13,24 @@ import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import managedBeans.historias.DatosFormularioHistoria;
 import managedBeans.historias.HistoriasMB;
+import managedBeans.seguridad.AplicacionGeneralMB;
 import modelo.entidades.CfgClasificaciones;
+import modelo.entidades.CfgPacientes;
+import modelo.entidades.CfgUsuarios;
 import modelo.entidades.Hc3047Anexo1;
+import modelo.entidades.HcAnexos3047;
 import modelo.fachadas.CfgClasificacionesFacade;
 import modelo.fachadas.CfgDiagnosticoPrincipalFacade;
+import modelo.fachadas.CfgPacientesFacade;
+import modelo.fachadas.CfgUsuariosFacade;
 import modelo.fachadas.Hc3047Anexo1Facade;
 
 /**
@@ -31,120 +39,142 @@ import modelo.fachadas.Hc3047Anexo1Facade;
  */
 @ManagedBean(name = "manejarAnexos3047MB")
 @SessionScoped
-public class ManejarAnexos3047MB extends MetodosGenerales implements Serializable {
+public class ManejarAnexos3047MB implements Serializable {
 
     /**
      * Manejar Informacion de Formularios Anexos 3047
      */
-        
     @EJB
     CfgClasificacionesFacade clasificacionesFacade;
     @EJB
     CfgDiagnosticoPrincipalFacade diagnosticoFacade;
     @EJB
     Hc3047Anexo1Facade hc3047Anexo1Facade;
-    
-    private String pacienteremitido=""; 
-    private int tipomovimiento=0;
-    private boolean prestadorremitente=false;
+    @EJB
+    CfgUsuariosFacade cfgUsuariosFacade;
+    @EJB
+    CfgPacientesFacade cfgPacientesFacade;
+
+    private String pacienteremitido = "";
+    private int tipomovimiento = 0;
+    private boolean prestadorremitente = false;
     private List<SelectItem> listaMunicipios;
     private String departamento = "";
-    private String tiposerviciosolicita="";
-    private String prioridadservicio="";
-    private String ubicacionpaciente="";
-    private String numeroInforme="";
-    private boolean coutam=false;
-    private boolean copago=false;
-    private boolean coutar=false;
-    private boolean coutaotro=false;
-    private Date fechaReg=new Date();
+    private String tiposerviciosolicita = "";
+    private String prioridadservicio = "";
+    private String ubicacionpaciente = "";
+    private String numeroInforme = "";
+    private boolean coutam = false;
+    private boolean copago = false;
+    private boolean coutar = false;
+    private boolean coutaotro = false;
+    private boolean haypacienteseleccionado=false;
+//    private HcAnexos3047 hcAnexos3047=new HcAnexos3047();
+    private CfgPacientes pacienteseleccionado;
+//    private CfgUsuarios usuarioPrestador = new CfgUsuarios();
+    private Date fechaReg = new Date();
     private Hc3047Anexo1 nuevoAnexo1 = new Hc3047Anexo1();
-    private HistoriasMB historiasMB=new HistoriasMB();
+    
+    private HcAnexos3047 tipoanexoActual = new HcAnexos3047();
     private List<CfgClasificaciones> listaInconsistencias = null;
     private List<CfgClasificaciones> listaTipoidentificacion = null;
-    
-    
+    private List<CfgUsuarios> listaUsuarios = null;
+    private HistoriasMB historiasMB;
+
+
     private DatosFormularioHistoria datosFormulario = new DatosFormularioHistoria();//valores de cada uno de los campos de cualquier registro clinico
-    
+
     public ManejarAnexos3047MB() {
+        historiasMB=new HistoriasMB();
     }
     
+
     @PostConstruct
-    public void init(){
-        listaInconsistencias= clasificacionesFacade.buscarPorMaestro("Inconsistencia");
+    public void init() {
+        listaInconsistencias = clasificacionesFacade.buscarPorMaestro("Inconsistencia");
         listaTipoidentificacion = clasificacionesFacade.buscarPorMaestro("TipoIdentificacion");
-        generarNumeroInforem();
+        listaUsuarios= cfgUsuariosFacade.buscarOrdenado();
+//        pacienteseleccionado=historiasMB.getPacienteElegido();
+//        generarNumeroInforme();
+        nuevoAnexo1.setFechadocumento(fechaReg);
+        System.out.println("Numero de Informe cargado "+numeroInforme);
     }
-        
 
     public void selecciontipomovimiento() {
         if (pacienteremitido.equals("SI")) {
             tipomovimiento = 1;
-            prestadorremitente=true;
+            prestadorremitente = true;
         } else if (pacienteremitido.equals("NO")) {
             tipomovimiento = 0;
-            prestadorremitente=false;
+            prestadorremitente = false;
             datosFormulario.setDato1(null);
-            listaMunicipios=null;
+            listaMunicipios = null;
         } else {
             tipomovimiento = 0;
-            prestadorremitente=false;
+            prestadorremitente = false;
         }
     }
-    
-    public void generarNumeroInforem(){
+
+    public void generarNumeroInforme() {
         //fechacomprobante=comprobanteivaef.getFecha();
         int mes;
         int anio;
         String Mesinforme;
-        mes=0;
+        mes = 0;
         Calendar cal = Calendar.getInstance();
         cal.setTime(fechaReg);
         anio = cal.get(Calendar.YEAR);
-        mes = cal.get(Calendar.MONTH)+1;
-        String year= Integer.toString(anio);
-        String month= String.format("%02d",mes);
-        Mesinforme=month;        
-        String tipoanex = historiasMB.getTipoAnexo3047();
-        numeroInforme=year + month + historiasMB.getTipoAnexo3047();
-    }    
-    
-    public void cargarMunicipios() {
-        listaMunicipios = new ArrayList<>();
-        try {
-            if (datosFormulario != null) {
-                departamento = datosFormulario.getDato1().toString();
-                if (departamento != null && departamento.length() != 0 && esNumero(departamento)) {
-                    List<CfgClasificaciones> listaM = clasificacionesFacade.buscarMunicipioPorDepartamento(clasificacionesFacade.find(Integer.parseInt(departamento)).getCodigo());
-                    for (CfgClasificaciones mun : listaM) {
-                        listaMunicipios.add(new SelectItem(mun.getId(), mun.getDescripcion()));
-                    }
-                } else {
-                    List<CfgClasificaciones> listaM = clasificacionesFacade.buscarMunicipioPorDepartamento(clasificacionesFacade.find(Integer.parseInt(departamento)).getCodigo());
-                    for (CfgClasificaciones mun : listaM) {
-                        listaMunicipios.add(new SelectItem(mun.getId(), mun.getDescripcion()));
-                    }
-                }
-            }
-        } catch (Exception e) {
-        }
+        mes = cal.get(Calendar.MONTH) + 1;
+        String year = Integer.toString(anio);
+        String month = String.format("%02d", mes);
+        Mesinforme = month;
+        int tipoanex= tipoanexoActual.getConsecutivo();
+        numeroInforme = year + month + (tipoanex+1);
     }
-    
+
+//    public void cargarMunicipios() {
+//        listaMunicipios = new ArrayList<>();
+//        try {
+//            if (datosFormulario != null) {
+//                departamento = datosFormulario.getDato1().toString();
+//                if (departamento != null && departamento.length() != 0 && esNumero(departamento)) {
+//                    List<CfgClasificaciones> listaM = clasificacionesFacade.buscarMunicipioPorDepartamento(clasificacionesFacade.find(Integer.parseInt(departamento)).getCodigo());
+//                    for (CfgClasificaciones mun : listaM) {
+//                        listaMunicipios.add(new SelectItem(mun.getId(), mun.getDescripcion()));
+//                    }
+//                } else {
+//                    List<CfgClasificaciones> listaM = clasificacionesFacade.buscarMunicipioPorDepartamento(clasificacionesFacade.find(Integer.parseInt(departamento)).getCodigo());
+//                    for (CfgClasificaciones mun : listaM) {
+//                        listaMunicipios.add(new SelectItem(mun.getId(), mun.getDescripcion()));
+//                    }
+//                }
+//            }
+//        } catch (Exception e) {
+//        }
+//    }
+
     public void guardarAnexo1() {//guardar un nuevo registro clinico        
         int idSede = 1;
-        System.out.println(datosFormulario.getDato0());
+        generarNumeroInforme();
+        System.out.println(fechaReg);
+        System.out.println("Iniciando el guardado del registro " + numeroInforme);
+         
 
-        System.out.println("Iniciando el guardado del registro");
-        
-        nuevoAnexo1.setNumeroinforme(numeroInforme);
-        nuevoAnexo1.setIdPaciente(historiasMB.getPacienteSeleccionado());
-        
+        try {
+            nuevoAnexo1.setNumeroinforme(numeroInforme);
+            
+            pacienteseleccionado=cfgPacientesFacade.buscarPaciente(historiasMB.getCodigoPaciente());
+            nuevoAnexo1.setIdPaciente(pacienteseleccionado);
+ 
 //        nuevoAnexo1.setIdUsuario(historiasMB.getUsuarios);
-        hc3047Anexo1Facade.create(nuevoAnexo1);
-        
+            hc3047Anexo1Facade.create(nuevoAnexo1);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Su Anexo fue almacenado con el Nro " + numeroInforme));
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "Error al Grabar Anexo"));
+        }
 
     }
-    
+
     public String getPacienteremitido() {
         return pacienteremitido;
     }
@@ -271,6 +301,30 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
 
     public void setListaTipoidentificacion(List<CfgClasificaciones> listaTipoidentificacion) {
         this.listaTipoidentificacion = listaTipoidentificacion;
+    }
+
+    public String getNumeroInforme() {
+        return numeroInforme;
+    }
+
+    public void setNumeroInforme(String numeroInforme) {
+        this.numeroInforme = numeroInforme;
+    }
+
+    public HcAnexos3047 getTipoanexoActual() {
+        return tipoanexoActual;
+    }
+
+    public void setTipoanexoActual(HcAnexos3047 tipoanexoActual) {
+        this.tipoanexoActual = tipoanexoActual;
+    }
+
+    public List<CfgUsuarios> getListaUsuarios() {
+        return listaUsuarios;
+    }
+
+    public void setListaUsuarios(List<CfgUsuarios> listaUsuarios) {
+        this.listaUsuarios = listaUsuarios;
     }
     
     

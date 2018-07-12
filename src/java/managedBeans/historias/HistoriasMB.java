@@ -46,6 +46,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.transform.TransformerException;
+import managedBeans.informe4505.ManejarAnexos3047MB;
 import managedBeans.seguridad.AplicacionGeneralMB;
 import managedBeans.seguridad.LoginMB;
 import modelo.entidades.CfgCamposArchivosPaciente;
@@ -208,6 +209,8 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     private CfgDiagnostico diagnosticoBuscado;
     private FacServicio servicioBuscado;
     private List<CfgHistoriaCamposPredefinidos> listaTextos;
+    private CfgPacientes pacienteElegido = new CfgPacientes();
+    private int codigoPaciente=0;
 
     //---------------------------------------------------
     //-----------------VARIABLES ------------------------
@@ -227,6 +230,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     private String urlFoto = "../recursos/img/img_usuario.png";
     private String tipoRegistroClinico = "";//tipo de registro clinico usado para cargar el fomulario correspondiente
     private String tipoAnexo3047 = "";//tipo de anexo 3047 usado para cargar el fomulario correspondiente
+    private HcAnexos3047 anexos3047;
     
     private String[] regCliSelHistorial;//registros clinicos seleccionados para el historial
     private String urlPagina = "";
@@ -6054,6 +6058,9 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     public void cambiaTipoRegistroClinico() {//cambia el combo 'tipo de registro clinico'
         modificandoRegCli = false;       
 //        tipoanexoActual= anexos3047Facade.getAnexos3047Nombre(tipoAnexo3047);
+        pacienteElegido=pacienteSeleccionado;
+        codigoPaciente=pacienteSeleccionado.getIdPaciente();
+        
         limpiarFormulario();
         valoresPorDefecto();
         cargarUltimoRegistro();
@@ -11353,8 +11360,32 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     public void setTipomovimiento(int tipomovimiento) {
         this.tipomovimiento = tipomovimiento;
     }
-    
-    
+
+    public HcAnexos3047 getAnexos3047() {
+        return anexos3047;
+    }
+
+    public void setAnexos3047(HcAnexos3047 anexos3047) {
+        this.anexos3047 = anexos3047;
+    }
+
+    public CfgPacientes getPacienteElegido() {
+        return pacienteElegido;
+    }
+
+    public void setPacienteElegido(CfgPacientes pacienteElegido) {
+        this.pacienteElegido = pacienteElegido;
+    }
+
+    public int getCodigoPaciente() {
+        return codigoPaciente;
+    }
+
+    public void setCodigoPaciente(int codigoPaciente) {
+        this.codigoPaciente = codigoPaciente;
+    }
     
     
 }
+
+
