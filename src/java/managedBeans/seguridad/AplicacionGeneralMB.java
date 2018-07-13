@@ -1414,4 +1414,4 @@ public class AplicacionGeneralMB {
     public void setListaDestinoPaciente(List<CfgClasificaciones> listaDestinoPaciente) {
         this.listaDestinoPaciente = listaDestinoPaciente;
     }
-}
+    }

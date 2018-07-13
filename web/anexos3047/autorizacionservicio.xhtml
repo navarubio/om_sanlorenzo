@@ -231,14 +231,14 @@
 
                                 <td >
                                     <p:focus for="IdFocus" />
-                                    <p:selectOneMenu id="IdFocus" style="width: 315px;" value="#{manejarAnexos3047MB.datosFormulario.dato300}" filter="true" filterMatchMode="contains">
+                                    <p:selectOneMenu id="IdFocus" style="width: 315px;" value="#{manejarAnexos3047MB.nuevoAnexo3.idorigenatencion}" filter="true" filterMatchMode="contains" converter="omnifaces.SelectItemsConverter">
                                         <f:selectItem itemLabel="" itemValue=""/>
                                         <f:selectItems value="#{aplicacionGeneralMB.listaOrigenAtencion}" var="origen" itemLabel="#{origen.descripcion}"/>
                                     </p:selectOneMenu>                        
                                 </td>   
 
                                 <td>
-                                    <p:selectOneMenu styleClass="campoFormulario"   value="#{manejarAnexos3047MB.tiposerviciosolicita}">
+                                    <p:selectOneMenu styleClass="campoFormulario"   value="#{manejarAnexos3047MB.nuevoAnexo3.idtiposerviciosolicitado}">
                                         <f:selectItem itemLabel="" itemValue=""/>
                                         <f:selectItem itemLabel="1-Posterior a la atención inicial de urgencias" itemValue="1" />
                                         <f:selectItem itemLabel="2-Servicios Electivos" itemValue="2" />
@@ -246,7 +246,7 @@
                                 </td>
                                 <td >
 
-                                    <p:selectOneMenu styleClass="campoFormulario"   value="#{manejarAnexos3047MB.prioridadservicio}" style="width: 215px;">
+                                    <p:selectOneMenu styleClass="campoFormulario"   value="#{manejarAnexos3047MB.nuevoAnexo3.idprioridadservicio}" style="width: 215px;">
                                         <f:selectItem itemLabel="" itemValue=""/>
                                         <f:selectItem itemLabel="1-Prioritaria" itemValue="1" />
                                         <f:selectItem itemLabel="2-No Prioritaria" itemValue="2" />
@@ -256,7 +256,7 @@
                                 <tr><td>&nbsp;</td></tr>
                                 <tr>
                                     <td >
-                                        <p:selectBooleanCheckbox id= "accident" value="#{historiasMB.primerapellido}" />
+                                        <p:selectBooleanCheckbox id= "accident" value="#{manejarAnexos3047MB.nuevoAnexo3.accidentetransito}" />
                                         <p:outputLabel for="accident" value="   Accidente de Tránsito" style="font-weight: bold;"/>
                                     </td>
                                 </tr>
@@ -270,7 +270,7 @@
                     <tr>
                         <td ><p:outputLabel  value="Ubicación del Paciente al momento de la solicitud de autorizacion" styleClass="labelFormularioBold" style="font-weight: bold;"/></td>
                         <td>
-                            <p:selectOneMenu styleClass="campoFormulario"   value="#{manejarAnexos3047MB.prioridadservicio}">
+                            <p:selectOneMenu styleClass="campoFormulario"   value="#{manejarAnexos3047MB.nuevoAnexo3.idubicacionpaciente}">
                                 <f:selectItem itemLabel="" itemValue=""/>
                                 <f:selectItem itemLabel="1-CONSULTA EXTERNA" itemValue="1" />
                                 <f:selectItem itemLabel="2-URGENCIAS" itemValue="2" />
@@ -285,13 +285,13 @@
                     <tr>
                         <td>
                             <p:focus for="IdFocus7" />
-                            <p:selectOneMenu id="IdFocus7" style="width: 315px;" value="#{manejarAnexos3047MB.datosFormulario.dato301}" filter="true" filterMatchMode="contains">
+                            <p:selectOneMenu id="IdFocus7" style="width: 315px;" value="#{manejarAnexos3047MB.nuevoAnexo3.idservicio}" filter="true" filterMatchMode="contains" converter="omnifaces.SelectItemsConverter">
                                 <f:selectItem itemLabel="" itemValue=""/>
-                                <f:selectItems value="#{aplicacionGeneralMB.listaEspecialidades}"/>
+                                <f:selectItems value="#{manejarAnexos3047MB.listaEspecialidades}" var="especialidad" itemLabel="#{especialidad.descripcion}" />
                             </p:selectOneMenu>         
                         </td>    
                         <td>
-                            <p:inputText  style="width: 95px;" value="#{manejarAnexos3047.datosFormulario.dato6}" />
+                            <p:inputText  style="width: 95px;" value="#{manejarAnexos3047MB.nuevoAnexo3.idcama}" />
                         </td>
                     </tr>
                 </table>
@@ -300,7 +300,7 @@
                     <table>
                         <tr>
                             <td colspan="2"><p:outputLabel value="Manejo Integral segun Guía de : " styleClass="labelFormularioBold" style="font-weight: bold;"/>
-                                <p:inputText  styleClass="width1" value="#{manejarAnexos3047.datosFormulario.dato7}" />
+                                <p:inputText  styleClass="width1" value="#{manejarAnexos3047MB.nuevoAnexo3.manejoguia}" />
                             </td>
                         </tr>
                         <tr><td>&nbsp;</td></tr>
@@ -310,104 +310,104 @@
                             <td  style="background-color: #eaecfe;"><p:outputLabel value="DESCRIPCION: " styleClass="labelFormularioBold" style="font-weight: bold;"/></td>                            
                         </tr>
                         <tr>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato20}" /></td>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato21}" /></td>
-                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047.datosFormulario.dato22}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato20}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato21}" /></td>
+                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047MB.datosFormulario.dato22}" /></td>
                         </tr>
                         <tr>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato23}" /></td>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato24}" /></td>
-                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047.datosFormulario.dato25}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato23}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato24}" /></td>
+                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047MB.datosFormulario.dato25}" /></td>
                         </tr>
                         <tr>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato26}" /></td>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato27}" /></td>
-                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047.datosFormulario.dato28}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato26}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato27}" /></td>
+                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047MB.datosFormulario.dato28}" /></td>
                         </tr>
                         <tr>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato29}" /></td>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato30}" /></td>
-                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047.datosFormulario.dato31}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato29}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato30}" /></td>
+                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047MB.datosFormulario.dato31}" /></td>
                         </tr>
                         <tr>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato32}" /></td>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato33}" /></td>
-                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047.datosFormulario.dato34}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato32}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato33}" /></td>
+                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047MB.datosFormulario.dato34}" /></td>
                         </tr>
                         <tr>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato35}" /></td>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato36}" /></td>
-                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047.datosFormulario.dato37}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato35}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato36}" /></td>
+                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047MB.datosFormulario.dato37}" /></td>
                         </tr>
                         <tr>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato38}" /></td>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato39}" /></td>
-                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047.datosFormulario.dato40}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato38}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato39}" /></td>
+                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047MB.datosFormulario.dato40}" /></td>
                         </tr>
                         <tr>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato41}" /></td>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato42}" /></td>
-                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047.datosFormulario.dato43}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato41}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato42}" /></td>
+                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047MB.datosFormulario.dato43}" /></td>
                         </tr>
                         <tr>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato44}" /></td>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato45}" /></td>
-                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047.datosFormulario.dato46}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato44}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato45}" /></td>
+                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047MB.datosFormulario.dato46}" /></td>
                         </tr>
                         <tr>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato47}" /></td>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato48}" /></td>
-                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047.datosFormulario.dato49}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato47}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato48}" /></td>
+                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047MB.datosFormulario.dato49}" /></td>
                         </tr>
                                                 <tr>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato50}" /></td>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato51}" /></td>
-                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047.datosFormulario.dato52}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato50}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato51}" /></td>
+                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047MB.datosFormulario.dato52}" /></td>
                         </tr>
                         <tr>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato53}" /></td>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato54}" /></td>
-                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047.datosFormulario.dato55}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato53}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato54}" /></td>
+                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047MB.datosFormulario.dato55}" /></td>
                         </tr>
                         <tr>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato56}" /></td>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato57}" /></td>
-                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047.datosFormulario.dato58}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato56}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato57}" /></td>
+                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047MB.datosFormulario.dato58}" /></td>
                         </tr>
                         <tr>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato59}" /></td>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato60}" /></td>
-                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047.datosFormulario.dato61}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato59}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato60}" /></td>
+                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047MB.datosFormulario.dato61}" /></td>
                         </tr>
                         <tr>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato62}" /></td>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato63}" /></td>
-                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047.datosFormulario.dato64}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato62}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato63}" /></td>
+                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047MB.datosFormulario.dato64}" /></td>
                         </tr>
                         <tr>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato65}" /></td>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato66}" /></td>
-                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047.datosFormulario.dato67}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato65}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato66}" /></td>
+                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047MB.datosFormulario.dato67}" /></td>
                         </tr>
                         <tr>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato68}" /></td>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato69}" /></td>
-                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047.datosFormulario.dato70}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato68}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato69}" /></td>
+                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047MB.datosFormulario.dato70}" /></td>
                         </tr>
                         <tr>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato71}" /></td>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato72}" /></td>
-                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047.datosFormulario.dato73}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato71}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato72}" /></td>
+                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047MB.datosFormulario.dato73}" /></td>
                         </tr>
                         <tr>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato74}" /></td>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato75}" /></td>
-                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047.datosFormulario.dato76}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato74}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato75}" /></td>
+                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047MB.datosFormulario.dato76}" /></td>
                         </tr>
                         <tr>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato77}" /></td>
-                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047.datosFormulario.dato78}" /></td>
-                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047.datosFormulario.dato79}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato77}" /></td>
+                            <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato78}" /></td>
+                            <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047MB.datosFormulario.dato79}" /></td>
                         </tr>
                     </table>
                 </tr>
@@ -418,7 +418,7 @@
                             <td colspan="2"><p:outputLabel value="JUSTIFICACIÓN CLINICA" styleClass="labelFormularioBold" style="font-weight: bold;"/></td>
                         </tr>
                         <tr>
-                            <td colspan="2"><p:inputTextarea  styleClass="width2" value="#{manejarAnexos3047.datosFormulario.dato13}"  /></td>                    
+                            <td colspan="2"><p:inputTextarea  styleClass="width2" value="#{manejarAnexos3047MB.nuevoAnexo3.justificacion}"  /></td>                    
                         </tr>
                         <tr><td>&nbsp;</td></tr>
                     </table>
@@ -428,8 +428,8 @@
                     <table>
                         <tr>
                             <td><p:outputLabel value="IMPRESION DIAGNOSTICA:" styleClass="labelFormularioBold" style="font-weight: bold;" /></td>
-                            <td><p:outputLabel value="CODIGO CIE 10" styleClass="labelFormularioBold" style="font-weight: bold;" /></td>
-                            <td><p:outputLabel value="DESCRIPCION" styleClass="labelFormularioBold" style="font-weight: bold;" /></td>
+                            <td><p:outputLabel value="CODIGO CIE 10" styleClass="labelFormularioBold" style="font-weight: bold;" />
+                                <p:outputLabel value="DESCRIPCION" styleClass="labelFormularioBold" style="font-weight: bold;" /></td>
                         </tr>
                         <tr><td>&nbsp;</td></tr>
                         <tr>
@@ -437,10 +437,7 @@
                                 <p:outputLabel value="Diagnóstico Principal:" />
                             </td>
                             <td>
-                                <p:autoComplete id="dato114" size="60" value="#{manejarAnexos3047.datosFormulario.dato114}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/>
-                            </td>
-                            <td>
-                                <p:inputText  styleClass="width1" value="#{manejarAnexos3047.datosFormulario.dato4}" />
+                                <p:autoComplete id="dato114" size="80" value="#{manejarAnexos3047MB.cei100}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true" />
                             </td>
                         </tr>
                         <tr>
@@ -448,10 +445,7 @@
                                 <p:outputLabel value="Diagnóstico relacionado 1:" />
                             </td>
                             <td>
-                                <p:autoComplete id="dato115" size="60" value="#{manejarAnexos3047.datosFormulario.dato115}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/>
-                            </td>
-                            <td>
-                                <p:inputText  styleClass="width1" value="#{manejarAnexos3047.datosFormulario.dato4}" size="50"  />
+                                <p:autoComplete id="dato115" size="80" value="#{manejarAnexos3047MB.cei101}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/>
                             </td>
                         </tr>
                         <tr>
@@ -459,19 +453,16 @@
                                 <p:outputLabel value="Diagnóstico relacionado 2:" />
                             </td>
                             <td>
-                                <p:autoComplete id="dato116" size="60" value="#{manejarAnexos3047.datosFormulario.dato116}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/>                 
-                            </td>
-                            <td>
-                                <p:inputText  styleClass="width1" value="#{manejarAnexos3047.datosFormulario.dato4}"   />
+                                <p:autoComplete id="dato116" size="80" value="#{manejarAnexos3047MB.cei102}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/>                 
                             </td>
                         </tr>
                         <tr><td>&nbsp;</td></tr>
-                        <tr>
+                        <tr> 
                             <td>
                                 <p:outputLabel value="FECHA-HORA REGISTRO" styleClass="labelFormularioBold" style="font-weight: bold;"/>
                             </td>
                             <td>
-                                <p:calendar navigator="true" locale="es" value="#{manejarAnexos3047MB.fechaReg}" pattern="dd/MM/yyyy HH:mm:ss" mask="true" size="23" style="width: 200px;" />
+                                <p:calendar navigator="true" locale="es" value="#{manejarAnexos3047MB.nuevoAnexo3.fechadocumento}" pattern="dd/MM/yyyy HH:mm:ss" mask="true" size="23" style="width: 200px;" />
                             </td>
                         </tr>
 
@@ -486,27 +477,27 @@
                     </tr>
                     <tr>
                         <td>
-                            <p:selectOneMenu style="width: 315px;" value="#{historiasMB.idPrestador}" filter="true" filterMatchMode="contains">                            
+                            <p:selectOneMenu style="width: 315px;" value="#{manejarAnexos3047MB.nuevoAnexo3.idUsuario}" filter="true" filterMatchMode="contains" converter="omnifaces.SelectItemsConverter">                            
                                 <p:ajax event="change" listener="#{historiasMB.cambiaMedico}" update="IdEspecialidad,telef"/>
                                 <f:selectItem itemLabel="" itemValue=""/>
-                                <f:selectItems value="#{historiasMB.listaPrestadores}" var="p" itemLabel="#{p.primerNombre} #{p.segundoNombre} #{p.primerApellido} #{p.segundoApellido}" itemValue="#{p.idUsuario}"/>
+                                <f:selectItems value="#{manejarAnexos3047MB.listaUsuarios}" var="p" itemLabel="#{p.primerNombre} #{p.segundoNombre} #{p.primerApellido} #{p.segundoApellido}" />
                             </p:selectOneMenu>
                         </td>
                     </tr>
                     <tr><td><p:outputLabel value="CARGO"/></td></tr>
                     <tr>
-                        <td><p:inputText id="IdEspecialidad" readonly="true" styleClass="width1" value="#{historiasMB.especialidadPrestador}"/></td>
+                        <td><p:inputText id="IdEspecialidad" readonly="true" styleClass="width1" value="#{manejarAnexos3047MB.nuevoAnexo2.idUsuario.especialidad.descripcion}"/></td>
                     </tr>
                     <tr><td><p:outputLabel value="TELEFONO"/></td></tr>
                     <tr>
-                        <td><p:inputText id="telef" readonly="true" styleClass="width1" value="#{historiasMB.especialidadPrestador}"/></td>
+                        <td><p:inputText id="telef" readonly="true" styleClass="width1" value="#{manejarAnexos3047MB.nuevoAnexo2.idUsuario.telefonoOficina}"/></td>
                     </tr>
 
                     <tr><td>&nbsp;</td></tr>
                     <tr>
                         <td colspan="2">
                             <p:commandButton icon="ui-icon-disk" value="Guardar Nuevo Registro" 
-                                             actionListener="#{historiasMB.guardarRegistro}" 
+                                             actionListener="#{manejarAnexos3047MB.guardarAnexo3()}" 
                                              disabled="#{historiasMB.modificandoRegCli}" update="@form"/>
                             <p:commandButton icon="ui-icon-arrowthickstop-1-s" value="Actualizar Registro" 
                                              actionListener="#{historiasMB.actualizarRegistro}" disabled="#{!historiasMB.modificandoRegCli}" 

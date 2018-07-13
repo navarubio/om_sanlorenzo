@@ -66,8 +66,9 @@ public class Hc3047Anexo3 implements Serializable {
     private Integer idprioridadservicio;
     @Column(name = "idubicacionpaciente")
     private Integer idubicacionpaciente;
+    @Size(max = 10)
     @Column(name = "idcama")
-    private Integer idcama;
+    private String idcama;
     @Size(max = 150)
     @Column(name = "manejoguia")
     private String manejoguia;
@@ -161,11 +162,11 @@ public class Hc3047Anexo3 implements Serializable {
         this.idubicacionpaciente = idubicacionpaciente;
     }
 
-    public Integer getIdcama() {
+    public String getIdcama() {
         return idcama;
     }
 
-    public void setIdcama(Integer idcama) {
+    public void setIdcama(String idcama) {
         this.idcama = idcama;
     }
 

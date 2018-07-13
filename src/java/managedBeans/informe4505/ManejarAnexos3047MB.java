@@ -28,6 +28,8 @@ import modelo.entidades.CfgPacientes;
 import modelo.entidades.CfgUsuarios;
 import modelo.entidades.Hc3047Anexo1;
 import modelo.entidades.Hc3047Anexo2;
+import modelo.entidades.Hc3047Anexo3;
+import modelo.entidades.Hc3047Anexo31;
 import modelo.entidades.HcAnexos3047;
 import modelo.fachadas.CfgClasificacionesFacade;
 import modelo.fachadas.CfgDiagnosticoFacade;
@@ -36,6 +38,8 @@ import modelo.fachadas.CfgPacientesFacade;
 import modelo.fachadas.CfgUsuariosFacade;
 import modelo.fachadas.Hc3047Anexo1Facade;
 import modelo.fachadas.Hc3047Anexo2Facade;
+import modelo.fachadas.Hc3047Anexo3Facade;
+import modelo.fachadas.Hc3047Anexo3_1Facade;
 import modelo.fachadas.HcAnexos3047Facade;
 
 /**
@@ -58,6 +62,10 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     @EJB
     Hc3047Anexo2Facade hc3047Anexo2Facade;
     @EJB
+    Hc3047Anexo3Facade hc3047Anexo3Facade;
+    @EJB
+    Hc3047Anexo3_1Facade  hc3047Anexo3_1Facade;
+    @EJB
     CfgUsuariosFacade cfgUsuariosFacade;
     @EJB
     CfgPacientesFacade cfgPacientesFacade;
@@ -65,12 +73,15 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     CfgDiagnosticoFacade cfgDiagnosticoFacade;
     @EJB
     HcAnexos3047Facade hcAnexos3047Facade;
+    @EJB
+    CfgClasificacionesFacade cfgClasificacionesFacade;
 
     private String pacienteremitido = "";
     private int tipomovimiento = 0;
     private int consecutivo = 0;
     private boolean prestadorremitente = false;
     private List<SelectItem> listaMunicipios;
+    private List<CfgClasificaciones> listaEspecialidades;
     private String departamento = "";
     private String municipio = "";
     private String tiposerviciosolicita = "";
@@ -78,6 +89,8 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     private String ubicacionpaciente = "";
     private String numeroInforme = "";
     private String numeroAtencion = "";
+    private String numeroSolicitud = "";
+    
     private boolean coutam = false;
     private boolean copago = false;
     private boolean coutar = false;
@@ -89,6 +102,9 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     private Date fechaReg = new Date();
     private Hc3047Anexo1 nuevoAnexo1 = new Hc3047Anexo1();
     private Hc3047Anexo2 nuevoAnexo2 = new Hc3047Anexo2();
+    private Hc3047Anexo3 nuevoAnexo3 = new Hc3047Anexo3();
+    private Hc3047Anexo31 nuevoAnexo31 = new Hc3047Anexo31();
+    
 
     private HcAnexos3047 tipoanexoActual = new HcAnexos3047();
     private List<CfgClasificaciones> listaInconsistencias = null;
@@ -119,11 +135,13 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         listaInconsistencias = clasificacionesFacade.buscarPorMaestro("Inconsistencia");
         listaTipoidentificacion = clasificacionesFacade.buscarPorMaestro("TipoIdentificacion");
         listaUsuarios = cfgUsuariosFacade.buscarOrdenado();
+        listaEspecialidades=cfgClasificacionesFacade.buscarPorMaestro("Especialidad");
 //        pacienteseleccionado=historiasMB.getPacienteElegido();
 //        generarNumeroInforme();
         nuevoAnexo1.setFechadocumento(fechaReg);
         nuevoAnexo2.setFechadocumento(fechaReg);
         nuevoAnexo2.setFechaingreso(fechaReg);
+        nuevoAnexo3.setFechadocumento(fechaReg);
     }
 
     public void selecciontipomovimiento() {
@@ -246,6 +264,44 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         }
 
     }
+    
+    public void guardarAnexo3() {//guardar un nuevo registro clinico        
+        int idSede = 1;
+        generarNumeroSolicitud();
+        System.out.println(fechaReg);
+        System.out.println("Iniciando el guardado del registro Anexo3 " + numeroSolicitud);
+        String codigo0 = "";
+        String codigo1 = "";
+        String codigo2 = "";
+        String codigo3 = "";
+
+        try {
+            nuevoAnexo3.setNumerosolicitud(numeroSolicitud);
+            if (cei100 != null) {
+                codigo0 = cei100.substring(0, 4);
+                diagnosticoppal = cfgDiagnosticoFacade.find(codigo0);
+                nuevoAnexo3.setCei100(diagnosticoppal);
+            }
+            if (cei101 != null) {
+                codigo1 = cei101.substring(0, 4);
+                diagnosticorelacion1 = cfgDiagnosticoFacade.find(codigo1);
+                nuevoAnexo3.setCei101(diagnosticorelacion1);
+            }
+            if (cei102 != null) {
+                codigo2 = cei102.substring(0, 4);
+                diagnosticorelacion2 = cfgDiagnosticoFacade.find(codigo2);
+                nuevoAnexo3.setCei102(diagnosticorelacion2);
+            }
+            hc3047Anexo3Facade.create(nuevoAnexo3);
+            anexoActual.setConsecutivo(consecutivo);
+            hcAnexos3047Facade.edit(anexoActual);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Su Anexo3 fue almacenado con el Nro " + numeroSolicitud));
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "Error al Grabar Anexo3"));
+        }
+
+    }
+    
 
     public void generarNumeroAtencion() {
         //fechacomprobante=comprobanteivaef.getFecha();
@@ -261,6 +317,22 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         anexoActual = hcAnexos3047Facade.find(2);
         consecutivo = anexoActual.getConsecutivo() + 1;
         numeroAtencion = yearsmall + month + consecutivo;
+    }
+    
+        public void generarNumeroSolicitud() {
+        //fechacomprobante=comprobanteivaef.getFecha();
+        int mes = 0;
+        int anio = 0;
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(fechaReg);
+        anio = cal.get(Calendar.YEAR);
+        mes = cal.get(Calendar.MONTH) + 1;
+        String year = Integer.toString(anio);
+        String yearsmall = year.substring(2, 4);
+        String month = String.format("%02d", mes);
+        anexoActual = hcAnexos3047Facade.find(3);
+        consecutivo = anexoActual.getConsecutivo() + 1;
+        numeroSolicitud = yearsmall + month + consecutivo;
     }
 
     public String getPacienteremitido() {
@@ -495,4 +567,29 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         this.cei103 = cei103;
     }
 
+    public Hc3047Anexo3 getNuevoAnexo3() {
+        return nuevoAnexo3;
+    }
+
+    public void setNuevoAnexo3(Hc3047Anexo3 nuevoAnexo3) {
+        this.nuevoAnexo3 = nuevoAnexo3;
+    }
+
+    public List<CfgClasificaciones> getListaEspecialidades() {
+        return listaEspecialidades;
+    }
+
+    public void setListaEspecialidades(List<CfgClasificaciones> listaEspecialidades) {
+        this.listaEspecialidades = listaEspecialidades;
+    }
+
+    public String getNumeroSolicitud() {
+        return numeroSolicitud;
+    }
+
+    public void setNumeroSolicitud(String numeroSolicitud) {
+        this.numeroSolicitud = numeroSolicitud;
+    }
+
+    
 }
