@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author sofimar
+ * @author sismacontab
  */
 @Entity
 @Table(name = "hc_3047_anexo1")
@@ -35,8 +35,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Hc3047Anexo1.findById3047anexo1", query = "SELECT h FROM Hc3047Anexo1 h WHERE h.id3047anexo1 = :id3047anexo1"),
     @NamedQuery(name = "Hc3047Anexo1.findByNumeroinforme", query = "SELECT h FROM Hc3047Anexo1 h WHERE h.numeroinforme = :numeroinforme"),
     @NamedQuery(name = "Hc3047Anexo1.findByFechadocumento", query = "SELECT h FROM Hc3047Anexo1 h WHERE h.fechadocumento = :fechadocumento"),
-    @NamedQuery(name = "Hc3047Anexo1.findByHoradocumento", query = "SELECT h FROM Hc3047Anexo1 h WHERE h.horadocumento = :horadocumento"),
-    @NamedQuery(name = "Hc3047Anexo1.findByTipodocumento", query = "SELECT h FROM Hc3047Anexo1 h WHERE h.tipodocumento = :tipodocumento"),
     @NamedQuery(name = "Hc3047Anexo1.findByTipocobertura", query = "SELECT h FROM Hc3047Anexo1 h WHERE h.tipocobertura = :tipocobertura"),
     @NamedQuery(name = "Hc3047Anexo1.findByPrimerapellido", query = "SELECT h FROM Hc3047Anexo1 h WHERE h.primerapellido = :primerapellido"),
     @NamedQuery(name = "Hc3047Anexo1.findBySegundoapellido", query = "SELECT h FROM Hc3047Anexo1 h WHERE h.segundoapellido = :segundoapellido"),
@@ -56,13 +54,8 @@ public class Hc3047Anexo1 implements Serializable {
     @Column(name = "numeroinforme")
     private String numeroinforme;
     @Column(name = "fechadocumento")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fechadocumento;
-    @Size(max = 8)
-    @Column(name = "horadocumento")
-    private String horadocumento;
-    @Column(name = "tipodocumento")
-    private Integer tipodocumento;
     @Column(name = "tipocobertura")
     private Integer tipocobertura;
     @Size(max = 30)
@@ -128,22 +121,6 @@ public class Hc3047Anexo1 implements Serializable {
 
     public void setFechadocumento(Date fechadocumento) {
         this.fechadocumento = fechadocumento;
-    }
-
-    public String getHoradocumento() {
-        return horadocumento;
-    }
-
-    public void setHoradocumento(String horadocumento) {
-        this.horadocumento = horadocumento;
-    }
-
-    public Integer getTipodocumento() {
-        return tipodocumento;
-    }
-
-    public void setTipodocumento(Integer tipodocumento) {
-        this.tipodocumento = tipodocumento;
     }
 
     public Integer getTipocobertura() {

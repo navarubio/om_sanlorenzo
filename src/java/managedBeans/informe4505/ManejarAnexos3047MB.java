@@ -68,11 +68,11 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
 
     private String pacienteremitido = "";
     private int tipomovimiento = 0;
-    private int consecutivo=0;
+    private int consecutivo = 0;
     private boolean prestadorremitente = false;
     private List<SelectItem> listaMunicipios;
     private String departamento = "";
-    private String municipio ="";
+    private String municipio = "";
     private String tiposerviciosolicita = "";
     private String prioridadservicio = "";
     private String ubicacionpaciente = "";
@@ -105,7 +105,7 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     private CfgDiagnostico diagnosticorelacion2;
     private CfgDiagnostico diagnosticorelacion3;
     private CfgClasificaciones origenatencion;
-    
+
     private HcAnexos3047 anexoActual;
 
     private DatosFormularioHistoria datosFormulario = new DatosFormularioHistoria();//valores de cada uno de los campos de cualquier registro clinico
@@ -143,20 +143,19 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     }
 
     public void generarNumeroInforme() {
-        //fechacomprobante=comprobanteivaef.getFecha();
-        int mes;
-        int anio;
-        String Mesinforme;
-        mes = 0;
+        int mes = 0;
+        int anio = 0;
         Calendar cal = Calendar.getInstance();
         cal.setTime(fechaReg);
         anio = cal.get(Calendar.YEAR);
         mes = cal.get(Calendar.MONTH) + 1;
         String year = Integer.toString(anio);
+        String yearsmall = year.substring(2, 4);
         String month = String.format("%02d", mes);
-        Mesinforme = month;
-        int tipoanex = tipoanexoActual.getConsecutivo();
-        numeroInforme = year + month + (tipoanex + 1);
+        anexoActual = hcAnexos3047Facade.find(1);
+        consecutivo = anexoActual.getConsecutivo() + 1;
+        numeroInforme = yearsmall + month + consecutivo;
+
     }
 
     public void cargarMunicipios() {
@@ -189,11 +188,10 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         try {
             nuevoAnexo1.setNumeroinforme(numeroInforme);
 
-//            pacienteseleccionado=cfgPacientesFacade.buscarPaciente(historiasMB.getCodigoPaciente());
-            nuevoAnexo1.setIdPaciente(pacienteseleccionado);
-
-//        nuevoAnexo1.setIdUsuario(historiasMB.getUsuarios);
+//            nuevoAnexo1.setIdPaciente(pacienteseleccionado);
             hc3047Anexo1Facade.create(nuevoAnexo1);
+            anexoActual.setConsecutivo(consecutivo);
+            hcAnexos3047Facade.edit(anexoActual);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Su Anexo fue almacenado con el Nro " + numeroInforme));
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "Error al Grabar Anexo"));
