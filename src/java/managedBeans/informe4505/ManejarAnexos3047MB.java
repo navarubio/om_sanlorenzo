@@ -68,6 +68,7 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
 
     private String pacienteremitido = "";
     private int tipomovimiento = 0;
+    private int consecutivo=0;
     private boolean prestadorremitente = false;
     private List<SelectItem> listaMunicipios;
     private String departamento = "";
@@ -104,6 +105,8 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     private CfgDiagnostico diagnosticorelacion2;
     private CfgDiagnostico diagnosticorelacion3;
     private CfgClasificaciones origenatencion;
+    
+    private HcAnexos3047 anexoActual;
 
     private DatosFormularioHistoria datosFormulario = new DatosFormularioHistoria();//valores de cada uno de los campos de cualquier registro clinico
 
@@ -237,7 +240,8 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
             }
             nuevoAnexo2.setNumeroatencion(numeroAtencion);
             hc3047Anexo2Facade.create(nuevoAnexo2);
-
+            anexoActual.setConsecutivo(consecutivo);
+            hcAnexos3047Facade.edit(anexoActual);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Su Anexo2 fue almacenado con el Nro " + numeroAtencion));
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "Error al Grabar Anexo2"));
@@ -256,8 +260,8 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         String year = Integer.toString(anio);
         String yearsmall = year.substring(2, 4);
         String month = String.format("%02d", mes);
-        HcAnexos3047 anexoActual = hcAnexos3047Facade.find(2);
-        int consecutivo = anexoActual.getConsecutivo() + 1;
+        anexoActual = hcAnexos3047Facade.find(2);
+        consecutivo = anexoActual.getConsecutivo() + 1;
         numeroAtencion = yearsmall + month + consecutivo;
     }
 
