@@ -233,7 +233,7 @@
                                     <p:focus for="IdFocus" />
                                     <p:selectOneMenu id="IdFocus" style="width: 315px;" value="#{manejarAnexos3047MB.datosFormulario.dato300}" filter="true" filterMatchMode="contains">
                                         <f:selectItem itemLabel="" itemValue=""/>
-                                        <f:selectItems value="#{aplicacionGeneralMB.listaOrigenAtencion}"/>
+                                        <f:selectItems value="#{aplicacionGeneralMB.listaOrigenAtencion}" var="origen" itemLabel="#{origen.descripcion}"/>
                                     </p:selectOneMenu>                        
                                 </td>   
 
