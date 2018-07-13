@@ -42,6 +42,14 @@ import javax.xml.bind.annotation.XmlTransient;
     ,
     @NamedQuery(name = "CfgClasificaciones.findByObservacion", query = "SELECT c FROM CfgClasificaciones c WHERE c.observacion = :observacion")})
 public class CfgClasificaciones implements Serializable {
+    @OneToMany(mappedBy = "iddestinopaciente")
+    private Collection<Hc3047Anexo2> hc3047Anexo2Collection;
+    @OneToMany(mappedBy = "idorigenatencion")
+    private Collection<Hc3047Anexo2> hc3047Anexo2Collection1;
+    @OneToMany(mappedBy = "iddepartamento")
+    private Collection<Hc3047Anexo2> hc3047Anexo2Collection2;
+    @OneToMany(mappedBy = "idmunicipio")
+    private Collection<Hc3047Anexo2> hc3047Anexo2Collection3;
     @OneToMany(mappedBy = "tipoinconsistencia")
     private Collection<Hc3047Anexo1> hc3047Anexo1Collection;
     @OneToMany(mappedBy = "tipoIdentificacion")
@@ -835,6 +843,42 @@ public class CfgClasificaciones implements Serializable {
 
     public void setHc3047Anexo1Collection1(Collection<Hc3047Anexo1> hc3047Anexo1Collection1) {
         this.hc3047Anexo1Collection1 = hc3047Anexo1Collection1;
+    }
+
+    @XmlTransient
+    public Collection<Hc3047Anexo2> getHc3047Anexo2Collection() {
+        return hc3047Anexo2Collection;
+    }
+
+    public void setHc3047Anexo2Collection(Collection<Hc3047Anexo2> hc3047Anexo2Collection) {
+        this.hc3047Anexo2Collection = hc3047Anexo2Collection;
+    }
+
+    @XmlTransient
+    public Collection<Hc3047Anexo2> getHc3047Anexo2Collection1() {
+        return hc3047Anexo2Collection1;
+    }
+
+    public void setHc3047Anexo2Collection1(Collection<Hc3047Anexo2> hc3047Anexo2Collection1) {
+        this.hc3047Anexo2Collection1 = hc3047Anexo2Collection1;
+    }
+
+    @XmlTransient
+    public Collection<Hc3047Anexo2> getHc3047Anexo2Collection2() {
+        return hc3047Anexo2Collection2;
+    }
+
+    public void setHc3047Anexo2Collection2(Collection<Hc3047Anexo2> hc3047Anexo2Collection2) {
+        this.hc3047Anexo2Collection2 = hc3047Anexo2Collection2;
+    }
+
+    @XmlTransient
+    public Collection<Hc3047Anexo2> getHc3047Anexo2Collection3() {
+        return hc3047Anexo2Collection3;
+    }
+
+    public void setHc3047Anexo2Collection3(Collection<Hc3047Anexo2> hc3047Anexo2Collection3) {
+        this.hc3047Anexo2Collection3 = hc3047Anexo2Collection3;
     }
 
 }

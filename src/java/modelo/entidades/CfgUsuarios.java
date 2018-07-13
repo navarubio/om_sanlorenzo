@@ -86,6 +86,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "CfgUsuarios.findByMostrarEnHistorias", query = "SELECT c FROM CfgUsuarios c WHERE c.mostrarEnHistorias = :mostrarEnHistorias")})
 public class CfgUsuarios implements Serializable {
     @OneToMany(mappedBy = "idUsuario")
+    private Collection<Hc3047Anexo2> hc3047Anexo2Collection;
+    @OneToMany(mappedBy = "idUsuario")
     private Collection<Hc3047Anexo1> hc3047Anexo1Collection;
 
     private static final long serialVersionUID = 1L;
@@ -756,6 +758,15 @@ public class CfgUsuarios implements Serializable {
 
     public void setHc3047Anexo1Collection(Collection<Hc3047Anexo1> hc3047Anexo1Collection) {
         this.hc3047Anexo1Collection = hc3047Anexo1Collection;
+    }
+
+    @XmlTransient
+    public Collection<Hc3047Anexo2> getHc3047Anexo2Collection() {
+        return hc3047Anexo2Collection;
+    }
+
+    public void setHc3047Anexo2Collection(Collection<Hc3047Anexo2> hc3047Anexo2Collection) {
+        this.hc3047Anexo2Collection = hc3047Anexo2Collection;
     }
 
 }

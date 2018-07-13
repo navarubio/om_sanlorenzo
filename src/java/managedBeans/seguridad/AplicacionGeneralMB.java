@@ -126,8 +126,8 @@ public class AplicacionGeneralMB {
     private List<SelectItem> listaFinalidadProcedimiento;
     private List<SelectItem> listaAmbito;
     private List<CfgClasificaciones> listaInconsistencia;
-    private List<SelectItem> listaOrigenAtencion;
-    private List<SelectItem> listaDestinoPaciente;
+    private List<CfgClasificaciones> listaOrigenAtencion;
+    private List<CfgClasificaciones> listaDestinoPaciente;
     private List<SelectItem> listaAmbitoFactura;
     private List<SelectItem> listaActoQuirurgico;
     private List<SelectItem> listaPersonalAtiende;
@@ -448,10 +448,10 @@ public class AplicacionGeneralMB {
                 listaInconsistencia = cargarClasificacionMaster(maestro.toString());
                 break;
             case OrigenAtencion:
-                listaOrigenAtencion = cargarClasificacion(maestro.toString());
+                listaOrigenAtencion = cargarClasificacionMaster(maestro.toString());
                 break;
             case DestinoPaciente:
-                listaDestinoPaciente = cargarClasificacion(maestro.toString());
+                listaDestinoPaciente = cargarClasificacionMaster(maestro.toString());
                 break;
 
             case Escolaridad:
@@ -1399,19 +1399,19 @@ public class AplicacionGeneralMB {
         this.listaAnexos3047 = listaAnexos3047;
     }
 
-    public List<SelectItem> getListaOrigenAtencion() {
+    public List<CfgClasificaciones> getListaOrigenAtencion() {
         return listaOrigenAtencion;
     }
 
-    public void setListaOrigenAtencion(List<SelectItem> listaOrigenAtencion) {
+    public void setListaOrigenAtencion(List<CfgClasificaciones> listaOrigenAtencion) {
         this.listaOrigenAtencion = listaOrigenAtencion;
     }
 
-    public List<SelectItem> getListaDestinoPaciente() {
+    public List<CfgClasificaciones> getListaDestinoPaciente() {
         return listaDestinoPaciente;
     }
 
-    public void setListaDestinoPaciente(List<SelectItem> listaDestinoPaciente) {
+    public void setListaDestinoPaciente(List<CfgClasificaciones> listaDestinoPaciente) {
         this.listaDestinoPaciente = listaDestinoPaciente;
     }
 }
