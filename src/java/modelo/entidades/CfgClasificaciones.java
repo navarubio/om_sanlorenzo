@@ -43,6 +43,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "CfgClasificaciones.findByObservacion", query = "SELECT c FROM CfgClasificaciones c WHERE c.observacion = :observacion")})
 public class CfgClasificaciones implements Serializable {
     @OneToMany(mappedBy = "idservicio")
+    private Collection<Hc3047Anexo4> hc3047Anexo4Collection;
+    @OneToMany(mappedBy = "idservicio")
     private Collection<Hc3047Anexo3> hc3047Anexo3Collection;
     @OneToMany(mappedBy = "idorigenatencion")
     private Collection<Hc3047Anexo3> hc3047Anexo3Collection1;
@@ -902,6 +904,15 @@ public class CfgClasificaciones implements Serializable {
 
     public void setHc3047Anexo3Collection1(Collection<Hc3047Anexo3> hc3047Anexo3Collection1) {
         this.hc3047Anexo3Collection1 = hc3047Anexo3Collection1;
+    }
+
+    @XmlTransient
+    public Collection<Hc3047Anexo4> getHc3047Anexo4Collection() {
+        return hc3047Anexo4Collection;
+    }
+
+    public void setHc3047Anexo4Collection(Collection<Hc3047Anexo4> hc3047Anexo4Collection) {
+        this.hc3047Anexo4Collection = hc3047Anexo4Collection;
     }
 
 }

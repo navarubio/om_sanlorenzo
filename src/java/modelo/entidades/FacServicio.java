@@ -55,6 +55,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "FacServicio.findByAplicaCree", query = "SELECT f FROM FacServicio f WHERE f.aplicaCree = :aplicaCree")})
 public class FacServicio implements Serializable {
     @OneToMany(mappedBy = "idServicio")
+    private Collection<Hc3047Anexo41> hc3047Anexo41Collection;
+    @OneToMany(mappedBy = "idServicio")
     private Collection<Hc3047Anexo31> hc3047Anexo31Collection;
     private static final long serialVersionUID = 1L;
     @Id
@@ -520,6 +522,15 @@ public class FacServicio implements Serializable {
 
     public void setHc3047Anexo31Collection(Collection<Hc3047Anexo31> hc3047Anexo31Collection) {
         this.hc3047Anexo31Collection = hc3047Anexo31Collection;
+    }
+
+    @XmlTransient
+    public Collection<Hc3047Anexo41> getHc3047Anexo41Collection() {
+        return hc3047Anexo41Collection;
+    }
+
+    public void setHc3047Anexo41Collection(Collection<Hc3047Anexo41> hc3047Anexo41Collection) {
+        this.hc3047Anexo41Collection = hc3047Anexo41Collection;
     }
 
 }

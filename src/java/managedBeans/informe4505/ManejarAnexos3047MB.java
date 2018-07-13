@@ -30,6 +30,8 @@ import modelo.entidades.Hc3047Anexo1;
 import modelo.entidades.Hc3047Anexo2;
 import modelo.entidades.Hc3047Anexo3;
 import modelo.entidades.Hc3047Anexo31;
+import modelo.entidades.Hc3047Anexo4;
+import modelo.entidades.Hc3047Anexo41;
 import modelo.entidades.HcAnexos3047;
 import modelo.fachadas.CfgClasificacionesFacade;
 import modelo.fachadas.CfgDiagnosticoFacade;
@@ -40,6 +42,8 @@ import modelo.fachadas.Hc3047Anexo1Facade;
 import modelo.fachadas.Hc3047Anexo2Facade;
 import modelo.fachadas.Hc3047Anexo3Facade;
 import modelo.fachadas.Hc3047Anexo3_1Facade;
+import modelo.fachadas.Hc3047Anexo4Facade;
+import modelo.fachadas.Hc3047Anexo4_1Facade;
 import modelo.fachadas.HcAnexos3047Facade;
 
 /**
@@ -66,6 +70,10 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     @EJB
     Hc3047Anexo3_1Facade  hc3047Anexo3_1Facade;
     @EJB
+    Hc3047Anexo4Facade hc3047Anexo4Facade;
+    @EJB
+    Hc3047Anexo4_1Facade hc3047Anexo41Facade;
+    @EJB
     CfgUsuariosFacade cfgUsuariosFacade;
     @EJB
     CfgPacientesFacade cfgPacientesFacade;
@@ -90,26 +98,29 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     private String numeroInforme = "";
     private String numeroAtencion = "";
     private String numeroSolicitud = "";
+    private String numeroAutorizacion = "";
+    
     
     private boolean coutam = false;
     private boolean copago = false;
     private boolean coutar = false;
     private boolean coutaotro = false;
     private boolean haypacienteseleccionado = false;
-//    private HcAnexos3047 hcAnexos3047=new HcAnexos3047();
     private CfgPacientes pacienteseleccionado;
-//    private CfgUsuarios usuarioPrestador = new CfgUsuarios();
     private Date fechaReg = new Date();
     private Hc3047Anexo1 nuevoAnexo1 = new Hc3047Anexo1();
     private Hc3047Anexo2 nuevoAnexo2 = new Hc3047Anexo2();
     private Hc3047Anexo3 nuevoAnexo3 = new Hc3047Anexo3();
     private Hc3047Anexo31 nuevoAnexo31 = new Hc3047Anexo31();
+    private Hc3047Anexo4 nuevoAnexo4 = new Hc3047Anexo4();
+    private Hc3047Anexo41 nuevoAnexo41 = new Hc3047Anexo41();
     
-
     private HcAnexos3047 tipoanexoActual = new HcAnexos3047();
     private List<CfgClasificaciones> listaInconsistencias = null;
     private List<CfgClasificaciones> listaTipoidentificacion = null;
     private List<CfgUsuarios> listaUsuarios = null;
+
+
 //    private HistoriasMB historiasMB;
     private String cei100 = null;
     private String cei101 = null;
@@ -136,12 +147,13 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         listaTipoidentificacion = clasificacionesFacade.buscarPorMaestro("TipoIdentificacion");
         listaUsuarios = cfgUsuariosFacade.buscarOrdenado();
         listaEspecialidades=cfgClasificacionesFacade.buscarPorMaestro("Especialidad");
-//        pacienteseleccionado=historiasMB.getPacienteElegido();
-//        generarNumeroInforme();
+
         nuevoAnexo1.setFechadocumento(fechaReg);
         nuevoAnexo2.setFechadocumento(fechaReg);
         nuevoAnexo2.setFechaingreso(fechaReg);
         nuevoAnexo3.setFechadocumento(fechaReg);
+        nuevoAnexo4.setFechadocumento(fechaReg);
+        
     }
 
     public void selecciontipomovimiento() {
@@ -301,6 +313,23 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         }
 
     }
+    public void guardarAnexo4() {//guardar un nuevo registro clinico        
+        int idSede = 1;
+        generarNumeroAutorizacion();
+        System.out.println(fechaReg);
+        System.out.println("Iniciando el guardado del registro Anexo4 " + numeroAutorizacion);
+
+        try {
+            nuevoAnexo4.setNumeroautorizacion(numeroAutorizacion);
+            hc3047Anexo4Facade.create(nuevoAnexo4);
+            anexoActual.setConsecutivo(consecutivo);
+            hcAnexos3047Facade.edit(anexoActual);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Su Anexo4 fue almacenado con el Nro " + numeroAutorizacion));
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "Error al Grabar Anexo4"));
+        }
+
+    }
     
 
     public void generarNumeroAtencion() {
@@ -319,7 +348,7 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         numeroAtencion = yearsmall + month + consecutivo;
     }
     
-        public void generarNumeroSolicitud() {
+    public void generarNumeroSolicitud() {
         //fechacomprobante=comprobanteivaef.getFecha();
         int mes = 0;
         int anio = 0;
@@ -333,6 +362,22 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         anexoActual = hcAnexos3047Facade.find(3);
         consecutivo = anexoActual.getConsecutivo() + 1;
         numeroSolicitud = yearsmall + month + consecutivo;
+    }
+        
+    public void generarNumeroAutorizacion() {
+        int mes = 0;
+        int anio = 0;
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(fechaReg);
+        anio = cal.get(Calendar.YEAR);
+        mes = cal.get(Calendar.MONTH) + 1;
+        String year = Integer.toString(anio);
+        String yearsmall = year.substring(2, 4);
+        String month = String.format("%02d", mes);
+        anexoActual = hcAnexos3047Facade.find(4);
+        consecutivo = anexoActual.getConsecutivo() + 1;
+        numeroInforme = yearsmall + month + consecutivo;
+
     }
 
     public String getPacienteremitido() {
@@ -589,6 +634,30 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
 
     public void setNumeroSolicitud(String numeroSolicitud) {
         this.numeroSolicitud = numeroSolicitud;
+    }
+
+    public Hc3047Anexo4 getNuevoAnexo4() {
+        return nuevoAnexo4;
+    }
+
+    public void setNuevoAnexo4(Hc3047Anexo4 nuevoAnexo4) {
+        this.nuevoAnexo4 = nuevoAnexo4;
+    }
+
+    public Hc3047Anexo41 getNuevoAnexo41() {
+        return nuevoAnexo41;
+    }
+
+    public void setNuevoAnexo41(Hc3047Anexo41 nuevoAnexo41) {
+        this.nuevoAnexo41 = nuevoAnexo41;
+    }
+
+    public Hc3047Anexo31 getNuevoAnexo31() {
+        return nuevoAnexo31;
+    }
+
+    public void setNuevoAnexo31(Hc3047Anexo31 nuevoAnexo31) {
+        this.nuevoAnexo31 = nuevoAnexo31;
     }
 
     
