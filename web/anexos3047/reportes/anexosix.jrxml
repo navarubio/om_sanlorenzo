@@ -2,11 +2,42 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0e740dac-5d5b-49a4-a38d-2f78e2775af8">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="189"/>
+	<property name="ireport.y" value="334"/>
 	<parameter name="numinform" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT
      *,
+     hc_3047_anexo6."id_paciente" AS hc_3047_anexo6_id_paciente,
+     hc_3047_anexo6."numerocontrarremision" AS hc_3047_anexo6_numerocontrarremision,
+     hc_3047_anexo6."fechadocumento" AS hc_3047_anexo6_fechadocumento,
+     hc_3047_anexo6."primerapellido" AS hc_3047_anexo6_primerapellido,
+     hc_3047_anexo6."segundoapellido" AS hc_3047_anexo6_segundoapellido,
+     hc_3047_anexo6."primernombre" AS hc_3047_anexo6_primernombre,
+     hc_3047_anexo6."segundonombre" AS hc_3047_anexo6_segundonombre,
+     hc_3047_anexo6."tipo_identificacion" AS hc_3047_anexo6_tipo_identificacion,
+     hc_3047_anexo6."identificiacion" AS hc_3047_anexo6_identificiacion,
+     hc_3047_anexo6."direccion" AS hc_3047_anexo6_direccion,
+     hc_3047_anexo6."id_departamento" AS hc_3047_anexo6_id_departamento,
+     hc_3047_anexo6."telefono" AS hc_3047_anexo6_telefono,
+     hc_3047_anexo6."idusuario" AS hc_3047_anexo6_idusuario,
+     hc_3047_anexo6."servicioqcontrarrefiere" AS hc_3047_anexo6_servicioqcontrarrefiere,
+     hc_3047_anexo6."informacionrelevante" AS hc_3047_anexo6_informacionrelevante,
+     cfg_usuarios."id_usuario" AS cfg_usuarios_id_usuario,
+     cfg_usuarios."identificacion" AS cfg_usuarios_identificacion,
+     cfg_usuarios."tipo_identificacion" AS cfg_usuarios_tipo_identificacion,
+     cfg_usuarios."primer_nombre" AS cfg_usuarios_primer_nombre,
+     cfg_usuarios."segundo_nombre" AS cfg_usuarios_segundo_nombre,
+     cfg_usuarios."primer_apellido" AS cfg_usuarios_primer_apellido,
+     cfg_usuarios."segundo_apellido" AS cfg_usuarios_segundo_apellido,
+     cfg_usuarios."direccion" AS cfg_usuarios_direccion,
+     cfg_usuarios."telefono_residencia" AS cfg_usuarios_telefono_residencia,
+     cfg_usuarios."telefono_oficina" AS cfg_usuarios_telefono_oficina,
+     cfg_usuarios."celular" AS cfg_usuarios_celular,
+     cfg_usuarios."email" AS cfg_usuarios_email,
+     cfg_usuarios."cargo_actual" AS cfg_usuarios_cargo_actual,
+     cfg_usuarios."registro_profesional" AS cfg_usuarios_registro_profesional,
+     cfg_usuarios."especialidad" AS cfg_usuarios_especialidad,
+     cfg_pacientes."id_paciente" AS cfg_pacientes_id_paciente,
      cfg_pacientes."identificacion" AS cfg_pacientes_identificacion,
      cfg_pacientes."tipo_identificacion" AS cfg_pacientes_tipo_identificacion,
      cfg_pacientes."fecha_nacimiento" AS cfg_pacientes_fecha_nacimiento,
@@ -21,35 +52,37 @@
      cfg_pacientes."celular" AS cfg_pacientes_celular,
      cfg_pacientes."departamento" AS cfg_pacientes_departamento,
      cfg_pacientes."municipio" AS cfg_pacientes_municipio,
-     hc_3047_anexo1."numeroinforme" AS hc_3047_anexo1_numeroinforme,
-     hc_3047_anexo1."fechadocumento" AS hc_3047_anexo1_fechadocumento,
-     hc_3047_anexo1."tipoinconsistencia" AS hc_3047_anexo1_tipoinconsistencia,
-     hc_3047_anexo1."tipocobertura" AS hc_3047_anexo1_tipocobertura,
-     hc_3047_anexo1."primerapellido" AS hc_3047_anexo1_primerapellido,
-     hc_3047_anexo1."segundoapellido" AS hc_3047_anexo1_segundoapellido,
-     hc_3047_anexo1."primernombre" AS hc_3047_anexo1_primernombre,
-     hc_3047_anexo1."segundonombre" AS hc_3047_anexo1_segundonombre,
-     hc_3047_anexo1."numeroidentificacion" AS hc_3047_anexo1_numeroidentificacion,
-     hc_3047_anexo1."tipo_identificacion" AS hc_3047_anexo1_tipo_identificacion,
-     hc_3047_anexo1."fechanacimiento" AS hc_3047_anexo1_fechanacimiento,
-     hc_3047_anexo1."observaciones" AS hc_3047_anexo1_observaciones,
-     cfg_usuarios."identificacion" AS cfg_usuarios_identificacion,
-     cfg_usuarios."primer_nombre" AS cfg_usuarios_primer_nombre,
-     cfg_usuarios."segundo_nombre" AS cfg_usuarios_segundo_nombre,
-     cfg_usuarios."primer_apellido" AS cfg_usuarios_primer_apellido,
-     cfg_usuarios."segundo_apellido" AS cfg_usuarios_segundo_apellido,
-     cfg_usuarios."direccion" AS cfg_usuarios_direccion,
-     cfg_usuarios."telefono_residencia" AS cfg_usuarios_telefono_residencia,
-     cfg_usuarios."celular" AS cfg_usuarios_celular,
-     cfg_usuarios."telefono_oficina" AS cfg_usuarios_telefono_oficina,
-     cfg_usuarios."cargo_actual" AS cfg_usuarios_cargo_actual,
-     cfg_empresa."direccion" AS cfg_empresa_direccion
+     cfg_pacientes."id_administradora" AS cfg_pacientes_id_administradora,
+     cfg_clasificaciones."codigo" AS cfg_clasificaciones_codigo,
+     cfg_clasificaciones."descripcion" AS cfg_clasificaciones_descripcion,
+     cfg_clasificaciones."observacion" AS cfg_clasificaciones_observacion,
+     hc_3047_anexo6."id_municipio" AS hc_3047_anexo6_id_municipio,
+     cfg_empresa."cod_empresa" AS cfg_empresa_cod_empresa,
+     cfg_empresa."cod_departamento" AS cfg_empresa_cod_departamento,
+     cfg_empresa."cod_municipio" AS cfg_empresa_cod_municipio,
+     cfg_empresa."tipo_doc" AS cfg_empresa_tipo_doc,
+     cfg_empresa."num_identificacion" AS cfg_empresa_num_identificacion,
+     cfg_empresa."dv" AS cfg_empresa_dv,
+     cfg_empresa."razon_social" AS cfg_empresa_razon_social,
+     cfg_empresa."tipo_doc_rep_legal" AS cfg_empresa_tipo_doc_rep_legal,
+     cfg_empresa."num_doc_rep_legal" AS cfg_empresa_num_doc_rep_legal,
+     cfg_empresa."nom_rep_legal" AS cfg_empresa_nom_rep_legal,
+     cfg_empresa."direccion" AS cfg_empresa_direccion,
+     cfg_empresa."telefono_1" AS cfg_empresa_telefono_1,
+     cfg_empresa."telefono_2" AS cfg_empresa_telefono_2,
+     cfg_empresa."website" AS cfg_empresa_website,
+     cfg_empresa."logo" AS cfg_empresa_logo,
+     cfg_empresa."observaciones" AS cfg_empresa_observaciones,
+     cfg_empresa."codigo_empresa" AS cfg_empresa_codigo_empresa,
+     cfg_empresa."regimen" AS cfg_empresa_regimen,
+     cfg_empresa."razon_rip" AS cfg_empresa_razon_rip,
+     cfg_empresa."nivel" AS cfg_empresa_nivel
 FROM
-     "cfg_pacientes" cfg_pacientes INNER JOIN "hc_3047_anexo1" hc_3047_anexo1 ON cfg_pacientes."id_paciente" = hc_3047_anexo1."id_paciente"
-     INNER JOIN "cfg_usuarios" cfg_usuarios ON hc_3047_anexo1."id_usuario" = cfg_usuarios."id_usuario",
-     "cfg_empresa" cfg_empresa
-WHERE
-     hc_3047_anexo1."numeroinforme" = $P{numinform}]]>
+     "cfg_pacientes" cfg_pacientes INNER JOIN "hc_3047_anexo6" hc_3047_anexo6 ON cfg_pacientes."id_paciente" = hc_3047_anexo6."id_paciente"
+     INNER JOIN "cfg_usuarios" cfg_usuarios ON hc_3047_anexo6."idusuario" = cfg_usuarios."id_usuario"
+     LEFT OUTER JOIN "cfg_clasificaciones" cfg_clasificaciones ON hc_3047_anexo6."id_municipio" = cfg_clasificaciones."id"
+     AND cfg_clasificaciones."id" = hc_3047_anexo6."id_departamento",
+     "public"."cfg_empresa" cfg_empresa]]>
 	</queryString>
 	<field name="id_paciente" class="java.lang.Integer"/>
 	<field name="identificacion" class="java.lang.String"/>
@@ -132,17 +165,20 @@ WHERE
 	</field>
 	<field name="id_contrato" class="java.lang.Integer"/>
 	<field name="parentesco_a" class="java.lang.Integer"/>
-	<field name="id_3047anexo1" class="java.lang.Integer"/>
-	<field name="numeroinforme" class="java.lang.String"/>
+	<field name="id_3047anexo6" class="java.lang.Integer"/>
+	<field name="numerocontrarremision" class="java.lang.String"/>
 	<field name="fechadocumento" class="java.sql.Timestamp"/>
-	<field name="tipoinconsistencia" class="java.lang.Integer"/>
-	<field name="tipocobertura" class="java.lang.Integer"/>
 	<field name="primerapellido" class="java.lang.String"/>
 	<field name="segundoapellido" class="java.lang.String"/>
 	<field name="primernombre" class="java.lang.String"/>
 	<field name="segundonombre" class="java.lang.String"/>
-	<field name="numeroidentificacion" class="java.lang.String"/>
-	<field name="fechanacimiento" class="java.sql.Date"/>
+	<field name="identificiacion" class="java.lang.String"/>
+	<field name="id_departamento" class="java.lang.Integer"/>
+	<field name="id_municipio" class="java.lang.Integer"/>
+	<field name="telefono" class="java.lang.String"/>
+	<field name="idusuario" class="java.lang.Integer"/>
+	<field name="servicioqcontrarrefiere" class="java.lang.String"/>
+	<field name="informacionrelevante" class="java.lang.String"/>
 	<field name="id_usuario" class="java.lang.Integer"/>
 	<field name="tipo_usuario" class="java.lang.Integer">
 		<fieldDescription><![CDATA[clasificacion TipoUsuario: 1 usuario, 2 prestador]]></fieldDescription>
@@ -162,7 +198,7 @@ WHERE
 	<field name="fecha_creacion" class="java.sql.Timestamp"/>
 	<field name="visible" class="java.lang.Boolean"/>
 	<field name="personal_atiende" class="java.lang.Integer">
-		<fieldDescription><![CDATA[sii el usuario es prestador debe permitir especificar el tipo de personal que atiende (por defecto va ser 1):
+		<fieldDescription><![CDATA[ sii el usuario es prestador debe permitir especificar el tipo de personal que atiende (por defecto va ser 1):
 1=Médico(a) especialista,
 2 =Médico(a) general
 3 =Enfermera (o)
@@ -172,6 +208,10 @@ WHERE
 	<field name="mostrar_en_historias" class="java.lang.Boolean">
 		<fieldDescription><![CDATA[Permite identificar si este usuario se lista en los formularios de registros clinicos]]></fieldDescription>
 	</field>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="codigo" class="java.lang.String"/>
+	<field name="maestro" class="java.lang.String"/>
+	<field name="descripcion" class="java.lang.String"/>
 	<field name="cod_empresa" class="java.lang.Integer"/>
 	<field name="cod_departamento" class="java.lang.Integer"/>
 	<field name="cod_municipio" class="java.lang.Integer"/>
@@ -184,11 +224,13 @@ WHERE
 		<fieldDescription><![CDATA[NOMBRE DE LA EMPRESA QUE COMPRA EL SOFTWARE]]></fieldDescription>
 	</field>
 	<field name="tipo_doc_rep_legal" class="java.lang.Integer">
-		<fieldDescription><![CDATA[TIPO DE DOCUMENTO DEL REPRESENTANTE LEGALPARA ESTE CASO SERIA CC, CE, PASAPORTE.]]></fieldDescription>
+		<fieldDescription><![CDATA[TIPO DE DOCUMENTO DEL REPRESENTANTE LEGALPARA ESTE CASO SERIA CC, CE, PASAPORTE.
+]]></fieldDescription>
 	</field>
 	<field name="num_doc_rep_legal" class="java.lang.String"/>
 	<field name="nom_rep_legal" class="java.lang.String">
-		<fieldDescription><![CDATA[NOMBRE DEL REPRESENTANTE LEGAL DE LA EMPRESA]]></fieldDescription>
+		<fieldDescription><![CDATA[NOMBRE DEL REPRESENTANTE LEGAL DE LA EMPRESA
+]]></fieldDescription>
 	</field>
 	<field name="telefono_1" class="java.lang.String"/>
 	<field name="telefono_2" class="java.lang.String"/>
@@ -204,6 +246,37 @@ WHERE
 	<field name="razon_rip" class="java.lang.String">
 		<fieldDescription><![CDATA[razon social usada en los rips]]></fieldDescription>
 	</field>
+	<field name="hc_3047_anexo6_id_paciente" class="java.lang.Integer"/>
+	<field name="hc_3047_anexo6_numerocontrarremision" class="java.lang.String"/>
+	<field name="hc_3047_anexo6_fechadocumento" class="java.sql.Timestamp"/>
+	<field name="hc_3047_anexo6_primerapellido" class="java.lang.String"/>
+	<field name="hc_3047_anexo6_segundoapellido" class="java.lang.String"/>
+	<field name="hc_3047_anexo6_primernombre" class="java.lang.String"/>
+	<field name="hc_3047_anexo6_segundonombre" class="java.lang.String"/>
+	<field name="hc_3047_anexo6_tipo_identificacion" class="java.lang.Integer"/>
+	<field name="hc_3047_anexo6_identificiacion" class="java.lang.String"/>
+	<field name="hc_3047_anexo6_direccion" class="java.lang.String"/>
+	<field name="hc_3047_anexo6_id_departamento" class="java.lang.Integer"/>
+	<field name="hc_3047_anexo6_telefono" class="java.lang.String"/>
+	<field name="hc_3047_anexo6_idusuario" class="java.lang.Integer"/>
+	<field name="hc_3047_anexo6_servicioqcontrarrefiere" class="java.lang.String"/>
+	<field name="hc_3047_anexo6_informacionrelevante" class="java.lang.String"/>
+	<field name="cfg_usuarios_id_usuario" class="java.lang.Integer"/>
+	<field name="cfg_usuarios_identificacion" class="java.lang.String"/>
+	<field name="cfg_usuarios_tipo_identificacion" class="java.lang.Integer"/>
+	<field name="cfg_usuarios_primer_nombre" class="java.lang.String"/>
+	<field name="cfg_usuarios_segundo_nombre" class="java.lang.String"/>
+	<field name="cfg_usuarios_primer_apellido" class="java.lang.String"/>
+	<field name="cfg_usuarios_segundo_apellido" class="java.lang.String"/>
+	<field name="cfg_usuarios_direccion" class="java.lang.String"/>
+	<field name="cfg_usuarios_telefono_residencia" class="java.lang.String"/>
+	<field name="cfg_usuarios_telefono_oficina" class="java.lang.String"/>
+	<field name="cfg_usuarios_celular" class="java.lang.String"/>
+	<field name="cfg_usuarios_email" class="java.lang.String"/>
+	<field name="cfg_usuarios_cargo_actual" class="java.lang.String"/>
+	<field name="cfg_usuarios_registro_profesional" class="java.lang.String"/>
+	<field name="cfg_usuarios_especialidad" class="java.lang.Integer"/>
+	<field name="cfg_pacientes_id_paciente" class="java.lang.Integer"/>
 	<field name="cfg_pacientes_identificacion" class="java.lang.String"/>
 	<field name="cfg_pacientes_tipo_identificacion" class="java.lang.Integer"/>
 	<field name="cfg_pacientes_fecha_nacimiento" class="java.sql.Timestamp"/>
@@ -218,29 +291,31 @@ WHERE
 	<field name="cfg_pacientes_celular" class="java.lang.String"/>
 	<field name="cfg_pacientes_departamento" class="java.lang.Integer"/>
 	<field name="cfg_pacientes_municipio" class="java.lang.Integer"/>
-	<field name="hc_3047_anexo1_numeroinforme" class="java.lang.String"/>
-	<field name="hc_3047_anexo1_fechadocumento" class="java.sql.Timestamp"/>
-	<field name="hc_3047_anexo1_tipoinconsistencia" class="java.lang.Integer"/>
-	<field name="hc_3047_anexo1_tipocobertura" class="java.lang.Integer"/>
-	<field name="hc_3047_anexo1_primerapellido" class="java.lang.String"/>
-	<field name="hc_3047_anexo1_segundoapellido" class="java.lang.String"/>
-	<field name="hc_3047_anexo1_primernombre" class="java.lang.String"/>
-	<field name="hc_3047_anexo1_segundonombre" class="java.lang.String"/>
-	<field name="hc_3047_anexo1_numeroidentificacion" class="java.lang.String"/>
-	<field name="hc_3047_anexo1_tipo_identificacion" class="java.lang.Integer"/>
-	<field name="hc_3047_anexo1_fechanacimiento" class="java.sql.Date"/>
-	<field name="hc_3047_anexo1_observaciones" class="java.lang.String"/>
-	<field name="cfg_usuarios_identificacion" class="java.lang.String"/>
-	<field name="cfg_usuarios_primer_nombre" class="java.lang.String"/>
-	<field name="cfg_usuarios_segundo_nombre" class="java.lang.String"/>
-	<field name="cfg_usuarios_primer_apellido" class="java.lang.String"/>
-	<field name="cfg_usuarios_segundo_apellido" class="java.lang.String"/>
-	<field name="cfg_usuarios_direccion" class="java.lang.String"/>
-	<field name="cfg_usuarios_telefono_residencia" class="java.lang.String"/>
-	<field name="cfg_usuarios_celular" class="java.lang.String"/>
-	<field name="cfg_usuarios_telefono_oficina" class="java.lang.String"/>
-	<field name="cfg_usuarios_cargo_actual" class="java.lang.String"/>
+	<field name="cfg_pacientes_id_administradora" class="java.lang.Integer"/>
+	<field name="cfg_clasificaciones_codigo" class="java.lang.String"/>
+	<field name="cfg_clasificaciones_descripcion" class="java.lang.String"/>
+	<field name="cfg_clasificaciones_observacion" class="java.lang.String"/>
+	<field name="hc_3047_anexo6_id_municipio" class="java.lang.Integer"/>
+	<field name="cfg_empresa_cod_empresa" class="java.lang.Integer"/>
+	<field name="cfg_empresa_cod_departamento" class="java.lang.Integer"/>
+	<field name="cfg_empresa_cod_municipio" class="java.lang.Integer"/>
+	<field name="cfg_empresa_tipo_doc" class="java.lang.Integer"/>
+	<field name="cfg_empresa_num_identificacion" class="java.lang.String"/>
+	<field name="cfg_empresa_dv" class="java.lang.String"/>
+	<field name="cfg_empresa_razon_social" class="java.lang.String"/>
+	<field name="cfg_empresa_tipo_doc_rep_legal" class="java.lang.Integer"/>
+	<field name="cfg_empresa_num_doc_rep_legal" class="java.lang.String"/>
+	<field name="cfg_empresa_nom_rep_legal" class="java.lang.String"/>
 	<field name="cfg_empresa_direccion" class="java.lang.String"/>
+	<field name="cfg_empresa_telefono_1" class="java.lang.String"/>
+	<field name="cfg_empresa_telefono_2" class="java.lang.String"/>
+	<field name="cfg_empresa_website" class="java.lang.String"/>
+	<field name="cfg_empresa_logo" class="java.lang.Integer"/>
+	<field name="cfg_empresa_observaciones" class="java.lang.String"/>
+	<field name="cfg_empresa_codigo_empresa" class="java.lang.String"/>
+	<field name="cfg_empresa_regimen" class="java.lang.String"/>
+	<field name="cfg_empresa_razon_rip" class="java.lang.String"/>
+	<field name="cfg_empresa_nivel" class="java.lang.String"/>
 	<variable name="papellido" class="java.lang.String">
 		<variableExpression><![CDATA[($F{primerapellido}== null ? "":"X")]]></variableExpression>
 	</variable>
@@ -254,19 +329,19 @@ WHERE
 		<variableExpression><![CDATA[($F{segundonombre}== null ? "":"X")]]></variableExpression>
 	</variable>
 	<variable name="tdocumento" class="java.lang.String">
-		<variableExpression><![CDATA[($F{hc_3047_anexo1_tipo_identificacion}== null ? "":"X")]]></variableExpression>
+		<variableExpression><![CDATA[]]></variableExpression>
 	</variable>
 	<variable name="ndocumento" class="java.lang.String">
-		<variableExpression><![CDATA[($F{numeroidentificacion}== null?"":"X")]]></variableExpression>
+		<variableExpression><![CDATA[]]></variableExpression>
 	</variable>
 	<variable name="fnacimiento" class="java.lang.String">
-		<variableExpression><![CDATA[($F{hc_3047_anexo1_fechanacimiento}== null ? "":"X")]]></variableExpression>
+		<variableExpression><![CDATA[]]></variableExpression>
 	</variable>
 	<variable name="pnoesxiste" class="java.lang.String">
-		<variableExpression><![CDATA[($F{hc_3047_anexo1_tipoinconsistencia}==1980 ? "":"X")]]></variableExpression>
+		<variableExpression><![CDATA[]]></variableExpression>
 	</variable>
 	<variable name="datincorrect" class="java.lang.String">
-		<variableExpression><![CDATA[($F{hc_3047_anexo1_tipoinconsistencia}==1981 ? "":"X")]]></variableExpression>
+		<variableExpression><![CDATA[]]></variableExpression>
 	</variable>
 	<variable name="rc" class="java.lang.String">
 		<variableExpression><![CDATA[($F{cfg_pacientes_tipo_identificacion}==1767 ? "X":"")]]></variableExpression>
@@ -290,6 +365,29 @@ WHERE
 		<variableExpression><![CDATA[($F{cfg_pacientes_tipo_identificacion}==1766 ? "X":"")]]></variableExpression>
 	</variable>
 	<variable name="dpto" class="java.lang.String"/>
+	<variable name="rc_1" class="java.lang.String">
+		<variableExpression><![CDATA[($F{hc_3047_anexo6_tipo_identificacion}==1767 ? "X":"")
+
+]]></variableExpression>
+	</variable>
+	<variable name="ti_1" class="java.lang.String">
+		<variableExpression><![CDATA[($F{hc_3047_anexo6_tipo_identificacion}==1768 ? "X":"")]]></variableExpression>
+	</variable>
+	<variable name="cc_1" class="java.lang.String">
+		<variableExpression><![CDATA[($F{hc_3047_anexo6_tipo_identificacion}==1764 ? "X":"")]]></variableExpression>
+	</variable>
+	<variable name="ce_1" class="java.lang.String">
+		<variableExpression><![CDATA[($F{hc_3047_anexo6_tipo_identificacion}==1765 ? "X":"")]]></variableExpression>
+	</variable>
+	<variable name="pa_1" class="java.lang.String">
+		<variableExpression><![CDATA[($F{hc_3047_anexo6_tipo_identificacion}==1766 ? "X":"")]]></variableExpression>
+	</variable>
+	<variable name="as_1" class="java.lang.String">
+		<variableExpression><![CDATA[($F{hc_3047_anexo6_tipo_identificacion}==1769 ? "X":"")]]></variableExpression>
+	</variable>
+	<variable name="ms_1" class="java.lang.String">
+		<variableExpression><![CDATA[($F{hc_3047_anexo6_tipo_identificacion}==1766 ? "X":"")]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -379,6 +477,13 @@ WHERE
 						<font size="8"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{numinform}]]></textFieldExpression>
+				</textField>
+				<textField pattern="HH.mm.ss">
+					<reportElement x="464" y="30" width="51" height="12" uuid="f6213664-4ce9-4ae6-baef-29ff880a828c"/>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{fechadocumento}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -573,7 +678,7 @@ WHERE
 					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{cod_empresa}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{cfg_empresa_codigo_empresa}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -1120,7 +1225,7 @@ WHERE
 					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{identificacion}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{cfg_pacientes_identificacion}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<staticText>
@@ -1140,7 +1245,7 @@ WHERE
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textField>
+				<textField pattern="dd/MM/yyyy">
 					<reportElement x="2" y="0" width="87" height="12" uuid="c0e4ff7d-1b9e-4b2c-89c1-5ea7978640a9"/>
 					<textElement textAlignment="Center">
 						<font size="8"/>
@@ -1308,7 +1413,7 @@ WHERE
 					<textElement>
 						<font size="9"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{hc_3047_anexo1_observaciones}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -1350,7 +1455,7 @@ WHERE
 					<textElement>
 						<font size="9"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{cfg_usuarios_primer_apellido}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{cfg_pacientes_primer_apellido}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -1375,7 +1480,7 @@ WHERE
 					<textElement textAlignment="Right">
 						<font size="9"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{cfg_usuarios_cargo_actual}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{hc_3047_anexo6_servicioqcontrarrefiere}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -1491,7 +1596,7 @@ WHERE
 					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{primer_nombre}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{hc_3047_anexo6_primernombre}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -1508,7 +1613,7 @@ WHERE
 					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{primer_apellido}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{hc_3047_anexo6_primerapellido}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -1525,7 +1630,7 @@ WHERE
 					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{segundo_apellido}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{hc_3047_anexo6_segundoapellido}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -1542,7 +1647,7 @@ WHERE
 					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{segundo_nombre}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{hc_3047_anexo6_segundonombre}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<staticText>
@@ -1631,7 +1736,7 @@ WHERE
 					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{rc}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{rc_1}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -1648,7 +1753,7 @@ WHERE
 					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{rc}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{ti_1}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -1665,7 +1770,7 @@ WHERE
 					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{rc}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{cc_1}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -1682,7 +1787,7 @@ WHERE
 					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{rc}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{ce_1}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<staticText>
@@ -1723,7 +1828,7 @@ WHERE
 					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{rc}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{pa_1}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -1740,7 +1845,7 @@ WHERE
 					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{rc}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{as_1}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -1757,7 +1862,7 @@ WHERE
 					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{rc}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{ms_1}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -1774,7 +1879,7 @@ WHERE
 					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{identificacion}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{hc_3047_anexo6_identificiacion}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<staticText>
@@ -1807,7 +1912,7 @@ WHERE
 					<textElement>
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{direccion}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{hc_3047_anexo6_direccion}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -1824,7 +1929,7 @@ WHERE
 					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{telefono_residencia}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{hc_3047_anexo6_telefono}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement x="6" y="0" width="56" height="12" uuid="a1dabafd-6576-468c-881d-55e3d9f06838"/>
@@ -1849,7 +1954,7 @@ WHERE
 					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{municipio}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{hc_3047_anexo6_id_municipio}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -1866,7 +1971,7 @@ WHERE
 					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{departamento}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{hc_3047_anexo6_id_departamento}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -1886,6 +1991,13 @@ WHERE
 					</textElement>
 					<text><![CDATA[Departamento:]]></text>
 				</staticText>
+				<textField>
+					<reportElement x="86" y="0" width="112" height="12" uuid="23e2f279-c4f3-4907-be8c-524c0909aaec"/>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{hc_3047_anexo6_id_departamento}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<frame>
 				<reportElement positionType="Float" x="286" y="322" width="239" height="12" backcolor="#E6E6E6" uuid="4af298fb-b3e3-4306-a629-9afebd3eaece"/>
@@ -1904,6 +2016,13 @@ WHERE
 					</textElement>
 					<text><![CDATA[Municipio:]]></text>
 				</staticText>
+				<textField>
+					<reportElement x="119" y="0" width="110" height="12" uuid="23bf34c5-84a0-48dc-a5c4-0331115fbf49"/>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{cfg_clasificaciones_descripcion}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<frame>
 				<reportElement positionType="Float" x="0" y="334" width="572" height="12" backcolor="#E6E6E6" uuid="181499eb-5e93-4cce-bf01-75bab6414333"/>
