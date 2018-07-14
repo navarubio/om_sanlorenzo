@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0e740dac-5d5b-49a4-a38d-2f78e2775af8">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="233"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="numinform" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT
@@ -2194,36 +2194,6 @@ WHERE
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<frame>
-					<reportElement positionType="Float" x="-107" y="213" width="23" height="12" backcolor="#E6E6E6" uuid="5c410bcc-e961-406d-9507-e8ba7661ea32"/>
-					<box>
-						<pen lineWidth="0.5"/>
-						<topPen lineWidth="0.5"/>
-						<leftPen lineWidth="0.5"/>
-						<bottomPen lineWidth="0.5"/>
-						<rightPen lineWidth="0.5"/>
-					</box>
-					<frame>
-						<reportElement positionType="Float" x="0" y="0" width="23" height="12" backcolor="#E6E6E6" uuid="d0c2d112-4e64-4be1-ac9c-0c0c9968d89c"/>
-						<box>
-							<pen lineWidth="0.5"/>
-							<topPen lineWidth="0.5"/>
-							<leftPen lineWidth="0.5"/>
-							<bottomPen lineWidth="0.5"/>
-							<rightPen lineWidth="0.5"/>
-						</box>
-					</frame>
-				</frame>
-				<frame>
-					<reportElement positionType="Float" x="-107" y="225" width="23" height="12" backcolor="#E6E6E6" uuid="a73c084c-8e9a-4d15-9bb7-a2d55a416a1f"/>
-					<box>
-						<pen lineWidth="0.5"/>
-						<topPen lineWidth="0.5"/>
-						<leftPen lineWidth="0.5"/>
-						<bottomPen lineWidth="0.5"/>
-						<rightPen lineWidth="0.5"/>
-					</box>
-				</frame>
 				<staticText>
 					<reportElement x="5" y="0" width="132" height="12" uuid="a4fef428-d65c-4356-87a5-27f98d4f7fbb"/>
 					<textElement>

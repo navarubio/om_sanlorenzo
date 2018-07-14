@@ -162,7 +162,7 @@ WHERE
 	<field name="fecha_creacion" class="java.sql.Timestamp"/>
 	<field name="visible" class="java.lang.Boolean"/>
 	<field name="personal_atiende" class="java.lang.Integer">
-		<fieldDescription><![CDATA[ sii el usuario es prestador debe permitir especificar el tipo de personal que atiende (por defecto va ser 1):
+		<fieldDescription><![CDATA[sii el usuario es prestador debe permitir especificar el tipo de personal que atiende (por defecto va ser 1):
 1=Médico(a) especialista,
 2 =Médico(a) general
 3 =Enfermera (o)
@@ -184,13 +184,11 @@ WHERE
 		<fieldDescription><![CDATA[NOMBRE DE LA EMPRESA QUE COMPRA EL SOFTWARE]]></fieldDescription>
 	</field>
 	<field name="tipo_doc_rep_legal" class="java.lang.Integer">
-		<fieldDescription><![CDATA[TIPO DE DOCUMENTO DEL REPRESENTANTE LEGALPARA ESTE CASO SERIA CC, CE, PASAPORTE.
-]]></fieldDescription>
+		<fieldDescription><![CDATA[TIPO DE DOCUMENTO DEL REPRESENTANTE LEGALPARA ESTE CASO SERIA CC, CE, PASAPORTE.]]></fieldDescription>
 	</field>
 	<field name="num_doc_rep_legal" class="java.lang.String"/>
 	<field name="nom_rep_legal" class="java.lang.String">
-		<fieldDescription><![CDATA[NOMBRE DEL REPRESENTANTE LEGAL DE LA EMPRESA
-]]></fieldDescription>
+		<fieldDescription><![CDATA[NOMBRE DEL REPRESENTANTE LEGAL DE LA EMPRESA]]></fieldDescription>
 	</field>
 	<field name="telefono_1" class="java.lang.String"/>
 	<field name="telefono_2" class="java.lang.String"/>
@@ -298,6 +296,17 @@ WHERE
 	<title>
 		<band height="74" splitType="Stretch">
 			<frame>
+				<reportElement positionType="Float" x="0" y="61" width="572" height="12" backcolor="#E6E6E6" uuid="f08146c8-46b7-4f55-bd46-a64f84505db6"/>
+				<staticText>
+					<reportElement x="0" y="0" width="252" height="12" uuid="e2eb48d7-42b9-4b93-8e97-d7425d5f3831"/>
+					<textElement>
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<text><![CDATA[INFORMACION DEL PRESTADOR]]></text>
+				</staticText>
+			</frame>
+			<frame>
 				<reportElement positionType="Float" x="0" y="0" width="572" height="64" uuid="44f894c4-7d22-4395-a148-a7ec1c9a4477"/>
 				<staticText>
 					<reportElement x="60" y="0" width="455" height="15" uuid="8421e4eb-79cd-4f31-a179-b8f133c5f192"/>
@@ -382,17 +391,13 @@ WHERE
 					</textElement>
 					<textFieldExpression><![CDATA[$P{numinform}]]></textFieldExpression>
 				</textField>
-			</frame>
-			<frame>
-				<reportElement positionType="Float" x="0" y="61" width="572" height="12" backcolor="#E6E6E6" uuid="f08146c8-46b7-4f55-bd46-a64f84505db6"/>
-				<staticText>
-					<reportElement x="0" y="0" width="252" height="12" uuid="e2eb48d7-42b9-4b93-8e97-d7425d5f3831"/>
-					<textElement>
-						<font size="9" isBold="true"/>
-						<paragraph leftIndent="5"/>
+				<textField pattern="HH.mm.ss">
+					<reportElement x="466" y="30" width="49" height="12" uuid="8e160a75-fffe-4e0a-a908-c8714c7ade57"/>
+					<textElement textAlignment="Center">
+						<font size="8"/>
 					</textElement>
-					<text><![CDATA[INFORMACION DEL PRESTADOR]]></text>
-				</staticText>
+					<textFieldExpression><![CDATA[$F{hc_3047_anexo1_fechadocumento}]]></textFieldExpression>
+				</textField>
 			</frame>
 		</band>
 	</title>
@@ -1877,7 +1882,7 @@ WHERE
 				</staticText>
 			</frame>
 			<frame>
-				<reportElement positionType="Float" x="0" y="424" width="285" height="24" backcolor="#E6E6E6" uuid="905b552e-d12b-4033-a1db-b230718e8878"/>
+				<reportElement positionType="Float" x="0" y="423" width="285" height="24" backcolor="#E6E6E6" uuid="905b552e-d12b-4033-a1db-b230718e8878"/>
 				<box>
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
