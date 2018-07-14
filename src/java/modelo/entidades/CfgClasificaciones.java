@@ -42,6 +42,19 @@ import javax.xml.bind.annotation.XmlTransient;
     ,
     @NamedQuery(name = "CfgClasificaciones.findByObservacion", query = "SELECT c FROM CfgClasificaciones c WHERE c.observacion = :observacion")})
 public class CfgClasificaciones implements Serializable {
+    
+    @OneToMany(mappedBy = "tipoIdentificacion")
+    private Collection<Hc3047Anexo5> hc3047Anexo5Collection;
+    @OneToMany(mappedBy = "idDepartamento")
+    private Collection<Hc3047Anexo5> hc3047Anexo5Collection1;
+    @OneToMany(mappedBy = "idMunicipio")
+    private Collection<Hc3047Anexo5> hc3047Anexo5Collection2;
+    @OneToMany(mappedBy = "tipoIdentificacion")
+    private Collection<Hc3047Anexo6> hc3047Anexo6Collection;
+    @OneToMany(mappedBy = "idDepartamento")
+    private Collection<Hc3047Anexo6> hc3047Anexo6Collection1;
+    @OneToMany(mappedBy = "idMunicipio")
+    private Collection<Hc3047Anexo6> hc3047Anexo6Collection2;
     @OneToMany(mappedBy = "idservicio")
     private Collection<Hc3047Anexo4> hc3047Anexo4Collection;
     @OneToMany(mappedBy = "idservicio")
@@ -913,6 +926,60 @@ public class CfgClasificaciones implements Serializable {
 
     public void setHc3047Anexo4Collection(Collection<Hc3047Anexo4> hc3047Anexo4Collection) {
         this.hc3047Anexo4Collection = hc3047Anexo4Collection;
+    }
+
+    @XmlTransient
+    public Collection<Hc3047Anexo5> getHc3047Anexo5Collection() {
+        return hc3047Anexo5Collection;
+    }
+
+    public void setHc3047Anexo5Collection(Collection<Hc3047Anexo5> hc3047Anexo5Collection) {
+        this.hc3047Anexo5Collection = hc3047Anexo5Collection;
+    }
+
+    @XmlTransient
+    public Collection<Hc3047Anexo5> getHc3047Anexo5Collection1() {
+        return hc3047Anexo5Collection1;
+    }
+
+    public void setHc3047Anexo5Collection1(Collection<Hc3047Anexo5> hc3047Anexo5Collection1) {
+        this.hc3047Anexo5Collection1 = hc3047Anexo5Collection1;
+    }
+
+    @XmlTransient
+    public Collection<Hc3047Anexo5> getHc3047Anexo5Collection2() {
+        return hc3047Anexo5Collection2;
+    }
+
+    public void setHc3047Anexo5Collection2(Collection<Hc3047Anexo5> hc3047Anexo5Collection2) {
+        this.hc3047Anexo5Collection2 = hc3047Anexo5Collection2;
+    }
+
+    @XmlTransient
+    public Collection<Hc3047Anexo6> getHc3047Anexo6Collection() {
+        return hc3047Anexo6Collection;
+    }
+
+    public void setHc3047Anexo6Collection(Collection<Hc3047Anexo6> hc3047Anexo6Collection) {
+        this.hc3047Anexo6Collection = hc3047Anexo6Collection;
+    }
+
+    @XmlTransient
+    public Collection<Hc3047Anexo6> getHc3047Anexo6Collection1() {
+        return hc3047Anexo6Collection1;
+    }
+
+    public void setHc3047Anexo6Collection1(Collection<Hc3047Anexo6> hc3047Anexo6Collection1) {
+        this.hc3047Anexo6Collection1 = hc3047Anexo6Collection1;
+    }
+
+    @XmlTransient
+    public Collection<Hc3047Anexo6> getHc3047Anexo6Collection2() {
+        return hc3047Anexo6Collection2;
+    }
+
+    public void setHc3047Anexo6Collection2(Collection<Hc3047Anexo6> hc3047Anexo6Collection2) {
+        this.hc3047Anexo6Collection2 = hc3047Anexo6Collection2;
     }
 
 }

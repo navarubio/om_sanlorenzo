@@ -85,6 +85,10 @@ import javax.xml.bind.annotation.XmlTransient;
     ,
     @NamedQuery(name = "CfgUsuarios.findByMostrarEnHistorias", query = "SELECT c FROM CfgUsuarios c WHERE c.mostrarEnHistorias = :mostrarEnHistorias")})
 public class CfgUsuarios implements Serializable {
+    @OneToMany(mappedBy = "idusuario")
+    private Collection<Hc3047Anexo5> hc3047Anexo5Collection;
+    @OneToMany(mappedBy = "idusuario")
+    private Collection<Hc3047Anexo6> hc3047Anexo6Collection;
     @OneToMany(mappedBy = "idUsuario")
     private Collection<Hc3047Anexo4> hc3047Anexo4Collection;
     @OneToMany(mappedBy = "idUsuario")
@@ -789,6 +793,24 @@ public class CfgUsuarios implements Serializable {
 
     public void setHc3047Anexo4Collection(Collection<Hc3047Anexo4> hc3047Anexo4Collection) {
         this.hc3047Anexo4Collection = hc3047Anexo4Collection;
+    }
+
+    @XmlTransient
+    public Collection<Hc3047Anexo5> getHc3047Anexo5Collection() {
+        return hc3047Anexo5Collection;
+    }
+
+    public void setHc3047Anexo5Collection(Collection<Hc3047Anexo5> hc3047Anexo5Collection) {
+        this.hc3047Anexo5Collection = hc3047Anexo5Collection;
+    }
+
+    @XmlTransient
+    public Collection<Hc3047Anexo6> getHc3047Anexo6Collection() {
+        return hc3047Anexo6Collection;
+    }
+
+    public void setHc3047Anexo6Collection(Collection<Hc3047Anexo6> hc3047Anexo6Collection) {
+        this.hc3047Anexo6Collection = hc3047Anexo6Collection;
     }
 
 }

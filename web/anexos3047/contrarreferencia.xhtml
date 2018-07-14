@@ -183,16 +183,16 @@
                         </tr>
                         <tr>
                             <td>
-                                <p:inputText styleClass="width1"      style="font-weight: bold;" value="#{manejarAnexos3047MB.datosFormulario.dato200}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>     
+                                <p:inputText styleClass="width1"      style="font-weight: bold;" value="#{manejarAnexos3047MB.nuevoAnexo6.primerapellido}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>     
                             </td>
                             <td>
-                                <p:inputText styleClass="labelFormulario"     style="font-weight: bold;" value="#{manejarAnexos3047MB.datosFormulario.dato201}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>   
+                                <p:inputText styleClass="labelFormulario"     style="font-weight: bold;" value="#{manejarAnexos3047MB.nuevoAnexo6.segundoapellido}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>   
                             </td>
                             <td>
-                                <p:inputText styleClass="labelFormulario"     style="font-weight: bold;" value="#{manejarAnexos3047MB.datosFormulario.dato202}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>     
+                                <p:inputText styleClass="labelFormulario"     style="font-weight: bold;" value="#{manejarAnexos3047MB.nuevoAnexo6.primernombre}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>     
                             </td>
                             <td>
-                                <p:inputText styleClass="labelFormulario"     style="font-weight: bold;" value="#{manejarAnexos3047MB.datosFormulario.dato203}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>     
+                                <p:inputText styleClass="labelFormulario"     style="font-weight: bold;" value="#{manejarAnexos3047MB.nuevoAnexo6.segundonombre}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>     
                             </td>
                         </tr>
                         <tr>
@@ -203,27 +203,20 @@
                                 <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="NUMERO DOCUMENTO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
                             </td>
                             <td style="background-color: #eaecfe;">
-                                <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="FECHA DE NACIMIENTO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
-                            </td>
-                            <td style="background-color: #eaecfe;">
                                 <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="TELEFONO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
                             </td>                                        
                         </tr>
                         <tr>
                             <td>
-                                <p:selectOneMenu id="IdFocus6" styleClass="width1" value="#{historiasMB.datosFormulario.dato219}" filter="true" filterMatchMode="contains" rendered="#{historiasMB.hayPacienteSeleccionado}">
-                                    <f:selectItems value="#{aplicacionGeneralMB.listaTipoIdentificacion}"/>
+                                <p:selectOneMenu id="IdFocus6" styleClass="width1" value="#{manejarAnexos3047MB.nuevoAnexo6.tipoIdentificacion}" filter="true" filterMatchMode="contains" rendered="#{historiasMB.hayPacienteSeleccionado}" converter="omnifaces.SelectItemsConverter">
+                                    <f:selectItems value="#{manejarAnexos3047MB.listaTipoidentificacion}" var="tidentifica" itemLabel="#{tidentifica.descripcion}"/>
                                 </p:selectOneMenu>   
                             </td>
                             <td>
-                                <p:inputText styleClass="labelFormulario"     style="font-weight: bold;" value="#{manejarAnexos3047MB.datosFormulario.dato212}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>     
-                            </td>
+                                <p:inputText styleClass="labelFormulario"     style="font-weight: bold;" value="#{manejarAnexos3047MB.nuevoAnexo6.identificiacion}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>     
+                            </td>dato212
                             <td>
-                                <p:calendar id="fechanacimiento" navigator="true" locale="es" value="#{historiasMB.datosFormulario.dato6}" pattern="dd/MM/yyyy" mask="true" size="23" style="width: 200px;" rendered="#{historiasMB.hayPacienteSeleccionado}">
-                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
-                                </p:calendar>                                </td>                                        
-                            <td>
-                                <p:inputText styleClass="labelFormulario"     style="font-weight: bold;" value="#{manejarAnexos3047MB.datosFormulario.dato211}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
+                                <p:inputText styleClass="labelFormulario"     style="font-weight: bold;" value="#{manejarAnexos3047MB.nuevoAnexo6.telefono}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
                             </td>                                                                    
                         </tr>
                         <tr>
@@ -239,20 +232,20 @@
                         </tr>
                         <tr>
                             <td>
-                                <p:inputText styleClass="width1"      style="font-weight: bold;" value="#{manejarAnexos3047MB.datosFormulario.dato210}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>     
+                                <p:inputText styleClass="width1"      style="font-weight: bold;" value="#{manejarAnexos3047MB.nuevoAnexo6.direccion}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>     
                             </td>
                             <td style="width: 206px;">
-                                <p:selectOneMenu styleClass="campoFormulario" style="width: 206px;" value="#{manejarAnexos3047MB.datosFormulario.dato1}" filter="true" filterMatchMode="contains" rendered="#{historiasMB.hayPacienteSeleccionado}">
+                                <p:selectOneMenu styleClass="campoFormulario" style="width: 315px;" value="#{manejarAnexos3047MB.datosFormulario.dato1}" filter="true" filterMatchMode="contains" rendered="#{historiasMB.hayPacienteSeleccionado}">
                                     <f:ajax 
                                         event="change"
                                         listener="#{manejarAnexos3047MB.cargarMunicipios}"                                                
-                                        render="IdMunicipios1"/> 
+                                        render="IdMunicipios"/> 
                                     <f:selectItem itemLabel="" itemValue=""/>
                                     <f:selectItems value="#{aplicacionGeneralMB.listaDepartamentos}" />
                                 </p:selectOneMenu>                         
                             </td>                    
                             <td>
-                                <p:selectOneMenu   styleClass="campoFormulario" id="IdMunicipios1" style="width: 206px;" value="#{manejarAnexos3047MB.datosFormulario.dato2}" filter="true" filterMatchMode="contains" rendered="#{historiasMB.hayPacienteSeleccionado}">
+                                <p:selectOneMenu   styleClass="campoFormulario" id="IdMunicipios" style="width: 315px;" value="#{manejarAnexos3047MB.datosFormulario.dato2}" filter="true" filterMatchMode="contains" rendered="#{historiasMB.hayPacienteSeleccionado}">
                                     <f:selectItems value="#{manejarAnexos3047MB.listaMunicipios}" />
                                 </p:selectOneMenu>
                             </td>
@@ -269,11 +262,11 @@
                                         <p:outputLabel styleClass="labelFormularioBold" style="font-weight: bold;" value="NOMBRE:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
                                     </td>
                                     <td >
-                                        <p:selectOneMenu style="width: 315px;" value="#{historiasMB.idPrestador}" filter="true" filterMatchMode="contains">                            
+                                        <p:selectOneMenu style="width: 315px;" value="#{manejarAnexos3047MB.nuevoAnexo6.idusuario}" filter="true" filterMatchMode="contains" converter="omnifaces.SelectItemsConverter">                            
+                                            <p:ajax event="change" listener="#{historiasMB.cambiaMedico}" update="IdEspecialidad,telef"/>
                                             <f:selectItem itemLabel="" itemValue=""/>
-                                            <f:selectItems value="#{historiasMB.listaPrestadores}" var="p" itemLabel="#{p.primerNombre} #{p.segundoNombre} #{p.primerApellido} #{p.segundoApellido}" itemValue="#{p.idUsuario}"/>
+                                            <f:selectItems value="#{manejarAnexos3047MB.listaUsuarios}" var="p" itemLabel="#{p.primerNombre} #{p.segundoNombre} #{p.primerApellido} #{p.segundoApellido}" />
                                         </p:selectOneMenu>
-
                                     </td>   
                                 </tr>
                             </table>
@@ -287,9 +280,9 @@
                                     <td style="width: 95px;"><p:outputLabel value="Extensión"/></td>
                                 </tr>
                                 <tr>
-                                    <td><p:inputText  style="width: 95px;"  value="#{manejarAnexos3047MB.datosFormulario.dato1001}"/></td>
-                                    <td><p:inputText  style="width: 95px;"  value="#{manejarAnexos3047MB.datosFormulario.dato1002}"/></td>
-                                    <td><p:inputText  style="width: 95px;" value="#{manejarAnexos3047MB.datosFormulario.dato1003}"/></td>                        
+                                    <td><p:inputText  style="width: 95px;" readonly="true"  value="#{manejarAnexos3047MB.datosFormulario.dato1001}"/></td>
+                                    <td><p:inputText id="IdEspecialidad"   readonly="true" style="width: 95px;"  value="#{manejarAnexos3047MB.nuevoAnexo6.idusuario.telefonoOficina}"/></td>
+                                    <td><p:inputText  style="width: 95px;" readonly="true" value="#{manejarAnexos3047MB.datosFormulario.dato1003}"/></td>                        
                                 </tr>
                                 <tr>
                                     <td><p:outputLabel value="CELULAR" styleClass="labelFormularioBold" style="font-weight: bold;"/></td>
@@ -300,9 +293,9 @@
                                     <td><p:outputLabel value="Extensión"/></td>
                                 </tr>
                                 <tr>
-                                    <td><p:inputText   style="width: 95px;" value="#{manejarAnexos3047MB.datosFormulario.dato1004}"/></td>
-                                    <td><p:inputText   style="width: 95px;" value="#{manejarAnexos3047MB.datosFormulario.dato1005}"/></td>
-                                    <td><p:inputText   style="width: 95px;" value="#{manejarAnexos3047MB.datosFormulario.dato1006}"/></td>                        
+                                    <td><p:inputText   style="width: 95px;" readonly="true" value="#{manejarAnexos3047MB.datosFormulario.dato1004}"/></td>
+                                    <td><p:inputText id="telef"  style="width: 95px;" readonly="true" value="#{manejarAnexos3047MB.nuevoAnexo6.idusuario.celular}"/></td>
+                                    <td><p:inputText   style="width: 95px;" readonly="true" value="#{manejarAnexos3047MB.datosFormulario.dato1006}"/></td>                        
                                 </tr>
                             </table>
                             <table>
@@ -314,7 +307,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <p:inputText styleClass="width1"      style="font-weight: bold;" value="#{manejarAnexos3047MB.datosFormulario.dato230}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>     
+                                        <p:inputText styleClass="width1"      style="font-weight: bold;" value="#{manejarAnexos3047MB.nuevoAnexo6.servicioqcontrarrefiere}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>     
                                     </td>
                                 </tr>
                             </table>
@@ -333,7 +326,7 @@
                                                                              firma y registro del profesional responsable." /></td>
                     </tr>
                     <tr>
-                        <td colspan="2"><p:inputTextarea  rows="6" styleClass="width2" value="#{historiasMB.datosFormulario.dato17}"  /></td>                    
+                        <td colspan="2"><p:inputTextarea  rows="6" styleClass="width2" value="#{manejarAnexos3047MB.nuevoAnexo6.informacionrelevante}"  /></td>                    
                     </tr>
 
                     <tr><td>&nbsp;</td></tr>
@@ -342,15 +335,15 @@
                     <tr>
                         <td>
                             <p:outputLabel value="FECHA-HORA REGISTRO" styleClass="labelFormularioBold" style="font-weight: bold;"/>
-                            <p:calendar navigator="true" locale="es" value="#{historiasMB.fechaReg}" pattern="dd/MM/yyyy HH:mm:ss" mask="true" size="23" style="width: 200px;" />
+                            <p:calendar navigator="true" locale="es" value="#{manejarAnexos3047MB.nuevoAnexo6.fechadocumento}" pattern="dd/MM/yyyy HH:mm:ss" mask="true" size="23" style="width: 200px;" />
                         </td>
                     </tr>
                     <tr><td>&nbsp;</td></tr>
                     <tr><td>&nbsp;</td></tr>
                     <tr>
                         <td colspan="2">
-                            <p:commandButton icon="ui-icon-disk" value="Guardar Nuevo Registro" 
-                                             actionListener="#{historiasMB.guardarRegistro}" 
+                            <p:commandButton icon="ui-icon-disk" value="Guardar Nuevo Anexo" 
+                                             actionListener="#{manejarAnexos3047MB.guardarAnexo6()}" 
                                              disabled="#{historiasMB.modificandoRegCli}" update="@form"/>
                             <p:commandButton icon="ui-icon-arrowthickstop-1-s" value="Actualizar Registro" 
                                              actionListener="#{historiasMB.actualizarRegistro}" disabled="#{!historiasMB.modificandoRegCli}" 

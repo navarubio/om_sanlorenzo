@@ -32,6 +32,8 @@ import modelo.entidades.Hc3047Anexo3;
 import modelo.entidades.Hc3047Anexo31;
 import modelo.entidades.Hc3047Anexo4;
 import modelo.entidades.Hc3047Anexo41;
+import modelo.entidades.Hc3047Anexo5;
+import modelo.entidades.Hc3047Anexo6;
 import modelo.entidades.HcAnexos3047;
 import modelo.fachadas.CfgClasificacionesFacade;
 import modelo.fachadas.CfgDiagnosticoFacade;
@@ -44,6 +46,8 @@ import modelo.fachadas.Hc3047Anexo3Facade;
 import modelo.fachadas.Hc3047Anexo3_1Facade;
 import modelo.fachadas.Hc3047Anexo4Facade;
 import modelo.fachadas.Hc3047Anexo4_1Facade;
+import modelo.fachadas.Hc3047Anexo5Facade;
+import modelo.fachadas.Hc3047Anexo6Facade;
 import modelo.fachadas.HcAnexos3047Facade;
 
 /**
@@ -74,6 +78,10 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     @EJB
     Hc3047Anexo4_1Facade hc3047Anexo41Facade;
     @EJB
+    Hc3047Anexo5Facade hc3047Anexo5Facade;
+    @EJB
+    Hc3047Anexo6Facade hc3047Anexo6Facade;
+    @EJB
     CfgUsuariosFacade cfgUsuariosFacade;
     @EJB
     CfgPacientesFacade cfgPacientesFacade;
@@ -99,6 +107,9 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     private String numeroAtencion = "";
     private String numeroSolicitud = "";
     private String numeroAutorizacion = "";
+    private String numeroRemision = "";
+    private String numeroContrarremision = "";
+    
     
     
     private boolean coutam = false;
@@ -114,6 +125,9 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     private Hc3047Anexo31 nuevoAnexo31 = new Hc3047Anexo31();
     private Hc3047Anexo4 nuevoAnexo4 = new Hc3047Anexo4();
     private Hc3047Anexo41 nuevoAnexo41 = new Hc3047Anexo41();
+    private Hc3047Anexo5 nuevoAnexo5 = new Hc3047Anexo5();
+    private Hc3047Anexo6 nuevoAnexo6 = new Hc3047Anexo6();
+    
     
     private HcAnexos3047 tipoanexoActual = new HcAnexos3047();
     private List<CfgClasificaciones> listaInconsistencias = null;
@@ -153,7 +167,8 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         nuevoAnexo2.setFechaingreso(fechaReg);
         nuevoAnexo3.setFechadocumento(fechaReg);
         nuevoAnexo4.setFechadocumento(fechaReg);
-        
+        nuevoAnexo5.setFechadocumento(fechaReg);
+        nuevoAnexo6.setFechadocumento(fechaReg);
     }
 
     public void selecciontipomovimiento() {
@@ -328,9 +343,49 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "Error al Grabar Anexo4"));
         }
+    }
+    
+    public void guardarAnexo5() {//guardar un nuevo registro clinico        
+        int idSede = 1;
+        generarNumeroRemision();
+        System.out.println(fechaReg);
+        System.out.println("Iniciando el guardado del registro Anexo5 " + numeroRemision);
+
+        try {
+            nuevoAnexo5.setNumeroremision(numeroRemision);
+            nuevoAnexo5.setIdDepartamento(clasificacionesFacade.find(Integer.parseInt(departamento)));
+            municipio = datosFormulario.getDato2().toString();
+            nuevoAnexo5.setIdMunicipio(clasificacionesFacade.find(Integer.parseInt(municipio)));
+            hc3047Anexo5Facade.create(nuevoAnexo5);
+            anexoActual.setConsecutivo(consecutivo);
+            hcAnexos3047Facade.edit(anexoActual);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Su Anexo5 fue almacenado con el Nro " + numeroRemision));
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "Error al Grabar Anexo5"));
+        }
 
     }
     
+    public void guardarAnexo6() {//guardar un nuevo registro clinico        
+        int idSede = 1;
+        generarNumeroContrarremision();
+        System.out.println(fechaReg);
+        System.out.println("Iniciando el guardado del registro Anexo6 " + numeroContrarremision);
+
+        try {
+            nuevoAnexo6.setNumerocontrarremision(numeroContrarremision);
+            nuevoAnexo6.setIdDepartamento(clasificacionesFacade.find(Integer.parseInt(departamento)));
+            municipio = datosFormulario.getDato2().toString();
+            nuevoAnexo6.setIdMunicipio(clasificacionesFacade.find(Integer.parseInt(municipio)));
+            hc3047Anexo6Facade.create(nuevoAnexo6);
+            anexoActual.setConsecutivo(consecutivo);
+            hcAnexos3047Facade.edit(anexoActual);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Su Anexo6 fue almacenado con el Nro " + numeroContrarremision));
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "Error al Grabar Anexo6"));
+        }
+
+    }
 
     public void generarNumeroAtencion() {
         //fechacomprobante=comprobanteivaef.getFecha();
@@ -376,9 +431,41 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         String month = String.format("%02d", mes);
         anexoActual = hcAnexos3047Facade.find(4);
         consecutivo = anexoActual.getConsecutivo() + 1;
-        numeroInforme = yearsmall + month + consecutivo;
+        numeroAutorizacion = yearsmall + month + consecutivo;
+    }
+    
+    public void generarNumeroRemision() {
+        int mes = 0;
+        int anio = 0;
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(fechaReg);
+        anio = cal.get(Calendar.YEAR);
+        mes = cal.get(Calendar.MONTH) + 1;
+        String year = Integer.toString(anio);
+        String yearsmall = year.substring(2, 4);
+        String month = String.format("%02d", mes);
+        anexoActual = hcAnexos3047Facade.find(5);
+        consecutivo = anexoActual.getConsecutivo() + 1;
+        numeroRemision = yearsmall + month + consecutivo;
 
     }
+    
+    public void generarNumeroContrarremision() {
+        int mes = 0;
+        int anio = 0;
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(fechaReg);
+        anio = cal.get(Calendar.YEAR);
+        mes = cal.get(Calendar.MONTH) + 1;
+        String year = Integer.toString(anio);
+        String yearsmall = year.substring(2, 4);
+        String month = String.format("%02d", mes);
+        anexoActual = hcAnexos3047Facade.find(6);
+        consecutivo = anexoActual.getConsecutivo() + 1;
+        numeroContrarremision = yearsmall + month + consecutivo;
+
+    }
+
 
     public String getPacienteremitido() {
         return pacienteremitido;
@@ -660,5 +747,22 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         this.nuevoAnexo31 = nuevoAnexo31;
     }
 
+    public Hc3047Anexo5 getNuevoAnexo5() {
+        return nuevoAnexo5;
+    }
+
+    public void setNuevoAnexo5(Hc3047Anexo5 nuevoAnexo5) {
+        this.nuevoAnexo5 = nuevoAnexo5;
+    }
+
+    public Hc3047Anexo6 getNuevoAnexo6() {
+        return nuevoAnexo6;
+    }
+
+    public void setNuevoAnexo6(Hc3047Anexo6 nuevoAnexo6) {
+        this.nuevoAnexo6 = nuevoAnexo6;
+    }
+
+    
     
 }
