@@ -2,14 +2,8 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0e740dac-5d5b-49a4-a38d-2f78e2775af8">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="48"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="numinform" class="java.lang.String"/>
-	<parameter name="admin" class="java.lang.String"/>
-	<parameter name="codadmin" class="java.lang.String"/>
-	<parameter name="mcpiopaciente" class="java.lang.String"/>
-	<parameter name="dptopaciente" class="java.lang.String"/>
-	<parameter name="dptoempresa" class="java.lang.String"/>
-	<parameter name="mcpioempresa" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT
      *,
@@ -808,13 +802,6 @@ WHERE
 					</textElement>
 					<text><![CDATA[ENTIDAD A LA QUE SE LE INFORMA (PAGADOR)]]></text>
 				</staticText>
-				<textField>
-					<reportElement x="229" y="0" width="175" height="12" uuid="5dbc6420-7dd6-42c5-87c5-5cb239fa9364"/>
-					<textElement textAlignment="Center">
-						<font size="8"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$P{admin}]]></textFieldExpression>
-				</textField>
 			</frame>
 			<frame>
 				<reportElement positionType="Float" x="404" y="61" width="168" height="12" backcolor="#E6E6E6" uuid="09dfe1d2-0eed-45d9-8be8-34749c3e2006"/>
@@ -825,13 +812,6 @@ WHERE
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textField>
-					<reportElement x="67" y="0" width="91" height="12" uuid="d5cd24f2-8697-4132-87f9-6e01cfe290fa"/>
-					<textElement textAlignment="Center">
-						<font size="8"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$P{codadmin}]]></textFieldExpression>
-				</textField>
 			</frame>
 			<staticText>
 				<reportElement x="404" y="61" width="67" height="12" uuid="3972485f-6cfe-40f3-8cfe-a2dcf7240407"/>
@@ -1242,13 +1222,6 @@ WHERE
 					</textElement>
 					<text><![CDATA[Departamento:]]></text>
 				</staticText>
-				<textField>
-					<reportElement x="93" y="0" width="151" height="12" uuid="93b19b13-5890-4456-83db-f5fda9956aa0"/>
-					<textElement textAlignment="Center">
-						<font size="8"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$P{dptopaciente}]]></textFieldExpression>
-				</textField>
 			</frame>
 			<frame>
 				<reportElement positionType="Float" x="525" y="192" width="47" height="12" backcolor="#E6E6E6" uuid="9185fb17-efb7-4adc-ba49-f75f5545da32"/>
@@ -1301,13 +1274,6 @@ WHERE
 					</textElement>
 					<text><![CDATA[Municipio:]]></text>
 				</staticText>
-				<textField>
-					<reportElement x="75" y="0" width="154" height="12" uuid="ae22a9a5-8a63-4193-be76-e2546ee8235d"/>
-					<textElement textAlignment="Center">
-						<font size="8"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$P{mcpiopaciente}]]></textFieldExpression>
-				</textField>
 			</frame>
 			<frame>
 				<reportElement positionType="Float" x="0" y="204" width="572" height="38" backcolor="#E6E6E6" uuid="fe342995-99d1-46bf-b7e5-5be04052f8ce"/>

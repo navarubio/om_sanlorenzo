@@ -7,6 +7,7 @@ package managedBeans.informe4505;
 
 import beans.utilidades.MetodosGenerales;
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -19,11 +20,13 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
+import javax.servlet.ServletContext;
 import managedBeans.historias.DatosFormularioHistoria;
 import managedBeans.historias.HistoriasMB;
 import managedBeans.seguridad.AplicacionGeneralMB;
 import modelo.entidades.CfgClasificaciones;
 import modelo.entidades.CfgDiagnostico;
+import modelo.entidades.CfgEmpresa;
 import modelo.entidades.CfgPacientes;
 import modelo.entidades.CfgUsuarios;
 import modelo.entidades.Hc3047Anexo1;
@@ -38,6 +41,7 @@ import modelo.entidades.HcAnexos3047;
 import modelo.fachadas.CfgClasificacionesFacade;
 import modelo.fachadas.CfgDiagnosticoFacade;
 import modelo.fachadas.CfgDiagnosticoPrincipalFacade;
+import modelo.fachadas.CfgEmpresaFacade;
 import modelo.fachadas.CfgPacientesFacade;
 import modelo.fachadas.CfgUsuariosFacade;
 import modelo.fachadas.Hc3047Anexo1Facade;
@@ -91,6 +95,8 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     HcAnexos3047Facade hcAnexos3047Facade;
     @EJB
     CfgClasificacionesFacade cfgClasificacionesFacade;
+    @EJB
+    CfgEmpresaFacade cfgEmpresaFacade;
 
     private String pacienteremitido = "";
     private int tipomovimiento = 0;
@@ -127,7 +133,7 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     private Hc3047Anexo41 nuevoAnexo41 = new Hc3047Anexo41();
     private Hc3047Anexo5 nuevoAnexo5 = new Hc3047Anexo5();
     private Hc3047Anexo6 nuevoAnexo6 = new Hc3047Anexo6();
-    
+    private CfgEmpresa empresa;
     
     private HcAnexos3047 tipoanexoActual = new HcAnexos3047();
     private List<CfgClasificaciones> listaInconsistencias = null;
@@ -169,6 +175,7 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         nuevoAnexo4.setFechadocumento(fechaReg);
         nuevoAnexo5.setFechadocumento(fechaReg);
         nuevoAnexo6.setFechadocumento(fechaReg);
+        empresa = cfgEmpresaFacade.findAll().get(0);
     }
 
     public void selecciontipomovimiento() {
@@ -762,7 +769,39 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     public void setNuevoAnexo6(Hc3047Anexo6 nuevoAnexo6) {
         this.nuevoAnexo6 = nuevoAnexo6;
     }
-
     
+    public void verReporte() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        
+        //Instancia hacia la clase reporteClientes        
+        ReporteAnexos rAnexo = new ReporteAnexos();
+        
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ServletContext servletContext = (ServletContext) facesContext.getExternalContext().getContext();
+        String ruta = servletContext.getRealPath("/anexos3047/reportes/articulos.jasper");
+       
+        rAnexo.getReporte(ruta);        
+        FacesContext.getCurrentInstance().responseComplete();               
+    }
+        
+
+    public void verAnexo1() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+
+        //Instancia hacia la clase reporteClientes        
+        ReporteAnexos rAnexo = new ReporteAnexos();
+
+        String admin = nuevoAnexo1.getIdPaciente().getIdAdministradora().getRazonSocial();
+        String codadmin = nuevoAnexo1.getIdPaciente().getIdAdministradora().getCodigoAdministradora();
+        String dptopaciente = nuevoAnexo1.getIdPaciente().getDepartamento().getDescripcion();
+        String mcpiopaciente = nuevoAnexo1.getIdPaciente().getMunicipio().getDescripcion();
+        String dptoempresa = empresa.getCodDepartamento().getDescripcion();
+        String mcpioempresa = empresa.getCodMunicipio().getDescripcion();
+        String numinform = numeroAtencion;
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ServletContext servletContext = (ServletContext) facesContext.getExternalContext().getContext();
+        String ruta = servletContext.getRealPath("/anexos3047/reportes/anexoone.jasper");
+
+        rAnexo.getAnexo1(admin, codadmin, mcpiopaciente, dptopaciente, dptoempresa, mcpioempresa, numinform, ruta);
+        FacesContext.getCurrentInstance().responseComplete();
+    }
     
 }
