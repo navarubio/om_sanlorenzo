@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0e740dac-5d5b-49a4-a38d-2f78e2775af8">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="48"/>
 	<parameter name="numinform" class="java.lang.String"/>
 	<parameter name="admin" class="java.lang.String"/>
 	<parameter name="codadmin" class="java.lang.String"/>
@@ -272,7 +272,7 @@ WHERE
 		<variableExpression><![CDATA[($F{hc_3047_anexo1_tipoinconsistencia}==1980 ? "":"X")]]></variableExpression>
 	</variable>
 	<variable name="datincorrect" class="java.lang.String">
-		<variableExpression><![CDATA[($F{hc_3047_anexo1_tipoinconsistencia}==1981 ? "":"X")]]></variableExpression>
+		<variableExpression><![CDATA[($F{hc_3047_anexo1_tipoinconsistencia}==1980 ? "X":"")]]></variableExpression>
 	</variable>
 	<variable name="rc" class="java.lang.String">
 		<variableExpression><![CDATA[($F{cfg_pacientes_tipo_identificacion}==1767 ? "X":"")]]></variableExpression>
@@ -296,6 +296,9 @@ WHERE
 		<variableExpression><![CDATA[($F{cfg_pacientes_tipo_identificacion}==1766 ? "X":"")]]></variableExpression>
 	</variable>
 	<variable name="dpto" class="java.lang.String"/>
+	<variable name="datincorrect1" class="java.lang.String">
+		<variableExpression><![CDATA[($F{hc_3047_anexo1_tipoinconsistencia}==1981 ? "X":"")]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -2105,7 +2108,7 @@ WHERE
 						<textElement textAlignment="Center">
 							<font size="8"/>
 						</textElement>
-						<textFieldExpression><![CDATA[$V{ti}]]></textFieldExpression>
+						<textFieldExpression><![CDATA[$V{datincorrect}]]></textFieldExpression>
 					</textField>
 				</frame>
 				<frame>
@@ -2122,7 +2125,7 @@ WHERE
 						<textElement textAlignment="Center">
 							<font size="8"/>
 						</textElement>
-						<textFieldExpression><![CDATA[$V{ti}]]></textFieldExpression>
+						<textFieldExpression><![CDATA[$V{datincorrect1}]]></textFieldExpression>
 					</textField>
 				</frame>
 				<staticText>
