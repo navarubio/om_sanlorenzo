@@ -31,8 +31,8 @@ public class ReporteAnexos {
         if (ruta != null) {
 
             Connection conexion;
-            Class.forName("com.postgresql.jdbc.Driver").newInstance();
-            conexion = DriverManager.getConnection("jdbc:postgresql://localhost:/Produccion", "postgres", "091095");
+            Class.forName("org.postgresql.Driver").newInstance();
+            conexion = DriverManager.getConnection("jdbc:postgresql://localhost:5433/Produccion", "postgres", "091095");
 
             //Se definen los parametros si es que el reporte necesita
             Map parameter = new HashMap();
@@ -79,7 +79,7 @@ public class ReporteAnexos {
         if (ruta != null) {
 
             Connection conexion;
-            Class.forName("com.postgresql.jdbc.Driver").newInstance();
+            Class.forName("org.postgresql.Driver").newInstance();
             conexion = DriverManager.getConnection("jdbc:postgresql://localhost:5433/Produccion", "postgres", "091095");
 
             //Se definen los parametros si es que el reporte necesita

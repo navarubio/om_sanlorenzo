@@ -194,22 +194,6 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         nuevoAnexo2.setReferido(prestadorremitente);
     }
 
-    public void generarNumeroInforme() {
-        int mes = 0;
-        int anio = 0;
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(fechaReg);
-        anio = cal.get(Calendar.YEAR);
-        mes = cal.get(Calendar.MONTH) + 1;
-        String year = Integer.toString(anio);
-        String yearsmall = year.substring(2, 4);
-        String month = String.format("%02d", mes);
-        anexoActual = hcAnexos3047Facade.find(1);
-        consecutivo = anexoActual.getConsecutivo() + 1;
-        numeroInforme = yearsmall + month + consecutivo;
-
-    }
-
     public void cargarMunicipios() {
         listaMunicipios = new ArrayList<>();
         try {
@@ -239,8 +223,6 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
 
         try {
             nuevoAnexo1.setNumeroinforme(numeroInforme);
-
-//            nuevoAnexo1.setIdPaciente(pacienteseleccionado);
             hc3047Anexo1Facade.create(nuevoAnexo1);
             anexoActual.setConsecutivo(consecutivo);
             hcAnexos3047Facade.edit(anexoActual);
@@ -262,7 +244,6 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         String codigo3 = "";
 
         try {
-            nuevoAnexo2.setNumeroatencion(numeroAtencion);
             if (cei100 != null) {
                 codigo0 = cei100.substring(0, 4);
                 diagnosticoppal = cfgDiagnosticoFacade.find(codigo0);
@@ -391,6 +372,22 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "Error al Grabar Anexo6"));
         }
+
+    }
+    
+    public void generarNumeroInforme() {
+        int mes = 0;
+        int anio = 0;
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(fechaReg);
+        anio = cal.get(Calendar.YEAR);
+        mes = cal.get(Calendar.MONTH) + 1;
+        String year = Integer.toString(anio);
+        String yearsmall = year.substring(2, 4);
+        String month = String.format("%02d", mes);
+        anexoActual = hcAnexos3047Facade.find(1);
+        consecutivo = anexoActual.getConsecutivo() + 1;
+        numeroInforme = yearsmall + month + consecutivo;
 
     }
 
@@ -788,14 +785,19 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
 
         //Instancia hacia la clase reporteClientes        
         ReporteAnexos rAnexo = new ReporteAnexos();
-
-        String admin = nuevoAnexo1.getIdPaciente().getIdAdministradora().getRazonSocial();
-        String codadmin = nuevoAnexo1.getIdPaciente().getIdAdministradora().getCodigoAdministradora();
-        String dptopaciente = nuevoAnexo1.getIdPaciente().getDepartamento().getDescripcion();
-        String mcpiopaciente = nuevoAnexo1.getIdPaciente().getMunicipio().getDescripcion();
+        String admin = "INDACA, S.A.";
+        String codadmin = "J-29906145-6";
+        String dptopaciente = "ESTADO ZULIA";
+        String mcpiopaciente = "MARACAIBO";
+       
+        
+//        String admin = nuevoAnexo1.getIdPaciente().getIdAdministradora().getRazonSocial();
+//        String codadmin = nuevoAnexo1.getIdPaciente().getIdAdministradora().getCodigoAdministradora();
+//        String dptopaciente = nuevoAnexo1.getIdPaciente().getDepartamento().getDescripcion();
+//        String mcpiopaciente = nuevoAnexo1.getIdPaciente().getMunicipio().getDescripcion();
         String dptoempresa = empresa.getCodDepartamento().getDescripcion();
         String mcpioempresa = empresa.getCodMunicipio().getDescripcion();
-        String numinform = numeroAtencion;
+        String numinform = numeroInforme;
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ServletContext servletContext = (ServletContext) facesContext.getExternalContext().getContext();
         String ruta = servletContext.getRealPath("/anexos3047/reportes/anexoone.jasper");
