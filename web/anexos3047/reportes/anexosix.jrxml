@@ -2,8 +2,16 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0e740dac-5d5b-49a4-a38d-2f78e2775af8">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="334"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="numinform" class="java.lang.String"/>
+	<parameter name="admin" class="java.lang.String"/>
+	<parameter name="codadmin" class="java.lang.String"/>
+	<parameter name="mcpiopaciente" class="java.lang.String"/>
+	<parameter name="dptopaciente" class="java.lang.String"/>
+	<parameter name="dptoempresa" class="java.lang.String"/>
+	<parameter name="mcpioempresa" class="java.lang.String"/>
+	<parameter name="dptoresponsable" class="java.lang.String"/>
+	<parameter name="mcpioresponsable" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT
      *,
@@ -198,7 +206,7 @@ FROM
 	<field name="fecha_creacion" class="java.sql.Timestamp"/>
 	<field name="visible" class="java.lang.Boolean"/>
 	<field name="personal_atiende" class="java.lang.Integer">
-		<fieldDescription><![CDATA[ sii el usuario es prestador debe permitir especificar el tipo de personal que atiende (por defecto va ser 1):
+		<fieldDescription><![CDATA[sii el usuario es prestador debe permitir especificar el tipo de personal que atiende (por defecto va ser 1):
 1=Médico(a) especialista,
 2 =Médico(a) general
 3 =Enfermera (o)
@@ -224,13 +232,11 @@ FROM
 		<fieldDescription><![CDATA[NOMBRE DE LA EMPRESA QUE COMPRA EL SOFTWARE]]></fieldDescription>
 	</field>
 	<field name="tipo_doc_rep_legal" class="java.lang.Integer">
-		<fieldDescription><![CDATA[TIPO DE DOCUMENTO DEL REPRESENTANTE LEGALPARA ESTE CASO SERIA CC, CE, PASAPORTE.
-]]></fieldDescription>
+		<fieldDescription><![CDATA[TIPO DE DOCUMENTO DEL REPRESENTANTE LEGALPARA ESTE CASO SERIA CC, CE, PASAPORTE.]]></fieldDescription>
 	</field>
 	<field name="num_doc_rep_legal" class="java.lang.String"/>
 	<field name="nom_rep_legal" class="java.lang.String">
-		<fieldDescription><![CDATA[NOMBRE DEL REPRESENTANTE LEGAL DE LA EMPRESA
-]]></fieldDescription>
+		<fieldDescription><![CDATA[NOMBRE DEL REPRESENTANTE LEGAL DE LA EMPRESA]]></fieldDescription>
 	</field>
 	<field name="telefono_1" class="java.lang.String"/>
 	<field name="telefono_2" class="java.lang.String"/>
@@ -366,9 +372,7 @@ FROM
 	</variable>
 	<variable name="dpto" class="java.lang.String"/>
 	<variable name="rc_1" class="java.lang.String">
-		<variableExpression><![CDATA[($F{hc_3047_anexo6_tipo_identificacion}==1767 ? "X":"")
-
-]]></variableExpression>
+		<variableExpression><![CDATA[($F{hc_3047_anexo6_tipo_identificacion}==1767 ? "X":"")]]></variableExpression>
 	</variable>
 	<variable name="ti_1" class="java.lang.String">
 		<variableExpression><![CDATA[($F{hc_3047_anexo6_tipo_identificacion}==1768 ? "X":"")]]></variableExpression>
@@ -798,13 +802,20 @@ FROM
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<staticText>
-					<reportElement x="2" y="0" width="108" height="12" uuid="36665113-9cac-4f76-b30f-86b9923c4991"/>
+					<reportElement x="2" y="0" width="75" height="12" uuid="36665113-9cac-4f76-b30f-86b9923c4991"/>
 					<textElement>
 						<font size="9" isBold="true"/>
 						<paragraph leftIndent="5"/>
 					</textElement>
 					<text><![CDATA[Departamento:]]></text>
 				</staticText>
+				<textField>
+					<reportElement x="77" y="0" width="111" height="12" uuid="851fd73c-5829-4057-822b-7a363091ff9d"/>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{dptoempresa}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<frame>
 				<reportElement positionType="Float" x="338" y="49" width="23" height="12" backcolor="#E6E6E6" uuid="fc31c834-b06f-454b-a67e-155ea748a937"/>
@@ -833,13 +844,20 @@ FROM
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<staticText>
-					<reportElement x="2" y="0" width="108" height="12" uuid="407fbe3e-1286-4bc2-acad-866f7217f437"/>
+					<reportElement x="2" y="0" width="58" height="12" uuid="407fbe3e-1286-4bc2-acad-866f7217f437"/>
 					<textElement>
 						<font size="9" isBold="true"/>
 						<paragraph leftIndent="5"/>
 					</textElement>
 					<text><![CDATA[Municipio:]]></text>
 				</staticText>
+				<textField>
+					<reportElement x="60" y="0" width="103" height="12" uuid="248bc1b4-2ece-40f4-ae77-3a98523bd8fc"/>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{mcpioempresa}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<staticText>
 				<reportElement x="525" y="49" width="47" height="12" uuid="8b1c5925-f1bd-4156-ae59-cb4409823ba9"/>
@@ -1303,6 +1321,13 @@ FROM
 					</textElement>
 					<text><![CDATA[Departamento:]]></text>
 				</staticText>
+				<textField>
+					<reportElement x="88" y="0" width="150" height="12" uuid="834f03d6-f095-42b2-8c05-b7c3f97d434c"/>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{dptopaciente}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<frame>
 				<reportElement positionType="Float" x="524" y="179" width="47" height="12" backcolor="#E6E6E6" uuid="9185fb17-efb7-4adc-ba49-f75f5545da32"/>
@@ -1355,6 +1380,13 @@ FROM
 					</textElement>
 					<text><![CDATA[Municipio:]]></text>
 				</staticText>
+				<textField>
+					<reportElement x="60" y="0" width="160" height="12" uuid="d42e4f13-a52f-4d8c-a8ba-e64789e618d8"/>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{mcpiopaciente}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<frame>
 				<reportElement positionType="Float" x="403" y="167" width="168" height="12" backcolor="#E6E6E6" uuid="219a91ff-eff3-4736-9359-141350500542"/>
@@ -1992,11 +2024,11 @@ FROM
 					<text><![CDATA[Departamento:]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="86" y="0" width="112" height="12" uuid="23e2f279-c4f3-4907-be8c-524c0909aaec"/>
+					<reportElement x="86" y="0" width="151" height="12" uuid="23e2f279-c4f3-4907-be8c-524c0909aaec"/>
 					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{hc_3047_anexo6_id_departamento}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$P{dptoresponsable}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -2009,7 +2041,7 @@ FROM
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<staticText>
-					<reportElement x="0" y="0" width="110" height="12" uuid="569dfd53-c2f9-4a88-87ae-c5a228737efb"/>
+					<reportElement x="0" y="0" width="59" height="12" uuid="569dfd53-c2f9-4a88-87ae-c5a228737efb"/>
 					<textElement>
 						<font size="9" isBold="true"/>
 						<paragraph leftIndent="5"/>
@@ -2017,11 +2049,11 @@ FROM
 					<text><![CDATA[Municipio:]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="119" y="0" width="110" height="12" uuid="23bf34c5-84a0-48dc-a5c4-0331115fbf49"/>
+					<reportElement x="75" y="0" width="154" height="12" uuid="23bf34c5-84a0-48dc-a5c4-0331115fbf49"/>
 					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{cfg_clasificaciones_descripcion}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$P{mcpioresponsable}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
