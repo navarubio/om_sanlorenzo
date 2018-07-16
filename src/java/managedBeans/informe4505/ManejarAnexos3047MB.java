@@ -537,9 +537,29 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         rAnexo.getAnexo2(admin, codadmin, mcpiopaciente, dptopaciente, dptoempresa, mcpioempresa, dptoremite, mcpioremite, diagppal, diagrel1, diagrel2, diagrel3, numinform, ruta);
         FacesContext.getCurrentInstance().responseComplete();
     }
+    
+        public void verAnexo5() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 
+        //Instancia hacia la clase reportes Anexos
+        ReporteAnexos rAnexo = new ReporteAnexos();
+        
+        String admin = nuevoAnexo5.getIdPaciente().getIdAdministradora().getRazonSocial();
+        String codadmin = nuevoAnexo5.getIdPaciente().getIdAdministradora().getCodigoAdministradora();
+        String dptopaciente = nuevoAnexo5.getIdPaciente().getDepartamento().getDescripcion();
+        String mcpiopaciente = nuevoAnexo5.getIdPaciente().getMunicipio().getDescripcion();
+        String dptoempresa = empresa.getCodDepartamento().getDescripcion();
+        String mcpioempresa = empresa.getCodMunicipio().getDescripcion();
+        String dptoresponsable = nuevoAnexo5.getIdDepartamento().getDescripcion();
+        String mcpioresponsable = nuevoAnexo5.getIdMunicipio().getDescripcion();
+        String numinform = numeroRemision;
+        
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ServletContext servletContext = (ServletContext) facesContext.getExternalContext().getContext();
+        String ruta = servletContext.getRealPath("/anexos3047/reportes/anexofive.jasper");
 
-
+        rAnexo.getAnexo5(admin, codadmin, mcpiopaciente, dptopaciente, dptoempresa, mcpioempresa, dptoresponsable, mcpioresponsable, numinform, ruta);
+        FacesContext.getCurrentInstance().responseComplete();
+    }
 
     public String getPacienteremitido() {
         return pacienteremitido;
