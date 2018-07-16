@@ -314,7 +314,7 @@
                         </p:panel>
                     </td>
                 </tr>
-                
+
                 <table>
                     <tr>
                         <td colspan="2"><p:outputLabel value="MOTIVO DE CONSULTA" /></td>
@@ -347,9 +347,9 @@
                             <td>
                                 <p:autoComplete id="dato115" size="80" value="#{manejarAnexos3047MB.cei101}" completeMethod="#{historiasMB.autocompletarDiagnostico}" forceSelection="true"/>
                             </td>
-                                <!--td>
-                                <p:inputText  styleClass="width1" value=".{historiasMB.datosFormulario.dato4}" size="50"  />
-                            </td-->
+                            <!--td>
+                            <p:inputText  styleClass="width1" value=".{historiasMB.datosFormulario.dato4}" size="50"  />
+                        </td-->
                         </tr>
                         <tr>
                             <td>
@@ -372,7 +372,7 @@
                     <table>
                         <tr><td>&nbsp;</td></tr>
                         <tr>
-                            
+
                             <td>
                                 <p:outputLabel value="DESTINO DEL PACIENTE" styleClass="labelFormularioBold" style="font-weight: bold;"/>
                             </td>
@@ -399,43 +399,44 @@
 
 
                 <table>
-                <tr><td>&nbsp;</td></tr>
-                <tr><td colspan="2"><h2>INFORMACION DE LA PERSONA QUE REPORTA</h2></td></tr> 
-                <tr><td>&nbsp;</td></tr>
-                <tr>
-                    <td><p:outputLabel value="NOMBRE DE QUIEN REPORTA"/></td>
-                </tr>
-                <tr>
-                    <td>
-                        <p:selectOneMenu style="width: 315px;" value="#{manejarAnexos3047MB.nuevoAnexo2.idUsuario}" filter="true" filterMatchMode="contains" converter="omnifaces.SelectItemsConverter">                            
-                            <p:ajax event="change" listener="#{historiasMB.cambiaMedico}" update="IdEspecialidad,telef"/>
-                            <f:selectItem itemLabel="" itemValue=""/>
-                            <f:selectItems value="#{manejarAnexos3047MB.listaUsuarios}" var="p" itemLabel="#{p.primerNombre} #{p.segundoNombre} #{p.primerApellido} #{p.segundoApellido}" />
-                        </p:selectOneMenu>
-                    </td>
-                </tr>
-                <tr><td><p:outputLabel value="CARGO"/></td></tr>
-                <tr>
-                    <td><p:inputText id="IdEspecialidad" readonly="true" styleClass="width1" value="#{manejarAnexos3047MB.nuevoAnexo2.idUsuario.especialidad.descripcion}"/></td>
-                </tr>
-                <tr><td><p:outputLabel value="TELEFONO"/></td></tr>
-                <tr>
-                    <td><p:inputText id="telef" readonly="true" styleClass="width1" value="#{manejarAnexos3047MB.nuevoAnexo2.idUsuario.telefonoOficina}"/></td>
-                </tr>
+                    <tr><td>&nbsp;</td></tr>
+                    <tr><td colspan="2"><h2>INFORMACION DE LA PERSONA QUE REPORTA</h2></td></tr> 
+                    <tr><td>&nbsp;</td></tr>
+                    <tr>
+                        <td><p:outputLabel value="NOMBRE DE QUIEN REPORTA"/></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:selectOneMenu style="width: 315px;" value="#{manejarAnexos3047MB.nuevoAnexo2.idUsuario}" filter="true" filterMatchMode="contains" converter="omnifaces.SelectItemsConverter">                            
+                                <p:ajax event="change" listener="#{historiasMB.cambiaMedico}" update="IdEspecialidad,telef"/>
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItems value="#{manejarAnexos3047MB.listaUsuarios}" var="p" itemLabel="#{p.primerNombre} #{p.segundoNombre} #{p.primerApellido} #{p.segundoApellido}" />
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr><td><p:outputLabel value="CARGO"/></td></tr>
+                    <tr>
+                        <td><p:inputText id="IdEspecialidad" readonly="true" styleClass="width1" value="#{manejarAnexos3047MB.nuevoAnexo2.idUsuario.especialidad.descripcion}"/></td>
+                    </tr>
+                    <tr><td><p:outputLabel value="TELEFONO"/></td></tr>
+                    <tr>
+                        <td><p:inputText id="telef" readonly="true" styleClass="width1" value="#{manejarAnexos3047MB.nuevoAnexo2.idUsuario.telefonoOficina}"/></td>
+                    </tr>
 
-                <tr><td>&nbsp;</td></tr>
-                <tr>
-                    <td colspan="2">
-                        <p:commandButton icon="ui-icon-disk" value="Guardar Nuevo Registro" 
-                                         actionListener="#{manejarAnexos3047MB.guardarAnexo2() }" 
-                                         disabled="#{historiasMB.modificandoRegCli}" update="@form"/>
-                        <p:commandButton icon="ui-icon-arrowthickstop-1-s" value="Actualizar Registro" 
-                                         actionListener="#{historiasMB.actualizarRegistro}" disabled="#{!historiasMB.modificandoRegCli}" 
-                                         rendered="#{loginMB.superUsuario}" update="@form"/>
-                        <p:commandButton icon="ui-icon-document" value="Limpiar Formulario" 
-                                         actionListener="#{historiasMB.btnLimpiarFormulario}" update="@form"/>
-                    </td>
-                </tr>
+                    <tr><td>&nbsp;</td></tr>
+                    <tr>
+                        <td colspan="2">
+                            <p:commandButton icon="ui-icon-disk" value="Guardar Nuevo Registro" 
+                                             actionListener="#{manejarAnexos3047MB.guardarAnexo2() }" 
+                                             disabled="#{historiasMB.modificandoRegCli}" update="@form"/>
+                            <p:commandButton icon="ui-icon-arrowthickstop-1-s" value="Actualizar Registro" 
+                                             actionListener="#{historiasMB.actualizarRegistro}" disabled="#{!historiasMB.modificandoRegCli}" 
+                                             rendered="#{loginMB.superUsuario}" update="@form"/>
+                            <p:commandButton icon="ui-icon-document" value="Limpiar Formulario" 
+                                             actionListener="#{historiasMB.btnLimpiarFormulario}" update="@form"/>
+                            <p:commandButton id="printButtom"  type="submit" icon="ui-icon-print"   value="Imprimir Anexo1" actionListener="#{manejarAnexos3047MB.verAnexo2()}" ajax="false" onclick="form.target = '_blank'"/>
+                        </td>
+                    </tr>
                 </table>
             </table>            
             <p:dialog id="IdTextosDlgPredefinidos" header="TEXTOS PREDEFINIDOS" width="645" widgetVar="dlgTextosPredefinidos" resizable="false" closable="true" modal="true">                                

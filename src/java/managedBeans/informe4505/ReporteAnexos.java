@@ -130,6 +130,72 @@ public class ReporteAnexos {
             }
         }
     }
+    public void getAnexo2(String admin, String codadmin, String mcpiopaciente, String dptopaciente, 
+            String dptoempresa, String mcpioempresa, String dptoprestador, String mcpioprestador, 
+            String diagppal, String diagrel1, String diagrel2, String diagrel3, String numinform,
+            String ruta ) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        
+        if (ruta != null) {
+
+            Connection conexion;
+            Class.forName("org.postgresql.Driver").newInstance();
+            conexion = DriverManager.getConnection("jdbc:postgresql://localhost:5433/Produccion", "postgres", "091095");
+
+            //Se definen los parametros si es que el reporte necesita
+            Map parameter = new HashMap();
+            parameter.put("admin", admin);
+            parameter.put("codadmin", codadmin);
+            parameter.put("mcpiopaciente", mcpiopaciente);
+            parameter.put("dptopaciente", dptopaciente);
+            parameter.put("dptoempresa", dptoempresa);
+            parameter.put("mcpioempresa", mcpioempresa);
+            parameter.put("dptoremite", dptoprestador);
+            parameter.put("mcpioremite", mcpioprestador);
+            parameter.put("diagppal", diagppal);
+            parameter.put("diagrel1", diagrel1);
+            parameter.put("diagrel2", diagrel2);
+            parameter.put("diagrel3", diagrel3);
+            parameter.put("numinform", numinform);
+            
+            try {
+                File file = new File(ruta);
+
+                HttpServletResponse httpServletResponse = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+
+                httpServletResponse.setContentType("application/pdf");
+                httpServletResponse.addHeader("Content-Type", "application/pdf");
+
+                JasperReport jasperReport = (JasperReport) JRLoader.loadObjectFromFile(file.getPath());
+
+                JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameter, conexion);
+
+                JRExporter jrExporter = null;
+                jrExporter = new JRPdfExporter();
+                jrExporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+                jrExporter.setParameter(JRExporterParameter.OUTPUT_STREAM, httpServletResponse.getOutputStream());
+
+                if (jrExporter != null) {
+                    try {
+                        jrExporter.exportReport();
+                    } catch (JRException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                if (conexion != null) {
+                    try {
+                        conexion.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+
     
     
 }

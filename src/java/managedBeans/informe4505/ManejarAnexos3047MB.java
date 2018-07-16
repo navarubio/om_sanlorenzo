@@ -510,6 +510,34 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         rAnexo.getAnexo1(admin, codadmin, mcpiopaciente, dptopaciente, dptoempresa, mcpioempresa, numinform, ruta);
         FacesContext.getCurrentInstance().responseComplete();
     }
+    
+    public void verAnexo2() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+
+        //Instancia hacia la clase reportes Anexos
+        ReporteAnexos rAnexo = new ReporteAnexos();
+        
+        String admin = nuevoAnexo2.getIdPaciente().getIdAdministradora().getRazonSocial();
+        String codadmin = nuevoAnexo2.getIdPaciente().getIdAdministradora().getCodigoAdministradora();
+        String dptopaciente = nuevoAnexo2.getIdPaciente().getDepartamento().getDescripcion();
+        String mcpiopaciente = nuevoAnexo2.getIdPaciente().getMunicipio().getDescripcion();
+        String dptoempresa = empresa.getCodDepartamento().getDescripcion();
+        String mcpioempresa = empresa.getCodMunicipio().getDescripcion();
+        String dptoremite = nuevoAnexo2.getIddepartamento().getDescripcion();
+        String mcpioremite = nuevoAnexo2.getIdmunicipio().getDescripcion();
+        String numinform = numeroAtencion;
+        String diagppal = nuevoAnexo2.getCei100().getNombreDiagnostico();
+        String diagrel1 = nuevoAnexo2.getCei101().getNombreDiagnostico();
+        String diagrel2 = nuevoAnexo2.getCei102().getNombreDiagnostico();
+        String diagrel3 = nuevoAnexo2.getCei103().getNombreDiagnostico();
+        
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ServletContext servletContext = (ServletContext) facesContext.getExternalContext().getContext();
+        String ruta = servletContext.getRealPath("/anexos3047/reportes/anexotwo.jasper");
+
+        rAnexo.getAnexo2(admin, codadmin, mcpiopaciente, dptopaciente, dptoempresa, mcpioempresa, dptoremite, mcpioremite, diagppal, diagrel1, diagrel2, diagrel3, numinform, ruta);
+        FacesContext.getCurrentInstance().responseComplete();
+    }
+
 
 
 
