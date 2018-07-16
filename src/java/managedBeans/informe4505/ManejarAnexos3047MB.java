@@ -538,7 +538,7 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         FacesContext.getCurrentInstance().responseComplete();
     }
     
-        public void verAnexo5() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public void verAnexo5() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 
         //Instancia hacia la clase reportes Anexos
         ReporteAnexos rAnexo = new ReporteAnexos();
@@ -560,6 +560,30 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         rAnexo.getAnexo5(admin, codadmin, mcpiopaciente, dptopaciente, dptoempresa, mcpioempresa, dptoresponsable, mcpioresponsable, numinform, ruta);
         FacesContext.getCurrentInstance().responseComplete();
     }
+    
+    public void verAnexo6() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+
+        //Instancia hacia la clase reportes Anexos
+        ReporteAnexos rAnexo = new ReporteAnexos();
+        
+        String admin = nuevoAnexo6.getIdPaciente().getIdAdministradora().getRazonSocial();
+        String codadmin = nuevoAnexo6.getIdPaciente().getIdAdministradora().getCodigoAdministradora();
+        String dptopaciente = nuevoAnexo6.getIdPaciente().getDepartamento().getDescripcion();
+        String mcpiopaciente = nuevoAnexo6.getIdPaciente().getMunicipio().getDescripcion();
+        String dptoempresa = empresa.getCodDepartamento().getDescripcion();
+        String mcpioempresa = empresa.getCodMunicipio().getDescripcion();
+        String dptoresponsable = nuevoAnexo6.getIdDepartamento().getDescripcion();
+        String mcpioresponsable = nuevoAnexo6.getIdMunicipio().getDescripcion();
+        String numinform = numeroContrarremision;
+        
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ServletContext servletContext = (ServletContext) facesContext.getExternalContext().getContext();
+        String ruta = servletContext.getRealPath("/anexos3047/reportes/anexosix.jasper");
+
+        rAnexo.getAnexo5(admin, codadmin, mcpiopaciente, dptopaciente, dptoempresa, mcpioempresa, dptoresponsable, mcpioresponsable, numinform, ruta);
+        FacesContext.getCurrentInstance().responseComplete();
+    }
+
 
     public String getPacienteremitido() {
         return pacienteremitido;
