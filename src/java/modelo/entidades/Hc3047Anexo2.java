@@ -57,9 +57,8 @@ public class Hc3047Anexo2 implements Serializable {
     private Date fechadocumento;
     @Column(name = "accidentetransito")
     private Boolean accidentetransito;
-    @Size(max = 12)
     @Column(name = "idclasificaciontriage")
-    private String idclasificaciontriage;
+    private Integer idclasificaciontriage;
     @Column(name = "fechaingreso")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaingreso;
@@ -144,11 +143,11 @@ public class Hc3047Anexo2 implements Serializable {
         this.accidentetransito = accidentetransito;
     }
 
-    public String getIdclasificaciontriage() {
+    public Integer getIdclasificaciontriage() {
         return idclasificaciontriage;
     }
 
-    public void setIdclasificaciontriage(String idclasificaciontriage) {
+    public void setIdclasificaciontriage(Integer idclasificaciontriage) {
         this.idclasificaciontriage = idclasificaciontriage;
     }
 
