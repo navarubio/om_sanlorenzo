@@ -198,6 +198,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     private List<CfgPacientes> listaPacientesFiltro;
     private CfgPacientes pacienteSeleccionadoTabla;
     private CfgPacientes pacienteSeleccionado;
+    public static int codPaciente=0;
     private CfgPacientes pacienteTmp;
     private List<CfgMaestrosTxtPredefinidos> listaMaestrosTxtPredefinidos;
     private List<CfgTxtPredefinidos> listaTxtPredefinidos;
@@ -209,8 +210,6 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
     private CfgDiagnostico diagnosticoBuscado;
     private FacServicio servicioBuscado;
     private List<CfgHistoriaCamposPredefinidos> listaTextos;
-    private CfgPacientes pacienteElegido = new CfgPacientes();
-    private int codigoPaciente=0;
 
     //---------------------------------------------------
     //-----------------VARIABLES ------------------------
@@ -6057,10 +6056,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
 
     public void cambiaTipoRegistroClinico() {//cambia el combo 'tipo de registro clinico'
         modificandoRegCli = false;       
-//        tipoanexoActual= anexos3047Facade.getAnexos3047Nombre(tipoAnexo3047);
-        pacienteElegido=pacienteSeleccionado;
-        codigoPaciente=pacienteSeleccionado.getIdPaciente();
-        
+//        tipoanexoActual= anexos3047Facade.getAnexos3047Nombre(tipoAnexo3047);        
         limpiarFormulario();
         valoresPorDefecto();
         cargarUltimoRegistro();
@@ -8001,6 +7997,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
 
             turnoCita = "";
             pacienteSeleccionado = pacientesFacade.find(pacienteSeleccionadoTabla.getIdPaciente());
+            codPaciente =  pacienteSeleccionado.getIdPaciente();
             listaArchivo = hcArchivosFacade.getHcArchivosByPaciente(pacienteSeleccionado);
             urlPagina = "";
             identificacionPaciente = "";
@@ -11367,24 +11364,7 @@ public class HistoriasMB extends MetodosGenerales implements Serializable {
 
     public void setAnexos3047(HcAnexos3047 anexos3047) {
         this.anexos3047 = anexos3047;
-    }
-
-    public CfgPacientes getPacienteElegido() {
-        return pacienteElegido;
-    }
-
-    public void setPacienteElegido(CfgPacientes pacienteElegido) {
-        this.pacienteElegido = pacienteElegido;
-    }
-
-    public int getCodigoPaciente() {
-        return codigoPaciente;
-    }
-
-    public void setCodigoPaciente(int codigoPaciente) {
-        this.codigoPaciente = codigoPaciente;
-    }
-    
+    }    
     
 }
 
