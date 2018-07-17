@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0e740dac-5d5b-49a4-a38d-2f78e2775af8">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="253"/>
 	<parameter name="numinform" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT
@@ -300,7 +300,8 @@ WHERE
 	</variable>
 	<variable name="dpto" class="java.lang.String"/>
 	<variable name="consulext" class="java.lang.String">
-		<variableExpression><![CDATA[($F{hc_3047_anexo3_idubicacionpaciente}==1 ? "X":"")]]></variableExpression>
+		<variableExpression><![CDATA[($F{hc_3047_anexo3_idubicacionpaciente}==1 ? "X":"")
+]]></variableExpression>
 	</variable>
 	<variable name="urgen" class="java.lang.String">
 		<variableExpression><![CDATA[($F{hc_3047_anexo3_idubicacionpaciente}==2 ? "X":"")]]></variableExpression>
