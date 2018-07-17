@@ -29,6 +29,7 @@ import modelo.entidades.CfgDiagnostico;
 import modelo.entidades.CfgEmpresa;
 import modelo.entidades.CfgPacientes;
 import modelo.entidades.CfgUsuarios;
+import modelo.entidades.FacServicio;
 import modelo.entidades.Hc3047Anexo1;
 import modelo.entidades.Hc3047Anexo2;
 import modelo.entidades.Hc3047Anexo3;
@@ -44,6 +45,7 @@ import modelo.fachadas.CfgDiagnosticoPrincipalFacade;
 import modelo.fachadas.CfgEmpresaFacade;
 import modelo.fachadas.CfgPacientesFacade;
 import modelo.fachadas.CfgUsuariosFacade;
+import modelo.fachadas.FacServicioFacade;
 import modelo.fachadas.Hc3047Anexo1Facade;
 import modelo.fachadas.Hc3047Anexo2Facade;
 import modelo.fachadas.Hc3047Anexo3Facade;
@@ -97,6 +99,8 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     CfgClasificacionesFacade cfgClasificacionesFacade;
     @EJB
     CfgEmpresaFacade cfgEmpresaFacade;
+    @EJB
+    FacServicioFacade facServicioFacade;
 
     private String pacienteremitido = "";
     private int tipomovimiento = 0;
@@ -104,6 +108,8 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     private boolean prestadorremitente = false;
     private List<SelectItem> listaMunicipios;
     private List<CfgClasificaciones> listaEspecialidades;
+    private List<FacServicio> listaCUPS;
+    private List<Hc3047Anexo31> listarequerimiento = new ArrayList();
     private String departamento = "";
     private String municipio = "";
     private String tiposerviciosolicita = "";
@@ -133,6 +139,7 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     private Hc3047Anexo41 nuevoAnexo41 = new Hc3047Anexo41();
     private Hc3047Anexo5 nuevoAnexo5 = new Hc3047Anexo5();
     private Hc3047Anexo6 nuevoAnexo6 = new Hc3047Anexo6();
+    private FacServicio facServ;
     private CfgEmpresa empresa;
     
     private HcAnexos3047 tipoanexoActual = new HcAnexos3047();
@@ -167,7 +174,7 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         listaTipoidentificacion = clasificacionesFacade.buscarPorMaestro("TipoIdentificacion");
         listaUsuarios = cfgUsuariosFacade.buscarOrdenado();
         listaEspecialidades=cfgClasificacionesFacade.buscarPorMaestro("Especialidad");
-
+        listaCUPS = facServicioFacade.findAll();
         nuevoAnexo1.setFechadocumento(fechaReg);
         nuevoAnexo2.setFechadocumento(fechaReg);
         nuevoAnexo2.setFechaingreso(fechaReg);
@@ -175,6 +182,7 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         nuevoAnexo4.setFechadocumento(fechaReg);
         nuevoAnexo5.setFechadocumento(fechaReg);
         nuevoAnexo6.setFechadocumento(fechaReg);
+        
         pacienteseleccionado= cfgPacientesFacade.find(HistoriasMB.codPaciente);
         empresa = cfgEmpresaFacade.findAll().get(0);
     }
@@ -538,6 +546,53 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         FacesContext.getCurrentInstance().responseComplete();
     }
     
+    public void verAnexo3() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+
+        //Instancia hacia la clase reportes Anexos
+        ReporteAnexos rAnexo = new ReporteAnexos();
+        
+        String admin = nuevoAnexo3.getIdPaciente().getIdAdministradora().getRazonSocial();
+        String codadmin = nuevoAnexo3.getIdPaciente().getIdAdministradora().getCodigoAdministradora();
+        String dptopaciente = nuevoAnexo3.getIdPaciente().getDepartamento().getDescripcion();
+        String mcpiopaciente = nuevoAnexo3.getIdPaciente().getMunicipio().getDescripcion();
+        String dptoempresa = empresa.getCodDepartamento().getDescripcion();
+        String mcpioempresa = empresa.getCodMunicipio().getDescripcion();
+        String numinform = numeroSolicitud;
+        String diagppal = nuevoAnexo3.getCei100().getNombreDiagnostico();
+        String diagrel1 = nuevoAnexo3.getCei101().getNombreDiagnostico();
+        String diagrel2 = nuevoAnexo3.getCei102().getNombreDiagnostico();
+        String services = nuevoAnexo3.getIdservicio().getDescripcion();
+        
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ServletContext servletContext = (ServletContext) facesContext.getExternalContext().getContext();
+        String ruta = servletContext.getRealPath("/anexos3047/reportes/anexotree.jasper");
+
+        rAnexo.getAnexo3(admin, codadmin, mcpiopaciente, dptopaciente, dptoempresa, mcpioempresa, diagppal, diagrel1, diagrel2, services, numinform, ruta);
+        FacesContext.getCurrentInstance().responseComplete();
+    }
+    
+    public void verAnexo4() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+
+        //Instancia hacia la clase reportes Anexos
+        ReporteAnexos rAnexo = new ReporteAnexos();
+        
+        String admin = nuevoAnexo4.getIdPaciente().getIdAdministradora().getRazonSocial();
+        String codadmin = nuevoAnexo4.getIdPaciente().getIdAdministradora().getCodigoAdministradora();
+        String dptopaciente = nuevoAnexo4.getIdPaciente().getDepartamento().getDescripcion();
+        String mcpiopaciente = nuevoAnexo4.getIdPaciente().getMunicipio().getDescripcion();
+        String dptoempresa = empresa.getCodDepartamento().getDescripcion();
+        String mcpioempresa = empresa.getCodMunicipio().getDescripcion();
+        String numinform = numeroAutorizacion;
+        String services = nuevoAnexo4.getIdservicio().getDescripcion();
+        
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ServletContext servletContext = (ServletContext) facesContext.getExternalContext().getContext();
+        String ruta = servletContext.getRealPath("/anexos3047/reportes/anexofour.jasper");
+
+        rAnexo.getAnexo4(admin, codadmin, mcpiopaciente, dptopaciente, dptoempresa, mcpioempresa, services, numinform, ruta);
+        FacesContext.getCurrentInstance().responseComplete();
+    }
+    
     public void verAnexo5() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 
         //Instancia hacia la clase reportes Anexos
@@ -583,8 +638,7 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         rAnexo.getAnexo5(admin, codadmin, mcpiopaciente, dptopaciente, dptoempresa, mcpioempresa, dptoresponsable, mcpioresponsable, numinform, ruta);
         FacesContext.getCurrentInstance().responseComplete();
     }
-
-
+    
     public String getPacienteremitido() {
         return pacienteremitido;
     }
@@ -880,4 +934,33 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     public void setNuevoAnexo6(Hc3047Anexo6 nuevoAnexo6) {
         this.nuevoAnexo6 = nuevoAnexo6;
     }
+
+    public List<FacServicio> getListaCUPS() {
+        return listaCUPS;
+    }
+
+    public void setListaCUPS(List<FacServicio> listaCUPS) {
+        this.listaCUPS = listaCUPS;
+    }
+
+    public List<Hc3047Anexo31> getListarequerimiento() {
+        return listarequerimiento;
+    }
+
+    public void setListarequerimiento(List<Hc3047Anexo31> listarequerimiento) {
+        this.listarequerimiento = listarequerimiento;
+    }
+
+    public FacServicio getFacServ() {
+        return facServ;
+    }
+
+    public void setFacServ(FacServicio facServ) {
+        this.facServ = facServ;
+    }
+
+
+    
+    
+    
 }

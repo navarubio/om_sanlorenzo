@@ -559,6 +559,8 @@
                                          rendered="#{loginMB.superUsuario}" update="@form"/>
                         <p:commandButton icon="ui-icon-document" value="Limpiar Formulario" 
                                          actionListener="#{historiasMB.btnLimpiarFormulario}" update="@form"/>
+                        <p:commandButton id="printButtom"  type="submit" icon="ui-icon-print"   value="Imprimir Anexo4" actionListener="#{manejarAnexos3047MB.verAnexo4()}" ajax="false" onclick="form.target = '_blank'"/>
+                       
                     </td>
                 </tr>
             </table>
