@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0e740dac-5d5b-49a4-a38d-2f78e2775af8">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="1008" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0e740dac-5d5b-49a4-a38d-2f78e2775af8">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="113"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="numinform" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT
@@ -21,18 +21,6 @@
      cfg_pacientes."celular" AS cfg_pacientes_celular,
      cfg_pacientes."departamento" AS cfg_pacientes_departamento,
      cfg_pacientes."municipio" AS cfg_pacientes_municipio,
-     hc_3047_anexo1."numeroinforme" AS hc_3047_anexo1_numeroinforme,
-     hc_3047_anexo1."fechadocumento" AS hc_3047_anexo1_fechadocumento,
-     hc_3047_anexo1."tipoinconsistencia" AS hc_3047_anexo1_tipoinconsistencia,
-     hc_3047_anexo1."tipocobertura" AS hc_3047_anexo1_tipocobertura,
-     hc_3047_anexo1."primerapellido" AS hc_3047_anexo1_primerapellido,
-     hc_3047_anexo1."segundoapellido" AS hc_3047_anexo1_segundoapellido,
-     hc_3047_anexo1."primernombre" AS hc_3047_anexo1_primernombre,
-     hc_3047_anexo1."segundonombre" AS hc_3047_anexo1_segundonombre,
-     hc_3047_anexo1."numeroidentificacion" AS hc_3047_anexo1_numeroidentificacion,
-     hc_3047_anexo1."tipo_identificacion" AS hc_3047_anexo1_tipo_identificacion,
-     hc_3047_anexo1."fechanacimiento" AS hc_3047_anexo1_fechanacimiento,
-     hc_3047_anexo1."observaciones" AS hc_3047_anexo1_observaciones,
      cfg_usuarios."identificacion" AS cfg_usuarios_identificacion,
      cfg_usuarios."primer_nombre" AS cfg_usuarios_primer_nombre,
      cfg_usuarios."segundo_nombre" AS cfg_usuarios_segundo_nombre,
@@ -43,13 +31,58 @@
      cfg_usuarios."celular" AS cfg_usuarios_celular,
      cfg_usuarios."telefono_oficina" AS cfg_usuarios_telefono_oficina,
      cfg_usuarios."cargo_actual" AS cfg_usuarios_cargo_actual,
-     cfg_empresa."direccion" AS cfg_empresa_direccion
+     cfg_empresa."direccion" AS cfg_empresa_direccion,
+     hc_3047_anexo4."id_3047anexo4" AS hc_3047_anexo4_id_3047anexo4,
+     hc_3047_anexo4."id_paciente" AS hc_3047_anexo4_id_paciente,
+     hc_3047_anexo4."numeroautorizacion" AS hc_3047_anexo4_numeroautorizacion,
+     hc_3047_anexo4."fechadocumento" AS hc_3047_anexo4_fechadocumento,
+     hc_3047_anexo4."idubicacionpaciente" AS hc_3047_anexo4_idubicacionpaciente,
+     hc_3047_anexo4."idservicio" AS hc_3047_anexo4_idservicio,
+     hc_3047_anexo4."idcama" AS hc_3047_anexo4_idcama,
+     hc_3047_anexo4."manejoguia" AS hc_3047_anexo4_manejoguia,
+     hc_3047_anexo4."numerosolicitudorigen" AS hc_3047_anexo4_numerosolicitudorigen,
+     hc_3047_anexo4."fechasolicitudorigen" AS hc_3047_anexo4_fechasolicitudorigen,
+     hc_3047_anexo4."porcentajegeneralasumido" AS hc_3047_anexo4_porcentajegeneralasumido,
+     hc_3047_anexo4."reclamotiquete" AS hc_3047_anexo4_reclamotiquete,
+     hc_3047_anexo4."valorcuotam" AS hc_3047_anexo4_valorcuotam,
+     hc_3047_anexo4."porcentajecuotam" AS hc_3047_anexo4_porcentajecuotam,
+     hc_3047_anexo4."valormaxcuotam" AS hc_3047_anexo4_valormaxcuotam,
+     hc_3047_anexo4."valorcopago" AS hc_3047_anexo4_valorcopago,
+     hc_3047_anexo4."porcentajecopago" AS hc_3047_anexo4_porcentajecopago,
+     hc_3047_anexo4."valormaxcopago" AS hc_3047_anexo4_valormaxcopago,
+     hc_3047_anexo4."valorcuotar" AS hc_3047_anexo4_valorcuotar,
+     hc_3047_anexo4."porcentajecuotar" AS hc_3047_anexo4_porcentajecuotar,
+     hc_3047_anexo4."valormaxcuotar" AS hc_3047_anexo4_valormaxcuotar,
+     hc_3047_anexo4."valorotro" AS hc_3047_anexo4_valorotro,
+     hc_3047_anexo4."porcentajeotro" AS hc_3047_anexo4_porcentajeotro,
+     hc_3047_anexo4."valormaxotro" AS hc_3047_anexo4_valormaxotro,
+     hc_3047_anexo4."nombreautoriza" AS hc_3047_anexo4_nombreautoriza,
+     hc_3047_anexo4."cargoautoriza" AS hc_3047_anexo4_cargoautoriza,
+     hc_3047_anexo4."indicativotelefono" AS hc_3047_anexo4_indicativotelefono,
+     hc_3047_anexo4."numerotelefono" AS hc_3047_anexo4_numerotelefono,
+     hc_3047_anexo4."extensiontelefono" AS hc_3047_anexo4_extensiontelefono,
+     hc_3047_anexo4."indicativocelular" AS hc_3047_anexo4_indicativocelular,
+     hc_3047_anexo4."numerocelular" AS hc_3047_anexo4_numerocelular,
+     hc_3047_anexo4."extensioncelular" AS hc_3047_anexo4_extensioncelular,
+     hc_3047_anexo4."id_usuario" AS hc_3047_anexo4_id_usuario,
+     cfg_pacientes."id_administradora" AS cfg_pacientes_id_administradora,
+     cfg_usuarios."email" AS cfg_usuarios_email,
+     cfg_usuarios."registro_profesional" AS cfg_usuarios_registro_profesional,
+     cfg_usuarios."especialidad" AS cfg_usuarios_especialidad,
+     cfg_empresa."cod_departamento" AS cfg_empresa_cod_departamento,
+     cfg_empresa."cod_municipio" AS cfg_empresa_cod_municipio,
+     cfg_empresa."num_identificacion" AS cfg_empresa_num_identificacion,
+     cfg_empresa."dv" AS cfg_empresa_dv,
+     cfg_empresa."razon_social" AS cfg_empresa_razon_social,
+     cfg_empresa."telefono_1" AS cfg_empresa_telefono_1,
+     cfg_empresa."telefono_2" AS cfg_empresa_telefono_2,
+     cfg_empresa."codigo_empresa" AS cfg_empresa_codigo_empresa
 FROM
-     "cfg_pacientes" cfg_pacientes INNER JOIN "hc_3047_anexo1" hc_3047_anexo1 ON cfg_pacientes."id_paciente" = hc_3047_anexo1."id_paciente"
-     INNER JOIN "cfg_usuarios" cfg_usuarios ON hc_3047_anexo1."id_usuario" = cfg_usuarios."id_usuario",
+     "cfg_pacientes" cfg_pacientes INNER JOIN "public"."hc_3047_anexo4" hc_3047_anexo4 ON cfg_pacientes."id_paciente" = hc_3047_anexo4."id_paciente"
+     INNER JOIN "cfg_usuarios" cfg_usuarios ON hc_3047_anexo4."id_usuario" = cfg_usuarios."id_usuario",
      "cfg_empresa" cfg_empresa
 WHERE
-     hc_3047_anexo1."numeroinforme" = $P{numinform}]]>
+     hc_3047_anexo4."numeroautorizacion" = $P{numinform}]]>
 	</queryString>
 	<field name="id_paciente" class="java.lang.Integer"/>
 	<field name="identificacion" class="java.lang.String"/>
@@ -132,17 +165,37 @@ WHERE
 	</field>
 	<field name="id_contrato" class="java.lang.Integer"/>
 	<field name="parentesco_a" class="java.lang.Integer"/>
-	<field name="id_3047anexo1" class="java.lang.Integer"/>
-	<field name="numeroinforme" class="java.lang.String"/>
+	<field name="id_3047anexo4" class="java.lang.Integer"/>
+	<field name="numeroautorizacion" class="java.lang.String"/>
 	<field name="fechadocumento" class="java.sql.Timestamp"/>
-	<field name="tipoinconsistencia" class="java.lang.Integer"/>
-	<field name="tipocobertura" class="java.lang.Integer"/>
-	<field name="primerapellido" class="java.lang.String"/>
-	<field name="segundoapellido" class="java.lang.String"/>
-	<field name="primernombre" class="java.lang.String"/>
-	<field name="segundonombre" class="java.lang.String"/>
-	<field name="numeroidentificacion" class="java.lang.String"/>
-	<field name="fechanacimiento" class="java.sql.Date"/>
+	<field name="idubicacionpaciente" class="java.lang.Integer"/>
+	<field name="idservicio" class="java.lang.Integer"/>
+	<field name="idcama" class="java.lang.String"/>
+	<field name="manejoguia" class="java.lang.String"/>
+	<field name="numerosolicitudorigen" class="java.lang.String"/>
+	<field name="fechasolicitudorigen" class="java.sql.Timestamp"/>
+	<field name="porcentajegeneralasumido" class="java.lang.Double"/>
+	<field name="reclamotiquete" class="java.lang.Boolean"/>
+	<field name="valorcuotam" class="java.lang.Double"/>
+	<field name="porcentajecuotam" class="java.lang.Double"/>
+	<field name="valormaxcuotam" class="java.lang.Double"/>
+	<field name="valorcopago" class="java.lang.Double"/>
+	<field name="porcentajecopago" class="java.lang.Double"/>
+	<field name="valormaxcopago" class="java.lang.Double"/>
+	<field name="valorcuotar" class="java.lang.Double"/>
+	<field name="porcentajecuotar" class="java.lang.Double"/>
+	<field name="valormaxcuotar" class="java.lang.Double"/>
+	<field name="valorotro" class="java.lang.Double"/>
+	<field name="porcentajeotro" class="java.lang.Double"/>
+	<field name="valormaxotro" class="java.lang.Double"/>
+	<field name="nombreautoriza" class="java.lang.String"/>
+	<field name="cargoautoriza" class="java.lang.String"/>
+	<field name="indicativotelefono" class="java.lang.String"/>
+	<field name="numerotelefono" class="java.lang.String"/>
+	<field name="extensiontelefono" class="java.lang.String"/>
+	<field name="indicativocelular" class="java.lang.String"/>
+	<field name="numerocelular" class="java.lang.String"/>
+	<field name="extensioncelular" class="java.lang.String"/>
 	<field name="id_usuario" class="java.lang.Integer"/>
 	<field name="tipo_usuario" class="java.lang.Integer">
 		<fieldDescription><![CDATA[clasificacion TipoUsuario: 1 usuario, 2 prestador]]></fieldDescription>
@@ -162,7 +215,7 @@ WHERE
 	<field name="fecha_creacion" class="java.sql.Timestamp"/>
 	<field name="visible" class="java.lang.Boolean"/>
 	<field name="personal_atiende" class="java.lang.Integer">
-		<fieldDescription><![CDATA[sii el usuario es prestador debe permitir especificar el tipo de personal que atiende (por defecto va ser 1):
+		<fieldDescription><![CDATA[ sii el usuario es prestador debe permitir especificar el tipo de personal que atiende (por defecto va ser 1):
 1=Médico(a) especialista,
 2 =Médico(a) general
 3 =Enfermera (o)
@@ -184,11 +237,13 @@ WHERE
 		<fieldDescription><![CDATA[NOMBRE DE LA EMPRESA QUE COMPRA EL SOFTWARE]]></fieldDescription>
 	</field>
 	<field name="tipo_doc_rep_legal" class="java.lang.Integer">
-		<fieldDescription><![CDATA[TIPO DE DOCUMENTO DEL REPRESENTANTE LEGALPARA ESTE CASO SERIA CC, CE, PASAPORTE.]]></fieldDescription>
+		<fieldDescription><![CDATA[TIPO DE DOCUMENTO DEL REPRESENTANTE LEGALPARA ESTE CASO SERIA CC, CE, PASAPORTE.
+]]></fieldDescription>
 	</field>
 	<field name="num_doc_rep_legal" class="java.lang.String"/>
 	<field name="nom_rep_legal" class="java.lang.String">
-		<fieldDescription><![CDATA[NOMBRE DEL REPRESENTANTE LEGAL DE LA EMPRESA]]></fieldDescription>
+		<fieldDescription><![CDATA[NOMBRE DEL REPRESENTANTE LEGAL DE LA EMPRESA
+]]></fieldDescription>
 	</field>
 	<field name="telefono_1" class="java.lang.String"/>
 	<field name="telefono_2" class="java.lang.String"/>
@@ -218,18 +273,6 @@ WHERE
 	<field name="cfg_pacientes_celular" class="java.lang.String"/>
 	<field name="cfg_pacientes_departamento" class="java.lang.Integer"/>
 	<field name="cfg_pacientes_municipio" class="java.lang.Integer"/>
-	<field name="hc_3047_anexo1_numeroinforme" class="java.lang.String"/>
-	<field name="hc_3047_anexo1_fechadocumento" class="java.sql.Timestamp"/>
-	<field name="hc_3047_anexo1_tipoinconsistencia" class="java.lang.Integer"/>
-	<field name="hc_3047_anexo1_tipocobertura" class="java.lang.Integer"/>
-	<field name="hc_3047_anexo1_primerapellido" class="java.lang.String"/>
-	<field name="hc_3047_anexo1_segundoapellido" class="java.lang.String"/>
-	<field name="hc_3047_anexo1_primernombre" class="java.lang.String"/>
-	<field name="hc_3047_anexo1_segundonombre" class="java.lang.String"/>
-	<field name="hc_3047_anexo1_numeroidentificacion" class="java.lang.String"/>
-	<field name="hc_3047_anexo1_tipo_identificacion" class="java.lang.Integer"/>
-	<field name="hc_3047_anexo1_fechanacimiento" class="java.sql.Date"/>
-	<field name="hc_3047_anexo1_observaciones" class="java.lang.String"/>
 	<field name="cfg_usuarios_identificacion" class="java.lang.String"/>
 	<field name="cfg_usuarios_primer_nombre" class="java.lang.String"/>
 	<field name="cfg_usuarios_segundo_nombre" class="java.lang.String"/>
@@ -241,32 +284,77 @@ WHERE
 	<field name="cfg_usuarios_telefono_oficina" class="java.lang.String"/>
 	<field name="cfg_usuarios_cargo_actual" class="java.lang.String"/>
 	<field name="cfg_empresa_direccion" class="java.lang.String"/>
+	<field name="hc_3047_anexo4_id_3047anexo4" class="java.lang.Integer"/>
+	<field name="hc_3047_anexo4_id_paciente" class="java.lang.Integer"/>
+	<field name="hc_3047_anexo4_numeroautorizacion" class="java.lang.String"/>
+	<field name="hc_3047_anexo4_fechadocumento" class="java.sql.Timestamp"/>
+	<field name="hc_3047_anexo4_idubicacionpaciente" class="java.lang.Integer"/>
+	<field name="hc_3047_anexo4_idservicio" class="java.lang.Integer"/>
+	<field name="hc_3047_anexo4_idcama" class="java.lang.String"/>
+	<field name="hc_3047_anexo4_manejoguia" class="java.lang.String"/>
+	<field name="hc_3047_anexo4_numerosolicitudorigen" class="java.lang.String"/>
+	<field name="hc_3047_anexo4_fechasolicitudorigen" class="java.sql.Timestamp"/>
+	<field name="hc_3047_anexo4_porcentajegeneralasumido" class="java.lang.Double"/>
+	<field name="hc_3047_anexo4_reclamotiquete" class="java.lang.Boolean"/>
+	<field name="hc_3047_anexo4_valorcuotam" class="java.lang.Double"/>
+	<field name="hc_3047_anexo4_porcentajecuotam" class="java.lang.Double"/>
+	<field name="hc_3047_anexo4_valormaxcuotam" class="java.lang.Double"/>
+	<field name="hc_3047_anexo4_valorcopago" class="java.lang.Double"/>
+	<field name="hc_3047_anexo4_porcentajecopago" class="java.lang.Double"/>
+	<field name="hc_3047_anexo4_valormaxcopago" class="java.lang.Double"/>
+	<field name="hc_3047_anexo4_valorcuotar" class="java.lang.Double"/>
+	<field name="hc_3047_anexo4_porcentajecuotar" class="java.lang.Double"/>
+	<field name="hc_3047_anexo4_valormaxcuotar" class="java.lang.Double"/>
+	<field name="hc_3047_anexo4_valorotro" class="java.lang.Double"/>
+	<field name="hc_3047_anexo4_porcentajeotro" class="java.lang.Double"/>
+	<field name="hc_3047_anexo4_valormaxotro" class="java.lang.Double"/>
+	<field name="hc_3047_anexo4_nombreautoriza" class="java.lang.String"/>
+	<field name="hc_3047_anexo4_cargoautoriza" class="java.lang.String"/>
+	<field name="hc_3047_anexo4_indicativotelefono" class="java.lang.String"/>
+	<field name="hc_3047_anexo4_numerotelefono" class="java.lang.String"/>
+	<field name="hc_3047_anexo4_extensiontelefono" class="java.lang.String"/>
+	<field name="hc_3047_anexo4_indicativocelular" class="java.lang.String"/>
+	<field name="hc_3047_anexo4_numerocelular" class="java.lang.String"/>
+	<field name="hc_3047_anexo4_extensioncelular" class="java.lang.String"/>
+	<field name="hc_3047_anexo4_id_usuario" class="java.lang.Integer"/>
+	<field name="cfg_pacientes_id_administradora" class="java.lang.Integer"/>
+	<field name="cfg_usuarios_email" class="java.lang.String"/>
+	<field name="cfg_usuarios_registro_profesional" class="java.lang.String"/>
+	<field name="cfg_usuarios_especialidad" class="java.lang.Integer"/>
+	<field name="cfg_empresa_cod_departamento" class="java.lang.Integer"/>
+	<field name="cfg_empresa_cod_municipio" class="java.lang.Integer"/>
+	<field name="cfg_empresa_num_identificacion" class="java.lang.String"/>
+	<field name="cfg_empresa_dv" class="java.lang.String"/>
+	<field name="cfg_empresa_razon_social" class="java.lang.String"/>
+	<field name="cfg_empresa_telefono_1" class="java.lang.String"/>
+	<field name="cfg_empresa_telefono_2" class="java.lang.String"/>
+	<field name="cfg_empresa_codigo_empresa" class="java.lang.String"/>
 	<variable name="papellido" class="java.lang.String">
-		<variableExpression><![CDATA[($F{primerapellido}== null ? "":"X")]]></variableExpression>
+		<variableExpression><![CDATA[]]></variableExpression>
 	</variable>
 	<variable name="sapellido" class="java.lang.String">
-		<variableExpression><![CDATA[($F{segundoapellido}== null ? "":"X")]]></variableExpression>
+		<variableExpression><![CDATA[]]></variableExpression>
 	</variable>
 	<variable name="pnombre" class="java.lang.String">
-		<variableExpression><![CDATA[($F{primernombre}== null ? "":"X")]]></variableExpression>
+		<variableExpression><![CDATA[]]></variableExpression>
 	</variable>
 	<variable name="snombre" class="java.lang.String">
-		<variableExpression><![CDATA[($F{segundonombre}== null ? "":"X")]]></variableExpression>
+		<variableExpression><![CDATA[]]></variableExpression>
 	</variable>
 	<variable name="tdocumento" class="java.lang.String">
-		<variableExpression><![CDATA[($F{hc_3047_anexo1_tipo_identificacion}== null ? "":"X")]]></variableExpression>
+		<variableExpression><![CDATA[]]></variableExpression>
 	</variable>
 	<variable name="ndocumento" class="java.lang.String">
-		<variableExpression><![CDATA[($F{numeroidentificacion}== null?"":"X")]]></variableExpression>
+		<variableExpression><![CDATA[]]></variableExpression>
 	</variable>
 	<variable name="fnacimiento" class="java.lang.String">
-		<variableExpression><![CDATA[($F{hc_3047_anexo1_fechanacimiento}== null ? "":"X")]]></variableExpression>
+		<variableExpression><![CDATA[]]></variableExpression>
 	</variable>
 	<variable name="pnoesxiste" class="java.lang.String">
-		<variableExpression><![CDATA[($F{hc_3047_anexo1_tipoinconsistencia}==1980 ? "":"X")]]></variableExpression>
+		<variableExpression><![CDATA[]]></variableExpression>
 	</variable>
 	<variable name="datincorrect" class="java.lang.String">
-		<variableExpression><![CDATA[($F{hc_3047_anexo1_tipoinconsistencia}==1981 ? "":"X")]]></variableExpression>
+		<variableExpression><![CDATA[]]></variableExpression>
 	</variable>
 	<variable name="rc" class="java.lang.String">
 		<variableExpression><![CDATA[($F{cfg_pacientes_tipo_identificacion}==1767 ? "X":"")]]></variableExpression>
@@ -294,7 +382,7 @@ WHERE
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="87" splitType="Stretch">
+		<band height="86" splitType="Stretch">
 			<frame>
 				<reportElement positionType="Float" x="0" y="0" width="572" height="60" uuid="44f894c4-7d22-4395-a148-a7ec1c9a4477"/>
 				<staticText>
@@ -371,7 +459,7 @@ WHERE
 					<textElement>
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{fechadocumento}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{hc_3047_anexo4_fechadocumento}]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="261" y="30" width="51" height="12" uuid="740a746f-4f6c-4a1c-993b-4afa878048e6"/>
@@ -380,9 +468,16 @@ WHERE
 					</textElement>
 					<textFieldExpression><![CDATA[$P{numinform}]]></textFieldExpression>
 				</textField>
+				<textField pattern="HH.mm.ss">
+					<reportElement x="463" y="30" width="51" height="12" uuid="ed65d726-860f-4f67-9fd4-ac038097c519"/>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{hc_3047_anexo4_fechadocumento}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<frame>
-				<reportElement positionType="Float" x="2" y="74" width="403" height="12" backcolor="#E6E6E6" uuid="ed164e1c-8a88-4e81-b818-5c9ad48b4943"/>
+				<reportElement positionType="Float" x="2" y="72" width="403" height="14" backcolor="#E6E6E6" uuid="ed164e1c-8a88-4e81-b818-5c9ad48b4943"/>
 				<box>
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -390,17 +485,9 @@ WHERE
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<staticText>
-					<reportElement x="4" y="0" width="259" height="12" uuid="2a33eeba-9efb-47bd-b182-60f2c19e5887"/>
-					<textElement>
-						<font size="9" isBold="true"/>
-						<paragraph leftIndent="5"/>
-					</textElement>
-					<text><![CDATA[ENTIDAD RESPONSABLE DEL PAGO]]></text>
-				</staticText>
 			</frame>
 			<frame>
-				<reportElement positionType="Float" x="404" y="74" width="169" height="12" backcolor="#E6E6E6" uuid="f8505c97-6597-4f1e-85e4-1b1309b7c7da"/>
+				<reportElement positionType="Float" x="404" y="72" width="169" height="14" backcolor="#E6E6E6" uuid="f8505c97-6597-4f1e-85e4-1b1309b7c7da"/>
 				<box>
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -417,6 +504,14 @@ WHERE
 					<text><![CDATA[CODIGO]]></text>
 				</staticText>
 			</frame>
+			<staticText>
+				<reportElement x="3" y="72" width="259" height="12" uuid="2a33eeba-9efb-47bd-b182-60f2c19e5887"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[ENTIDAD RESPONSABLE DEL PAGO]]></text>
+			</staticText>
 		</band>
 	</title>
 	<pageHeader>
@@ -426,7 +521,7 @@ WHERE
 		<band splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="737" splitType="Stretch">
+		<band height="728" splitType="Stretch">
 			<frame>
 				<reportElement positionType="Float" x="346" y="693" width="227" height="12" backcolor="#E6E6E6" uuid="3ceeb4be-06cf-4343-8951-31cde597871b"/>
 				<box>
@@ -614,6 +709,97 @@ WHERE
 						<rightPen lineWidth="0.5"/>
 					</box>
 				</frame>
+				<textField>
+					<reportElement x="420" y="0" width="46" height="12" uuid="240e26c9-68df-4f92-b20b-77121b6ffeac"/>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{hc_3047_anexo4_porcentajegeneralasumido}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="188" y="39" width="74" height="12" uuid="91dff2c0-6cd4-4a5d-a7ac-c595724992b4"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{hc_3047_anexo4_valorcuotam}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="189" y="50" width="74" height="12" uuid="968ba13f-c76d-4722-a168-475df86361c9"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{hc_3047_anexo4_valorcopago}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="188" y="62" width="74" height="12" uuid="6cffed2d-37e0-403a-a272-25acd9ae2be0"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{hc_3047_anexo4_valorcuotar}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="188" y="74" width="74" height="12" uuid="29530712-e0e1-4902-8d0c-be98eb769547"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{hc_3047_anexo4_valorotro}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="296" y="39" width="49" height="12" uuid="222f3fc0-4b4a-4529-afea-a2b3c112db1f"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{hc_3047_anexo4_porcentajecuotam}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="295" y="50" width="49" height="12" uuid="0ba9d7e6-c816-4b46-9933-73190fd67bf0"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{hc_3047_anexo4_porcentajecopago}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="296" y="63" width="49" height="12" uuid="20e4f02f-d68b-44d6-bd73-be81122df1dc"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{hc_3047_anexo4_porcentajecuotar}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="296" y="74" width="49" height="12" uuid="b91f4802-f883-49d1-a3bf-7d46fcc2e7ab"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{hc_3047_anexo4_porcentajeotro}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="400" y="41" width="74" height="12" uuid="337d8110-c66e-4212-bb9c-b523105ada1a"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{hc_3047_anexo4_valormaxcuotam}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="400" y="51" width="74" height="12" uuid="9fea8cff-f267-4432-9876-7fb9ad161ace"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{hc_3047_anexo4_valormaxcopago}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="400" y="62" width="74" height="12" uuid="36b4fb08-cb41-4450-b445-32c4ea0af049"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{hc_3047_anexo4_valormaxcuotar}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="399" y="74" width="74" height="12" uuid="95eafc70-230c-41ba-bf03-d2bd918d0dd2"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{hc_3047_anexo4_valormaxotro}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<frame>
 				<reportElement positionType="Float" x="1" y="88" width="572" height="94" backcolor="#E6E6E6" uuid="e8c5ec02-6c01-4941-91e2-6ffab5fdfe7e"/>
@@ -647,7 +833,7 @@ WHERE
 					<textElement>
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{razon_social}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{cfg_empresa_razon_social}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<staticText>
@@ -672,14 +858,14 @@ WHERE
 					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{num_identificacion}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{cfg_empresa_num_identificacion}]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="121" y="1" width="47" height="11" uuid="c6fbe390-8332-4cb8-ba17-81892da3e8c5"/>
 					<textElement>
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{dv}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{cfg_empresa_dv}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -776,7 +962,7 @@ WHERE
 					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{cod_empresa}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{cfg_empresa_codigo_empresa}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -918,7 +1104,7 @@ WHERE
 					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{cod_departamento}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{cfg_empresa_cod_departamento}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -961,7 +1147,7 @@ WHERE
 					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{cod_municipio}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{cfg_empresa_cod_municipio}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -996,7 +1182,7 @@ WHERE
 					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{primer_apellido}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{cfg_pacientes_primer_nombre}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -1013,7 +1199,7 @@ WHERE
 					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{segundo_apellido}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{cfg_pacientes_segundo_apellido}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -1030,7 +1216,7 @@ WHERE
 					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{primer_nombre}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{cfg_pacientes_primer_nombre}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -1047,7 +1233,7 @@ WHERE
 					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{segundo_nombre}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{cfg_pacientes_segundo_nombre}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<staticText>
@@ -1287,7 +1473,7 @@ WHERE
 					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{identificacion}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{cfg_pacientes_identificacion}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<staticText>
@@ -1307,12 +1493,12 @@ WHERE
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textField>
+				<textField pattern="yyyy/MM/dd">
 					<reportElement x="3" y="0" width="87" height="12" uuid="c0e4ff7d-1b9e-4b2c-89c1-5ea7978640a9"/>
 					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{fecha_nacimiento}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{cfg_pacientes_fecha_nacimiento}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -1337,7 +1523,7 @@ WHERE
 					<textElement>
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{direccion}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{cfg_pacientes_direccion}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<staticText>
@@ -1380,7 +1566,7 @@ WHERE
 					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{municipio}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{cfg_pacientes_municipio}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -1397,7 +1583,7 @@ WHERE
 					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{departamento}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{cfg_pacientes_departamento}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -1522,7 +1708,7 @@ WHERE
 					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{telefono_residencia}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{cfg_pacientes_telefono_residencia}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -1715,6 +1901,13 @@ WHERE
 						<bottomPen lineWidth="0.5"/>
 						<rightPen lineWidth="0.5"/>
 					</box>
+					<textField pattern="HH.mm.ss">
+						<reportElement x="0" y="0" width="48" height="16" uuid="4c3c2a95-7c9b-4022-bc8b-27adf774f54b"/>
+						<textElement textAlignment="Center">
+							<font size="8"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{hc_3047_anexo4_fechasolicitudorigen}]]></textFieldExpression>
+					</textField>
 				</frame>
 				<staticText>
 					<reportElement x="367" y="0" width="47" height="15" uuid="f577f85e-8881-4ae2-8599-bfb3f4ebcfb3"/>
@@ -1730,13 +1923,6 @@ WHERE
 					</textElement>
 					<text><![CDATA[HORA]]></text>
 				</staticText>
-				<textField pattern="yyyy/MM/dd">
-					<reportElement x="423" y="3" width="45" height="12" uuid="be0d93ef-c7f5-4230-ab4d-198d9804d920"/>
-					<textElement textAlignment="Center">
-						<font size="8"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{fechadocumento}]]></textFieldExpression>
-				</textField>
 				<frame>
 					<reportElement positionType="Float" x="416" y="0" width="55" height="16" backcolor="#E6E6E6" uuid="d38cfce2-bf76-4c62-87ef-2203515f2e47"/>
 					<box>
@@ -1747,6 +1933,13 @@ WHERE
 						<rightPen lineWidth="0.5"/>
 					</box>
 				</frame>
+				<textField pattern="yyyy/MM/dd">
+					<reportElement x="420" y="0" width="48" height="16" uuid="be0d93ef-c7f5-4230-ab4d-198d9804d920"/>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{hc_3047_anexo4_fechasolicitudorigen}]]></textFieldExpression>
+				</textField>
 				<frame>
 					<reportElement positionType="Float" x="188" y="0" width="172" height="15" backcolor="#E6E6E6" uuid="037ca05e-437b-4aeb-8802-630e82a31c85"/>
 					<box>
@@ -1756,6 +1949,13 @@ WHERE
 						<bottomPen lineWidth="0.5"/>
 						<rightPen lineWidth="0.5"/>
 					</box>
+					<textField>
+						<reportElement x="38" y="0" width="100" height="12" uuid="aaee1ba9-b26c-4c57-a1f9-3d380caf5d1f"/>
+						<textElement textAlignment="Center">
+							<font size="8"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{hc_3047_anexo4_numerosolicitudorigen}]]></textFieldExpression>
+					</textField>
 				</frame>
 			</frame>
 			<frame>
@@ -1912,7 +2112,7 @@ WHERE
 				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{telefono_1}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{cfg_empresa_telefono_1}]]></textFieldExpression>
 			</textField>
 			<frame>
 				<reportElement positionType="Float" x="1" y="256" width="572" height="38" backcolor="#E6E6E6" uuid="827d0965-c297-4be3-be18-3168bbbe8ad5"/>
@@ -2220,7 +2420,7 @@ WHERE
 					</box>
 				</frame>
 				<staticText>
-					<reportElement x="3" y="23" width="159" height="12" uuid="30d17c6d-cd2f-4b6a-bc68-9a0cd0a02608"/>
+					<reportElement x="7" y="16" width="159" height="12" uuid="30d17c6d-cd2f-4b6a-bc68-9a0cd0a02608"/>
 					<textElement>
 						<font size="8" isBold="true"/>
 						<paragraph leftIndent="5"/>
@@ -2228,7 +2428,7 @@ WHERE
 					<text><![CDATA[CODIGO CUPS]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="95" y="23" width="159" height="12" uuid="f31cd78f-b835-4851-a3a7-a446957251c1"/>
+					<reportElement x="99" y="16" width="159" height="12" uuid="f31cd78f-b835-4851-a3a7-a446957251c1"/>
 					<textElement>
 						<font size="8" isBold="true"/>
 						<paragraph leftIndent="5"/>
@@ -2236,7 +2436,7 @@ WHERE
 					<text><![CDATA[CANTIDAD]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="221" y="23" width="159" height="12" uuid="be4ec01f-ca23-47d8-abae-04bd14e67170"/>
+					<reportElement x="225" y="16" width="159" height="12" uuid="be4ec01f-ca23-47d8-abae-04bd14e67170"/>
 					<textElement>
 						<font size="8" isBold="true"/>
 						<paragraph leftIndent="5"/>
@@ -2308,18 +2508,11 @@ WHERE
 					<text><![CDATA[Nombre]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="62" y="3" width="78" height="20" uuid="3beb70f1-cf20-4e5d-9658-159efccaf3a2"/>
-					<textElement textAlignment="Right">
+					<reportElement x="62" y="3" width="213" height="20" uuid="3beb70f1-cf20-4e5d-9658-159efccaf3a2"/>
+					<textElement textAlignment="Center">
 						<font size="9"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{cfg_usuarios_primer_nombre}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="146" y="3" width="100" height="20" uuid="8b1a5a38-597d-4afd-80a4-6a586f06599e"/>
-					<textElement>
-						<font size="9"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{cfg_usuarios_primer_apellido}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -2332,22 +2525,26 @@ WHERE
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textField>
-					<reportElement x="53" y="0" width="100" height="12" uuid="d4614d78-3c5a-426e-9c9f-e9171c10df91"/>
+					<reportElement x="5" y="0" width="43" height="12" uuid="d4614d78-3c5a-426e-9c9f-e9171c10df91"/>
 					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{cfg_usuarios_telefono_oficina}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{hc_3047_anexo4_indicativotelefono}]]></textFieldExpression>
 				</textField>
-			</frame>
-			<frame>
-				<reportElement positionType="Float" x="-6" y="-46" width="227" height="12" backcolor="#E6E6E6" uuid="a2bc018e-781a-4425-add3-cb52257ce2bd"/>
-				<box>
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
+				<textField>
+					<reportElement x="61" y="0" width="80" height="12" uuid="d0e6014b-d416-4342-9e6a-5164316963d5"/>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{hc_3047_anexo4_numerotelefono}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="165" y="0" width="43" height="12" uuid="f8b8bfd3-44a9-42fa-8338-01c23e66aeaf"/>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{hc_3047_anexo4_extensiontelefono}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<frame>
 				<reportElement positionType="Float" x="346" y="638" width="227" height="12" backcolor="#E6E6E6" uuid="d385bf31-8e8f-4c55-aec5-a233b208442d"/>
@@ -2401,11 +2598,11 @@ WHERE
 					<text><![CDATA[Cargo o Actividad]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="113" y="0" width="168" height="19" uuid="61b05c28-84fc-440e-9907-4bbbbf953d05"/>
-					<textElement>
+					<reportElement x="109" y="0" width="172" height="19" uuid="61b05c28-84fc-440e-9907-4bbbbf953d05"/>
+					<textElement textAlignment="Center">
 						<font size="9"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{cfg_usuarios_cargo_actual}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{hc_3047_anexo4_cargoautoriza}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<staticText>
@@ -2415,14 +2612,6 @@ WHERE
 					<paragraph leftIndent="5"/>
 				</textElement>
 				<text><![CDATA[Teléfono]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="13" y="-46" width="47" height="12" uuid="1df1207e-da6a-4fcc-9de4-401ae612660d"/>
-				<textElement>
-					<font size="9" isBold="true"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<text><![CDATA[Celular]]></text>
 			</staticText>
 			<frame>
 				<reportElement positionType="Float" x="286" y="651" width="287" height="19" backcolor="#E6E6E6" uuid="5b590f9c-c5ce-4592-8fa8-bea0fed3fe0b"/>
@@ -2442,11 +2631,18 @@ WHERE
 					<text><![CDATA[Celular]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="85" y="7" width="135" height="12" uuid="8bce06d2-d03f-4335-9711-1ca1ff215376"/>
+					<reportElement x="85" y="7" width="44" height="12" uuid="8bce06d2-d03f-4335-9711-1ca1ff215376"/>
 					<textElement textAlignment="Center">
-						<font size="9"/>
+						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{cfg_usuarios_celular}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{hc_3047_anexo4_indicativocelular}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="134" y="7" width="89" height="12" uuid="99d9e683-020f-4068-8500-0050de2b0327"/>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{hc_3047_anexo4_numerocelular}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>
