@@ -12,7 +12,7 @@ import modelo.entidades.FacServicio;
 
 /**
  *
- * @author santos
+ * @author santos / sismacontab
  */
 @Stateless
 public class FacServicioFacade extends AbstractFacade<FacServicio> {
@@ -118,5 +118,13 @@ public class FacServicioFacade extends AbstractFacade<FacServicio> {
             return null;
 }
     }
+    
+    public List<String> autocompletarFacServicio(String txt) {
+        try {
+            return getEntityManager().createNativeQuery("select codigo_cup||' - '||nombre_servicio from fac_servicio where codigo_cup||' - '||nombre_servicio ilike '%" + txt + "%' limit 10").getResultList();
+        } catch (Exception e) {                          
+            return null;
+        }
+    }   
 
 }

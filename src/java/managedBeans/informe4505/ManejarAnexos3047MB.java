@@ -78,7 +78,7 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     @EJB
     Hc3047Anexo3Facade hc3047Anexo3Facade;
     @EJB
-    Hc3047Anexo3_1Facade  hc3047Anexo3_1Facade;
+    Hc3047Anexo3_1Facade hc3047Anexo3_1Facade;
     @EJB
     Hc3047Anexo4Facade hc3047Anexo4Facade;
     @EJB
@@ -121,9 +121,7 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     private String numeroAutorizacion = "";
     private String numeroRemision = "";
     private String numeroContrarremision = "";
-    
-    
-    
+
     private boolean coutam = false;
     private boolean copago = false;
     private boolean coutar = false;
@@ -141,19 +139,21 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     private Hc3047Anexo6 nuevoAnexo6 = new Hc3047Anexo6();
     private FacServicio facServ;
     private CfgEmpresa empresa;
-    
+    private int id=0;
+
     private HcAnexos3047 tipoanexoActual = new HcAnexos3047();
     private List<CfgClasificaciones> listaInconsistencias = null;
     private List<CfgClasificaciones> listaTipoidentificacion = null;
     private List<CfgUsuarios> listaUsuarios = null;
-
 
 //    private HistoriasMB historiasMB;
     private String cei100 = null;
     private String cei101 = null;
     private String cei102 = null;
     private String cei103 = null;
+    private String cups1 = null;
 
+    
     private CfgDiagnostico diagnosticoppal;
     private CfgDiagnostico diagnosticorelacion1;
     private CfgDiagnostico diagnosticorelacion2;
@@ -173,8 +173,8 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         listaInconsistencias = clasificacionesFacade.buscarPorMaestro("Inconsistencia");
         listaTipoidentificacion = clasificacionesFacade.buscarPorMaestro("TipoIdentificacion");
         listaUsuarios = cfgUsuariosFacade.buscarOrdenado();
-        listaEspecialidades=cfgClasificacionesFacade.buscarPorMaestro("Especialidad");
-        listaCUPS = facServicioFacade.findAll();
+        listaEspecialidades = cfgClasificacionesFacade.buscarPorMaestro("Especialidad");
+        listaCUPS = facServicioFacade.buscarTodosOrdenado();
         nuevoAnexo1.setFechadocumento(fechaReg);
         nuevoAnexo2.setFechadocumento(fechaReg);
         nuevoAnexo2.setFechaingreso(fechaReg);
@@ -182,8 +182,8 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         nuevoAnexo4.setFechadocumento(fechaReg);
         nuevoAnexo5.setFechadocumento(fechaReg);
         nuevoAnexo6.setFechadocumento(fechaReg);
-        
-        pacienteseleccionado= cfgPacientesFacade.find(HistoriasMB.codPaciente);
+
+        pacienteseleccionado = cfgPacientesFacade.find(HistoriasMB.codPaciente);
         empresa = cfgEmpresaFacade.findAll().get(0);
     }
 
@@ -229,7 +229,7 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         generarNumeroInforme();
         System.out.println(fechaReg);
         System.out.println("Iniciando el guardado del registro " + numeroInforme);
-        pacienteseleccionado=cfgPacientesFacade.find(HistoriasMB.codPaciente);
+        pacienteseleccionado = cfgPacientesFacade.find(HistoriasMB.codPaciente);
         try {
             nuevoAnexo1.setIdPaciente(pacienteseleccionado);
             nuevoAnexo1.setNumeroinforme(numeroInforme);
@@ -252,7 +252,7 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         String codigo1 = "";
         String codigo2 = "";
         String codigo3 = "";
-        pacienteseleccionado=cfgPacientesFacade.find(HistoriasMB.codPaciente);
+        pacienteseleccionado = cfgPacientesFacade.find(HistoriasMB.codPaciente);
         try {
             nuevoAnexo2.setIdPaciente(pacienteseleccionado);
             if (cei100 != null) {
@@ -290,7 +290,7 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         }
 
     }
-    
+
     public void guardarAnexo3() {//guardar un nuevo registro clinico        
         int idSede = 1;
         generarNumeroSolicitud();
@@ -300,7 +300,7 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         String codigo1 = "";
         String codigo2 = "";
         String codigo3 = "";
-        pacienteseleccionado=cfgPacientesFacade.find(HistoriasMB.codPaciente);
+        pacienteseleccionado = cfgPacientesFacade.find(HistoriasMB.codPaciente);
         try {
             nuevoAnexo3.setIdPaciente(pacienteseleccionado);
             nuevoAnexo3.setNumerosolicitud(numeroSolicitud);
@@ -328,12 +328,13 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         }
 
     }
+
     public void guardarAnexo4() {//guardar un nuevo registro clinico        
         int idSede = 1;
         generarNumeroAutorizacion();
         System.out.println(fechaReg);
         System.out.println("Iniciando el guardado del registro Anexo4 " + numeroAutorizacion);
-        pacienteseleccionado=cfgPacientesFacade.find(HistoriasMB.codPaciente);
+        pacienteseleccionado = cfgPacientesFacade.find(HistoriasMB.codPaciente);
         try {
             nuevoAnexo4.setIdPaciente(pacienteseleccionado);
             nuevoAnexo4.setNumeroautorizacion(numeroAutorizacion);
@@ -345,13 +346,13 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "Error al Grabar Anexo4"));
         }
     }
-    
+
     public void guardarAnexo5() {//guardar un nuevo registro clinico        
         int idSede = 1;
         generarNumeroRemision();
         System.out.println(fechaReg);
         System.out.println("Iniciando el guardado del registro Anexo5 " + numeroRemision);
-        pacienteseleccionado=cfgPacientesFacade.find(HistoriasMB.codPaciente);
+        pacienteseleccionado = cfgPacientesFacade.find(HistoriasMB.codPaciente);
         try {
             nuevoAnexo5.setIdPaciente(pacienteseleccionado);
             nuevoAnexo5.setNumeroremision(numeroRemision);
@@ -367,13 +368,13 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         }
 
     }
-    
+
     public void guardarAnexo6() {//guardar un nuevo registro clinico        
         int idSede = 1;
         generarNumeroContrarremision();
         System.out.println(fechaReg);
         System.out.println("Iniciando el guardado del registro Anexo6 " + numeroContrarremision);
-        pacienteseleccionado=cfgPacientesFacade.find(HistoriasMB.codPaciente);
+        pacienteseleccionado = cfgPacientesFacade.find(HistoriasMB.codPaciente);
         try {
             nuevoAnexo6.setIdPaciente(pacienteseleccionado);
             nuevoAnexo6.setNumerocontrarremision(numeroContrarremision);
@@ -389,7 +390,7 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         }
 
     }
-    
+
     public void generarNumeroInforme() {
         int mes = 0;
         int anio = 0;
@@ -421,7 +422,7 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         consecutivo = anexoActual.getConsecutivo() + 1;
         numeroAtencion = yearsmall + month + consecutivo;
     }
-    
+
     public void generarNumeroSolicitud() {
         //fechacomprobante=comprobanteivaef.getFecha();
         int mes = 0;
@@ -437,7 +438,7 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         consecutivo = anexoActual.getConsecutivo() + 1;
         numeroSolicitud = yearsmall + month + consecutivo;
     }
-        
+
     public void generarNumeroAutorizacion() {
         int mes = 0;
         int anio = 0;
@@ -452,7 +453,7 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         consecutivo = anexoActual.getConsecutivo() + 1;
         numeroAutorizacion = yearsmall + month + consecutivo;
     }
-    
+
     public void generarNumeroRemision() {
         int mes = 0;
         int anio = 0;
@@ -468,7 +469,7 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         numeroRemision = yearsmall + month + consecutivo;
 
     }
-    
+
     public void generarNumeroContrarremision() {
         int mes = 0;
         int anio = 0;
@@ -484,26 +485,25 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         numeroContrarremision = yearsmall + month + consecutivo;
 
     }
-    
-        public void verReporte() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        
+
+    public void verReporte() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+
         //Instancia hacia la clase reporteAnexos
         ReporteAnexos rAnexo = new ReporteAnexos();
-        
+
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ServletContext servletContext = (ServletContext) facesContext.getExternalContext().getContext();
         String ruta = servletContext.getRealPath("/anexos3047/reportes/articulos.jasper");
-       
-        rAnexo.getReporte(ruta);        
-        FacesContext.getCurrentInstance().responseComplete();               
+
+        rAnexo.getReporte(ruta);
+        FacesContext.getCurrentInstance().responseComplete();
     }
-        
 
     public void verAnexo1() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 
         //Instancia hacia la clase reportes Anexos
         ReporteAnexos rAnexo = new ReporteAnexos();
-        
+
         String admin = nuevoAnexo1.getIdPaciente().getIdAdministradora().getRazonSocial();
         String codadmin = nuevoAnexo1.getIdPaciente().getIdAdministradora().getCodigoAdministradora();
         String dptopaciente = nuevoAnexo1.getIdPaciente().getDepartamento().getDescripcion();
@@ -518,12 +518,12 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         rAnexo.getAnexo1(admin, codadmin, mcpiopaciente, dptopaciente, dptoempresa, mcpioempresa, numinform, ruta);
         FacesContext.getCurrentInstance().responseComplete();
     }
-    
+
     public void verAnexo2() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 
         //Instancia hacia la clase reportes Anexos
         ReporteAnexos rAnexo = new ReporteAnexos();
-        
+
         String admin = nuevoAnexo2.getIdPaciente().getIdAdministradora().getRazonSocial();
         String codadmin = nuevoAnexo2.getIdPaciente().getIdAdministradora().getCodigoAdministradora();
         String dptopaciente = nuevoAnexo2.getIdPaciente().getDepartamento().getDescripcion();
@@ -537,7 +537,7 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         String diagrel1 = nuevoAnexo2.getCei101().getNombreDiagnostico();
         String diagrel2 = nuevoAnexo2.getCei102().getNombreDiagnostico();
         String diagrel3 = nuevoAnexo2.getCei103().getNombreDiagnostico();
-        
+
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ServletContext servletContext = (ServletContext) facesContext.getExternalContext().getContext();
         String ruta = servletContext.getRealPath("/anexos3047/reportes/anexotwo.jasper");
@@ -545,12 +545,12 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         rAnexo.getAnexo2(admin, codadmin, mcpiopaciente, dptopaciente, dptoempresa, mcpioempresa, dptoremite, mcpioremite, diagppal, diagrel1, diagrel2, diagrel3, numinform, ruta);
         FacesContext.getCurrentInstance().responseComplete();
     }
-    
+
     public void verAnexo3() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 
         //Instancia hacia la clase reportes Anexos
         ReporteAnexos rAnexo = new ReporteAnexos();
-        
+
         String admin = nuevoAnexo3.getIdPaciente().getIdAdministradora().getRazonSocial();
         String codadmin = nuevoAnexo3.getIdPaciente().getIdAdministradora().getCodigoAdministradora();
         String dptopaciente = nuevoAnexo3.getIdPaciente().getDepartamento().getDescripcion();
@@ -562,7 +562,7 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         String diagrel1 = nuevoAnexo3.getCei101().getNombreDiagnostico();
         String diagrel2 = nuevoAnexo3.getCei102().getNombreDiagnostico();
         String services = nuevoAnexo3.getIdservicio().getDescripcion();
-        
+
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ServletContext servletContext = (ServletContext) facesContext.getExternalContext().getContext();
         String ruta = servletContext.getRealPath("/anexos3047/reportes/anexotree.jasper");
@@ -570,12 +570,12 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         rAnexo.getAnexo3(admin, codadmin, mcpiopaciente, dptopaciente, dptoempresa, mcpioempresa, diagppal, diagrel1, diagrel2, services, numinform, ruta);
         FacesContext.getCurrentInstance().responseComplete();
     }
-    
+
     public void verAnexo4() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 
         //Instancia hacia la clase reportes Anexos
         ReporteAnexos rAnexo = new ReporteAnexos();
-        
+
         String admin = nuevoAnexo4.getIdPaciente().getIdAdministradora().getRazonSocial();
         String codadmin = nuevoAnexo4.getIdPaciente().getIdAdministradora().getCodigoAdministradora();
         String dptopaciente = nuevoAnexo4.getIdPaciente().getDepartamento().getDescripcion();
@@ -584,7 +584,7 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         String mcpioempresa = empresa.getCodMunicipio().getDescripcion();
         String numinform = numeroAutorizacion;
         String services = nuevoAnexo4.getIdservicio().getDescripcion();
-        
+
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ServletContext servletContext = (ServletContext) facesContext.getExternalContext().getContext();
         String ruta = servletContext.getRealPath("/anexos3047/reportes/anexofour.jasper");
@@ -592,12 +592,12 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         rAnexo.getAnexo4(admin, codadmin, mcpiopaciente, dptopaciente, dptoempresa, mcpioempresa, services, numinform, ruta);
         FacesContext.getCurrentInstance().responseComplete();
     }
-    
+
     public void verAnexo5() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 
         //Instancia hacia la clase reportes Anexos
         ReporteAnexos rAnexo = new ReporteAnexos();
-        
+
         String admin = nuevoAnexo5.getIdPaciente().getIdAdministradora().getRazonSocial();
         String codadmin = nuevoAnexo5.getIdPaciente().getIdAdministradora().getCodigoAdministradora();
         String dptopaciente = nuevoAnexo5.getIdPaciente().getDepartamento().getDescripcion();
@@ -607,7 +607,7 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         String dptoresponsable = nuevoAnexo5.getIdDepartamento().getDescripcion();
         String mcpioresponsable = nuevoAnexo5.getIdMunicipio().getDescripcion();
         String numinform = numeroRemision;
-        
+
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ServletContext servletContext = (ServletContext) facesContext.getExternalContext().getContext();
         String ruta = servletContext.getRealPath("/anexos3047/reportes/anexofive.jasper");
@@ -615,12 +615,12 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         rAnexo.getAnexo5(admin, codadmin, mcpiopaciente, dptopaciente, dptoempresa, mcpioempresa, dptoresponsable, mcpioresponsable, numinform, ruta);
         FacesContext.getCurrentInstance().responseComplete();
     }
-    
+
     public void verAnexo6() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 
         //Instancia hacia la clase reportes Anexos
         ReporteAnexos rAnexo = new ReporteAnexos();
-        
+
         String admin = nuevoAnexo6.getIdPaciente().getIdAdministradora().getRazonSocial();
         String codadmin = nuevoAnexo6.getIdPaciente().getIdAdministradora().getCodigoAdministradora();
         String dptopaciente = nuevoAnexo6.getIdPaciente().getDepartamento().getDescripcion();
@@ -630,7 +630,7 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         String dptoresponsable = nuevoAnexo6.getIdDepartamento().getDescripcion();
         String mcpioresponsable = nuevoAnexo6.getIdMunicipio().getDescripcion();
         String numinform = numeroContrarremision;
-        
+
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ServletContext servletContext = (ServletContext) facesContext.getExternalContext().getContext();
         String ruta = servletContext.getRealPath("/anexos3047/reportes/anexosix.jasper");
@@ -638,7 +638,30 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         rAnexo.getAnexo5(admin, codadmin, mcpiopaciente, dptopaciente, dptoempresa, mcpioempresa, dptoresponsable, mcpioresponsable, numinform, ruta);
         FacesContext.getCurrentInstance().responseComplete();
     }
+
+    public List<String> autocompletarServicio(String txt) {//retorna una lista con los diagnosticos que contengan el parametro txt
+        if (txt != null && txt.length() > 2) {
+            return facServicioFacade.autocompletarFacServicio(txt);
+        } else {
+            return null;
+        }
+    }
     
+        public void anexaraCups() {
+        if (nuevoAnexo31.getCantidad()!= 0) {
+            Hc3047Anexo31 reque1 = new Hc3047Anexo31();
+            reque1.setIdServicio(nuevoAnexo31.getIdServicio());
+            reque1.setCantidad(nuevoAnexo31.getCantidad());
+            this.listarequerimiento.add(reque1);
+            id++;
+            nuevoAnexo31=null;
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "No puede dejar el campo Cantidad en 0.0"));
+        }
+
+    }
+
+
     public String getPacienteremitido() {
         return pacienteremitido;
     }
@@ -959,8 +982,13 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         this.facServ = facServ;
     }
 
+    public String getCups1() {
+        return cups1;
+    }
 
-    
-    
+    public void setCups1(String cups1) {
+        this.cups1 = cups1;
+    }
+
     
 }

@@ -31,5 +31,5 @@ public class FacFacturaServicioFacade extends AbstractFacade<FacFacturaServicio>
         }
         return obj;
     }
-    
+       
 }

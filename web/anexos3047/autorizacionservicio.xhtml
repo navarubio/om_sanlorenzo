@@ -304,6 +304,31 @@
                             </td>
                         </tr>
                         <tr><td>&nbsp;</td></tr>
+                        <p:panel id="ingresarcups" >
+                            <p:panelGrid columns="5">
+                                <p:outputLabel id="dato116" value="CODIGO CUPS"/>
+                                <p:autoComplete id="dato116" size="80" value="#{manejarAnexos3047MB.nuevoAnexo31.idServicio}" completeMethod="#{manejarAnexos3047MB.autocompletarServicio}" forceSelection="true"/>
+                                <p:outputLabel id="dato117" value="CANTIDAD"/>
+                                <p:inputText id="dato117" value value="#{manejarAnexos3047MB.nuevoAnexo31.cantidad}" required="true" styleClass="width3"/>
+                                <p:commandButton id="anexar" value="Anexar" actionListener="#{manejarAnexos3047MB}"/>
+                                <p:commandButton value="Anexar" icon="ui-icon-plusthick"  action="#{manejarAnexos3047MB.anexaraCups()}" update="listado"/>      
+                            </p:panelGrid>
+                        </p:panel>
+                        <p:panel>
+                            <p:dataTable id="listado" widgetVar="listadoreq" value="#{manejarAnexos3047MB.listarequerimiento}" 
+                                         var="req" emptyMessage="No hay servicios para mostrar" rowKey="#{req.id3047anexo31}"
+                                         selectionMode="single" style="width: 500px;">
+                                <p:column style="width:10%"  headerText="Codigo CUPS">
+                                    #{req.id3047anexos31} 
+                                </p:column>
+                                <p:column style="width:25%"  headerText="Descripcion ">
+                                    #{req.idservicio.nombreservicio} 
+                                </p:column>
+                                <p:column style="text-align: center" headerText="Cantidad">
+                                    #{req.cantidad} 
+                                </p:column >
+                            </p:dataTable>
+                        </p:panel>
                         <tr>
                             <td  style="background-color: #eaecfe;"><p:outputLabel value="CODIGO CUPS: " styleClass="labelFormularioBold" style="font-weight: bold;" /></td>
                             <td  style="background-color: #eaecfe;"><p:outputLabel value="CANTIDAD: "   styleClass="labelFormularioBold" style="font-weight: bold;"/></td>
@@ -359,7 +384,7 @@
                             <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato48}" /></td>
                             <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047MB.datosFormulario.dato49}" /></td>
                         </tr>
-                                                <tr>
+                        <tr>
                             <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato50}" /></td>
                             <td><p:inputText  styleClass="width3" value="#{manejarAnexos3047MB.datosFormulario.dato51}" /></td>
                             <td><p:inputText  styleClass="width1" value="#{manejarAnexos3047MB.datosFormulario.dato52}" /></td>
@@ -505,7 +530,7 @@
                             <p:commandButton icon="ui-icon-document" value="Limpiar Formulario" 
                                              actionListener="#{historiasMB.btnLimpiarFormulario}" update="@form"/>
                             <p:commandButton id="printButtom"  type="submit" icon="ui-icon-print"   value="Imprimir Anexo3" actionListener="#{manejarAnexos3047MB.verAnexo3()}" ajax="false" onclick="form.target = '_blank'"/>
-                        
+
                         </td>
                     </tr>
                 </table>
