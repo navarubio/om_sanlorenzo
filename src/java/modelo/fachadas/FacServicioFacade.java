@@ -119,9 +119,20 @@ public class FacServicioFacade extends AbstractFacade<FacServicio> {
 }
     }
     
+    public FacServicio buscarPorcodigoCups(String cups) {
+        try {
+            Query query = getEntityManager().createQuery("SELECT s FROM FacServicio s WHERE s.codigo_cup = ?1");
+            query.setParameter(1, cups);
+            return (FacServicio) query.getSingleResult();
+        } catch (Exception e) {
+            return null;
+}
+    }
+
+    
     public List<String> autocompletarFacServicio(String txt) {
         try {
-            return getEntityManager().createNativeQuery("select codigo_cup||' - '||nombre_servicio from fac_servicio where codigo_cup||' - '||nombre_servicio ilike '%" + txt + "%' limit 10").getResultList();
+            return getEntityManager().createNativeQuery("select id_servicio||' . '||codigo_cup||' - '||nombre_servicio from fac_servicio where codigo_cup||' - '||nombre_servicio ilike '%" + txt + "%' limit 10").getResultList();
         } catch (Exception e) {                          
             return null;
         }

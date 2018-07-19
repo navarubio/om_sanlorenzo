@@ -139,7 +139,8 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     private Hc3047Anexo6 nuevoAnexo6 = new Hc3047Anexo6();
     private FacServicio facServ;
     private CfgEmpresa empresa;
-    private int id=0;
+    private int id = 1;
+    private double cantidad=0.0;
 
     private HcAnexos3047 tipoanexoActual = new HcAnexos3047();
     private List<CfgClasificaciones> listaInconsistencias = null;
@@ -153,7 +154,6 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     private String cei103 = null;
     private String cups1 = null;
 
-    
     private CfgDiagnostico diagnosticoppal;
     private CfgDiagnostico diagnosticorelacion1;
     private CfgDiagnostico diagnosticorelacion2;
@@ -646,19 +646,44 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
             return null;
         }
     }
-    
-        public void anexaraCups() {
-        if (nuevoAnexo31.getCantidad()!= 0) {
-            Hc3047Anexo31 reque1 = new Hc3047Anexo31();
+
+    public void anexarCups() {
+        String codigocups = "";
+        FacServicio nuevofacServicio = new FacServicio();
+        Hc3047Anexo31 reque1 = new Hc3047Anexo31();
+        
+        if (cantidad!= 0) {
+            int index = cups1.indexOf("."); 
+            codigocups = cups1.substring(0, index-1);
+            int codServicio = Integer.parseInt(codigocups); 
+            nuevofacServicio = facServicioFacade.find(codServicio);
+            nuevoAnexo31.setIdServicio(nuevofacServicio);
+            nuevoAnexo31.setCantidad(cantidad);
             reque1.setIdServicio(nuevoAnexo31.getIdServicio());
             reque1.setCantidad(nuevoAnexo31.getCantidad());
+            reque1.setId3047anexo31(id);
             this.listarequerimiento.add(reque1);
             id++;
-            nuevoAnexo31=null;
+//            nuevoAnexo31 = null;
+            cantidad=0.0;
+            cups1="";
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "No puede dejar el campo Cantidad en 0.0"));
         }
 
+    }
+    
+    public void eliminar(Hc3047Anexo31 requerim) {
+        listarequerimiento.remove(requerim.hashCode());
+        int indice = 0;
+        for (Hc3047Anexo31 requeri : listarequerimiento) {
+            requeri.setId3047anexo31(indice);
+            indice++;
+            id = indice;
+        }
+        if (requerim.hashCode() == 0) {
+            id = 0;
+        }
     }
 
 
@@ -988,6 +1013,14 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
 
     public void setCups1(String cups1) {
         this.cups1 = cups1;
+    }
+
+    public double getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(double cantidad) {
+        this.cantidad = cantidad;
     }
 
     
