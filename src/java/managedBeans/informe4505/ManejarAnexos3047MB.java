@@ -110,6 +110,7 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     private List<CfgClasificaciones> listaEspecialidades;
     private List<FacServicio> listaCUPS;
     private List<Hc3047Anexo31> listarequerimiento = new ArrayList();
+    private List<Hc3047Anexo41> listarequerimiento1 = new ArrayList();
     private String departamento = "";
     private String municipio = "";
     private String tiposerviciosolicita = "";
@@ -132,8 +133,11 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     private Hc3047Anexo1 nuevoAnexo1 = new Hc3047Anexo1();
     private Hc3047Anexo2 nuevoAnexo2 = new Hc3047Anexo2();
     private Hc3047Anexo3 nuevoAnexo3 = new Hc3047Anexo3();
-    private Hc3047Anexo3 codAnexo3 = new Hc3047Anexo3();    
+    private Hc3047Anexo3 codAnexo3 = new Hc3047Anexo3();
+    private Hc3047Anexo4 codAnexo4 = new Hc3047Anexo4();
+    
     private Hc3047Anexo31 anexo3Grabar = new Hc3047Anexo31();
+    private Hc3047Anexo41 anexo4Grabar = new Hc3047Anexo41();
 
     private Hc3047Anexo31 nuevoAnexo31 = new Hc3047Anexo31();
     private Hc3047Anexo4 nuevoAnexo4 = new Hc3047Anexo4();
@@ -142,7 +146,9 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     private Hc3047Anexo6 nuevoAnexo6 = new Hc3047Anexo6();
     private FacServicio facServ;
     private CfgEmpresa empresa;
-    private int id = 1;
+    private int id = 0;
+    private int id1 = 0;
+    
     private double cantidad = 0.0;
 
     private HcAnexos3047 tipoanexoActual = new HcAnexos3047();
@@ -339,7 +345,6 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "Error al Grabar Anexo3"));
         }
-
     }
 
     public void guardarAnexo4() {//guardar un nuevo registro clinico        
@@ -352,6 +357,15 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
             nuevoAnexo4.setIdPaciente(pacienteseleccionado);
             nuevoAnexo4.setNumeroautorizacion(numeroAutorizacion);
             hc3047Anexo4Facade.create(nuevoAnexo4);
+
+            codAnexo4 = hc3047Anexo4Facade.ultimoInsertado();
+
+            for (Hc3047Anexo41 rq : listarequerimiento1) {
+                anexo4Grabar.setId3047anexo4(codAnexo4);
+                anexo4Grabar.setIdServicio(rq.getIdServicio());
+                anexo4Grabar.setCantidad(rq.getCantidad());
+                hc3047Anexo41Facade.create(anexo4Grabar);
+            }
             anexoActual.setConsecutivo(consecutivo);
             hcAnexos3047Facade.edit(anexoActual);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Su Anexo4 fue almacenado con el Nro " + numeroAutorizacion));
@@ -536,20 +550,57 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
 
         //Instancia hacia la clase reportes Anexos
         ReporteAnexos rAnexo = new ReporteAnexos();
-
-        String admin = nuevoAnexo2.getIdPaciente().getIdAdministradora().getRazonSocial();
-        String codadmin = nuevoAnexo2.getIdPaciente().getIdAdministradora().getCodigoAdministradora();
-        String dptopaciente = nuevoAnexo2.getIdPaciente().getDepartamento().getDescripcion();
-        String mcpiopaciente = nuevoAnexo2.getIdPaciente().getMunicipio().getDescripcion();
-        String dptoempresa = empresa.getCodDepartamento().getDescripcion();
-        String mcpioempresa = empresa.getCodMunicipio().getDescripcion();
-        String dptoremite = nuevoAnexo2.getIddepartamento().getDescripcion();
-        String mcpioremite = nuevoAnexo2.getIdmunicipio().getDescripcion();
+        String admin=null;
+        String codadmin=null;
+        String dptopaciente = null;
+        String mcpiopaciente = null;
+        String dptoempresa = null;
+        String mcpioempresa = null;
+        String dptoremite =null;
+        String mcpioremite = null;
         String numinform = numeroAtencion;
-        String diagppal = nuevoAnexo2.getCei100().getNombreDiagnostico();
-        String diagrel1 = nuevoAnexo2.getCei101().getNombreDiagnostico();
-        String diagrel2 = nuevoAnexo2.getCei102().getNombreDiagnostico();
-        String diagrel3 = nuevoAnexo2.getCei103().getNombreDiagnostico();
+        String diagppal = null;
+        String diagrel1 = null;
+        String diagrel2 = null;
+        String diagrel3 = null;
+               
+        if (nuevoAnexo2.getIdPaciente().getIdAdministradora().getRazonSocial()!=null){
+            admin = nuevoAnexo2.getIdPaciente().getIdAdministradora().getRazonSocial();
+        }
+        if (nuevoAnexo2.getIdPaciente().getIdAdministradora().getCodigoAdministradora()!=null){
+            codadmin = nuevoAnexo2.getIdPaciente().getIdAdministradora().getCodigoAdministradora();
+        }
+        if (nuevoAnexo2.getIdPaciente().getDepartamento().getDescripcion()!=null){
+            dptopaciente = nuevoAnexo2.getIdPaciente().getDepartamento().getDescripcion();
+        }
+        if (nuevoAnexo2.getIdPaciente().getMunicipio().getDescripcion()!=null){
+            mcpiopaciente = nuevoAnexo2.getIdPaciente().getMunicipio().getDescripcion();
+        }
+        if (empresa.getCodDepartamento().getDescripcion()!=null){
+            dptoempresa = empresa.getCodDepartamento().getDescripcion();
+        }
+        if (empresa.getCodMunicipio().getDescripcion()!=null){
+            mcpioempresa = empresa.getCodMunicipio().getDescripcion();
+        }
+        if (nuevoAnexo2.getIddepartamento().getDescripcion()!=null){
+            dptoremite = nuevoAnexo2.getIddepartamento().getDescripcion();
+        }
+        if (nuevoAnexo2.getIdmunicipio().getDescripcion()!=null){
+            mcpioremite = nuevoAnexo2.getIdmunicipio().getDescripcion();
+        }
+        if (nuevoAnexo2.getCei100().getNombreDiagnostico()!=null){
+            diagppal = nuevoAnexo2.getCei100().getNombreDiagnostico();
+        }
+        if (nuevoAnexo2.getCei101().getNombreDiagnostico()!=null){
+            diagrel1 = nuevoAnexo2.getCei101().getNombreDiagnostico();
+        }
+        if (nuevoAnexo2.getCei102().getNombreDiagnostico()!=null){
+            diagrel2 = nuevoAnexo2.getCei102().getNombreDiagnostico();
+        }
+        if (nuevoAnexo2.getCei103().getNombreDiagnostico()!=null){
+            diagrel3 = nuevoAnexo2.getCei103().getNombreDiagnostico();
+        }            
+        numinform = numeroAtencion;
 
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ServletContext servletContext = (ServletContext) facesContext.getExternalContext().getContext();
@@ -563,8 +614,8 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
 
         //Instancia hacia la clase reportes Anexos
         ReporteAnexos rAnexo = new ReporteAnexos();
-        List<Hc3047Anexo31> listaCupsDetalles=hc3047Anexo3_1Facade.buscarAnexos31xAnexo3(codAnexo3.getId3047anexo3());
-        
+        List<Hc3047Anexo31> listaCupsDetalles = hc3047Anexo3_1Facade.buscarAnexos31xAnexo3(codAnexo3.getId3047anexo3());
+
         String admin = nuevoAnexo3.getIdPaciente().getIdAdministradora().getRazonSocial();
         String codadmin = nuevoAnexo3.getIdPaciente().getIdAdministradora().getCodigoAdministradora();
         String dptopaciente = nuevoAnexo3.getIdPaciente().getDepartamento().getDescripcion();
@@ -576,8 +627,7 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         String diagrel1 = nuevoAnexo3.getCei101().getNombreDiagnostico();
         String diagrel2 = nuevoAnexo3.getCei102().getNombreDiagnostico();
         String services = nuevoAnexo3.getIdservicio().getDescripcion();
-        int anexo3=codAnexo3.getId3047anexo3();
-        
+        int anexo3 = codAnexo3.getId3047anexo3();
 
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ServletContext servletContext = (ServletContext) facesContext.getExternalContext().getContext();
@@ -689,6 +739,32 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
 
     }
 
+    public void anexarCups4() {
+        String codigocups = "";
+        FacServicio nuevofacServicio = new FacServicio();
+        Hc3047Anexo41 reque1 = new Hc3047Anexo41();
+
+        if (cantidad != 0) {
+            int index = cups1.indexOf(".");
+            codigocups = cups1.substring(0, index - 1);
+            int codServicio = Integer.parseInt(codigocups);
+            nuevofacServicio = facServicioFacade.find(codServicio);
+            nuevoAnexo41.setIdServicio(nuevofacServicio);
+            nuevoAnexo41.setCantidad(cantidad);
+            reque1.setIdServicio(nuevoAnexo41.getIdServicio());
+            reque1.setCantidad(nuevoAnexo41.getCantidad());
+            reque1.setId3047anexo41(id1);
+            this.listarequerimiento1.add(reque1);
+            id1++;
+//            nuevoAnexo31 = null;
+            cantidad = 0.0;
+            cups1 = "";
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "No puede dejar el campo Cantidad en 0.0"));
+        }
+
+    }
+
     public void eliminar(Hc3047Anexo31 requerim) {
         listarequerimiento.remove(requerim.hashCode());
         int indice = 0;
@@ -699,6 +775,19 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         }
         if (requerim.hashCode() == 0) {
             id = 0;
+        }
+    }
+
+    public void eliminar1(Hc3047Anexo41 requerim) {
+        listarequerimiento1.remove(requerim.hashCode());
+        int indice = 0;
+        for (Hc3047Anexo41 requeri : listarequerimiento1) {
+            requeri.setId3047anexo41(indice);
+            indice++;
+            id1 = indice;
+        }
+        if (requerim.hashCode() == 0) {
+            id1 = 0;
         }
     }
 
@@ -1038,4 +1127,11 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         this.cantidad = cantidad;
     }
 
+    public List<Hc3047Anexo41> getListarequerimiento1() {
+        return listarequerimiento1;
+    }
+
+    public void setListarequerimiento1(List<Hc3047Anexo41> listarequerimiento1) {
+        this.listarequerimiento1 = listarequerimiento1;
+    }
 }

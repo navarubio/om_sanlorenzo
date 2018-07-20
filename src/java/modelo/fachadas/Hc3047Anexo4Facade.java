@@ -5,6 +5,7 @@
  */
 package modelo.fachadas;
 
+import java.util.Collections;
 import java.util.List;
 import javax.ejb.Stateless;
 import modelo.entidades.CfgPacientes;
@@ -55,5 +56,21 @@ public class Hc3047Anexo4Facade extends AbstractFacade<Hc3047Anexo4> {
         }
     }
     
+    public Hc3047Anexo4 ultimoInsertado() {
+        String consulta = null;
+        Hc3047Anexo4 ultimo = new Hc3047Anexo4();
+        try {
+            String hql = "SELECT h FROM Hc3047Anexo4 h ";
+            List<Hc3047Anexo4> lista = getEntityManager().createQuery(hql).getResultList();
+            if (!lista.isEmpty()) {
+                Collections.reverse(lista);
+                ultimo = lista.get(0);
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return ultimo;
+    }
+
 
 }
