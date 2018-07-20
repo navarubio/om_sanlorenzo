@@ -132,6 +132,9 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     private Hc3047Anexo1 nuevoAnexo1 = new Hc3047Anexo1();
     private Hc3047Anexo2 nuevoAnexo2 = new Hc3047Anexo2();
     private Hc3047Anexo3 nuevoAnexo3 = new Hc3047Anexo3();
+    private Hc3047Anexo3 codAnexo3 = new Hc3047Anexo3();    
+    private Hc3047Anexo31 anexo3Grabar = new Hc3047Anexo31();
+
     private Hc3047Anexo31 nuevoAnexo31 = new Hc3047Anexo31();
     private Hc3047Anexo4 nuevoAnexo4 = new Hc3047Anexo4();
     private Hc3047Anexo41 nuevoAnexo41 = new Hc3047Anexo41();
@@ -140,7 +143,7 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     private FacServicio facServ;
     private CfgEmpresa empresa;
     private int id = 1;
-    private double cantidad=0.0;
+    private double cantidad = 0.0;
 
     private HcAnexos3047 tipoanexoActual = new HcAnexos3047();
     private List<CfgClasificaciones> listaInconsistencias = null;
@@ -320,6 +323,16 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
                 nuevoAnexo3.setCei102(diagnosticorelacion2);
             }
             hc3047Anexo3Facade.create(nuevoAnexo3);
+            codAnexo3 = hc3047Anexo3Facade.ultimoInsertado();
+
+            for (Hc3047Anexo31 rq : listarequerimiento) {
+                anexo3Grabar.setId3047anexo3(codAnexo3);
+                anexo3Grabar.setIdServicio(rq.getIdServicio());
+                anexo3Grabar.setCantidad(rq.getCantidad());
+                hc3047Anexo3_1Facade.create(anexo3Grabar);
+            }
+//            listarequerimiento.clear();
+
             anexoActual.setConsecutivo(consecutivo);
             hcAnexos3047Facade.edit(anexoActual);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Su Anexo3 fue almacenado con el Nro " + numeroSolicitud));
@@ -550,7 +563,8 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
 
         //Instancia hacia la clase reportes Anexos
         ReporteAnexos rAnexo = new ReporteAnexos();
-
+        List<Hc3047Anexo31> listaCupsDetalles=hc3047Anexo3_1Facade.buscarAnexos31xAnexo3(codAnexo3.getId3047anexo3());
+        
         String admin = nuevoAnexo3.getIdPaciente().getIdAdministradora().getRazonSocial();
         String codadmin = nuevoAnexo3.getIdPaciente().getIdAdministradora().getCodigoAdministradora();
         String dptopaciente = nuevoAnexo3.getIdPaciente().getDepartamento().getDescripcion();
@@ -562,12 +576,14 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         String diagrel1 = nuevoAnexo3.getCei101().getNombreDiagnostico();
         String diagrel2 = nuevoAnexo3.getCei102().getNombreDiagnostico();
         String services = nuevoAnexo3.getIdservicio().getDescripcion();
+        int anexo3=codAnexo3.getId3047anexo3();
+        
 
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ServletContext servletContext = (ServletContext) facesContext.getExternalContext().getContext();
         String ruta = servletContext.getRealPath("/anexos3047/reportes/anexotree.jasper");
 
-        rAnexo.getAnexo3(admin, codadmin, mcpiopaciente, dptopaciente, dptoempresa, mcpioempresa, diagppal, diagrel1, diagrel2, services, numinform, ruta);
+        rAnexo.getAnexo3(admin, codadmin, mcpiopaciente, dptopaciente, dptoempresa, mcpioempresa, diagppal, diagrel1, diagrel2, services, numinform, anexo3, ruta);
         FacesContext.getCurrentInstance().responseComplete();
     }
 
@@ -651,11 +667,11 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         String codigocups = "";
         FacServicio nuevofacServicio = new FacServicio();
         Hc3047Anexo31 reque1 = new Hc3047Anexo31();
-        
-        if (cantidad!= 0) {
-            int index = cups1.indexOf("."); 
-            codigocups = cups1.substring(0, index-1);
-            int codServicio = Integer.parseInt(codigocups); 
+
+        if (cantidad != 0) {
+            int index = cups1.indexOf(".");
+            codigocups = cups1.substring(0, index - 1);
+            int codServicio = Integer.parseInt(codigocups);
             nuevofacServicio = facServicioFacade.find(codServicio);
             nuevoAnexo31.setIdServicio(nuevofacServicio);
             nuevoAnexo31.setCantidad(cantidad);
@@ -665,14 +681,14 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
             this.listarequerimiento.add(reque1);
             id++;
 //            nuevoAnexo31 = null;
-            cantidad=0.0;
-            cups1="";
+            cantidad = 0.0;
+            cups1 = "";
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "No puede dejar el campo Cantidad en 0.0"));
         }
 
     }
-    
+
     public void eliminar(Hc3047Anexo31 requerim) {
         listarequerimiento.remove(requerim.hashCode());
         int indice = 0;
@@ -685,7 +701,6 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
             id = 0;
         }
     }
-
 
     public String getPacienteremitido() {
         return pacienteremitido;
@@ -1023,5 +1038,4 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         this.cantidad = cantidad;
     }
 
-    
 }

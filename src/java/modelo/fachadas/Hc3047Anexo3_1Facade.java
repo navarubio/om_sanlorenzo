@@ -7,6 +7,7 @@ package modelo.fachadas;
 
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.persistence.Query;
 import modelo.entidades.CfgPacientes;
 import modelo.entidades.Hc3047Anexo1;
 import modelo.entidades.Hc3047Anexo2;
@@ -28,22 +29,31 @@ public class Hc3047Anexo3_1Facade extends AbstractFacade<Hc3047Anexo31> {
     
     public List<Hc3047Anexo31> buscar3047Anexos31() {
         try {
-            String hql = "SELECT h FROM Hc3047Anexo31 h ORDER BY h.id3047Anexo31";
+            String hql = "SELECT h FROM Hc3047Anexo31 h ORDER BY h.id3047anexo31";
             return getEntityManager().createQuery(hql).getResultList();
         } catch (Exception e) {
             return null;
         }
     }
     
-    public Hc3047Anexo31 get3047Anexos31xAnexo3 (int idanexo3){
+    public Hc3047Anexo31 buscar3047Anexos31xAnexo3 (int idanexo3){
         try {
-            String hql ="SELECT h FROM Hc3047Anexo31 h WHERE h.id3047anexo31 = :id3047anexo31";
-            List<Hc3047Anexo31> lista = getEntityManager().createQuery(hql).setParameter("id3047anexo31", idanexo3).getResultList();
+            String hql ="SELECT h FROM Hc3047Anexo31 h WHERE h.id3047anexo3 = :id3047anexo3";
+            List<Hc3047Anexo31> lista = getEntityManager().createQuery(hql).setParameter("id3047anexo3", idanexo3).getResultList();
             return lista.size() > 0 ? lista.get(0) : null;
         } catch (Exception e) {
             return null;
         }
     }
     
-
+    public List<Hc3047Anexo31> buscarAnexos31xAnexo3 (int anexo3){
+        try {
+            String hql ="FROM Hc3047Anexo31 h WHERE h.id3047anexo3.id3047anexo3 = ?1";
+            List<Hc3047Anexo31> lista = getEntityManager().createQuery(hql).setParameter(1, anexo3).getResultList();
+            return lista;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
 }

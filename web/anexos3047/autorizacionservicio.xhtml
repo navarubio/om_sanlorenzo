@@ -308,7 +308,7 @@
                         <p:autoComplete id="codcup" size="80" value="#{manejarAnexos3047MB.cups1}" completeMethod="#{manejarAnexos3047MB.autocompletarServicio}" forceSelection="true"/>
                         <p:outputLabel  value="CANTIDAD"/>
                         <p:inputText id="cantcup" value="#{manejarAnexos3047MB.cantidad}" required="true" size="10" /> 
-                        <p:commandButton value="Anexar" icon="ui-icon-plusthick"  action="#{manejarAnexos3047MB.anexarCups()}" update="listado,ingresarcups" rendered="#{manejarAnexos3047MB.listarequerimiento.size()== 0? true:false}"/>      
+                        <p:commandButton value="Anexar" icon="ui-icon-plusthick"  action="#{manejarAnexos3047MB.anexarCups()}" update="listado,ingresarcups" />      
                     </p:panelGrid>
                 </p:panel>
                 <p:panel style="width: 1030px;">
