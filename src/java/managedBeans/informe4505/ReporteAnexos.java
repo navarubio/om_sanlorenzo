@@ -264,7 +264,7 @@ public class ReporteAnexos {
     
     public void getAnexo4(String admin, String codadmin, String mcpiopaciente, String dptopaciente, 
             String dptoempresa, String mcpioempresa, String services, 
-            String numinform, String ruta ) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+            String numinform, int anexo4, String ruta ) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         
         if (ruta != null) {
 
@@ -282,6 +282,7 @@ public class ReporteAnexos {
             parameter.put("mcpioempresa", mcpioempresa);
             parameter.put("services", services);
             parameter.put("numinform", numinform);
+            parameter.put("anexo4", anexo4); 
             
             try {
                 File file = new File(ruta);

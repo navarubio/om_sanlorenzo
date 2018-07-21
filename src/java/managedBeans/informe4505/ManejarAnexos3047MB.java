@@ -623,10 +623,22 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         String dptoempresa = empresa.getCodDepartamento().getDescripcion();
         String mcpioempresa = empresa.getCodMunicipio().getDescripcion();
         String numinform = numeroSolicitud;
-        String diagppal = nuevoAnexo3.getCei100().getNombreDiagnostico();
-        String diagrel1 = nuevoAnexo3.getCei101().getNombreDiagnostico();
-        String diagrel2 = nuevoAnexo3.getCei102().getNombreDiagnostico();
-        String services = nuevoAnexo3.getIdservicio().getDescripcion();
+        String diagppal=null;
+        String diagrel1=null;
+        String diagrel2=null;
+        String services=null;
+        if (nuevoAnexo3.getCei100().getNombreDiagnostico()!=null){
+            diagppal = nuevoAnexo3.getCei100().getNombreDiagnostico();
+        }    
+        if (nuevoAnexo3.getCei101().getNombreDiagnostico()!=null){
+            diagrel1 = nuevoAnexo3.getCei101().getNombreDiagnostico();
+        }    
+        if (nuevoAnexo3.getCei102().getNombreDiagnostico()!=null){
+            diagrel2 = nuevoAnexo3.getCei102().getNombreDiagnostico();
+        }    
+        if (nuevoAnexo3.getIdservicio().getDescripcion()!=null){
+            services = nuevoAnexo3.getIdservicio().getDescripcion();
+        }
         int anexo3 = codAnexo3.getId3047anexo3();
 
         FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -649,13 +661,18 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         String dptoempresa = empresa.getCodDepartamento().getDescripcion();
         String mcpioempresa = empresa.getCodMunicipio().getDescripcion();
         String numinform = numeroAutorizacion;
-        String services = nuevoAnexo4.getIdservicio().getDescripcion();
+        String services=null;
+        if (nuevoAnexo4.getIdservicio().getDescripcion()!=null){
+            services = nuevoAnexo4.getIdservicio().getDescripcion();
+        }
+        int anexo4 = codAnexo4.getId3047anexo4();
+        
 
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ServletContext servletContext = (ServletContext) facesContext.getExternalContext().getContext();
         String ruta = servletContext.getRealPath("/anexos3047/reportes/anexofour.jasper");
 
-        rAnexo.getAnexo4(admin, codadmin, mcpiopaciente, dptopaciente, dptoempresa, mcpioempresa, services, numinform, ruta);
+        rAnexo.getAnexo4(admin, codadmin, mcpiopaciente, dptopaciente, dptoempresa, mcpioempresa, services, numinform, anexo4, ruta);
         FacesContext.getCurrentInstance().responseComplete();
     }
 

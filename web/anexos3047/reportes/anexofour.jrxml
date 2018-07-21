@@ -73,7 +73,7 @@ and cfg_usuarios.id_usuario = 176;]]>
 		<field name="genero" class="java.lang.Integer"/>
 		<field name="visible" class="java.lang.Boolean"/>
 		<field name="personal_atiende" class="java.lang.Integer">
-			<fieldDescription><![CDATA[ sii el usuario es prestador debe permitir especificar el tipo de personal que atiende (por defecto va ser 1):
+			<fieldDescription><![CDATA[sii el usuario es prestador debe permitir especificar el tipo de personal que atiende (por defecto va ser 1):
 1=Médico(a) especialista,
 2 =Médico(a) general
 3 =Enfermera (o)
@@ -314,7 +314,7 @@ WHERE
 	<field name="fecha_creacion" class="java.sql.Timestamp"/>
 	<field name="visible" class="java.lang.Boolean"/>
 	<field name="personal_atiende" class="java.lang.Integer">
-		<fieldDescription><![CDATA[ sii el usuario es prestador debe permitir especificar el tipo de personal que atiende (por defecto va ser 1):
+		<fieldDescription><![CDATA[sii el usuario es prestador debe permitir especificar el tipo de personal que atiende (por defecto va ser 1):
 1=Médico(a) especialista,
 2 =Médico(a) general
 3 =Enfermera (o)
@@ -340,13 +340,11 @@ WHERE
 		<fieldDescription><![CDATA[NOMBRE DE LA EMPRESA QUE COMPRA EL SOFTWARE]]></fieldDescription>
 	</field>
 	<field name="tipo_doc_rep_legal" class="java.lang.Integer">
-		<fieldDescription><![CDATA[TIPO DE DOCUMENTO DEL REPRESENTANTE LEGALPARA ESTE CASO SERIA CC, CE, PASAPORTE.
-]]></fieldDescription>
+		<fieldDescription><![CDATA[TIPO DE DOCUMENTO DEL REPRESENTANTE LEGALPARA ESTE CASO SERIA CC, CE, PASAPORTE.]]></fieldDescription>
 	</field>
 	<field name="num_doc_rep_legal" class="java.lang.String"/>
 	<field name="nom_rep_legal" class="java.lang.String">
-		<fieldDescription><![CDATA[NOMBRE DEL REPRESENTANTE LEGAL DE LA EMPRESA
-]]></fieldDescription>
+		<fieldDescription><![CDATA[NOMBRE DEL REPRESENTANTE LEGAL DE LA EMPRESA]]></fieldDescription>
 	</field>
 	<field name="telefono_1" class="java.lang.String"/>
 	<field name="telefono_2" class="java.lang.String"/>
@@ -2177,7 +2175,7 @@ WHERE
 					<text><![CDATA[Cargo o Actividad]]></text>
 				</staticText>
 				<textField isBlankWhenNull="true">
-					<reportElement x="122" y="0" width="159" height="18" uuid="6515904e-14b9-4df0-b0d0-9cecb194c5c7"/>
+					<reportElement x="109" y="0" width="172" height="18" uuid="6515904e-14b9-4df0-b0d0-9cecb194c5c7"/>
 					<textElement>
 						<font size="9"/>
 					</textElement>

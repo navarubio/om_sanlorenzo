@@ -1445,9 +1445,9 @@ WHERE
 				<textField>
 					<reportElement x="9" y="52" width="556" height="86" uuid="67253bc6-9ab7-4be5-9225-05467e48f3f2"/>
 					<textElement>
-						<font size="9"/>
+						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{hc_3047_anexo6_informacionrelevante}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -1512,7 +1512,7 @@ WHERE
 				<textField>
 					<reportElement x="8" y="11" width="272" height="12" uuid="6515904e-14b9-4df0-b0d0-9cecb194c5c7"/>
 					<textElement textAlignment="Right">
-						<font size="9"/>
+						<font size="8"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{hc_3047_anexo6_servicioqcontrarrefiere}]]></textFieldExpression>
 				</textField>
@@ -1526,7 +1526,7 @@ WHERE
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="53" y="0" width="100" height="12" uuid="d284c38c-c910-4659-861d-91241ede8e3a"/>
 					<textElement textAlignment="Center">
 						<font size="8"/>
@@ -1575,10 +1575,10 @@ WHERE
 					</textElement>
 					<text><![CDATA[Celular]]></text>
 				</staticText>
-				<textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 					<reportElement x="85" y="7" width="135" height="12" uuid="4be12d18-257a-46ff-9435-f944cd99c9e2"/>
 					<textElement textAlignment="Center">
-						<font size="9"/>
+						<font size="8"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{cfg_usuarios_celular}]]></textFieldExpression>
 				</textField>

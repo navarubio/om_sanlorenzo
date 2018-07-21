@@ -49,10 +49,17 @@
      cfg_usuarios."celular" AS cfg_usuarios_celular,
      cfg_usuarios."telefono_oficina" AS cfg_usuarios_telefono_oficina,
      cfg_usuarios."cargo_actual" AS cfg_usuarios_cargo_actual,
-     cfg_empresa."direccion" AS cfg_empresa_direccion
+     cfg_empresa."direccion" AS cfg_empresa_direccion,
+     cfg_clasificaciones."id" AS cfg_clasificaciones_id,
+     cfg_clasificaciones."codigo" AS cfg_clasificaciones_codigo,
+     cfg_clasificaciones."maestro" AS cfg_clasificaciones_maestro,
+     cfg_clasificaciones."descripcion" AS cfg_clasificaciones_descripcion,
+     cfg_clasificaciones."observacion" AS cfg_clasificaciones_observacion,
+     cfg_usuarios."especialidad" AS cfg_usuarios_especialidad
 FROM
      "cfg_pacientes" cfg_pacientes INNER JOIN "hc_3047_anexo1" hc_3047_anexo1 ON cfg_pacientes."id_paciente" = hc_3047_anexo1."id_paciente"
-     INNER JOIN "cfg_usuarios" cfg_usuarios ON hc_3047_anexo1."id_usuario" = cfg_usuarios."id_usuario",
+     INNER JOIN "cfg_usuarios" cfg_usuarios ON hc_3047_anexo1."id_usuario" = cfg_usuarios."id_usuario"
+     INNER JOIN "public"."cfg_clasificaciones" cfg_clasificaciones ON cfg_usuarios."especialidad" = cfg_clasificaciones."id",
      "cfg_empresa" cfg_empresa
 WHERE
      hc_3047_anexo1."numeroinforme" = $P{numinform}]]>
@@ -168,7 +175,7 @@ WHERE
 	<field name="fecha_creacion" class="java.sql.Timestamp"/>
 	<field name="visible" class="java.lang.Boolean"/>
 	<field name="personal_atiende" class="java.lang.Integer">
-		<fieldDescription><![CDATA[sii el usuario es prestador debe permitir especificar el tipo de personal que atiende (por defecto va ser 1):
+		<fieldDescription><![CDATA[ sii el usuario es prestador debe permitir especificar el tipo de personal que atiende (por defecto va ser 1):
 1=Médico(a) especialista,
 2 =Médico(a) general
 3 =Enfermera (o)
@@ -178,6 +185,10 @@ WHERE
 	<field name="mostrar_en_historias" class="java.lang.Boolean">
 		<fieldDescription><![CDATA[Permite identificar si este usuario se lista en los formularios de registros clinicos]]></fieldDescription>
 	</field>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="codigo" class="java.lang.String"/>
+	<field name="maestro" class="java.lang.String"/>
+	<field name="descripcion" class="java.lang.String"/>
 	<field name="cod_empresa" class="java.lang.Integer"/>
 	<field name="cod_departamento" class="java.lang.Integer"/>
 	<field name="cod_municipio" class="java.lang.Integer"/>
@@ -190,11 +201,13 @@ WHERE
 		<fieldDescription><![CDATA[NOMBRE DE LA EMPRESA QUE COMPRA EL SOFTWARE]]></fieldDescription>
 	</field>
 	<field name="tipo_doc_rep_legal" class="java.lang.Integer">
-		<fieldDescription><![CDATA[TIPO DE DOCUMENTO DEL REPRESENTANTE LEGALPARA ESTE CASO SERIA CC, CE, PASAPORTE.]]></fieldDescription>
+		<fieldDescription><![CDATA[TIPO DE DOCUMENTO DEL REPRESENTANTE LEGALPARA ESTE CASO SERIA CC, CE, PASAPORTE.
+]]></fieldDescription>
 	</field>
 	<field name="num_doc_rep_legal" class="java.lang.String"/>
 	<field name="nom_rep_legal" class="java.lang.String">
-		<fieldDescription><![CDATA[NOMBRE DEL REPRESENTANTE LEGAL DE LA EMPRESA]]></fieldDescription>
+		<fieldDescription><![CDATA[NOMBRE DEL REPRESENTANTE LEGAL DE LA EMPRESA
+]]></fieldDescription>
 	</field>
 	<field name="telefono_1" class="java.lang.String"/>
 	<field name="telefono_2" class="java.lang.String"/>
@@ -247,6 +260,12 @@ WHERE
 	<field name="cfg_usuarios_telefono_oficina" class="java.lang.String"/>
 	<field name="cfg_usuarios_cargo_actual" class="java.lang.String"/>
 	<field name="cfg_empresa_direccion" class="java.lang.String"/>
+	<field name="cfg_clasificaciones_id" class="java.lang.Integer"/>
+	<field name="cfg_clasificaciones_codigo" class="java.lang.String"/>
+	<field name="cfg_clasificaciones_maestro" class="java.lang.String"/>
+	<field name="cfg_clasificaciones_descripcion" class="java.lang.String"/>
+	<field name="cfg_clasificaciones_observacion" class="java.lang.String"/>
+	<field name="cfg_usuarios_especialidad" class="java.lang.Integer"/>
 	<variable name="papellido" class="java.lang.String">
 		<variableExpression><![CDATA[($F{primerapellido}== null ? "":"X")]]></variableExpression>
 	</variable>
@@ -1887,7 +1906,7 @@ WHERE
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="62" y="0" width="135" height="12" uuid="4ecd111c-e208-4d30-b602-1d356e1db572"/>
 					<textElement textAlignment="Center">
 						<font size="8"/>
@@ -1904,7 +1923,7 @@ WHERE
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="62" y="0" width="135" height="12" uuid="9b513b37-1aeb-4110-a049-e8e7fd6394bb"/>
 					<textElement textAlignment="Center">
 						<font size="8"/>
@@ -1921,7 +1940,7 @@ WHERE
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="62" y="0" width="135" height="12" uuid="56284207-149c-4629-b43b-174a63486003"/>
 					<textElement textAlignment="Center">
 						<font size="8"/>
@@ -1938,7 +1957,7 @@ WHERE
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="62" y="0" width="135" height="12" uuid="f0b2d8fc-c043-46a9-aa96-4f05eba15da8"/>
 					<textElement textAlignment="Center">
 						<font size="8"/>
@@ -1955,7 +1974,7 @@ WHERE
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="23" y="0" width="66" height="12" uuid="5ae76f1f-400e-4b6e-a3ad-8df037529dac"/>
 					<textElement textAlignment="Center">
 						<font size="8"/>
@@ -1972,7 +1991,7 @@ WHERE
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="17" y="0" width="77" height="12" uuid="ea4cd0bc-33a7-4058-ae73-95d2063e8412"/>
 					<textElement textAlignment="Center">
 						<font size="8"/>
@@ -1989,7 +2008,7 @@ WHERE
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textField pattern="yyyy/MM/dd">
+				<textField pattern="yyyy/MM/dd" isBlankWhenNull="true">
 					<reportElement x="83" y="0" width="77" height="12" uuid="169d0b93-03dc-4cb4-afad-9181f0a1b98b"/>
 					<textElement textAlignment="Center">
 						<font size="8"/>
@@ -2012,7 +2031,7 @@ WHERE
 						<font size="9" isBold="true"/>
 						<paragraph leftIndent="5"/>
 					</textElement>
-					<text><![CDATA[	DATOS DE LA PERSONA QUE REPORTA]]></text>
+					<text><![CDATA[	INFORMACION DE LA PERSONA QUE REPORTA]]></text>
 				</staticText>
 			</frame>
 			<frame>
@@ -2035,14 +2054,14 @@ WHERE
 				<textField>
 					<reportElement x="60" y="4" width="78" height="20" uuid="34060e4f-b85f-405a-80a4-79f17dbc67ef"/>
 					<textElement textAlignment="Right">
-						<font size="9"/>
+						<font size="8"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{cfg_usuarios_primer_nombre}]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="144" y="4" width="100" height="20" uuid="f97a2ad4-9750-4047-9db9-95ef4dc56937"/>
 					<textElement>
-						<font size="9"/>
+						<font size="8"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{cfg_usuarios_primer_apellido}]]></textFieldExpression>
 				</textField>
@@ -2067,9 +2086,9 @@ WHERE
 				<textField>
 					<reportElement x="108" y="0" width="168" height="19" uuid="6515904e-14b9-4df0-b0d0-9cecb194c5c7"/>
 					<textElement>
-						<font size="9"/>
+						<font fontName="SansSerif" size="7"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{cfg_usuarios_cargo_actual}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{cfg_clasificaciones_descripcion}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -2081,7 +2100,7 @@ WHERE
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="53" y="0" width="100" height="12" uuid="d284c38c-c910-4659-861d-91241ede8e3a"/>
 					<textElement textAlignment="Center">
 						<font size="8"/>
@@ -2123,14 +2142,14 @@ WHERE
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<staticText>
-					<reportElement x="11" y="7" width="47" height="12" uuid="64f055aa-b3d5-4bcc-b158-a3d796feb72e"/>
+					<reportElement x="1" y="7" width="84" height="12" uuid="64f055aa-b3d5-4bcc-b158-a3d796feb72e"/>
 					<textElement>
 						<font size="9" isBold="true"/>
 						<paragraph leftIndent="5"/>
 					</textElement>
-					<text><![CDATA[Celular]]></text>
+					<text><![CDATA[Telefono Celular]]></text>
 				</staticText>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="85" y="7" width="135" height="12" uuid="4be12d18-257a-46ff-9435-f944cd99c9e2"/>
 					<textElement textAlignment="Center">
 						<font size="9"/>

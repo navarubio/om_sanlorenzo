@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0e740dac-5d5b-49a4-a38d-2f78e2775af8">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="183"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="numinform" class="java.lang.String"/>
 	<parameter name="admin" class="java.lang.String"/>
 	<parameter name="codadmin" class="java.lang.String"/>
@@ -1452,12 +1452,12 @@ WHERE
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<staticText>
-					<reportElement x="9" y="0" width="557" height="37" uuid="0ca43f39-4656-4619-bde4-adbe4d286fe9"/>
+					<reportElement stretchType="RelativeToBandHeight" x="9" y="0" width="557" height="37" uuid="0ca43f39-4656-4619-bde4-adbe4d286fe9"/>
 					<textElement>
 						<font size="9" isBold="true"/>
 						<paragraph leftIndent="5"/>
 					</textElement>
-					<text><![CDATA["Diligencie en el orden indicado el resumen de anamnesis y examen físico, fechas y resultados de examenes auxiliares de diagnostico, resumen de la evolución , diagnostico, complicaciones,tratamientos aplicados y motivo de Remisión. Al finalizar, el profesional tratante debe firmar la solicitud de referencia y anotar su registro profesional. "]]></text>
+					<text><![CDATA[Diligencie en el orden indicado el resumen de anamnesis y examen físico, fechas y resultados de examenes auxiliares de diagnostico, resumen de la evolución , diagnostico, complicaciones,tratamientos aplicados y motivo de Remisión. Al finalizar, el profesional tratante debe firmar la solicitud de referencia y anotar su registro profesional. ]]></text>
 				</staticText>
 				<textField>
 					<reportElement x="8" y="47" width="558" height="73" uuid="67253bc6-9ab7-4be5-9225-05467e48f3f2"/>
@@ -1558,7 +1558,7 @@ WHERE
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="53" y="0" width="100" height="12" uuid="d284c38c-c910-4659-861d-91241ede8e3a"/>
 					<textElement textAlignment="Center">
 						<font size="8"/>
@@ -1607,7 +1607,7 @@ WHERE
 					</textElement>
 					<text><![CDATA[Celular]]></text>
 				</staticText>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="85" y="7" width="135" height="12" uuid="4be12d18-257a-46ff-9435-f944cd99c9e2"/>
 					<textElement textAlignment="Center">
 						<font size="9"/>
@@ -1978,7 +1978,7 @@ WHERE
 					<textElement>
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{direccion}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{hc_3047_anexo5_direccion}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
