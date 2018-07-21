@@ -3,6 +3,37 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<subDataset name="dataset1" uuid="47725d2c-b805-42a2-aec5-9052460f6d7f">
+		<parameter name="anexo3" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+     hc_3047_anexo3_1."id_3047anexo3_1" AS hc_3047_anexo3_1_id_3047anexo3_1,
+     hc_3047_anexo3_1."id_3047anexo3" AS hc_3047_anexo3_1_id_3047anexo3,
+     hc_3047_anexo3_1."id_servicio" AS hc_3047_anexo3_1_id_servicio,
+     hc_3047_anexo3_1."cantidad" AS hc_3047_anexo3_1_cantidad,
+     fac_servicio."id_servicio" AS fac_servicio_id_servicio,
+     fac_servicio."codigo_servicio" AS fac_servicio_codigo_servicio,
+     fac_servicio."codigo_cup" AS fac_servicio_codigo_cup,
+     fac_servicio."nombre_servicio" AS fac_servicio_nombre_servicio,
+     fac_servicio."codigo_iss" AS fac_servicio_codigo_iss
+FROM
+     "public"."fac_servicio" fac_servicio INNER JOIN "public"."hc_3047_anexo3_1" hc_3047_anexo3_1 ON fac_servicio."id_servicio" = hc_3047_anexo3_1."id_servicio"
+
+WHERE
+      hc_3047_anexo3_1."id_3047anexo3" =$P{anexo3}]]>
+		</queryString>
+		<field name="hc_3047_anexo3_1_id_3047anexo3_1" class="java.lang.Integer"/>
+		<field name="hc_3047_anexo3_1_id_3047anexo3" class="java.lang.Integer"/>
+		<field name="hc_3047_anexo3_1_id_servicio" class="java.lang.Integer"/>
+		<field name="hc_3047_anexo3_1_cantidad" class="java.lang.Double"/>
+		<field name="fac_servicio_id_servicio" class="java.lang.Integer"/>
+		<field name="fac_servicio_codigo_servicio" class="java.lang.String"/>
+		<field name="fac_servicio_codigo_cup" class="java.lang.String"/>
+		<field name="fac_servicio_nombre_servicio" class="java.lang.String"/>
+		<field name="fac_servicio_codigo_iss" class="java.lang.String"/>
+	</subDataset>
 	<parameter name="numinform" class="java.lang.String"/>
 	<parameter name="admin" class="java.lang.String"/>
 	<parameter name="codadmin" class="java.lang.String"/>
@@ -14,6 +45,7 @@
 	<parameter name="diagrel1" class="java.lang.String"/>
 	<parameter name="diagrel2" class="java.lang.String"/>
 	<parameter name="services" class="java.lang.String"/>
+	<parameter name="anexo3" class="java.lang.Integer"/>
 	<queryString>
 		<![CDATA[SELECT
      *,
@@ -69,13 +101,21 @@
      cfg_empresa."codigo_empresa" AS cfg_empresa_codigo_empresa,
      cfg_pacientes."id_administradora" AS cfg_pacientes_id_administradora,
      cfg_usuarios."email" AS cfg_usuarios_email,
-     cfg_usuarios."especialidad" AS cfg_usuarios_especialidad
+     cfg_usuarios."especialidad" AS cfg_usuarios_especialidad,
+     cfg_clasificaciones."id" AS cfg_clasificaciones_id,
+     cfg_clasificaciones."codigo" AS cfg_clasificaciones_codigo,
+     cfg_clasificaciones."maestro" AS cfg_clasificaciones_maestro,
+     cfg_clasificaciones."descripcion" AS cfg_clasificaciones_descripcion,
+     cfg_clasificaciones."observacion" AS cfg_clasificaciones_observacion
 FROM
      "cfg_usuarios" cfg_usuarios INNER JOIN "public"."hc_3047_anexo3" hc_3047_anexo3 ON cfg_usuarios."id_usuario" = hc_3047_anexo3."id_usuario"
-     INNER JOIN "cfg_pacientes" cfg_pacientes ON hc_3047_anexo3."id_paciente" = cfg_pacientes."id_paciente",
+     INNER JOIN "cfg_pacientes" cfg_pacientes ON hc_3047_anexo3."id_paciente" = cfg_pacientes."id_paciente"
+     INNER JOIN "public"."cfg_clasificaciones" cfg_clasificaciones ON cfg_usuarios."especialidad" = cfg_clasificaciones."id",
      "cfg_empresa" cfg_empresa
 WHERE
-     hc_3047_anexo3."numerosolicitud" = $P{numinform}]]>
+     hc_3047_anexo3."numerosolicitud" = $P{numinform}
+
+]]>
 	</queryString>
 	<field name="id_usuario" class="java.lang.Integer"/>
 	<field name="tipo_usuario" class="java.lang.Integer">
@@ -112,7 +152,7 @@ WHERE
 	<field name="genero" class="java.lang.Integer"/>
 	<field name="visible" class="java.lang.Boolean"/>
 	<field name="personal_atiende" class="java.lang.Integer">
-		<fieldDescription><![CDATA[sii el usuario es prestador debe permitir especificar el tipo de personal que atiende (por defecto va ser 1):
+		<fieldDescription><![CDATA[ sii el usuario es prestador debe permitir especificar el tipo de personal que atiende (por defecto va ser 1):
 1=Médico(a) especialista,
 2 =Médico(a) general
 3 =Enfermera (o)
@@ -202,6 +242,10 @@ WHERE
 	</field>
 	<field name="id_contrato" class="java.lang.Integer"/>
 	<field name="parentesco_a" class="java.lang.Integer"/>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="codigo" class="java.lang.String"/>
+	<field name="maestro" class="java.lang.String"/>
+	<field name="descripcion" class="java.lang.String"/>
 	<field name="cod_empresa" class="java.lang.Integer"/>
 	<field name="cod_departamento" class="java.lang.Integer"/>
 	<field name="cod_municipio" class="java.lang.Integer"/>
@@ -214,11 +258,13 @@ WHERE
 		<fieldDescription><![CDATA[NOMBRE DE LA EMPRESA QUE COMPRA EL SOFTWARE]]></fieldDescription>
 	</field>
 	<field name="tipo_doc_rep_legal" class="java.lang.Integer">
-		<fieldDescription><![CDATA[TIPO DE DOCUMENTO DEL REPRESENTANTE LEGALPARA ESTE CASO SERIA CC, CE, PASAPORTE.]]></fieldDescription>
+		<fieldDescription><![CDATA[TIPO DE DOCUMENTO DEL REPRESENTANTE LEGALPARA ESTE CASO SERIA CC, CE, PASAPORTE.
+]]></fieldDescription>
 	</field>
 	<field name="num_doc_rep_legal" class="java.lang.String"/>
 	<field name="nom_rep_legal" class="java.lang.String">
-		<fieldDescription><![CDATA[NOMBRE DEL REPRESENTANTE LEGAL DE LA EMPRESA]]></fieldDescription>
+		<fieldDescription><![CDATA[NOMBRE DEL REPRESENTANTE LEGAL DE LA EMPRESA
+]]></fieldDescription>
 	</field>
 	<field name="telefono_1" class="java.lang.String"/>
 	<field name="telefono_2" class="java.lang.String"/>
@@ -287,6 +333,11 @@ WHERE
 	<field name="cfg_pacientes_id_administradora" class="java.lang.Integer"/>
 	<field name="cfg_usuarios_email" class="java.lang.String"/>
 	<field name="cfg_usuarios_especialidad" class="java.lang.Integer"/>
+	<field name="cfg_clasificaciones_id" class="java.lang.Integer"/>
+	<field name="cfg_clasificaciones_codigo" class="java.lang.String"/>
+	<field name="cfg_clasificaciones_maestro" class="java.lang.String"/>
+	<field name="cfg_clasificaciones_descripcion" class="java.lang.String"/>
+	<field name="cfg_clasificaciones_observacion" class="java.lang.String"/>
 	<variable name="rc" class="java.lang.String">
 		<variableExpression><![CDATA[($F{cfg_pacientes_tipo_identificacion}==1767 ? "X":"")]]></variableExpression>
 	</variable>
@@ -487,7 +538,7 @@ WHERE
 		<band splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="668" splitType="Stretch">
+		<band height="660" splitType="Stretch">
 			<frame>
 				<reportElement positionType="Float" x="0" y="544" width="572" height="56" backcolor="#E6E6E6" uuid="1fbb5a20-b0c9-473c-a660-2397b326dc3d"/>
 				<box>
@@ -506,6 +557,22 @@ WHERE
 					<text><![CDATA[Impresión Diagnostica]]></text>
 				</staticText>
 				<staticText>
+					<reportElement x="35" y="44" width="140" height="12" uuid="2521ee71-bebd-4d84-915c-b688b53536fb"/>
+					<textElement>
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<text><![CDATA[Diagnóstico Relacionado 2]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="35" y="32" width="137" height="12" uuid="f0c796e8-1581-4f5c-90dc-3790c4815341"/>
+					<textElement>
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<text><![CDATA[Diagnóstico Relacionado 1]]></text>
+				</staticText>
+				<staticText>
 					<reportElement x="171" y="5" width="136" height="12" uuid="a374ec67-367c-4d29-88f3-65530468f5fb"/>
 					<textElement>
 						<font size="8" isBold="true"/>
@@ -520,6 +587,14 @@ WHERE
 						<paragraph leftIndent="5"/>
 					</textElement>
 					<text><![CDATA[DESCRIPCION]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="35" y="20" width="125" height="12" uuid="26e81f7a-a219-4245-857e-3fe2b7968c35"/>
+					<textElement>
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<text><![CDATA[Diagnóstico Principal]]></text>
 				</staticText>
 				<textField pattern="yyyy/MM/dd">
 					<reportElement x="181" y="20" width="64" height="11" uuid="deb66f14-3408-4ea1-a57c-12ce0e7fa8b0"/>
@@ -1670,22 +1745,6 @@ WHERE
 					<text><![CDATA[INFORMACION DE LA ATENCIÓN Y SERVICIOS SOLICITADOS]]></text>
 				</staticText>
 			</frame>
-			<staticText>
-				<reportElement x="33" y="588" width="138" height="12" uuid="2521ee71-bebd-4d84-915c-b688b53536fb"/>
-				<textElement>
-					<font size="9" isBold="true"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<text><![CDATA[Diagnóstico Relacionado 2]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="33" y="576" width="137" height="12" uuid="f0c796e8-1581-4f5c-90dc-3790c4815341"/>
-				<textElement>
-					<font size="9" isBold="true"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<text><![CDATA[Diagnóstico Relacionado 1]]></text>
-			</staticText>
 			<frame>
 				<reportElement positionType="Float" x="175" y="587" width="70" height="12" backcolor="#E6E6E6" uuid="9030da99-b05d-4a12-a0d1-bd3194272a31"/>
 				<box>
@@ -1713,14 +1772,6 @@ WHERE
 					<rightPen lineWidth="0.5"/>
 				</box>
 			</frame>
-			<staticText>
-				<reportElement x="33" y="564" width="125" height="12" uuid="26e81f7a-a219-4245-857e-3fe2b7968c35"/>
-				<textElement>
-					<font size="9" isBold="true"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<text><![CDATA[Diagnóstico Principal]]></text>
-			</staticText>
 			<frame>
 				<reportElement positionType="Float" x="260" y="564" width="312" height="12" backcolor="#E6E6E6" uuid="4c749104-c793-40f0-b751-f055ded55e73"/>
 				<box>
@@ -1835,14 +1886,14 @@ WHERE
 				<textField>
 					<reportElement x="61" y="4" width="78" height="20" uuid="34060e4f-b85f-405a-80a4-79f17dbc67ef"/>
 					<textElement textAlignment="Right">
-						<font size="9"/>
+						<font size="8"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{cfg_usuarios_primer_nombre}]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="145" y="4" width="100" height="20" uuid="f97a2ad4-9750-4047-9db9-95ef4dc56937"/>
 					<textElement>
-						<font size="9"/>
+						<font size="8"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{cfg_usuarios_primer_apellido}]]></textFieldExpression>
 				</textField>
@@ -1867,9 +1918,9 @@ WHERE
 				<textField isBlankWhenNull="true">
 					<reportElement x="111" y="0" width="168" height="19" uuid="6515904e-14b9-4df0-b0d0-9cecb194c5c7"/>
 					<textElement>
-						<font size="9"/>
+						<font size="7"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{cfg_usuarios_cargo_actual}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{cfg_clasificaciones_descripcion}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -1882,7 +1933,7 @@ WHERE
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textField isBlankWhenNull="true">
-					<reportElement x="53" y="0" width="100" height="12" uuid="d284c38c-c910-4659-861d-91241ede8e3a"/>
+					<reportElement x="45" y="0" width="100" height="12" uuid="d284c38c-c910-4659-861d-91241ede8e3a"/>
 					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
@@ -1914,7 +1965,7 @@ WHERE
 				<text><![CDATA[extensión]]></text>
 			</staticText>
 			<frame>
-				<reportElement positionType="Float" x="285" y="635" width="287" height="19" backcolor="#E6E6E6" uuid="9a980891-53cc-42cf-bdd0-aed44b7fb9f5"/>
+				<reportElement positionType="Float" x="285" y="612" width="287" height="42" backcolor="#E6E6E6" uuid="9a980891-53cc-42cf-bdd0-aed44b7fb9f5"/>
 				<box>
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -1923,7 +1974,7 @@ WHERE
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<staticText>
-					<reportElement x="11" y="7" width="47" height="12" uuid="64f055aa-b3d5-4bcc-b158-a3d796feb72e"/>
+					<reportElement x="11" y="26" width="47" height="12" uuid="64f055aa-b3d5-4bcc-b158-a3d796feb72e"/>
 					<textElement>
 						<font size="9" isBold="true"/>
 						<paragraph leftIndent="5"/>
@@ -1931,12 +1982,20 @@ WHERE
 					<text><![CDATA[Celular]]></text>
 				</staticText>
 				<textField isBlankWhenNull="true">
-					<reportElement x="85" y="7" width="135" height="12" uuid="4be12d18-257a-46ff-9435-f944cd99c9e2"/>
+					<reportElement x="82" y="26" width="135" height="12" uuid="4be12d18-257a-46ff-9435-f944cd99c9e2"/>
 					<textElement textAlignment="Center">
 						<font size="9"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{cfg_usuarios_celular}]]></textFieldExpression>
 				</textField>
+				<staticText>
+					<reportElement x="7" y="4" width="47" height="12" uuid="57c6dcca-7ca3-4cdc-a430-587bbf0b9cb0"/>
+					<textElement>
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<text><![CDATA[Teléfono]]></text>
+				</staticText>
 			</frame>
 			<frame>
 				<reportElement positionType="Float" x="345" y="624" width="227" height="12" backcolor="#E6E6E6" uuid="3ceeb4be-06cf-4343-8951-31cde597871b"/>
@@ -1948,22 +2007,6 @@ WHERE
 					<rightPen lineWidth="0.5"/>
 				</box>
 			</frame>
-			<staticText>
-				<reportElement x="286" y="612" width="57" height="12" uuid="d631a7a4-bd13-4fd4-a509-67ebc5fd8cc3"/>
-				<textElement>
-					<font size="9" isBold="true"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<text><![CDATA[Teléfono]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="3" y="654" width="190" height="12" uuid="acea9dd1-f73a-4286-a69c-074a29232192"/>
-				<textElement>
-					<font size="9" isBold="true"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<text><![CDATA[MPS-AIU-V5.0 2008-07-11]]></text>
-			</staticText>
 			<textField>
 				<reportElement x="95" y="37" width="47" height="12" uuid="e0b5054f-bec5-402b-8b56-d62d04dcf936"/>
 				<textElement textAlignment="Center">
@@ -2408,7 +2451,7 @@ WHERE
 					</textField>
 				</frame>
 				<staticText>
-					<reportElement x="2" y="23" width="159" height="12" uuid="30d17c6d-cd2f-4b6a-bc68-9a0cd0a02608"/>
+					<reportElement x="2" y="23" width="119" height="12" uuid="30d17c6d-cd2f-4b6a-bc68-9a0cd0a02608"/>
 					<textElement>
 						<font size="8" isBold="true"/>
 						<paragraph leftIndent="5"/>
@@ -2416,7 +2459,7 @@ WHERE
 					<text><![CDATA[CODIGO CUPS]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="95" y="23" width="159" height="12" uuid="f31cd78f-b835-4851-a3a7-a446957251c1"/>
+					<reportElement x="64" y="23" width="51" height="11" uuid="f31cd78f-b835-4851-a3a7-a446957251c1"/>
 					<textElement>
 						<font size="8" isBold="true"/>
 						<paragraph leftIndent="5"/>
@@ -2424,7 +2467,7 @@ WHERE
 					<text><![CDATA[CANTIDAD]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="221" y="23" width="159" height="12" uuid="be4ec01f-ca23-47d8-abae-04bd14e67170"/>
+					<reportElement x="121" y="23" width="170" height="12" uuid="be4ec01f-ca23-47d8-abae-04bd14e67170"/>
 					<textElement>
 						<font size="8" isBold="true"/>
 						<paragraph leftIndent="5"/>
@@ -2445,6 +2488,40 @@ WHERE
 					</textElement>
 					<textFieldExpression><![CDATA[$V{contrib}]]></textFieldExpression>
 				</textField>
+				<componentElement>
+					<reportElement x="6" y="35" width="562" height="12" uuid="de3fc6e9-69d2-43bf-bf69-66ae278d124f"/>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+						<datasetRun subDataset="dataset1" uuid="2a680943-9729-4906-99a8-bbf6ac85ac0f">
+							<datasetParameter name="anexo3">
+								<datasetParameterExpression><![CDATA[$P{anexo3}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:listContents height="12" width="562">
+							<textField>
+								<reportElement x="0" y="0" width="55" height="12" uuid="58cc4ab6-1adf-4ccc-888f-bf3f0de1d7dd"/>
+								<textElement textAlignment="Center">
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{fac_servicio_codigo_cup}]]></textFieldExpression>
+							</textField>
+							<textField>
+								<reportElement x="60" y="0" width="45" height="12" uuid="49439471-37c8-459d-89f8-1d35a5720954"/>
+								<textElement textAlignment="Center">
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{hc_3047_anexo3_1_cantidad}]]></textFieldExpression>
+							</textField>
+							<textField>
+								<reportElement x="115" y="0" width="437" height="11" uuid="724931cc-367c-441c-bfc0-7e6a7c8e356e"/>
+								<textElement>
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{fac_servicio_nombre_servicio}]]></textFieldExpression>
+							</textField>
+						</jr:listContents>
+					</jr:list>
+				</componentElement>
 			</frame>
 			<frame>
 				<reportElement positionType="Float" x="175" y="575" width="70" height="12" backcolor="#E6E6E6" uuid="4a70612e-ae34-49c8-8f45-24388802d1a9"/>
@@ -2480,7 +2557,16 @@ WHERE
 		</band>
 	</detail>
 	<columnFooter>
-		<band splitType="Stretch"/>
+		<band height="12" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="0" width="190" height="12" uuid="acea9dd1-f73a-4286-a69c-074a29232192"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[MPS-AIU-V5.0 2008-07-11]]></text>
+			</staticText>
+		</band>
 	</columnFooter>
 	<pageFooter>
 		<band splitType="Stretch"/>
