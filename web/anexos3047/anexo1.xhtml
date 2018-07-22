@@ -12,80 +12,80 @@
         <script type="text/javascript" src="../recursos/js/calendario.js"></script>
         <script type="text/javascript">
             $(document).keypress(
-                function (event) {
-                if (event.which == '13') {
-                    event.preventDefault();
-                }
-            });
+                    function (event) {
+                        if (event.which == '13') {
+                            event.preventDefault();
+                        }
+                    });
         </script>
     </h:head>
     <h:body style="font-size: 11px;">
         #{historiasMB.inicializar()}
-            <h:form id="cargar">
-                <p:dialog id="IdDialogoBuscarManualTarifario" header="BUSCAR PYP PROGRAMAS" widgetVar="dialogoBuscarManualesTarifarios" resizable="false" modal="true">
-                    <table id="tabla">
-                        <tr>
-                            <td>
-                                <p:dataTable 
-                                    id="IdTablaServiciosManual" 
-                                    var="servicioManual" 
-                                    widgetVar="wvTablaServiciosManual"
-                                    value="#{historiasMB.listaServiciosPrograma}"  
-                                    paginator="true"
-                                    style="width: 100%; height: 80%;"
-                                    rows="10"                                    
-                                    paginatorPosition="bottom"                                
-                                    emptyMessage="No hay Programas"
-                                    scrollable="true" 
-                                    currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
-                                    paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                    pageLinks="5"
-                                    >
-                                    <f:facet name="header">
-                                        PyP Disponibles
-                                    </f:facet>
+        <h:form id="cargar">
+            <p:dialog id="IdDialogoBuscarManualTarifario" header="BUSCAR PYP PROGRAMAS" widgetVar="dialogoBuscarManualesTarifarios" resizable="false" modal="true">
+                <table id="tabla">
+                    <tr>
+                        <td>
+                            <p:dataTable 
+                                id="IdTablaServiciosManual" 
+                                var="servicioManual" 
+                                widgetVar="wvTablaServiciosManual"
+                                value="#{historiasMB.listaServiciosPrograma}"  
+                                paginator="true"
+                                style="width: 100%; height: 80%;"
+                                rows="10"                                    
+                                paginatorPosition="bottom"                                
+                                emptyMessage="No hay Programas"
+                                scrollable="true" 
+                                currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                pageLinks="5"
+                                >
+                                <f:facet name="header">
+                                    PyP Disponibles
+                                </f:facet>
 
-                                    <p:column headerText="ID" style="display: none" filterBy="#{servicioManual.idProgramaItems}" filterMatchMode="contains">
-                                        #{servicioManual.idProgramaItems}
-                                    </p:column>
-                                    <p:column headerText="Servicio" style="display: none" filterBy="#{servicioManual.idServicio}" filterMatchMode="contains">
-                                        #{servicioManual.idServicio}
-                                    </p:column>
-                                    <p:column headerText="Servicio" width="300" filterBy="#{servicioManual.nombreActividad}" filterMatchMode="contains">
-                                        #{servicioManual.nombreActividad}
-                                    </p:column>
-                                    <p:column headerText="Finalidad" width="85" filterBy="#{servicioManual.finalidad}" filterMatchMode="contains">
-                                        #{servicioManual.finalidad}
-                                    </p:column>
-                                    <p:column headerText="Genero" width="85" filterBy="#{citasMB.genero_to_string(servicioManual.genero)}" filterMatchMode="contains">
-                                        #{citasMB.genero_to_string(servicioManual.genero)}
-                                    </p:column>
-                                    <p:column headerText="Edad Inicial" width="85" filterBy="#{servicioManual.edad_ini}" filterMatchMode="contains">
-                                        #{servicioManual.edad_ini} - #{citasMB.edad_to_string(servicioManual.edad_ini_list)}
-                                    </p:column>                                    
-                                    <p:column headerText="Edad Final" width="85" filterBy="#{servicioManual.edad_fin}" filterMatchMode="contains">
-                                        #{servicioManual.edad_fin} - #{citasMB.edad_to_string(servicioManual.edad_fin_list)}
-                                    </p:column>
-                                    <p:column headerText="Dosis" width="85" filterBy="#{servicioManual.dosis}" filterMatchMode="contains">
-                                        #{servicioManual.dosis}
-                                    </p:column>
-                                    <p:column headerText="Frecuencia" width="85" filterBy="#{servicioManual.frecuencia}" filterMatchMode="contains">
-                                        #{servicioManual.frecuencia}
-                                    </p:column>      
-                                    <p:column headerText="Meta" width="85" filterBy="#{servicioManual.meta}" filterMatchMode="contains">
-                                        #{servicioManual.meta}
-                                    </p:column>      
-                                    <p:column headerText="Programa" style="display: none" filterBy="#{servicioManual.idPrograma}" filterMatchMode="contains">
-                                        #{servicioManual.idPrograma}
-                                    </p:column>                       
-                                </p:dataTable>   
-                            </td>    
-                        </tr>
-                        
-                    </table>
+                                <p:column headerText="ID" style="display: none" filterBy="#{servicioManual.idProgramaItems}" filterMatchMode="contains">
+                                    #{servicioManual.idProgramaItems}
+                                </p:column>
+                                <p:column headerText="Servicio" style="display: none" filterBy="#{servicioManual.idServicio}" filterMatchMode="contains">
+                                    #{servicioManual.idServicio}
+                                </p:column>
+                                <p:column headerText="Servicio" width="300" filterBy="#{servicioManual.nombreActividad}" filterMatchMode="contains">
+                                    #{servicioManual.nombreActividad}
+                                </p:column>
+                                <p:column headerText="Finalidad" width="85" filterBy="#{servicioManual.finalidad}" filterMatchMode="contains">
+                                    #{servicioManual.finalidad}
+                                </p:column>
+                                <p:column headerText="Genero" width="85" filterBy="#{citasMB.genero_to_string(servicioManual.genero)}" filterMatchMode="contains">
+                                    #{citasMB.genero_to_string(servicioManual.genero)}
+                                </p:column>
+                                <p:column headerText="Edad Inicial" width="85" filterBy="#{servicioManual.edad_ini}" filterMatchMode="contains">
+                                    #{servicioManual.edad_ini} - #{citasMB.edad_to_string(servicioManual.edad_ini_list)}
+                                </p:column>                                    
+                                <p:column headerText="Edad Final" width="85" filterBy="#{servicioManual.edad_fin}" filterMatchMode="contains">
+                                    #{servicioManual.edad_fin} - #{citasMB.edad_to_string(servicioManual.edad_fin_list)}
+                                </p:column>
+                                <p:column headerText="Dosis" width="85" filterBy="#{servicioManual.dosis}" filterMatchMode="contains">
+                                    #{servicioManual.dosis}
+                                </p:column>
+                                <p:column headerText="Frecuencia" width="85" filterBy="#{servicioManual.frecuencia}" filterMatchMode="contains">
+                                    #{servicioManual.frecuencia}
+                                </p:column>      
+                                <p:column headerText="Meta" width="85" filterBy="#{servicioManual.meta}" filterMatchMode="contains">
+                                    #{servicioManual.meta}
+                                </p:column>      
+                                <p:column headerText="Programa" style="display: none" filterBy="#{servicioManual.idPrograma}" filterMatchMode="contains">
+                                    #{servicioManual.idPrograma}
+                                </p:column>                       
+                            </p:dataTable>   
+                        </td>    
+                    </tr>
 
-                </p:dialog>
-            </h:form>
+                </table>
+
+            </p:dialog>
+        </h:form>
         <h:form id="IdFormHistorias">
             <p:growl id="IdMensajeHistorias"  showDetail="true" sticky="false" autoUpdate="true" life="3000"  />
             <p:panel id="IdpanelDatosPaciente" style="position: relative; width: 100%; height: 100px; left: -5px;">
@@ -97,9 +97,9 @@
                                             rendered="#{historiasMB.hayPacienteSeleccionado}"
                                             width="38" height="38"/>
                             <br /> <p:commandButton 
-                                    value="Ver más"                                              
-                                     rendered="#{historiasMB.hayPacienteSeleccionado}"
-                                    actionListener="#{historiasMB.buscarPrograma}"/> </td>
+                                value="Ver más"                                              
+                                rendered="#{historiasMB.hayPacienteSeleccionado}"
+                                actionListener="#{historiasMB.buscarPrograma}"/> </td>
                         <td>
                             <table>
                                 <tr>
@@ -133,11 +133,16 @@
                                         <p:selectOneMenu styleClass="campoFormulario" filter="true" filterMatchMode="contains" style="width: 270px;" value="#{manejarAnexos3047MB.tipoanexoActual}" rendered="#{historiasMB.hayPacienteSeleccionado}" converter="omnifaces.SelectItemsConverter">
                                             <f:ajax
                                                 event="change"
-                                                listener="#{historiasMB.cambiaTipoRegistroClinico}"
-                                                render="IdPanelRegistroClinico"/>
+                                                listener="#{manejarAnexos3047MB.cambiaTipoAnexo()}"
+                                                render="IdPanelRegistroClinico IdpanelDatosPaciente"/>
                                             <f:selectItem itemLabel="" itemValue=""/>
                                             <f:selectItems value="#{aplicacionGeneralMB.listaAnexos3047}" var="tipoAnexo" itemLabel="#{tipoAnexo.codanexo} #{tipoAnexo.nombre}"/>
                                         </p:selectOneMenu>
+
+                                        <p:commandButton styleClass="campoFormulario" actionListener="#{manejarAnexos3047MB.actualizaparaModif()}"    style="width: 22px; height: 22px; " 
+                                                         title="Buscar Anexos 1 del Paciente" update="IdTablaAnexo IdpanelDatosPaciente"   icon="ui-icon-search" rendered="#{manejarAnexos3047MB.lupanexo1}"
+                                                         onclick="PF('dlgSeleccionarAnexo').show();"/>
+
                                         <!--p:outputLabel styleClass="labelFormularioBold" value="Turno cita: " rendered=".{historiasMB.hayPacienteSeleccionado}"/>
                                         <p:outputLabel styleClass="labelFormulario"     value=".{historiasMB.turnoCita}" style="margin-left: 10px;" rendered=".{historiasMB.hayPacienteSeleccionado}"/-->
                                     </td>
@@ -155,6 +160,8 @@
                          style="position: absolute; width: 100%; height: 100%; border: none; left: 0px; top: 0px;">
                 </iframe>
             </p:panel>
+
+
             <p:dialog header="Seleccionar paciente" widgetVar="dlgSeleccionarPaciente" modal="true" resizable="false" closable="true">
                 <p:dataTable
                     id="IdTablaPacientes"
@@ -185,6 +192,41 @@
                 <p:commandButton value="Cargar" actionListener="#{historiasMB.cargarPaciente}" update="IdpanelDatosPaciente IdPanelRegistroClinico IdTablaArchivos "/>
                 <br/>
             </p:dialog>
+
+            <p:dialog header="Seleccionar Anexo" widgetVar="dlgSeleccionarAnexo" modal="true" resizable="false" closable="true">
+                <p:dataTable
+                    id="IdTablaAnexo"
+                    var="anexo" 
+                    value="#{manejarAnexos3047MB.listaAnexo1Modif}"
+                    rowKey="#{anexo.id3047anexo1}"  
+                    selection="#{manejarAnexos3047MB.anexo1Seleccionado}" 
+                    paginator="true"
+                    style="width: 500px;"
+                    rows="10"
+                    lazy="true"
+                    paginatorPosition="bottom"                                
+                    emptyMessage="No se encontraron Anexos1 para este paciente"
+                    scrollable="true" 
+                    pageLinks="5"
+                    widgetVar="anexos1Table"
+                    selectionMode="single"
+                    resizableColumns="true"
+                    >
+                    <p:column headerText="Nro Informe" width="25%"  filterBy="#{anexo.numeroinforme}" filterMatchMode="contains" filterStyle="width: 145px;">
+                        <h:outputText value="#{anexo.numeroinforme}"/>                                  
+                    </p:column>
+                    <p:column headerText="Fecha Emisión" width="44%">
+                        <h:outputText value="#{anexo.fechadocumento}" >
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </p:column>
+                </p:dataTable>
+                <br/>
+                <p:commandButton value="Cargar" actionListener="#{manejarAnexos3047MB.cargarAnexo1Modif()}"   update="IdpanelDatosPaciente IdPanelRegistroClinico IdTablaArchivos "/>
+                <br/>
+            </p:dialog>
+
+
             <p:dialog header="Histórico paciente" widgetVar="dlgHistorico" modal="true" resizable="false" closable="true">
                 <p:panel id="IdPanelHistorico" style="border: none;"  >
                     <h:panelGrid columns="8" cellpadding="2">

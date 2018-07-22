@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core">  
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">  
     <h:head>
         <title>Inconsistencia en Datos</title>
         <link href="../recursos/css/estilos.css" rel="stylesheet"/>        
@@ -217,59 +218,59 @@
                                 </tr>
                                 <tr>
                                     <td style="background-color: #eaecfe;">
-                                        <p:selectBooleanCheckbox id= "papell" value="#{historiasMB.primerapellido}">
+                                        <p:selectBooleanCheckbox id= "papell" value="#{manejarAnexos3047MB.primerapellido}">
                                             <p:ajax update="variacion" />
                                         </p:selectBooleanCheckbox>
                                         <p:outputLabel for="papell" value="   PRIMER APELLIDO" />
                                     </td>
                                     <td>
-                                        <p:inputText  id="papellido" styleClass="width1" value="#{manejarAnexos3047MB.nuevoAnexo1.primerapellido}"  rendered="#{historiasMB.primerapellido}" />
+                                        <p:inputText  id="papellido" styleClass="width1" value="#{manejarAnexos3047MB.nuevoAnexo1.primerapellido}"  rendered="#{manejarAnexos3047MB.primerapellido}" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="background-color: #eaecfe;">
-                                        <p:selectBooleanCheckbox id= "sapell" value="#{historiasMB.segundoapellido}">
+                                        <p:selectBooleanCheckbox id= "sapell" value="#{manejarAnexos3047MB.segundoapellido}">
                                             <p:ajax update="variacion" />
                                         </p:selectBooleanCheckbox>
                                         <p:outputLabel for="sapell" value="    SEGUNDO APELLIDO" />
                                     </td>
                                     <td> 
-                                        <p:inputText  id="sapellido" styleClass="width1" value="#{manejarAnexos3047MB.nuevoAnexo1.segundoapellido}" rendered="#{historiasMB.segundoapellido}"  />
+                                        <p:inputText  id="sapellido" styleClass="width1" value="#{manejarAnexos3047MB.nuevoAnexo1.segundoapellido}" rendered="#{manejarAnexos3047MB.segundoapellido}"  />
                                     </td>                  
                                 </tr>    
                                 <tr>
                                     <td style="background-color: #eaecfe;">
-                                        <p:selectBooleanCheckbox id= "pnomb" value="#{historiasMB.primernombre}">
+                                        <p:selectBooleanCheckbox id= "pnomb" value="#{manejarAnexos3047MB.primernombre}">
                                             <p:ajax update="variacion" />
                                         </p:selectBooleanCheckbox>
                                         <p:outputLabel for="pnomb" value="    PRIMER NOMBRE" />
                                     </td>
                                     <td>
-                                        <p:inputText  id="pnombre" styleClass="width1" value="#{manejarAnexos3047MB.nuevoAnexo1.primernombre}" rendered="#{historiasMB.primernombre}"  />
+                                        <p:inputText  id="pnombre" styleClass="width1" value="#{manejarAnexos3047MB.nuevoAnexo1.primernombre}" rendered="#{manejarAnexos3047MB.primernombre}"  />
                                     </td>                  
                                 </tr>  
                                 <tr>
                                     <td style="background-color: #eaecfe;">
-                                        <p:selectBooleanCheckbox id= "snomb" value="#{historiasMB.segundonombre}">
+                                        <p:selectBooleanCheckbox id= "snomb" value="#{manejarAnexos3047MB.segundonombre}">
                                             <p:ajax update="variacion" />
                                         </p:selectBooleanCheckbox>
                                         <p:outputLabel for="snomb" value="    SEGUNDO NOMBRE" />
                                     </td>
                                     <td>
-                                        <p:inputText  id="snombre" styleClass="width1" value="#{manejarAnexos3047MB.nuevoAnexo1.segundonombre}" rendered="#{historiasMB.segundonombre}"  />
+                                        <p:inputText  id="snombre" styleClass="width1" value="#{manejarAnexos3047MB.nuevoAnexo1.segundonombre}" rendered="#{manejarAnexos3047MB.segundonombre}"  />
                                     </td>                  
                                 </tr>  
 
                                 <tr>
                                     <td style="background-color: #eaecfe;">
-                                        <p:selectBooleanCheckbox id= "tdocu" value="#{historiasMB.tipodocumentoidentifica}">
+                                        <p:selectBooleanCheckbox id= "tdocu" value="#{manejarAnexos3047MB.tipodocumentoidentifica}">
                                             <p:ajax update="variacion" />
                                         </p:selectBooleanCheckbox>
                                         <p:outputLabel for="tdocu" value="    TIPO DOCUMENTO IDENTIFICACION" />
                                     </td>
                                     <td >
                                         <p:focus for="IdFocus2" />
-                                        <p:selectOneMenu id="IdFocus2" style="width: 315px;" value="#{manejarAnexos3047MB.nuevoAnexo1.tipoIdentificacion}" filter="true" filterMatchMode="contains" rendered="#{historiasMB.tipodocumentoidentifica}" converter="omnifaces.SelectItemsConverter">
+                                        <p:selectOneMenu id="IdFocus2" style="width: 315px;" value="#{manejarAnexos3047MB.nuevoAnexo1.tipoIdentificacion}" filter="true" filterMatchMode="contains" rendered="#{manejarAnexos3047MB.tipodocumentoidentifica}" converter="omnifaces.SelectItemsConverter">
                                             <f:selectItems value="#{manejarAnexos3047MB.listaTipoidentificacion}"
                                                            var="tipoidentificacionItem" itemLabel="#{tipoidentificacionItem.descripcion} #{tipoidentificacionItem.observacion}"/>
                                         </p:selectOneMenu>                        
@@ -277,24 +278,24 @@
                                 </tr>
                                 <tr>
                                     <td style="background-color: #eaecfe;">
-                                        <p:selectBooleanCheckbox id= "numerodoc" value="#{historiasMB.numerodocumento}">
+                                        <p:selectBooleanCheckbox id= "numerodoc" value="#{manejarAnexos3047MB.numerodocumento}">
                                             <p:ajax update="variacion" />
                                         </p:selectBooleanCheckbox>
                                         <p:outputLabel for="numerodoc" value="    NUMERO DOCUMENTO IDENTIFICACION" />
                                     </td>
                                     <td>
-                                        <p:inputText  id="ndocument" styleClass="width1" value="#{manejarAnexos3047MB.nuevoAnexo1.numeroidentificacion}"  rendered="#{historiasMB.numerodocumento}"  />
+                                        <p:inputText  id="ndocument" styleClass="width1" value="#{manejarAnexos3047MB.nuevoAnexo1.numeroidentificacion}"  rendered="#{manejarAnexos3047MB.numerodocumento}"  />
                                     </td>                  
                                 </tr>  
                                 <tr>
                                     <td style="background-color: #eaecfe;">
-                                        <p:selectBooleanCheckbox id= "fnac" value="#{historiasMB.fechanacimiento}">
+                                        <p:selectBooleanCheckbox id= "fnac" value="#{manejarAnexos3047MB.fechanacimiento}">
                                             <p:ajax update="variacion" />
                                         </p:selectBooleanCheckbox>
                                         <p:outputLabel for="fnac" value="    FECHA DE NACIMIENTO" />
                                     </td>
                                     <td>
-                                        <p:calendar id="fechanacimiento" navigator="true" locale="es" value="#{manejarAnexos3047MB.nuevoAnexo1.fechanacimiento}" pattern="dd/MM/yyyy" mask="true" size="23" style="width: 200px;" rendered="#{historiasMB.fechanacimiento}">
+                                        <p:calendar id="fechanacimiento" navigator="true" locale="es" value="#{manejarAnexos3047MB.nuevoAnexo1.fechanacimiento}" pattern="dd/MM/yyyy" mask="true" size="23" style="width: 200px;" rendered="#{manejarAnexos3047MB.fechanacimiento}">
                                             <f:convertDateTime pattern="dd/MM/yyyy"/>
                                         </p:calendar>                   
                                     </td>                    
@@ -349,13 +350,13 @@
                             <td colspan="2">
                                 <p:commandButton icon="ui-icon-disk" value="Guardar Nuevo Registro" 
                                                  actionListener="#{manejarAnexos3047MB.guardarAnexo1()}" 
-                                                 disabled="#{historiasMB.modificandoRegCli}" update="@form ,IdMensajeRefContra"/>
+                                                 disabled="#{historiasMB.modificandoRegCli}" update="@form ,IdMensajeRefContra" rendered="#{manejarAnexos3047MB.actualizaparaModif()}"/>
                                 <p:commandButton icon="ui-icon-arrowthickstop-1-s" value="Actualizar Registro" 
-                                                 actionListener="#{historiasMB.actualizarRegistro}" disabled="#{!historiasMB.modificandoRegCli}" 
-                                                 rendered="#{loginMB.superUsuario}" update="@form"/>
+                                                 actionListener="#{manejarAnexos3047MB.guardarAnexo1()}" 
+                                                 disabled="#{historiasMB.modificandoRegCli}" update="@form ,IdMensajeRefContra" rendered="#{manejarAnexos3047MB.actualizaparaModif()}" />
                                 <p:commandButton icon="ui-icon-document" value="Limpiar Formulario" 
                                                  actionListener="#{historiasMB.btnLimpiarFormulario}" update="@form"/>
-                                <p:commandButton id="printButtom"  type="submit" icon="ui-icon-print"   value="Imprimir Anexo1" actionListener="#{manejarAnexos3047MB.verAnexo1()}" ajax="false" onclick="form.target = '_blank'"/>
+                                <p:commandButton id="printButtom"  type="submit" icon="ui-icon-print"   value="Imprimir Anexo1" actionListener="#{manejarAnexos3047MB.verAnexo1()}" ajax="false" onclick="form.target = '_blank'" rendered="#{manejarAnexos3047MB.inprimirregistro}"/>
                             </td>
                         </tr>
                     </table>

@@ -127,6 +127,19 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     private boolean copago = false;
     private boolean coutar = false;
     private boolean coutaotro = false;
+
+    boolean primerapellido = false;
+    boolean segundoapellido = false;
+    boolean primernombre = false;
+    boolean segundonombre = false;
+    boolean tipodocumentoidentifica = false;
+    boolean numerodocumento = false;
+    boolean fechanacimiento = false;
+    boolean accidentetransito = false;
+    boolean actualizarregistro=false;
+    boolean imprimirregistro=false;
+    boolean lupanexo1=false;
+
     private boolean haypacienteseleccionado = false;
     private CfgPacientes pacienteseleccionado;
     private Date fechaReg = new Date();
@@ -135,7 +148,7 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     private Hc3047Anexo3 nuevoAnexo3 = new Hc3047Anexo3();
     private Hc3047Anexo3 codAnexo3 = new Hc3047Anexo3();
     private Hc3047Anexo4 codAnexo4 = new Hc3047Anexo4();
-    
+
     private Hc3047Anexo31 anexo3Grabar = new Hc3047Anexo31();
     private Hc3047Anexo41 anexo4Grabar = new Hc3047Anexo41();
 
@@ -144,17 +157,20 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     private Hc3047Anexo41 nuevoAnexo41 = new Hc3047Anexo41();
     private Hc3047Anexo5 nuevoAnexo5 = new Hc3047Anexo5();
     private Hc3047Anexo6 nuevoAnexo6 = new Hc3047Anexo6();
+    private Hc3047Anexo1 Anexo1Seleccionado;
+
     private FacServicio facServ;
     private CfgEmpresa empresa;
     private int id = 0;
     private int id1 = 0;
-    
+
     private double cantidad = 0.0;
 
     private HcAnexos3047 tipoanexoActual = new HcAnexos3047();
     private List<CfgClasificaciones> listaInconsistencias = null;
     private List<CfgClasificaciones> listaTipoidentificacion = null;
     private List<CfgUsuarios> listaUsuarios = null;
+    private List<Hc3047Anexo1> listaAnexo1Modif = null;
 
 //    private HistoriasMB historiasMB;
     private String cei100 = null;
@@ -237,17 +253,30 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         int idSede = 1;
         generarNumeroInforme();
         System.out.println(fechaReg);
-        System.out.println("Iniciando el guardado del registro " + numeroInforme);
-        pacienteseleccionado = cfgPacientesFacade.find(HistoriasMB.codPaciente);
-        try {
-            nuevoAnexo1.setIdPaciente(pacienteseleccionado);
-            nuevoAnexo1.setNumeroinforme(numeroInforme);
-            hc3047Anexo1Facade.create(nuevoAnexo1);
-            anexoActual.setConsecutivo(consecutivo);
-            hcAnexos3047Facade.edit(anexoActual);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Su Anexo fue almacenado con el Nro " + numeroInforme));
-        } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "Error al Grabar Anexo"));
+        if (actualizarregistro=false){
+            System.out.println("Iniciando el guardado del registro " + numeroInforme);
+            pacienteseleccionado = cfgPacientesFacade.find(HistoriasMB.codPaciente);
+            try {
+                nuevoAnexo1.setIdPaciente(pacienteseleccionado);
+                nuevoAnexo1.setNumeroinforme(numeroInforme);
+                hc3047Anexo1Facade.create(nuevoAnexo1);
+                anexoActual.setConsecutivo(consecutivo);
+                hcAnexos3047Facade.edit(anexoActual);
+                imprimirregistro=true;
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Su Anexo fue almacenado con el Nro " + numeroInforme));
+            } catch (Exception e) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "Error al Grabar Anexo"));
+            }
+        }else{
+            System.out.println("Iniciando actualizado del registro " + nuevoAnexo1.getNumeroinforme());
+            try {
+                hc3047Anexo1Facade.edit(nuevoAnexo1);
+                imprimirregistro=true;
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Su Anexo fue actualziado con exito"));
+            } catch (Exception e) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "Error al Actualizar el Anexo"));
+            }
+            
         }
 
     }
@@ -550,56 +579,56 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
 
         //Instancia hacia la clase reportes Anexos
         ReporteAnexos rAnexo = new ReporteAnexos();
-        String admin=null;
-        String codadmin=null;
+        String admin = null;
+        String codadmin = null;
         String dptopaciente = null;
         String mcpiopaciente = null;
         String dptoempresa = null;
         String mcpioempresa = null;
-        String dptoremite =null;
+        String dptoremite = null;
         String mcpioremite = null;
         String numinform = numeroAtencion;
         String diagppal = null;
         String diagrel1 = null;
         String diagrel2 = null;
         String diagrel3 = null;
-               
-        if (nuevoAnexo2.getIdPaciente().getIdAdministradora().getRazonSocial()!=null){
+
+        if (nuevoAnexo2.getIdPaciente().getIdAdministradora().getRazonSocial() != null) {
             admin = nuevoAnexo2.getIdPaciente().getIdAdministradora().getRazonSocial();
         }
-        if (nuevoAnexo2.getIdPaciente().getIdAdministradora().getCodigoAdministradora()!=null){
+        if (nuevoAnexo2.getIdPaciente().getIdAdministradora().getCodigoAdministradora() != null) {
             codadmin = nuevoAnexo2.getIdPaciente().getIdAdministradora().getCodigoAdministradora();
         }
-        if (nuevoAnexo2.getIdPaciente().getDepartamento().getDescripcion()!=null){
+        if (nuevoAnexo2.getIdPaciente().getDepartamento().getDescripcion() != null) {
             dptopaciente = nuevoAnexo2.getIdPaciente().getDepartamento().getDescripcion();
         }
-        if (nuevoAnexo2.getIdPaciente().getMunicipio().getDescripcion()!=null){
+        if (nuevoAnexo2.getIdPaciente().getMunicipio().getDescripcion() != null) {
             mcpiopaciente = nuevoAnexo2.getIdPaciente().getMunicipio().getDescripcion();
         }
-        if (empresa.getCodDepartamento().getDescripcion()!=null){
+        if (empresa.getCodDepartamento().getDescripcion() != null) {
             dptoempresa = empresa.getCodDepartamento().getDescripcion();
         }
-        if (empresa.getCodMunicipio().getDescripcion()!=null){
+        if (empresa.getCodMunicipio().getDescripcion() != null) {
             mcpioempresa = empresa.getCodMunicipio().getDescripcion();
         }
-        if (nuevoAnexo2.getIddepartamento().getDescripcion()!=null){
+        if (nuevoAnexo2.getIddepartamento().getDescripcion() != null) {
             dptoremite = nuevoAnexo2.getIddepartamento().getDescripcion();
         }
-        if (nuevoAnexo2.getIdmunicipio().getDescripcion()!=null){
+        if (nuevoAnexo2.getIdmunicipio().getDescripcion() != null) {
             mcpioremite = nuevoAnexo2.getIdmunicipio().getDescripcion();
         }
-        if (nuevoAnexo2.getCei100().getNombreDiagnostico()!=null){
+        if (nuevoAnexo2.getCei100().getNombreDiagnostico() != null) {
             diagppal = nuevoAnexo2.getCei100().getNombreDiagnostico();
         }
-        if (nuevoAnexo2.getCei101().getNombreDiagnostico()!=null){
+        if (nuevoAnexo2.getCei101().getNombreDiagnostico() != null) {
             diagrel1 = nuevoAnexo2.getCei101().getNombreDiagnostico();
         }
-        if (nuevoAnexo2.getCei102().getNombreDiagnostico()!=null){
+        if (nuevoAnexo2.getCei102().getNombreDiagnostico() != null) {
             diagrel2 = nuevoAnexo2.getCei102().getNombreDiagnostico();
         }
-        if (nuevoAnexo2.getCei103().getNombreDiagnostico()!=null){
+        if (nuevoAnexo2.getCei103().getNombreDiagnostico() != null) {
             diagrel3 = nuevoAnexo2.getCei103().getNombreDiagnostico();
-        }            
+        }
         numinform = numeroAtencion;
 
         FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -623,20 +652,20 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         String dptoempresa = empresa.getCodDepartamento().getDescripcion();
         String mcpioempresa = empresa.getCodMunicipio().getDescripcion();
         String numinform = numeroSolicitud;
-        String diagppal=null;
-        String diagrel1=null;
-        String diagrel2=null;
-        String services=null;
-        if (nuevoAnexo3.getCei100().getNombreDiagnostico()!=null){
+        String diagppal = null;
+        String diagrel1 = null;
+        String diagrel2 = null;
+        String services = null;
+        if (nuevoAnexo3.getCei100().getNombreDiagnostico() != null) {
             diagppal = nuevoAnexo3.getCei100().getNombreDiagnostico();
-        }    
-        if (nuevoAnexo3.getCei101().getNombreDiagnostico()!=null){
+        }
+        if (nuevoAnexo3.getCei101().getNombreDiagnostico() != null) {
             diagrel1 = nuevoAnexo3.getCei101().getNombreDiagnostico();
-        }    
-        if (nuevoAnexo3.getCei102().getNombreDiagnostico()!=null){
+        }
+        if (nuevoAnexo3.getCei102().getNombreDiagnostico() != null) {
             diagrel2 = nuevoAnexo3.getCei102().getNombreDiagnostico();
-        }    
-        if (nuevoAnexo3.getIdservicio().getDescripcion()!=null){
+        }
+        if (nuevoAnexo3.getIdservicio().getDescripcion() != null) {
             services = nuevoAnexo3.getIdservicio().getDescripcion();
         }
         int anexo3 = codAnexo3.getId3047anexo3();
@@ -661,12 +690,11 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         String dptoempresa = empresa.getCodDepartamento().getDescripcion();
         String mcpioempresa = empresa.getCodMunicipio().getDescripcion();
         String numinform = numeroAutorizacion;
-        String services=null;
-        if (nuevoAnexo4.getIdservicio().getDescripcion()!=null){
+        String services = null;
+        if (nuevoAnexo4.getIdservicio().getDescripcion() != null) {
             services = nuevoAnexo4.getIdservicio().getDescripcion();
         }
         int anexo4 = codAnexo4.getId3047anexo4();
-        
 
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ServletContext servletContext = (ServletContext) facesContext.getExternalContext().getContext();
@@ -805,6 +833,45 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         }
         if (requerim.hashCode() == 0) {
             id1 = 0;
+        }
+    }
+
+    public void actualizaparaModif() {
+        actualizarregistro=true;
+        pacienteseleccionado = cfgPacientesFacade.find(HistoriasMB.codPaciente);
+        listaAnexo1Modif = hc3047Anexo1Facade.Anexos1xPaciente(pacienteseleccionado.getIdPaciente());
+    }
+
+    public void cargarAnexo1Modif() {
+        this.nuevoAnexo1 = Anexo1Seleccionado;
+        if (nuevoAnexo1.getPrimerapellido() != null) {
+            primerapellido = true;
+        }
+        if (nuevoAnexo1.getSegundoapellido() != null) {
+            segundoapellido = true;
+        }
+        if (nuevoAnexo1.getPrimernombre()!= null) {
+            primernombre = true;
+        }
+        if (nuevoAnexo1.getSegundonombre()!= null) {
+            segundonombre = true;
+        }
+        
+        if (nuevoAnexo1.getTipoIdentificacion()!= null) {
+            tipodocumentoidentifica = true;
+        }
+        if (nuevoAnexo1.getNumeroidentificacion()!= null) {
+             numerodocumento= true;
+        }
+        if (nuevoAnexo1.getFechanacimiento()!= null) {
+            fechanacimiento = true;
+        }
+
+    }
+    
+    public void cambiaTipoAnexo() {
+        if (tipoanexoActual.getIdAnexos3047()==1){
+            lupanexo1=true;
         }
     }
 
@@ -1150,5 +1217,101 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
 
     public void setListarequerimiento1(List<Hc3047Anexo41> listarequerimiento1) {
         this.listarequerimiento1 = listarequerimiento1;
+    }
+
+    public List<Hc3047Anexo1> getListaAnexo1Modif() {
+        return listaAnexo1Modif;
+    }
+
+    public void setListaAnexo1Modif(List<Hc3047Anexo1> listaAnexo1Modif) {
+        this.listaAnexo1Modif = listaAnexo1Modif;
+    }
+
+    public Hc3047Anexo1 getAnexo1Seleccionado() {
+        return Anexo1Seleccionado;
+    }
+
+    public void setAnexo1Seleccionado(Hc3047Anexo1 Anexo1Seleccionado) {
+        this.Anexo1Seleccionado = Anexo1Seleccionado;
+    }
+
+    public boolean isPrimerapellido() {
+        return primerapellido;
+    }
+
+    public void setPrimerapellido(boolean primerapellido) {
+        this.primerapellido = primerapellido;
+    }
+
+    public boolean isSegundoapellido() {
+        return segundoapellido;
+    }
+
+    public void setSegundoapellido(boolean segundoapellido) {
+        this.segundoapellido = segundoapellido;
+    }
+
+    public boolean isPrimernombre() {
+        return primernombre;
+    }
+
+    public void setPrimernombre(boolean primernombre) {
+        this.primernombre = primernombre;
+    }
+
+    public boolean isSegundonombre() {
+        return segundonombre;
+    }
+
+    public void setSegundonombre(boolean segundonombre) {
+        this.segundonombre = segundonombre;
+    }
+
+    public boolean isTipodocumentoidentifica() {
+        return tipodocumentoidentifica;
+    }
+
+    public void setTipodocumentoidentifica(boolean tipodocumentoidentifica) {
+        this.tipodocumentoidentifica = tipodocumentoidentifica;
+    }
+
+    public boolean isNumerodocumento() {
+        return numerodocumento;
+    }
+
+    public void setNumerodocumento(boolean numerodocumento) {
+        this.numerodocumento = numerodocumento;
+    }
+
+    public boolean isFechanacimiento() {
+        return fechanacimiento;
+    }
+
+    public void setFechanacimiento(boolean fechanacimiento) {
+        this.fechanacimiento = fechanacimiento;
+    }
+
+    public boolean isActualizarregistro() {
+        return actualizarregistro;
+    }
+
+    public void setActualizarregistro(boolean actualizarregistro) {
+        this.actualizarregistro = actualizarregistro;
+    }
+
+    public boolean isInprimirregistro() {
+        return imprimirregistro;
+    }
+
+    public void setInprimirregistro(boolean inprimirregistro) {
+        this.imprimirregistro = inprimirregistro;
+    }
+
+    public boolean isLupanexo1() {
+        return lupanexo1;
+    }
+
+    public void setLupanexo1(boolean lupanexo1) {
+        this.lupanexo1 = lupanexo1;
     }
 }

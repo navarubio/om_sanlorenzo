@@ -27,7 +27,7 @@ public class CfgSedeFacade extends AbstractFacade<CfgSede> {
 
     public List<CfgSede> buscarOrdenado() {
         try {
-            String hql = "SELECT u FROM CfgSede u ORDER BY u.idSede ASC";
+            String hql = "SELECT a FROM CfgSede a ORDER BY a.idSede ASC";
             return getEntityManager().createQuery(hql).getResultList();
             
         } catch (Exception e) {
