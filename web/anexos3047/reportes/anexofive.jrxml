@@ -983,7 +983,7 @@ WHERE
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="8" y="0" width="123" height="12" uuid="8cd6686d-3d1b-4168-9c87-25fddfe997be"/>
 					<textElement textAlignment="Center">
 						<font size="8"/>
@@ -1017,7 +1017,7 @@ WHERE
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="12" y="0" width="113" height="12" uuid="5ee96e2e-f1a3-42e5-8ef6-01b481c52c09"/>
 					<textElement textAlignment="Center">
 						<font size="8"/>

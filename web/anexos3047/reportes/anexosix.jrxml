@@ -966,7 +966,7 @@ WHERE
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="8" y="0" width="123" height="12" uuid="8cd6686d-3d1b-4168-9c87-25fddfe997be"/>
 					<textElement textAlignment="Center">
 						<font size="8"/>
@@ -1000,7 +1000,7 @@ WHERE
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="12" y="0" width="113" height="12" uuid="5ee96e2e-f1a3-42e5-8ef6-01b481c52c09"/>
 					<textElement textAlignment="Center">
 						<font size="8"/>
@@ -1436,7 +1436,7 @@ WHERE
 				</box>
 				<staticText>
 					<reportElement x="9" y="0" width="557" height="47" uuid="0ca43f39-4656-4619-bde4-adbe4d286fe9"/>
-					<textElement textAlignment="Justified">
+					<textElement>
 						<font size="9" isBold="true"/>
 						<paragraph leftIndent="5"/>
 					</textElement>
@@ -2050,7 +2050,7 @@ WHERE
 					</textElement>
 					<text><![CDATA[Municipio:]]></text>
 				</staticText>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="75" y="0" width="154" height="12" uuid="23bf34c5-84a0-48dc-a5c4-0331115fbf49"/>
 					<textElement textAlignment="Center">
 						<font size="8"/>

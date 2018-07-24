@@ -2434,21 +2434,21 @@ WHERE
 							<textField>
 								<reportElement x="5" y="0" width="53" height="15" uuid="bc562fb9-319f-499c-9d95-529345d6c5c0"/>
 								<textElement textAlignment="Center">
-									<font size="8"/>
+									<font size="7"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{fac_servicio_codigo_cup}]]></textFieldExpression>
 							</textField>
 							<textField>
 								<reportElement x="68" y="0" width="64" height="15" uuid="9ee399fe-85b9-4433-90b1-fc6f441c34d2"/>
 								<textElement textAlignment="Center">
-									<font size="8"/>
+									<font size="7"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{hc_3047_anexo4_1_cantidad}]]></textFieldExpression>
 							</textField>
 							<textField>
 								<reportElement x="141" y="0" width="414" height="15" uuid="ccae996c-03a2-4114-b937-a3bf1434c313"/>
 								<textElement>
-									<font size="8"/>
+									<font size="7"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{fac_servicio_nombre_servicio}]]></textFieldExpression>
 							</textField>

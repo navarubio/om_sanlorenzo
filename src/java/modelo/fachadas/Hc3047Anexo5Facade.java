@@ -61,7 +61,7 @@ public class Hc3047Anexo5Facade extends AbstractFacade<Hc3047Anexo5> {
         String consulta;
         List<Hc3047Anexo5> lista = null;
             try {
-                consulta = "From Hc3047Anexo2 h where h.idPaciente.idPaciente= ?1";
+                consulta = "From Hc3047Anexo5 h where h.idPaciente.idPaciente= ?1";
                 Query query = getEntityManager().createQuery(consulta);
                 query.setParameter(1, paciente);
                 lista = query.getResultList();

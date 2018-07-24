@@ -71,7 +71,7 @@
                                 <p:inputText readonly="true" styleClass="width1"     value="#{historiasMB.empresa.razonSocial}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>
                             </td>
                             <td>
-                                        <p:inputText readonly="true" styleClass="labelFormulario"      value="#{historiasMB.empresa.numIdentificacion}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>
+                                <p:inputText readonly="true" styleClass="labelFormulario"      value="#{historiasMB.empresa.numIdentificacion}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>
                             </td>
                             <td>
                                 <p:inputText readonly="true" styleClass="labelFormulario"      value="#{historiasMB.empresa.codEmpresa}"  rendered="#{historiasMB.hayPacienteSeleccionado}"/>
@@ -473,13 +473,13 @@
                 <td colspan="2">
                     <p:commandButton icon="ui-icon-disk" value="Guardar Nuevo Anexo" 
                                      actionListener="#{manejarAnexos3047MB.guardarAnexo4()}" 
-                                     disabled="#{historiasMB.modificandoRegCli}" update="@form"/>
+                                     disabled="#{manejarAnexos3047MB.nuevoregistro==0 ? true:false}" update="@form ,IdMensajeRefContra" />
                     <p:commandButton icon="ui-icon-arrowthickstop-1-s" value="Actualizar Registro" 
-                                     actionListener="#{historiasMB.actualizarRegistro}" disabled="#{!historiasMB.modificandoRegCli}" 
-                                     rendered="#{loginMB.superUsuario}" update="@form"/>
+                                     actionListener="#{manejarAnexos3047MB.guardarAnexo4()}" 
+                                     disabled="#{manejarAnexos3047MB.actualizarregistro==0 ? true:false}" update="@form ,IdMensajeRefContra" />
                     <p:commandButton icon="ui-icon-document" value="Limpiar Formulario" 
-                                     actionListener="#{historiasMB.btnLimpiarFormulario}" update="@form"/>
-                    <p:commandButton id="printButtom"  type="submit" icon="ui-icon-print"   value="Imprimir Anexo4" actionListener="#{manejarAnexos3047MB.verAnexo4()}" ajax="false" onclick="form.target = '_blank'"/>
+                                     actionListener="#{manejarAnexos3047MB.btnLimpiarFormulario()}" update="@form ,IdFormRegistroClinico"/>
+                    <p:commandButton id="printButtom"  type="submit" icon="ui-icon-print"   value="Imprimir Anexo4" actionListener="#{manejarAnexos3047MB.verAnexo4()}" ajax="false" onclick="form.target = '_blank'" rendered="#{manejarAnexos3047MB.inprimirregistro}"/>
 
                 </td>
             </tr>

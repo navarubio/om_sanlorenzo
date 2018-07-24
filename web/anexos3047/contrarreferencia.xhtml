@@ -171,13 +171,13 @@
                             <td>
                                 <p:outputLabel   value="PRIMER APELLIDO" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
                             </td>
-                            <td style="background-color: #eaecfe;">
+                            <td >
                                 <p:outputLabel   value="SEGUNDO APELLIDO" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
                             </td>
-                            <td style="background-color: #eaecfe;">
+                            <td >
                                 <p:outputLabel   value="PRIMER NOMBRE" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
                             </td>
-                            <td style="background-color: #eaecfe;">
+                            <td >
                                 <p:outputLabel   value="SEGUNDO NOMBRE" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
                             </td>                                        
                         </tr>
@@ -196,13 +196,13 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="background-color: #eaecfe;">
+                            <td>
                                 <p:outputLabel   value="DOCUMENTO IDENTIFICACION:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
                             </td>
-                            <td style="background-color: #eaecfe;">
+                            <td >
                                 <p:outputLabel   value="NUMERO DOCUMENTO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
                             </td>
-                            <td style="background-color: #eaecfe;">
+                            <td >
                                 <p:outputLabel   value="TELEFONO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
                             </td>                                        
                         </tr>
@@ -220,13 +220,13 @@
                             </td>                                                                    
                         </tr>
                         <tr>
-                            <td style="background-color: #eaecfe;">
+                            <td>
                                 <p:outputLabel   value="DIRECCION DE HABITACION:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
                             </td>
-                            <td style="background-color: #eaecfe;">
+                            <td >
                                 <p:outputLabel   value="DEPARTAMENTO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
                             </td>
-                            <td style="background-color: #eaecfe;">
+                            <td >
                                 <p:outputLabel   value="MUNICIPIO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
                             </td>
                         </tr>
@@ -344,13 +344,13 @@
                         <td colspan="2">
                             <p:commandButton icon="ui-icon-disk" value="Guardar Nuevo Anexo" 
                                              actionListener="#{manejarAnexos3047MB.guardarAnexo6()}" 
-                                             disabled="#{historiasMB.modificandoRegCli}" update="@form"/>
+                                             disabled="#{manejarAnexos3047MB.nuevoregistro==0 ? true:false}" update="@form ,IdMensajeRefContra" />
                             <p:commandButton icon="ui-icon-arrowthickstop-1-s" value="Actualizar Registro" 
-                                             actionListener="#{historiasMB.actualizarRegistro}" disabled="#{!historiasMB.modificandoRegCli}" 
-                                             rendered="#{loginMB.superUsuario}" update="@form"/>
+                                             actionListener="#{manejarAnexos3047MB.guardarAnexo1()}" 
+                                             disabled="#{manejarAnexos3047MB.actualizarregistro==0 ? true:false}" update="@form ,IdMensajeRefContra" />
                             <p:commandButton icon="ui-icon-document" value="Limpiar Formulario" 
-                                             actionListener="#{historiasMB.btnLimpiarFormulario}" update="@form"/>
-                            <p:commandButton id="printButtom"  type="submit" icon="ui-icon-print"   value="Imprimir Anexo6" actionListener="#{manejarAnexos3047MB.verAnexo6()}" ajax="false" onclick="form.target = '_blank'"/>
+                                             actionListener="#{historiasMB.btnLimpiarFormulario}" update="@form ,IdFormRegistroClinico""/>
+                            <p:commandButton id="printButtom"  type="submit" icon="ui-icon-print"   value="Imprimir Anexo6" actionListener="#{manejarAnexos3047MB.verAnexo6()}" ajax="false" onclick="form.target = '_blank'" rendered="#{manejarAnexos3047MB.inprimirregistro}"/>
                         </td>
                     </tr>
                 </table>

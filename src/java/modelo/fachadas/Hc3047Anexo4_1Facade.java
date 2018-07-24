@@ -45,6 +45,16 @@ public class Hc3047Anexo4_1Facade extends AbstractFacade<Hc3047Anexo41> {
             return null;
         }
     }
+
+    public List<Hc3047Anexo41> buscarAnexos41xAnexo4(int idanexo4) {
+        try {
+            String hql ="SELECT h FROM Hc3047Anexo41 h WHERE h.id3047anexo4.id3047anexo4 = ?1";
+            return getEntityManager().createQuery(hql).setParameter(1, idanexo4).getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+        
+    }
     
 
 }
