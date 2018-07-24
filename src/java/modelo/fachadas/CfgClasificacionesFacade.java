@@ -40,6 +40,7 @@ public class CfgClasificacionesFacade extends AbstractFacade<CfgClasificaciones>
         }
         return null;
     }
+    
 
     public List<CfgClasificaciones> buscarPorMaestroObservacion(String maestro, String observacion) {
         try {

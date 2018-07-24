@@ -205,7 +205,7 @@ WHERE
 	<field name="fecha_creacion" class="java.sql.Timestamp"/>
 	<field name="visible" class="java.lang.Boolean"/>
 	<field name="personal_atiende" class="java.lang.Integer">
-		<fieldDescription><![CDATA[ sii el usuario es prestador debe permitir especificar el tipo de personal que atiende (por defecto va ser 1):
+		<fieldDescription><![CDATA[sii el usuario es prestador debe permitir especificar el tipo de personal que atiende (por defecto va ser 1):
 1=Médico(a) especialista,
 2 =Médico(a) general
 3 =Enfermera (o)
@@ -231,13 +231,11 @@ WHERE
 		<fieldDescription><![CDATA[NOMBRE DE LA EMPRESA QUE COMPRA EL SOFTWARE]]></fieldDescription>
 	</field>
 	<field name="tipo_doc_rep_legal" class="java.lang.Integer">
-		<fieldDescription><![CDATA[TIPO DE DOCUMENTO DEL REPRESENTANTE LEGALPARA ESTE CASO SERIA CC, CE, PASAPORTE.
-]]></fieldDescription>
+		<fieldDescription><![CDATA[TIPO DE DOCUMENTO DEL REPRESENTANTE LEGALPARA ESTE CASO SERIA CC, CE, PASAPORTE.]]></fieldDescription>
 	</field>
 	<field name="num_doc_rep_legal" class="java.lang.String"/>
 	<field name="nom_rep_legal" class="java.lang.String">
-		<fieldDescription><![CDATA[NOMBRE DEL REPRESENTANTE LEGAL DE LA EMPRESA
-]]></fieldDescription>
+		<fieldDescription><![CDATA[NOMBRE DEL REPRESENTANTE LEGAL DE LA EMPRESA]]></fieldDescription>
 	</field>
 	<field name="telefono_1" class="java.lang.String"/>
 	<field name="telefono_2" class="java.lang.String"/>
@@ -772,21 +770,21 @@ WHERE
 					</textElement>
 					<text><![CDATA[DESCRIPCION]]></text>
 				</staticText>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="175" y="32" width="67" height="12" uuid="766e528f-f3d8-42b3-a998-fdcc8216bd18"/>
 					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{hc_3047_anexo2_cei10_1}]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="175" y="43" width="67" height="12" uuid="93a048e7-51de-4473-8dca-361e59b32cdc"/>
 					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{hc_3047_anexo2_cei10_2}]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="175" y="55" width="67" height="12" uuid="0fae104e-227f-4378-ac19-ee7dfc36236a"/>
 					<textElement textAlignment="Center">
 						<font size="8"/>
@@ -1251,7 +1249,7 @@ WHERE
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="9" y="0" width="123" height="12" uuid="8cd6686d-3d1b-4168-9c87-25fddfe997be"/>
 					<textElement textAlignment="Center">
 						<font size="8"/>
@@ -1285,7 +1283,7 @@ WHERE
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="13" y="0" width="113" height="12" uuid="5ee96e2e-f1a3-42e5-8ef6-01b481c52c09"/>
 					<textElement textAlignment="Center">
 						<font size="8"/>
@@ -1973,7 +1971,7 @@ WHERE
 				</box>
 			</frame>
 			<frame>
-				<reportElement positionType="Float" x="175" y="411" width="70" height="12" backcolor="#E6E6E6" uuid="83bc8461-98c5-4682-95d2-98ab8202504e"/>
+				<reportElement positionType="Float" x="175" y="410" width="70" height="12" backcolor="#E6E6E6" uuid="83bc8461-98c5-4682-95d2-98ab8202504e"/>
 				<box>
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -1981,7 +1979,7 @@ WHERE
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="3" y="0" width="64" height="12" uuid="56284207-149c-4629-b43b-174a63486003"/>
 					<textElement textAlignment="Center">
 						<font size="8"/>
@@ -2006,7 +2004,7 @@ WHERE
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="12" y="0" width="293" height="12" uuid="d6499648-a55b-44df-98be-7b264863bd7f"/>
 					<textElement>
 						<font size="8"/>
@@ -2023,7 +2021,7 @@ WHERE
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="12" y="0" width="293" height="12" uuid="2c7d9f7c-5359-4481-912f-ab5763c7b652"/>
 					<textElement>
 						<font size="8"/>
@@ -2040,7 +2038,7 @@ WHERE
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="12" y="0" width="293" height="12" uuid="9d9b7b6a-7a12-4e54-85d5-9c0fa0f2c8b5"/>
 					<textElement>
 						<font size="8"/>
@@ -2057,7 +2055,7 @@ WHERE
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="12" y="0" width="293" height="12" uuid="cd04411e-dd05-4bcb-85c3-87fe29f46235"/>
 					<textElement>
 						<font size="8"/>
@@ -2223,7 +2221,7 @@ WHERE
 					</textElement>
 					<text><![CDATA[Celular]]></text>
 				</staticText>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="85" y="7" width="135" height="12" uuid="4be12d18-257a-46ff-9435-f944cd99c9e2"/>
 					<textElement textAlignment="Center">
 						<font size="9"/>
@@ -2440,7 +2438,7 @@ WHERE
 						</textElement>
 						<text><![CDATA[CODIGO:]]></text>
 					</staticText>
-					<textField>
+					<textField isBlankWhenNull="true">
 						<reportElement x="33" y="0" width="124" height="12" uuid="3de4317a-1420-43af-840c-937c18bca1cd"/>
 						<textElement textAlignment="Center">
 							<font size="8"/>
@@ -2465,7 +2463,7 @@ WHERE
 						</textElement>
 						<text><![CDATA[Departamento:]]></text>
 					</staticText>
-					<textField>
+					<textField isBlankWhenNull="true">
 						<reportElement x="94" y="0" width="134" height="12" uuid="7cd47776-069a-4b89-9209-269ca0c1dd4b"/>
 						<textElement textAlignment="Center">
 							<font size="8"/>
@@ -2490,7 +2488,7 @@ WHERE
 						</textElement>
 						<text><![CDATA[Municipio:]]></text>
 					</staticText>
-					<textField>
+					<textField isBlankWhenNull="true">
 						<reportElement x="66" y="0" width="161" height="12" uuid="68b50096-7e5c-40b5-b7e9-a8861b98b09c"/>
 						<textElement textAlignment="Center">
 							<font size="8"/>
@@ -2498,7 +2496,7 @@ WHERE
 						<textFieldExpression><![CDATA[$P{mcpioremite}]]></textFieldExpression>
 					</textField>
 				</frame>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="227" y="0" width="171" height="12" uuid="b69a07af-0f07-4ddc-af48-cc829122766c"/>
 					<textElement textAlignment="Center">
 						<font size="8"/>
@@ -2515,7 +2513,7 @@ WHERE
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="8" y="0" width="21" height="12" uuid="26b27590-b268-4d17-9ca2-b9bad3712947"/>
 					<textElement textAlignment="Center">
 						<font size="8"/>
@@ -2532,7 +2530,7 @@ WHERE
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="0" y="0" width="37" height="11" uuid="c69604b2-625c-48ab-9a87-9e52dd983d53"/>
 					<textElement textAlignment="Center">
 						<font size="8"/>

@@ -175,7 +175,7 @@ WHERE
 	<field name="fecha_creacion" class="java.sql.Timestamp"/>
 	<field name="visible" class="java.lang.Boolean"/>
 	<field name="personal_atiende" class="java.lang.Integer">
-		<fieldDescription><![CDATA[ sii el usuario es prestador debe permitir especificar el tipo de personal que atiende (por defecto va ser 1):
+		<fieldDescription><![CDATA[sii el usuario es prestador debe permitir especificar el tipo de personal que atiende (por defecto va ser 1):
 1=Médico(a) especialista,
 2 =Médico(a) general
 3 =Enfermera (o)
@@ -201,13 +201,11 @@ WHERE
 		<fieldDescription><![CDATA[NOMBRE DE LA EMPRESA QUE COMPRA EL SOFTWARE]]></fieldDescription>
 	</field>
 	<field name="tipo_doc_rep_legal" class="java.lang.Integer">
-		<fieldDescription><![CDATA[TIPO DE DOCUMENTO DEL REPRESENTANTE LEGALPARA ESTE CASO SERIA CC, CE, PASAPORTE.
-]]></fieldDescription>
+		<fieldDescription><![CDATA[TIPO DE DOCUMENTO DEL REPRESENTANTE LEGALPARA ESTE CASO SERIA CC, CE, PASAPORTE.]]></fieldDescription>
 	</field>
 	<field name="num_doc_rep_legal" class="java.lang.String"/>
 	<field name="nom_rep_legal" class="java.lang.String">
-		<fieldDescription><![CDATA[NOMBRE DEL REPRESENTANTE LEGAL DE LA EMPRESA
-]]></fieldDescription>
+		<fieldDescription><![CDATA[NOMBRE DEL REPRESENTANTE LEGAL DE LA EMPRESA]]></fieldDescription>
 	</field>
 	<field name="telefono_1" class="java.lang.String"/>
 	<field name="telefono_2" class="java.lang.String"/>
@@ -372,7 +370,7 @@ WHERE
 					<textElement textAlignment="Center">
 						<font size="9" isBold="true"/>
 					</textElement>
-					<text><![CDATA[INFORME DE POSIBLE INCONSISTENCIA EN A BASE DE DATOS DE LA ENTIDAD RESPONSABLE DEL PAGO]]></text>
+					<text><![CDATA[INFORME DE POSIBLE INCONSISTENCIA EN LA BASE DE DATOS DE LA ENTIDAD RESPONSABLE DEL PAGO]]></text>
 				</staticText>
 				<image onErrorType="Blank">
 					<reportElement x="0" y="0" width="60" height="59" uuid="6c520186-c20e-4dec-8e6d-037f291bc78c"/>
@@ -431,7 +429,7 @@ WHERE
 				</frame>
 				<textField pattern="yyyy/MM/dd">
 					<reportElement x="370" y="30" width="51" height="12" uuid="5f0ddf70-740b-4468-8388-0d52dc8b16bb"/>
-					<textElement>
+					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{fechadocumento}]]></textFieldExpression>
@@ -970,7 +968,7 @@ WHERE
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="9" y="0" width="123" height="12" uuid="8cd6686d-3d1b-4168-9c87-25fddfe997be"/>
 					<textElement textAlignment="Center">
 						<font size="8"/>
@@ -1004,7 +1002,7 @@ WHERE
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="12" y="0" width="113" height="12" uuid="5ee96e2e-f1a3-42e5-8ef6-01b481c52c09"/>
 					<textElement textAlignment="Center">
 						<font size="8"/>

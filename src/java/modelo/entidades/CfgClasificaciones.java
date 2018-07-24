@@ -845,7 +845,11 @@ public class CfgClasificaciones implements Serializable {
     public String toString() {
         return "modelo.entidades.CfgClasificaciones[ id=" + id + " ]";
     }
-
+    
+    public String toStrinEdoMcpío() {
+        return descripcion;
+    }
+    
     @XmlTransient
     public Collection<Hc3047Anexo1> getHc3047Anexo1Collection() {
         return hc3047Anexo1Collection;

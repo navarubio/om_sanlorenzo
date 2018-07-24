@@ -143,6 +143,10 @@
                                                          title="Buscar Anexos 1 del Paciente" update="IdTablaAnexo IdpanelDatosPaciente"   icon="ui-icon-search" rendered="#{manejarAnexos3047MB.lupanexo1}"
                                                          onclick="PF('dlgSeleccionarAnexo').show();"/>
 
+                                        <p:commandButton styleClass="campoFormulario" actionListener="#{manejarAnexos3047MB.actualizaparaModif2()}"    style="width: 22px; height: 22px; " 
+                                                         title="Buscar Anexos 2 del Paciente" update="IdTablaAnexo2 IdpanelDatosPaciente"   icon="ui-icon-search" rendered="#{manejarAnexos3047MB.lupanexo2}"
+                                                         onclick="PF('dlgSeleccionarAnexo2').show();"/>
+
                                         <!--p:outputLabel styleClass="labelFormularioBold" value="Turno cita: " rendered=".{historiasMB.hayPacienteSeleccionado}"/>
                                         <p:outputLabel styleClass="labelFormulario"     value=".{historiasMB.turnoCita}" style="margin-left: 10px;" rendered=".{historiasMB.hayPacienteSeleccionado}"/-->
                                     </td>
@@ -223,6 +227,39 @@
                 </p:dataTable>
                 <br/>
                 <p:commandButton value="Cargar" actionListener="#{manejarAnexos3047MB.cargarAnexo1Modif()}"   update="IdpanelDatosPaciente IdPanelRegistroClinico IdTablaArchivos "/>
+                <br/>
+            </p:dialog>
+
+            <p:dialog header="Seleccionar Anexo 2" widgetVar="dlgSeleccionarAnexo2" modal="true" resizable="false" closable="true">
+                <p:dataTable
+                    id="IdTablaAnexo2"
+                    var="anexo2" 
+                    value="#{manejarAnexos3047MB.listaAnexo1Modif2}"
+                    rowKey="#{anexo2.id3047anexo2}"  
+                    selection="#{manejarAnexos3047MB.anexo2Seleccionado}" 
+                    paginator="true"
+                    style="width: 500px;"
+                    rows="10"
+                    lazy="true"
+                    paginatorPosition="bottom"                                
+                    emptyMessage="No se encontraron Anexos2 para este paciente"
+                    scrollable="true" 
+                    pageLinks="5"
+                    widgetVar="anexos2Table"
+                    selectionMode="single"
+                    resizableColumns="true"
+                    >
+                    <p:column headerText="Nro Informe" width="25%"  filterBy="#{anexo2.numeroatencion}" filterMatchMode="contains" filterStyle="width: 145px;">
+                        <h:outputText value="#{anexo2.numeroatencion}"/>                                  
+                    </p:column>
+                    <p:column headerText="Fecha Emisión" width="44%">
+                        <h:outputText value="#{anexo2.fechadocumento}" >
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </p:column>
+                </p:dataTable>
+                <br/>
+                <p:commandButton value="Cargar" actionListener="#{manejarAnexos3047MB.cargarAnexo2Modif()}"   update="IdpanelDatosPaciente IdPanelRegistroClinico IdTablaArchivos "/>
                 <br/>
             </p:dialog>
 

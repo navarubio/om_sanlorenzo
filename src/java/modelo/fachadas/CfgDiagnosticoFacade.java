@@ -28,6 +28,9 @@ public class CfgDiagnosticoFacade extends AbstractFacade<CfgDiagnostico> {
         }
     }
     
+    
+    
+    
     public CfgDiagnostico buscarPorNombre(String nombreDiagnostico) {
         String hql = "SELECT c FROM CfgDiagnostico c WHERE c.nombreDiagnostico = :nombreDiagnostico";
         try {
