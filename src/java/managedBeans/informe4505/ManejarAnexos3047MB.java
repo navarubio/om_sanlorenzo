@@ -924,10 +924,20 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
         listaAnexo1Modif2 = hc3047Anexo2Facade.Anexos2xPaciente(pacienteseleccionado.getIdPaciente());
     }
 
+    public void actualizaparaModif5() {
+        pacienteseleccionado = cfgPacientesFacade.find(HistoriasMB.codPaciente);
+        listaAnexo1Modif5 = hc3047Anexo5Facade.Anexos5xPaciente(pacienteseleccionado.getIdPaciente());
+    }
+    
+    public void actualizaparaModif6() {
+        pacienteseleccionado = cfgPacientesFacade.find(HistoriasMB.codPaciente);
+        listaAnexo1Modif6 = hc3047Anexo6Facade.Anexos6xPaciente(pacienteseleccionado.getIdPaciente());
+    }
 
     public void cargarAnexo1Modif() {
         nuevoregistro = 0;
         actualizarregistro = 1;
+        imprimirregistro=true;
         this.nuevoAnexo1 = Anexo1Seleccionado;
         this.numeroInforme = nuevoAnexo1.getNumeroinforme();
         if (nuevoAnexo1.getPrimerapellido() != null) {
@@ -958,6 +968,7 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
     public void cargarAnexo2Modif() {
         nuevoregistro = 0;
         actualizarregistro = 1;
+        imprimirregistro=true;
         this.nuevoAnexo2 = Anexo2Seleccionado;
         this.prestadorremitente = nuevoAnexo2.getReferido();
         if (prestadorremitente){
@@ -978,16 +989,30 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
             cei103=nuevoAnexo2.getCei103().getCodigoDiagnostico()+" - " + nuevoAnexo2.getCei103().getNombreDiagnostico();
         }    
         this.numeroAtencion = nuevoAnexo2.getNumeroatencion();
-//        CfgClasificaciones clasif;
-//        clasif = cfgClasificacionesFacade.buscarPorId(nuevoAnexo2.getIdmunicipio().toString());
-//        datosFormulario.setDato2(clasif);
-//        clasif = cfgClasificacionesFacade.buscarPorId(nuevoAnexo2.getIddepartamento().toString());
-//        datosFormulario.setDato1(clasif);
-//        datosFormulario.setDato2(cfgClasificacionesFacade.buscarPorId(nuevoAnexo2.getIdmunicipio().toStrinEdoMcpío()));        
+
         RequestContext.getCurrentInstance().execute("PF('dlgSeleccionarAnexo2').hide();");
     }
+    
+    public void cargarAnexo5Modif() {
+        nuevoregistro = 0;
+        actualizarregistro = 1;
+        imprimirregistro=true;
+        this.nuevoAnexo5 = Anexo5Seleccionado;
+        this.numeroRemision = nuevoAnexo5.getNumeroremision();
 
+        RequestContext.getCurrentInstance().execute("PF('dlgSeleccionarAnexo5').hide();");
+    }
+    
+    public void cargarAnexo6Modif() {
+        nuevoregistro = 0;
+        actualizarregistro = 1;
+        imprimirregistro=true;
+        this.nuevoAnexo6 = Anexo6Seleccionado;
+        this.numeroContrarremision = nuevoAnexo6.getNumerocontrarremision();
 
+        RequestContext.getCurrentInstance().execute("PF('dlgSeleccionarAnexo6').hide();");
+    }
+    
     public void cambiaTipoAnexo() {
         if (tipoanexoActual.getIdAnexos3047() == 1) {
             lupanexo1 = true;
@@ -1004,6 +1029,26 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
             lupanexo4 = false;
             lupanexo5 = false;
             lupanexo6 = false;
+            nuevoregistro=1;
+            actualizarregistro=0;  
+        }
+        if (tipoanexoActual.getIdAnexos3047() == 5) {
+            lupanexo5 = true;
+            lupanexo1 = false;
+            lupanexo2 = false;
+            lupanexo3 = false;
+            lupanexo4 = false;
+            lupanexo6 = false;
+            nuevoregistro=1;
+            actualizarregistro=0;  
+        }
+        if (tipoanexoActual.getIdAnexos3047() == 6) {
+            lupanexo6 = true;
+            lupanexo1 = false;
+            lupanexo2 = false;
+            lupanexo3 = false;
+            lupanexo4 = false;
+            lupanexo5 = false;
             nuevoregistro=1;
             actualizarregistro=0;  
         }
@@ -1551,6 +1596,14 @@ public class ManejarAnexos3047MB extends MetodosGenerales implements Serializabl
 
     public void setLupanexo6(boolean lupanexo6) {
         this.lupanexo6 = lupanexo6;
+    }
+
+    public boolean isLupanexo5() {
+        return lupanexo5;
+    }
+
+    public void setLupanexo5(boolean lupanexo5) {
+        this.lupanexo5 = lupanexo5;
     }
 
     public List<Hc3047Anexo2> getListaAnexo1Modif2() {

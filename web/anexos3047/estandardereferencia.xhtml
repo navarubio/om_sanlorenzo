@@ -169,16 +169,16 @@
                         <tr><td colspan="2"><h2>DATOS DE LA PERSONA RESPONSABLE DEL PACIENTE</h2></td></tr>   
 
                         <tr>
-                            <td style="background-color: #eaecfe;">
+                            <td >
                                 <p:outputLabel   value="PRIMER APELLIDO" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
                             </td>
-                            <td style="background-color: #eaecfe;">
+                            <td >
                                 <p:outputLabel   value="SEGUNDO APELLIDO" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
                             </td>
-                            <td style="background-color: #eaecfe;">
+                            <td >
                                 <p:outputLabel   value="PRIMER NOMBRE" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
                             </td>
-                            <td style="background-color: #eaecfe;">
+                            <td >
                                 <p:outputLabel   value="SEGUNDO NOMBRE" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
                             </td>                                        
                         </tr>
@@ -197,23 +197,23 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="background-color: #eaecfe;">
+                            <td >
                                 <p:outputLabel   value="DOCUMENTO IDENTIFICACION:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
                             </td>
-                            <td style="background-color: #eaecfe;">
+                            <td >
                                 <p:outputLabel   value="NUMERO DOCUMENTO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
                             </td>
-                            <td style="background-color: #eaecfe;">
+                            <td >
                                 <p:outputLabel   value="FECHA DE NACIMIENTO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
                             </td>
-                            <td style="background-color: #eaecfe;">
+                            <td >
                                 <p:outputLabel   value="TELEFONO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
                             </td>                                        
                         </tr>
                         <tr>
                             <td>
                                 <p:selectOneMenu id="IdFocus6" styleClass="width1" value="#{manejarAnexos3047MB.nuevoAnexo5.tipoIdentificacion}" filter="true" filterMatchMode="contains" rendered="#{historiasMB.hayPacienteSeleccionado}" converter="omnifaces.SelectItemsConverter">
-                                    <f:selectItems value="#{manejarAnexos3047MB.listaTipoidentificacion}" var="tidentifica" itemLabel="#{tidentifica.descripcion}"/>
+                                    <f:selectItems value="#{manejarAnexos3047MB.listaTipoidentificacion}" var="tidentifica" itemLabel="#{tidentifica.descripcion} #{tidentifica.observacion}"/>
                                 </p:selectOneMenu>   
                             </td>
                             <td>
@@ -228,13 +228,13 @@
                             </td>                                                                    
                         </tr>
                         <tr>
-                            <td style="background-color: #eaecfe;">
+                            <td >
                                 <p:outputLabel   value="DIRECCION DE HABITACION:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
                             </td>
-                            <td style="background-color: #eaecfe;">
+                            <td >
                                 <p:outputLabel   value="DEPARTAMENTO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/> 
                             </td>
-                            <td style="background-color: #eaecfe;">
+                            <td >
                                 <p:outputLabel   value="MUNICIPIO:" rendered="#{historiasMB.hayPacienteSeleccionado}"/>
                             </td>
                         </tr>

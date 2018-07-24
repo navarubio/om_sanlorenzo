@@ -147,6 +147,15 @@
                                                          title="Buscar Anexos 2 del Paciente" update="IdTablaAnexo2 IdpanelDatosPaciente"   icon="ui-icon-search" rendered="#{manejarAnexos3047MB.lupanexo2}"
                                                          onclick="PF('dlgSeleccionarAnexo2').show();"/>
 
+                                        <p:commandButton styleClass="campoFormulario" actionListener="#{manejarAnexos3047MB.actualizaparaModif5()}"    style="width: 22px; height: 22px; " 
+                                                         title="Buscar Anexos 5 del Paciente" update="IdTablaAnexo5 IdpanelDatosPaciente"   icon="ui-icon-search" rendered="#{manejarAnexos3047MB.lupanexo5}"
+                                                         onclick="PF('dlgSeleccionarAnexo5').show();"/>
+
+                                        <p:commandButton styleClass="campoFormulario" actionListener="#{manejarAnexos3047MB.actualizaparaModif6()}"    style="width: 22px; height: 22px; " 
+                                                         title="Buscar Anexos 6 del Paciente" update="IdTablaAnexo6 IdpanelDatosPaciente"   icon="ui-icon-search" rendered="#{manejarAnexos3047MB.lupanexo6}"
+                                                         onclick="PF('dlgSeleccionarAnexo6').show();"/>
+                                        
+                                        
                                         <!--p:outputLabel styleClass="labelFormularioBold" value="Turno cita: " rendered=".{historiasMB.hayPacienteSeleccionado}"/>
                                         <p:outputLabel styleClass="labelFormulario"     value=".{historiasMB.turnoCita}" style="margin-left: 10px;" rendered=".{historiasMB.hayPacienteSeleccionado}"/-->
                                     </td>
@@ -249,7 +258,7 @@
                     selectionMode="single"
                     resizableColumns="true"
                     >
-                    <p:column headerText="Nro Informe" width="25%"  filterBy="#{anexo2.numeroatencion}" filterMatchMode="contains" filterStyle="width: 145px;">
+                    <p:column headerText="Nro Atencion" width="25%"  filterBy="#{anexo2.numeroatencion}" filterMatchMode="contains" filterStyle="width: 145px;">
                         <h:outputText value="#{anexo2.numeroatencion}"/>                                  
                     </p:column>
                     <p:column headerText="Fecha Emisión" width="44%">
@@ -263,6 +272,72 @@
                 <br/>
             </p:dialog>
 
+            <p:dialog header="Seleccionar Anexo 5" widgetVar="dlgSeleccionarAnexo5" modal="true" resizable="false" closable="true">
+                <p:dataTable
+                    id="IdTablaAnexo5"
+                    var="anexo5" 
+                    value="#{manejarAnexos3047MB.listaAnexo1Modif5}"
+                    rowKey="#{anexo5.id3047anexo5}"  
+                    selection="#{manejarAnexos3047MB.anexo5Seleccionado}" 
+                    paginator="true"
+                    style="width: 500px;"
+                    rows="10"
+                    lazy="true"
+                    paginatorPosition="bottom"                                
+                    emptyMessage="No se encontraron Anexos5 para este paciente"
+                    scrollable="true" 
+                    pageLinks="5"
+                    widgetVar="anexos5Table"
+                    selectionMode="single"
+                    resizableColumns="true"
+                    >
+                    <p:column headerText="Nro Remisión" width="25%"  filterBy="#{anexo5.numeroremision}" filterMatchMode="contains" filterStyle="width: 145px;">
+                        <h:outputText value="#{anexo5.numeroremision}"/>                                  
+                    </p:column>
+                    <p:column headerText="Fecha Emisión" width="44%">
+                        <h:outputText value="#{anexo5.fechadocumento}" >
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </p:column>
+                </p:dataTable>
+                <br/>
+                <p:commandButton value="Cargar" actionListener="#{manejarAnexos3047MB.cargarAnexo5Modif()}"   update="IdpanelDatosPaciente IdPanelRegistroClinico IdTablaArchivos "/>
+                <br/>
+            </p:dialog>
+
+            <p:dialog header="Seleccionar Anexo 6" widgetVar="dlgSeleccionarAnexo6" modal="true" resizable="false" closable="true">
+                <p:dataTable
+                    id="IdTablaAnexo6"
+                    var="anexo6" 
+                    value="#{manejarAnexos3047MB.listaAnexo1Modif6}"
+                    rowKey="#{anexo6.id3047anexo6}"  
+                    selection="#{manejarAnexos3047MB.anexo6Seleccionado}" 
+                    paginator="true"
+                    style="width: 500px;"
+                    rows="10"
+                    lazy="true"
+                    paginatorPosition="bottom"                                
+                    emptyMessage="No se encontraron Anexos5 para este paciente"
+                    scrollable="true" 
+                    pageLinks="5"
+                    widgetVar="anexos6Table"
+                    selectionMode="single"
+                    resizableColumns="true"
+                    >
+                    <p:column headerText="Nro Contrarremisión" width="25%"  filterBy="#{anexo5.numerocontrarremision}" filterMatchMode="contains" filterStyle="width: 145px;">
+                        <h:outputText value="#{anexo6.numerocontrarremision}"/>                                  
+                    </p:column>
+                    <p:column headerText="Fecha Emisión" width="44%">
+                        <h:outputText value="#{anexo6.fechadocumento}" >
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </p:column>
+                </p:dataTable>
+                <br/>
+                <p:commandButton value="Cargar" actionListener="#{manejarAnexos3047MB.cargarAnexo6Modif()}"   update="IdpanelDatosPaciente IdPanelRegistroClinico IdTablaArchivos "/>
+                <br/>
+            </p:dialog>
+            
 
             <p:dialog header="Histórico paciente" widgetVar="dlgHistorico" modal="true" resizable="false" closable="true">
                 <p:panel id="IdPanelHistorico" style="border: none;"  >
