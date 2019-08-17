@@ -59,7 +59,7 @@
                 </table>
             </p:panel>
             <br/>
-            <p:schedule id="agenda" rendered="#{agendaPrestadorMB.rendAgenda}" draggable="false" resizable="false" value="#{agendaPrestadorMB.evenModel}" widgetVar="agenda" locale="es" timeZone="America/Bogota" view="agendaDay" rightHeaderTemplate="agendaDay" minTime="#{agendaPrestadorMB.minTime}" maxTime="#{agendaPrestadorMB.maxTime}" timeFormat="hh:mm" allDaySlot="false">
+            <p:schedule id="agenda" rendered="#{agendaPrestadorMB.rendAgenda}" draggable="false" resizable="false" value="#{agendaPrestadorMB.evenModel}" widgetVar="agenda" locale="es" timeZone="America/Caracas" view="agendaDay" rightHeaderTemplate="agendaDay" minTime="#{agendaPrestadorMB.minTime}" maxTime="#{agendaPrestadorMB.maxTime}" timeFormat="hh:mm" allDaySlot="false">
                 <p:ajax event="eventSelect" listener="#{agendaPrestadorMB.onEventSelect}"/>
             </p:schedule> 
             <p:dialog id="pdialog" widgetVar="eventDialog" header="Detalles de la cita" modal="true" resizable="false">
